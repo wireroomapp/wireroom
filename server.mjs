@@ -22,7 +22,15 @@ const parser = new Parser({
 });
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
+
+// Allow requests from the deployed frontend (different domain now that
+// they're hosted separately). No extra package needed for this.
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET");
+  next();
+});
 
 // Confirmed, working official feeds. Add to this as more get verified —
 // unverified countries automatically fall back to the Google News layer

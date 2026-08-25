@@ -12,6 +12,10 @@ import * as d3 from "d3";
 
 const MAP_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
+// The real, deployed backend — no longer a same-origin /api proxy since
+// the frontend and backend now live on different domains.
+const API_BASE = "https://wireroom-backend.onrender.com";
+
 const COUNTRIES = [
   { id:"us", name:"United States", code:"US", lat:38.9, lon:-77.0, region:"Americas", sources:["White House","Department of Defense","Department of State"] },
   { id:"ca", name:"Canada", code:"CA", lat:45.4, lon:-75.7, region:"Americas", sources:["Prime Minister's Office","Global Affairs Canada","National Defence"] },
@@ -134,7 +138,7 @@ export default function WireRoomV2() {
     const activeMode = modeOverride || mode;
     try {
       // Production contract. No browser API key: the future backend owns this request.
-      const response = await fetch(`/api/news?country=${encodeURIComponent(country.id)}&mode=${encodeURIComponent(activeMode)}`);
+      const response = await fetch(`${API_BASE}/api/news?country=${encodeURIComponent(country.id)}&mode=${encodeURIComponent(activeMode)}`);
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data.items)) setFeed(prev => [...prev.filter(x => x.countryId !== country.id), ...data.items]);
