@@ -1,0 +1,32 @@
+name: Fetch News Feeds
+
+on:
+  schedule:
+    - cron: '0 * * * *'   # every hour, on the hour
+  workflow_dispatch: {}    # lets us trigger it manually from GitHub's UI
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install rss-parser
+
+      - name: Fetch all feeds
+        run: node scripts/fetch-feeds.mjs
+
+      - name: Commit and push cache if it changed
+        run: |
+          git config user.name "wire-room-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/cache.json
+          git diff --staged --quiet || git commit -m "chore: update cached news feeds"
+          git push
