@@ -1,8 +1,20 @@
 {
-  "generatedAt": "2026-08-29T00:06:06.380Z",
+  "generatedAt": "2026-08-29T01:06:12.051Z",
   "countries": {
     "us": {
       "official": [
+        {
+          "id": "us-official-aHR0cHM6Ly93",
+          "countryId": "us",
+          "sourceType": "official",
+          "source": "White House",
+          "headline": "President Trump Was Right: America Controls the Strait of Hormuz",
+          "summary": "U.S. Central Command confirms what Democrats and the Fake News have spent months denying: the United States — not the Islamic Republic of Iran — controls the Strait of Hormuz. American forces are keeping energy moving…",
+          "date": "Aug 29, 2026 · 12:00 AM",
+          "publishedAt": "2026-08-29T00:00:05.000Z",
+          "url": "https://www.whitehouse.gov/releases/2026/08/president-trump-was-right-america-controls-the-strait-of-hormuz/",
+          "importance": 3
+        },
         {
           "id": "us-official-aHR0cHM6Ly93",
           "countryId": "us",
@@ -61,18 +73,6 @@
           "date": "Aug 27, 2026 · 6:13 PM",
           "publishedAt": "2026-08-27T18:13:38.000Z",
           "url": "https://www.whitehouse.gov/releases/2026/08/never-surrender-karoline-leavitts-historic-tenure-as-white-house-press-secretary/",
-          "importance": 3
-        },
-        {
-          "id": "us-official-aHR0cHM6Ly93",
-          "countryId": "us",
-          "sourceType": "official",
-          "source": "White House",
-          "headline": "Fact Sheet: President Donald J. Trump Further Ensures Affordable Beef for the American Consumer",
-          "summary": "ADDRESSING BEEF AFFORDABILITY WITH TARGETED ACTION: Today, President Donald J. Trump signed a Proclamation to temporarily increase the quantity of lean beef trimmings that are imported with no above-quota tariff to en…",
-          "date": "Aug 26, 2026 · 9:19 PM",
-          "publishedAt": "2026-08-26T21:19:54.000Z",
-          "url": "https://www.whitehouse.gov/fact-sheets/2026/08/fact-sheet-president-donald-j-trump-further-ensures-affordable-beef-for-the-american-consumer/",
           "importance": 3
         }
       ],
@@ -552,18 +552,6 @@
           "countryId": "gb",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Burnham Accuses Russia of ‘Starting the Fire’ in Ukraine as Moscow Amps Up Warnings - The New York Times",
-          "summary": "Burnham Accuses Russia of ‘Starting the Fire’ in Ukraine as Moscow Amps Up Warnings The New York Times",
-          "date": "Aug 24, 2026 · 9:08 AM",
-          "publishedAt": "2026-08-24T09:08:26.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQWHBHU1dYVU50Z0k4YUx6eklTYmIyS0tSUXZ1aXpFWWlMVnhBc1NHV0N0SEw1anpoUE82TmNuV2dUd19RaWdLT3RLSG51SzZLVnRVd0d1S2tuN3luQzhiTEZ6clhMUEV6UmhmQWlLYjF3OFk3ejQ2UFNhUkRTQXZrZUctVG5rLXIxQTJJ?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "gb-independent-aHR0cHM6Ly9u",
-          "countryId": "gb",
-          "sourceType": "independent",
-          "source": "Google News",
           "headline": "The British Prime Minister’s New Digs - Politico",
           "summary": "The British Prime Minister’s New Digs Politico",
           "date": "Aug 21, 2026 · 1:13 PM",
@@ -605,6 +593,18 @@
           "date": "Aug 26, 2026 · 1:14 PM",
           "publishedAt": "2026-08-26T13:14:11.000Z",
           "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOeGdEOE14aGNJTDB4ZVBmTG1BYlJLRDlzanpkY181X2lGTll2Y0dtNEphTzBpRTYxa0FPUDNfN050SGpXSUdySS11Q2VNMGxRRi04NGpyTVUyUWRTMjFnTnRDZG1ydXg4djFwNUllc2NDaGZLSmJGRlJvYTFLTUtGMGNyQVUyRmUzcTRfT3JqOWRFbUoyR24ydE0xbHRnQzZ1OHF6dzRHMktpS094YlZiZ05OLTdlY21xelY5ZVlJSGdxV0ZjS2FTOHB6OFpCbGQydVhQTzRwUllWWTBLSWhqbA?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "gb-independent-aHR0cHM6Ly9u",
+          "countryId": "gb",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Meeting Between the President of Ukraine and the Prime Minister of the United Kingdom - Офіційне інтернет-представництво Президента України",
+          "summary": "Meeting Between the President of Ukraine and the Prime Minister of the United Kingdom Офіційне інтернет-представництво Президента України",
+          "date": "Aug 24, 2026 · 9:38 PM",
+          "publishedAt": "2026-08-24T21:38:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPdXBiRFJWZEtMUFFSVlFvQjE4ZnNMcVJyMWVkaHI5ZVgwMjhaY3BKelJ1cF9paW0xMXRhY0pQdXpUcTlWWk84UWhDazBaUm1ubWp1LU10YlpBeXZtc3p6QkhfeXVRQTE5c05LVUlRTFNhV1RzaWc1Xzdta1JDMmk3aEEzTkl3TFB6QTZSNl94SEZQRllzOUtQTVhCTGF4RmZsSVR5MVc1Zw?oc=5",
           "importance": 2
         }
       ]
@@ -1050,11 +1050,11 @@
           "countryId": "ua",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Spymaster Ukraine Ukraine's new domestic intel chief Oleksandr Poklad extends web into heart of GUR - Intelligence Online",
-          "summary": "Spymaster Ukraine Ukraine's new domestic intel chief Oleksandr Poklad extends web into heart of GUR Intelligence Online",
-          "date": "Aug 28, 2026 · 4:00 AM",
-          "publishedAt": "2026-08-28T04:00:20.000Z",
-          "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQRjVleFExS1BidjZON1lQNXpSaXpzTDB5VmRBdEVXOFdSaHUwdXNvb1lYakstUDBzT0NjVDZhTGNOWUlQNTFQRGpPRXQzMzdZTTNkbWhJdTdfb1p6eG8wMktKYnR0cWc4NUJORkJ1dUstS09qUDNIYVFfamVWYnFZSEo0WEJmQUJYWHAycENRU0JHLU9YRDBoTlZsYUUyY24tQWNObkpRTVNNNEdOTmNUak90NGdWN0VDdjZuaF81SkJ2bVpYTElTZzZ5b3R3aHVnYlB3NHJsWkcxWlVNeUFvV29vS29tb2ZiZWtF?oc=5",
+          "headline": "We cannot stop war now, we will be fighting in winter – Head of President's Office - Українська правда",
+          "summary": "We cannot stop war now, we will be fighting in winter – Head of President's Office Українська правда",
+          "date": "Aug 28, 2026 · 2:45 PM",
+          "publishedAt": "2026-08-28T14:45:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5kSFhYanlEQ18tOERfNW9YXzdVZWdqT1ltcmZRaHA1WFRrMFRuRzhzSVlRbU5DeGtQSTBFZWdLTDd5U2RDNlBNN0RpTkdrNjVoa0hETW5YMTFkaTdINzlBYUprRTfSAXBBVV95cUxPSEE0eFMwX1c4bXRJR0hNcVNtTE5ib0JOSk9rUUZVOXlZemY4dzhqdFpyYVBTYk91LWdNUjNtdkpLUzJnTTFJUkZqcDF4NFRqVVhyMHk3X0FHXzk2dkVqUzA0U1Z4WklLVF83ZjZ5cFg3?oc=5",
           "importance": 2
         },
         {
@@ -1062,11 +1062,11 @@
           "countryId": "ua",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "We cannot stop war now, we will be fighting in winter – Head of President's Office - Українська правда",
-          "summary": "We cannot stop war now, we will be fighting in winter – Head of President's Office Українська правда",
-          "date": "Aug 28, 2026 · 2:45 PM",
-          "publishedAt": "2026-08-28T14:45:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5kSFhYanlEQ18tOERfNW9YXzdVZWdqT1ltcmZRaHA1WFRrMFRuRzhzSVlRbU5DeGtQSTBFZWdLTDd5U2RDNlBNN0RpTkdrNjVoa0hETW5YMTFkaTdINzlBYUprRTfSAXBBVV95cUxPSEE0eFMwX1c4bXRJR0hNcVNtTE5ib0JOSk9rUUZVOXlZemY4dzhqdFpyYVBTYk91LWdNUjNtdkpLUzJnTTFJUkZqcDF4NFRqVVhyMHk3X0FHXzk2dkVqUzA0U1Z4WklLVF83ZjZ5cFg3?oc=5",
+          "headline": "Spymaster Ukraine Ukraine's new domestic intel chief Oleksandr Poklad extends web into heart of GUR - Intelligence Online",
+          "summary": "Spymaster Ukraine Ukraine's new domestic intel chief Oleksandr Poklad extends web into heart of GUR Intelligence Online",
+          "date": "Aug 28, 2026 · 4:00 AM",
+          "publishedAt": "2026-08-28T04:00:20.000Z",
+          "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQRjVleFExS1BidjZON1lQNXpSaXpzTDB5VmRBdEVXOFdSaHUwdXNvb1lYakstUDBzT0NjVDZhTGNOWUlQNTFQRGpPRXQzMzdZTTNkbWhJdTdfb1p6eG8wMktKYnR0cWc4NUJORkJ1dUstS09qUDNIYVFfamVWYnFZSEo0WEJmQUJYWHAycENRU0JHLU9YRDBoTlZsYUUyY24tQWNObkpRTVNNNEdOTmNUak90NGdWN0VDdjZuaF81SkJ2bVpYTElTZzZ5b3R3aHVnYlB3NHJsWkcxWlVNeUFvV29vS29tb2ZiZWtF?oc=5",
           "importance": 2
         }
       ]
@@ -1091,11 +1091,11 @@
           "countryId": "ru",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Kremlin says US spy chief met with Russian counterparts during Moscow visit - Reuters",
-          "summary": "Kremlin says US spy chief met with Russian counterparts during Moscow visit Reuters CIA Director John Ratcliffe met with Russian intelligence officials in visit to Moscow, Kremlin says Fox News The Kremlin says the CI…",
-          "date": "Aug 26, 2026 · 10:19 AM",
-          "publishedAt": "2026-08-26T10:19:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOVmlRUk55MzlrOEpyYWZiR1VqYmh2UXhibi13SVRoS0dBWjBKbTk2eTBmeWtRd1R5R1owRXFZN1VLc1RpQk9KSDR4TjVqbWhQUmRKMGJNeFpMVFhmU3BXV3gtblc5US10ai01cEhKZUlhLVZ1cVJoSFMtTjF2TnRDUjd5eHZNN3JNRzNwRk02V3gtUTB3ZUo2UkZqbG05aC1wY3FnRlVMbHBweENaZ01UX2lsY3hOZ1dEaEE?oc=5",
+          "headline": "Kremlin reveals purpose of CIA director's visit to Moscow - Українська правда",
+          "summary": "Kremlin reveals purpose of CIA director's visit to Moscow Українська правда CIA Director John Ratcliffe met with Russian intelligence officials in visit to Moscow, Kremlin says Fox News Kremlin says US spy chief met w…",
+          "date": "Aug 26, 2026 · 6:24 AM",
+          "publishedAt": "2026-08-26T06:24:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE40UDladXR3NUFtQXQwWmhuUlJOYU5yMmxKQ0RYRU11QXIxNmVVVmY4ZWRSNGc0cVpNay02TVU4dHIyR1JxNGs3am1HemlzYURSRDNTRGdYWHptWU1iNEo0VHprLUzSAXBBVV95cUxPdDk4Z3pITWJlWnVjSTljb01xb3RVOEtxcXpZX3czbEVJTlNxTG1xX2pKOExRUk5MS2xqZmkyZ0FrUmVmcmhMbTZfajBNOFZJaTM0alRVMXlqLWpmZFZidE83OXVoajF4eTdxR0pJWjdT?oc=5",
           "importance": 2
         },
         {
@@ -1310,54 +1310,6 @@
           "countryId": "ir",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Iran Talks Sputter as Trump Spurns a Return to His June Deal - WSJ",
-          "summary": "Iran Talks Sputter as Trump Spurns a Return to His June Deal WSJ",
-          "date": "Aug 27, 2026 · 5:44 PM",
-          "publishedAt": "2026-08-27T17:44:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQbHFUOFExaDZiMzF5cHdpVWdnMmRkalZFZUxiUFVseHZmUkU3MWhaWEpwdU5tcVhad055UU0ya2ZxSUdRMEZKSTFtZmVxbXFSOHFwdUhadDNUSlNuM2tyTmE0bWRkZGo4ZG9MRk40ekhYU2dWLVVzdXc3cU1GSW5XSjZiOUdkWlg4TVdLdkRUeDBqNzJxNmIxMUtabS1NNlA0Q3J0TVljU2R3WEU?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-aHR0cHM6Ly9u",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Trump says the U.S. is not talking with Iran as economic war in focus - Reuters",
-          "summary": "Trump says the U.S. is not talking with Iran as economic war in focus Reuters",
-          "date": "Aug 27, 2026 · 6:17 PM",
-          "publishedAt": "2026-08-27T18:17:43.000Z",
-          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOU3V4QnUxMjhRcWJmZGRDdmJSWWZuWjdnMkQ0bEZxX05lME5tNEx0dHpTUGt1UHZDbmd3WXJMS0hjWDlxRlhYblh2VUNLLXIxSkZIclZxTmd4M2VpdUdRU2NGSTgxd3VqSzZ2S2dlSUEwdnZ2aVhEWGdxQmhwOWZIYWNTMVV3bk5pS3FqMXJZYU9GbDlPRWJKR0d3YkR1QU5rUi1tR3M0Q3UzTzVsQmsyXw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-aHR0cHM6Ly9u",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "President Trump: We don’t want to speak to Iran - Fox News",
-          "summary": "President Trump: We don’t want to speak to Iran Fox News",
-          "date": "Aug 27, 2026 · 10:49 PM",
-          "publishedAt": "2026-08-27T22:49:30.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBjaUZfaGZLc3FCaWp3WWZldDEweFl4cTA1bV9yMVY1dGZvUUFibEItTkJMODg3M2JhaW1lN29xZGlqV1RSZmZzal9ZYnc4QjRvSTNjRXhB?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-aHR0cHM6Ly9u",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Trump's oil and gas stock trades continued during Iran war, filings show - CBS News",
-          "summary": "Trump's oil and gas stock trades continued during Iran war, filings show CBS News",
-          "date": "Aug 27, 2026 · 10:00 AM",
-          "publishedAt": "2026-08-27T10:00:06.000Z",
-          "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBmOWtkNUJFRFlJTmlJYkFDTXBkaHBBUHZJU3c1Y2IwWmRnbzd6c0R1WGZTZ1RqbmIyOER3b3llOUJ5QTI1NHgydkU4OEZVSW5fWVJzeFZjU1ZxdHBGY24wdVVDdG1vX3MxV082VUtUM1YtVFdU?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-aHR0cHM6Ly9u",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "Google News",
           "headline": "For Trump, the Iran War Is Stuck Between Combat and Genuine Peace - The New York Times",
           "summary": "For Trump, the Iran War Is Stuck Between Combat and Genuine Peace The New York Times",
           "date": "Aug 28, 2026 · 10:35 PM",
@@ -1370,11 +1322,59 @@
           "countryId": "ir",
           "sourceType": "independent",
           "source": "Google News",
+          "headline": "Six months on, Trump’s Iran strategy is starting to pay off - Al Jazeera",
+          "summary": "Six months on, Trump’s Iran strategy is starting to pay off Al Jazeera",
+          "date": "Aug 28, 2026 · 6:41 AM",
+          "publishedAt": "2026-08-28T06:41:11.000Z",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNQjFvalNSNnJFaDFBYlV5djdnd2dhWDktd0RWWkU0azRIZVhHQlpqQXdYTU56NTREQTJCT1Rmb0JoUFdpY2FncnVRSU5pTkxHcGdZdlNxejF3dFIwV1NzYlJIZUtIMlpmQ3hkQmtSX1FnYVhXLVFEZEZhaWcyak5kNzZPcU84TTBtelZHUlpKaGo4SFRmRmYwYnNrNVBMeFkzdHpZctIBqgFBVV95cUxQbVQ2MWt1amRTMmNwYnJuVk1jc1FzOUhINTJ2a3ZfQlpmeFFXRE04ZFhDcldwcEt1NkwtSGE4NE8xTU11aWZmckRtUWowT0hOR1ltQld4U2swcXl4OVVKenVXRlUxcWdZZWNxSmt4bDZfQzVOc0ZGcS1TdldOMmtFZzlxbWdWRDV1aWlzTlhXT3lOTzR2NlFHUzB2c01NTmFnWng3amNBUFZPZw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-aHR0cHM6Ly9u",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "Google News",
           "headline": "Live updates: Trump awards medals to Artemis II crew for moon mission - NBC News",
           "summary": "Live updates: Trump awards medals to Artemis II crew for moon mission NBC News",
-          "date": "Aug 28, 2026 · 11:22 PM",
-          "publishedAt": "2026-08-28T23:22:00.000Z",
+          "date": "Aug 29, 2026 · 12:02 AM",
+          "publishedAt": "2026-08-29T00:02:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPb2hOLU1sbG1wM3lUMWxxMmRtaE1QV0cxU0V2Q2pmX2FqMFZOVzFsaXFOSjRZQTFCRWF3WmVNejY5OVY1MWl0MDU2TGZ3NmhCcTFnSlcwTHlVN08xdUtzMFlyYUdzbzQzZzhyMkhzakdFQ2xUQ1dBU2RralA5WElybGZlNm5nSUZvMVdzdnFrc1dkZVM0MFRIQlYwaE9aN3RzaWgyeU5YcTRQLUUtNmRIT3NGUV9TT0lvbldqdm1LR2hBOGNVWkxxZU1R?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-aHR0cHM6Ly9u",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Live Updates: Iran war hits 6-month mark with no end in sight - CBS News",
+          "summary": "Live Updates: Iran war hits 6-month mark with no end in sight CBS News",
+          "date": "Aug 28, 2026 · 5:42 PM",
+          "publishedAt": "2026-08-28T17:42:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNY3ZaTmR4OEVQWjVMZWRibUo2TGJTRDMtUVl6SmdLblprZlRsOXNPeTNvVmJRX2VUbU5JX3dCeXFfbUtqaExPa2pxZzByOEl4aDNNOThMajlXMnNHdFhFVlViTmIzTVZqMmh4RnVsMkdNTmV5ZGNVUThJYjZBRHpfdmFTY0QzYVpuUDdXUFl4c21VWDhvNWZib3NFbE00QQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-aHR0cHM6Ly9u",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Putin sees U.S. as weakened by Iran war, intelligence reports say - The Washington Post",
+          "summary": "Putin sees U.S. as weakened by Iran war, intelligence reports say The Washington Post",
+          "date": "Aug 28, 2026 · 4:26 AM",
+          "publishedAt": "2026-08-28T04:26:54.000Z",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNem0xRFYzU0FTU09QYkFsRzF3TTJJZUd6NDByNTNpdjQ5MFlFSlpBNU1Bc3JWckFQVkhtTk1jT2FROXQ2X2ZWc29xZjJKZFZRb0V1bUxKNGFPVGs3aHJqcGpiYV9zcGRQRno2QVlpRTBjd0RsOWMybHpiV0VReXZLUXJBQXhoV0ZpckJsXy1tX0I4ZkpoTVZOUkNJdjFVdTdDT19UalAxNVgwRVZXQ2tUXzdLbjc5UFFhTEl4Sw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-aHR0cHM6Ly9u",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Iran Talks Sputter as Trump Spurns a Return to His June Deal - WSJ",
+          "summary": "Iran Talks Sputter as Trump Spurns a Return to His June Deal WSJ Trump says the U.S. is not talking with Iran as economic war in focus Reuters President Trump said he saw a quick end to the Iran war. Six months later …",
+          "date": "Aug 27, 2026 · 5:44 PM",
+          "publishedAt": "2026-08-27T17:44:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQbHFUOFExaDZiMzF5cHdpVWdnMmRkalZFZUxiUFVseHZmUkU3MWhaWEpwdU5tcVhad055UU0ya2ZxSUdRMEZKSTFtZmVxbXFSOHFwdUhadDNUSlNuM2tyTmE0bWRkZGo4ZG9MRk40ekhYU2dWLVVzdXc3cU1GSW5XSjZiOUdkWlg4TVdLdkRUeDBqNzJxNmIxMUtabS1NNlA0Q3J0TVljU2R3WEU?oc=5",
           "importance": 2
         }
       ]
@@ -1502,8 +1502,8 @@
           "source": "Google News",
           "headline": "Theyab bin Mohamed praises Emirati women’s achievements - Sharjah24",
           "summary": "Theyab bin Mohamed praises Emirati women’s achievements Sharjah24",
-          "date": "Aug 28, 2026 · 1:01 PM",
-          "publishedAt": "2026-08-28T13:01:04.000Z",
+          "date": "Aug 29, 2026 · 12:56 AM",
+          "publishedAt": "2026-08-29T00:56:15.000Z",
           "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQelZJaGxDNDRVRzBxUjlVbTZkcHhwQ0lvaXBHT2FyUF82U1VjYy1HUmNHUDNsQ1FoaEpiWnBOS25JSWphNjNJUEdkMTdXcGF1bGtnRWgzSTNaUmxMdWw2MUtnanFTTm95SFY3YUswbE9WcUxOVG5SQjM3WUh4LVRnOFlKNUtDc3dYTGNleFpac1o1bndaR3hBSGpOblRqbDQ?oc=5",
           "importance": 2
         },
@@ -1577,11 +1577,11 @@
           "countryId": "eg",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Polish naval commander visits Egyptian presidency - Egyptian Gazette",
-          "summary": "Polish naval commander visits Egyptian presidency Egyptian Gazette",
-          "date": "Aug 28, 2026 · 10:19 PM",
-          "publishedAt": "2026-08-28T22:19:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPQVl5YVY1d3RsejlQOU1FREM0WGV5bG5ZWUFrMWtfSnRXdGpqNzdYZnJIZ0JXTVhXTzJZZzRxTFNSNkxyaVk5NDJ6SU5MYVFFQ2JpX1gxXy1nZ0U4NDA2RVJZbkQwN1FfdFE1T1JacW5vSWhydWY0Tmd6VGNKS0h4QWprY3luQ29WYjB4eGVHWWhPVTNaMTg4WC1lYm4?oc=5",
+          "headline": "China's Xi Jinping to make first state visit to Egypt in decade - thenationalnews.com",
+          "summary": "China's Xi Jinping to make first state visit to Egypt in decade thenationalnews.com",
+          "date": "Aug 27, 2026 · 12:38 PM",
+          "publishedAt": "2026-08-27T12:38:13.000Z",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQQjVHdkJtT3E1Sk5tVGN1ZUZycEhmOVpVb0dNOWZGOWZPdlJkUHhGM25veWJNSHpPSjhaSnlYb1ktaXZlUWVsTG8zNlU3T2V5YVpTY21CcTM0enYyV1ZyX3VYUlBkU251bUdOaEtDT0RWcUtFLWdpZnkyY3RlaUhuV1FRYkFMQ19xX1RDZGJKelp6ZTNLV19Lczlac0lGR1Z0TlAzT3REMll5M1N5RVBpcFhWdWZQNnc?oc=5",
           "importance": 2
         },
         {
@@ -1589,11 +1589,11 @@
           "countryId": "eg",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "China's Xi Jinping to make first state visit to Egypt in decade - thenationalnews.com",
-          "summary": "China's Xi Jinping to make first state visit to Egypt in decade thenationalnews.com",
-          "date": "Aug 27, 2026 · 12:38 PM",
-          "publishedAt": "2026-08-27T12:38:13.000Z",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQQjVHdkJtT3E1Sk5tVGN1ZUZycEhmOVpVb0dNOWZGOWZPdlJkUHhGM25veWJNSHpPSjhaSnlYb1ktaXZlUWVsTG8zNlU3T2V5YVpTY21CcTM0enYyV1ZyX3VYUlBkU251bUdOaEtDT0RWcUtFLWdpZnkyY3RlaUhuV1FRYkFMQ19xX1RDZGJKelp6ZTNLV19Lczlac0lGR1Z0TlAzT3REMll5M1N5RVBpcFhWdWZQNnc?oc=5",
+          "headline": "Polish naval commander visits Egyptian presidency - Egyptian Gazette",
+          "summary": "Polish naval commander visits Egyptian presidency Egyptian Gazette",
+          "date": "Aug 28, 2026 · 10:19 PM",
+          "publishedAt": "2026-08-28T22:19:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPQVl5YVY1d3RsejlQOU1FREM0WGV5bG5ZWUFrMWtfSnRXdGpqNzdYZnJIZ0JXTVhXTzJZZzRxTFNSNkxyaVk5NDJ6SU5MYVFFQ2JpX1gxXy1nZ0U4NDA2RVJZbkQwN1FfdFE1T1JacW5vSWhydWY0Tmd6VGNKS0h4QWprY3luQ29WYjB4eGVHWWhPVTNaMTg4WC1lYm4?oc=5",
           "importance": 2
         },
         {
@@ -1654,6 +1654,18 @@
           "countryId": "za",
           "sourceType": "independent",
           "source": "Google News",
+          "headline": "[Column] President Ntuli: South Africa must own its AI future - Africa Business Communities",
+          "summary": "[Column] President Ntuli: South Africa must own its AI future Africa Business Communities",
+          "date": "Aug 28, 2026 · 12:32 PM",
+          "publishedAt": "2026-08-28T12:32:33.000Z",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQNFRhX2VvRGR4VUJZeDJHY2dxamlBTkFGb25MSzhpM2VDc25ZdVNTMy1SQXR3eGJSU2p5OHg1a3cwWjlkblVkX2M0d0JhMDBJR3lYTkUwYTFaY2xCcXVvRDRXSUtZTnM0SGdIbnBseHJUeVdVcmU3bFZlWWRiS0N6WUlXRkRHMXRlSmMtQ0JKS3lRZzhlU05yMHBkU0Jyal9VUGVWdXNxNzB3MlRTbko1UlhzNUNHOXRiZW1MRDd3?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "za-independent-aHR0cHM6Ly9u",
+          "countryId": "za",
+          "sourceType": "independent",
+          "source": "Google News",
           "headline": "World’s second-most powerful president set to make another trip to North Africa after 10 years following major joint military drills with Egypt - Business Insider Africa",
           "summary": "World’s second-most powerful president set to make another trip to North Africa after 10 years following major joint military drills with Egypt Business Insider Africa",
           "date": "Aug 26, 2026 · 1:00 PM",
@@ -1671,18 +1683,6 @@
           "date": "Aug 11, 2026 · 7:00 AM",
           "publishedAt": "2026-08-11T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQME9lMnFnUWQ1SGtRWDlSUEdUbFY1UFVGU1BidHNyLTV3R0Rxd1hKbmM1N1RDV3JpMWpZOGVOQThMUGozMGN0amkyeUtjNWxyRDVtNi1ZSEw2T3pNV0hzRFFuNzVEWlNCVDlmU1BTQm9JS1JaZ2RidUlCWHlFQThCMnc0MnFPSU5CVlBoSmh4OGJGa0ZIQVRWbHRMYlVmaXQ5b09WR3hyQU9McjdtUEZRSXpLbXRvbG1UY2xFeQ?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "za-independent-aHR0cHM6Ly9u",
-          "countryId": "za",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Jacob Zuma - South African President, Corruption, ANC - Britannica",
-          "summary": "Jacob Zuma - South African President, Corruption, ANC Britannica",
-          "date": "Aug 15, 2026 · 7:00 AM",
-          "publishedAt": "2026-08-15T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE5ZTVA5Uzh5b3dIR2ZnWGZBS25YUnlmNXZCSG1NWlZrUHNsdEJjblhxdWFxTE9Kdi1sWGF4aW0yemotTmJyTzBWV01BZFQwc1I4eThaT013d05NV0h1ZGluWUJJQm1JVm5TVGJlMjc1VkNfNkk?oc=5",
           "importance": 2
         }
       ]
@@ -1938,11 +1938,11 @@
           "countryId": "cn",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Fuelling future growth: China targets hi-tech pillars by 2030 to beat headwinds - South China Morning Post",
-          "summary": "Fuelling future growth: China targets hi-tech pillars by 2030 to beat headwinds South China Morning Post",
-          "date": "Aug 26, 2026 · 11:00 AM",
-          "publishedAt": "2026-08-26T11:00:11.000Z",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxON1pjdHk5SFUwRzduaTBuSTRORjRHekllYXVhT0Z4Z28ycXJ0UGZOeHFRcVhWNm8xUDhJVFItcmo5eHhfX0dpTG5sM0hNT0d5eWt6Y2NFSVljU1cwRmRlbGNua3Q5cUFNYlduOTJYMDI4WUNkdlVxNVluOGl0cVlFTVpralVZY1pGTGJ2cGVqbVh3cWpYV3pJOWxSNEFhZjVCSGhnQ2x5Zm5Qb2RvcXJuY0RFZVXSAbQBQVVfeXFMTlpib0VFb2xCN0JYVkc0Tlp2a2c0ZmdUTGpvTnZROUUyQ3NNdWNTTHNCU2MwOTFfV0FXWmh3Mk02WWdlOVdrSDM5UjRZUk8xTXVQWC00UVVKR0h4OW14ckswWTJzejZjcTJyT3dPQ01lTVhKRGI3Z09vbjVKMWpjMGJJY0NHYTdZYzZRUWM3cjl0R0hnOXVqc19FS3Z2LU95TnF3VmxSbkJrOGhtNE9xWmxBSVBn?oc=5",
+          "headline": "State Council beefs up framework for exit bans - Safeguard Defenders",
+          "summary": "State Council beefs up framework for exit bans Safeguard Defenders",
+          "date": "Aug 3, 2026 · 7:00 AM",
+          "publishedAt": "2026-08-03T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQdE54OGwzTG5aVWcwUHh6MVpLQk82bUNvU2RuNmZxODJEMm9uRTY5Wnk2TmVlcmltQ3RIUmFZQnFNMXdQS2xJTENzME1WQXFDbTFzbjZKV2NuZ00wZUk4cVhScnpiMkRUb2xTaXRDLUl6OVg0ZUNBcGZuVDlHdU9KS0hXY0Q?oc=5",
           "importance": 2
         },
         {
@@ -1955,18 +1955,6 @@
           "date": "Aug 22, 2026 · 3:55 AM",
           "publishedAt": "2026-08-22T03:55:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9fY1Q2RENoYjNBbS1GdHlXYjZBSTFQai1tN0J6Q0pmNTF1LXVDdzNXRWFKZU94Z2g3QW1XRG5mWWF1TFB5M3R4bGFSYzJXTzcwVmNXN3JJOE44d3FnNXg1cTB1X2JNZGxmU2VUa0xFcU1CUkVpSnc?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "cn-independent-aHR0cHM6Ly9u",
-          "countryId": "cn",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "State Council beefs up framework for exit bans - Safeguard Defenders",
-          "summary": "State Council beefs up framework for exit bans Safeguard Defenders",
-          "date": "Aug 3, 2026 · 7:00 AM",
-          "publishedAt": "2026-08-03T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQdE54OGwzTG5aVWcwUHh6MVpLQk82bUNvU2RuNmZxODJEMm9uRTY5Wnk2TmVlcmltQ3RIUmFZQnFNMXdQS2xJTENzME1WQXFDbTFzbjZKV2NuZ00wZUk4cVhScnpiMkRUb2xTaXRDLUl6OVg0ZUNBcGZuVDlHdU9KS0hXY0Q?oc=5",
           "importance": 2
         },
         {
@@ -1991,6 +1979,18 @@
           "date": "Aug 3, 2026 · 3:05 PM",
           "publishedAt": "2026-08-03T15:05:55.000Z",
           "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNQ0VGWjNCWE5GcXJ3OVdxVFNEbWtTTHMyWGdpTHpEVV93RXhzMWlSS0t0eGN6ODZBN1dRVmxmUU4teVdXSjdDSVA0Q3NrOWl5VmlnX0dJN1BEd2JMcE5KTmVYOU9CRGx4LWl1V05UX29QOE9JYUNnMUUyOE1xWjBPZHlyakx5RmxkWkpKbkJMcnh5emFpTl9TWmZsTl9BbXg2SGRBb2l2elYzRm5mV25MbDZNOXJ2Z9IBuwFBVV95cUxQbDVJNmZjVjVhS3J6amlnZWdXd2F3cGhvOEdJSE9yMGlKZEtNQXZRVTB3dWV4azlhOUNQREQtYXlHUXZ2b0pGRjNlUmlzYlBRSlJUVkZMRkd0N2dRWGRlQldUZDRCUnppdVdtelBpdTktTGpqc2hITGgySWE0QU1aUFpkdTRfeDd1QVp4ZEk1N1hDYVZBX1NkdTR3RFZkeGpSQXoxY09fM1pOcmRyVlpGTU8xWHV1clhOaTVZ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "cn-independent-aHR0cHM6Ly9u",
+          "countryId": "cn",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "China's New Exit Regulations Reinforce Export Controls and Anti-Sanctions Enforcement - Geopolitechs",
+          "summary": "China's New Exit Regulations Reinforce Export Controls and Anti-Sanctions Enforcement Geopolitechs",
+          "date": "Jul 31, 2026 · 7:00 AM",
+          "publishedAt": "2026-07-31T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1pR2loblY2Ni1FOU9CZEg2dFZuOEhYWEVvT184dkZ1S0lxOUJsaDNMREF5M2xkMmJ0SkV6cThkSXBtWkNpSldSX0Z5SHFxNFBNeGYxbnlCdWJxeWRSN3NEM2hkNXlzRWY0NEdUSU5aWVJGZGNFTGRr?oc=5",
           "importance": 2
         }
       ]
@@ -2051,11 +2051,11 @@
           "countryId": "jp",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Press Conference by the Chief Cabinet Secretary (August 25, 2026 - Morning) - 政府広報オンライン",
-          "summary": "Press Conference by the Chief Cabinet Secretary (August 25, 2026 - Morning) 政府広報オンライン",
-          "date": "Aug 23, 2026 · 7:00 AM",
-          "publishedAt": "2026-08-23T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNeDNpWDhYY3oyTS0tMW1nbFlHXzVYaUxWNmRLQkNrcUJWeDRtdEhXQ0NIZkZlRHZTSW1WYXRfRXRmUTNtX3Q5d1Z2ZWVnQWFIVlRQQzEwakdBMFBOenZSUjhmcE1vOHVrclBVOUluaDdqdzA3VDdvbnM1N0xPQm10cTVWOTNHbVVJRUYyXzZxRjdweHNRay1lM1RBc3ViZw?oc=5",
+          "headline": "Japan's leader Takaichi explains why she spends long hours in seclusion at her official residence - AP News",
+          "summary": "Japan's leader Takaichi explains why she spends long hours in seclusion at her official residence AP News",
+          "date": "Aug 22, 2026 · 3:05 PM",
+          "publishedAt": "2026-08-22T15:05:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNc014aUQzZWhRYTFPTWVUUWQzNWxPay1Qd3NmUDAzY3Ewb2lzM2NZelRacGlHUmc3YmlQV2NFOGctQlNqc0dUVmRDdGRPbzA4VXBHOUFsd0FxUkc0RTJHd1RPTklwZS1jUEdlX254aXpKTGE3dE5FQkp3QkZFNzQtT3NWRGpOd1c4bHdFOEhYb09peENXeTE3dzNtSC1IbUxiN3M5VjRn?oc=5",
           "importance": 2
         },
         {
@@ -2063,11 +2063,11 @@
           "countryId": "jp",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Japan's leader Takaichi explains why she spends long hours in seclusion at her official residence - AP News",
-          "summary": "Japan's leader Takaichi explains why she spends long hours in seclusion at her official residence AP News",
-          "date": "Aug 22, 2026 · 3:05 PM",
-          "publishedAt": "2026-08-22T15:05:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNc014aUQzZWhRYTFPTWVUUWQzNWxPay1Qd3NmUDAzY3Ewb2lzM2NZelRacGlHUmc3YmlQV2NFOGctQlNqc0dUVmRDdGRPbzA4VXBHOUFsd0FxUkc0RTJHd1RPTklwZS1jUEdlX254aXpKTGE3dE5FQkp3QkZFNzQtT3NWRGpOd1c4bHdFOEhYb09peENXeTE3dzNtSC1IbUxiN3M5VjRn?oc=5",
+          "headline": "Takaichi rejects ‘weak-kneed’ criticism over ICC sanctions response - The Japan Times",
+          "summary": "Takaichi rejects ‘weak-kneed’ criticism over ICC sanctions response The Japan Times",
+          "date": "Aug 26, 2026 · 9:02 AM",
+          "publishedAt": "2026-08-26T09:02:34.000Z",
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQZzBjTnUxNE9pVkhZNFp3dF9mTWx6MVh6XzJWRFZYdmxYelItejFLUmxvQVh4ems5Ym1BMzM5V0V0YXhoNTJZSkVhc0tkQXBKeXdldzllMHRiQ3pfejJ5em8wb0stY1ZpYWNLVlNuTkEzNHZZSVo2MnQ0MGtKeEI5OU5zLUw3dUtQaDNyWEZZbw?oc=5",
           "importance": 2
         }
       ]
@@ -2307,11 +2307,11 @@
           "countryId": "id",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Indonesia’s Prabowo eyes North Korea trip. But no one’s invited him - South China Morning Post",
-          "summary": "Indonesia’s Prabowo eyes North Korea trip. But no one’s invited him South China Morning Post",
-          "date": "Aug 5, 2026 · 7:00 AM",
-          "publishedAt": "2026-08-05T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQZ3JubExoaGFPZ3N2MFMxMlI0YWctanhsNjJ3MGUxUUdlUk1ESEY2UkVndmNacldMd0FsSFBfT3FlYnlCLXBWYno4S1M1YjZaRjRzcnVEemhaUDVsM3htSmNaOExjVk1JTG1MWThnOElZZF9ub0k5U1c2SXN5bU0zY0k1SzU5RkVSWE5sd2dYNXo3V3BTYWhLM3dveURUVUkzR2tVYldmcjI5TlpSNWdhUEN2ZW1JTksySDdrTzJjN1dORzRs0gHEAUFVX3lxTE8xRHJxM1NJZWNILWN3c0ZKUXBQZUprNS1kMk5TWTVpYzRITjFndENqR2xmZUhKNGtZSzVmeVh3eDA5dmJOQ0VWZFgwSS1Uc2d4YlN3Y0FnUE5MbTctWGQwX1hDMTh5SUd5NE9oeGlpVVp4WDdWc1h6RlVWampFRWZfbEVLblRpOV9YQ2RBZWJQdWVfS1Etd1JRRGZRX0VPVWZOWkN3RmxxcFBSYkVYbFpVZkVmRnZGNGpZUGlIR04wNDlBV3o?oc=5",
+          "headline": "Indonesia signs deal for Indian weaponry - The Arkansas Democrat-Gazette",
+          "summary": "Indonesia signs deal for Indian weaponry The Arkansas Democrat-Gazette",
+          "date": "Jul 8, 2026 · 7:00 AM",
+          "publishedAt": "2026-07-08T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOdFprbE5OTVVvQ0dncDZSZHZYazJicmowYmtNdFQ5SzVRSzMyTUVXY3pSbThpMnM5ck8tQXl3cGx0UXFoWnZmdXFOS0JLbk16cG42aFFHa0tQN2lGOFBLTERXeDNXRmluekdRUl9uUlNXMER3cjNMX0RNNk9fakZDTTdiYU1mVjRJRmRHMDluQjlCVW8?oc=5",
           "importance": 2
         },
         {
@@ -2319,11 +2319,11 @@
           "countryId": "id",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Indonesia signs deal for Indian weaponry - The Arkansas Democrat-Gazette",
-          "summary": "Indonesia signs deal for Indian weaponry The Arkansas Democrat-Gazette",
-          "date": "Jul 8, 2026 · 7:00 AM",
-          "publishedAt": "2026-07-08T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOdFprbE5OTVVvQ0dncDZSZHZYazJicmowYmtNdFQ5SzVRSzMyTUVXY3pSbThpMnM5ck8tQXl3cGx0UXFoWnZmdXFOS0JLbk16cG42aFFHa0tQN2lGOFBLTERXeDNXRmluekdRUl9uUlNXMER3cjNMX0RNNk9fakZDTTdiYU1mVjRJRmRHMDluQjlCVW8?oc=5",
+          "headline": "Indonesia’s Prabowo eyes North Korea trip. But no one’s invited him - South China Morning Post",
+          "summary": "Indonesia’s Prabowo eyes North Korea trip. But no one’s invited him South China Morning Post",
+          "date": "Aug 5, 2026 · 7:00 AM",
+          "publishedAt": "2026-08-05T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQZ3JubExoaGFPZ3N2MFMxMlI0YWctanhsNjJ3MGUxUUdlUk1ESEY2UkVndmNacldMd0FsSFBfT3FlYnlCLXBWYno4S1M1YjZaRjRzcnVEemhaUDVsM3htSmNaOExjVk1JTG1MWThnOElZZF9ub0k5U1c2SXN5bU0zY0k1SzU5RkVSWE5sd2dYNXo3V3BTYWhLM3dveURUVUkzR2tVYldmcjI5TlpSNWdhUEN2ZW1JTksySDdrTzJjN1dORzRs0gHEAUFVX3lxTE8xRHJxM1NJZWNILWN3c0ZKUXBQZUprNS1kMk5TWTVpYzRITjFndENqR2xmZUhKNGtZSzVmeVh3eDA5dmJOQ0VWZFgwSS1Uc2d4YlN3Y0FnUE5MbTctWGQwX1hDMTh5SUd5NE9oeGlpVVp4WDdWc1h6RlVWampFRWZfbEVLblRpOV9YQ2RBZWJQdWVfS1Etd1JRRGZRX0VPVWZOWkN3RmxxcFBSYkVYbFpVZkVmRnZGNGpZUGlIR04wNDlBV3o?oc=5",
           "importance": 2
         },
         {
@@ -2343,35 +2343,35 @@
           "countryId": "id",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "The Indonesian Presidential Office said on Friday that mineral exports - Shanghai Metals Market",
-          "summary": "The Indonesian Presidential Office said on Friday that mineral exports Shanghai Metals Market",
-          "date": "Aug 8, 2026 · 7:00 AM",
-          "publishedAt": "2026-08-08T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNUVM5TUlhNW1uNmpyN0FrRnVud1JDWTQybGU0eUoxMkU4ZHVncm1nWEQxNHNtb0dMR0Q1NWxJbXpwOHEtUlFPcmNyRWRXemVfRDhTQ3FsOU9yWjFTRnNfeFNoRGdNbzJHSTFMMS0zbUw5Qy02M3dYUEVDdDJ0ZmpQVDdTaU05ODFxalp0cFhyX2poTElSVzdaNEhXR19WSVlka29VWWtzQ2tsNUNpbzRDX2J6cGpVZjRKSmlBTWpzU0RSbWFjZ0tJ?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "id-independent-aHR0cHM6Ly9u",
-          "countryId": "id",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "In State of the Nation address, Prabowo touts early wins after 21 months in office - CNA",
-          "summary": "In State of the Nation address, Prabowo touts early wins after 21 months in office CNA",
-          "date": "Aug 14, 2026 · 7:00 AM",
-          "publishedAt": "2026-08-14T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQY2Q2NUpfRnk0eHhERHY0X2JxbDlyMW5IaDRzMkVBQ3FlRno0eEx5bU5qTy05eVkyVW1GM3pfMkl6c1UzcVR3dl9fM0gydXg0Ty1raTNuYlBMWUg1c20zZ0pWN3RybFdFMnFKcVkwLVpxbmFORWtLZHpNbFdxVjNYbHBGZVV0R1JpRnBjZ3VKMi0tcG1TRTVvRHh3?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "id-independent-aHR0cHM6Ly9u",
-          "countryId": "id",
-          "sourceType": "independent",
-          "source": "Google News",
           "headline": "Indonesia appoints labour union chief as new environment minister - Reuters",
           "summary": "Indonesia appoints labour union chief as new environment minister Reuters",
           "date": "Apr 27, 2026 · 7:00 AM",
           "publishedAt": "2026-04-27T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQcnpjYnowWE9BYkQ2eE5xNzA1MzNhWHdWMEIzdnVxb1dja0RGRE94WlNDcmVpN0FqWDBqdkxYNnE3MVhESnlQaFNHaERlN3UydXlqLWp4aXN0LWNnaENuMlJlMHJ4VHNYdU9LQXBmeG9lZUpLTWxibEVNRXNtZmNPbHlsU1o5bUtDUDdOdzVLT2dXT3ZSd3N3Y0VyYXlFNkRGS0hjSm5Icl9NdE8tOEV4anlyeWtKYzRO?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "id-independent-aHR0cHM6Ly9u",
+          "countryId": "id",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Eve Warburton on Indonesian President Prabowo’s First Year in Office - The Diplomat – Asia-Pacific",
+          "summary": "Eve Warburton on Indonesian President Prabowo’s First Year in Office The Diplomat – Asia-Pacific",
+          "date": "Nov 11, 2025 · 8:00 AM",
+          "publishedAt": "2025-11-11T08:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOLTRWcWJXZWNOODVkdWQ1ZWg3T2dUVDROZmFJMmFFc3NpbzcyZmJWWnp6LWdQQVFzQjdnRW54Zmt4OU9iRkszR1lsbzJZT2JKN1RfSU51UEJyTU1uVHZBRElqM1NXV2EtTkNBYkNUakRGWHlZdGgzRkkxS2pPNy1sUGdaOHFlYy0wS3NpSm9JVGlNem52dVVlVTY2SWxWcVdrUkE?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "id-independent-aHR0cHM6Ly9u",
+          "countryId": "id",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "[SMM Rare Earth Flash] The Indonesian Presidential Office stated that - Shanghai Metals Market",
+          "summary": "[SMM Rare Earth Flash] The Indonesian Presidential Office stated that Shanghai Metals Market",
+          "date": "Aug 3, 2026 · 7:00 AM",
+          "publishedAt": "2026-08-03T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPcmNJODd6d3N1dVlDS21FM2RJQU5qZ0cxTS1pQ0xzSUp5Y24tN2k4aUhhdF9Jd2Z4eGpSVHY4RkpvVUhQcnlyYzk5X3FSODl5TFg0Y19jQURwQ2p0RWRqTjUxZ1Rkd1NVNHMxQXhVVlAyM3lMaHJMSE1KWHdmQkQ4X1lZSmNSWXREVWdacEQwdHRyNkZVcnZlTzVWWDNZMnliM1lUVk1WRlRlb2RSSDRDMU5BVHNFTHlaR3J5SVZtTkxZWXRoN2lVdzlNWEJiYVBKZUE?oc=5",
           "importance": 2
         }
       ]
