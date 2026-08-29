@@ -1,5 +1,5 @@
 import { writeFileSync, mkdirSync } from "fs";
-import { COUNTRY_INFO, fetchAllForCountry } from "../lib/feeds.mjs";
+import { COUNTRY_INFO, fetchAllForCountry, hasVerifiedOfficialSource } from "../lib/feeds.mjs";
 
 async function main() {
   console.log(`Starting feed fetch for ${Object.keys(COUNTRY_INFO).length} countries…`);
@@ -10,10 +10,11 @@ async function main() {
     try {
       const result = await fetchAllForCountry(countryId);
       countries[countryId] = result;
-      console.log(`official=${result.official.length} independent=${result.independent.length}`);
+      const verifiedLabel = result.officialVerified ? "verified-source" : "not-yet-verified";
+      console.log(`official=${result.official.length} independent=${result.independent.length} (${verifiedLabel})`);
     } catch (err) {
       console.log(`FAILED (${err.message}) — keeping empty for this run`);
-      countries[countryId] = { official: [], independent: [] };
+      countries[countryId] = { official: [], independent: [], officialVerified: hasVerifiedOfficialSource(countryId) };
     }
   }
 

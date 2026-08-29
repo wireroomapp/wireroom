@@ -1,6 +1,6 @@
 import express from "express";
 import { readFileSync } from "fs";
-import { COUNTRY_INFO } from "./lib/feeds.mjs";
+import { COUNTRY_INFO, hasVerifiedOfficialSource } from "./lib/feeds.mjs";
 
 /*
   WIRE ROOM / WORLD WIRE — backend (cache-serving version)
@@ -42,6 +42,8 @@ app.get("/api/news", (req, res) => {
 
   const cache = loadCache();
   const entry = cache.countries[countryId] || { official: [], independent: [] };
+  const officialVerified =
+    typeof entry.officialVerified === "boolean" ? entry.officialVerified : hasVerifiedOfficialSource(countryId);
 
   let items;
   if (mode === "official") items = entry.official;
@@ -50,7 +52,7 @@ app.get("/api/news", (req, res) => {
 
   items = [...items].sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
 
-  res.json({ items, generatedAt: cache.generatedAt });
+  res.json({ items, generatedAt: cache.generatedAt, officialVerified });
 });
 
 app.get("/api/status", (req, res) => {

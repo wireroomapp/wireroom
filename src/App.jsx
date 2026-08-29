@@ -74,6 +74,7 @@ export default function WireRoomV2() {
   const [query, setQuery] = useState("");
   const [region, setRegion] = useState("ALL");
   const [feed, setFeed] = useState(DEMO_NEWS);
+  const [officialVerifiedMap, setOfficialVerifiedMap] = useState({});
   const [loading, setLoading] = useState(false);
   const [mapFeatures, setMapFeatures] = useState([]);
   const [dims, setDims] = useState({w:1200,h:700});
@@ -142,6 +143,9 @@ export default function WireRoomV2() {
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data.items)) setFeed(prev => [...prev.filter(x => x.countryId !== country.id), ...data.items]);
+        if (typeof data.officialVerified === "boolean") {
+          setOfficialVerifiedMap(prev => ({ ...prev, [country.id]: data.officialVerified }));
+        }
       }
     } catch (_) {
       // Demo data remains visible when no backend exists yet.
@@ -192,11 +196,32 @@ export default function WireRoomV2() {
 
       <aside className={`panel ${selected?"open":""}`}>
         <div className="panel-head">
-          <div><div className="eyebrow">COUNTRY BRIEF</div><h1>{selected?.name || "GLOBAL FEED"}</h1><p>{selected ? selected.sources.join(" • ") : "Official government statements and optional trusted independent reporting"}</p></div>
+          <div>
+            <div className="eyebrow">COUNTRY BRIEF</div>
+            <h1>{selected?.name || "GLOBAL FEED"}</h1>
+            <p>{selected ? selected.sources.join(" • ") : "Official government statements and optional trusted independent reporting"}</p>
+            {selected && officialVerifiedMap[selected.id] !== undefined && (
+              <p className={`source-status ${officialVerifiedMap[selected.id] === false ? "unverified" : "verified"}`}>
+                {officialVerifiedMap[selected.id] === false
+                  ? "⚠ Official source: not yet verified for this country"
+                  : "✓ Official source: verified"}
+              </p>
+            )}
+          </div>
           {selected && <button onClick={()=>setSelected(null)}>×</button>}
         </div>
         {loading && <div className="loading">CHECKING SOURCE FEEDS…</div>}
-        {!loading && visibleFeed.length === 0 && <div className="empty">NO STORIES IN THIS FILTER YET.<br/><small>The backend source-ingestion layer will populate this feed.</small></div>}
+        {!loading && visibleFeed.length === 0 && (
+          <div className="empty">
+            {mode === "official" && selected && officialVerifiedMap[selected.id] === false ? (
+              <>NO VERIFIED OFFICIAL SOURCE YET FOR THIS COUNTRY.<br/><small>We haven't found or confirmed a direct government feed for {selected.name} yet — this isn't the same as "nothing happening," it means the source itself is still unverified. Check the NEWS tab for independent coverage in the meantime.</small></>
+            ) : mode === "official" && selected ? (
+              <>NO NEW OFFICIAL STATEMENTS RIGHT NOW.<br/><small>{selected.name}'s official source is verified and connected — it just hasn't published anything new since the last check.</small></>
+            ) : (
+              <>NO STORIES IN THIS FILTER YET.<br/><small>The backend source-ingestion layer will populate this feed.</small></>
+            )}
+          </div>
+        )}
         {visibleFeed.map(item=><NewsCard key={item.id} item={item}/>)}
       </aside>
     </main>
@@ -213,5 +238,5 @@ function geometryFromTopo(topology, geom) {
 }
 
 const CSS = `
-*{box-sizing:border-box} body{margin:0;background:#071019} .app{min-height:100vh;background:#071019;color:#e8e3d8;font-family:Arial,sans-serif}.topbar{height:64px;border-bottom:1px solid #1c2a3b;display:flex;align-items:center;padding:0 22px;gap:18px}.brand{font-weight:800;letter-spacing:.12em;font-size:21px}.brand b{color:#c9974b}.subtitle{font:11px monospace;color:#718198;letter-spacing:.08em}.status{margin-left:auto;font:10px monospace;color:#4fa6a0}.toolbar{height:54px;border-bottom:1px solid #162538;display:flex;align-items:center;gap:9px;padding:8px 18px}.toolbar input,.toolbar select,.mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace}.toolbar input{width:190px}.mode{margin-left:auto;display:flex}.mode button{cursor:pointer}.mode button.active{color:#c9974b;border-color:#c9974b}.layout{height:calc(100vh - 118px);display:flex}.map-wrap{position:relative;flex:1;min-width:0}.map{width:100%;height:100%;touch-action:none;cursor:grab}.map:active{cursor:grabbing}.ocean{fill:#0b1725;stroke:#21334a}.grid{fill:none;stroke:#142233;stroke-width:.5}.land{fill:#142230;stroke:#2a3c50;stroke-width:.65}.marker{cursor:pointer}.dot{fill:#c9974b}.dot.active{fill:#e8e3d8;stroke:#c9974b;stroke-width:2}.pulse{fill:none;stroke:#c9974b;stroke-width:1;opacity:.55;animation:pulse 2s infinite}.marker text{font:8px monospace;fill:#65758a;text-anchor:middle}.map-note{position:absolute;bottom:16px;left:18px;font:10px monospace;color:#4e6076}.panel{width:410px;background:#0c1724;border-left:1px solid #1c2a3b;padding:20px;overflow:auto}.panel-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #1c2a3b;padding-bottom:14px;margin-bottom:14px}.panel-head h1{margin:2px 0 4px;font-size:28px}.panel-head p{margin:0;color:#718198;font:10px monospace;line-height:1.5}.panel-head button{height:30px;background:none;border:1px solid #26384d;color:#8795a7;cursor:pointer}.eyebrow{font:9px monospace;letter-spacing:.12em;color:#4fa6a0}.loading,.empty{font:11px monospace;color:#718198;padding:24px 4px;line-height:1.7}.card{border:1px solid #1d2d40;background:#071019;padding:13px;margin-bottom:10px}.card-meta{display:flex;gap:8px;align-items:center;color:#586b82;font:9px monospace;margin-bottom:8px}.tag{padding:2px 5px;border:1px solid}.tag.official{color:#4fa6a0;border-color:#315e5b}.tag.independent{color:#8a98aa;border-color:#3a4655}.card h3{font-size:14px;line-height:1.35;margin:0 0 7px}.card p{font-size:12px;line-height:1.5;color:#9ba8b8;margin:0 0 8px}.card a{font:10px monospace;color:#c9974b;text-decoration:none}@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.2);opacity:0}}@media(max-width:800px){.layout{height:auto;min-height:calc(100vh - 118px)}.panel{position:absolute;right:0;top:118px;bottom:0;height:calc(100vh - 118px);width:min(420px,100%);transform:translateX(100%);transition:transform .25s;z-index:4}.panel.open{transform:translateX(0)}.subtitle{display:none}.toolbar{overflow:auto}.toolbar input{width:150px}.map-wrap{height:calc(100vh - 118px)}.status{display:none}}
+*{box-sizing:border-box} body{margin:0;background:#071019} .app{min-height:100vh;background:#071019;color:#e8e3d8;font-family:Arial,sans-serif}.topbar{height:64px;border-bottom:1px solid #1c2a3b;display:flex;align-items:center;padding:0 22px;gap:18px}.brand{font-weight:800;letter-spacing:.12em;font-size:21px}.brand b{color:#c9974b}.subtitle{font:11px monospace;color:#718198;letter-spacing:.08em}.status{margin-left:auto;font:10px monospace;color:#4fa6a0}.toolbar{height:54px;border-bottom:1px solid #162538;display:flex;align-items:center;gap:9px;padding:8px 18px}.toolbar input,.toolbar select,.mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace}.toolbar input{width:190px}.mode{margin-left:auto;display:flex}.mode button{cursor:pointer}.mode button.active{color:#c9974b;border-color:#c9974b}.layout{height:calc(100vh - 118px);display:flex}.map-wrap{position:relative;flex:1;min-width:0}.map{width:100%;height:100%;touch-action:none;cursor:grab}.map:active{cursor:grabbing}.ocean{fill:#0b1725;stroke:#21334a}.grid{fill:none;stroke:#142233;stroke-width:.5}.land{fill:#142230;stroke:#2a3c50;stroke-width:.65}.marker{cursor:pointer}.dot{fill:#c9974b}.dot.active{fill:#e8e3d8;stroke:#c9974b;stroke-width:2}.pulse{fill:none;stroke:#c9974b;stroke-width:1;opacity:.55;animation:pulse 2s infinite}.marker text{font:8px monospace;fill:#65758a;text-anchor:middle}.map-note{position:absolute;bottom:16px;left:18px;font:10px monospace;color:#4e6076}.panel{width:410px;background:#0c1724;border-left:1px solid #1c2a3b;padding:20px;overflow:auto}.panel-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #1c2a3b;padding-bottom:14px;margin-bottom:14px}.panel-head h1{margin:2px 0 4px;font-size:28px}.panel-head p{margin:0;color:#718198;font:10px monospace;line-height:1.5}.panel-head button{height:30px;background:none;border:1px solid #26384d;color:#8795a7;cursor:pointer}.eyebrow{font:9px monospace;letter-spacing:.12em;color:#4fa6a0}.source-status{margin:6px 0 0;font:10px monospace;letter-spacing:.04em}.source-status.verified{color:#4fa6a0}.source-status.unverified{color:#c9974b}.loading,.empty{font:11px monospace;color:#718198;padding:24px 4px;line-height:1.7}.card{border:1px solid #1d2d40;background:#071019;padding:13px;margin-bottom:10px}.card-meta{display:flex;gap:8px;align-items:center;color:#586b82;font:9px monospace;margin-bottom:8px}.tag{padding:2px 5px;border:1px solid}.tag.official{color:#4fa6a0;border-color:#315e5b}.tag.independent{color:#8a98aa;border-color:#3a4655}.card h3{font-size:14px;line-height:1.35;margin:0 0 7px}.card p{font-size:12px;line-height:1.5;color:#9ba8b8;margin:0 0 8px}.card a{font:10px monospace;color:#c9974b;text-decoration:none}@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.2);opacity:0}}@media(max-width:800px){.layout{height:auto;min-height:calc(100vh - 118px)}.panel{position:absolute;right:0;top:118px;bottom:0;height:calc(100vh - 118px);width:min(420px,100%);transform:translateX(100%);transition:transform .25s;z-index:4}.panel.open{transform:translateX(0)}.subtitle{display:none}.toolbar{overflow:auto}.toolbar input{width:150px}.map-wrap{height:calc(100vh - 118px)}.status{display:none}}
 `;
