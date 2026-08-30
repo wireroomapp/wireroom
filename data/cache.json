@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T16:06:14.225Z",
+  "generatedAt": "2026-08-30T17:06:05.767Z",
   "countries": {
     "us": {
       "official": [
@@ -82,6 +82,18 @@
           "countryId": "us",
           "sourceType": "independent",
           "source": "Google News",
+          "headline": "Lake Ontario Didn’t Ask for Trump to Rename It - The New York Times",
+          "summary": "Lake Ontario Didn’t Ask for Trump to Rename It The New York Times",
+          "date": "Aug 28, 2026 · 12:06 AM",
+          "publishedAt": "2026-08-28T00:06:21.000Z",
+          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPY3Z3eUNWT0s2QktsMVlVdE54WHJLblVoc3RTWjRVdFMxam82OU1rMWh3bUtRQjlWd3UyQi0tcXNwWVhQclpsekxkZHBXbUxTeFFmM1VOUFQ5Q3RTT0ZKV05OVkRaOEZlZE5QeHZaa3JJRUVGYVRKdFhEZ05iamtMdnJpMTZ5Zw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "us-independent-aHR0cHM6Ly9u",
+          "countryId": "us",
+          "sourceType": "independent",
+          "source": "Google News",
           "headline": "President Trump Participates in Signing Time, Aug. 27, 2026 - The White House (.gov)",
           "summary": "President Trump Participates in Signing Time, Aug. 27, 2026 The White House (.gov)",
           "date": "Aug 27, 2026 · 5:35 PM",
@@ -123,18 +135,6 @@
           "date": "Aug 28, 2026 · 5:37 PM",
           "publishedAt": "2026-08-28T17:37:48.000Z",
           "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQNjdkZlBoTjZzRWlWbDJJVnIzTkNFV3BQdjlHSjlOVHYzblRTY0pBUVZMNGI0OHpoSmd4XzExTFlScHI5b1VtMDVjMEt5SHRGbWlWaDRpNHJwWk5qOVBtaFhhUFBKOFlOV2lXZWZfaE1wX0phSE9BMjUtdGpVQkZ3bkx2bFZHZC1VZWhIZElReFRncXhJa2Y4RTZPVGlvcTho?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "us-independent-aHR0cHM6Ly9u",
-          "countryId": "us",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Trump keeps building his ballroom amid Supreme Court’s silence - Jefferson City News Tribune",
-          "summary": "Trump keeps building his ballroom amid Supreme Court’s silence Jefferson City News Tribune",
-          "date": "Aug 30, 2026 · 9:00 AM",
-          "publishedAt": "2026-08-30T09:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQclNxUER2M2JiQWRfbTh1Y183SlRpb1hYemtWTk1sYnJadDdTVm9DUWZYX3pXdVBjSFMycDR4Z2ZpUVV5eGhNYUV3cEgyNnc5WDRJQ2REcHFUQ2Y4aEZsb2xETzN0elBTZDE4TjJFaXRtUHh1T01DZWJwU2s5R01VLTdsRnBNUzN5WV8yakFJOGNSMVBWT2Zz?oc=5",
           "importance": 2
         },
         {
@@ -540,30 +540,6 @@
           "countryId": "gb",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "The British Prime Minister’s New Digs - Politico",
-          "summary": "The British Prime Minister’s New Digs Politico",
-          "date": "Aug 21, 2026 · 7:00 AM",
-          "publishedAt": "2026-08-21T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOM1RCVFRiMS00Z0NCSGppMkdmR2d3ZXJVNkM5bThPVHZ6NTU1R2lJVU5ldTY1UTB4SnNGMTJHRVFWRjZpVUE4eXV5VkFIVE9ZWGoxWEl3U19xRVQ3SXRwLXRxSzlMRUNfSnI5dFVQLWFNMGRlQ1JldFBZY1FodndzdjFENV90czYwOWIxTDlKV1A4MTUyeUE?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "gb-independent-aHR0cHM6Ly9u",
-          "countryId": "gb",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "British prime minister reportedly exchanged messages with someone posing as Susie Wiles - PBS",
-          "summary": "British prime minister reportedly exchanged messages with someone posing as Susie Wiles PBS",
-          "date": "Aug 17, 2026 · 7:00 AM",
-          "publishedAt": "2026-08-17T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPbHpDTmF2ZWhsU0dIVTJrVTN4Q0xoWHVNWVFkeURFc2xtLVR0Nm9OQzFZd2k4bEhEMmRxR29PUzlwMTd4RF9mMEx6MnY2LW94TmJMa2JEQmFLWlBVRVlyOFlJc29UZlBJZFB0S0Q2Snh6a0ZGZldVMEppOFl2UGlRTWFXTk5xdVdvOHBMbHZIRmZWaktlNDJQVTVlRGxZMENoUDFXb1RseWtpQzR2bXNhQW8xMDczYUhFVmc0NHA5d9IBxAFBVV95cUxOUTMzNFMtY3dRWHlRRk9NaGhaTEpleDdlUmNxZkFRNUhMQ3A0SlREOUxwUjdGTlhQdVlPRVRkclFrdUF0Qk9hLWhnUEdkcUgxdVlzRXpsVHJNV0pGOXAwU1V2TnhoZ3VMVUxBX2dnalIzSEstdUU1Vm5qMnU1SnRub1NVNzJCbE1oU09pOUEweEZQVy13VWY0Ykp6My04RXRDQ1ZjNVk2WjloeFN0SHdmYnFGY2Zvdm5SQXV4Z25iT1ZoOTFv?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "gb-independent-aHR0cHM6Ly9u",
-          "countryId": "gb",
-          "sourceType": "independent",
-          "source": "Google News",
           "headline": "Cost of living and young people priorities for the PM during first visit to Northern Ireland - GOV.UK",
           "summary": "Cost of living and young people priorities for the PM during first visit to Northern Ireland GOV.UK",
           "date": "Aug 27, 2026 · 1:10 PM",
@@ -576,11 +552,11 @@
           "countryId": "gb",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Meeting Between the President of Ukraine and the Prime Minister of the United Kingdom - Офіційне інтернет-представництво Президента України",
-          "summary": "Meeting Between the President of Ukraine and the Prime Minister of the United Kingdom Офіційне інтернет-представництво Президента України",
-          "date": "Aug 24, 2026 · 9:38 PM",
-          "publishedAt": "2026-08-24T21:38:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPdXBiRFJWZEtMUFFSVlFvQjE4ZnNMcVJyMWVkaHI5ZVgwMjhaY3BKelJ1cF9paW0xMXRhY0pQdXpUcTlWWk84UWhDazBaUm1ubWp1LU10YlpBeXZtc3p6QkhfeXVRQTE5c05LVUlRTFNhV1RzaWc1Xzdta1JDMmk3aEEzTkl3TFB6QTZSNl94SEZQRllzOUtQTVhCTGF4RmZsSVR5MVc1Zw?oc=5",
+          "headline": "Burnham caps busy first week as UK's new prime minister at part-time office in Manchester - PBS",
+          "summary": "Burnham caps busy first week as UK's new prime minister at part-time office in Manchester PBS",
+          "date": "Jul 24, 2026 · 7:00 AM",
+          "publishedAt": "2026-07-24T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPUkVKM05Ib0FfTGw3Vkh5UWpiRXBYdHNDcFRZWkVDSmhCX1dUdm5yejJNdFUzajY2dVVJUW5aOWpQMC1sSWQ1YXAwRlJlNW1WY3BRZTVLTzhjcEgxcVlkNjdfU0c4OXljMTBqblZpbWx4QmxGd2JiQ2lyaF9jWUloLTRsY25jREhicmtzUWxZWUNyb3lxVFA2eEdzT01Wd3RyZzBZSGZydGJtLVFNVzBTb0dua3dITEdLNm5Ua0pxRznSAcYBQVVfeXFMT1UtckF0bVI4bGRtZTBHTWE5Wnl0ZEpKQWJfTC1ITVZKbWQwcl9kOEVsb1NEY2VCOGNfbi16Qk5NY18xSXJNVVowMXZsaFJqaHdTakl0Z1U0RVdfSi1kWDVCN2Z3eVZNN29scm8zTFpnaEJKb2c0VWJfai1aZms3amVrZi1jaWUybW42QXZlRnlaLUhfYTJsbk5nRmN5Q29XdlU3RWcyeU80R3J5RXFtNTlOQlhhbmxTdzc5NVc3SThrTW9qUURn?oc=5",
           "importance": 2
         },
         {
@@ -588,11 +564,23 @@
           "countryId": "gb",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "New UK PM Burnham takes to social media to challenge populist parties' dominance - Reuters",
-          "summary": "New UK PM Burnham takes to social media to challenge populist parties' dominance Reuters",
-          "date": "Aug 5, 2026 · 7:00 AM",
-          "publishedAt": "2026-08-05T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNLWJqN2x1VXdfbzN5TmtQLVYyeDBYMWhob25Rd1hvTDhQR2d0TEtPQ1Y2alVZbGVsRGJhSzRtX0pvQzhFMzJDSUhNZnVIdE10Qm9Jd1Y5Z05QdEE5UTRYb3l2bG9TQm95YnJqZmJCRDdmdm9kaFV4MkpycVFISEd0cGk2bl90NHpqckVDWXRfUkpxRkZNVnd1ZU5hVkFsY1Y5U0xtOXpxUGNPVXpRb3hkUVIwS01CSTlGZFE?oc=5",
+          "headline": "The UK Has Its Seventh Prime Minister in a Decade. What Happened to the Others? - Council on Foreign Relations",
+          "summary": "The UK Has Its Seventh Prime Minister in a Decade. What Happened to the Others? Council on Foreign Relations",
+          "date": "Jul 20, 2026 · 7:00 AM",
+          "publishedAt": "2026-07-20T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOdFdrcDBXV1RGbHNvSUJ2SUVYZVFYb3paSUdoSEZIYlQtVHlGamhJcEJkdVFjVWVGNWRTeHE3aEkxS1V5TktsSUlWWEllUWxhLVRzUVV0ZkFyZU05N0p5SDl3RTFFYnVKQVV5QTJxWTNacVVJcG1DUmZUNWJiajZUTkhvWWdPbjRLT0VfUjRnQ3pCMWRMeVdDUUNpZzRVRmZCaUNXeWNvZjBZSVQ5WVdXcDdB?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "gb-independent-aHR0cHM6Ly9u",
+          "countryId": "gb",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Andy Burnham takes the reins as U.K.'s 7th prime minister in a decade - CBS News",
+          "summary": "Andy Burnham takes the reins as U.K.'s 7th prime minister in a decade CBS News",
+          "date": "Jul 20, 2026 · 7:00 AM",
+          "publishedAt": "2026-07-20T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNVnNwUE9TYTdQWllkZTlKS3RmaDl4NGo5T3BZLUpJWXdFc0NXdW9RbkoxRWZEZFR6ZmRLMkVkMEFMczFtNjFMQXhyLWpMM01EbVRzZkJYS3FJeTZkRm9ZdHJkQXJrOUZxay16YUkyNUllTjJCZ0NnM291MWxNS1UtT2lWa0ZJSV8xUTluV2VFeVY2dzgwSFZEaU5UUHFiUQ?oc=5",
           "importance": 2
         },
         {
@@ -605,6 +593,18 @@
           "date": "Jul 24, 2026 · 7:00 AM",
           "publishedAt": "2026-07-24T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPNWRtN1VndTh0UDVTaGJYaUludFBlZnd6cUdzREh6RUMtc2pYVTFudFZvRENnQ2NvX2dkR05TNjlFVTlPOVFEdEcwczVHbjRCUVR5Q1Q4Z2NXWlNvNGl5X1ltNE5OSHY0TEVmVnN4alp2UTFaRmJBdUJlLXZwakoxVmtoNjZiQzhlV2VSN2tPMGZPQQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "gb-independent-aHR0cHM6Ly9u",
+          "countryId": "gb",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Andy Burnham becomes U.K. prime minister - NPR",
+          "summary": "Andy Burnham becomes U.K. prime minister NPR",
+          "date": "Jul 20, 2026 · 7:00 AM",
+          "publishedAt": "2026-07-20T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQdXhEcXdUbDZHTWpJMDZ4VGlYU0x0MFB6T0hydDhIYTJpRzI2cTJIZGpJOTZOd21JT1Bwa3dOYlhxV25LNVE2TVZKZS1RR3Rxc19yYXpaSkl6bnc4STZjaC1xbFVRYU9zN3E1UUZqQlotT1dDZGRmSS01a2RWZFVjSTV6T1VnMGRmTElwUkp3?oc=5",
           "importance": 2
         }
       ]
@@ -937,11 +937,11 @@
           "countryId": "pl",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "PM Tusk: Strength, preparedness, independence and sovereignty to avoid war - English Section - polskieradio.pl",
-          "summary": "PM Tusk: Strength, preparedness, independence and sovereignty to avoid war - English Section polskieradio.pl",
-          "date": "Aug 15, 2026 · 12:33 PM",
-          "publishedAt": "2026-08-15T12:33:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxORG1FbEVKTGtzQjdyODFLRjJFSjUwazhEMlozel9UU2ZRSlgxbE5jbVpZVVNVT3RzWUJYWmw3RzkwOVUtbzM1czdDS1lHSHJEVEtPcEdfN1VPQ3NLQW0weEh0ZmY4MnoxSlBheXJtM1NrcEJacE5mNDktbVV4RUJsRFFBRnJ6ckFEUVNXOE1zb0o3TlQyVjRDeEFGMkFmMy0yRk95b0Q1dGMyVTNWZU80TU15YTFTY0dURXJKalVSSXlRZw?oc=5",
+          "headline": "Poland, UK set to sign defence treaty amid security threats - polskieradio.pl",
+          "summary": "Poland, UK set to sign defence treaty amid security threats polskieradio.pl",
+          "date": "May 27, 2026 · 7:00 AM",
+          "publishedAt": "2026-05-27T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNMENBZVd5aXFXTmliSUI5d1pPSFRhakl3MUJmeUNnd2NiSmgtN2NIc0dOakpFajZsZzd6VDU4UTRwM0RYdVFsQzRlcFQtMmJ4ZnRXVEwxVEd1N3lHVGxJV3Z3YXNiSTNvcmt6LWhLV1RHaS1uRkRQWmIydG1tYlJIdXl1aWRWV251a25DYWlndkxuTk83QnRHTk9QbjRXSGcwQ2oydjdlR1oweWlOT28zSg?oc=5",
           "importance": 2
         },
         {
@@ -954,18 +954,6 @@
           "date": "Mar 23, 2026 · 7:00 AM",
           "publishedAt": "2026-03-23T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQb0l4am9sWEZ1QTBocE4tTVhzUHhJLXZvY2dZMV84ckVpT1QwcDB1VlMzYlJneWxYTXF3VUZ5YkZTZE4zTXFxMktwYi1DM2hfemxlWUI2VmlaUUd0U1ZjNXE0QnJ6b2x5dHl6VUtlbkd4U0o1QWhnd2g5SXRnTF8xOG81djR0cldFOUhZWHVaYWsxaDljUmVHS0lTdnk?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "pl-independent-aHR0cHM6Ly9u",
-          "countryId": "pl",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Poland, UK set to sign defence treaty amid security threats - polskieradio.pl",
-          "summary": "Poland, UK set to sign defence treaty amid security threats polskieradio.pl",
-          "date": "May 27, 2026 · 7:00 AM",
-          "publishedAt": "2026-05-27T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNMENBZVd5aXFXTmliSUI5d1pPSFRhakl3MUJmeUNnd2NiSmgtN2NIc0dOakpFajZsZzd6VDU4UTRwM0RYdVFsQzRlcFQtMmJ4ZnRXVEwxVEd1N3lHVGxJV3Z3YXNiSTNvcmt6LWhLV1RHaS1uRkRQWmIydG1tYlJIdXl1aWRWV251a25DYWlndkxuTk83QnRHTk9QbjRXSGcwQ2oydjdlR1oweWlOT28zSg?oc=5",
           "importance": 2
         },
         {
@@ -990,6 +978,18 @@
           "date": "Mar 30, 2021 · 7:00 AM",
           "publishedAt": "2021-03-30T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPeURtNTROOG5rVVBuRWlsWkpQcF85elV2cld2Wm0wY0pSTHJOdTJXbmY2SUJDWm9BT0tXZDZ5YlNLOHRpenNQUVhwZjVPSFpjT29XRXRlLVVGVzg0RkhCd3ZiNTVFZV9uVGg1VThJNHM4SGJQck9LMzJyQ181MHNiWmM5ZHRyNWJGeTdYdUl2VDBYVFNfR05BQkEzMDJwNjB6dGk1THdZQ3FfVGRHeHhMdWRLZDZUOE0?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "pl-independent-aHR0cHM6Ly9u",
+          "countryId": "pl",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Poland Prepares for Direct War with Russia - The Jamestown Foundation",
+          "summary": "Poland Prepares for Direct War with Russia The Jamestown Foundation",
+          "date": "Apr 4, 2025 · 7:00 AM",
+          "publishedAt": "2025-04-04T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBvYzF1N2tSNUN4Y3lVWElkUGktTTQ2VVY4MDNKNWZVNHoySjNFV3Z0dWNtbEc4LXZibzk0TlpHZ1F3SXNlbm0yVElVV1prX3dyNE1QRGdoTnhKWV9sUzBEWE9YZFl4dU9jVHhDNWh0VXFBVDQ?oc=5",
           "importance": 2
         }
       ]
@@ -1091,6 +1091,18 @@
           "countryId": "ru",
           "sourceType": "independent",
           "source": "Google News",
+          "headline": "How Kremlin Propaganda Is Spreading Through Serbia - Radio Free Europe/Radio Liberty",
+          "summary": "How Kremlin Propaganda Is Spreading Through Serbia Radio Free Europe/Radio Liberty",
+          "date": "Aug 30, 2026 · 10:55 AM",
+          "publishedAt": "2026-08-30T10:55:53.000Z",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPVEFpLWIyZDFNbjlPbTMtSkdWbnV3VDJYNElwN1hNRzQycHVONVYxYXJMT2dJam5fRzg3TUFiZENfVFZUMnN1ZXJUbmczMTdlVzVWYWdhZ1poeFA1cXp1R0tEV2lqT3JrRlF6TjhWYUpqTFJ0Zm02eFJEWU9nU042cHBMY09QMkh3R1NubkFhNWdNUdIBlAFBVV95cUxOQllDc1V2YVlXSWtvczQ1RWdWZEh0cEs2SkMyTkU4N1NVYnVuRmdLVHBYelM2c21uckVjWVdQNzVrUDVqVmZEU0g3Z0hScENpeXFyYVdFWTN2cEVDZ001NG9Fd1NVYUR2Q25hdE5YVGdHTmc0MUlvZEdPSkc4cEpTWV80NnJ5OXJXQkYyS2paTExfN3A4?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ru-independent-aHR0cHM6Ly9u",
+          "countryId": "ru",
+          "sourceType": "independent",
+          "source": "Google News",
           "headline": "Notes From Russia’s Literary Underground - Foreign Policy",
           "summary": "Notes From Russia’s Literary Underground Foreign Policy",
           "date": "Aug 28, 2026 · 6:58 PM",
@@ -1108,18 +1120,6 @@
           "date": "Aug 28, 2026 · 10:58 AM",
           "publishedAt": "2026-08-28T10:58:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOWklva1BaTmNXa2hzOW9QU1h0ZEExQ3hvbTVOcHAzZ0tkUDM4TWpyZVFVeDNWcUsxOGVpZ2JHbUpEb1BqMDVKUDdqT3BQRU16QjU4Q2Fkb3dqbnJUMFVuLThXQ2tiRmhyVnBGZGJvWEpIU3pqY3JzeTBqSTVGQVhzQ0k4RWFWbTN5YkN5RlVaMDhDOFlna3A2OFVaNA?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ru-independent-aHR0cHM6Ly9u",
-          "countryId": "ru",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "How Kremlin Propaganda Is Spreading Through Serbia - Radio Free Europe/Radio Liberty",
-          "summary": "How Kremlin Propaganda Is Spreading Through Serbia Radio Free Europe/Radio Liberty",
-          "date": "Aug 30, 2026 · 10:55 AM",
-          "publishedAt": "2026-08-30T10:55:53.000Z",
-          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPVEFpLWIyZDFNbjlPbTMtSkdWbnV3VDJYNElwN1hNRzQycHVONVYxYXJMT2dJam5fRzg3TUFiZENfVFZUMnN1ZXJUbmczMTdlVzVWYWdhZ1poeFA1cXp1R0tEV2lqT3JrRlF6TjhWYUpqTFJ0Zm02eFJEWU9nU042cHBMY09QMkh3R1NubkFhNWdNUdIBlAFBVV95cUxOQllDc1V2YVlXSWtvczQ1RWdWZEh0cEs2SkMyTkU4N1NVYnVuRmdLVHBYelM2c21uckVjWVdQNzVrUDVqVmZEU0g3Z0hScENpeXFyYVdFWTN2cEVDZ001NG9Fd1NVYUR2Q25hdE5YVGdHTmc0MUlvZEdPSkc4cEpTWV80NnJ5OXJXQkYyS2paTExfN3A4?oc=5",
           "importance": 2
         },
         {
@@ -1360,8 +1360,8 @@
           "source": "Google News",
           "headline": "War weighs on Iran's economy as US intensifies sanctions - Reuters",
           "summary": "War weighs on Iran's economy as US intensifies sanctions Reuters",
-          "date": "Aug 29, 2026 · 2:01 PM",
-          "publishedAt": "2026-08-29T14:01:05.000Z",
+          "date": "Aug 29, 2026 · 2:04 AM",
+          "publishedAt": "2026-08-29T02:04:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQQmtVbEg3UlB1QzhqQTZJLTRJY1ZfZWJTZjVrVjVPWDFDT3dGd0RxTEQ3M19hVEFHcldMaEpxcncwNGxlQ1ZDMzA3T09ScHFKdjFEYVQ4Yi1BdFNHdmNuVlpmN3MtWUVOSlVVTEZoRjlxRDZQQ3VpejdGRGg4bEh1NzRyMjJuYU15c2t1V0V3ckJxeDBLdUs4WFNkeEhnSWl3dW9keE5YMA?oc=5",
           "importance": 2
         },
@@ -1464,6 +1464,18 @@
           "countryId": "ae",
           "sourceType": "independent",
           "source": "Google News",
+          "headline": "President Sheikh Mohamed meets Sheikh Mohammed bin Rashid in Dubai - thenationalnews.com",
+          "summary": "President Sheikh Mohamed meets Sheikh Mohammed bin Rashid in Dubai thenationalnews.com",
+          "date": "Aug 30, 2026 · 1:24 PM",
+          "publishedAt": "2026-08-30T13:24:49.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQVlR5cTd1RVdYVEhlc19EcGNPYi10bGFEbTJWZ0dmdGc3V1BDRWUzNGlYWWNWUktiXy1jUWJGc1dWckZJU0pTQkhTdkV2MV9IUkdlRVhfam8zVWN6OEFQWGZwMTUtWWhFbjZVQU52X3hJZzA1bGVlV21qbGtTRFF1VWR5SnRFTlQwWHN1UVJOSjd2NE04RHJqRU1RTmM2aTIxMHJNa3d3MjB0bXFCclhWRnRFRnJiODJOejFZ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ae-independent-aHR0cHM6Ly9u",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "Google News",
           "headline": "FILE PHOTO: UAE President Sheikh Mohamed bin Zayed Al Nahyan visits Saudi Arabia - The Lufkin Daily News",
           "summary": "FILE PHOTO: UAE President Sheikh Mohamed bin Zayed Al Nahyan visits Saudi Arabia The Lufkin Daily News",
           "date": "Aug 18, 2026 · 7:00 AM",
@@ -1481,18 +1493,6 @@
           "date": "Aug 19, 2026 · 7:00 AM",
           "publishedAt": "2026-08-19T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNVnA2MnprdC01ZXZreGxyR1pZYl9rTnVReTZ0S2ZiZ3FMcGtabktucW5nT011Vm9aZnNZbHBpX0FkenktVXJnWkluOGJYaThYMHJPcXlwN2F2T3J0dXBaX1VyVXRQU2pESWtEZmo4eDRPTzg5U1JuSmZOLWJuNjFwLXZ5NUJzMk5nb1l0ZWNVOTAzSk9hWnhSZ1J2UGlWRVNBYjJkaHJpbEYyQkdtR1VEYg?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ae-independent-aHR0cHM6Ly9u",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "UAE's Gargash says attacks on Gulf states ‘deepened’ Iran's predicament - thenationalnews.com",
-          "summary": "UAE's Gargash says attacks on Gulf states ‘deepened’ Iran's predicament thenationalnews.com",
-          "date": "Aug 25, 2026 · 10:06 AM",
-          "publishedAt": "2026-08-25T10:06:45.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPSVhuWmV0ck9iNXYyNTUtR3EyQWItNWF4SmJSRl96cDJGV18zdDJkYjNrVFhWcDZBVWVQRzZZb1d2MVgxSG15Y3RNMFpwT1pkRlN3RVpxQmRMNUZaeDU2ajdHZHNxZmh6Y0wzNDgwUFdYbjlEempUQk9tdGlBOGZkUVQ0ZTB2cWZWVTg1andIWThINVR4d2xfc0xzb1NwcFRlVW9fM2NnQmYzZXdzc04wa1Z4NXUzVWVKVnZYNGxwb1VsZw?oc=5",
           "importance": 2
         },
         {
@@ -1666,11 +1666,11 @@
           "countryId": "za",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "President Ramaphosa to address Volkswagen Group Africa 75th anniversary dinner - South African Government News Agency",
-          "summary": "President Ramaphosa to address Volkswagen Group Africa 75th anniversary dinner South African Government News Agency",
-          "date": "Aug 30, 2026 · 11:08 AM",
-          "publishedAt": "2026-08-30T11:08:35.000Z",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPOEJzV2ZDM29lX2xmYXdnYUFaN1cwTFlNbll6VTROQ2VLUHJFUDB3RzRzM3FxUXpfRGZWY1J5Sk5mU012TzlXYy1BLXRFTUpSUXlFSnZBWlMyNFlqV0gxY1B6RmYxREl0RHFWd0tIaF92UFZUMlBXV0JwalFBeEFfQ3ZmZ0lzQmVjRU9saVlWSm9yaEZ3TXVaMjJNLXA2azctLVcxR3pvRWkwd0dxZnlMMTNObGs?oc=5",
+          "headline": "South African president gets court order halting inquiry into 'Farmgate' scandal - Reuters",
+          "summary": "South African president gets court order halting inquiry into 'Farmgate' scandal Reuters",
+          "date": "Jul 24, 2026 · 7:00 AM",
+          "publishedAt": "2026-07-24T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOWGtkM3JlMFFGWXpqTXFnbmFBQ2JMb2xNUHp3UmFFaGxEUXhFZWJXci13cnFKMGpEUXRQT0FPY2NOREFWZjhPVGRydVI4SXRfeS1qYXRIV0tPMXpxYkcyeVlHSlJ4RTBROUFPMnh4aXVTNHhyYTJObklIUFZ2WWN3T3V6a0Vqclk5MkdnaVlkN1ZnVE1NSWozUUJuSUI4dzBUUVZVdDBOLXlSOUJUdmlFSnJ4aFh3WDBYT0l3Yg?oc=5",
           "importance": 2
         },
         {
@@ -1678,11 +1678,11 @@
           "countryId": "za",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "South African president gets court order halting inquiry into 'Farmgate' scandal - Reuters",
-          "summary": "South African president gets court order halting inquiry into 'Farmgate' scandal Reuters",
-          "date": "Jul 24, 2026 · 7:00 AM",
-          "publishedAt": "2026-07-24T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOWGtkM3JlMFFGWXpqTXFnbmFBQ2JMb2xNUHp3UmFFaGxEUXhFZWJXci13cnFKMGpEUXRQT0FPY2NOREFWZjhPVGRydVI4SXRfeS1qYXRIV0tPMXpxYkcyeVlHSlJ4RTBROUFPMnh4aXVTNHhyYTJObklIUFZ2WWN3T3V6a0Vqclk5MkdnaVlkN1ZnVE1NSWozUUJuSUI4dzBUUVZVdDBOLXlSOUJUdmlFSnJ4aFh3WDBYT0l3Yg?oc=5",
+          "headline": "President Ramaphosa to address Volkswagen Group Africa 75th anniversary dinner - South African Government News Agency",
+          "summary": "President Ramaphosa to address Volkswagen Group Africa 75th anniversary dinner South African Government News Agency",
+          "date": "Aug 30, 2026 · 11:08 AM",
+          "publishedAt": "2026-08-30T11:08:35.000Z",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPOEJzV2ZDM29lX2xmYXdnYUFaN1cwTFlNbll6VTROQ2VLUHJFUDB3RzRzM3FxUXpfRGZWY1J5Sk5mU012TzlXYy1BLXRFTUpSUXlFSnZBWlMyNFlqV0gxY1B6RmYxREl0RHFWd0tIaF92UFZUMlBXV0JwalFBeEFfQ3ZmZ0lzQmVjRU9saVlWSm9yaEZ3TXVaMjJNLXA2azctLVcxR3pvRWkwd0dxZnlMMTNObGs?oc=5",
           "importance": 2
         }
       ]
@@ -1709,8 +1709,8 @@
           "source": "Google News",
           "headline": "Tinubu Meets Progressives’ Govs At State House - THISDAYLIVE",
           "summary": "Tinubu Meets Progressives’ Govs At State House THISDAYLIVE",
-          "date": "Aug 27, 2026 · 7:44 PM",
-          "publishedAt": "2026-08-27T19:44:26.000Z",
+          "date": "Aug 27, 2026 · 8:25 PM",
+          "publishedAt": "2026-08-27T20:25:47.000Z",
           "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQSTNBdzZ2WkdxSFJ0RUMybUZVbElpRG9SQmtzRGhKa3poRmpNb2VyMjI1ZVoxSWFLOTBYZkdQdFZRelJVYWQ5TmNONTA3SVNqUUxjQ0MwZ0g3a0piOE9YMnZTSFBlZDdvQUZWVjV0SGNqanFka0h6MXYzNi1DcnlwcWxsenNwTi1iTWQySi1hblg?oc=5",
           "importance": 2
         },
@@ -1772,11 +1772,11 @@
           "countryId": "in",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "India news: PM Modi in Uzbekistan on way to SCO summit - dw.com",
-          "summary": "India news: PM Modi in Uzbekistan on way to SCO summit dw.com",
-          "date": "Aug 29, 2026 · 8:28 PM",
-          "publishedAt": "2026-08-29T20:28:43.000Z",
-          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNMngxaFU0RlBYWVlEN0ZsRG5YcmdBOXpCMkxURWhVTE1zakNYMnRTdzFic3JkQ1FPeFk0OHNNN2JwZWlrbjBqcjBrdi1Za2hER3prR3pDMmVzUHVjVXF3Wkg1cG9WWGFIUmxMQTBGWXlIR3BrYjBjbzdHZU9QbVVNVHE2SDd2cGMzcnpZTkF2bXRWMVk?oc=5",
+          "headline": "India news: PM Modi leaves for Central Asian tour - DW.com",
+          "summary": "India news: PM Modi leaves for Central Asian tour DW.com",
+          "date": "Aug 29, 2026 · 8:23 AM",
+          "publishedAt": "2026-08-29T08:23:01.000Z",
+          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNUThaWk51b3ZiU25pdGtuVFFJbm5RaHZmMEJjS3JKamIzTE9TcnZQQzlYeXNvcmlWeGlsTG94c1NHMmhLc0xLWWEwdXFXSWkyUXZSeGJuSUpfVjc4WjNKZXJVWndwU0pWb2hrTS1nMXh6dEZZdzF4amlaMENsZjRuRnl4Y2NrNFJKSGptWA?oc=5",
           "importance": 2
         },
         {
@@ -1873,11 +1873,11 @@
           "countryId": "pk",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Islamabad, Riyadh commit to raising Pakistan’s agricultural, food exports to $3 billion - Arab News PK",
-          "summary": "Islamabad, Riyadh commit to raising Pakistan’s agricultural, food exports to $3 billion Arab News PK",
-          "date": "Aug 30, 2026 · 12:51 PM",
-          "publishedAt": "2026-08-30T12:51:58.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBfMC1YbkVnVFlsaUZ2elNBZ3ZuVEcxWFpXcXlnRHpwU2gtLUpVNXkyMENob3JPUkh5N0JBOHkzRG4zN0VKXzdxZUs3QUU2ZkppeVI1Z3hzSms?oc=5",
+          "headline": "Mecca defence pact sends 'message of unity and peace': Pakistan PM - TRT World",
+          "summary": "Mecca defence pact sends 'message of unity and peace': Pakistan PM TRT World",
+          "date": "Aug 28, 2026 · 9:10 AM",
+          "publishedAt": "2026-08-28T09:10:13.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE13M2Z6MzVHZnlha2djdzZHY1JWa3ktQTZwQUxYOGRod3BxcjJnVC1tU0M4eFVTblk0and0Q1FvU1hIdjliSG1JYU4xVHpQYjdvNTBOWFplMEY?oc=5",
           "importance": 2
         },
         {
@@ -1885,11 +1885,11 @@
           "countryId": "pk",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Mecca defence pact sends 'message of unity and peace': Pakistan PM - TRT World",
-          "summary": "Mecca defence pact sends 'message of unity and peace': Pakistan PM TRT World",
-          "date": "Aug 28, 2026 · 9:10 AM",
-          "publishedAt": "2026-08-28T09:10:13.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE13M2Z6MzVHZnlha2djdzZHY1JWa3ktQTZwQUxYOGRod3BxcjJnVC1tU0M4eFVTblk0and0Q1FvU1hIdjliSG1JYU4xVHpQYjdvNTBOWFplMEY?oc=5",
+          "headline": "Islamabad, Riyadh commit to raising Pakistan’s agricultural, food exports to $3 billion - Arab News PK",
+          "summary": "Islamabad, Riyadh commit to raising Pakistan’s agricultural, food exports to $3 billion Arab News PK",
+          "date": "Aug 30, 2026 · 12:51 PM",
+          "publishedAt": "2026-08-30T12:51:58.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBfMC1YbkVnVFlsaUZ2elNBZ3ZuVEcxWFpXcXlnRHpwU2gtLUpVNXkyMENob3JPUkh5N0JBOHkzRG4zN0VKXzdxZUs3QUU2ZkppeVI1Z3hzSms?oc=5",
           "importance": 2
         },
         {
@@ -1909,11 +1909,11 @@
           "countryId": "pk",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Islamabad, Riyadh agree to boost Pakistani agri and food exports to $3bn - Dawn",
-          "summary": "Islamabad, Riyadh agree to boost Pakistani agri and food exports to $3bn Dawn",
-          "date": "Aug 30, 2026 · 12:35 PM",
-          "publishedAt": "2026-08-30T12:35:48.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE9iRzdUNmo1b294elAya0JqYU5JMkkyR1RjQlcyQ2lEWGY3bE5HMGhjamUybDJFa3Vtd3M5aEt5YWVoUS10d0xLVdIBTkFVX3lxTE05QjNObXE1blJvQkJmWFhwcDROUmpWVGVnNVlFeXlISEVqMGpPeEhwRW1DbGNGYjZGd3FyMHdLeU0za25PSDFIZkxBbXFZZw?oc=5",
+          "headline": "Mecca defense pact has sent ‘message of unity, peace throughout region’: Pakistan premier - Middle East Monitor",
+          "summary": "Mecca defense pact has sent ‘message of unity, peace throughout region’: Pakistan premier Middle East Monitor",
+          "date": "Aug 28, 2026 · 12:08 PM",
+          "publishedAt": "2026-08-28T12:08:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOTUdSWE1RWUgxVUhQb240RXlMX29TS2RibEVjWnlGcEgwTlZsTHpBbEw0UFR0TXN0NFpUSnBRNDBpakQwZEdoUWFmZVAyb0p2YlJjTGtoSUl4TnZSaTZWdXpGOWZxSFBvOXg5ZTFqeTROcm0xS25rS2ZYVjdWSEx0dklxbVllcnVFU3RKUlVDTzhhS3hPendvdjVZQ0ZCUWduQzhJODZRZEVjNzNzRnF1MkYtZWtqTWNobU93YkdQeDNjZkYxOW15aNIBzgFBVV95cUxPUkZxUjNzVzZEYkpHNnJCazNIbGVsTl9tQmxOM0N1QURyNDVkR3d0LThycTV3ZkF5WFczN2tISENkVEZkZ3h3M3dZcGYyMl9xdnJiRUMxbWMxZUlXX3ctOG50VEpUNU9wR2Zfd3UyenZKZmt2MnJlNnh3Z0ZUb0NQci11NjE0M0xxZjhGemJnbFJZcjlKSWlpRktNaTNLYTlhMVAzTmQ1dU5PVTBfV2pSUjFPeDlDeUl6UHNBX1BJVDM3eDhBN2ZWQm92eGk4UQ?oc=5",
           "importance": 2
         }
       ]
