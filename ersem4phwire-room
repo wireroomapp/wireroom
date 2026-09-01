@@ -1,0 +1,53 @@
+warning: in the working copy of 'src/App.jsx', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/src/App.jsx b/src/App.jsx[m
+[1mindex 15651ca..4a21fa4 100644[m
+[1m--- a/src/App.jsx[m
+[1m+++ b/src/App.jsx[m
+[36m@@ -82,6 +82,7 @@[m [mexport default function WireRoomV2() {[m
+   const stageRef = useRef(null);[m
+   const svgRef = useRef(null);[m
+   const zoomRef = useRef(null);[m
+[32m+[m[32m  const abortRef = useRef(null); // cancels a stale request when a newer one starts[m
+ [m
+   useEffect(() => {[m
+     fetch(MAP_URL).then(r => r.json()).then(topology => {[m
+[36m@@ -137,9 +138,21 @@[m [mexport default function WireRoomV2() {[m
+     // backend instead of only re-filtering whatever was fetched under[m
+     // the mode that was active at selection time.[m
+     const activeMode = modeOverride || mode;[m
+[32m+[m
+[32m+[m[32m    // Cancel whatever request was still in flight — without this, a[m
+[32m+[m[32m    // slower older request (e.g. from a tab you clicked a moment ago)[m
+[32m+[m[32m    // can resolve AFTER a newer one and silently overwrite it, showing[m
+[32m+[m[32m    // stale content under the wrong tab.[m
+[32m+[m[32m    if (abortRef.current) abortRef.current.abort();[m
+[32m+[m[32m    const controller = new AbortController();[m
+[32m+[m[32m    abortRef.current = controller;[m
+[32m+[m
+     try {[m
+       // Production contract. No browser API key: the future backend owns this request.[m
+[31m-      const response = await fetch(`${API_BASE}/api/news?country=${encodeURIComponent(country.id)}&mode=${encodeURIComponent(activeMode)}`);[m
+[32m+[m[32m      const response = await fetch([m
+[32m+[m[32m        `${API_BASE}/api/news?country=${encodeURIComponent(country.id)}&mode=${encodeURIComponent(activeMode)}`,[m
+[32m+[m[32m        { signal: controller.signal }[m
+[32m+[m[32m      );[m
+       if (response.ok) {[m
+         const data = await response.json();[m
+         if (Array.isArray(data.items)) setFeed(prev => [...prev.filter(x => x.countryId !== country.id), ...data.items]);[m
+[36m@@ -147,9 +160,13 @@[m [mexport default function WireRoomV2() {[m
+           setOfficialVerifiedMap(prev => ({ ...prev, [country.id]: data.officialVerified }));[m
+         }[m
+       }[m
+[31m-    } catch (_) {[m
+[31m-      // Demo data remains visible when no backend exists yet.[m
+[31m-    } finally { setLoading(false); }[m
+[32m+[m[32m    } catch (err) {[m
+[32m+[m[32m      if (err.name !== "AbortError") {[m
+[32m+[m[32m        // Demo data remains visible when no backend exists yet.[m
+[32m+[m[32m      }[m
+[32m+[m[32m    } finally {[m
+[32m+[m[32m      if (abortRef.current === controller) setLoading(false);[m
+[32m+[m[32m    }[m
+   }[m
+ [m
+   function changeMode(newMode) {[m
