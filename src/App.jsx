@@ -82,6 +82,7 @@ export default function WireRoomV2() {
   const stageRef = useRef(null);
   const svgRef = useRef(null);
   const zoomRef = useRef(null);
+  const abortRef = useRef(null); // cancels a stale request when a newer one starts
 
   useEffect(() => {
     fetch(MAP_URL).then(r => r.json()).then(topology => {
@@ -137,9 +138,21 @@ export default function WireRoomV2() {
     // backend instead of only re-filtering whatever was fetched under
     // the mode that was active at selection time.
     const activeMode = modeOverride || mode;
+
+    // Cancel whatever request was still in flight — without this, a
+    // slower older request (e.g. from a tab you clicked a moment ago)
+    // can resolve AFTER a newer one and silently overwrite it, showing
+    // stale content under the wrong tab.
+    if (abortRef.current) abortRef.current.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+
     try {
       // Production contract. No browser API key: the future backend owns this request.
-      const response = await fetch(`${API_BASE}/api/news?country=${encodeURIComponent(country.id)}&mode=${encodeURIComponent(activeMode)}`);
+      const response = await fetch(
+        `${API_BASE}/api/news?country=${encodeURIComponent(country.id)}&mode=${encodeURIComponent(activeMode)}`,
+        { signal: controller.signal }
+      );
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data.items)) setFeed(prev => [...prev.filter(x => x.countryId !== country.id), ...data.items]);
@@ -147,9 +160,13 @@ export default function WireRoomV2() {
           setOfficialVerifiedMap(prev => ({ ...prev, [country.id]: data.officialVerified }));
         }
       }
-    } catch (_) {
-      // Demo data remains visible when no backend exists yet.
-    } finally { setLoading(false); }
+    } catch (err) {
+      if (err.name !== "AbortError") {
+        // Demo data remains visible when no backend exists yet.
+      }
+    } finally {
+      if (abortRef.current === controller) setLoading(false);
+    }
   }
 
   function changeMode(newMode) {
