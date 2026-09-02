@@ -128,7 +128,9 @@ export default function WireRoomV2() {
       const wantType = mode === "news" ? "independent" : mode;
       items = items.filter(i => i.sourceType === wantType);
     }
-    return items.sort((a,b) => new Date(b.publishedAt||0) - new Date(a.publishedAt||0));
+return [...items].sort((a, b) =>
+  new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0)
+);
   }, [feed,selected,mode]);
 
   async function loadCountry(country, modeOverride) {
@@ -155,7 +157,10 @@ export default function WireRoomV2() {
       );
       if (response.ok) {
         const data = await response.json();
-        if (Array.isArray(data.items)) setFeed(prev => [...prev.filter(x => x.countryId !== country.id), ...data.items]);
+ 	if (abortRef.current !== controller) return;
+       if (Array.isArray(data.items) && abortRef.current === controller) {
+  setFeed(data.items);
+}
         if (typeof data.officialVerified === "boolean") {
           setOfficialVerifiedMap(prev => ({ ...prev, [country.id]: data.officialVerified }));
         }
