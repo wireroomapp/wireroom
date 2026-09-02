@@ -1,8 +1,20 @@
 {
-  "generatedAt": "2026-09-02T21:10:34.412Z",
+  "generatedAt": "2026-09-02T22:11:22.595Z",
   "countries": {
     "us": {
       "official": [
+        {
+          "id": "us-official-4a5901ed0ff98630",
+          "countryId": "us",
+          "sourceType": "official",
+          "source": "White House",
+          "headline": "G20 Innovation Ministerial Concludes with Consensus Statement",
+          "summary": "Today, G20 member ministers concluded a two-day Innovation Ministerial in Chapel Hill, North Carolina. The Ministerial was hosted by the Department of Commerce and the White House Office of Science and Technology Poli…",
+          "date": "Sep 2, 2026 · 9:37 PM",
+          "publishedAt": "2026-09-02T21:37:46.000Z",
+          "url": "https://www.whitehouse.gov/releases/2026/09/g20-innovation-ministerial-concludes-with-consensus-statement/",
+          "importance": 3
+        },
         {
           "id": "us-official-c32872e6c22673de",
           "countryId": "us",
@@ -62,18 +74,6 @@
           "publishedAt": "2026-08-31T23:55:33.000Z",
           "url": "https://www.whitehouse.gov/fact-sheets/2026/08/fact-sheet-president-donald-j-trump-announces-historic-oil-agreement-to-secure-american-energy-dominance-and-drive-venezuelas-economic-recovery/",
           "importance": 3
-        },
-        {
-          "id": "us-official-e56f664ba608d256",
-          "countryId": "us",
-          "sourceType": "official",
-          "source": "White House",
-          "headline": "Fact Sheet: President Donald J. Trump Announces Deal with Nine Additional Pharmaceutical Manufacturers to Lower Drug Prices for Americans",
-          "summary": "ADVANCING MOST-FAVORED-NATION (MFN) PRICING: Today, President Donald J. Trump announced nine new agreements with pharmaceutical manufacturers to lower prescription drug prices for Americans in line with the lowest pri…",
-          "date": "Aug 31, 2026 · 7:14 PM",
-          "publishedAt": "2026-08-31T19:14:29.000Z",
-          "url": "https://www.whitehouse.gov/fact-sheets/2026/08/fact-sheet-president-donald-j-trump-announces-deal-with-nine-additional-pharmaceutical-manufacturers-to-lower-drug-prices-for-americans/",
-          "importance": 3
         }
       ],
       "independent": [
@@ -90,18 +90,6 @@
           "importance": 2
         },
         {
-          "id": "us-independent-1aaef7bf5978a8d0",
-          "countryId": "us",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Trump plans state dinner for Xi even as disputes with China pile up - MS NOW",
-          "summary": "Trump plans state dinner for Xi even as disputes with China pile up MS NOW",
-          "date": "Sep 2, 2026 · 7:42 PM",
-          "publishedAt": "2026-09-02T19:42:33.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9Ca3hDRjh6TTc4ak9GMlB2THhRU0dvRGU1d1FJU2JQcG9MaWlpN2N2MDQ1bWtmWS12YzNmb0M2bU5Fc3lTbmdaYmpJZG12S2h3ZkhUVmoyTzFaOGxBbmFxSnVLRVRNM3VtVWNvcnV3T2o4WlJOcHVQUlpn?oc=5",
-          "importance": 2
-        },
-        {
           "id": "us-independent-20f4578306aa792d",
           "countryId": "us",
           "sourceType": "independent",
@@ -114,15 +102,27 @@
           "importance": 2
         },
         {
-          "id": "us-independent-5ad446359a11692f",
+          "id": "us-independent-3e0279a68a4c3ae8",
           "countryId": "us",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Trump warns of bigger response if Iran keeps targeting US forces and shipping - KABB",
-          "summary": "Trump warns of bigger response if Iran keeps targeting US forces and shipping KABB",
-          "date": "Sep 2, 2026 · 7:44 PM",
-          "publishedAt": "2026-09-02T19:44:57.000Z",
-          "url": "https://news.google.com/rss/articles/CBMi2wJBVV95cUxNQVF0T0lIY2Y5cWJmeDNCQ1otNWFBUzlsUVdveFQ4UlBGZzJiSFpLbDVmT3FTV1hWX0dibGlMVkpwNXJVXzRHbUpPSGpvWW9mY1RneHFWTVFBZWROWENvQlVDcmUwc3J5M2JLTjBXNTFTd3Y3aWdxZThReWVhU0d3NnlYeEpNUGljenVHNlJVX3ZtRVVsY0NLU2QyNlR5TEhrek9lcVRkM0Y0OGdvUVJueHVMNzVHd2tKU01tdjgyUGVxS0M0QTc3b3U1dm1iZ2tMcG00b2J4eDhUYnc3ZlRpZENmQUNkWGZSdmptLW9uWWszbzZCQmFOTy01R2w0MndlbVUta3NJQmQ0WHlfSkJWSEtPN29Udk9PczVTeTltM09sTTdDQ2Q5eGYzYWNCZ3R0NXM0cVI3V3JqSktRMGdrWUtNTk9RbmRkSTByMHVheG5PRTZ0bFFuQ1JZaw?oc=5",
+          "headline": "US Supreme Court says construction of Trump's White House ballroom can continue - Dezeen",
+          "summary": "US Supreme Court says construction of Trump's White House ballroom can continue Dezeen",
+          "date": "Sep 1, 2026 · 2:30 PM",
+          "publishedAt": "2026-09-01T14:30:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNeWxlbzQ2VWR1UE5TQkxwRmVvSXNhcUgtUEJrYmYtd0pnMXRaVTFHaFBtbTh0aTRxSDF2Smhtc2wtVjdtOFp2Ym1LcXhKNFo3WVlWU0hNT0lxTUJjcXFfZDVtUnVPeUlfTjdyVUMtWUExUE4zRnBsSm1YeEw1UVcwY25vOTlXYmkyVExFc0JjUzY?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "us-independent-a6d31c30db00568f",
+          "countryId": "us",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "The Latest: US and Iran exchange fire after abrupt end to month without military action - WKMG",
+          "summary": "The Latest: US and Iran exchange fire after abrupt end to month without military action WKMG",
+          "date": "Sep 1, 2026 · 12:45 PM",
+          "publishedAt": "2026-09-01T12:45:26.000Z",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQTkRaZUxLUEQySHE5S3VjY0dlUXo3S1FURUV3TzgzNXM0bnp5QmFmRGdLZTlzZFliMG10Q1ZXeU1QcHJJdmlreEZ4YkJldWRSS25kb3BvWWR2OGh2QV9zSWRsb2tJTVBCWWp6TjBsZ3AzUUVpaXNxRWZvaHRzcTVXdVZ5WHhnVmJuc3dlNVJlTjdaZENnWlNEV3dBd2c2R3RCVHNUQTYxYU04OWhPc1Z6MDZ1eWtVRmZDYTNXekpjbjhzeW5pVXc?oc=5",
           "importance": 2
         },
         {
@@ -138,15 +138,15 @@
           "importance": 2
         },
         {
-          "id": "us-independent-a6d31c30db00568f",
+          "id": "us-independent-5ad446359a11692f",
           "countryId": "us",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "The Latest: US and Iran exchange fire after abrupt end to month without military action - WKMG",
-          "summary": "The Latest: US and Iran exchange fire after abrupt end to month without military action WKMG",
-          "date": "Sep 1, 2026 · 12:45 PM",
-          "publishedAt": "2026-09-01T12:45:26.000Z",
-          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQTkRaZUxLUEQySHE5S3VjY0dlUXo3S1FURUV3TzgzNXM0bnp5QmFmRGdLZTlzZFliMG10Q1ZXeU1QcHJJdmlreEZ4YkJldWRSS25kb3BvWWR2OGh2QV9zSWRsb2tJTVBCWWp6TjBsZ3AzUUVpaXNxRWZvaHRzcTVXdVZ5WHhnVmJuc3dlNVJlTjdaZENnWlNEV3dBd2c2R3RCVHNUQTYxYU04OWhPc1Z6MDZ1eWtVRmZDYTNXekpjbjhzeW5pVXc?oc=5",
+          "headline": "Trump warns of bigger response if Iran keeps targeting US forces and shipping - KABB",
+          "summary": "Trump warns of bigger response if Iran keeps targeting US forces and shipping KABB",
+          "date": "Sep 2, 2026 · 7:44 PM",
+          "publishedAt": "2026-09-02T19:44:57.000Z",
+          "url": "https://news.google.com/rss/articles/CBMi2wJBVV95cUxNQVF0T0lIY2Y5cWJmeDNCQ1otNWFBUzlsUVdveFQ4UlBGZzJiSFpLbDVmT3FTV1hWX0dibGlMVkpwNXJVXzRHbUpPSGpvWW9mY1RneHFWTVFBZWROWENvQlVDcmUwc3J5M2JLTjBXNTFTd3Y3aWdxZThReWVhU0d3NnlYeEpNUGljenVHNlJVX3ZtRVVsY0NLU2QyNlR5TEhrek9lcVRkM0Y0OGdvUVJueHVMNzVHd2tKU01tdjgyUGVxS0M0QTc3b3U1dm1iZ2tMcG00b2J4eDhUYnc3ZlRpZENmQUNkWGZSdmptLW9uWWszbzZCQmFOTy01R2w0MndlbVUta3NJQmQ0WHlfSkJWSEtPN29Udk9PczVTeTltM09sTTdDQ2Q5eGYzYWNCZ3R0NXM0cVI3V3JqSktRMGdrWUtNTk9RbmRkSTByMHVheG5PRTZ0bFFuQ1JZaw?oc=5",
           "importance": 2
         }
       ],
@@ -155,18 +155,6 @@
     "ca": {
       "official": [],
       "independent": [
-        {
-          "id": "ca-independent-5b330e64d373d608",
-          "countryId": "ca",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "The Latest: Canadian Prime Minister Carney tells Trump: ‘Stop trying to be tough’ - CBS17.com",
-          "summary": "The Latest: Canadian Prime Minister Carney tells Trump: ‘Stop trying to be tough’ CBS17.com",
-          "date": "Sep 2, 2026 · 1:33 PM",
-          "publishedAt": "2026-09-02T13:33:08.000Z",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNcC1sdDA5dVBmTnZJLUxSdUlMT25zQ1Bid1lSN2xKR21BZVo3WXpDU2hCYUNIYk9Kdzc5WFRvYVpvQ3NlVXE3QV9HdGFKdEFwazVramlUNGw3V01mOTlUNy1HeWFtMlZ4bS14MUtfMTd0b19QU1Fmc2tyaldVcEllblRScmZHZzZqcUtYTjBPX1lrSGtTSGUtZGo4VVlzTUNvYmlXWWY1bk9SWTM50gGyAUFVX3lxTE9TQ3B4eEZzRTAzVXI4dVlNUUplX1g0dHNPbnl5Uzc0Q0VyaER0M2UtOGNsZ29MYnRqZ2VtaHVic3N0dmRNRkVmMk1UbG9jbXhkZTNTODI5eHI3Y2V3YkZORi15Z1VfZkwtTnVuaHh0N1psbzR5dUZxZEVWcDlWanF5SW1SZXFrajJOMUV4QWNXQXBHY05vR1RVOFV4R1hEUG9Qa0dWdThuVzJjMWdqQWZRdHc?oc=5",
-          "importance": 2
-        },
         {
           "id": "ca-independent-43d45e69baa917dd",
           "countryId": "ca",
@@ -177,6 +165,30 @@
           "date": "Sep 2, 2026 · 1:41 PM",
           "publishedAt": "2026-09-02T13:41:15.000Z",
           "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQTnc3S0pxWDdJSnVGakxHakVtVkE1Tk5EYncxdVdUNmktcTRJNV9fZHV2cHhwS0lhTVhlX1JJRUd1TUFwM0ttcE1rQXFpTldzVnhyeXdaeGpJdUxOVFVORG01MmpyOFVKeUlOOUF5bmt5S2lpSFRoVFRhOGVPYXBRZFRkdWxwbzM4S29HdEJGbEdfbGlPc0ZickJoUXZDazZlTTZKNUJn?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ca-independent-d26d6e92373ea71e",
+          "countryId": "ca",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Canada's Carney slaps Trump admin for 'doing memes ... throwing shade' - CNBC",
+          "summary": "Canada's Carney slaps Trump admin for 'doing memes ... throwing shade' CNBC",
+          "date": "Sep 1, 2026 · 2:54 PM",
+          "publishedAt": "2026-09-01T14:54:02.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9fQVFaOGNhUWtmZExQN2xaSVhGVXJzR1l6OEcwWmgwZllGZDBXTEdlc1Y0Y0hwZC1iSVZvc1JPUEJCeXM5NG5zWldNZzVlUHZmTk5oWEh5M25lMlRtXzJDSzlKMnhEYkhudXpsM0tZLWEyTGZ4MG5QUmZB0gF_QVVfeXFMT1BPSWRHT2pjdGE4UHFsRmxHSEZLMkJ4Y21YUVRzazhFLU5OcmI4eU5CVDk1LW4weTZoSXBycXE3bVp5eklCX2tXcW9vR09TZnpNZHBjLV96VVFIb2lFYkRxM3UtcVVsckptUGh5c3JqU1k5R3REdzZZVnlMamdPWQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ca-independent-dc249ddca2682f07",
+          "countryId": "ca",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Carney sets preconditions for resuming talks: US must stop mockery and pressure, negotiate seriously - finance.biggo.com",
+          "summary": "Carney sets preconditions for resuming talks: US must stop mockery and pressure, negotiate seriously finance.biggo.com",
+          "date": "Sep 2, 2026 · 7:04 PM",
+          "publishedAt": "2026-09-02T19:04:21.000Z",
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5EdHpfNWZ2YnF0TllvdGRtNVB3LTFVdVNhUVhCRExGRVZ1Qk13UWRYTGVHdmhrR0ptbk9sQXRuMnF2cExqX1ZSTEtEemxmZ3VmZU1SZzlHT21ISTlmU005MEdCZm9MeGNFc3U0eTB4ZVRaN0x3WHc?oc=5",
           "importance": 2
         },
         {
@@ -192,6 +204,18 @@
           "importance": 2
         },
         {
+          "id": "ca-independent-72ac1ff71038c140",
+          "countryId": "ca",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Canada Condemns Drone Attack Targeting Kurdistan Region Prime Minister’s Office - Kurdistan24",
+          "summary": "Canada Condemns Drone Attack Targeting Kurdistan Region Prime Minister’s Office Kurdistan24",
+          "date": "Aug 20, 2026 · 5:31 AM",
+          "publishedAt": "2026-08-20T05:31:22.000Z",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPc1NxMGVzSDl1VWFyaGpTOWxORUt5RDRaeGJ2SnU3ODlNQnZiZEZvVW84T2RSWUNHS0g4Q29QV1hRcG84NHpHOTVVb0hQTENaQkpsZWdWMnc4WmxDdERNeC1GeklHUDRwLWRvZXhjRDJWWjFhbjhEM3ZZb0NFOFV6Y0RCNmpXZXFYNHVCbTlER2xkZDlfMmVRN2k3UGRIVFBnZGFYRTBjcUd5eC1fLXF6cXpDaVRHdkNfWHo4eWhkNA?oc=5",
+          "importance": 2
+        },
+        {
           "id": "ca-independent-12283ca30e32cc48",
           "countryId": "ca",
           "sourceType": "independent",
@@ -201,30 +225,6 @@
           "date": "Sep 1, 2026 · 3:01 AM",
           "publishedAt": "2026-09-01T03:01:07.000Z",
           "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPcm4xLXIwdUNXOHZkZmtqclNXaHpCWEU1cVhaNi0waW41Ti1xQlhqQURqakdiRG81YXJDS2pBalczTVIxb2YwNldBcEJJQVI1bHdkdGlCdU50TXhjUk95QVlIRXlzMzdLWF9zUTVfZjMtY1lWQmh3NFFEQ0xhN09vY3FmeS1jSmVHbE45T0RPUEYwVkZMUmpvSThjVHN5R0RhYXVv?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ca-independent-095c40ebb36f852c",
-          "countryId": "ca",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Justin Trudeau - Canadian PM, Liberal Leader - Britannica",
-          "summary": "Justin Trudeau - Canadian PM, Liberal Leader Britannica",
-          "date": "Aug 28, 2026 · 5:00 AM",
-          "publishedAt": "2026-08-28T05:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE41aVExVWtUUm1NYkxCbS1QejdRc1pBRVpaYkRSQTUyQmtmX0pSZ0VydjZqeGlLV210YUFkWENXVDE4UkxLZ2ZkcW9MTmZIN3o1cGFXYzJyMzFWc004TDRWdmtGOHhabmQxOGtZN1NWbnF0V201WTE3X29R?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ca-independent-3d18ed8aff90db4f",
-          "countryId": "ca",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "PM Carney meets business leaders to discuss U.S. trade, says PM’s office - CTV News",
-          "summary": "PM Carney meets business leaders to discuss U.S. trade, says PM’s office CTV News",
-          "date": "Sep 1, 2026 · 1:40 AM",
-          "publishedAt": "2026-09-01T01:40:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPdHpiM1M0UEZJWWdDdmpYOGtYVGc1c2NzNXNDNGg5V2ZKTklxdkZKMDluaTlRS1Q0QzZMWjJKMXFfRzRWaEM2d3FvVV9xMVFKZ3diSV9fNFVUamJYUGdQY05hZGF3UDgwNjBDVXZoNWJCOVB1LWlqLTE1UHRuYjVnRVR5Vnl5b1l3Unl0a0JsdFFHWXl6Uk1Zal9DdmtIYWw4R3FjMEdYUkRwWnRBTTJjZUlWSnpVZnQ0c1dQcXVB?oc=5",
           "importance": 2
         }
       ],
@@ -246,18 +246,6 @@
           "importance": 2
         },
         {
-          "id": "mx-independent-6d876bdfb613f08d",
-          "countryId": "mx",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "List of presidents of Mexico - Britannica",
-          "summary": "List of presidents of Mexico Britannica",
-          "date": "Aug 28, 2026 · 5:00 AM",
-          "publishedAt": "2026-08-28T05:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9NclYtWnJBcG9lQUdtT280YjZSUlE1U0tmRzVsRkF4dDc4NFVESFRhMXBvM2stWVZNUkFkVWdfXzdJZGw1ZDdERlVXUy0xUTJaTmhuYUxESTFoQzU1WmpKSlFPVGljWkNCOEcyTlQteHdGV0hLQmFKcQ?oc=5",
-          "importance": 2
-        },
-        {
           "id": "mx-independent-c8bd1714027b1a9a",
           "countryId": "mx",
           "sourceType": "independent",
@@ -274,8 +262,8 @@
           "countryId": "mx",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "After years of opposition, Mexico’s president is reconsidering fracking - Science | AAAS",
-          "summary": "After years of opposition, Mexico’s president is reconsidering fracking Science | AAAS",
+          "headline": "After years of opposition, Mexico’s president is reconsidering fracking - science.org",
+          "summary": "After years of opposition, Mexico’s president is reconsidering fracking science.org",
           "date": "Jun 11, 2026 · 7:00 AM",
           "publishedAt": "2026-06-11T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOUXhiMGhSWll2TjdEWXFtZkRweHdlQ0M4el9oTWZlWDJTLU1SaGVtc3l0VnprQ05oSVp6UU1FNTQ2dmFVNEFVNHd5dE1nbXhxYUNWSjFJZEtmMmc4emptUDRhR3E3MkQzdGZqLXNOY1V3UmNINm9RaDFfcmJhV0FzZXZ5LTRYUU56NXVfemlueERhQXh4U0FXbTlla3hiM09VY2pDNjZ4VQ?oc=5",
@@ -303,6 +291,18 @@
           "date": "Jul 18, 2026 · 7:00 AM",
           "publishedAt": "2026-07-18T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOM2Y2R3FEd1BEVXhuQzIyS2w0d25Qb1lPaUVZbEQ0NlBadlNweU1JYmZPWU90U1FCQ09lMTQ0VXZiSUxxT1BVbnI0aEU0anZyYmk3dUlkc2ZEQ2w4SVBUYWVqUmh3VUlKUk1KQ3JLTzduUGk0RjFuSUJjTWlXVkJheTdR?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "mx-independent-7ab091c4fd954a73",
+          "countryId": "mx",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "BTS Announces ‘Behind-the-Scenes’ of Their Visit to Mexico’s National Palace - Billboard",
+          "summary": "BTS Announces ‘Behind-the-Scenes’ of Their Visit to Mexico’s National Palace Billboard",
+          "date": "May 26, 2026 · 7:00 AM",
+          "publishedAt": "2026-05-26T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQTHR2Wkdnc0xBRkNfOVBLUEhhZ3lRWUlkUXBqaGVqYXpfaVdLa0RrakFaeFBJRlh6cEdLcGFKYlpVS2dZaGdiOU5mLWhmYl9sV2d1WWZ4YVl5QmVxUm1CVGZHU1E2MG5hRFZVbjBmcWd3UUcwRGhjNG5pZ0ZMLVdTb3JLTGhrdlI0YmNHU2hGTUlIOE5tN0JUVlE4cTJEb00wcHZaZG9IU21NdDg0aVE?oc=5",
           "importance": 2
         }
       ],
@@ -348,39 +348,39 @@
           "importance": 2
         },
         {
-          "id": "br-independent-72f307cb91604b5e",
-          "countryId": "br",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Lula condemns attacks on Venezuela, Brazilian diplomats discuss crisis - Brasil de Fato",
-          "summary": "Lula condemns attacks on Venezuela, Brazilian diplomats discuss crisis Brasil de Fato",
-          "date": "Jan 5, 2026 · 8:00 AM",
-          "publishedAt": "2026-01-05T08:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNWkV1SFlBWkRKU3hEVVh4UzVaRUJwZlRKaGNxaUxwUlFKODFDU1phclJaUjJkYkdMY1V0bTE2YlpzSERWVDBYckZpT0IyNEtwWmhSRTRHT2ozLXpYQzZzaS1Dal9ZSHJ6cVNuWFdxdld6d3MyVFJBMlYwV01RVEF5UlJMOThyYlZ0TmhUODVBc3RXMjhGQ2l3b3l6dW5MXzRRZGZ5NFRac1N3Zm9Da1AzbkEtdw?oc=5",
-          "importance": 2
-        },
-        {
           "id": "br-independent-62455028e95eda57",
           "countryId": "br",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Ukraine accepts proposal from Brazil’s Lula to work for peace, Kyiv adviser says - Internazionale",
-          "summary": "Ukraine accepts proposal from Brazil’s Lula to work for peace, Kyiv adviser says Internazionale",
+          "headline": "Ukraine accepts proposal from Brazil’s Lula to work for peace, Kyiv adviser says - internazionale.it",
+          "summary": "Ukraine accepts proposal from Brazil’s Lula to work for peace, Kyiv adviser says internazionale.it",
           "date": "Jun 19, 2026 · 7:00 AM",
           "publishedAt": "2026-06-19T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQTGpkSXZRYTZyRVRfU1lfVmRUWTZFYXRPYVFDNG5kTXhwSktZb2tMYVplQ0RNcjQzamNZdk01ejFPOU90ZDVwNTZlcHRLMjA0aVlNLTlSSFRHWUZ6SlIwLXRPUFFaQXpEVWxWeHdYb2tocEtkTkRJSVQ0N05DZ3RXY1FuMThwNlV4SmdKRERGV3pSb0l2QllKM2Y5OG8taXpUb0Jadno5NE9KdkNaX0Uza254cGpJdFQ5ZTN0NHNfTWVzR0VoNE5oTE9kOU1fTFhYLTJNNF9jTUMtYWM?oc=5",
           "importance": 2
         },
         {
-          "id": "br-independent-1f60ca918f8f6b17",
+          "id": "br-independent-c15bd67cc656c5a2",
           "countryId": "br",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "President of Brazil pays a historic visit to the ASEAN Headquarters/ ASEAN Secretariat to strengthen ASEAN-Brazil Partnership - ASEAN Main Portal",
-          "summary": "President of Brazil pays a historic visit to the ASEAN Headquarters/ ASEAN Secretariat to strengthen ASEAN-Brazil Partnership ASEAN Main Portal",
-          "date": "Oct 24, 2025 · 7:00 AM",
-          "publishedAt": "2025-10-24T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxOQkFzSHkyWEdDaENkRVlXWmJ3Rk55Ny1LdjltV01VbVlhM0hUMFlaT0tEd2JpUElGRHdwaVdDUV84NGRVVDd2Y1dZRVd1S3hWNi1RdlJjOFIyOVZ4Sjg4bjRJd2dQLXlrekxUTFNOSUMybjJHVG1FZ2RxTTdtcUFhcThFb2czcy1MOTh2Z2VLcmtDY1ZwZjdnckpRam9iRzdoSlByR09hZXpVaHpoUV9EUk1qUEpreEJTbC1BaVBkZF9fcEtfdmlKUUpwaXliWExCdHV5bUxYamd3NG8?oc=5",
+          "headline": "Que horas começa a sabatina de Flávio Bolsonaro no 'Jornal Nacional'? - O GLOBO",
+          "summary": "Que horas começa a sabatina de Flávio Bolsonaro no 'Jornal Nacional'? O GLOBO",
+          "date": "Aug 28, 2026 · 10:25 AM",
+          "publishedAt": "2026-08-28T10:25:15.000Z",
+          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPMS1NczIzZXFaQ20yWEJ1UDhKZDhrOWNyR001VkpjQnUzUUY5UjRYZmY4bm4tOTJHMzRoWFJ1cjBWS1JseUxIYUVsejRNMDNOa25heXVPTTZmdTdBMFZTenl5YllCa2lnUmhMa1VLMmNlYk84OXdHVjdNelNVZFpjWWVsUkhVODN4MkFVX3FUMnh5THhrM3Ztdk1WLWprNFJnUkhKTi1lY1hGM1BlYTdxeW80Y2g5OUs4UnJDRGloM0U5S2dpaEtBOTVrUk8xcjVNeXfSAeABQVVfeXFMTXFTSmNpQ2t0ZE9CbkpCOVZ6ZTExTmZpbVZKWkJrbkNyc2hNSUhJUFhVeGdLZkZreEJXZlo0S05XZm5EcGxmcmt1dnBYNjcxRk9lZTltb285dFlweVFiQ1hpX19PdWxxRGt5ZzM2elA1ZGMxSGRYVTNuN2ZRRjd3VjJaYzdGYnFXTFZGVWlmcVNrSFBrYjY1bjhTNl9zcjYtVkItUG1PakNXUm1DNFFYdFNsLXEtSzdyUkhmVGRRbGxWd1pLUWtrRDBpRE1nLXZKTnZDbV9RRHZoTXNTY1QxM1I?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "br-independent-33374664d54e8e00",
+          "countryId": "br",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Campanha de Lula pede inelegibilidade de Flávio Bolsonaro e acusa o candidato de receber doação vedada - Jornal O Sul",
+          "summary": "Campanha de Lula pede inelegibilidade de Flávio Bolsonaro e acusa o candidato de receber doação vedada Jornal O Sul",
+          "date": "Aug 31, 2026 · 11:54 PM",
+          "publishedAt": "2026-08-31T23:54:04.000Z",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNZWczV2czRTQ3Z2FZVFBmLUNvNHY1eW8tR2t5STlTMDYxQ1Jncl80TDdxQmVQWGU0VFljcFlNWXNsUEtDX2w1dzl0NE1lZlY0Z1Vna1pqZGhzTWhLbS1FTDUyX0EzWmpiV0syTWdtYlUtem9FYll4T1hOa0RiN3JEQ1EtNThkYmF4ejBhbXZiRVM2Yi1BbGFaRGJtZk94NjJsYUhNZ3I5ZEhCREZWeUdobkVJeFplRWg1azY5eFotSDJFWTdlUlHSAcsBQVVfeXFMUE84elRjNWdmU1Iwd3BCZFJEVnI1a2FWemJvMXBiZ2ZmaFhFUnV0Qm5hc2pRQzJ2VXdSV01qeXFuZGhvUE5FYjFtaWtfV0NkNnZLc19fVjZpLUc3MkJqNWpPNVZfYncza0xWM29STHNDMy03R01ubUFkYVAzMEh5Vlk3aGk0OUZfRXVMVTkzVDVVZFgzT3ByTFVyUnE0Z3dMcUFERFZjTUJoblZfbE1ReWRMT0h4ZE45Qk12YXdSVGdRc3NSWUhRVkV4MGM?oc=5",
           "importance": 2
         }
       ],
@@ -411,18 +411,6 @@
           "date": "Sep 1, 2026 · 4:30 PM",
           "publishedAt": "2026-09-01T16:30:52.000Z",
           "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNS0xyOTdOd3FId0EwS2RkNHUtOV9la1RLX01TdTFfVDg5YWtZM3RvcXdzZEp4eGZIY2lKdUlaNGVmWHNIbzU2Rzl6U0ZmRDdfWUlDTGVjWkJweXVNVTYyNEVac182SmN3djZ6NDdsQWN2Q2hFem8xSFFHUXBza0JfaU1PRjB2REVXeVctUmtqR1ZXNXo5MWJaY3JaMHdNNDQ4YjdBZ040SFI2ZlNGYjlKMklJb9IBuAFBVV95cUxNc1ZnX1dNeTZscHFuaEI0NGJfS0pjUkU2T3hpSEVGRHBZVVo5ajhJYi12TzFiSTN0M0ZIbnltNHI4X1lqY2x1VkljcU9kSkJwVkxWd0ppQlZtNVpXTXJ6ekllcUJBMTNZOW94RnFQc3J6YU54Mml3UnZ2aVhoTHRaOUJVT3hUQkl0UEFsSlUyZFpvWXBleW16SVRxektYSWoxc2o4NXZ0LVNZdzJMeENYTGhWQ3ZTdXJJ?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ar-independent-89509bd61da72002",
-          "countryId": "ar",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Milei administration in Argentina blocks journalist access to Casa Rosada - Al Jazeera",
-          "summary": "Milei administration in Argentina blocks journalist access to Casa Rosada Al Jazeera",
-          "date": "Apr 23, 2026 · 7:00 AM",
-          "publishedAt": "2026-04-23T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQRm5sLTJIOTVZOEY5RC00bEhIaUNidDBiMVVUQUxURDExSFV3VEFUS2F1ZGdMTFE3T0hBWk4tM0pneXAtMGh5R3c2SU1ueWtJTkV3R0pPb1VWU1Vzbk9LY2RBMGNXbUk4dFhwdjllaUEzQS1nWkMyUGZrS0YtbG82S1ltQ2RkU3VNd0RTU1c2Sk5NTXlCM2JoTWJ6Umstb3ROMWdNbWxkVVU4cW5vbWlVTGNtZkzSAboBQVVfeXFMUG5aaTZxTE1jaUdPRjFSaGpxc3phWkVXRXVkSFVxbUhhY21ZYjlPVElvS2JsOGFKMlN6QWZjNU1sWW11dndBeWh3Vk5vSE5qUC1jc1pURDBKbGxObi1xTy0tVVpLRFpjUlM4R1VPc0ZoN0t2QXF3OTFrVno5VWVzZmliN29vdkFUaXprUG4xX2V5S1NXWm5Ja3VNX01JRHVIaE56WVU2Mnhtbkk0MWRrZk9YR2ZjVUpFdmp3?oc=5",
           "importance": 2
         },
         {
@@ -460,12 +448,36 @@
           "publishedAt": "2026-05-04T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNN1FMbllkRFFZblVtbTZZZDBYWE55aXlxNE5VQTRzd0trcUJXbWROaUdrMWNCazZBX3lQcEZBb0JIRXg1TWJBRFZtTFFGNHAyX0hFV2RSV3VqQk1uOGtod0VfTEQ4TmhtYnUyVGtWTF9DQWZLNnI4dmNIUUp3bXBqZlg5dWc3cmdYYk1EUk4yaUdYWEZoSXJha0ktNlFFSDlHeUhJb3gyYUZLOVNvNFVjVEx3?oc=5",
           "importance": 2
+        },
+        {
+          "id": "ar-independent-243f4e0ed0988157",
+          "countryId": "ar",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Argentina’s Milei restores press access to presidency after a ban sparks backlash - AP News",
+          "summary": "Argentina’s Milei restores press access to presidency after a ban sparks backlash AP News",
+          "date": "May 4, 2026 · 7:00 AM",
+          "publishedAt": "2026-05-04T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPbFpkVTdOUlJhNm9TYk1vTlg4aWUwZE1jZTIwV3JMcDlRc0Q4WjRHclJJOXotNmUyVUJjbDlQeUFUWHVOU1d1ZUJGcVBIa2czWUtNTHhpcU82Zkl4cXpIWVNpUE1jWHFhdXR3bEY5eVF2OUpTYnhVTkJMcWlzeDluMlZBMmU3cEh1bjd1YzBibDJFaS0xQ0N3bjZnWFJyTDlYYjFLb1Z6WkpEZ3FZM3FfN1dscmxYM3I4?oc=5",
+          "importance": 2
         }
       ],
       "officialVerified": false
     },
     "gb": {
       "official": [
+        {
+          "id": "gb-official-6ed34dff98738453",
+          "countryId": "gb",
+          "sourceType": "official",
+          "source": "Prime Minister's Office",
+          "headline": "‘Working alongside Europe is the key to driving a stronger Britain’- Burnham",
+          "summary": "The Prime Minister will host President Macron in Downing Street today (Thursday 3 September) to discuss shared challenges facing both countries.",
+          "date": "Sep 2, 2026 · 9:30 PM",
+          "publishedAt": "2026-09-02T21:30:01.000Z",
+          "url": "https://www.gov.uk/government/news/working-alongsideeurope-is-the-key-todriving-a-stronger-britain-burnham",
+          "importance": 3
+        },
         {
           "id": "gb-official-1488c9c470604e59",
           "countryId": "gb",
@@ -525,18 +537,6 @@
           "publishedAt": "2026-08-30T05:53:29.000Z",
           "url": "https://www.gov.uk/government/news/prime-minister-blocks-hundreds-more-criminals-from-sentencing-changes",
           "importance": 3
-        },
-        {
-          "id": "gb-official-991e636879215c5d",
-          "countryId": "gb",
-          "sourceType": "official",
-          "source": "Prime Minister's Office",
-          "headline": "Correspondence: PM letter to ministers on the Terminally Ill Adults (End of Life) Bill",
-          "summary": "Prime Minister Andy Burnham's letter to ministers on the Terminally Ill Adults (End of Life) Bill.",
-          "date": "Aug 28, 2026 · 2:38 PM",
-          "publishedAt": "2026-08-28T14:38:34.000Z",
-          "url": "https://www.gov.uk/government/publications/pm-letter-to-ministers-on-the-terminally-ill-adults-end-of-life-bill",
-          "importance": 3
         }
       ],
       "independent": [
@@ -550,18 +550,6 @@
           "date": "Sep 1, 2026 · 12:16 PM",
           "publishedAt": "2026-09-01T12:16:17.000Z",
           "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOSS1tWm1HSEpyVm0xYjdnUGpDbXJiTlNYdXFtYlpnUnpwSWJnT1NSOEU5MkNvTHA0VGRlbzNPUG9xd1VmVlFOWnM5eEF3Ui1RdVNLVXZLZVBvMzBNbFlfM21lOEFzZ1g3OTIybVZIMV9yMW9tZm9VbERpclk4bFozaXBSVDk4dGZBaFVMTDUybGtZbmtkUTk1UDJmc21hNWI2eDZ30gGoAUFVX3lxTE9PY0JlVVlQUHdzQUFqV1huLUsyNVVqUHhMMFhvTHpjQm52dzloS094cjdSTWZyUzNaSU10Q21zUHRYYzB0SWd1OGg3NHhWWWxlb2JVRWZvNlFpN1VWM3ozeV9PbWx2V1YtSDd0WXI2MGtydUtoMzJobkpxMkNCSWpHbkk3dzIyY0s0Nmx5MjBQelAyNFRPazNyRHNYalh2Mjh3aFJIRGNyYg?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "gb-independent-ae126718e4a5f4a3",
-          "countryId": "gb",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Story of the Bayeux Tapestry to be brought to communities across the country as Prime Minister joins The King and Queen and President Macron at exhibition opening - GOV.UK",
-          "summary": "Story of the Bayeux Tapestry to be brought to communities across the country as Prime Minister joins The King and Queen and President Macron at exhibition opening GOV.UK",
-          "date": "Sep 2, 2026 · 11:00 AM",
-          "publishedAt": "2026-09-02T11:00:01.000Z",
-          "url": "https://news.google.com/rss/articles/CBMikwJBVV95cUxQdDcxSXZVV19QY25YRVY0ZndSMGNIQWhibzlMckQ2Q3M3NW41YThvZ0pWZE0zSGwwNnRsRXFqOHBFSWtWU3E1ZF9XM1BTX2JJbXpnZS05ZG1IbFhwNGI2NHJSbFBLcTVOMG5SWlhJc0VGWkY0Y1hQTWxQU0NrNkttckFsMnI4ZDdURTFqeXpRSnNQTUJlVUZ4Zy14aWVxVlcwenQ3TFdkM3F3blRaY1pZdEtrX0hQZkE5czNLUFZYaktka0hJMTFVaFljdGFweTZIZEl6QXk0cXNOUFFrMjlwWEl6eHYyVGJPLVYtdkZsSWNQN3l6NExXNlpTNkJTWDBwWkZmZGRWT0E4amI2a1RuT0ZoMA?oc=5",
           "importance": 2
         },
         {
@@ -610,6 +598,18 @@
           "date": "Jul 24, 2026 · 7:00 AM",
           "publishedAt": "2026-07-24T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPUkVKM05Ib0FfTGw3Vkh5UWpiRXBYdHNDcFRZWkVDSmhCX1dUdm5yejJNdFUzajY2dVVJUW5aOWpQMC1sSWQ1YXAwRlJlNW1WY3BRZTVLTzhjcEgxcVlkNjdfU0c4OXljMTBqblZpbWx4QmxGd2JiQ2lyaF9jWUloLTRsY25jREhicmtzUWxZWUNyb3lxVFA2eEdzT01Wd3RyZzBZSGZydGJtLVFNVzBTb0dua3dITEdLNm5Ua0pxRznSAcYBQVVfeXFMT1UtckF0bVI4bGRtZTBHTWE5Wnl0ZEpKQWJfTC1ITVZKbWQwcl9kOEVsb1NEY2VCOGNfbi16Qk5NY18xSXJNVVowMXZsaFJqaHdTakl0Z1U0RVdfSi1kWDVCN2Z3eVZNN29scm8zTFpnaEJKb2c0VWJfai1aZms3amVrZi1jaWUybW42QXZlRnlaLUhfYTJsbk5nRmN5Q29XdlU3RWcyeU80R3J5RXFtNTlOQlhhbmxTdzc5NVc3SThrTW9qUURn?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "gb-independent-ad635bb36c69d181",
+          "countryId": "gb",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Five questions about new UK Prime Minister Andy Burnham - School of Foreign Service | Georgetown University",
+          "summary": "Five questions about new UK Prime Minister Andy Burnham School of Foreign Service | Georgetown University",
+          "date": "Jul 24, 2026 · 7:00 AM",
+          "publishedAt": "2026-07-24T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPNWRtN1VndTh0UDVTaGJYaUludFBlZnd6cUdzREh6RUMtc2pYVTFudFZvRENnQ2NvX2dkR05TNjlFVTlPOVFEdEcwczVHbjRCUVR5Q1Q4Z2NXWlNvNGl5X1ltNE5OSHY0TEVmVnN4alp2UTFaRmJBdUJlLXZwakoxVmtoNjZiQzhlV2VSN2tPMGZPQQ?oc=5",
           "importance": 2
         }
       ],
@@ -733,15 +733,15 @@
           "importance": 2
         },
         {
-          "id": "de-independent-810466a9de1635cb",
+          "id": "de-independent-9e1444f0cec777d6",
           "countryId": "de",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Germany’s €15bn voluntary investment from streamers faces industry scepticism - Screen Daily",
-          "summary": "Germany’s €15bn voluntary investment from streamers faces industry scepticism Screen Daily",
-          "date": "Dec 9, 2025 · 8:00 AM",
-          "publishedAt": "2025-12-09T08:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxORTRXMXpjcTRINi1iWE9BMGZuLU5tMC1iOERHUTB3Ujh5UkR1Z1Qwc0dVYVBHdWxrOTB5Zkw0OWxCS2tlWEd0RWppZTVYMFFaazV2bUtfZ2VEUkcyR2xsTTNJTzVUUzFpT3R3ZjFPeHFNcjVwMWhkSEZoQ2pmems2a1RMTmxNaV9jUmdkQWpFSktDdkFiaDI2dFFjcEZrUW9QamdSTkx1T2dKM0MteTh4eWdlYXcxbENUQTRCU2ZVWWRkZw?oc=5",
+          "headline": "Germany to introduce 8% investment obligation to boost local content - Screen Daily",
+          "summary": "Germany to introduce 8% investment obligation to boost local content Screen Daily",
+          "date": "Feb 6, 2026 · 8:00 AM",
+          "publishedAt": "2026-02-06T08:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNLWxEM1J3STM0X2tHOEJOYWg0WlhTTDI3dVoxTHdCaGxzdi1JMlNoTDg5eDMwREJlazN5Z0pYYWhMODhPb3Axdk80dXdyMVgxN2JWR0NSNG96SDY4eUlWSFVCakFDeWMtcG43THYtSEplQkQ2ZGhOUkRrVHJsV3hPV3JOSHM2T1pzZGZ4Sk9WX3pNc2VBZDUwRE1pMDhtU2JpVXltR0dmTWxuc1k3ckRsa2EyUlV0ajA?oc=5",
           "importance": 2
         },
         {
@@ -775,75 +775,75 @@
       "official": [],
       "independent": [
         {
+          "id": "it-independent-91d8f05b4b284b72",
+          "countryId": "it",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "DW News. . Italian Prime Minister Giorgia Meloni welcomed Indian Prime Minister Narendra Modi at Rome's 17th-century Villa Doria Pamphili on Wednesday, as the two leaders reinforced diplomatic and trade ties. During the meeting the prime ministers share - facebook.com",
+          "summary": "DW News. . Italian Prime Minister Giorgia Meloni welcomed Indian Prime Minister Narendra Modi at Rome's 17th-century Villa Doria Pamphili on Wednesday, as the two leaders reinforced diplomatic and trade ties. During t…",
+          "date": "May 20, 2026 · 7:00 AM",
+          "publishedAt": "2026-05-20T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxNdW9hT00zWk1LM1A1VG80RFFZWk8xck9ocjNKSGZLTE9ucWNWcnlPdlJ2Y3dtc3BxU2VRT3VOOUZ0ZmMwd0pWU2lEcnlhUUJINkc1SjZpOU9WWDFHcGdzbVFuZGMxZjk0ZFc4NXh2djYyQ0NfQzlRY1lmMzlNYVl5cWRtWUJFaFh5dVlvOXFIX2xKUXltXzhTX3puX2tBRzhETEFxX0QtQ3pKOXNXQ0pPdjdrOU9kX2VOazIzVG5vV09mdTNaUjUwazVTMDBsQU53SFNzdWp4WVR2dXlPOTdBbmxR?oc=5",
+          "importance": 2
+        },
+        {
           "id": "it-independent-fe7a8e3d31321e08",
           "countryId": "it",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Le Comunicazioni del Presidente Meloni in vista del Consiglio europeo del 18 e 19 giugno - Governo.it",
-          "summary": "Le Comunicazioni del Presidente Meloni in vista del Consiglio europeo del 18 e 19 giugno Governo.it",
+          "headline": "Le Comunicazioni del Presidente Meloni in vista del Consiglio europeo del 18 e 19 giugno - governo.it",
+          "summary": "Le Comunicazioni del Presidente Meloni in vista del Consiglio europeo del 18 e 19 giugno governo.it",
           "date": "Jun 11, 2026 · 7:00 AM",
           "publishedAt": "2026-06-11T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPT0dPUTZjbVFWN254VVFnRU1oZktjclc3SWh6WmJPRmwyMXF3eHZDeldNeVJmaF9PTW9XbjF6Mm9KdUhLTmx0ZjhqYnN5ZVBTVW5SRmxtUll4SmJoaDZOdXQ1YkJXWXJEaWxRemVUcTdqZXdUSTg5MG5LMGpFLVk4S0ItMU1LMGc1akkxb1hIdzVkU1BucDNmZmZxT0ExbG9mVFlla0szZjU4UEdyS084MTVhdkRMWGpCRWZadU92bjZObFFZ?oc=5",
           "importance": 2
         },
         {
-          "id": "it-independent-f7fc7c4a3d4996fd",
+          "id": "it-independent-b57a8afe24bf1968",
           "countryId": "it",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "President Meloni’s video message on the Middle East crisis - Governo.it",
-          "summary": "President Meloni’s video message on the Middle East crisis Governo.it",
-          "date": "Mar 9, 2026 · 11:02 AM",
-          "publishedAt": "2026-03-09T11:02:46.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1VaE5MOFRaZXBRMTlSa1RZYS1UMFh4WFFOSmtFOHU0VFBWa2lOM1pnbjdPWHlRUUxWUXU1cER4UzVfMmFwV1ozTjlKcTY?oc=5",
+          "headline": "L’Agenzia Spaziale Italiana annuncia la scomparsa del presidente Teodoro Valente - asi.it",
+          "summary": "L’Agenzia Spaziale Italiana annuncia la scomparsa del presidente Teodoro Valente asi.it",
+          "date": "Jul 16, 2026 · 7:00 AM",
+          "publishedAt": "2026-07-16T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQZ3hYaWdWQzc3YUM0M2Q4T0dRV1V0TFdzSHVYMzRHbmV0VHg1dV9yanFVaXFBY1BESW5OYTFWMDVKckNuWGE4TlN0azBQRmZJbVhST3Y0dWl4S04tMmhjZERJQWZkTWRFdHVpN2RzOWJYNVh2ZXVTOFNqMGQ3UFdRWE1mdm1paHdyVHRyY1c4NHNzRWNSai0yblJrSVNZNWdfd0dBT2tWQTBITEE?oc=5",
           "importance": 2
         },
         {
-          "id": "it-independent-6d5c658090f300b8",
+          "id": "it-independent-90d6eb534968c2eb",
           "countryId": "it",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "homepage — Italiano - isprambiente.gov.it",
-          "summary": "homepage — Italiano isprambiente.gov.it",
-          "date": "May 19, 2020 · 1:17 PM",
-          "publishedAt": "2020-05-19T13:17:17.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE5EcExGckFRcVZyQ21PWkZ1WUgtYmZJNkpkU1lpNXd5YUFVQWFUd2h1SEV1b1pBZEJlVEtHdjJQZmotTTNxX1VWR3NR?oc=5",
+          "headline": "Italian PM urges Cyprus to focus on repatriation regulation during EU presidency - InfoMigrants",
+          "summary": "Italian PM urges Cyprus to focus on repatriation regulation during EU presidency InfoMigrants",
+          "date": "Mar 2, 2026 · 8:00 AM",
+          "publishedAt": "2026-03-02T08:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQTENwdElWZ3VlRjJ0LXg5akN3LWs3bVJFTlVUMnZVSHhjOHI3dXVJWDlabjc1eTM0OVJVYktzclJXb1FrZXhiWS10X1RpY2tXTUpGcUxROHYyei0zQjZRbXFHNER3Z3QzY2M3Vk8zWnpGXzJYYjA2R0JLbXF4aXpfSHVSa2tJakpsOXVtTzFrd1UySjNFaXdjVEtBVnNLaWFFVVlnanR2c1dxbTlLSEtzN0E1LWM5czB6em5Jb0dQRks?oc=5",
           "importance": 2
         },
         {
-          "id": "it-independent-4144bbf82da3106a",
+          "id": "it-independent-57a31ac6a4e31973",
           "countryId": "it",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "President Meloni meets with President Xi Jinping of the People’s Republic of China - Governo.it",
-          "summary": "President Meloni meets with President Xi Jinping of the People’s Republic of China Governo.it",
-          "date": "Nov 16, 2022 · 5:47 PM",
-          "publishedAt": "2022-11-16T17:47:03.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1yU2VLdU1qaWJXeGJIZGRBWVhMX25kX2hwOEtXaDZodlMxUExCN21kUVBQQzRPOFg0VTV2cXl3RHhOR2Z3Z0c4Mng5aGU?oc=5",
+          "headline": "L'Italia sospende Schengen con la Spagna. L'Ue: \"La decisione deve essere notificata e giustificata\" - RaiNews",
+          "summary": "L'Italia sospende Schengen con la Spagna. L'Ue: \"La decisione deve essere notificata e giustificata\" RaiNews",
+          "date": "Aug 1, 2026 · 7:00 AM",
+          "publishedAt": "2026-08-01T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxPLUJNOVJHeHgtZjRDWmI3aWptd19YRkE4cmhLU1RUNkFxSmVKMVRNSnBpY3BBMEdQLWRXRkxqNVlCelNpaUZZRDRsLW9LWkxkVXI1YjdRdzRFUmdhSXhaMFRlWUdqZW1GVzlBWm9qalJ4aUFscHlDdjhIai1zb1hnQ2RxTFhoMzVTb0Q5Sy12ZXE1dHZsVW9wX0ZzU2dRbjhUUVdqREtKdkJHLWxGSDVFMF9ocXpvbXU3eHFGVEJRZWoyUEt0NzdWSU9iWHJMSVB3ZWxaM1c4ekZ5Sk1TbHVZc0NwYU1oMVAtNVU4M3BYRi14X3VIOFlKMENoaTc5OElzdjdMaUlCY9IBjAJBVV95cUxQN2RxeGRLS0lkb2UySW42ZUxFZ1pXckJ2YTJPX2Q2alJCVDNITDNCYVczNFFzR0VFcFpDNkd4Z3dKXzlnQWtXU0tlb3VEcDlSWmRXOHJiMmNyWXFERk51emY0S1BPN0hGSGhXbEJyX0tlSzJ5OVBFOGwzQzg1Um9fSEJjcXRjdDc3dnczOFdocjVIS3BSazRqbXJmSU9yY1NUa29UQ2J6R1ZTeno2WmZvM21IdnNoQXRpUm0yUGRrTGhvM0RrOG4xWFFzbm5JMGdhSExzcjBwQ0JvRW9mbWVWR3VRR2VYb2s5UDFBVjF1Vzg0ektoamcwQ1BVRGQ5aTVfZTZOX3ZGbUJXc3FG?oc=5",
           "importance": 2
         },
         {
-          "id": "it-independent-277c1c58a4b284e4",
+          "id": "it-independent-e1589efa264cd489",
           "countryId": "it",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Campobasso, Cefaratti (F.I.) sostiene la mozione di sfiducia di Esposito e si appella al centrodestra \"Assumiamoci sino in fondo le nostre responsabilità\" - Molise Network",
-          "summary": "Campobasso, Cefaratti (F.I.) sostiene la mozione di sfiducia di Esposito e si appella al centrodestra \"Assumiamoci sino in fondo le nostre responsabilità\" Molise Network",
-          "date": "Aug 31, 2026 · 2:55 PM",
-          "publishedAt": "2026-08-31T14:55:26.000Z",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNRVBNaHFkQi02djV0V3JjQWxsanpZQkhUYnhkUUx2Rm1Nbm1NTW1GaVhFSnhTVy11enY5RkJOTkFUMDgzbmRkaVBiR2RZS0h6Vkt0SjMwTGU0bU5ybndyMlNHVUhjZEZrb29NNGZOWnF1OEZRZEdlM3d5NFdEY1B1WElHS0dLQy00bUpyTW90WXI3MmpxVzZnZmhqLThSWjE1eG5LMWdCcXY2XzZr?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "it-independent-15a00fe89571b9cd",
-          "countryId": "it",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Intervento del Presidente Meloni alla Conferenza dei prefetti e dei questori d’Italia - Governo.it",
-          "summary": "Intervento del Presidente Meloni alla Conferenza dei prefetti e dei questori d’Italia Governo.it",
-          "date": "Feb 17, 2025 · 8:00 AM",
-          "publishedAt": "2025-02-17T08:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPejZpWjNZUElKREZ5emZWMGdKUUhiMDRnUnF1VElfWGpIeFNYTmJ5UG1EcUVpMndyajF4eThBeFdRUFJMTTNvemc1V3dFaTFPVkRubmE2dHdzR1Y5YVpLZGF4UnlyU0ZGeVc2MWtPQ0RhcnQzeUdnRldFemdRNkhxUHJGSkNfVkVrcmpJZ09sZ193RWpHbjYwRW9Xamx0ZVlab1AzQ19aTlFXZGo3OGNCbFZtVm04b0NFUzlpMERpTG9tVlJB?oc=5",
+          "headline": "Giustizia Tributaria, Lussana: \"Tappa storica i 170 magistrati\" - Il Sole 24 ORE",
+          "summary": "Giustizia Tributaria, Lussana: \"Tappa storica i 170 magistrati\" Il Sole 24 ORE",
+          "date": "Jul 21, 2026 · 7:00 AM",
+          "publishedAt": "2026-07-21T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOdTdKZnFMcUFraUVpQ3hTdVdVY2VFNjlqWk5GdzhxZjN6c05wbjhnbnpVdUpzQ2tydW85R180Nm9HQ05QR1I1MVRRUGFRQUg2cW1IUENTdG1BeFc2akhOUkR6VnUtTEpic0dQSFZEWXd5Rk41TnNXcHdhYTRPMWxzZHpmbXBmWnh5NWM5RmQ5V3BVYThCWUVzcld0S0VJcFdHX1JJVXZVUEJWblRZVlM5Vw?oc=5",
           "importance": 2
         }
       ],
@@ -862,18 +862,6 @@
           "date": "Aug 17, 2026 · 7:00 AM",
           "publishedAt": "2026-08-17T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNaHU3ZGRNcjBBcURyLS13dXpOd0p3ckFyeG03Vm1SZVJVOFVnX0IySHhqUTZuZnphSm9VSDZQQU4wbmhVbjNnSWJwT3pjdnBiY2tyZU5XMDRhdVFYUnQ1Y0Nlcy1heWtxOHNGMm9uYTZwb1RPRXl6RG1fRVRvUmM4dG5JakVqZUhNMmRER2hPZDAxSnh1YkJ4SVMzS3ZDY2pja01oTnJNZV9IZw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "es-independent-8bfe32c7282129cc",
-          "countryId": "es",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "The Government of Spain steps up coordination of measures to restore normality in Ceuta - La Moncloa",
-          "summary": "The Government of Spain steps up coordination of measures to restore normality in Ceuta La Moncloa",
-          "date": "Aug 26, 2026 · 10:42 AM",
-          "publishedAt": "2026-08-26T10:42:36.000Z",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOVWhJeFloUHAzeFluOWNmVGU5STE0TlJvaXItaDhiSkEyUEtfQmtLUlJtejF4aktZQ2lLdnFLbWNKUUdZZVVvMTRpVjRFUmVNYnJvUjl6MmRsNkdJQXE3eFNQRkVhcEg5SjZ3dG02RTVTdWp4aHNwbFVBQkQ4RnIxWUVEZ3Z5Q1FTNWxiQWN2UlFrVmNXNFdsTlhzcHAxX084RjZDVVNrT1pPSnJ5ZkNPOE4xc1E?oc=5",
           "importance": 2
         },
         {
@@ -922,6 +910,18 @@
           "date": "Jun 22, 2026 · 7:00 AM",
           "publishedAt": "2026-06-22T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOU3BXb0pYdUJWRE5uZXBTRVNPeS1sUU0zUHB6WDd4U3JoNzZPRzNPNmd6Q3JROEVjdlJOZDVWUWxiY1ZBbHhKRmNrNV8yMklQTzFfX0RDWndUbWJha0V4UU5DbDNiMEpiZ0dSWjNGNUR5VU54QU1CdS1rY0dHd21wb0E2aVV4MW1wNTlhYVJHSHFVLV9YU1RNSHVFYWJRYjEx?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "es-independent-791c2dda98f2b75b",
+          "countryId": "es",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Pedro Sánchez meets with the new governing board of the CRUE - La Moncloa",
+          "summary": "Pedro Sánchez meets with the new governing board of the CRUE La Moncloa",
+          "date": "Jul 21, 2026 · 7:00 AM",
+          "publishedAt": "2026-07-21T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOMTdtYXZHbEtyOTJPSFhxc1g1Zk1SeTdDU082MEF1ZmtJSUJZb3hSanN5aGFOMnN6TjdIMWY0TVpvSDNqODVsanFlSGRBTkRNdHdMc1FkY0QzLTVBVmhxS3IydVBEbS1qRFhwRDY1SHd2RHgzQ0ZMYUtYSXNQUTBrbGR5SnFCS3BzSzVldEtBcXBLZHB4Ry11VERkVlRoclBhRlE?oc=5",
           "importance": 2
         }
       ],
@@ -1013,8 +1013,8 @@
           "countryId": "ua",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Ukraine’s president coos over a puppy, starting a new volley in his war of visuals against Russia - The Press Democrat",
-          "summary": "Ukraine’s president coos over a puppy, starting a new volley in his war of visuals against Russia The Press Democrat",
+          "headline": "Ukraine’s president coos over a puppy, starting a new volley in his war of visuals against Russia - pressdemocrat.com",
+          "summary": "Ukraine’s president coos over a puppy, starting a new volley in his war of visuals against Russia pressdemocrat.com",
           "date": "Aug 27, 2026 · 9:14 AM",
           "publishedAt": "2026-08-27T09:14:45.000Z",
           "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPLUJqRTI1VUg2T0pHR29qWlUzM2hoNGFLYlBzZ2IyWUZtMWVib1hzMzZmU21HSkpyRDJsaHBQXzl1eEFCOVMyU3BYQ0lCTFJPdEltQmR5bl9mLVAtUkFGLWlYX0NzUVpJMGU4LWlPS0dhTzctdUw1NGI3YkhXS3VmZjZnSkFNdw?oc=5",
@@ -1069,15 +1069,15 @@
           "importance": 2
         },
         {
-          "id": "ua-independent-4e31ed13ef93f37b",
+          "id": "ua-independent-4688cf52ac064590",
           "countryId": "ua",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Ukraine holds \"substantive meeting\" with envoy Anjani Kumar; discusses India's role in ending conflict with Russia - ANI News",
-          "summary": "Ukraine holds \"substantive meeting\" with envoy Anjani Kumar; discusses India's role in ending conflict with Russia ANI News",
-          "date": "Sep 2, 2026 · 4:10 AM",
-          "publishedAt": "2026-09-02T04:10:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxQQkpfd090NEdacW50aUtrd0k0bkdGMC1PUnRxSHB1QXBzMEo2UGNzVUtrT1Z1V1VQczJRQkkzS01Vby1selZYVzN1eWpKa1ZZYjhrYVlibWZka1JmZDB4NXlBRWIyVmNoNXNpcDgtUl81b1FMUXBiVzJSazRXUHJPQWhDTF9xYzhDdEdvTTJBbU5YMzBaNDF0Yk1VQy1VREFCV05YODNVeWJCUWJ2QUIzOVBvem1IU05aWjdPRjEtT2s5TnVTMmIyXzNmV0p6T2tocnhDLUxtam5ZZmNMd0xKX3ZIa0ZOSlFyR2xCWFRwMnowRlBrVElWZQ?oc=5",
+          "headline": "Ukraine's president coos over a puppy, starting a new volley in his war of visuals against Russia - Click2Houston",
+          "summary": "Ukraine's president coos over a puppy, starting a new volley in his war of visuals against Russia Click2Houston",
+          "date": "Aug 26, 2026 · 5:56 PM",
+          "publishedAt": "2026-08-26T17:56:41.000Z",
+          "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOZnR0Qm4yd01oaUdRcHQ4dDBIWlFfaVRvQnN6aTh1d3Y5WlN6RVo0LVhLYnpIX0xFZTlhWjB1dlkwa3hnWGt4c2Nfc0JkSGh0S2FvcXBtNUgwc1dpMmVBTE52UFZBeWszTFh0ZTlZRzctOWk2ZmcyWTlLSy1SVmM0MXR2V3ZNQUpCal9lYTdDbXVLX3ZDcDJZTlV5a3JISFVIbnY2TmlGS0ZwMXhoVmdvdVRpSFk3ajFQYWpiNXdvR0o3WTY4N1E5N1VjTi01bFBXR01fRDE0UzNKV2dIUUN6ZnQ0Smc?oc=5",
           "importance": 2
         }
       ],
@@ -1087,27 +1087,15 @@
       "official": [],
       "independent": [
         {
-          "id": "ru-independent-5a38506c50515d76",
+          "id": "ru-independent-0f13a2f17b81dd07",
           "countryId": "ru",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "How Kremlin Propaganda Is Spreading Through Serbia - Radio Free Europe/Radio Liberty",
-          "summary": "How Kremlin Propaganda Is Spreading Through Serbia Radio Free Europe/Radio Liberty",
-          "date": "Aug 30, 2026 · 10:55 AM",
-          "publishedAt": "2026-08-30T10:55:53.000Z",
-          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPVEFpLWIyZDFNbjlPbTMtSkdWbnV3VDJYNElwN1hNRzQycHVONVYxYXJMT2dJam5fRzg3TUFiZENfVFZUMnN1ZXJUbmczMTdlVzVWYWdhZ1poeFA1cXp1R0tEV2lqT3JrRlF6TjhWYUpqTFJ0Zm02eFJEWU9nU042cHBMY09QMkh3R1NubkFhNWdNUdIBlAFBVV95cUxOQllDc1V2YVlXSWtvczQ1RWdWZEh0cEs2SkMyTkU4N1NVYnVuRmdLVHBYelM2c21uckVjWVdQNzVrUDVqVmZEU0g3Z0hScENpeXFyYVdFWTN2cEVDZ001NG9Fd1NVYUR2Q25hdE5YVGdHTmc0MUlvZEdPSkc4cEpTWV80NnJ5OXJXQkYyS2paTExfN3A4?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ru-independent-02f770fabc640f16",
-          "countryId": "ru",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Ukraine Claims It Foiled FSB Plot Against Anti-Kremlin Figure Amid Shootout in Kyiv - The Moscow Times",
-          "summary": "Ukraine Claims It Foiled FSB Plot Against Anti-Kremlin Figure Amid Shootout in Kyiv The Moscow Times",
-          "date": "Sep 2, 2026 · 12:45 PM",
-          "publishedAt": "2026-09-02T12:45:37.000Z",
-          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOS2JJQVBJZkhSZVM1NE1yc3U5Tml0QzJXbFdXbG5IMlkzUkRKMXRFQlVraDhDeUpBY2tZRmhSdV9YUHZHNEtSWVFXUW1XUmNfV0VGSUlfRjU4RWItNHVPQUpzdk96cTdxaUFnOUpQUUQ0S2h6R3VORXRFVmhzZ3VzY0xIZVpPcC1CU0xhR1FMR2FUMkQ3MThtVmlLbndLRThTb3o5bjBrWnM3SUUwd2RyRVFIYnNBSWlNbmp2aGJwN3RaVHJGWWhxTHNTeS0?oc=5",
+          "headline": "Putin seems peeved with Uzbekistan - Eurasianet",
+          "summary": "Putin seems peeved with Uzbekistan Eurasianet",
+          "date": "Sep 2, 2026 · 5:50 PM",
+          "publishedAt": "2026-09-02T17:50:17.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE04RWw3SXBaalg5OTVqX1FMNlRMUTBNUC14aUxEODVLQjlOUVRFQjM4d1NnY0pIRkxOckJ0eFd4bFFjSi10TGc4MEdNWnh4TUdyNmhwalJZVU83cjJzbm5lb25QU0laSGZQ?oc=5",
           "importance": 2
         },
         {
@@ -1123,39 +1111,51 @@
           "importance": 2
         },
         {
-          "id": "ru-independent-6fdee58ea9c286a0",
+          "id": "ru-independent-2fcbb4775b87f95f",
           "countryId": "ru",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Russia Again Hits 3 Largest Retailers: Dnipro-M, VARUS, Aurora Warehouses - Kyiv Post",
-          "summary": "Russia Again Hits 3 Largest Retailers: Dnipro-M, VARUS, Aurora Warehouses Kyiv Post",
-          "date": "Sep 1, 2026 · 2:55 PM",
-          "publishedAt": "2026-09-01T14:55:58.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5FWm5nMWJzNHo5c0hoXzFIcGJ0SEZPQVRHbjEzaHlDOHlJM3V4MERpRjRvX2REWlBEUkZmWUVXcVhubnR5WUxGaC0wYw?oc=5",
+          "headline": "Putin pledges support to Iran, rallies leaders to challenge U.S. - The Washington Post",
+          "summary": "Putin pledges support to Iran, rallies leaders to challenge U.S. The Washington Post",
+          "date": "Sep 2, 2026 · 12:23 AM",
+          "publishedAt": "2026-09-02T00:23:09.000Z",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPcGFTdTZwSlMwRGFYemJGNlpqcXRsWkFmMXJLRE1NSGRvTEZscC1OZ01pZm9qZHJKalZCdXpHd1JOZERUM0tyYmZRNzVlbV9sbjJOdVZ0NzBoa1RUZF9xSkEyWTVEXzdyQ0s0ZnJBdnVvSUZYNEJOVXZUWHBnQS0tS2NoZk9RUVh2VnBJYVRhZnNwWTE1alE3TWI3eElET1NJU1BFOEJkdw?oc=5",
           "importance": 2
         },
         {
-          "id": "ru-independent-b668bf32cf5e1f03",
+          "id": "ru-independent-5a38506c50515d76",
           "countryId": "ru",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Kremlin leader breaks silence on looming post-election mobilization in Russia - RBC-Ukraine",
-          "summary": "Kremlin leader breaks silence on looming post-election mobilization in Russia RBC-Ukraine",
-          "date": "Sep 1, 2026 · 11:40 PM",
-          "publishedAt": "2026-09-01T23:40:48.000Z",
-          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPaDFPcXR2WUZ1a3J2azZrLVBQN2RrMzF1UjJPWm1kOGQ1RXJ2ZTRHS3JPS0h6UUs3SFlMVk84RUpmMlhIcjNQTXpwMEk3blFuTWx1akE5djhZSXE2cm1LY0JwSTFXTXhQNmdRamNTNGRsM242QUVpMFNKczNnUnM5alJhSDJnVDhISm1SLTY0UnlxUQ?oc=5",
+          "headline": "How Kremlin Propaganda Is Spreading Through Serbia - Radio Free Europe/Radio Liberty",
+          "summary": "How Kremlin Propaganda Is Spreading Through Serbia Radio Free Europe/Radio Liberty",
+          "date": "Aug 30, 2026 · 10:55 AM",
+          "publishedAt": "2026-08-30T10:55:53.000Z",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPVEFpLWIyZDFNbjlPbTMtSkdWbnV3VDJYNElwN1hNRzQycHVONVYxYXJMT2dJam5fRzg3TUFiZENfVFZUMnN1ZXJUbmczMTdlVzVWYWdhZ1poeFA1cXp1R0tEV2lqT3JrRlF6TjhWYUpqTFJ0Zm02eFJEWU9nU042cHBMY09QMkh3R1NubkFhNWdNUdIBlAFBVV95cUxOQllDc1V2YVlXSWtvczQ1RWdWZEh0cEs2SkMyTkU4N1NVYnVuRmdLVHBYelM2c21uckVjWVdQNzVrUDVqVmZEU0g3Z0hScENpeXFyYVdFWTN2cEVDZ001NG9Fd1NVYUR2Q25hdE5YVGdHTmc0MUlvZEdPSkc4cEpTWV80NnJ5OXJXQkYyS2paTExfN3A4?oc=5",
           "importance": 2
         },
         {
-          "id": "ru-independent-67b512f20f85af15",
+          "id": "ru-independent-d53ca81dc8982218",
           "countryId": "ru",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Ukraine's long-range strikes bring war to Russian territory, undermine Kremlin narratives – expert - Ukrinform",
-          "summary": "Ukraine's long-range strikes bring war to Russian territory, undermine Kremlin narratives – expert Ukrinform",
-          "date": "Aug 31, 2026 · 3:45 AM",
-          "publishedAt": "2026-08-31T03:45:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPcUpzTTA5c0JvU0FMU0o1N3dHT2RXUVFSY0lfVEJFcUhxUUp2R2V3cHpDb3hVcFZLcjJuTFdxbjJUbDdBZFkwbWJ4WUcta2x5cXpZV3RkMy10eHlDcWRseVVMM3BvXy1PeHViX3lEMkRreVJHRnlmMzVxR3dSYzB3amJjN0taTER4N1dSd28tVmFxem5NR0VaOHlDV0tJNmFIMkdfTEg2Y3hyUzRxbzgtWm1KZDl2OUtWanZybUVOTFJsOXp1OUVyZEtBWFhpUEJZVjB5SGpVR2g3OUXSAeABQVVfeXFMUGMwMFRQYUJQOWlseXJsMzJ6bTVBWXBrUnczUXZoNzRBbzA1cnhZNUJxUFlUdEplTnJQWVBKQzFWVVpaQnJvTGFvMk9YM0tkWFhJZTJCbENKd1p6dXF1cEMtMWZvZjRpSmhnMzNGQnFySjJHREhpbnJlYmUtMG85UW9VUXBPOUgtX0luRVptSWhRT2YteEd4b3E1b1RxM3k4OVV6M0xTVU9XYzczcVVjbjAwRzBkdnNUbnJza21OUFpoQk5CUkZSalZheFJxdV9jT0xscDNZazhPZTNjNnB3bFE?oc=5",
+          "headline": "Signs mount that Russians are losing patience with Kremlin’s war with Ukraine - The Christian Science Monitor",
+          "summary": "Signs mount that Russians are losing patience with Kremlin’s war with Ukraine The Christian Science Monitor",
+          "date": "Aug 19, 2026 · 7:00 AM",
+          "publishedAt": "2026-08-19T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNekpVVWZ6YWlPWUlBdUJIb050TjJrVkRGRmlzZ0ZwT1JVcHY2aThoeWFxSU1LVlAyNmJJOEQzUVJQX3ZsUlZ2eHlFQnpNU3lHOHRqQzIzSHdPeEtCUjQ4UDdUSVZfX25Jb0RVLTJmbXAySF9iTXZzUHFqNWprZ3RpcXN5UmpnX3BNVmFuMlVPeU9vTWRRUWpJcklnczRMSEN5aW1j0gG8AUFVX3lxTE5KcGNRekhnV0F4bGRhY0xiS3g5N2VYQmRyWnFrOTF4VC05YlRKWGlDV3NFWlNOQ1N5ZnlJZnpJb00tQ1dRMWNrbHhpMi1ZVGNOUTctY2MzOFhlSmx4b0FJS2xRVDZ2N0laN1VXU1EwOTh3dlFEVENXTnRsODBGU2FRbXVydG1mTjRMc0xvbU9RVE1NeE1KdnZXbjcyMDVoSzg0SW9XRTRTOXg0ZmZCQTRGdGhhMDdyT2xROF82?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ru-independent-689116fce0c203df",
+          "countryId": "ru",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Leaders of China, Russia and India are among heads of state meeting to counter US influence - seMissourian",
+          "summary": "Leaders of China, Russia and India are among heads of state meeting to counter US influence seMissourian",
+          "date": "Aug 31, 2026 · 4:55 PM",
+          "publishedAt": "2026-08-31T16:55:24.000Z",
+          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxObm83THRHdVhJbVNTNm0tSG9xaFV6Tm9hNC1yeW5xOVMxRDBwRzBNYkRzWkcwWEt1ekJpaDJzYzdpNUxZTk1BUDFTN01sSmZLcXBrVTVpN1Vpd3ozLW1hTy1NMURnRjVwX2lFdnplbDhUd25iNDVscF9MbjJHdzFPNWNHUFVmbUNPMmg2RTVkbG1rUHJYZjcxdVBDbTRnVkJXVWVIazRlWnR2Qm5lN1FnbEYxYVhqQ1JjVzV1aGFkdjZlSXExTGI5N0pXWldPYnc?oc=5",
           "importance": 2
         }
       ],
@@ -1165,15 +1165,15 @@
       "official": [],
       "independent": [
         {
-          "id": "tr-independent-4667c555e7d3c410",
+          "id": "tr-independent-8c99d3d7ae19dc51",
           "countryId": "tr",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "President Erdogan, first lady share joint video on programs in Kyrgyzstan - Anadolu Ajansı",
-          "summary": "President Erdogan, first lady share joint video on programs in Kyrgyzstan Anadolu Ajansı",
-          "date": "Sep 2, 2026 · 1:27 PM",
-          "publishedAt": "2026-09-02T13:27:05.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQX0MzSDV2MDI4alJ0bmtCZ3hvWmdhS1l3U1JiZThyc0VFd1lfNVliWTlaZ0FPWS00M1J4NFJRdFZqVG9wdnNNSmVNVnJOalBlamt2YTZWWXVjc3pSU2xadnR1aF9JOTA2TERoQWctZUxSQWRzNk54RFJZamxSbHdZeVRGeTc2VW1RSHJRUVY5LTV3YVdQbE9VWjg5RWRzMXpicU9OQ0RScFBVYWRCTnNDM3Ywdw?oc=5",
+          "headline": "Türkiye's SCO membership perspective never means turning its back on West: President Erdogan - Anadolu Ajansı",
+          "summary": "Türkiye's SCO membership perspective never means turning its back on West: President Erdogan Anadolu Ajansı",
+          "date": "Sep 2, 2026 · 11:08 AM",
+          "publishedAt": "2026-09-02T11:08:29.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOSjVqRmRVX2ZnOHNkb0lYQmdoREhjOTRHR3V6YlpuLTg4UnMwb3pxdXQ4STk0UEhRRnlVZ2drdXNsaFZlYzZRRDktSFZwa3VmeG9uRW50UTkxS1lMelBtekpJZnJqZmZlRENUVzVBa09hOG9aVWtMWlI4TTNEUjF0a0hvQ3BWeDFNWW85VFBESUFJTXgwdXpia0tWNHZITlozTndhTGJ6QVFXT01yYkY0VV9JVzYteVJHQlZXVU80V1pEMHlQNjF5am5zQQ?oc=5",
           "importance": 2
         },
         {
@@ -1189,18 +1189,6 @@
           "importance": 2
         },
         {
-          "id": "tr-independent-650f71a599d18c9c",
-          "countryId": "tr",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Erdogan, Putin hold 90-minute talks on sidelines of SCO summit - turkiyetoday.com",
-          "summary": "Erdogan, Putin hold 90-minute talks on sidelines of SCO summit turkiyetoday.com",
-          "date": "Sep 1, 2026 · 10:45 PM",
-          "publishedAt": "2026-09-01T22:45:44.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPRnFWZGxZVjA2S3JqZzZ5Mzl3WFhHenNyYUFDVkxwOWZ0dE5QRFlkYi00WVBNMTFPYjRZcG92V2VJbjNfb2Zld3huVVBpZ3l0eDdxV3NHZVRlSG1zMkx6STFqNnRhQTUtOFlEVk1jZ2ZHaE14Wm5LSFpUOURRVzV2QXBMMkpfX2VxVnprNGlVWGhKM2ZqRzBpOWh4WXI0TXRnXzdRYWZRajQ?oc=5",
-          "importance": 2
-        },
-        {
           "id": "tr-independent-eea5ad0abeda6f75",
           "countryId": "tr",
           "sourceType": "independent",
@@ -1210,6 +1198,18 @@
           "date": "Sep 2, 2026 · 7:38 PM",
           "publishedAt": "2026-09-02T19:38:03.000Z",
           "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPQlBJUU44YzN5MHFfRl9hN1FqVjhUZXVHN1RDSHdmT2N0ZnhLekJablJzSWdvVTJZNzFJeUx1ZlZ5NzJOLUxyWWF2TGNscDNEcHBUcllwWHB2aVh0QmhraHFPSURiS01fRFdpRXM1NnZGZ3lOMm1zZ2d1UXRJZHY2UEtFNVVObzdoZ3dxY3NZU1d3ZEVjNkVmbFkxME5feHNDUXlCVTRWUDZ6aFNTZkFtSjhPUVk0RW9D?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "tr-independent-650f71a599d18c9c",
+          "countryId": "tr",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Erdogan, Putin hold 90-minute talks on sidelines of SCO summit - Türkiye Today",
+          "summary": "Erdogan, Putin hold 90-minute talks on sidelines of SCO summit Türkiye Today",
+          "date": "Sep 1, 2026 · 10:45 PM",
+          "publishedAt": "2026-09-01T22:45:44.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPRnFWZGxZVjA2S3JqZzZ5Mzl3WFhHenNyYUFDVkxwOWZ0dE5QRFlkYi00WVBNMTFPYjRZcG92V2VJbjNfb2Zld3huVVBpZ3l0eDdxV3NHZVRlSG1zMkx6STFqNnRhQTUtOFlEVk1jZ2ZHaE14Wm5LSFpUOURRVzV2QXBMMkpfX2VxVnprNGlVWGhKM2ZqRzBpOWh4WXI0TXRnXzdRYWZRajQ?oc=5",
           "importance": 2
         },
         {
@@ -1321,75 +1321,75 @@
       "official": [],
       "independent": [
         {
-          "id": "ir-independent-79a03874750b40ad",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Iran's president says Tehran will reciprocate if US honours interim deal commitments - Reuters",
-          "summary": "Iran's president says Tehran will reciprocate if US honours interim deal commitments Reuters",
-          "date": "Sep 1, 2026 · 9:16 AM",
-          "publishedAt": "2026-09-01T09:16:05.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNc0JpM0lYODRGdU16eG9aOVp6TjlPUDVIbHVGMzVScXdqWlZaeHM0eVYzMU5CeTlzYXc1VTZkVkF1TjlnekFOUko1TTYwVDdMR1RuUFlUTzhVTnFhR3p1Q3RrR09IVVJQcmxpbjFmdG5PaHhITlRFMzhWWVZtdlZkajJwbjEtb2lwVm9nQWZMakI0X3FjZUtBRXJTZHlNSHBJVG5ERm5heGVHZUhmS09PQlV3UTBWSmF4bkd2TjV1a01uOXM?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ir-independent-b49a2217c24d3e4b",
           "countryId": "ir",
           "sourceType": "independent",
           "source": "Google News",
           "headline": "Iran's president admits 'we have many problems' as the U.S. blockade chokes its economy - Fortune",
-          "summary": "Iran's president admits 'we have many problems' as the U.S. blockade chokes its economy Fortune",
+          "summary": "Iran's president admits 'we have many problems' as the U.S. blockade chokes its economy Fortune Iran's president says Tehran will reciprocate if US honours interim deal commitments Reuters One glaring issue goes unadd…",
           "date": "Aug 30, 2026 · 11:10 PM",
           "publishedAt": "2026-08-30T23:10:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPdVhleTJWZWh6blNFNVdMX0g2Z2lxaXE5NGpQVXVEdHhyanU1V0dUZE1pUUZGcnIwb0oycEYyZVBtTjdZZHlwbUszRkRsM0J5RDRiRTJ2WXB0WTJYRTl4UERoZHk1QzhJT3loTVdhbzdtUzVWd1E1YWNjWE02bVEzenlxTTFLZ0RSMWtxbDBYRzJNaFdCTWREWTJDSklDNG9xQXVubjJNNzltUmNBemtRZmhCdVhNUQ?oc=5",
           "importance": 2
         },
         {
-          "id": "ir-independent-c4aecf3915b9a50e",
+          "id": "ir-independent-a01ec5eb42fa0530",
           "countryId": "ir",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Iranian President Pezeshkian says Tehran will follow US if Americans honor deal - The Jerusalem Post",
-          "summary": "Iranian President Pezeshkian says Tehran will follow US if Americans honor deal The Jerusalem Post",
-          "date": "Sep 1, 2026 · 8:01 AM",
-          "publishedAt": "2026-09-01T08:01:30.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9xWVpNcUJVZTZ1aUsxN3lFR2dmU3JjU0dhSm9GUnlneUV6a3BkT2VPMkwxVzJ6UUw1U1J5WHAtLURUS2JCZlBDNlIwQ2NoNjIyRXp1TnREb1JJM19xRENfOXQ5d2NLZnpOQVE?oc=5",
+          "headline": "Putin Pledges Increased Strikes in Ukraine and Support for Iran - The New York Times",
+          "summary": "Putin Pledges Increased Strikes in Ukraine and Support for Iran The New York Times",
+          "date": "Sep 2, 2026 · 12:00 AM",
+          "publishedAt": "2026-09-02T00:00:08.000Z",
+          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBGQWxaZktVUjhLU3ZKMkxyZGJ0NldPSHRkQzJzTUhVWEM5M0pKVGVGU196QURSRkZ4NVpNZkRqU2tJZVB1Z3hndktlaWxnbTBnS2xydlM5cFA3dGg3ZUtYeWRIUU5PcGE2eGJzb2NQWlRrOUVFTmVxSk9uVQ?oc=5",
           "importance": 2
         },
         {
-          "id": "ir-independent-c0e7ce086ec95ef2",
+          "id": "ir-independent-2fcbb4775b87f95f",
           "countryId": "ir",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Trump Returns to a Familiar Playbook as the War With Iran Flares Up Again - The New York Times",
-          "summary": "Trump Returns to a Familiar Playbook as the War With Iran Flares Up Again The New York Times",
-          "date": "Sep 2, 2026 · 7:56 PM",
-          "publishedAt": "2026-09-02T19:56:52.000Z",
-          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQbjdQZlZlaGNQQklWMGdlakY0aFhSTTdKYVFJcnk4dHZRM3J4NGJzVjN2emxDUURfcUlhZ0JUNlZoa3JqT3d0cDJ5ZDdZWEQ5RVlLOUFDckhvd0c4bnQ4RTVVelVDTlJmN18td0NWdXFPQ2VVTU9lSUpmd0dUZU5EeWdpeGZEQQ?oc=5",
+          "headline": "Putin pledges support to Iran, rallies leaders to challenge U.S. - The Washington Post",
+          "summary": "Putin pledges support to Iran, rallies leaders to challenge U.S. The Washington Post",
+          "date": "Sep 2, 2026 · 12:23 AM",
+          "publishedAt": "2026-09-02T00:23:09.000Z",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPcGFTdTZwSlMwRGFYemJGNlpqcXRsWkFmMXJLRE1NSGRvTEZscC1OZ01pZm9qZHJKalZCdXpHd1JOZERUM0tyYmZRNzVlbV9sbjJOdVZ0NzBoa1RUZF9xSkEyWTVEXzdyQ0s0ZnJBdnVvSUZYNEJOVXZUWHBnQS0tS2NoZk9RUVh2VnBJYVRhZnNwWTE1alE3TWI3eElET1NJU1BFOEJkdw?oc=5",
           "importance": 2
         },
         {
-          "id": "ir-independent-01297085f356cb34",
+          "id": "ir-independent-dbc0947292b6c825",
           "countryId": "ir",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Trump aides seek 'quiet' in Iran war but say attacks may intensify after November elections - Reuters",
-          "summary": "Trump aides seek 'quiet' in Iran war but say attacks may intensify after November elections Reuters",
-          "date": "Sep 2, 2026 · 3:52 PM",
-          "publishedAt": "2026-09-02T15:52:52.000Z",
-          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNMDJDS3ZmaHY1S0hTTlJiUUVPQ081YTU5bWV3NmJJLTRTNDdNQUhKNWdFTXd4TzVVRkRiRXd6SV9xZ1hmbHVxMFVGOUhXMkJLTkdaN0VWa3g3aEZ1aWZDbnlNTkRoUk5zY2ltOW9PNVk1SlFJVU1mNzZFSE9GTGpGbmhwdW1sMFNuTFhwcTVmSlFUNUIwM3lOV3ZpQ0NCX3B2TmMwbXZB?oc=5",
+          "headline": "Iran president offers US olive branch, hails Russian support - Arab News",
+          "summary": "Iran president offers US olive branch, hails Russian support Arab News",
+          "date": "Sep 1, 2026 · 4:25 PM",
+          "publishedAt": "2026-09-01T16:25:56.000Z",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQZmN2Q2RpNi0yTkt3cEMyWWJuUXprQTFhQ2pGSUdUQ2ZZWHkxaDNUcEwzNnpldndvakdTNFlqWnBuZXM1V3gzTnloNFFvQU5sRWZuME02Nl9aTDRqbXVnT0NJR2tRNDVVUHlqVFpSSjR2X2Nfa3hsVGN4Z2lWVzh6X0lBUExzUkNwbmdRbmRkS2N2dURHaWdaZm9OREdPTjIwTmtoTHdIYw?oc=5",
           "importance": 2
         },
         {
-          "id": "ir-independent-208e87ac3508c62b",
+          "id": "ir-independent-78b6ed5ef3758a7c",
           "countryId": "ir",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Victory in Iran and the Midterms - National Review",
-          "summary": "Victory in Iran and the Midterms National Review",
-          "date": "Sep 2, 2026 · 7:21 PM",
-          "publishedAt": "2026-09-02T19:21:14.000Z",
-          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE54aEttVjRaaGNjTWoxN0ZkSEdfcV94Y0JQTmgtcE1hVEY5cW1NTTc1Z1dBM0huNGJoSHlVTUFQYWpEVU80Q0t2cTFQZDQ0OGhjM1MwTzk0Sk0xb21wcWJ1N3dFOGdyejdCOUpvRk9JLTZVYVZqbW94RkRsMNIBgAFBVV95cUxQeGNYV1QxUU1JMVRPU25WTTNaWnBmbGlxaVZ1QTc5WXJGc3NZRXo0R0JYZk5kbzFCOXBuemwxY3B4NW1xalA0dmRScHRMQnlaUWdVODZyMDVEdU9rdnZvdVRyN2RGX05RcGFNdlJXNkFWMnNlMTcwMWxMX3hPbGhhVQ?oc=5",
+          "headline": "Trump says renewed US campaign against Iran won't last long - Reuters",
+          "summary": "Trump says renewed US campaign against Iran won't last long Reuters",
+          "date": "Sep 2, 2026 · 8:11 PM",
+          "publishedAt": "2026-09-02T20:11:01.000Z",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQZkprNWZWZmliWmh1WXZLMk5HVUY0VDVUWkE1dU15a2xyeVJkWDNsS25aQnRqUVo1Zmh4OUxCMkk1RkFHRThST0JZQlpHNGJnSjB2aGpoanJWWXNBakVMcEhMUzNsSW5iZUM2SEJ0VXZuclFLM0laLXlGdHdQRVNNZGdwdmZ6YmhzSDhWNFZWRFR4S0pIWWVIb2pxUG4yalQ5cXhTU1dR?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-1c956d2fde7313f5",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "President Trump rules out using nuclear weapons against Iran - USA Today",
+          "summary": "President Trump rules out using nuclear weapons against Iran USA Today",
+          "date": "Sep 1, 2026 · 8:32 PM",
+          "publishedAt": "2026-09-01T20:32:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPdnpiWUE0ZFVrc19RcmlCT1ZFeFh0VlFwUS1WdV9IbUx5b2p4SHh5and4VHVoajVNMHRiNmJ4OVdkRVJ2Z1BTOVlTSHNkby05NTJsTkJhMHB5ZTZTc2RPbU1tem83VnNvanhoQVdoN3FuTUxjS3Q1SFFka0UxbGphWVdxNzZPNW9jYXJXVnFqRUlidTVYd0tNbXBuXzNtYWwxY0FsUWJodzZWa0xnanc?oc=5",
           "importance": 2
         }
       ],
@@ -1411,6 +1411,18 @@
           "importance": 2
         },
         {
+          "id": "sa-independent-1a89aeb0ea8a6ff7",
+          "countryId": "sa",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Mohammed bin Salman goes to Washington - 1A | Speak Freely",
+          "summary": "Mohammed bin Salman goes to Washington 1A | Speak Freely",
+          "date": "Nov 19, 2025 · 8:00 AM",
+          "publishedAt": "2025-11-19T08:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1KNHlyTEF5RHdla1lCT2ZHUjNIZktrR3B4N185WDVZQkVJQ0NLaUNBaGtCS2luMDNKRWlZSUc5bFVnQXItRHQ2X2lYekc4WUREWnhsa0Y3QTFGcWgyS0JKdVlqSlNiSTFwTm9XSGtkOW4wVk1S?oc=5",
+          "importance": 2
+        },
+        {
           "id": "sa-independent-57530cb0f70cb82d",
           "countryId": "sa",
           "sourceType": "independent",
@@ -1423,51 +1435,39 @@
           "importance": 2
         },
         {
-          "id": "sa-independent-655a1fa553f9a3e5",
+          "id": "sa-independent-c8f5b15e1561752c",
           "countryId": "sa",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Saudi Prince Dies From Toxic Drug Mix in London Hotel - uz.kursiv.media",
-          "summary": "Saudi Prince Dies From Toxic Drug Mix in London Hotel uz.kursiv.media",
-          "date": "Jul 24, 2026 · 7:00 AM",
-          "publishedAt": "2026-07-24T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPcC1ERm9pMktubDB1NE1ZT1lzUWpfTUM2LXBCV1A0R0p5R2h2bFR2OWZGWmpDRkdfdEcyTWM5VTJYQnY1TkpYczRieER5cjJRQk9KT0VqSEdOYVZ0UTNOMjB3RHRfRFR4eXB3NEtYNnh6UEdUZ280S3BpVXFIdFh4cFlORlFUSDQxTU1INGo2Q01YclM4cy1LaWJYUHlka3FjdHU0dWF5MmZaNmFK?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "sa-independent-28309897b411464d",
-          "countryId": "sa",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Visit from Saudi Arabia - Royalcourt.no",
-          "summary": "Visit from Saudi Arabia Royalcourt.no",
-          "date": "Feb 25, 2026 · 4:38 AM",
-          "publishedAt": "2026-02-25T04:38:52.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBfY2Nxd19BT3ZGa2lCOXkwYlNBOXBaUEhhNDBXOUhlaDJ4cGZBNGh1eGU2bWN1ZFhrbFQ0UF80UFRkV1FsX0dzSzFDcGdtV3VhZ0VVdUVOUE9iZlZnSUkzeDlTQkM?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "sa-independent-edd3d146829301f9",
-          "countryId": "sa",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Saudi King Salman undergoes medical tests, royal court says - Anadolu Ajansı",
-          "summary": "Saudi King Salman undergoes medical tests, royal court says Anadolu Ajansı",
+          "headline": "Saudi Arabia’s King Salman leaves hospital, medical exams reassuring: Royal Court - Al Arabiya English",
+          "summary": "Saudi Arabia’s King Salman leaves hospital, medical exams reassuring: Royal Court Al Arabiya English",
           "date": "Jan 16, 2026 · 8:00 AM",
           "publishedAt": "2026-01-16T08:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOaTY2ZHp4YUFzYzZ3SnBxTm9PV0paUHY3OFZmMlZFZnpzeUJFc1pqeGt1VHpqcHlidW1seTViTFpBdkNNREtSYkRJR0d6R1VkY240eEJQa3Jla19ONzczbVNDNWYteF9qNGozTE9NNGxCemVUMWhNMXVuNVpwRm9WZXg4VlpvTEZiMGc3aDhhYXpzZUVIV3AtaWNoc3VNNVh3Z09xOVFYUQ?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOSU9UOUZjNDRZcFQzemZqXzlQRS1yc3NsVTgyVkdLRlJ3d2tUeEZ3LUx0V1l4R3ZoMmRSRVBtNGtjTUowdFJjcFZkUU16Wll0WE93anFobW9INjdjLWpfY2lXc3hlVEVYN0QzRXRZc0pYLWpwbFFfbXZpX2JMZ1VZckNYemREbjM4dEtwYmd5RmFiN2JIY1ptRlNfZFdfTEcwZWlzMEt1R3lKNEYwTDlF0gG0AUFVX3lxTE43LV9JSmIzZWxKSnI3UWVuTHBFdUZxVUhyME5jMVhzTDh3NGtYTm1KZkR6MW8ydTJXMjVoYTlZZGlBdWlFMFVFR1liUWUtTVNpUXhhNHFUUFlxQ0NKeUJlbGVGdUNWOTNNT0gxbDZ1UVU0akxpd1hfT3pHdkYtc2VuZXpfX2lnVlZiOGRlMUwyclVKQTN2WXJ3RnRveGZWRVR4bVl5Qm96OFR4dEpKNkxWOWJ2Xw?oc=5",
           "importance": 2
         },
         {
-          "id": "sa-independent-f9a8d6cf5c7e384f",
+          "id": "sa-independent-1b94d1ec01d90ec0",
           "countryId": "sa",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Saudi King Salman leaves hospital, says royal court - Reuters",
-          "summary": "Saudi King Salman leaves hospital, says royal court Reuters",
-          "date": "May 15, 2022 · 7:00 AM",
-          "publishedAt": "2022-05-15T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOSmVVUWtkUFRCV0ZRMWRjbFd6NXgwQzFtRnl0enJOMUk1RzEzWndCOFdtWHpuOVRaNFhTNl9femc1TzNwOFgtTTJXcmQzNlo4bkxEOXRuZGItTm5ZazZwT2E0TmxoTFo4ZmhPUUZPTXdjd1Rja05qdG9nQ2hEbmNVRVJmdXU2NDJBaXdkS2xQb1QwYVBmSkpKTWVsMzJwb3QxbzRpa1pCWDc?oc=5",
+          "headline": "Minister of State for Information welcomes Turki Al Al-Sheikh, Advisor to the Saudi Royal Court - الهيئة العامة للاستعلامات",
+          "summary": "Minister of State for Information welcomes Turki Al Al-Sheikh, Advisor to the Saudi Royal Court الهيئة العامة للاستعلامات",
+          "date": "Feb 23, 2026 · 8:00 AM",
+          "publishedAt": "2026-02-23T08:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPQ0dCem1lNjJiX3ZzMnYtaFZvS3JTOGw4b2M3SUx3OTZXc3E3UGN1QTdnd1lLTnZwcmdLUGY1RTh4TmtJUTRNVVR0dUJkTlNyb19mdlBxSkVZOWQzX2hob0QxTHdrSmYwQmh4WVhoN1IxUmV1Ukdqakc3ZG9vLV9YMmJ0RTkwLTFUVjNfY1BKOGczelAyd3Brd1pGcGk5Vi1TQXFPNFhHcGZGcDU4QnN5RUFCZnRBNHU4WDlhQmJuUi1zY3QxTXJxcXRLMG9KdHk0?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "sa-independent-2f233b18166623aa",
+          "countryId": "sa",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Royal Court: Tomorrow is the first day of the holy month of Ramadan in Saudi Arabia - صحيفة مال",
+          "summary": "Royal Court: Tomorrow is the first day of the holy month of Ramadan in Saudi Arabia صحيفة مال",
+          "date": "Feb 17, 2026 · 8:00 AM",
+          "publishedAt": "2026-02-17T08:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFAzOGJCZ2MyV0dkNEhjdjRGSUZXWHpnMGplNDEtOUNsalBGTFZFT1hWWlpRNDRxY2t6bnZYMC02UHRRdTVnLW9HMU9vUjdGeWRpaHpsb0xoRUZ2NGlzN0I5NDdZY0xnZFBVRGc?oc=5",
           "importance": 2
         }
       ],
@@ -1481,8 +1481,8 @@
           "countryId": "ae",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "FILE PHOTO: UAE President Sheikh Mohamed bin Zayed Al Nahyan visits Saudi Arabia - lufkindailynews.com",
-          "summary": "FILE PHOTO: UAE President Sheikh Mohamed bin Zayed Al Nahyan visits Saudi Arabia lufkindailynews.com",
+          "headline": "FILE PHOTO: UAE President Sheikh Mohamed bin Zayed Al Nahyan visits Saudi Arabia - The Lufkin Daily News",
+          "summary": "FILE PHOTO: UAE President Sheikh Mohamed bin Zayed Al Nahyan visits Saudi Arabia The Lufkin Daily News",
           "date": "Aug 18, 2026 · 7:00 AM",
           "publishedAt": "2026-08-18T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMiiAJBVV95cUxPTFpiandLUlQ3LWxJZTJVVDV4TzRpSm1nSGxrSmhLRUFPXzVEWmdZT2RKRDFxcmJFUmhIaVA0VHA1VjVyQzBxUGdNeUZuUVliUm5nanZzRWtDSFNrSlJ6TEhPYzg4YjNZMktMZW1WN2xVa2JQQmlqN1dTTkxkaFloS0lOSTBOMW9SMm40bmZMdUZGUVA3UVNYX3E1VmRDblJFdS1YMHN6TmY1T3ZRLWFDdFVTUEF0a25XT25lUWlHdTc3SDJhNEdabS1ic3c2UDZDU3FQYUJ0RnVsdlhSXzVUQlBTTmZ4SGNnTFp6UUNmSGZEVG5qVXpRbnQ0cG5NWVhlUkJZQUE3OWY?oc=5",
@@ -1555,15 +1555,15 @@
       "official": [],
       "independent": [
         {
-          "id": "eg-independent-efffb28e50c37ac4",
+          "id": "eg-independent-f6d3d8d9101461d7",
           "countryId": "eg",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "China’s Xi urges new Middle East security framework during rare Egypt visit - Al Jazeera",
-          "summary": "China’s Xi urges new Middle East security framework during rare Egypt visit Al Jazeera",
-          "date": "Sep 2, 2026 · 3:45 PM",
-          "publishedAt": "2026-09-02T15:45:47.000Z",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQUlZXREx3UEo4cEphcFhIdW1MWGlOUHhfcjJkbTJlM29obE5BWTlvQ056dGxDMUQyTXp5UW1ZbC1ZTkhVbDhsRWN6R19QUV9PZGdLMWR4WGtVd1ZIOEJfS2FTbUV5czNMUnFaSldPWWd6S09ES3JVSTVXR05KUFlBYWFpR19NemtLVmtlZEhyWFdaSzRuOC1OdXYwaVhHZmFkb2NTc1hXUDJieXVhajgzdWctTXrSAboBQVVfeXFMTWMtNlhkTk1Dbi1MT0lvRFRnLXBsOGxwdTNxN2p5dm9TVmhKTlY5NU1ZTWxjbElLZVpxQlVXeDZBaGkzR1Vhc3E5Rm5rU3dHTjk2clRZTE81R2hRM0x1Vlk0THlmME5ac0U4eHY4M1duNTZjNVlrNjJ4Yl9qTVhGejdrVlM0dWtucHBoOG1xWTZ2V19SZE1UWi1XVVBwbGhOSDdjUi1JVTVPelVzTjF1Y1o4QTlYOE9LUUNn?oc=5",
+          "headline": "China's Xi urges new Middle East security framework during Egypt visit - Reuters",
+          "summary": "China's Xi urges new Middle East security framework during Egypt visit Reuters",
+          "date": "Sep 2, 2026 · 3:50 PM",
+          "publishedAt": "2026-09-02T15:50:02.000Z",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPZS1HRXhpY18xZjJMeV8tOU5UcFVxOFkzSVRKT3ZSR1Myak1oRHZZN081aVY2MldCemZNa1c0U1hKaUtyOHRJaUVjb0U0S2xCWC14cGIyN2QxQzVzVFhfZl85dkhRdFZtMjBCeGVpV2lQQ0g5alBZVnFiUGg5MDkzdDF3eGozTkg4Sm9kc2FIcHZNbXA3TVZoLW4zZ001ejY1UWFaOVdB?oc=5",
           "importance": 2
         },
         {
@@ -1576,18 +1576,6 @@
           "date": "Sep 2, 2026 · 8:54 AM",
           "publishedAt": "2026-09-02T08:54:54.000Z",
           "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPSF9fWlRuUzZyZ2V6cmx5VGJ3aFdXWFN3dXpIeGl0dGhtWm9raVRRdXdRak8yekNham5lWjlpYlM3VC1qWVNPQ2R1Yk1NZGF5WWxjQTZ5RHY3U3FjY3E4UHZzeThNMmhJZHlMOEZKVVhva0ZEdlU1dDdIaXRtU05kQmRlQ3l4TnFsY3BKVzhyTmJVc0NfOG9UdURVb0FZc1Z4UVphLUhOQmVfdVc3RkFtQ3RFSEZYUQ?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "eg-independent-caec29f8689595cc",
-          "countryId": "eg",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Egypt China - Goshen News",
-          "summary": "Egypt China Goshen News",
-          "date": "Sep 2, 2026 · 3:28 PM",
-          "publishedAt": "2026-09-02T15:28:27.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOZ1RxejlLRThsZXJ0eEVvZk5GdkYwS2hYQ2pKWGNGY0I2ODhIVW5WQUFPMkJDOHZuQlVpcTZRRU5YbGh3cUF6QmlqTEd0czdrLVo5a3F2WXU3U3dzT0w0WVdmVlFZcFVkbTIzSFRfclJQWmJWNGxLbk1fQnh2czZad2kwcDN0N1o0YzZHZXpoVDZrZm5vWm93NnpvcEhXRXJfNG9NSGNiR20?oc=5",
           "importance": 2
         },
         {
@@ -1615,15 +1603,27 @@
           "importance": 2
         },
         {
-          "id": "eg-independent-826e4bc932b17681",
+          "id": "eg-independent-8086f8bf864431bf",
           "countryId": "eg",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "President El-Sisi Receives Chinese President Xi Jinping on Official Visit to Egypt - الموقع الرسمي لرئاسة الجمهورية",
-          "summary": "President El-Sisi Receives Chinese President Xi Jinping on Official Visit to Egypt الموقع الرسمي لرئاسة الجمهورية",
-          "date": "Sep 1, 2026 · 6:38 AM",
-          "publishedAt": "2026-09-01T06:38:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiggJBVV95cUxQZXU5NjdiNUxPRkoyNjQwZVpOZmdKWXhldDVZTFgyZi1hejJySDJYeTJEWnFIVzhHMjYwUlpiZENxbjdaSXNiOVlhVTZCT09VUkF5aGZ2RDJ1WVRDMEZrLV9SUF9oakJQRWt4eWJCVC1UdUN3TmRPSENiandIbnJ0ai1DY1h2SHRMWU0wRXFKalFSbnc2MDM3czJ3WmxjMFkydmxQY05XZENLQ196Z2VpdVBDeTZ0U1pHWDM3M1Y2Z1hNSGVGUllIcHhhQ2V1elJpZGp2eG94Slp0bGJJeWpVTXk5TTF3SlhtTTl1R1VzWFBJUDNSRS1BVFg4Uml6RmhHQ0E?oc=5",
+          "headline": "El-Sisi, Xi hold talks to bolster ties, urge diplomacy to resolve disputes in historic Egypt visit - Egypt Today",
+          "summary": "El-Sisi, Xi hold talks to bolster ties, urge diplomacy to resolve disputes in historic Egypt visit Egypt Today",
+          "date": "Sep 2, 2026 · 10:47 AM",
+          "publishedAt": "2026-09-02T10:47:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNNHd6cElKMkVmZEFWRTlFdC1GTW85Yzhkc1ZZcmpPb2JJT2Q5TkJZVEI0VEdmemtza25oZGIxQTh0bGRDaktRMGlqNThlQVRmMDZUYWRuSHZNSTgyVVlWU1hQRWlxOUpCN2MwTFcxWkVxYzM1TE92QWlRMGZqaE5lQ1UyUGFhTEZCX3k3a2VqUEFlaERwTlBNM1Vlcno?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "eg-independent-2249113e309918f0",
+          "countryId": "eg",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Egypt urges legally binding global drought protocol ahead of COP18 presidency - Dailynewsegypt",
+          "summary": "Egypt urges legally binding global drought protocol ahead of COP18 presidency Dailynewsegypt",
+          "date": "Aug 26, 2026 · 10:28 AM",
+          "publishedAt": "2026-08-26T10:28:56.000Z",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNUGlBNzRLSm5GckM0bWNBLV93dHpVRkVUZXNJV3RvMVlEUlk0RTBCZlVJVnptTW9tREZsdWxRVG4xcGRaSU9SdlJSNFFpdEd6dm9HWWEtX3BJb2NWUjFTWVY4am5lSzVIQWdqWWtvLUV0em9uM1VHU2hVY2x3UHY4QzVhNlNxM3dUWkd4ODVqY3gxZDFEeGUwcGtvUDNRZjFTZ1E5Ull0M3B2czNFaWpBd0lNX2pjaHlxMjVwbA?oc=5",
           "importance": 2
         }
       ],
@@ -1693,15 +1693,15 @@
           "importance": 2
         },
         {
-          "id": "za-independent-0bcc349139313e8b",
+          "id": "za-independent-203c035074ae3110",
           "countryId": "za",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Zambia's president sworn in for second term while opponent detained - BBC",
-          "summary": "Zambia's president sworn in for second term while opponent detained BBC",
-          "date": "Sep 1, 2026 · 12:37 PM",
-          "publishedAt": "2026-09-01T12:37:36.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBCOU1QUjFRU2hKLU80Mk1adVRHMmh0SXlmMEdFTTRZOXByOWZrVGp5VHk3aDBHN0d2WlQtTzZzRFI3cWF3ampHMllVejVlMXR3MmJ3S0lnS1ZFQQ?oc=5",
+          "headline": "Tinubu on xenophobic attacks in South Africa: Tinubu report xenophobic attacks for South Africa to African Union, say make dem take action - bbc.com",
+          "summary": "Tinubu on xenophobic attacks in South Africa: Tinubu report xenophobic attacks for South Africa to African Union, say make dem take action bbc.com",
+          "date": "Aug 31, 2026 · 7:04 AM",
+          "publishedAt": "2026-08-31T07:04:09.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBHaWc2RVR1S1JnUkJ6Y3NtQ2xMVTluaHZBMjJTZ3JkZkRra1A2cDBScnk5UGlwQmNJaExOcVZpTGs4RTFZSk5wYjc2NVA2dUFYNGlHeVRmTnRPbTNJ0gFiQVVfeXFMTjlDU1FqRnNWZ0RJT2FzYkFOWjlJSUdTNEpfaHBUNDR2a005S1lONGg0RmxoZlJqZnlnUl9ISVBNWkZKTEtxcjRyVFNNVzI4UWt1NDZRSW1iN3VNLVo4eVlCZEE?oc=5",
           "importance": 2
         }
       ],
@@ -1710,18 +1710,6 @@
     "ng": {
       "official": [],
       "independent": [
-        {
-          "id": "ng-independent-2d6575b94997a67a",
-          "countryId": "ng",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "PRESIDENT TINUBU CELEBRATES VICE-PRESIDENT SHETTIMA AT 60 - The State House, Abuja",
-          "summary": "PRESIDENT TINUBU CELEBRATES VICE-PRESIDENT SHETTIMA AT 60 The State House, Abuja",
-          "date": "Sep 1, 2026 · 8:55 PM",
-          "publishedAt": "2026-09-01T20:55:18.000Z",
-          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQOVZ2TXBFWmRaa18wX1hVS2VKalc4M0VKdlVLOEdwS0FreUM2ZG95cm9TcXUyQXhRVGtVRlNrQ01Vay10SDkyYzlqNFlQcXE0OFlGUTd3U20taG1yU3BYa2V1bzBUNGFnNmNKdUQ0SHh0YTduR05NNzdEa21mU2FLQUFmZkJ1RThmc3k0Uw?oc=5",
-          "importance": 2
-        },
         {
           "id": "ng-independent-727fca7f26ddcf6f",
           "countryId": "ng",
@@ -1732,6 +1720,18 @@
           "date": "Aug 29, 2026 · 10:01 PM",
           "publishedAt": "2026-08-29T22:01:43.000Z",
           "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNaUtJR0tLX2JxNTNXOVVMek4ycHh1c2IzZHFMbExNZ1R6OUZkNm1jVUxYMG1WMGo5TERhdWNkNG1hX3g0ajZyTlNQRWhpcktCVHZiSDlXUWExdFYwNldtemFfeU1XeFZjMnFMaFY3UVdyREd1amluRm9OWGl2RkxTZktzenA?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ng-independent-194d2a0ca564eedb",
+          "countryId": "ng",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "The State House, Abuja - The State House, Abuja",
+          "summary": "The State House, Abuja The State House, Abuja",
+          "date": "Aug 11, 2026 · 7:00 AM",
+          "publishedAt": "2026-08-11T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNUGNPa1NSelZXZFBNa013ME1NcDJ2S3ZCWjdZQ3Awc0pzamVvZ2dCV0o3SndzOFk1LVhHM3MybXB3VEpwclFtTjk0N1JnQUFkdWtqOFh6VElTTlNDaFhuT1hzSEtobTlzRlNKUlktREVMNXBfd0ZiY1d2c0FVOGRyajY5UElLVV9qVklhMlRRNWdhNUJpVEUwQ0k5R2Rfc0hYUTJZb3BVak0wNVd2eGJiUGkxcXdTVWZkUHE1MXdUWGJvdVFTaVRzMDVFdHR1cmhHMjZWQWt1aEt6Nlk?oc=5",
           "importance": 2
         },
         {
@@ -1759,18 +1759,6 @@
           "importance": 2
         },
         {
-          "id": "ng-independent-5bd09088dc2e2ab0",
-          "countryId": "ng",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Pension arrears: PenCom intervenes as police disperse protesting retirees - The Guardian Nigeria News",
-          "summary": "Pension arrears: PenCom intervenes as police disperse protesting retirees The Guardian Nigeria News",
-          "date": "Sep 1, 2026 · 4:55 AM",
-          "publishedAt": "2026-09-01T04:55:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNMHYxd01yOTFiOElreDZ0ZGNWdG5hLU8xWlNqdTZ4cXB3a21CdDVrRGFja3FRNXAyQmxXNmhFM0pMVndhZVdsZFFGb3k3eVFpYUExUTRSTkR6Vk5SSDJNTmhiNUFiWFpRdGJ1MnpLTjJFV3pWYXNjWUxiSUZmV044R1Q0UVpla0E5M3VKMDVDaERkVGh0SUljQ1daY1YzY3M?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ng-independent-4893eae29f9a3e57",
           "countryId": "ng",
           "sourceType": "independent",
@@ -1780,6 +1768,18 @@
           "date": "Jun 23, 2026 · 7:00 AM",
           "publishedAt": "2026-06-23T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPTHZzeFRFemRLZ2g5ODFPbE02ZktpcS1TQUw2Q0taR0xhVlREeTZQeVhrdmVNcGhSSkl1TTdwODVjQ2JBZmlWdGFveGQwOFExMnhxM1NidEsxS1dRVGMwRTBkTkROLWpvdmhlRkltd2hycUcxZ2lJOGk1bk1LZkJrYTlUMmZKdUxIRmk4SnNQTUp3VldwdFo4M2FrUTM1NW42ZFp2dk1hMEtzdTRBbGQ0Mg?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ng-independent-a330b8ad242f04b8",
+          "countryId": "ng",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Nigeria Advances SheIsIncluded At 2026 State House Summit, Enhancing Practical Delivery For Women - Independent Newspaper Nigeria",
+          "summary": "Nigeria Advances SheIsIncluded At 2026 State House Summit, Enhancing Practical Delivery For Women Independent Newspaper Nigeria",
+          "date": "Aug 21, 2026 · 12:19 PM",
+          "publishedAt": "2026-08-21T12:19:09.000Z",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOQ3liZllfMTVOT2xYQjczZ1BPcnpKakRZbEszSnlmLWJTN3FCWEhaX1pMNDlPd1N3MXdIWGgyYVBEaTJ1QWlUQkdVSmh1c0pTWXFKVENpMmgxZmIxMUdPY1JSNnJhYkh5VDhtcDQ1cWk2V0RDOUNSamF0eUxSbjVUU1ZFT1NLcEhIcW4xbjlKSm05d1h3TWFuLV9KbC1LZlBoY2NMdFpQTFNncDlRT09kQXVTVkFMbzdqLWUtOQ?oc=5",
           "importance": 2
         }
       ],
@@ -1825,15 +1825,15 @@
           "importance": 2
         },
         {
-          "id": "in-independent-b3eeba213b870b12",
+          "id": "in-independent-01ae7fbffb2e6c1b",
           "countryId": "in",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Why did Pakistan’s PMO crop PM Modi out of SCO photo? Was it petty politics? - firstpost.com",
-          "summary": "Why did Pakistan’s PMO crop PM Modi out of SCO photo? Was it petty politics? firstpost.com",
-          "date": "Sep 2, 2026 · 3:12 AM",
-          "publishedAt": "2026-09-02T03:12:14.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPRjJTV2thOEtTZTZFY3llSnBNZVhaLXE3QTZGX2thOHZDYnpYTURKMjN5OE4ybmdIVnRuVHpPU0JjQlVCejZ3c21kT29rOGt2UWtxNnpIRkZuLVc0bU84eGNGUGtSaWpOQ3dSSzJDN0hMZ3ZBenZzMjF0cmpuV0RyZ2JqSkhQbk50eUlmbzlwZXhaVXhReEdVTVQ3X2NpSWw2R2ROV2pTZkLSAa4BQVVfeXFMTWlfbHNMcC01WGFZeEgzOUlXZGRXSTNUX0d4QkVPRkRIam91SW14Vy10RlVWdE1fZTNGVTNobDVScFdyWGdFNFhGWEVWaF9RT0o3cDFDUG90YzJsR3BUMFp6UE1SbUdVNjFTb2RPY3YtNUoxWHpnN0MweTE4SkpDVF91RUprNHJuNlljcXB3ZExmekJpdGVSV3ppck5HaWs5WmpETWd0TGYyeGVsOGVB?oc=5",
+          "headline": "Visit to India (1) - Prime Minister's Office of Japan",
+          "summary": "Visit to India (1) Prime Minister's Office of Japan",
+          "date": "Jul 2, 2026 · 7:00 AM",
+          "publishedAt": "2026-07-02T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5BRV9MWV94c3VRZnduS2NQX0xvR0VZWk1sSzVDbFVNZk1VbHo0S3BOckxtVTNMbTFxNFRvQ1pGTjhjNDdCRndVNVJqSi1NQTRUMWwzM2NYamQ2aFJBdDhqQjlpRTVjay1mUDM0?oc=5",
           "importance": 2
         },
         {
@@ -1853,8 +1853,8 @@
           "countryId": "in",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Pashinyan and Modi discuss development of bilateral cooperation - armenpress.am",
-          "summary": "Pashinyan and Modi discuss development of bilateral cooperation armenpress.am",
+          "headline": "Pashinyan and Modi discuss development of bilateral cooperation - Armenpress",
+          "summary": "Pashinyan and Modi discuss development of bilateral cooperation Armenpress",
           "date": "Aug 31, 2026 · 9:12 AM",
           "publishedAt": "2026-08-31T09:12:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1wWDRCNldVX3dzRG5Wa3dFWF9KQlZBV29BOUxhd0l3WXNLQWtsWkxreEkyWkZwLVp2SU5ZbWdESHUtbi1HMW40ODNoaFRsQTd1cnfSAVdBVV95cUxOaXBRU2UyTlVyN3hlMEpXcFNoMV9PWDROQ0xfS1F2VlZraGpuWWxWbUxJaVk0ejhINWhyNThiYktBMXdfdE5iUGIydE16cU51WDFBaHZqMmM?oc=5",
@@ -1865,24 +1865,85 @@
     },
     "pk": {
       "official": [],
-      "independent": [],
+      "independent": [
+        {
+          "id": "pk-independent-873f08a9db26ce6a",
+          "countryId": "pk",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Pakistan PM meets Pezeshkian in Bishkek, urges restraint amid latest US-Iran flare-up - Arab News PK",
+          "summary": "Pakistan PM meets Pezeshkian in Bishkek, urges restraint amid latest US-Iran flare-up Arab News PK",
+          "date": "Aug 31, 2026 · 2:11 PM",
+          "publishedAt": "2026-08-31T14:11:19.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5SYUZEYzM5TDdsMFRGdEJEX3RZYjlRTy1mSkdFS1R6VDg5UDZsUU1ITC1PZWhCT0J5QndBWWVCVzFMVUd2bWJ2bTc1b0VDcVZFSlBpbUNqSXo?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "pk-independent-6f83ac0a3c240ce0",
+          "countryId": "pk",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Pakistan PM arrives in Kyrgyzstan to assume SCO chairmanship for 2026-27 - Arab News",
+          "summary": "Pakistan PM arrives in Kyrgyzstan to assume SCO chairmanship for 2026-27 Arab News",
+          "date": "Aug 31, 2026 · 4:46 AM",
+          "publishedAt": "2026-08-31T04:46:18.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFByWFJteUVfeE16REZhM1YyVl9VeXUxY1JSSnZXTl9IaGF5V2N2RzJ5VnVDNk9QOFFUeFN4SWFjQWdYWU5maFJJX2pNM0lVeXpUNDVTWXpUay1GUQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "pk-independent-502bfcc506fd3671",
+          "countryId": "pk",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Pakistan, Kyrgyzstan to raise bilateral trade to $200m - The Express Tribune",
+          "summary": "Pakistan, Kyrgyzstan to raise bilateral trade to $200m The Express Tribune",
+          "date": "Sep 2, 2026 · 9:08 AM",
+          "publishedAt": "2026-09-02T09:08:52.000Z",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPVWhyU0tLbGZNaFVFeUxRRkU3OEJDN1M5a2dxcmlVSFctQlE5UGZLSTJiVENqVzR2a3dfRHc0UHBvaW81X1Y0ZmpCYmh5UVlNRDc5UHpEUG1mRWh2THNkcUh1bl9NSm5BRWRNM0Vxam1iYThIQ05VT2dlWUFPUnNJQnNPcmp5YlJGMjYxM2tNS2VKUnhYd3FBOHBR?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "pk-independent-57be0eeb736963c4",
+          "countryId": "pk",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "'Can remove Pak from world picture': Pakistan PMO crops Modi out of SCO pic, gets warned | India News - Hindustan Times",
+          "summary": "'Can remove Pak from world picture': Pakistan PMO crops Modi out of SCO pic, gets warned | India News Hindustan Times",
+          "date": "Sep 2, 2026 · 6:06 AM",
+          "publishedAt": "2026-09-02T06:06:46.000Z",
+          "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQWWtWVUpnZ0VuSmdNUHoyXzZGelBub2JJZUhSNmRWWnViUjU0VHdfdHhnZnVWdTNqcm9kWUlBRnF4THprTmU4VjJsMjV2dU1abHlZNV9JbWhkZ0VGQ3VBdUtrLV85MGpGNDEtazI3a0dzWlNEWnRsNE1idFFDZEZncDZrcTBlUnJQOFJqemlQSTF3blBrb0V4SXYtV25tVVRWS2huVElUbVNzMjNJYzNwR1NtNS1Oa3pLZERwWnI1dHh1T253ckc1SzU5dVBTVEJLX3EyeE9qQjJxdVVMUVdpSdIB5gFBVV95cUxQZ0I2Mm5PenhuWWtTOXMwOGc4RzRXUWMzV19VOC1oZ3gxMVNCaVV6MmxTTHk0aV84SmhVZjNUR2EwQkRicXl3VmV6MDFDaGl5dG5OVGtvS0w1Y2lvTWdNc3ZlYXZiZGE2SVRscC1OOGR5ZDdlZDBZMDUyVHRxaWFZN2Fta2s1eGE1QURqeXNUQWFsX3duUXhrNUd1RE5IalZ4bWp4QUc0SzRac1RJNlVFZWpBTHZRMnB0clFYTHVmc3B5ZGNiaGJoMWh6eE1VWl9vN3pkclNsNTRVM1l0UWZqME1PdFJKZw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "pk-independent-4cc6ff25561cfd93",
+          "countryId": "pk",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Maharashtra: Shinde Slams Pakistan Over PM Modi’s Cropped Photo - Deccan Chronicle",
+          "summary": "Maharashtra: Shinde Slams Pakistan Over PM Modi’s Cropped Photo Deccan Chronicle",
+          "date": "Sep 2, 2026 · 3:46 PM",
+          "publishedAt": "2026-09-02T15:46:11.000Z",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPUGluVi1OVHR4RWlDMlBqVFByMTMxMERfakx6RFE2TEZpcmJsMDkzQlluU0J3dEVNQTN4WkdZMFExeGM0d3J4RHY1TW9VTGYzcnl5T0tGRlFFVGlJa0hzcTBKTUg3YURQbU14MVlqblhUSzZzVmdpWE5sa3pDOS1kUlQ1WmtSSkFoWFNGejdWQ3RwNHlOS3dTMU4yODhkdThIWmdvanZ3OFI2c0JQ0gGyAUFVX3lxTE5tZFo3Q0tCZ2gwUDh4UGltS3Q0MklOaXpwT0JCSC1BeTQxUThJaTBteEtzcjJhY19GNktIY2J4akpUMk1qMHpFV0FRUlMtLXp2NnlDVFFlSWw2MFRBNHZRQUc5M2hzQzRGZVdMSmhmaENlZk1qUGNTaEZiM1RlWGFwMUxvTzhiNFR1YTdyUXRTNE9VdjY3eWllZ25hbWVtLWFacWhKdk1oclRJdi1aZE5GWnc?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "pk-independent-d211c1a795b70830",
+          "countryId": "pk",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Why is Pakistan PM Shehbaz Sharif visiting Saudi Arabia amid Gulf tensions? - Al Jazeera",
+          "summary": "Why is Pakistan PM Shehbaz Sharif visiting Saudi Arabia amid Gulf tensions? Al Jazeera",
+          "date": "Aug 6, 2026 · 7:00 AM",
+          "publishedAt": "2026-08-06T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQTEVvVm5TRDhCajlpWlY5YkJEYnJib3djMnNLaDZEZjVpTXZWbmVqUGhrTjRfMTVQWDF1YVpWNnlOdElHM3NhdWVMZmhlM3NFS1pVWlNlbXp6VzlmNXk0Tk5FMzQ5T3J5ODdqbHBpakFhVGxKcW9WYTN1b1lzTmk0YkpkaVZVMWxXeU53V2w2bjk1UEkyWmJCOTM5XzR3RU9QZHFXQ3hHNEpfRW1GbG4taTBPVnPSAboBQVVfeXFMT2dpQUJjTFB3RWdrVFhIcmlkRzR6bUVWaVhsdm1xOEdPeTR2M2pkYnhWUTBmWGlZcnRwMzlhVFEwQjE0bktTUWlqVEpzQzVBdTljaUdwQzY2MFBsOWF5eTJaSkxfVm1Xa1prUHVSYnB2Wk5LcDlxc1ZUMERnbENKcFAtX3VmblZsNXl0Q2ZWQTdBOGJTQXc4RUdGTklXNUt6cG15Tk50dGwyY0lHc0NwT00wSWhTUVhWME13?oc=5",
+          "importance": 2
+        }
+      ],
       "officialVerified": false
     },
     "cn": {
       "official": [],
       "independent": [
-        {
-          "id": "cn-independent-9f3e82ba41b60253",
-          "countryId": "cn",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Conversation with Vice Premier of the State Council of China Ding Xuexiang - Президент России",
-          "summary": "Conversation with Vice Premier of the State Council of China Ding Xuexiang Президент России",
-          "date": "Sep 2, 2026 · 3:47 PM",
-          "publishedAt": "2026-09-02T15:47:02.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9yOFNINE8zQlJrSWxGRXFSd19ydmVxN3BYQWd1cnFLUTR2T2NmTWJ0MEdrNUlYeU5tM3ZuYTN3OWxHVmMzblFtNkJEanFUdFd3UFN3Rlcybm1CSzMx?oc=5",
-          "importance": 2
-        },
         {
           "id": "cn-independent-d5b1c806582a753d",
           "countryId": "cn",
@@ -1912,8 +1973,8 @@
           "countryId": "cn",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Mainland denounces Taiwan authorities' move to increase defense spending - chinadaily.com.cn",
-          "summary": "Mainland denounces Taiwan authorities' move to increase defense spending chinadaily.com.cn",
+          "headline": "Mainland denounces Taiwan authorities' move to increase defense spending - China Daily",
+          "summary": "Mainland denounces Taiwan authorities' move to increase defense spending China Daily",
           "date": "Sep 2, 2026 · 8:21 AM",
           "publishedAt": "2026-09-02T08:21:06.000Z",
           "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBqTzdHQlFvUWY3UloxMHh6dC1yOUowR1AzTzRHQmI3d09NTUw5cHZiX2hwemM3ay1uQmFIUkYwekpGYzIwWVZpMGZkWVVIekZhNkxnMTMwZDVhWWRzNVlSYVlGOVNtRnc2cjNCQXFreVhKLUlpZ0FOQjJsRDNXdw?oc=5",
@@ -1941,6 +2002,18 @@
           "date": "Sep 2, 2026 · 6:51 AM",
           "publishedAt": "2026-09-02T06:51:15.000Z",
           "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE92aEt2TURrUmlnd0NsR3NjaXdITmR1SkpBVUdNLUZhd3Vmc0k1Vk9xd3V6d0RNSVlocDNfWjdYYWw0Zld4QzBZaFcxb3A1NW05OEMwNEV5U0kwNGxzZ01HTmM1TkUtNDVSTFkyZGdtbERyR0c5U1J6YXlZZDM?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "cn-independent-1e91b4bbefa87b45",
+          "countryId": "cn",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "China Issues New Outbound Investment Regulation - Mayer Brown",
+          "summary": "China Issues New Outbound Investment Regulation Mayer Brown",
+          "date": "Jun 16, 2026 · 7:00 AM",
+          "publishedAt": "2026-06-16T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNSk9xbUNpUnJxanlndW54R19FcWkyZWh0MGlOMktSaDVtMnpEQnA5Uks4MkpuMmQ2cEY5YksyX3JkWnpQNHdYcXhhWEhpUFZjc1RKSXR0M2ZHN0phXzNXVXBqaUR2UmtGMUFOcy1FSW9sX3JIRUxGLWwxNnEyaEVsSUh4bGN0TkhCNFFJNmx3Sk9Tb0toRUZRZFN5eGg1dm9nel9JbWVoaERHaGs?oc=5",
           "importance": 2
         }
       ],
@@ -1986,24 +2059,12 @@
           "importance": 2
         },
         {
-          "id": "jp-independent-a2231271905f586a",
-          "countryId": "jp",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Japan's leader Takaichi explains why she spends long hours in seclusion at her official residence - ABC News - Breaking News, Latest News and Videos",
-          "summary": "Japan's leader Takaichi explains why she spends long hours in seclusion at her official residence ABC News - Breaking News, Latest News and Videos",
-          "date": "Aug 22, 2026 · 7:00 AM",
-          "publishedAt": "2026-08-22T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQU3drcVFJYThIRlAyU2J2RElRcWYycE83NHNRUGNQaFBKUW1ONG1UUTRuU0d3MjhCb0phS2JoZ1J4X3N2aFJOZUF2SWtiVjlyRG9VLTJkN3FIZmZVQUZ4blZ5OFdCSnRfZGEzSlY0X25BQ3hDZDZjWmdKQkE0d1hJNHpfSTRHOHlZYU5INVJkS1p4TkRucklfcWJGaVdORnY3OFFCcnFPZzlkYW1EbGR1WHgwSdIBuAFBVV95cUxQT0dmUmJQbEVCYkRlaW1NZm51azI1Ny1oaTBOMVZlM192N29Qem5IdUFhUnpQMklqU1J2MklTb0NTaFRsNlo1SHVDa25uWDhQSm9ibE1Id01ERzJJR3prVG8xcjBnN0owbFJVak1BeERFeGctYjhKS0F5MkZtMWxaZ2xRZmhHMFlMbmxCUXFZbm9SOVo2WjZhNFZxZEZUQzk0Nll6MUs5eW81N3JQNnpHRTE1OVJWeEw1?oc=5",
-          "importance": 2
-        },
-        {
           "id": "jp-independent-cce4e8dcde43d13e",
           "countryId": "jp",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Japan to relax overtime regulation under workaholic PM - koreatimes.co.kr",
-          "summary": "Japan to relax overtime regulation under workaholic PM koreatimes.co.kr",
+          "headline": "Japan to relax overtime regulation under workaholic PM - The Korea Times",
+          "summary": "Japan to relax overtime regulation under workaholic PM The Korea Times",
           "date": "Sep 1, 2026 · 7:14 AM",
           "publishedAt": "2026-09-01T07:14:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPTTVCNGxWMV80ZWJ6UjdYVjNFQXhTU2luVW04T1BSeVhrcGgwUVJrSzVMRDJmWDlORFVoTzV0LTJPS2ZrbWlGYXVham1qazRXZ0N5SlNJZk5WeFRyNVR4MzVNaEo0amloU29vSUhBNEh3X2pEdXEyZ2ZNR2F4TzFlMVRkcHNWX2JBdFVSUkJfam1sYXJON2hIeHpoSW1NaFgtNjBJddIBpAFBVV95cUxPTTVCNGxWMV80ZWJ6UjdYVjNFQXhTU2luVW04T1BSeVhrcGgwUVJrSzVMRDJmWDlORFVoTzV0LTJPS2ZrbWlGYXVham1qazRXZ0N5SlNJZk5WeFRyNVR4MzVNaEo0amloU29vSUhBNEh3X2pEdXEyZ2ZNR2F4TzFlMVRkcHNWX2JBdFVSUkJfam1sYXJON2hIeHpoSW1NaFgtNjBJdQ?oc=5",
@@ -2019,6 +2080,18 @@
           "date": "Sep 1, 2026 · 1:36 PM",
           "publishedAt": "2026-09-01T13:36:30.000Z",
           "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBmM01NaGF4c0FZMG9FcXlmZVB6NDhZUlRVc3YtSGc1UTdzNDM3R1lEQ3VPWkhsT2xLa3E3UFpEYmRwQU4tZVNMYUx6NUwyNVpiM05MWThZaEpoUk0?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "jp-independent-ba0c5891ed130251",
+          "countryId": "jp",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Japan to beef up its defense with drones, AI and missiles, defense budget plans show - morning-times.com",
+          "summary": "Japan to beef up its defense with drones, AI and missiles, defense budget plans show morning-times.com",
+          "date": "Aug 31, 2026 · 8:59 AM",
+          "publishedAt": "2026-08-31T08:59:33.000Z",
+          "url": "https://news.google.com/rss/articles/CBMihAJBVV95cUxQbmZuWTZ6RHNIN0hNZmRrOU5RVTItcWplUTZGNHRLaVRGWHBZS3p4NUE4Q1ZiNUZCMmFYQlAxZTFuVjNhZVRXMUdpUm0wTFlMWnpvRllaenFlbDh2czdGOUtkcGFVQ2lQMVplYWtuMHdzLTl5UzdfUEoxcU9Ha2h0YWNRUVlONG5hcE9rOTNiVEpKWVNTVzByNDdxWnRSSGVMeFVVTHUyZlFmcHpkNlB1TFRCVC1SRFNkemZOdnh6a0F4NTRlcUlUenVwYjFNUktRNGRkVnQ0UHVsMjJFZTVzeXU0UU14WDJGOXFfU2pHNERiY2pCUkU0ME0wTU16NEx5dUdpOQ?oc=5",
           "importance": 2
         }
       ],
@@ -2044,8 +2117,8 @@
           "countryId": "kr",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "[EXPLAINER] Lee's push to open Sejong presidential office by 2029 - koreatimes.co.kr",
-          "summary": "[EXPLAINER] Lee's push to open Sejong presidential office by 2029 koreatimes.co.kr",
+          "headline": "[EXPLAINER] Lee's push to open Sejong presidential office by 2029 - The Korea Times",
+          "summary": "[EXPLAINER] Lee's push to open Sejong presidential office by 2029 The Korea Times",
           "date": "Aug 12, 2026 · 7:00 AM",
           "publishedAt": "2026-08-12T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOMXYyYldocUNUOS1pWmd5dHJtaWJLMkNTQjZGMkRteVlRVUExdWxmR290Mm1YMDFXeENzMWl1dGxDN3JLeWg5X3BxRkZXUFMxSnhmNWRGcm0xajltOFl0YWJwNDFINERUc29fNUlqZHEyeDdURV90YTlUYS1uY0pnblFBYW5LWW1SQnhzSi1RelpSdDFqTUZ2WUd0OERCUDNXS1pDVzJmU3pBeW9hRGpqc0h5dTQ0Y3o0ZmVTV9IBwgFBVV95cUxQMGJDVkFuZW1feXNQbDB4T0FWMVQ1cHR3ODFzWElvb2FEYTNfa0hnclZjRU5KbnJZa3hscU5WQXM4VXVNdkk2OG5qTS1tVWFnVTRtakZPczUzMFl2aklNRHFpX1h2U3B5dF9tSmR1eGF1UzI5a1Q5OU9GR1U0ajhLYXp2aTB4MjRLdkkzZFZJcGNsOU5qODlYTjFncVJrcmoxTFJMeVJxR1pQYk5nN2xwTFR2UEFuWHZZc0h3S3pETWpvdw?oc=5",
@@ -2195,8 +2268,8 @@
           "countryId": "tw",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Kids event to take over Presidential Office, Ketagalan Boulevard - Focus Taiwan",
-          "summary": "Kids event to take over Presidential Office, Ketagalan Boulevard Focus Taiwan",
+          "headline": "Kids event to take over Presidential Office, Ketagalan Boulevard - focustaiwan.tw",
+          "summary": "Kids event to take over Presidential Office, Ketagalan Boulevard focustaiwan.tw",
           "date": "Aug 28, 2026 · 12:53 PM",
           "publishedAt": "2026-08-28T12:53:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1IWVNIQ1NvQkpLb0dmRTB5eEFCVl9tOHBPTHJaZGU5SE0yXzZYZ0pMVEZHYnNnWXhnWUdOMGdURGV3d201bmZFd1ByVHlObnctN0tDQkFB?oc=5",
@@ -2257,6 +2330,18 @@
       "official": [],
       "independent": [
         {
+          "id": "id-independent-cbb0da3fb8f339a5",
+          "countryId": "id",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Indonesia signs deal for Indian weaponry - The Arkansas Democrat-Gazette",
+          "summary": "Indonesia signs deal for Indian weaponry The Arkansas Democrat-Gazette",
+          "date": "Jul 8, 2026 · 7:00 AM",
+          "publishedAt": "2026-07-08T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOdFprbE5OTVVvQ0dncDZSZHZYazJicmowYmtNdFQ5SzVRSzMyTUVXY3pSbThpMnM5ck8tQXl3cGx0UXFoWnZmdXFOS0JLbk16cG42aFFHa0tQN2lGOFBLTERXeDNXRmluekdRUl9uUlNXMER3cjNMX0RNNk9fakZDTTdiYU1mVjRJRmRHMDluQjlCVW8?oc=5",
+          "importance": 2
+        },
+        {
           "id": "id-independent-41d8bceb934bcd1b",
           "countryId": "id",
           "sourceType": "independent",
@@ -2273,23 +2358,11 @@
           "countryId": "id",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "The Indonesian Presidential Office said on Friday that mineral exports - Shanghai Metals Market",
-          "summary": "The Indonesian Presidential Office said on Friday that mineral exports Shanghai Metals Market",
+          "headline": "The Indonesian Presidential Office said on Friday that mineral exports - news.metal.com",
+          "summary": "The Indonesian Presidential Office said on Friday that mineral exports news.metal.com",
           "date": "Aug 8, 2026 · 7:00 AM",
           "publishedAt": "2026-08-08T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNUVM5TUlhNW1uNmpyN0FrRnVud1JDWTQybGU0eUoxMkU4ZHVncm1nWEQxNHNtb0dMR0Q1NWxJbXpwOHEtUlFPcmNyRWRXemVfRDhTQ3FsOU9yWjFTRnNfeFNoRGdNbzJHSTFMMS0zbUw5Qy02M3dYUEVDdDJ0ZmpQVDdTaU05ODFxalp0cFhyX2poTElSVzdaNEhXR19WSVlka29VWWtzQ2tsNUNpbzRDX2J6cGpVZjRKSmlBTWpzU0RSbWFjZ0tJ?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "id-independent-232972b0e8662eeb",
-          "countryId": "id",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Modi and Prabowo seal a deal for Indonesia to acquire India's BrahMos missiles - The Washington Post",
-          "summary": "Modi and Prabowo seal a deal for Indonesia to acquire India's BrahMos missiles The Washington Post",
-          "date": "Jul 7, 2026 · 7:00 AM",
-          "publishedAt": "2026-07-07T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQLVpjdi1DV3BLTGY2ck1nUGdDZFBZc1Y4eDBBTWRTWldXckpKSjdoMTdoczZvR1g5Tk40V3VUTk93aGIxM3FHQ2FDYm5aWjltTy1yeWlCam9lOEg5Yk9Ycy1NUlF5NjVoYnk2cmlpalNmMGczRHNZUjVGMlN3Q0d2RThzZ1c1R0d3Mk90S1Y2RFVIb0dsTGZfMl9aRHlKRGN6aHpPdkMzQzFHclNzek9neXZ0SU5sTDNaRjJpbXVCcTg3aTNmMGlvbHB4N0FrLTJmU1Bvb2NmVWJOV3ZZTGlGUzZtVQ?oc=5",
           "importance": 2
         },
         {
@@ -2309,23 +2382,23 @@
           "countryId": "id",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Indonesian VP Gibran’s outreach to student protesters puts focus on his role in government - Asia News Network",
-          "summary": "Indonesian VP Gibran’s outreach to student protesters puts focus on his role in government Asia News Network",
+          "headline": "Indonesian VP Gibran’s outreach to student protesters puts focus on his role in government - asianews.network",
+          "summary": "Indonesian VP Gibran’s outreach to student protesters puts focus on his role in government asianews.network",
           "date": "Jun 25, 2026 · 7:00 AM",
           "publishedAt": "2026-06-25T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZFpKVHQ3eHYtc3lIN25yWGxWZXBueUhWeXRhNFM2cENHY1hvRHpRXzc0bUlNclplZVh1cS1oY1I2WHZLTUF2dzd1OG5nd0gxOWFGVXpzOEN3d0c3elF0cTQ5YVo5QkVDbXN2d3J4cVlCUktlOFBxaTNQSkF1V2paNzJzTy1WVTNLYzZsa1FiN3A0TVRZWTcyUk52bXI5TGppYnNYUk94UlJaTXBZWkg1c1EyZ1FHdw?oc=5",
           "importance": 2
         },
         {
-          "id": "id-independent-f4ea510e5ab59212",
+          "id": "id-independent-ff700bbfe6e2be50",
           "countryId": "id",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Indonesia blocks Polymarket after bets on president’s exit - TradingView",
-          "summary": "Indonesia blocks Polymarket after bets on president’s exit TradingView",
-          "date": "May 25, 2026 · 7:00 AM",
-          "publishedAt": "2026-05-25T07:00:00.000Z",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQUHVvNG43NHdsLVN6LXkydllJMElzQTc0bjBYRkxLLXYzRVJnV2RnNDhlYVZWaW9NdDAtMDRUY1VhVHFLNXphQ0RzMFlaR25jd0RnZU1IWGFac0UzcWUzXzN5NzJ6U1BDOVRxZUtJYjNHXzFheUVGeWJrNF9yYU11ZTZpTGlTWlJqakh6dDVTQ1VjaGJVZGptclNFTVk2NW9iZkJXWTI1b0c2ZEJGZWtvdDd0ZDZPOGtxUnRNYTVqcw?oc=5",
+          "headline": "Destry Nomination Ensures Smooth Transition at Bank Indonesia: Airlangga - Jakarta Globe",
+          "summary": "Destry Nomination Ensures Smooth Transition at Bank Indonesia: Airlangga Jakarta Globe",
+          "date": "Aug 10, 2026 · 7:00 AM",
+          "publishedAt": "2026-08-10T07:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQclc3N01tZnI4UVBOamtOWTUyTldQVWtSNVc1a1RUcWRFdHF1UnpiTmI0TGRobUdRSldTeDdKRndmQW5uRzBzVWhILWl3eWhsWDczSkMzTzl5T3dxd2pVemlCd0xONGJ1NWNyM3hBWUVNbVZiN0t1QTFWUk1vX0ZfXzF4WFNvLWE0d3JEalVTYTB3eWpmakpvTmxtaG5pR2pVTXpMWWVqcw?oc=5",
           "importance": 2
         }
       ],
@@ -2351,8 +2424,8 @@
           "countryId": "au",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Australian PM apologises for 'inappropriate' comments about Kylie Minogue - BBC",
-          "summary": "Australian PM apologises for 'inappropriate' comments about Kylie Minogue BBC",
+          "headline": "Australian PM apologises for 'inappropriate' comments about Kylie Minogue - bbc.com",
+          "summary": "Australian PM apologises for 'inappropriate' comments about Kylie Minogue bbc.com",
           "date": "Jul 6, 2026 · 7:00 AM",
           "publishedAt": "2026-07-06T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1QeE0wQkE4VXRwNVNtcEdST3E2Tl9UcHdRSkpuVzl5X0luY1dOc2k2bGxhVFQ0eTEzZ3JOdFVqS2tzZk9GYVprVFY2Z181emhLRUJsbmFXUEl6Zw?oc=5",
@@ -2375,8 +2448,8 @@
           "countryId": "au",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Australia: Prime Minister announces new AI office and proposed standards on data centres’ water and energy use - Business and Human Rights Centre",
-          "summary": "Australia: Prime Minister announces new AI office and proposed standards on data centres’ water and energy use Business and Human Rights Centre",
+          "headline": "Australia: Prime Minister announces new AI office and proposed standards on data centres’ water and energy use - business-humanrights.org",
+          "summary": "Australia: Prime Minister announces new AI office and proposed standards on data centres’ water and energy use business-humanrights.org",
           "date": "Jul 15, 2026 · 7:00 AM",
           "publishedAt": "2026-07-15T07:00:00.000Z",
           "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxONzliU3dyNXdGLWJDUkppQTR0SGFkNzlaNzc3ZGxLc0JzM2xmQ1hFMUpIVEFpaC15eFdBNUJsOVprOVVMX0tyaDFpb1lSdEI5dzlrU2RqemJyeHk2ZW9KQ21BVGltY0tEUjhtYzFlbDZyZlBrUjFFak9zaEd3UWc0dGMxaldrSUNDZlEtcHQxQW5rSm1BUzFGblhGYWowR2o0dVpZeXAyLVg2STJpUWdPZDJRZ0xRUk5vR0RsNE4wZWxCWGF1VVFzd2dCT2JDU0Z6TGpZVG5iSEh5ZGhEaTg3QlhKN1EtTldTRjJKZ21WUXZlTkU?oc=5",
