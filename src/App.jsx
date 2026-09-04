@@ -206,9 +206,11 @@ return [...items].sort((a, b) =>
               const [x,y]=projection([c.lon,c.lat]); const active=selected?.id===c.id;
               const has=feed.some(n=>n.countryId===c.id);
               return <g key={c.id} transform={`translate(${x},${y})`} className="marker" onClick={()=>loadCountry(c)}>
-                <circle r={active?6:has?4:3} className={active?"dot active":"dot"}/>
+                  <circle r={active?6:has?4:3} className={active?"dot active":"dot"}/>
                 {has && <circle r="7" className="pulse"/>}
-                <text y="15">{c.code}</text>
+                <g transform={`scale(${1/transform.k})`}>
+                  <text y="15">{c.code}</text>
+                </g>
               </g>;
             })}
           </g>
