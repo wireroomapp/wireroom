@@ -54,7 +54,19 @@ app.get("/api/news", (req, res) => {
 
   res.json({ items, generatedAt: cache.generatedAt, officialVerified });
 });
-
+app.get("/api/global", (req, res) => {
+  const mode = String(req.query.mode || "both");
+  const cache = loadCache();
+  let items = [];
+  for (const countryId of Object.keys(cache.countries)) {
+    const entry = cache.countries[countryId] || { official: [], independent: [] };
+    if (mode === "official") items.push(...entry.official);
+    else if (mode === "news") items.push(...entry.independent);
+    else items.push(...entry.official, ...entry.independent);
+  }
+  items = items.sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0)).slice(0, 30);
+  res.json({ items, generatedAt: cache.generatedAt });
+});
 app.get("/api/status", (req, res) => {
   const cache = loadCache();
   res.json({ generatedAt: cache.generatedAt, countriesCached: Object.keys(cache.countries).length });
