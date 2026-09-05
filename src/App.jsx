@@ -85,6 +85,18 @@ export default function WireRoomV2() {
   const abortRef = useRef(null); // cancels a stale request when a newer one starts
 
   useEffect(() => {
+    fetch(`${API_BASE}/api/global?mode=both`)
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data && Array.isArray(data.items) && data.items.length) {
+          setFeed(data.items);
+        }
+      })
+      .catch(() => {
+        // Demo data remains visible if the backend can't be reached.
+      });
+  }, []);
+  useEffect(() => {
     fetch(MAP_URL).then(r => r.json()).then(topology => {
       const obj = topology.objects.countries;
       if (!obj) return;
