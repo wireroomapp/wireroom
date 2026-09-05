@@ -69,7 +69,8 @@ function NewsCard({ item }) {
 }
 
 export default function WireRoomV2() {
-  const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState(null);
+  const [panelOpen, setPanelOpen] = useState(false);
   const [mode, setMode] = useState("official"); // official | news | both
   const [query, setQuery] = useState("");
   const [region, setRegion] = useState("ALL");
@@ -204,7 +205,7 @@ return [...items].sort((a, b) =>
     <div className="toolbar">
       <input value={query} onChange={e=>setQuery(e.target.value)} placeholder="SEARCH COUNTRY"/>
       <select value={region} onChange={e=>setRegion(e.target.value)}>{regions.map(r=><option key={r}>{r}</option>)}</select>
-      <div className="mode"><button className={mode==="official"?"active":""} onClick={()=>changeMode("official")}>OFFICIAL</button><button className={mode==="both"?"active":""} onClick={()=>changeMode("both")}>BOTH</button><button className={mode==="news"?"active":""} onClick={()=>changeMode("news")}>NEWS</button></div>
+      <div className="mode"><button className={mode==="official"?"active":""} onClick={()=>changeMode("official")}>OFFICIAL</button><button className={mode==="both"?"active":""} onClick={()=>changeMode("both")}>BOTH</button><button className={mode==="news"?"active":""} onClick={()=>changeMode("news")}>NEWS</button><button onClick={()=>{setSelected(null);setPanelOpen(true);}}>GLOBAL</button></div>
     </div>
 
     <main className="layout">
@@ -230,7 +231,7 @@ return [...items].sort((a, b) =>
         <div className="map-note">SELECT A COUNTRY • CLICK MARKER FOR SOURCES</div>
       </section>
 
-      <aside className={`panel ${selected?"open":""}`}>
+      <aside className={`panel ${(selected||panelOpen)?"open":""}`}>
         <div className="panel-head">
           <div>
             <div className="eyebrow">COUNTRY BRIEF</div>
@@ -244,7 +245,8 @@ return [...items].sort((a, b) =>
               </p>
             )}
           </div>
-          {selected && <button onClick={()=>setSelected(null)}>×</button>}
+          {selected && <button onClick={()=>
+	{setSelected(null);setPanelOpen(false);}}>×</button>}
         </div>
         {loading && <div className="loading">CHECKING SOURCE FEEDS…</div>}
         {!loading && visibleFeed.length === 0 && (
