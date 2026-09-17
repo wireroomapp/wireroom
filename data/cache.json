@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T03:11:58.708Z",
+  "generatedAt": "2026-09-17T04:12:39.766Z",
   "countries": {
     "us": {
       "official": [
@@ -84,6 +84,19 @@
       ],
       "independent": [
         {
+          "id": "us-independent-baaa30d12094711f",
+          "countryId": "us",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "US drops Venezuela from drug list, may remove Colombia, Trump says - Reuters",
+          "summary": "US drops Venezuela from drug list, may remove Colombia, Trump says Reuters",
+          "date": "Sep 16, 2026 · 6:10 PM",
+          "publishedAt": "2026-09-16T18:10:11.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPXzBFQjlMc0t3MjVGM1NXVFhVQTNicy1uRVpjTzZNT19aNlRJVU0zbjVjOEtZSl8xQVNVOEhEcGJMUTFSR3JncXdjd050cnc0Z0xyeHg0MGpJdkhIcDd2aFdqemJSMWVNOURxcGFjSFBnS2xSU1NDVVg5eHVjQ3B1UnZiV2RGUG13dzIyWnM3a01HbXVnM1VsVi1FZjM3Z1RlZUo3SzlwZ3V5bDJNeEdB?oc=5",
+          "importance": 2
+        },
+        {
           "id": "us-independent-4dcc064edac14656",
           "countryId": "us",
           "sourceType": "independent",
@@ -146,19 +159,6 @@
           "publishedAt": "2026-09-16T19:12:48.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5qWmd5ajhOQ3lpbWlTWm5kb1dxRW9JcEg3UlRBQ0dOdUtjQ1VnMlVnajdwUWRRQ18tVGxQdGQ2ektlQTlWOEY0aDIxd0phSTZtWEpXdW9SRDhJUXc?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "us-independent-852f657a9872de77",
-          "countryId": "us",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "White House posts so-called 'hype' videos combining real Iran war footage alongside movie, video game clips - ABC News - Breaking News, Latest News and Videos",
-          "summary": "White House posts so-called 'hype' videos combining real Iran war footage alongside movie, video game clips ABC News - Breaking News, Latest News and Videos",
-          "date": "Sep 15, 2026 · 4:52 PM",
-          "publishedAt": "2026-09-15T16:52:31.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQTGZ3a3Q4R2NnNWJ6TXdGcWNEd0EzUnozYmtiNmI1TC1xcEw2dkMxN09CZDhuN3hDX3k2SkV1M2tjTGt2RHNFVXVmaEQwOVhQZVc4VzhJaHZraHloWWRzR0xoVkhqVmtoc2xPZ0pzWUxOa2ZpdnlrbENWSU1ZeTFha1pCRUlORXBzV2RLR1VhRElJejAyY0FXd2RlMlRnQWFp0gGmAUFVX3lxTFBiOXlWck42MkJWNjhKWDVDQWZXVGdLNm94cEU4b2ZJdlkxWFVyVWJpQkppenhGeW1JWGpESDh4UDFTS2s3WS1qa0c2cXJXLTlWa0pnd2pjZ19WcVZFaFhxRDZqNkI4QURjSGpDd0JUQ1lXSGY0Y3hGRVJrNUQyLUlzeEpTNmVwZmhobmZDeHlsWVk2NktDNEdwWXA2Uld5Z0JBUkhWVGc?oc=5",
           "importance": 2
         }
       ],
@@ -264,25 +264,12 @@
           "countryId": "ca",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "UK and Canada discuss AI risks and defence ties in first bilateral meeting - Al Jazeera",
-          "summary": "UK and Canada discuss AI risks and defence ties in first bilateral meeting Al Jazeera",
-          "date": "Sep 17, 2026 · 1:20 AM",
-          "publishedAt": "2026-09-17T01:20:12.000Z",
+          "headline": "UK’s Burnham, Canada’s Carney discuss AI risks, defence cooperation - Al Jazeera",
+          "summary": "UK’s Burnham, Canada’s Carney discuss AI risks, defence cooperation Al Jazeera",
+          "date": "Sep 17, 2026 · 1:30 AM",
+          "publishedAt": "2026-09-17T01:30:51.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNY3FYdjJqUmFyR3JVbUtJamN2czZUdkVVYkRiVk5PZW90QTNjN2FtbEdINEI3bnpLTlNGeDh1WXFzRHJZUmxnUl9NZ0VZNzB2OTBjeENQeGM3bTNfSGh0NHBPSl9Yd2otanl2dEpwNnFnZkpUdmNNb1Yyb0dfMjQ1R0trNnBlYXFOcXVjT1Vyd1JxSl82ZE5sNnBGNlBIQVlfQ0R4S01EdmRXZXloS3hsWEhqRUJRd9IBuwFBVV95cUxPUWkwWFBRLUcxeXJkTDU0SDFyd3A3T0VZd1QwTDJ0ek5zTVpfZnJaWjZaOVF5LWd6aVhtM2swLVFEVXZaN1c0QmxQa2JuNHFydnRPTUJsS2dSOWtVbU1yV243cVpyemdlcHRvZ0RtQ3VBM1dLMC1TYXBHSHBvdG83eXJQTmVKbjdScU42VWhwNmpqbjU5bWNWY1d2eW9zcmJjOExScS1NVkhGTFk3SzRTV0dDQTduMm1MZ2U0?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ca-independent-2e804c9d160b1852",
-          "countryId": "ca",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "The first Canada Investment Summit unleashes nearly $500 billion of new investment in Canada - pm.gc.ca",
-          "summary": "The first Canada Investment Summit unleashes nearly $500 billion of new investment in Canada pm.gc.ca",
-          "date": "Sep 15, 2026 · 2:41 PM",
-          "publishedAt": "2026-09-15T14:41:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQaktRMFpqUlFJTGxqR0pvb0lwWmRXVG1IU0hMQkkyTm05N3RFY09fWGJsQ1Y3a2x0UjMxUV9CaHU1UGMtRkhlMWtGSFhTQ29hNDZtRGJ0WWZVeTF1YVdjV0dlT1JtR3FRWTVTVzdPMmw0NEdpa1B3SHVJbEhZaHlXRml6bVBpVElQRVNyM2tpQWl1RmNWXzVHejI0MXpCLTVUOWdJREVhTjFOOUlFN2Mtc3hUUVlZUEk1?oc=5",
           "importance": 2
         },
         {
@@ -296,6 +283,19 @@
           "publishedAt": "2026-09-16T21:47:33.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPVDg4VlVwSF8wTFJLVTBqaUdvNExES3dZVlZtSG1nQWJDSnU4YWVuMjcyV3ZSYXFKaWxldGxLTEJ4R1M0dld4VzM1ZlE2cE9pV0xMZ2U4WjZqUUg3VnpBTEVjWkJCMXA2Z1BNWVVOUjNoMnduWkJRZGZUYUpIcklCRzg0WlFmWlowVkZXTDQtMG83SEZYMllNNGFKczYwVFZOYmc?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ca-independent-2e804c9d160b1852",
+          "countryId": "ca",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "The first Canada Investment Summit unleashes nearly $500 billion of new investment in Canada - pm.gc.ca",
+          "summary": "The first Canada Investment Summit unleashes nearly $500 billion of new investment in Canada pm.gc.ca",
+          "date": "Sep 15, 2026 · 2:41 PM",
+          "publishedAt": "2026-09-15T14:41:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQaktRMFpqUlFJTGxqR0pvb0lwWmRXVG1IU0hMQkkyTm05N3RFY09fWGJsQ1Y3a2x0UjMxUV9CaHU1UGMtRkhlMWtGSFhTQ29hNDZtRGJ0WWZVeTF1YVdjV0dlT1JtR3FRWTVTVzdPMmw0NEdpa1B3SHVJbEhZaHlXRml6bVBpVElQRVNyM2tpQWl1RmNWXzVHejI0MXpCLTVUOWdJREVhTjFOOUlFN2Mtc3hUUVlZUEk1?oc=5",
           "importance": 2
         },
         {
@@ -357,6 +357,19 @@
           "importance": 2
         },
         {
+          "id": "mx-independent-a182eb540cfacf6f",
+          "countryId": "mx",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "President Claudia Sheinbaum’s Second State of the Nation Address - mexicosolidarity.com",
+          "summary": "President Claudia Sheinbaum’s Second State of the Nation Address mexicosolidarity.com",
+          "date": "Sep 2, 2026 · 12:23 PM",
+          "publishedAt": "2026-09-02T12:23:36.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1pRE1fOEdWYU5vNUpUem1DcFd5ckxSaGlELUVMX0dwTVFoM2lrT25EeDVkX3dYM3U3enpMSVJxVlUzRU1BWEwxUFlHZUlTMm5zUG1laG1wU0xzSjc2VTJxa2x0TG5Hb1E?oc=5",
+          "importance": 2
+        },
+        {
           "id": "mx-independent-6d876bdfb613f08d",
           "countryId": "mx",
           "sourceType": "independent",
@@ -394,19 +407,6 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxOV0I0ZlJSOU1sbHRyOExBbXNKTHV0aG1MMXRqVUVrSVJUbGgxeTRqLWRyY0tmeTJQaExiLXhRWkRVejU2d1hFSXN2ckE4UHFjbDJSdUh3UVVqN0lsME9fQWpYRmhMUU96d1NXRl9FWVRHci0tSDdTYkhYeEx6VjdaUWlsSFR3VnZUTEpuZlhOT0MxeUo4bjVfdmZENTNXQkFZbGNFXzkza1pSQ3NYWllocy16N3g3ZDhmbEdDSlp1T1o1SGdJTVdzV2o3YVdqZzYtWEo5RXFKUjdjd3RiWlhmQ0NranB5OVlhTGtiaGVwUUpESUU?oc=5",
           "importance": 2
-        },
-        {
-          "id": "mx-independent-f137c871d37f0e75",
-          "countryId": "mx",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "BTS Greets ARMY from Mexico’s Presidential Palace: ‘The Energy Here Is Incredible’ - Billboard",
-          "summary": "BTS Greets ARMY from Mexico’s Presidential Palace: ‘The Energy Here Is Incredible’ Billboard",
-          "date": "May 6, 2026 · 7:00 AM",
-          "publishedAt": "2026-05-06T07:00:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNajZHeVM0R3I3ZHZUMU1QWnhSV2JpN2dvNUpIUEJ1ZVRqM3ZoN2tVVDVOMUdGZmhETjd3WDRiYk01SVlFck8yTHFYUzMtUXgwc3BTMXVXS0pieERJRDZ1N0IyLWpsUlFMUVVWNHhIR0xiZWdCZHJYbWt0d3ptOXBSYm1OcVozaThlVWR0NXJsbGpLQTdyVnpYNnVsSzRncldDWWN2ZlJR?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": false
@@ -419,8 +419,8 @@
           "countryId": "br",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "📢 (DEADLINE: 30/6/2026) Public Consultation on the 1st National Plan on Migration, Refuge and Statelessness (I PlaNaMIGRA)! - UNHCR - The UN Refugee Agency",
-          "summary": "📢 (DEADLINE: 30/6/2026) Public Consultation on the 1st National Plan on Migration, Refuge and Statelessness (I PlaNaMIGRA)! UNHCR - The UN Refugee Agency",
+          "headline": "📢 (DEADLINE: 30/6/2026) Public Consultation on the 1st National Plan on Migration, Refuge and Statelessness (I PlaNaMIGRA)! - help.unhcr.org",
+          "summary": "📢 (DEADLINE: 30/6/2026) Public Consultation on the 1st National Plan on Migration, Refuge and Statelessness (I PlaNaMIGRA)! help.unhcr.org",
           "date": "Jun 22, 2026 · 7:00 AM",
           "publishedAt": "2026-06-22T07:00:00.000Z",
           "dateOnly": false,
@@ -458,8 +458,8 @@
           "countryId": "br",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Carlo Ancelotti pide consejo al presidente de Brasil sobre la convocatoria de Neymar para el Mundial - Fox News",
-          "summary": "Carlo Ancelotti pide consejo al presidente de Brasil sobre la convocatoria de Neymar para el Mundial Fox News",
+          "headline": "Carlo Ancelotti pide consejo al presidente de Brasil sobre la convocatoria de Neymar para el Mundial - noticias.foxnews.com",
+          "summary": "Carlo Ancelotti pide consejo al presidente de Brasil sobre la convocatoria de Neymar para el Mundial noticias.foxnews.com",
           "date": "Apr 15, 2026 · 7:00 AM",
           "publishedAt": "2026-04-15T07:00:00.000Z",
           "dateOnly": false,
@@ -666,10 +666,10 @@
           "countryId": "gb",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "UK and Canada discuss AI risks and defence ties in first bilateral meeting - Al Jazeera",
-          "summary": "UK and Canada discuss AI risks and defence ties in first bilateral meeting Al Jazeera",
-          "date": "Sep 17, 2026 · 1:20 AM",
-          "publishedAt": "2026-09-17T01:20:12.000Z",
+          "headline": "UK’s Burnham, Canada’s Carney discuss AI risks, defence cooperation - Al Jazeera",
+          "summary": "UK’s Burnham, Canada’s Carney discuss AI risks, defence cooperation Al Jazeera",
+          "date": "Sep 17, 2026 · 1:30 AM",
+          "publishedAt": "2026-09-17T01:30:51.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNY3FYdjJqUmFyR3JVbUtJamN2czZUdkVVYkRiVk5PZW90QTNjN2FtbEdINEI3bnpLTlNGeDh1WXFzRHJZUmxnUl9NZ0VZNzB2OTBjeENQeGM3bTNfSGh0NHBPSl9Yd2otanl2dEpwNnFnZkpUdmNNb1Yyb0dfMjQ1R0trNnBlYXFOcXVjT1Vyd1JxSl82ZE5sNnBGNlBIQVlfQ0R4S01EdmRXZXloS3hsWEhqRUJRd9IBuwFBVV95cUxPUWkwWFBRLUcxeXJkTDU0SDFyd3A3T0VZd1QwTDJ0ek5zTVpfZnJaWjZaOVF5LWd6aVhtM2swLVFEVXZaN1c0QmxQa2JuNHFydnRPTUJsS2dSOWtVbU1yV243cVpyemdlcHRvZ0RtQ3VBM1dLMC1TYXBHSHBvdG83eXJQTmVKbjdScU42VWhwNmpqbjU5bWNWY1d2eW9zcmJjOExScS1NVkhGTFk3SzRTV0dDQTduMm1MZ2U0?oc=5",
           "importance": 2
@@ -727,16 +727,16 @@
           "importance": 2
         },
         {
-          "id": "gb-independent-479fb63103666149",
+          "id": "gb-independent-ade32764411b956c",
           "countryId": "gb",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Andy Burnham | Labour, Prime Minister, Mayor of Greater Manchester, & ‘King of the North’ - Britannica",
-          "summary": "Andy Burnham | Labour, Prime Minister, Mayor of Greater Manchester, & ‘King of the North’ Britannica",
-          "date": "Sep 16, 2026 · 5:00 AM",
-          "publishedAt": "2026-09-16T05:00:00.000Z",
+          "headline": "Canada seeks full membership in U.K.-led military coalition - Barrie News",
+          "summary": "Canada seeks full membership in U.K.-led military coalition Barrie News",
+          "date": "Sep 16, 2026 · 10:50 PM",
+          "publishedAt": "2026-09-16T22:50:05.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBnSkJKbVBZNU5xY3UwQ2ZyUHRySjYycjhwR2RjVzI5U3RMaVh1ZWh4QjhVSE9fOXhwczVQMXYzRWdTMXVrcTM1NWlvWmZYTVZvSnhkY2Y1VTBUTGxzRWc?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPSWdaOTZicGUxLXE0dVFXVTlSZGt2NERVaHFRbHFkYmFPTGNvU3NTNVJBNVgzMnJUWVU0RW96Q20tTGQyeW1sbmFOeDRYOHAxVVEtTzluelNXalJhTzNUMC1vWUlOZVFkdmk5UVVQWl9YcEh0S21faEpycUpUUS1GMXFxTndjNVBpQTlja1I3UDYyakRmZWZ6aWlXR3pKQWFCTHhIV1NfSC0?oc=5",
           "importance": 2
         }
       ],
@@ -825,6 +825,19 @@
       ],
       "independent": [
         {
+          "id": "fr-independent-c180cee15bdb0831",
+          "countryId": "fr",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "France to extend targeted fuel aid measures until end of year - Reuters",
+          "summary": "France to extend targeted fuel aid measures until end of year Reuters",
+          "date": "Sep 16, 2026 · 5:49 PM",
+          "publishedAt": "2026-09-16T17:49:17.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOcUxGM2FkWDFXU2U0SlpNZmp0blRvNlk1X3RxanpXY0xPWjhqQUl5MGIzV1NreW9PQ1lRRHJWeGp0SjhZWklQcHY3aklrZ0VIa0ZQWFU1NUFmMnpXeDMyZ1IxQ0ZWZEF6R3h3ZHI0dXgwR0pTRXV5VkIxZTd6V2tXX1lZM0JQYmFQbjZabkY3ZGppb2dCN08xM3lSLWJyQQ?oc=5",
+          "importance": 2
+        },
+        {
           "id": "fr-independent-8b3517e118afb33d",
           "countryId": "fr",
           "sourceType": "independent",
@@ -887,19 +900,6 @@
           "publishedAt": "2026-09-16T03:12:58.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNdHQ3X0NZYm5IRWhobEVmVjdEV0lOeVFvVzUxOUs0cTREdy1mLWhQcTlyeVZabmZrT2ZMMHZwbnAwYmtKVGFQcXhBR1diS3M2NVByeTFwOUtXSERnOFMzVGU2eDQ0TjFnb3hqeElMb3ZqTGYxYllUVVJaSzRZSWI3djhlT3RsYmE5LTJRLVhRMzBpMF80WXFWLU9qVVVxcW1wVzRrbk1GbEZQQndRR0hCTkpibEN1M3A1Q1M5YWJxd2NHVHpsc1F6Rw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "fr-independent-09e4a1ca09bc7473",
-          "countryId": "fr",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "History of Élysée Palace in France - Britannica",
-          "summary": "History of Élysée Palace in France Britannica",
-          "date": "Aug 28, 2026 · 7:00 AM",
-          "publishedAt": "2026-08-28T07:00:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1ueFRSaEpnTDhsLWpTbTJJMGVlUWhVNWJST0FHbjRxRWk1VzZ2RFZCTU5SSEdYY2gtUE1MOXFuUDV4UENhUUJXTjVPeTFMWGFfVDB5TGtSTFJaQjVDOU1QY2JneW1SY212T0FxcGV4TjgtUF8yQVF3TA?oc=5",
           "importance": 2
         }
       ],
@@ -1328,8 +1328,8 @@
           "countryId": "ua",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Update: Lawmaker charged in graft case involving President's Office returns to Ukraine - The Kyiv Independent",
-          "summary": "Update: Lawmaker charged in graft case involving President's Office returns to Ukraine The Kyiv Independent",
+          "headline": "Update: Lawmaker charged in graft case involving President's Office returns to Ukraine - kyivindependent.com",
+          "summary": "Update: Lawmaker charged in graft case involving President's Office returns to Ukraine kyivindependent.com",
           "date": "Sep 11, 2026 · 12:22 PM",
           "publishedAt": "2026-09-11T12:22:31.000Z",
           "dateOnly": false,
@@ -1354,8 +1354,8 @@
           "countryId": "ua",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "The President of Ukraine Had a Meeting with the President of the United States in Washington - president.gov.ua",
-          "summary": "The President of Ukraine Had a Meeting with the President of the United States in Washington president.gov.ua",
+          "headline": "The President of Ukraine Had a Meeting with the President of the United States in Washington - Офіційне інтернет-представництво Президента України",
+          "summary": "The President of Ukraine Had a Meeting with the President of the United States in Washington Офіційне інтернет-представництво Президента України",
           "date": "Jul 28, 2026 · 7:00 AM",
           "publishedAt": "2026-07-28T07:00:00.000Z",
           "dateOnly": false,
@@ -1393,8 +1393,8 @@
           "countryId": "ua",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Ukraine’s new defence minister takes office as popular predecessor calls for presidential vote - France 24",
-          "summary": "Ukraine’s new defence minister takes office as popular predecessor calls for presidential vote France 24",
+          "headline": "Ukraine’s new defence minister takes office as popular predecessor calls for presidential vote - france24.com",
+          "summary": "Ukraine’s new defence minister takes office as popular predecessor calls for presidential vote france24.com",
           "date": "Aug 19, 2026 · 7:00 AM",
           "publishedAt": "2026-08-19T07:00:00.000Z",
           "dateOnly": false,
@@ -1413,7 +1413,7 @@
           "sourceType": "independent",
           "source": "Google News",
           "headline": "Kremlin welcomes Trump's idea of energy truce with Ukraine, calls for sanctions removal - Reuters",
-          "summary": "Kremlin welcomes Trump's idea of energy truce with Ukraine, calls for sanctions removal Reuters Zelenskyy says Ukraine will pause strikes on Russia if Kremlin spares critical infrastructure PBS Kremlin declines to com…",
+          "summary": "Kremlin welcomes Trump's idea of energy truce with Ukraine, calls for sanctions removal Reuters",
           "date": "Sep 15, 2026 · 11:24 AM",
           "publishedAt": "2026-09-15T11:24:50.000Z",
           "dateOnly": false,
@@ -1421,16 +1421,42 @@
           "importance": 2
         },
         {
-          "id": "ru-independent-1b8e080323ee2a8f",
+          "id": "ru-independent-7ce8e48ed99d31a2",
           "countryId": "ru",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "‘Warsaw Will Disappear in 2 or 3 Days’: Kremlin Threatens Poland - Kyiv Post",
-          "summary": "‘Warsaw Will Disappear in 2 or 3 Days’: Kremlin Threatens Poland Kyiv Post",
-          "date": "Sep 15, 2026 · 10:38 AM",
-          "publishedAt": "2026-09-15T10:38:09.000Z",
+          "headline": "Zelenskyy says Ukraine will pause strikes on Russia if Kremlin spares critical infrastructure - PBS",
+          "summary": "Zelenskyy says Ukraine will pause strikes on Russia if Kremlin spares critical infrastructure PBS",
+          "date": "Sep 14, 2026 · 9:57 PM",
+          "publishedAt": "2026-09-14T21:57:49.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5fUU1XOC10U1c0ZXpLSEZ0eG03M2lmNEFQekloMHVmOUlCMmg3S0dMT096aVBqYTZ4V2I0eTdZdGNfT1ZoRUxJQzZKNA?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPdWRjRmw3MFR1Q0hLRDRJMXlmbnZjRVlleVBUS19XdUs1WjhlMlE2RFNtbjZkT01hOW54bm9fMThmRC03ZTJWNk9KbUdXZktiQlRqTGpORDcyZUgwbmVpeG1RYTI0T29kOUYzeHVzaWdRVDMyN1ByLVNBWEE5dURFc3dfcnVNcmR2b1h6N0NEdnJOcm1VZjhCcjdUbnY5YUNIVk9WUWxjT29ad2FYUzBNaEZkaC1IYkQ0U1UxSVZiSXFFZUNYYnNn0gHMAUFVX3lxTFBOcmhFaG90alNZOE9fczM4NUZsLTZXbnZ0R0VTNjU0cUV0SWFkTTBJRzU5VmttOV9LeW1mczUtSUQ5S0JVNzlTLVpCX0tTSkh4NndNRU9SZkZEMlZuUmNQYWlvY2QyRWtQcUhBRGpsQVRuWkt1dWhPSGFzc25JWnRWVmRya0dLeHItd1VGSXhfRjZtNTNOUGhoaDJpUVFiRjI2X1o1VUlaeEgwc2pKTVMzSGRGaEdUWmtJSmdlaWIwSG9SVTBnQTFXYzlEMA?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ru-independent-7846b875e16e1dfd",
+          "countryId": "ru",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Kremlin declines to comment on possibility of halting attacks on Ukraine's energy infrastructure if strik - Ukrinform",
+          "summary": "Kremlin declines to comment on possibility of halting attacks on Ukraine's energy infrastructure if strik Ukrinform",
+          "date": "Sep 15, 2026 · 2:32 AM",
+          "publishedAt": "2026-09-15T02:32:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxQRDc0NXR2Tnk5VVdhQVFsbUYwb3NLMnNkZmtzdWtWRk44M3VCWEh4aW1ZNDJPemQ4c3dENmxpdmd5d241OGltaUdtTFZ2M1RENjI2b0tRY3RiSXNSeVNQNG5HTEpKUWJLUzZTR01pUEhXRm8yR3JrWDJlQ3pjSVJMS0FSeWlsTG8tRG1HdnQtTFFBM0hWdUJQelRYZHZZaDRTZTdrcmtKZzNCZGNwQS1vLXR0X1Jzd0I2MEJrdVJZejFHbU5rUjJZSG1KTW5DdVdCd0NCLWg5TUdpYmxVVndHblJBZmZ6NWg4aFQ1RkljVXdxbldlRU1pa3NtbXZsdFV1RU5MRkdOT1ZJNGPSAZACQVVfeXFMT0pxS2EwR05VTDV2UDNOSXRvNDdIT3VHQ3lmNlRYa1dEZlJWcUxqUmtsZTZRcFpmN2QwVDNtYVVvNC0yQnlYOUhiV3duT3NwWGlvVm9qWWR5V0VheloyeDk1WWhjYk1jWUVtbm9GODhRZGhEZU9kSnRldUd2Z04xMDJtQWtMczZNbGhRSVFtUWdpTVMyVFZoWHV5cDlibEdpYi1iby1OMng2LTVDemdEZWs2dVRnYXExQVpkTE8wQTFENVRlZjVmX0VuYXdlTEptd2R0VU5YZmtqdUlpN20tdklsUEN3bnJiZUxkaklEWVRDZDh6aWw0eE1renk5X0d0TEhSNXEzU3FFQjU1MG14c0U?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ru-independent-fbcab50139af14d8",
+          "countryId": "ru",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Kremlin Prepares to Cross the Final Red Line - Center for European Policy Analysis (CEPA)",
+          "summary": "Kremlin Prepares to Cross the Final Red Line Center for European Policy Analysis (CEPA)",
+          "date": "Sep 14, 2026 · 5:39 PM",
+          "publishedAt": "2026-09-14T17:39:11.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1Cb28zM21mdS1scTgyR3dfN0F1RXRLLThNelJLTFZvU3NOaDJXanFqUDMxTlhsU0dLWTBEWmxBU1RtUGpjeFlid2toNnNXSEdmLU1KM2lSY1RHa3ZQVFp0bUN6eEhIaVl3TkJPaHUwcE1ybGltRTZJY2JB?oc=5",
           "importance": 2
         },
         {
@@ -1458,32 +1484,6 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQRVEwZHhqNk1YMldGazhyUkY2VkJrR09jelRkXzItc1B5Vl9YMTJsVEdTZHFSZ3prUGV2TkRJR1M2WGV5YVNaU1lsU2czSWMyYUE3UmkzTTBkcTBDcUpHTGp6cXlNenBCZTZ6aktBNXNjVmhaeWJLSEhkbFZFYVVQOXFfS1FaVFh1WDlESVBueTAtYksyay1LeHJjb3NDLTRTVTJLN1ZSdU54eGVLUmk5NnFpWQ?oc=5",
           "importance": 2
-        },
-        {
-          "id": "ru-independent-fa549bd15609cc65",
-          "countryId": "ru",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Address ahead of the elections - Президент России",
-          "summary": "Address ahead of the elections Президент России",
-          "date": "Sep 16, 2026 · 4:36 PM",
-          "publishedAt": "2026-09-16T16:36:26.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBONzJvRWVBVW5kY19OU2xoX0FvM0V2U3Q1T014Z0tQdGIyNWZONTBYWFliMVN4aHNqTjNvazhtdm5GeWxiczBKeFMxU0ZaUHFKRlNFWG44VWxrMVdQ?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ru-independent-fbcab50139af14d8",
-          "countryId": "ru",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Kremlin Prepares to Cross the Final Red Line - Center for European Policy Analysis (CEPA)",
-          "summary": "Kremlin Prepares to Cross the Final Red Line Center for European Policy Analysis (CEPA)",
-          "date": "Sep 14, 2026 · 5:39 PM",
-          "publishedAt": "2026-09-14T17:39:11.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1Cb28zM21mdS1scTgyR3dfN0F1RXRLLThNelJLTFZvU3NOaDJXanFqUDMxTlhsU0dLWTBEWmxBU1RtUGpjeFlid2toNnNXSEdmLU1KM2lSY1RHa3ZQVFp0bUN6eEhIaVl3TkJPaHUwcE1ybGltRTZJY2JB?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": false
@@ -1509,8 +1509,8 @@
           "countryId": "tr",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Mecca defense pact sends signal to Islamic world: Turkish president - Anadolu Ajansı",
-          "summary": "Mecca defense pact sends signal to Islamic world: Turkish president Anadolu Ajansı",
+          "headline": "Mecca defense pact sends signal to Islamic world: Turkish president - aa.com.tr",
+          "summary": "Mecca defense pact sends signal to Islamic world: Turkish president aa.com.tr",
           "date": "Sep 14, 2026 · 8:12 PM",
           "publishedAt": "2026-09-14T20:12:07.000Z",
           "dateOnly": false,
@@ -1544,19 +1544,6 @@
           "importance": 2
         },
         {
-          "id": "tr-independent-7cfe1334e59b46c7",
-          "countryId": "tr",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Azerbaijan, Türkiye Deepen Strategic Partnership in Baku Talks - caspiannews.com",
-          "summary": "Azerbaijan, Türkiye Deepen Strategic Partnership in Baku Talks caspiannews.com",
-          "date": "Sep 16, 2026 · 10:36 AM",
-          "publishedAt": "2026-09-16T10:36:40.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxORDMzckxpb3Bib2M2OTZTemZyYlJTSnloSXIzejFfVjJtQjZxWUZROVQyOWhHaEVmSDI1cDZvelhJYkZxNjBCWjJmVUhSTGJMQlNDQTZid2trUmJPdDZKenJscWQxV1c0Z0tTWFFCODFwY3BJTzQySXBHUGpOdUphRFNvYm1OS2YzOGFpNVM1Y0taMTFKd09ZQkdWNkxOQlhXSnowQ21ZTXhxbE5SVHlFTA?oc=5",
-          "importance": 2
-        },
-        {
           "id": "tr-independent-eca8f919987e481b",
           "countryId": "tr",
           "sourceType": "independent",
@@ -1567,6 +1554,19 @@
           "publishedAt": "2026-09-16T01:20:13.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQZTA1YmFYTmhSS3U4VjlDSnJVa2lvSk5NeFhZWEhwRGtDVDdCYjI0U3h6dDAtdXlxMWhQSURqNm4ycFdvWWphbTJQbXhYbExYbEtveTg5UjRZY3p6MzV2VnRiWDh5UXBGbzlUWGlEcERySlNmZWZ5VTU1ZC1IMVN5Mzd2TjJlNDZwM2pSdjNFazhPVWlyMnNlYjRMLTdScDdob2V5ejlaeWxwRGh4N09RVjB2RG9PTlE?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "tr-independent-f4bfafa7d23e337a",
+          "countryId": "tr",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Netanyahu calls Turkish president ‘antisemitic dictator’ after Turkiye issues arrest warrant - アラブニュース",
+          "summary": "Netanyahu calls Turkish president ‘antisemitic dictator’ after Turkiye issues arrest warrant アラブニュース",
+          "date": "Aug 22, 2026 · 7:00 AM",
+          "publishedAt": "2026-08-22T07:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5TMjZWMHZ4Qk9TbVpOeEtFUzhzb3ZzSWM2SmJaQk1JNGw4TUlpMGg2aFA0blI5aS1mLWRpeVktQWRSM1A5alVnRjdlLVRrdnh4ZE9Dc2RlVF9UT29lNFNtUVdvZ00?oc=5",
           "importance": 2
         }
       ],
@@ -1580,12 +1580,25 @@
           "countryId": "il",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Netanyahu’s New York UN visit sees unusual US Secret Service security involvement - jpost.com",
-          "summary": "Netanyahu’s New York UN visit sees unusual US Secret Service security involvement jpost.com",
+          "headline": "Netanyahu’s New York UN visit sees unusual US Secret Service security involvement - The Jerusalem Post",
+          "summary": "Netanyahu’s New York UN visit sees unusual US Secret Service security involvement The Jerusalem Post",
           "date": "Sep 16, 2026 · 12:52 PM",
           "publishedAt": "2026-09-16T12:52:18.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9zWnhJOGhzM3h1bU5LN3VCVkpsTlBRNlFoeTF6dktFay03YlREc1R2Y0pZdFM4cE9JOVkzUXZDUHEzdjVqNVoxMWNoYlpfdW5RY1Y3bkIydDhMUTF1?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "il-independent-034011a043b302d0",
+          "countryId": "il",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Luxury suites, makeup and a traffic ticket: Netanyahu’s US expenses revealed - ynetnews.com",
+          "summary": "Luxury suites, makeup and a traffic ticket: Netanyahu’s US expenses revealed ynetnews.com",
+          "date": "Sep 16, 2026 · 3:34 PM",
+          "publishedAt": "2026-09-16T15:34:22.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE42QkxaM2RvYXNhVi15OFoyOXVTa0VKbkZEa1A1Ul9Lb2paaTc5Ty1XU1p5OU9aLWNLTUhkdVpPTnFyQjFROE1KUFZ1QVBtS3JVc3ZjSmFB?oc=5",
           "importance": 2
         },
         {
@@ -1599,19 +1612,6 @@
           "publishedAt": "2026-09-16T07:50:27.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNZzhNOGF3Skc2bmFaeGhPTDhwelBQWkZRc1VqeTNRZE5ua0gyZUxqbnJoOGR5ZDlwMURTaUltSGlMLVZocU5qMEdIYmxtMDY2QjdpMG5mcUlnYW9rYTl1NXJ6bm5Odk1rcnN0NjRwVV9Hc2JmWjF3ZE5PNlZSYmxJY29hUXJNa2U3c3B2LWFxeUlpcllIQUZRQUtMQm1pNHRaOXB2NUJ0ZURSVXdXU3JkSGQ5ZzFsV0lZeDh1RGU4OA?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "il-independent-034011a043b302d0",
-          "countryId": "il",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Luxury suites, makeup and a traffic ticket: Netanyahu’s US expenses revealed - Ynetnews",
-          "summary": "Luxury suites, makeup and a traffic ticket: Netanyahu’s US expenses revealed Ynetnews",
-          "date": "Sep 16, 2026 · 3:34 PM",
-          "publishedAt": "2026-09-16T15:34:22.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE42QkxaM2RvYXNhVi15OFoyOXVTa0VKbkZEa1A1Ul9Lb2paaTc5Ty1XU1p5OU9aLWNLTUhkdVpPTnFyQjFROE1KUFZ1QVBtS3JVc3ZjSmFB?oc=5",
           "importance": 2
         },
         {
@@ -1660,6 +1660,19 @@
       "official": [],
       "independent": [
         {
+          "id": "ir-independent-2c942ae33d88e3cd",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Scoop: Trump to hold Iran talks with Gulf leaders next week - Axios",
+          "summary": "Scoop: Trump to hold Iran talks with Gulf leaders next week Axios",
+          "date": "Sep 17, 2026 · 12:51 AM",
+          "publishedAt": "2026-09-17T00:51:47.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1wZW1TV1RKZGZoT0dmLURXZXJxRENaLWJYWHVET2JJMUZ2SV9EWTE2eEtnUjRZemhGbHNtaU5aOGlpZUs0T3lmc1RhQnIwMXJROUNhRGlnTXNyRmtpMTNrY2ZvdkQxX2FOWWZNTGozaHlQQWc?oc=5",
+          "importance": 2
+        },
+        {
           "id": "ir-independent-649dca043e0807aa",
           "countryId": "ir",
           "sourceType": "independent",
@@ -1686,29 +1699,16 @@
           "importance": 2
         },
         {
-          "id": "ir-independent-fdf53c09f70acc1f",
+          "id": "ir-independent-07e7a8002e5ee6f8",
           "countryId": "ir",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "House votes to limit Trump's power to strike Iran for 3rd time, as 7 Republicans defect - CBS News",
-          "summary": "House votes to limit Trump's power to strike Iran for 3rd time, as 7 Republicans defect CBS News",
-          "date": "Sep 16, 2026 · 2:29 PM",
-          "publishedAt": "2026-09-16T14:29:12.000Z",
+          "headline": "7 Republicans rebel against Trump, vote with Dems to rein in Iran war powers - Fox News",
+          "summary": "7 Republicans rebel against Trump, vote with Dems to rein in Iran war powers Fox News",
+          "date": "Sep 16, 2026 · 4:19 AM",
+          "publishedAt": "2026-09-16T04:19:51.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPemFWRzlJa1NQdVdadlg4NW84NFJXaGlybDJfTDYwWkV1WjE2VTFlZGxxV1pTZjZ6UWtQa3FkODEwQWpXaV9UeVZBT0JzVnZfTDgxUDUtWHJtNlg5VVg4QzNJZlk3RzExMUppcXN6N0JKUUFlSEtKeWxIdWw1YzBMSTZZa2hUOG12UHc?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-2c942ae33d88e3cd",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Scoop: Trump to hold Iran talks with Gulf leaders next week - Axios",
-          "summary": "Scoop: Trump to hold Iran talks with Gulf leaders next week Axios",
-          "date": "Sep 17, 2026 · 12:51 AM",
-          "publishedAt": "2026-09-17T00:51:47.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1wZW1TV1RKZGZoT0dmLURXZXJxRENaLWJYWHVET2JJMUZ2SV9EWTE2eEtnUjRZemhGbHNtaU5aOGlpZUs0T3lmc1RhQnIwMXJROUNhRGlnTXNyRmtpMTNrY2ZvdkQxX2FOWWZNTGozaHlQQWc?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPZC0zWnRFdFU3a3lhXzZWYy1laF9fTXd2RFNuRE9XNWFMVi1wbVp1d0lvblJ3NGR4dmxEaXZ3aTJONERqSjVoTF9OVG5UajZ5TmgtWEFFb0ZyczBBYW5hOEVya2JQdXRMWFVnVk5ZU3JzRFlnQkk1aDJPNFV2cFlLbk9lRHlpRFZ3OGYycWhidlBMd0ZVb1A3MHAwSdIBoAFBVV95cUxObWNQbzNkUXNFVkV6S3VLZVVkeDRQMEQtLWpjLUhMMHU4c0x5MUl4c1JLQTZVcEdWc1lhc2ZPTzhmRWdId2JwZm81ZnBaeV9TVnU3OVF1OW5IYmpUS2cxRGNTM3g1ZFlrX2k4NjRSV3JMN2gxUzNzWUcxZ1FuVVJ6djkteXJwbU1pWlZOSDdHajlpelp5UGpObmdmODlzNnlE?oc=5",
           "importance": 2
         },
         {
@@ -1718,23 +1718,23 @@
           "source": "Google News",
           "headline": "Iran war live: Trump says US nearing end of war, claims Tehran direct talks - Al Jazeera",
           "summary": "Iran war live: Trump says US nearing end of war, claims Tehran direct talks Al Jazeera",
-          "date": "Sep 17, 2026 · 1:45 AM",
-          "publishedAt": "2026-09-17T01:45:13.000Z",
+          "date": "Sep 17, 2026 · 2:59 AM",
+          "publishedAt": "2026-09-17T02:59:25.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQVHB3aXFTV0ljVmRIR19sOXZVMDlhS0dIUmEwekRvNWVRUWlBU1B4TFA1VWpsT3h3em1FUGlsQnllSFhpWXBWbEFKX2N0VTRMQTdvV1FqMWR4RWN0WUQ3QkhvczRYaGE3MENaMk5QLWFqZ0JoQVZZSU5jaGJjRjhVc1lfdUc0V0E1RUZGX0cxZDBaT0lxX0pVb2tDaGprX2NHTXllcmlYQnpWbDVZXzBZYjFCa1piemxQUUJ6V1JMcHfSAcYBQVVfeXFMTWlGUFhlT3NpcFFfOXpjMWY4TTVIcHB5ekZDWDUxVFdkbWQtY1FXajJndkN0YXhBcTRXV0RqZWlJdk5Ia3NKQURZNlBjamJEMUxQVjJfVGpEc1hMOU1hWjZiTlJ2ckVycDM1RDFET1dha0x5VmpoM2JmSF83UTdKRkdzb2psTnBWeTNjNTR2V0VMcEk4a3dCY2cxUGZZdTcyTDNBZ0xFWnZxTFNJV0s4Z1k1X3NCR3pkc2VyS2xKWFJBTVVyTFZB?oc=5",
           "importance": 2
         },
         {
-          "id": "ir-independent-d3ce27a973ecb6ee",
+          "id": "ir-independent-d3a3505c5e7f089f",
           "countryId": "ir",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "WAR PRESIDENT: THE IRAN TRAP - Institute for Global Affairs",
-          "summary": "WAR PRESIDENT: THE IRAN TRAP Institute for Global Affairs",
-          "date": "Sep 16, 2026 · 12:42 PM",
-          "publishedAt": "2026-09-16T12:42:09.000Z",
+          "headline": "Middle East latest: Iran gives Trump talks ultimatum - as Houthis say strait access 'free for all' except Saudi Arabia - Sky News",
+          "summary": "Middle East latest: Iran gives Trump talks ultimatum - as Houthis say strait access 'free for all' except Saudi Arabia Sky News",
+          "date": "Sep 16, 2026 · 3:16 AM",
+          "publishedAt": "2026-09-16T03:16:25.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQcERlaXJROEt4Yk96dUFzdEFPY0xnb2pPTW0ycV9LS21XMUREOUpkb3ZhWHMyVkV0VG5hdUVZLTN2am9LendGZE5qYVBzTWZ6T1UxalhjczZtdUh2Yl9ieEgycFp6ZjExanZYVnlrZGZselhiSG1lTks2bGIxdTRvRjRtT1BnX3h6MEp4RGpn?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQay1QUWdjbk42dWhUNUxJZWJEVjZpZFB0cF9FVHp4dXU2bnltTUt0MVFlWTFuOWJacHVCVHBzR3RobWpVTU0xejVnd0s5Z1NlSGpCaGZ6WU1zSi1qYmZoUFh0Q3ZvaFpJT09zSzlFWWoxMjRDdjhzWmJHdUkzZE1oRmF3THBmemZtU25VbkJHdUY?oc=5",
           "importance": 2
         }
       ],
@@ -1774,8 +1774,8 @@
           "countryId": "sa",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Saudi Royal Court Advisor Dr. Majid Al-Fayyad - Arab News PK",
-          "summary": "Saudi Royal Court Advisor Dr. Majid Al-Fayyad Arab News PK",
+          "headline": "Saudi Royal Court Advisor Dr. Majid Al-Fayyad - arabnews.pk",
+          "summary": "Saudi Royal Court Advisor Dr. Majid Al-Fayyad arabnews.pk",
           "date": "Sep 1, 2026 · 9:38 PM",
           "publishedAt": "2026-09-01T21:38:39.000Z",
           "dateOnly": false,
@@ -1787,8 +1787,8 @@
           "countryId": "sa",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Saudi royal court adviser thanks Turkish president for support for 2027 Spanish Super Cup in Istanbul - Anadolu Ajansı",
-          "summary": "Saudi royal court adviser thanks Turkish president for support for 2027 Spanish Super Cup in Istanbul Anadolu Ajansı",
+          "headline": "Saudi royal court adviser thanks Turkish president for support for 2027 Spanish Super Cup in Istanbul - aa.com.tr",
+          "summary": "Saudi royal court adviser thanks Turkish president for support for 2027 Spanish Super Cup in Istanbul aa.com.tr",
           "date": "Aug 14, 2026 · 7:00 AM",
           "publishedAt": "2026-08-14T07:00:00.000Z",
           "dateOnly": false,
@@ -1813,8 +1813,8 @@
           "countryId": "sa",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Saudi Arabia’s nuclear deal with Donald Trump raises questions over Iran and Israel - jpost.com",
-          "summary": "Saudi Arabia’s nuclear deal with Donald Trump raises questions over Iran and Israel jpost.com",
+          "headline": "Saudi Arabia’s nuclear deal with Donald Trump raises questions over Iran and Israel - The Jerusalem Post",
+          "summary": "Saudi Arabia’s nuclear deal with Donald Trump raises questions over Iran and Israel The Jerusalem Post",
           "date": "Jul 30, 2026 · 7:00 AM",
           "publishedAt": "2026-07-30T07:00:00.000Z",
           "dateOnly": false,
@@ -1828,6 +1828,19 @@
       "official": [],
       "independent": [
         {
+          "id": "ae-independent-523c9c53dc44fb81",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Under the patronage of the UAE President, Theyab bin Mohamed bin Zayed honours winners of 20th Sheikh Zayed Book Award - mediaoffice.abudhabi",
+          "summary": "Under the patronage of the UAE President, Theyab bin Mohamed bin Zayed honours winners of 20th Sheikh Zayed Book Award mediaoffice.abudhabi",
+          "date": "Sep 16, 2026 · 5:06 PM",
+          "publishedAt": "2026-09-16T17:06:27.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxPWTVGbEt6QWFwVUFMWmxHck9yQzVoaHUteGtPeHRnUVJ0UkhqOXhfZ2Y0TG9ybUVQbGw4NEhSaFc3ODRRYUlUb00zaHNCNFdHblJWQ3NPdVpzUkxwSnN4QWRZR3ZnUElLbHVwbFYtWTVqalF1bkk3RGVhUzR2NXo4dHVBTG1qVzY0d1gxeU9WZXlNZUVUVEJ6Z3dkLUFtQWZtYXBoeEpvelZTWkE1T3NWVEw1d2JrY3pYbkpJT3Y1YWRjUUl5WHNPVmlwU011S2FRYl9jcDAtZXNvRm54NHIxbjVzeGtBTlFsM09iRTlhWWJLSXBHcHhDcE9TQQ?oc=5",
+          "importance": 2
+        },
+        {
           "id": "ae-independent-6f2282ee3a83a756",
           "countryId": "ae",
           "sourceType": "independent",
@@ -1838,19 +1851,6 @@
           "publishedAt": "2026-09-14T14:11:43.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNd1o0SlR5Rk1OMTRyVEdpdENqX0w1Y3o1Z09xRmlrLVNMeVE3QlRPUTNfVV9lZFZzbGlWZTJiWDBUMnNVVU80Y1dWUVJOUV9IbE1hS3ZCWXlHYXFNMXN5RFVMOFdwV3BQSmQ2SUVmYk9oRHBaSHJIRG1qM2lZSnF4bTBKZTYtcllfdXY2RS1HVDgyeWlQUXhpeDA1alpZaXdobzhBRi1LVHJjV0RDWHBkOW1tRC1rMnhCWWxDX3phOWRENDhQUHM2R3Z6RQ?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ae-independent-523c9c53dc44fb81",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Under the patronage of the UAE President, Theyab bin Mohamed bin Zayed honours winners of 20th Sheikh Zayed Book Award - مكتب أبوظبي الإعلامي",
-          "summary": "Under the patronage of the UAE President, Theyab bin Mohamed bin Zayed honours winners of 20th Sheikh Zayed Book Award مكتب أبوظبي الإعلامي",
-          "date": "Sep 16, 2026 · 5:06 PM",
-          "publishedAt": "2026-09-16T17:06:27.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxPWTVGbEt6QWFwVUFMWmxHck9yQzVoaHUteGtPeHRnUVJ0UkhqOXhfZ2Y0TG9ybUVQbGw4NEhSaFc3ODRRYUlUb00zaHNCNFdHblJWQ3NPdVpzUkxwSnN4QWRZR3ZnUElLbHVwbFYtWTVqalF1bkk3RGVhUzR2NXo4dHVBTG1qVzY0d1gxeU9WZXlNZUVUVEJ6Z3dkLUFtQWZtYXBoeEpvelZTWkE1T3NWVEw1d2JrY3pYbkpJT3Y1YWRjUUl5WHNPVmlwU011S2FRYl9jcDAtZXNvRm54NHIxbjVzeGtBTlFsM09iRTlhWWJLSXBHcHhDcE9TQQ?oc=5",
           "importance": 2
         },
         {
@@ -1880,6 +1880,19 @@
           "importance": 2
         },
         {
+          "id": "ae-independent-262c02dc3e117149",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "US, Emirati presidents discuss bilateral ties, regional developments - Middle East Monitor",
+          "summary": "US, Emirati presidents discuss bilateral ties, regional developments Middle East Monitor",
+          "date": "Aug 18, 2026 · 3:17 PM",
+          "publishedAt": "2026-08-18T15:17:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQeWY0MlBObG14UVVfSE1qS2w4eTBqcUVtd25jMnpxa25VU21qT19USnNUY0o4THEwMHNORm5Nd0I3Qk9JcFNvQ084OUdSVEZmZDExNUVqQUM0TDJVSlZNQU1vZFZVUGd1U2tRYXA0VUwwRG5YbHZ5YlFGQUY4a2FEN3Z2VmZRelJ2OEJDb2oxNVl0V2tCNEJfWGlmU3FtYzVlXzQwSkJONTAzQmF4b2tJ0gG0AUFVX3lxTE1RMkZIczQ0Zzg2dk5HYmlLMUFwVXV6RlNqdnlBMmJsa1BkVHczY2RiMkJYa0psSGR0QkE4ZVZLTjN4QmdBb2M1b0lsbUt3Sk5JR21tcDhEa2tiRE0xbkZjbnFvVUZyOFNOYkNOaENBcjJYcGtmRldmdkJSWVpJTFdwbzdoajdXV2JwQkJCMmJBQW5ZYUd4bDh3c0xrbV82UDlXczBfN0tPUmFYSHpTQVFJZWhzYQ?oc=5",
+          "importance": 2
+        },
+        {
           "id": "ae-independent-9453e9d1b0e8159a",
           "countryId": "ae",
           "sourceType": "independent",
@@ -1890,19 +1903,6 @@
           "publishedAt": "2026-09-14T16:24:24.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQbi1JTWI3dnROUjBKZUQxeXZUZVNBdTdobmdiSVBKSjlXY1RBNU90MjJXZElUQ0RDempoc3FRbDRyMFh5M083bjNHamlYN01XcjQtaS1ZOU5XOEpNUVE1RE5rU2VlNHV5b0dUdzh0dXVvS3p5d3Y0WEhDRzExeXlXRGdDT1MyXzVVb0h2bHZR?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ae-independent-b7b6db28aa0a913c",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "UAE says it is suspending trade with Iran after missile launch - The Washington Post",
-          "summary": "UAE says it is suspending trade with Iran after missile launch The Washington Post",
-          "date": "Aug 19, 2026 · 7:00 AM",
-          "publishedAt": "2026-08-19T07:00:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNVnA2MnprdC01ZXZreGxyR1pZYl9rTnVReTZ0S2ZiZ3FMcGtabktucW5nT011Vm9aZnNZbHBpX0FkenktVXJnWkluOGJYaThYMHJPcXlwN2F2T3J0dXBaX1VyVXRQU2pESWtEZmo4eDRPTzg5U1JuSmZOLWJuNjFwLXZ5NUJzMk5nb1l0ZWNVOTAzSk9hWnhSZ1J2UGlWRVNBYjJkaHJpbEYyQkdtR1VEYg?oc=5",
           "importance": 2
         }
       ],
@@ -1938,19 +1938,6 @@
           "importance": 2
         },
         {
-          "id": "eg-independent-2e3b9cc124a49db0",
-          "countryId": "eg",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Egypt’s El-Sisi rejects displacement of Palestinians, vows continued efforts on Gaza deal - Arab News",
-          "summary": "Egypt’s El-Sisi rejects displacement of Palestinians, vows continued efforts on Gaza deal Arab News",
-          "date": "Sep 16, 2026 · 2:49 PM",
-          "publishedAt": "2026-09-16T14:49:56.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQd3hHblNfZ3hfcHpnMEJkd01sZGo0Rkt5RXJmVjhhcDNXQ2R3NlhZN1FTU2JHU19RY2dncW9DZERmUG5Sd1RHbDloalQtdTd6c0g4S2wtY3MtdGEzd1FYYmhobk9UZ2plSnh6VmNwSXBFRy1mOFN4YUtFSmJTR3kwZnVIYk56RlUtdXQtZFRYY1BRdnMtclZVMEFSSkVlb0FNZngzdUVJa0ZoWVZSNkx4S0tYQ3BCdllqLXd0MlFXU1MxNGduODJyV29Ybkw?oc=5",
-          "importance": 2
-        },
-        {
           "id": "eg-independent-9f96fbd4a37dcbaa",
           "countryId": "eg",
           "sourceType": "independent",
@@ -1961,6 +1948,19 @@
           "publishedAt": "2026-09-14T19:36:11.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNaUhkWlFkejY2dGFITDBMX0U0ZnBoZFBzWFlQRTJPZkRkWUcyX29UbTl6d1p2dFEzbUtXUFZvYUtPSWI2aFNaeFVVazlTSTZMOS1tcE02SVdmcV84SXlyTGZvSjdTVU5YbHRzMlpEU3cxc1RTUktGWVJWQUZQSmZPYmM4VUhIeTFoV0xWQ29zV2pIUjJRZEdtV3RtYkdaSy10Nzc3cGNwX2NWbUlEV3RR?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "eg-independent-2e3b9cc124a49db0",
+          "countryId": "eg",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Egypt’s El-Sisi rejects displacement of Palestinians, vows continued efforts on Gaza deal - Arab News",
+          "summary": "Egypt’s El-Sisi rejects displacement of Palestinians, vows continued efforts on Gaza deal Arab News",
+          "date": "Sep 16, 2026 · 2:49 PM",
+          "publishedAt": "2026-09-16T14:49:56.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQd3hHblNfZ3hfcHpnMEJkd01sZGo0Rkt5RXJmVjhhcDNXQ2R3NlhZN1FTU2JHU19RY2dncW9DZERmUG5Sd1RHbDloalQtdTd6c0g4S2wtY3MtdGEzd1FYYmhobk9UZ2plSnh6VmNwSXBFRy1mOFN4YUtFSmJTR3kwZnVIYk56RlUtdXQtZFRYY1BRdnMtclZVMEFSSkVlb0FNZngzdUVJa0ZoWVZSNkx4S0tYQ3BCdllqLXd0MlFXU1MxNGduODJyV29Ybkw?oc=5",
           "importance": 2
         },
         {
@@ -2065,8 +2065,8 @@
           "countryId": "za",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "South African President Withdraws From Public Engagements Over Ill Health - therealmediang.com",
-          "summary": "South African President Withdraws From Public Engagements Over Ill Health therealmediang.com",
+          "headline": "South African President Withdraws From Public Engagements Over Ill Health - Real Broadcasting Network",
+          "summary": "South African President Withdraws From Public Engagements Over Ill Health Real Broadcasting Network",
           "date": "Sep 16, 2026 · 9:55 PM",
           "publishedAt": "2026-09-16T21:55:25.000Z",
           "dateOnly": false,
@@ -2145,16 +2145,16 @@
           "importance": 2
         },
         {
-          "id": "ng-independent-6c95f9b79927263e",
+          "id": "ng-independent-288689c16d0a412e",
           "countryId": "ng",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "PRESIDENT TINUBU’S SPECIAL TRIBUTE TO PROF. SHAFFY AMUWO AT 80 - The State House, Abuja",
-          "summary": "PRESIDENT TINUBU’S SPECIAL TRIBUTE TO PROF. SHAFFY AMUWO AT 80 The State House, Abuja",
-          "date": "Sep 16, 2026 · 7:02 AM",
-          "publishedAt": "2026-09-16T07:02:00.000Z",
+          "headline": "Tinubu Meets Progressives’ Govs At State House - THISDAYLIVE",
+          "summary": "Tinubu Meets Progressives’ Govs At State House THISDAYLIVE",
+          "date": "Aug 27, 2026 · 7:00 AM",
+          "publishedAt": "2026-08-27T07:00:00.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPaXdtTHB6YjdRbEpUUjZrYjVWeEZXbWE2MUphbDZqV0MzVlFuRC0zYXhZdlRvMF84Rnd3OF8wMnhZejBTTnJJQWhNdTVydlVBdThiQ29TaTllRlAxRnJXTkc1RzgtUDl3N3pIblFZM2k5emx6MHZ0WG1CTkFvXy1FUFZyLWV5U1JqMk1GWDNHTFQ?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQSTNBdzZ2WkdxSFJ0RUMybUZVbElpRG9SQmtzRGhKa3poRmpNb2VyMjI1ZVoxSWFLOTBYZkdQdFZRelJVYWQ5TmNONTA3SVNqUUxjQ0MwZ0g3a0piOE9YMnZTSFBlZDdvQUZWVjV0SGNqanFka0h6MXYzNi1DcnlwcWxsenNwTi1iTWQySi1hblg?oc=5",
           "importance": 2
         }
       ],
@@ -2243,19 +2243,6 @@
       ],
       "independent": [
         {
-          "id": "in-independent-b94e3cd4919730d3",
-          "countryId": "in",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Narendra Modi facts you may not know: 10 little-known details from Indian PM’s life - The Economic Times",
-          "summary": "Narendra Modi facts you may not know: 10 little-known details from Indian PM’s life The Economic Times",
-          "date": "Sep 17, 2026 · 1:16 AM",
-          "publishedAt": "2026-09-17T01:16:18.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPZlcxMkk0NXplZzFYTE0waVozWDRkZlBDOVBLSDhMS1JYT29idHkzTklYZDg5TEFIa2kwSEc1TU9UTDFBbkpPV2h1ZUw4RXFKV3kzVWZfMjNtbUlWekJQZVBNS3VwMDhfTVdZREw5Q0NnQTVJTUtFb29YVHRnX21NTFU1QXJWZkJHYWl0RTIxaWRyRVVnRnVUWTQ4N051YXhFOWFDMzg1aTh2V0NTak9EZXZqQ2otYmthRWVMS3RIdHpCLVBGcU9yZk9meThTTWZvX2k4MmpwLWs3OXBRaFZB0gHkAUFVX3lxTE9CRG0xSmFob1lPN2FXZHlFdEc4WTk3WHhBT0FfelJoMUxsdXV0Vjc2UHdXZ2t0QU5lRlRyU240NFBieTNMQTNMWEM3UVJRYzg3SUJkWF9wWlNWWE80NFVRcG1JcjJ5YjJkOGN5QWI3SlpITHhUQTB3ZUIzcURjVnRsdm5SMVN2MXBScTY2Y2tSbExFQW9zR056bGpIaTJNSGxtekRLZEdqbzFvWV84NmN1MFRYLVkxQVVpUzF5bVBqQzd0UkFKSTJxbmhkcjdCYndZaEw1UHZxcjUtMmlLWGhBTGFrNw?oc=5",
-          "importance": 2
-        },
-        {
           "id": "in-independent-5bcf1c68b17a768b",
           "countryId": "in",
           "sourceType": "independent",
@@ -2269,16 +2256,16 @@
           "importance": 2
         },
         {
-          "id": "in-independent-b3ad05673eac7cbc",
+          "id": "in-independent-8d9d46d611d3054e",
           "countryId": "in",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "BRICS leaders voice concern over Middle East, condemn unilateral sanctions at India summit - Chronicle-Tribune",
-          "summary": "BRICS leaders voice concern over Middle East, condemn unilateral sanctions at India summit Chronicle-Tribune",
-          "date": "Sep 16, 2026 · 5:57 AM",
-          "publishedAt": "2026-09-16T05:57:52.000Z",
+          "headline": "Narendra Modi facts you may not know: 10 little-known details from Indian PM’s life - economictimes.com",
+          "summary": "Narendra Modi facts you may not know: 10 little-known details from Indian PM’s life economictimes.com",
+          "date": "Sep 17, 2026 · 1:16 AM",
+          "publishedAt": "2026-09-17T01:16:18.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMikAJBVV95cUxNSWlpOXZ6djZOUGRjRlVKQXI0bjBrd05lb0Y2TXRnOHZQcTB6d2xOQlFGbEcxYUI2X2Fua0FKeDhCUG8xZlVrbkVKNEpQT0RJQUNuM0ZlQUNYSlVoZlhHa0h4cHA5SWMyMUw0RVo0T0N4RVA3SUY3Wk9pRlVDR0FkSVl0STV5UjdvQUtXTUVYYlNkQ1ZjNk9nX0R3cUU1Umt4c1hUYUplSjdvNXFJZXFmVmh2ejdBaTkxbWVfV0tKUk9YRG4zcGZsY2dFcXFobUx3anJOZDJkdEV4UllKYmxDTDdwRy14UHp0bDBpdXVoUDVKMU9HSTVzRm4zMk96SFlDRmJ4RTh5TUN5R0hTWWVNUQ?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPZlcxMkk0NXplZzFYTE0waVozWDRkZlBDOVBLSDhMS1JYT29idHkzTklYZDg5TEFIa2kwSEc1TU9UTDFBbkpPV2h1ZUw4RXFKV3kzVWZfMjNtbUlWekJQZVBNS3VwMDhfTVdZREw5Q0NnQTVJTUtFb29YVHRnX21NTFU1QXJWZkJHYWl0RTIxaWRyRVVnRnVUWTQ4N051YXhFOWFDMzg1aTh2V0NTak9EZXZqQ2otYmthRWVMS3RIdHpCLVBGcU9yZk9meThTTWZvX2k4MmpwLWs3OXBRaFZB?oc=5",
           "importance": 2
         },
         {
@@ -2292,6 +2279,19 @@
           "publishedAt": "2026-09-16T15:54:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQTFcwc0FtTU1LcXBNMk1QY0V4TVdjN3V0NjBnZ3JxVkMzaV9fM0JBNGxkRUhWSElRclpXVFhXZ3FPM05jWUVUbU42dE16aDc1V1dFWGtkZGhKTmpnT1Iwb1FWY2haQk9hT2tGRWFaZ0cxTUh0RFo1bm80MXQzaVdaR2FMd3Y3X3I5OWlrMTFnTDZlQkZxUU9Pek1wdF9XaTFrNWdDZ1ZyaXFFWTNTdko5clI5YzFUV1A1T0s2dFB3T1JSUDJOYk5hT0UtczM1RUZ2X19wbDhWZ015WHJGcXk3YtIB5gFBVV95cUxOcFpic1JhbnlkTTBoVkpfajc2RmxhOUl1UXllczlEYmppMHdlUXJqMElYMThCS21tRDNrYlplVU1nQlM0U1psZ0ZmOW9VbU51dklpUnhfcjU3dTVJR3U2QnZ3LWVYNUtaUm0zMTZlUThUYmNDYmlDODgzV0tRVHVIdnhRazBrakcycUJiNGFOem0yaTRUSGd6YUUyTE9pcVVWTEpwMHVDR2JpRlZrX2xIZ0RNbEJLNkV2aEZsay04Y1BFY3dyX29hU25Lakw4eS1IU2FPRm4wM2RtVDgzWlQ0My1qWm5nUQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "in-independent-b3ad05673eac7cbc",
+          "countryId": "in",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "BRICS leaders voice concern over Middle East, condemn unilateral sanctions at India summit - Chronicle-Tribune",
+          "summary": "BRICS leaders voice concern over Middle East, condemn unilateral sanctions at India summit Chronicle-Tribune",
+          "date": "Sep 16, 2026 · 5:57 AM",
+          "publishedAt": "2026-09-16T05:57:52.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMikAJBVV95cUxNSWlpOXZ6djZOUGRjRlVKQXI0bjBrd05lb0Y2TXRnOHZQcTB6d2xOQlFGbEcxYUI2X2Fua0FKeDhCUG8xZlVrbkVKNEpQT0RJQUNuM0ZlQUNYSlVoZlhHa0h4cHA5SWMyMUw0RVo0T0N4RVA3SUY3Wk9pRlVDR0FkSVl0STV5UjdvQUtXTUVYYlNkQ1ZjNk9nX0R3cUU1Umt4c1hUYUplSjdvNXFJZXFmVmh2ejdBaTkxbWVfV0tKUk9YRG4zcGZsY2dFcXFobUx3anJOZDJkdEV4UllKYmxDTDdwRy14UHp0bDBpdXVoUDVKMU9HSTVzRm4zMk96SFlDRmJ4RTh5TUN5R0hTWWVNUQ?oc=5",
           "importance": 2
         },
         {
@@ -2312,8 +2312,8 @@
           "countryId": "in",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Modi calls on India to become an early leader in emerging technologies - newindianexpress.com",
-          "summary": "Modi calls on India to become an early leader in emerging technologies newindianexpress.com",
+          "headline": "Modi calls on India to become an early leader in emerging technologies - The New Indian Express",
+          "summary": "Modi calls on India to become an early leader in emerging technologies The New Indian Express",
           "date": "Sep 16, 2026 · 2:45 PM",
           "publishedAt": "2026-09-16T14:45:00.000Z",
           "dateOnly": false,
@@ -2326,6 +2326,19 @@
     "pk": {
       "official": [],
       "independent": [
+        {
+          "id": "pk-independent-6046e4d6c94a41c3",
+          "countryId": "pk",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Pakistan’s military says Makkah defence pact has 'no regional aspirations', intended for collective deterrence - Asia News Network",
+          "summary": "Pakistan’s military says Makkah defence pact has 'no regional aspirations', intended for collective deterrence Asia News Network",
+          "date": "Sep 17, 2026 · 3:35 AM",
+          "publishedAt": "2026-09-17T03:35:38.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQOS1ZWTFRbTdyaEdWUXpGTGU0SHhWVE1iYXFLOGVrdGZwUmZUbnF4MDF0QjNwbXFMUUNUc1JiQmlyb3JySmwtS0xzNzhtTVVyVUMyY3FDM25pd0lVSnZ5MExQSzVScUFVbEZRM0dwd194VmtBOGpoNEVCYjdwdG9iNlY3aWpyMTRvd1poc3dpUzN6OHhJaDI0cGNBWkRqWjZidkdhd3dpczJ3UnNyaXYtWVViTkg3Vl9vVHJBeFhGMG9OS3owZGRnVHh3NzE?oc=5",
+          "importance": 2
+        },
         {
           "id": "pk-independent-71ae80a6dd594611",
           "countryId": "pk",
@@ -2357,8 +2370,8 @@
           "countryId": "pk",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Iraqi military commander dismissed after drone attacks against Saudi Arabia, prime minister’s office says - Arab News PK",
-          "summary": "Iraqi military commander dismissed after drone attacks against Saudi Arabia, prime minister’s office says Arab News PK",
+          "headline": "Iraqi military commander dismissed after drone attacks against Saudi Arabia, prime minister’s office says - arabnews.pk",
+          "summary": "Iraqi military commander dismissed after drone attacks against Saudi Arabia, prime minister’s office says arabnews.pk",
           "date": "Sep 12, 2026 · 1:56 AM",
           "publishedAt": "2026-09-12T01:56:57.000Z",
           "dateOnly": false,
@@ -2389,19 +2402,6 @@
           "publishedAt": "2026-09-04T07:00:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNMDQ1Um4waUFpRklONzhGdjhyTDZ3cFRGb2h1ME9YWFFfRF9jb0VPNE5CUjF4dEoxWTNEaGdnc09EVU83Mk82SlVSTTFISGhEdExnUy1rX0lCVmdYSmhUU2Q1VGd0dXRBSjY2bU5QSXBUVnlPZHh6dVR3UjAycmNraTFGMHQwOTlyVlg3Qmh3TGFtTmw0ZXFXWFU1R1lqcTk2Z3lMUlZMSV9JdXpTNVBZSHFVc9IBuAFBVV95cUxNcjdjMk5Hempwd3lGdDR0cGM3a3ZGSGdBSWhCRnVzOEl2bkxyZDZaODFtX205M0hGdnpodU9HZ0ozRlhoRmtDeUZTQzJOdWtNbFR5S0poaF9pa1dqLTVPUzRnVDFZcWNGXzBHdmVGQ0VQcXBnRG1PU3RLTmdZcnJWSG5IdkxiSmR0WDlNRE5SeFc0WWswM3hjZWFQc0p6VE1zRmhVOGM3N2VIRXIzZmJCUVV1SWl1NTlC?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "pk-independent-243aac6b484118e4",
-          "countryId": "pk",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "PM orders implementation of Pims inquiry reccomendations within 3 months - Dawn",
-          "summary": "PM orders implementation of Pims inquiry reccomendations within 3 months Dawn",
-          "date": "Sep 16, 2026 · 9:19 AM",
-          "publishedAt": "2026-09-16T09:19:21.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1tNW9UMlJWck1NLUtVUlBqdTF3SWVNV1BTeWF4YVh3T2swV3p2bGlsZ0xmREF6NlRfNkNYaXdOSldMT0x4LVhrUNIBTkFVX3lxTE1fZHdoQ0czMWMyVF93QlVYTzdjZVhrNGxfSXQ5eGtjWGlXZzBncndzeDIxSHRUQ1VXa3MwU3NjZFl1ZkF3OENlRUpNTGR0UQ?oc=5",
           "importance": 2
         }
       ],
@@ -2542,19 +2542,6 @@
           "importance": 2
         },
         {
-          "id": "cn-independent-b6d55fe1b25b9c5e",
-          "countryId": "cn",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "China imposes new travel restrictions over tech security - DW.com",
-          "summary": "China imposes new travel restrictions over tech security DW.com",
-          "date": "Sep 16, 2026 · 3:53 AM",
-          "publishedAt": "2026-09-16T03:53:14.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPSjRfQ05GUUxvbG9PVjVQYVJOeTlIWGxGQzlHRDg1RnNEQUxKeXpnTVdrbjRGdEZBcG90R3duYjVLNkFtQ1RYQTNlSlRTU3ZvNS1jc09GaDF5RWZubUY1NkhjV3J3YXdEdFUydHM5NlRtaEJSNmdHa2U0MXBqZXM2R0h2R0JjUdIBhgFBVV95cUxQOURVekRwZjVxVlB5LVdNVjkxSENpUnlKMDNtdUhUVVQyVXpTYnhqcWNzV3E2NV9iVzJrbGwzZ3R0MHhyWWpEcDhzd18yRUlBaHBvQ0xUZ3hzZTA4aGl2Q0tRVE9RQlZIM3MwSlNVZGFHaWxHMGVzR3YtbkJvSVhibVlXSC1zQQ?oc=5",
-          "importance": 2
-        },
-        {
           "id": "cn-independent-bfc627c0bd017496",
           "countryId": "cn",
           "sourceType": "independent",
@@ -2565,6 +2552,19 @@
           "publishedAt": "2026-09-15T04:35:39.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPOERseWM1SDB1UFZUdEMyblU1WFN6RjBjWEtiQlgzd0wzY3BISTJYdE9IZ3VwZl9wcXZIWEpRRnNnbl9aOUtlZFloanhtZFdUaXZLYkFnRktlYnp6Tm5wZ2JNX29rMG1TTmlPWVdjcWdtbEp3RXRJU1JFV01VS1oxTDNBTllRbTNmdW9UYnpzWkEyRUNTU254dmE2eXNqVVJv0gGmAUFVX3lxTFBOcXgwSGdUYTl2eVlBX2x3WTVDYzVBbGxvVTYxSDlkUDZpaVpUXzZWZ2xoNjZ3ZnRycWQ4el9KMlVMLVJVUk84RmJUWWNVbm42ZnhNbU9CaFJHdlNuNEJxSzZST0xXazZVcHZMNnFhTmMwTThXSFZManZxdmRtZGNmb20xc0JxS2h6c1U5UGxWWm9hZTlOVGxfOHBGc3FPenZFYWxWLWc?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "cn-independent-0a67b140b043adb5",
+          "countryId": "cn",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "China's State Council Deploys Computing Power Network Buildout; Industry Chain Orders Heat Up, Computing Optimization Emerges as New Paid Hotspot - finance.biggo.com",
+          "summary": "China's State Council Deploys Computing Power Network Buildout; Industry Chain Orders Heat Up, Computing Optimization Emerges as New Paid Hotspot finance.biggo.com",
+          "date": "Sep 12, 2026 · 11:25 AM",
+          "publishedAt": "2026-09-12T11:25:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE8yaDNCOUtJSXRmbzJzbXNFb19scG84VzNwUjFjYks0RE90NzZJbjNtNUpJQmxkVTktMFBkNjBSOUx5bWgtcncwQVhlNnhVdXYzRFVKWnFDTFFmSjVZVmptWDlYcV9MOXk1WlhacWs1azM5Rk5SNmc?oc=5",
           "importance": 2
         }
       ],
@@ -2983,10 +2983,10 @@
           "countryId": "tw",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Presidential Office to hold international resilience forum - Taipei Times",
-          "summary": "Presidential Office to hold international resilience forum Taipei Times",
-          "date": "Sep 16, 2026 · 4:00 PM",
-          "publishedAt": "2026-09-16T16:00:00.000Z",
+          "headline": "Presidential Office to hold international resilience forum - taipeitimes.com",
+          "summary": "Presidential Office to hold international resilience forum taipeitimes.com",
+          "date": "Sep 17, 2026 · 3:29 AM",
+          "publishedAt": "2026-09-17T03:29:05.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1hOUtLWi12R0w5b0NfcUR1akY4OFNvUWpJQXJWR0xVZHZIRU9nRDNzVnJob2RyNG9DYmI5SkxpdGFLV1dndlo5UGFsMnFmbGFNRU40aVl2VEo5cU81Z0puRU5ZX3I1bXVBRG0wY3I5ZU9LUjV4YWw4S1Nn?oc=5",
           "importance": 2
@@ -2996,8 +2996,8 @@
           "countryId": "tw",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Presidential Office to hold forum on Taiwan's whole-of-society resilience - Focus Taiwan",
-          "summary": "Presidential Office to hold forum on Taiwan's whole-of-society resilience Focus Taiwan",
+          "headline": "Presidential Office to hold forum on Taiwan's whole-of-society resilience - focustaiwan.tw",
+          "summary": "Presidential Office to hold forum on Taiwan's whole-of-society resilience focustaiwan.tw",
           "date": "Sep 16, 2026 · 6:32 AM",
           "publishedAt": "2026-09-16T06:32:00.000Z",
           "dateOnly": false,
@@ -3031,16 +3031,16 @@
           "importance": 2
         },
         {
-          "id": "tw-independent-ec1637060dd2b506",
+          "id": "tw-independent-333fcf137d41b770",
           "countryId": "tw",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Taiwan’s vice president on rare Europe visit for Italy democracy forum - whbl.com",
-          "summary": "Taiwan’s vice president on rare Europe visit for Italy democracy forum whbl.com",
-          "date": "Sep 11, 2026 · 3:44 AM",
-          "publishedAt": "2026-09-11T03:44:32.000Z",
+          "headline": "Taiwan’s vice president on rare Europe visit for Italy democracy forum - WTVB",
+          "summary": "Taiwan’s vice president on rare Europe visit for Italy democracy forum WTVB",
+          "date": "Sep 11, 2026 · 3:59 AM",
+          "publishedAt": "2026-09-11T03:59:32.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOS2hMYTJZYndLT1RDWWtKMnFXc2JPa0hEN29nLUFXSk56eDNaa0d1MjB4QU1pUkxGVm0tSS1DYmFFXzVoS0pNdU1IZkpQbG9aLTVXNl9oTDRBRmgtZWpmM05oMDNVYTRUTk5nTGowVkw3cWsyeTkySk8zc3AyZ3BVOWlqV2dFWEppWmluTmhKNVpaR204eS1vMHd2VHplR3dEY3o5RHE0OA?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOODZoQWllNXN0YmhCY0IxM2ZoWDR2TWF3NHV0Vk1RWWctal9iazhDaUdDel9oN091ejJLOE12SnhVRDFGNHNVOUJXQWhjdFA2a3BIWmVOdHVxZ0pGdm9zSWFBVnBkeVV0ekFTQk00eFd5dGNKLTNvNVhkbXVrZDZ4cXV4emU5YVU3ZF92dmsxQWhielBDSEdvVEhfb2dxTnBoLVRJRzZNZmFzZw?oc=5",
           "importance": 2
         },
         {
@@ -3226,6 +3226,19 @@
       ],
       "independent": [
         {
+          "id": "au-independent-620d3aa8f8f4f786",
+          "countryId": "au",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Australia, China Australian PM's Chinese interpreter under scrutiny for sensitive ties with China - Intelligence Online",
+          "summary": "Australia, China Australian PM's Chinese interpreter under scrutiny for sensitive ties with China Intelligence Online",
+          "date": "Sep 17, 2026 · 4:04 AM",
+          "publishedAt": "2026-09-17T04:04:24.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNMWxvWkY2Y2NfczM5VWx3NjJiREpuYVFpOXNoMTV2T18xOG9JVzN2dlgxZ3hkOTAwRzNJY0p5TnVzY0REYmg4ZUhnMDJ2TjBDTWlRS0xhcF84czJtOFgwRU5zanVSbWY2X3JnTDBOMm5ldDFXUF9ZVlF3LUNETEhhSkFVLVluemM4NWNURzNqTERRNHcxYURTTnNQVHNCMERocUhCQTNvWmJyWlcwbnUtUkhnLUFUZTk3eUJ6dnlKelJPTkhHalNjTDFtYW1ZQkxLRlIyX2MzUW1tWkswZGJpM2VidllyaTV1?oc=5",
+          "importance": 2
+        },
+        {
           "id": "au-independent-396e82364151b38e",
           "countryId": "au",
           "sourceType": "independent",
@@ -3256,8 +3269,8 @@
           "countryId": "au",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Australia’s PM Apologizes for ‘Inappropriate’ Comment About Kylie Minogue - time.com",
-          "summary": "Australia’s PM Apologizes for ‘Inappropriate’ Comment About Kylie Minogue time.com",
+          "headline": "Australia’s PM Apologizes for ‘Inappropriate’ Comment About Kylie Minogue - Time Magazine",
+          "summary": "Australia’s PM Apologizes for ‘Inappropriate’ Comment About Kylie Minogue Time Magazine",
           "date": "Jul 6, 2026 · 7:00 AM",
           "publishedAt": "2026-07-06T07:00:00.000Z",
           "dateOnly": false,
@@ -3288,19 +3301,6 @@
           "publishedAt": "2026-07-05T07:00:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOY3QzSmduclZubGdJX1ZzeVB1TjRZYmJvWUYzRHc4MUU3aHFrTTQ5bXQ0WkNycHg4UFJRSzd5SDJnX0ZkNHVTaHpYZ0xpaFJhMDZwN3JFMFZsR3JCYUMtcUU3b3YyZV9FUGtqcklvODl6Tkd0d3lkdnBJUzZ4ZnhRdGtpM2RPRWYxTTNvclFaT0E0cmc3THowczlHdm1INnlZTU50WmhkRUJTZE5KS0FMcldTenM?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "au-independent-2e96ac4a19172d74",
-          "countryId": "au",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "I evacuated the White House on 9/11. These are four lessons we can’t afford to forget - United States Studies Centre",
-          "summary": "I evacuated the White House on 9/11. These are four lessons we can’t afford to forget United States Studies Centre",
-          "date": "Sep 4, 2026 · 7:00 AM",
-          "publishedAt": "2026-09-04T07:00:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOYmlYTU9NNmNWVm1wN1pNcW5oTHpuMTZJLVpFS2l5MU4wRHkyYUxEdVQ2Y2JIaFVpZThlTmtLdDlhUkk5UE0zbUxKaFFxQ01XakQzblM2NFpwa0pucmFONWZQemtCeURZTzFsLUZhYzU5Sy16NnFyTVdsX0t0Qno0LWhwTHlkXzBac0tGVmRwcnJTSUpHZWdwNnJ0dE9BaEx6UWtpUlhacGhpZU1f?oc=5",
           "importance": 2
         }
       ],
