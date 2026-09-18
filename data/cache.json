@@ -1,8 +1,21 @@
 {
-  "generatedAt": "2026-09-18T18:12:55.296Z",
+  "generatedAt": "2026-09-18T19:11:31.451Z",
   "countries": {
     "us": {
       "official": [
+        {
+          "id": "us-official-5c507c02799ba08d",
+          "countryId": "us",
+          "sourceType": "official",
+          "source": "White House",
+          "headline": "WHAT THEY ARE SAYING: President Trump Delivers Historic Victories for America’s Hunters, Anglers, and Outdoorsmen",
+          "summary": "President Donald J. Trump is delivering on his promises to America’s outdoorsmen by cutting red tape, removing burdensome and unnecessary restrictions levied by previous Administrations and expanding America’s great oâ€¦",
+          "date": "Sep 18, 2026 Â· 6:48 PM",
+          "publishedAt": "2026-09-18T18:48:53.000Z",
+          "dateOnly": false,
+          "url": "https://www.whitehouse.gov/releases/2026/09/what-they-are-saying-president-trump-delivers-historic-victories-for-americas-hunters-anglers-and-outdoorsmen/",
+          "importance": 3
+        },
         {
           "id": "us-official-38e00da46cea3100",
           "countryId": "us",
@@ -67,35 +80,9 @@
           "dateOnly": false,
           "url": "https://www.whitehouse.gov/presidential-actions/2026/09/withdrawals-sent-to-the-senate/",
           "importance": 3
-        },
-        {
-          "id": "us-official-cff720cb6c03169f",
-          "countryId": "us",
-          "sourceType": "official",
-          "source": "White House",
-          "headline": "Presidential Message on National Hispanic Heritage Month",
-          "summary": "During National Hispanic Heritage Month, we honor the innumerable achievements and vast contributions of Hispanic Americans, whose strength, character, and devotion to our country continue to make America the greatestâ€¦",
-          "date": "Sep 17, 2026 Â· 2:19 PM",
-          "publishedAt": "2026-09-17T14:19:32.000Z",
-          "dateOnly": false,
-          "url": "https://www.whitehouse.gov/briefings-statements/2026/09/presidential-message-on-national-hispanic-heritage-month/",
-          "importance": 3
         }
       ],
       "independent": [
-        {
-          "id": "us-independent-c93f00951a2e8665",
-          "countryId": "us",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "America’s hunters get an exclusive seat at Trump’s White House table as he takes aim at Biden-era rules - Fox News",
-          "summary": "America’s hunters get an exclusive seat at Trump’s White House table as he takes aim at Biden-era rules Fox News",
-          "date": "Sep 17, 2026 Â· 6:58 PM",
-          "publishedAt": "2026-09-17T18:58:16.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQU0FsTW9lME9uTzJzUGJRS0FNLUFOcW9iaklxV3NsVEFoUXR1bExjQXdMd19iRF8yMF8yTXE3U2RMemg0aVd5bFZrd29iLVdLaktyekJiY1l1aDdpSTVKMHdjN0hRNUpxakhad2xPZFcwUHVaUlRvV2FqcEVIUVo5eTBVZU1laHR1Q3VtVk9VQVk1M2VBb2hfQzFFMllnRE1QTXh4MGQ2Q2Y4SzduX3ZlS0poT3pFeDllQkY2TGhub9IBxAFBVV95cUxPNW1HOVkybHp5RThZdzVQdjctMkpMZW9QeVB1aGtnb1NFVWc5ZEtxQzlPWnhHb2laQjNqRnZzQVgxTEtBM0xGbHowWUhxX2J4eTNBWS1YUVdiUlkwZDl4NS1LSE9qV0xpRzJMV3N1c2Y4dEZjcjNoVjhXVm9ZODQtWEQ2WFpWQXBiTFNzaklLN1ZQMHNDdDFaeEY0enZNa3UyRHJzSWpOcUp5RlZGY04xZXlBT2tFUU8wUUM4NDZIcEM5VFNY?oc=5",
-          "importance": 2
-        },
         {
           "id": "us-independent-626b8d702246d96f",
           "countryId": "us",
@@ -103,8 +90,8 @@
           "source": "Google News",
           "headline": "Trump Calls A.I. Fears a Hoax. Inside the White House, the Debate Is More Complex. - The New York Times",
           "summary": "Trump Calls A.I. Fears a Hoax. Inside the White House, the Debate Is More Complex. The New York Times",
-          "date": "Sep 18, 2026 Â· 4:36 PM",
-          "publishedAt": "2026-09-18T16:36:47.000Z",
+          "date": "Sep 18, 2026 Â· 6:09 PM",
+          "publishedAt": "2026-09-18T18:09:23.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNak5GUzFuWWRqR1pyS1YtWkxtSXdRRXZQeTVOQzlEQmMtMVFteUxjYnRDRTdlRm91NFhacVJ4UkEwRVA1Slg3THlocElZRTZxdTh3TnNyZGlpRklMdFhyWndMaEVORS1JMUY0N3lLc0xQQkdTZHFhMzNtY0R1d01KeVhjRVI3SURHenRrVWVTME9TRDZl?oc=5",
           "importance": 2
@@ -120,6 +107,32 @@
           "publishedAt": "2026-09-17T22:17:19.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE42NTlYUDVnc1VoMXdxeFE4R2Z3X2lzd0VTX0tYTHVwT3dfb1AzLTBReHRKZnRjaEo2eV9DdDkwOElrU25TRVV0MEdEbzRydEJiV2g1dFhGa3BKYzg?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "us-independent-c93f00951a2e8665",
+          "countryId": "us",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "America’s hunters get an exclusive seat at Trump’s White House table as he takes aim at Biden-era rules - Fox News",
+          "summary": "America’s hunters get an exclusive seat at Trump’s White House table as he takes aim at Biden-era rules Fox News",
+          "date": "Sep 17, 2026 Â· 6:58 PM",
+          "publishedAt": "2026-09-17T18:58:16.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQU0FsTW9lME9uTzJzUGJRS0FNLUFOcW9iaklxV3NsVEFoUXR1bExjQXdMd19iRF8yMF8yTXE3U2RMemg0aVd5bFZrd29iLVdLaktyekJiY1l1aDdpSTVKMHdjN0hRNUpxakhad2xPZFcwUHVaUlRvV2FqcEVIUVo5eTBVZU1laHR1Q3VtVk9VQVk1M2VBb2hfQzFFMllnRE1QTXh4MGQ2Q2Y4SzduX3ZlS0poT3pFeDllQkY2TGhub9IBxAFBVV95cUxPNW1HOVkybHp5RThZdzVQdjctMkpMZW9QeVB1aGtnb1NFVWc5ZEtxQzlPWnhHb2laQjNqRnZzQVgxTEtBM0xGbHowWUhxX2J4eTNBWS1YUVdiUlkwZDl4NS1LSE9qV0xpRzJMV3N1c2Y4dEZjcjNoVjhXVm9ZODQtWEQ2WFpWQXBiTFNzaklLN1ZQMHNDdDFaeEY0enZNa3UyRHJzSWpOcUp5RlZGY04xZXlBT2tFUU8wUUM4NDZIcEM5VFNY?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "us-independent-8bbd2e2711f0c456",
+          "countryId": "us",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "All 50 states sign up for Trump's Medicaid most-favored-nation plan - Reuters",
+          "summary": "All 50 states sign up for Trump's Medicaid most-favored-nation plan Reuters",
+          "date": "Sep 18, 2026 Â· 6:41 PM",
+          "publishedAt": "2026-09-18T18:41:34.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNc0NGUXVRZk4wY3k3amVvZk84NnFsRldTd2NDSVBDSjFSREU5Wl9rZ3hEUFN4YzBiR2JxSzZab2Myd3AzWE1iM180RGVGcUlVZnZGT2JpaDNsRE5HNTdVZVpGYkZPeTRUS3Jfb2lOZUdIUGo4UDVNS3FqblZVYnZuZHhubHlwRUJxQ3FOMl8xQlIxcEJuSGdNX2xTY3pJdU9RZkxNbWJOSDZ5TnVLRHl4UFhyWGI2Z2Rn?oc=5",
           "importance": 2
         },
         {
@@ -146,19 +159,6 @@
           "publishedAt": "2026-09-16T23:42:54.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE80S2RKNTFfeklHNmZWODlmS0ZsdC1NSERxSVNaMG1weTFoVGo3VFlZNjRnVEFSMW16X1dKaElzNFlJWUlXQ2txTTlpRkNhNURGR25uWElRVXZ1NG9oZkE?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "us-independent-48829d9cd02be6d5",
-          "countryId": "us",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "White House withdraws Lance Schroyer’s nomination to lead ICE - Al Jazeera",
-          "summary": "White House withdraws Lance Schroyer’s nomination to lead ICE Al Jazeera",
-          "date": "Sep 18, 2026 Â· 1:27 AM",
-          "publishedAt": "2026-09-18T01:27:07.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPcTZfenhiOV9ySkVGNWpSYURxSlMxQWZhcmgyZF9JTWtvb2JXem5lTVR5VTJQTC1wS0hRc1lGOXNaZFZFaXhJX2dZVTQwMk1QNVgzLV8tbDZkVElHU3A2c3R0dkVqNUVrSHB0OE5qM3RpYzIyMnozRXVhTURsWU1WMUs3ZWFZeDRQcm9DcFRMa2lrbjd1ZDZxT1BVQmNwRWFZRk9J0gGoAUFVX3lxTE12UG9zYzhVNktGTDRmRE5SVTlUTkNTNFFyZzFPcGhjWWZYVjNod21FRENNTXBsazl4eGZxWXlKTEh4dW5qVF9RVHhOVDh0V2ZjbG9yU1NsVmZoTWFaTW5TT2tsenJHdzEwTzlTQnpYQVFPNXVhNWN4a1pDTDNhUHBvQUM2OWFJRlhPUktIUExGSzdLdDJuYTg0UzBvWldSOS1fNVdwb213Wg?oc=5",
           "importance": 2
         }
       ],
@@ -247,19 +247,6 @@
       ],
       "independent": [
         {
-          "id": "ca-independent-2e804c9d160b1852",
-          "countryId": "ca",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "The first Canada Investment Summit unleashes nearly $500 billion of new investment in Canada - pm.gc.ca",
-          "summary": "The first Canada Investment Summit unleashes nearly $500 billion of new investment in Canada pm.gc.ca",
-          "date": "Sep 15, 2026 Â· 2:41 PM",
-          "publishedAt": "2026-09-15T14:41:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQaktRMFpqUlFJTGxqR0pvb0lwWmRXVG1IU0hMQkkyTm05N3RFY09fWGJsQ1Y3a2x0UjMxUV9CaHU1UGMtRkhlMWtGSFhTQ29hNDZtRGJ0WWZVeTF1YVdjV0dlT1JtR3FRWTVTVzdPMmw0NEdpa1B3SHVJbEhZaHlXRml6bVBpVElQRVNyM2tpQWl1RmNWXzVHejI0MXpCLTVUOWdJREVhTjFOOUlFN2Mtc3hUUVlZUEk1?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ca-independent-b06a1fc16dbe6a5b",
           "countryId": "ca",
           "sourceType": "independent",
@@ -270,6 +257,19 @@
           "publishedAt": "2026-09-16T20:37:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPaGFtd2NJNW14SnBQWHp2aWlFSnhzelJIVHljN1RMVEZjYjF1bWRhNE5mNTRuTGxuMTQ2MVhET0UyeXdLdnk4dldqanpfMWhFdkZJOGRmNnp4eFZmb3JYc1FKSXBXaVd2cUxtZG5mLUhXOTRIbkhhOWlGZU5tWFRsNmVmQ1dMLUpyLVF5ZTRKWnlVNUxCOWp6MzVnd0cyVDZ6SENBVFhaWEU5UUk?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ca-independent-2e804c9d160b1852",
+          "countryId": "ca",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "The first Canada Investment Summit unleashes nearly $500 billion of new investment in Canada - pm.gc.ca",
+          "summary": "The first Canada Investment Summit unleashes nearly $500 billion of new investment in Canada pm.gc.ca",
+          "date": "Sep 15, 2026 Â· 2:41 PM",
+          "publishedAt": "2026-09-15T14:41:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQaktRMFpqUlFJTGxqR0pvb0lwWmRXVG1IU0hMQkkyTm05N3RFY09fWGJsQ1Y3a2x0UjMxUV9CaHU1UGMtRkhlMWtGSFhTQ29hNDZtRGJ0WWZVeTF1YVdjV0dlT1JtR3FRWTVTVzdPMmw0NEdpa1B3SHVJbEhZaHlXRml6bVBpVElQRVNyM2tpQWl1RmNWXzVHejI0MXpCLTVUOWdJREVhTjFOOUlFN2Mtc3hUUVlZUEk1?oc=5",
           "importance": 2
         },
         {
@@ -290,8 +290,8 @@
           "countryId": "ca",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Canada could become the EU's first \"associate member\" - axios.com",
-          "summary": "Canada could become the EU's first \"associate member\" axios.com",
+          "headline": "Canada could become the EU's first \"associate member\" - Axios",
+          "summary": "Canada could become the EU's first \"associate member\" Axios",
           "date": "Sep 16, 2026 Â· 9:41 PM",
           "publishedAt": "2026-09-16T21:41:04.000Z",
           "dateOnly": false,
@@ -329,6 +329,32 @@
     },
     "mx": {
       "official": [
+        {
+          "id": "mx-official-cf5c71064133e932",
+          "countryId": "mx",
+          "sourceType": "official",
+          "source": "Presidencia",
+          "headline": "Avanza posibilidad de acuerdo México-Estados Unidos: presidenta Sheinbaum - Gob MX",
+          "summary": "Avanza posibilidad de acuerdo México-Estados Unidos: presidenta Sheinbaum Gob MX",
+          "date": "Sep 18, 2026 Â· 6:18 PM",
+          "publishedAt": "2026-09-18T18:18:35.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPa2R6ZjI4bHFiSExwN015SGpSSzg1SGRQR0xJNE5fYTJiS08wUWhxeGJqX0s0SFBod0JQbFg2NjNEVUNFRVVDTU42dzhfbnJuY3ZyMjJ1d3lHRktFMk9JcFVzX1VnTHdiRkdnWVc5c2ptenBGMnVTTFJ3NThmeDlMZFNLRVVCYzcxN2JkbERVZHBYekotN2wzVG40bWtSZHVQalNScWxaQm0yaTlISDc1Q1FlSk9kdXZEcUFR?oc=5",
+          "importance": 3
+        },
+        {
+          "id": "mx-official-aa056d9edee3d4e2",
+          "countryId": "mx",
+          "sourceType": "official",
+          "source": "Presidencia",
+          "headline": "Presidenta inaugura el Centro de Excelencia en Partería y Bienestar del IMSS Bienestar en San Miguel de Allende, Guanajuato - Gob MX",
+          "summary": "Presidenta inaugura el Centro de Excelencia en Partería y Bienestar del IMSS Bienestar en San Miguel de Allende, Guanajuato Gob MX",
+          "date": "Sep 18, 2026 Â· 2:37 AM",
+          "publishedAt": "2026-09-18T02:37:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxOdnFNVU9qc1pNVWctc1pHVGNjQjJ2cGw2TXNnZ0w2T3JveVU4Q2N0bmRYdmRCNjVPdlRVRGNhbkkyNmhSSlVwcTkxM1lzQ0w5T1Jkcy1qMng1RHkzaVYyQ0huU1h4WUtvT3NISFlYNWJvUUFQSHhFOWIyckl4WE9SXzI2QUxGbjZfZExvbHRCT0RKSk5nOVhWNl9yWTg4eEtOZ05QYnNta1hzbGFWT2t1Q3Y3WV9aaTczenIwUDB3dWtxUzF5WDFDUUt5a2ZheGZVQVFVclNYcHIwMXd5blN3dV9mcm12a0pqQ25ycjVLa2NWdw?oc=5",
+          "importance": 3
+        },
         {
           "id": "mx-official-f1cdcad1f68819ae",
           "countryId": "mx",
@@ -379,32 +405,6 @@
           "publishedAt": "2026-09-16T06:57:47.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxPSndTbllKTkwwMzFCS21jd2NlSmktZHh5UmtFUGZ1eDZhZ1lYczhIb2pJN0U2MDZBZ2FXUzk2ZDZZUmFyajZiQzJtM1ZDcWlINGxKRDg1YkJuaV9GLWlCUmRLZkowYWstLThfaW9yRktxV1JPemxvR2FjN3hmcktTenV1OXZYcV9RYmxzRGRaZnhOSGw4MUpsZTFfMVJyTjF6LUt2aFhuQ1lKRjRpaGtaTlIwa1NReHRNYkp0UFNjQS1hbVJOTTU1LWFIdGo5cWFfRG1QRlY2dmx4dldUZHlzWEFjSG9Ia1FGRG5jXzdTOXctczdTLUdxdm5qb1loQQ?oc=5",
-          "importance": 3
-        },
-        {
-          "id": "mx-official-e98a12535ea7d688",
-          "countryId": "mx",
-          "sourceType": "official",
-          "source": "Presidencia",
-          "headline": "Vestido patrio de presidenta Sheinbaum, homenaje a artesanas del Istmo de Tehuantepec - Gob MX",
-          "summary": "Vestido patrio de presidenta Sheinbaum, homenaje a artesanas del Istmo de Tehuantepec Gob MX",
-          "date": "Sep 16, 2026 Â· 10:35 PM",
-          "publishedAt": "2026-09-16T22:35:56.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQRkhEY0ZDdF90em9Wb3pTY21Xd3FNNGw0UEttaWdNbmlIelppeWNwdEFHNUpyQmppa19EZEVVb1JjcXFha2hPNUNaUy1hZ2Zrd3BaTFBFaFp3b0NKYUtNWEE5dDJPVmlUOTYyVW9WYURGSHVTeDJXNVJqYWsxNTgyMXl4LWNLNG5oVDZQVnFDbGFJWE43VkFvMHptNXk0N05PUVYxaGxuQ0xlT1B4cjZYMHVCdGpGX0lSbFYxRWlsbw?oc=5",
-          "importance": 3
-        },
-        {
-          "id": "mx-official-26eff966f81d723a",
-          "countryId": "mx",
-          "sourceType": "official",
-          "source": "Presidencia",
-          "headline": "México no será colonia ni protectorado de nadie; no se doblega, no se arrodilla y nunca se vende: presidenta en Desfile Cívico Militar - Gob MX",
-          "summary": "México no será colonia ni protectorado de nadie; no se doblega, no se arrodilla y nunca se vende: presidenta en Desfile Cívico Militar Gob MX",
-          "date": "Sep 17, 2026 Â· 1:51 AM",
-          "publishedAt": "2026-09-17T01:51:10.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiigJBVV95cUxQRENGRHhvX2JidC1xQURrTExMWEppcjQwdFFJZjJsX0pWLTJqWlpFbEpwVnFGdFIwTnd4YXRfdzJUSFFwRmdIQnE0N2VYNUJSQWduWGx2MXpFR3E2SEZxT3p2cGE0aFVyQl9ZSUNBQjhKclpDY1h1djVKYlo2ZG92OHp3djFqM0NtY3laZXl1QUZLS1huOWhfMWpMOEFDOVBMN3VqTXJxWUdfeXc5NG9DRTdaV0tWeHJWNkpDWjA3eS10cGVGdDFfcV95MldJcnJVbTdFQTN0RTlRTmtSektuSjNZSDZvU1owNlhyYVBvU1lLdjF5YU00ZVktWmlFVU01WTdLdXZzSVFQZw?oc=5",
           "importance": 3
         }
       ],
@@ -493,19 +493,6 @@
     "br": {
       "official": [
         {
-          "id": "br-official-f2343cc4477b40f8",
-          "countryId": "br",
-          "sourceType": "official",
-          "source": "PresidÃªncia",
-          "headline": "Agenda de Presidente da República para 18/09/2026 — Planalto - www.gov.br",
-          "summary": "Agenda de Presidente da República para 18/09/2026 — Planalto www.gov.br",
-          "date": "Jan 5, 2023 Â· 2:58 PM",
-          "publishedAt": "2023-01-05T14:58:31.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNc0FhUkZmVm1aQlI4STEtc1J0Z3VMTjg5TzBEcFdjUjNhcnZNMER5NzIyYk91cUh1N2lWbEJoT2IzdjdiN1hDREVCX1E4eUllYVdBbTVpNFg0SmI1T0dGN0pETnUxT2ZGNTlKdms3bVp2eTlEMmhKTEpMWk5SalFuY09pTkVLc0J0OHJnb240ZkE5S3ZhN1RhNFdab1B2bmxLcWZ4bm5vSGhubWIyb25mWWxENHk4LXZpUXdjXzJlUHJpN3BuV1E?oc=5",
-          "importance": 3
-        },
-        {
           "id": "br-official-f5ba48e4f74b6e70",
           "countryId": "br",
           "sourceType": "official",
@@ -569,6 +556,19 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNOTlmRXEyT3d1VVh2eEZLUlpmdXA1YVljSnNaX19DcnltdmpmTXFlbTY1MjRWQ3ZDU0YwUEJrZGhyYnkzRG1qR0FIYXNJdHc1MmlZUTFRLVlyajNhSHc0S1kwRmdqeDZCSWVLVDdEZlJtRkJRT202MEozQVFIMlBnVFBHOWdTd2x2R3BtM0h2SUs1N0pJLUdIa3NEUVNNV2U4MFVuVmVwWXFvUWVkN2tBeGplNDlDUGtlVTNpUklIX0RqdUtUMGhqdHhFUzdjeVg4d1kweA?oc=5",
           "importance": 3
+        },
+        {
+          "id": "br-official-e17889b1ae1b69d5",
+          "countryId": "br",
+          "sourceType": "official",
+          "source": "PresidÃªncia",
+          "headline": "Agenda de Presidente da República para 30/06/2026 — Planalto - www.gov.br",
+          "summary": "Agenda de Presidente da República para 30/06/2026 — Planalto www.gov.br",
+          "date": "Jun 30, 2026 Â· 7:00 AM",
+          "publishedAt": "2026-06-30T07:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPSkozSlUyNi1nUUtWY1R4TjRhaWh5V2FtM0ZiQjBJcUtSclBJOGFzdzlPYU1IbGZMTk9OcGdVd2syb3FqY0IzcjNpTWRIYWh0M2F1WnlWZURxQVBkVmE3Q3pBenZubEdvUTdOaDkzS1ktV3BLNld5RUdwb2JNUUJlZjJZQTIwb3ZNcFA5eVZQbjh1a0EyTVdEUmNYb1ZXMWIwRmhFdURicUt4ZHVtZEVSZjc4SkpCaWlsQkdpYTBLNjZHRHBUSmxqdTV5OU12MUJmd2xiYw?oc=5",
+          "importance": 3
         }
       ],
       "independent": [
@@ -616,8 +616,8 @@
           "countryId": "br",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "MERCOSUR: Argentina hands over the Pro Tempore Presidency to Brazil with achievements in customs and trade - Aduana News",
-          "summary": "MERCOSUR: Argentina hands over the Pro Tempore Presidency to Brazil with achievements in customs and trade Aduana News",
+          "headline": "MERCOSUR: Argentina hands over the Pro Tempore Presidency to Brazil with achievements in customs and trade - aduananews.com",
+          "summary": "MERCOSUR: Argentina hands over the Pro Tempore Presidency to Brazil with achievements in customs and trade aduananews.com",
           "date": "Jul 4, 2025 Â· 7:00 AM",
           "publishedAt": "2025-07-04T07:00:00.000Z",
           "dateOnly": false,
@@ -642,8 +642,8 @@
           "countryId": "br",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Brazil justice minister considered leak to harm Maduro - guardian.ng",
-          "summary": "Brazil justice minister considered leak to harm Maduro guardian.ng",
+          "headline": "Brazil justice minister considered leak to harm Maduro - The Guardian Nigeria News",
+          "summary": "Brazil justice minister considered leak to harm Maduro The Guardian Nigeria News",
           "date": "Jul 8, 2019 Â· 7:00 AM",
           "publishedAt": "2019-07-08T07:00:00.000Z",
           "dateOnly": false,
@@ -964,16 +964,16 @@
           "importance": 2
         },
         {
-          "id": "gb-independent-7b72e85933af38b1",
+          "id": "gb-independent-b06a1fc16dbe6a5b",
           "countryId": "gb",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Former U.K. Prime Minister Starmer Steps Down From Parliament. What Happens Next? - Time Magazine",
-          "summary": "Former U.K. Prime Minister Starmer Steps Down From Parliament. What Happens Next? Time Magazine",
-          "date": "Sep 1, 2026 Â· 7:00 AM",
-          "publishedAt": "2026-09-01T07:00:00.000Z",
+          "headline": "Canada applies to join UK-led military coalition - Reuters",
+          "summary": "Canada applies to join UK-led military coalition Reuters",
+          "date": "Sep 16, 2026 Â· 8:37 PM",
+          "publishedAt": "2026-09-16T20:37:00.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPa1l2ZTFadEp1N0VzXzEtSlZnS2gwWmxaR281dXBzemFkTHcyOE5RTGl2YkJJRWdzUjRGOHktNFB4TGZITEYyTGJkMUxPVF9JWDJ4RU9Cd1RmTmlqVEZQanhubzI4aUNPNW1PVE9WZ000NWFqeHlCN0h3VnltZFVLbno3ZWVKRUN1eTl3eTRMWVQ2OTl3Ul9SYnJDaw?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPaGFtd2NJNW14SnBQWHp2aWlFSnhzelJIVHljN1RMVEZjYjF1bWRhNE5mNTRuTGxuMTQ2MVhET0UyeXdLdnk4dldqanpfMWhFdkZJOGRmNnp4eFZmb3JYc1FKSXBXaVd2cUxtZG5mLUhXOTRIbkhhOWlGZU5tWFRsNmVmQ1dMLUpyLVF5ZTRKWnlVNUxCOWp6MzVnd0cyVDZ6SENBVFhaWEU5UUk?oc=5",
           "importance": 2
         }
       ],
@@ -1092,8 +1092,8 @@
           "countryId": "fr",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "ANALYSIS: How the US helped to defuse Saudi Arabia's dangerous gambit with Lebanon - ABC News - Breaking News, Latest News and Videos",
-          "summary": "ANALYSIS: How the US helped to defuse Saudi Arabia's dangerous gambit with Lebanon ABC News - Breaking News, Latest News and Videos",
+          "headline": "ANALYSIS: How the US helped to defuse Saudi Arabia's dangerous gambit with Lebanon - abcnews.com",
+          "summary": "ANALYSIS: How the US helped to defuse Saudi Arabia's dangerous gambit with Lebanon abcnews.com",
           "date": "Dec 4, 2017 Â· 8:00 AM",
           "publishedAt": "2017-12-04T08:00:00.000Z",
           "dateOnly": false,
@@ -1264,16 +1264,16 @@
           "importance": 2
         },
         {
-          "id": "de-independent-e10f8aa354bc68a0",
+          "id": "de-independent-5889c20c76801724",
           "countryId": "de",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Bundesregierung erlaubt Emirates Flüge nach Berlin - Wirtschaft - SZ.de - SZ.de",
-          "summary": "Bundesregierung erlaubt Emirates Flüge nach Berlin - Wirtschaft - SZ.de SZ.de",
-          "date": "Sep 11, 2026 Â· 11:55 AM",
-          "publishedAt": "2026-09-11T11:55:09.000Z",
+          "headline": "German government plans massive cuts to health, pensions and social benefits - World Socialist Web Site",
+          "summary": "German government plans massive cuts to health, pensions and social benefits World Socialist Web Site",
+          "date": "Apr 29, 2026 Â· 7:00 AM",
+          "publishedAt": "2026-04-29T07:00:00.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNSzV4UnVUV1Y3clJydVdfZWZoQnBIWUJqQmhnWmluQ0FVZzF2bjJVN2VhdVU4Z0gtT0FnSE5PVzItZlpVZFFURk5JUnEtajF1a1kzaERPNF95NVVqWHFDejc0T0wwbjRWRVZTTFNtbGdoanlEUWNmVWlVbGlDUDZPYg?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5abktnX20tZE1OMzktc0JreUxSMU03QU9RSFgtcFk3ZEpzcll1djdTQnkxV0RYWXQ3S3FIZlE3aFh2bVZMS25CUjliZllwT0N6UmZaX1JaZHJrTjFGSG52SGw4MzNBSXI0?oc=5",
           "importance": 2
         }
       ],
@@ -1322,16 +1322,16 @@
           "importance": 2
         },
         {
-          "id": "it-independent-32eb9cf9d4023739",
+          "id": "it-independent-623d26ffac0595f7",
           "countryId": "it",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Crans Montana, Meloni sees Parmelin. President of Switzerland: 'Stop sending bills to wounded' - Il Sole 24 ORE",
-          "summary": "Crans Montana, Meloni sees Parmelin. President of Switzerland: 'Stop sending bills to wounded' Il Sole 24 ORE",
-          "date": "May 3, 2026 Â· 7:00 AM",
-          "publishedAt": "2026-05-03T07:00:00.000Z",
+          "headline": "Separated parents’ allowance: a payment for those on incomes of up to 35,000 euros - Il Sole 24 ORE",
+          "summary": "Separated parents’ allowance: a payment for those on incomes of up to 35,000 euros Il Sole 24 ORE",
+          "date": "Sep 15, 2026 Â· 11:18 AM",
+          "publishedAt": "2026-09-15T11:18:04.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNcWswZ19MRG9kVXBkZUU2Tkx0enRaLWJRQjJQTm9vVjJRbkt1cWl6US1yenRmRDlfNldMY1RzX3QyeHY2TklscmwxUWtuMVRYUC1uSldGb2w3blZxRW1oUDBUQmJmN0JvMWFwb2VmSC1fRUVTeWFKLVdjbGtmYTVIZjRYN3p4WHpkUE1lVXl1dUxraGJJd1EzQzliWDhZNkJpNDAybXRDUmk?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNNll6ZGQ1b2pxV2pYS3p0eEJzRHVyR1F6OFZuWjFSaE8xWTV0STlEdUR4SUtFT2xZd1BMYjZFUU0yQmE5Nmh1X2RFM2tBanpVZmtOb3ZsSGVrdWpnZ3MyT2ZsS1ZXbWgwNTJUUDVSNG84Z2ZUcWdpLWtyby1TalZ5SkRVT2xic1BjTGNTUFhBQjFRV1MzNVUxeWFfd0F6OF9lMGNR?oc=5",
           "importance": 2
         },
         {
@@ -1494,8 +1494,8 @@
           "countryId": "pl",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Poland's prime minister asks top court to decide if constitution has primacy over EU law - constitutionnet.org",
-          "summary": "Poland's prime minister asks top court to decide if constitution has primacy over EU law constitutionnet.org",
+          "headline": "Poland's prime minister asks top court to decide if constitution has primacy over EU law - ConstitutionNet",
+          "summary": "Poland's prime minister asks top court to decide if constitution has primacy over EU law ConstitutionNet",
           "date": "Mar 30, 2021 Â· 7:00 AM",
           "publishedAt": "2021-03-30T07:00:00.000Z",
           "dateOnly": false,
@@ -1619,19 +1619,6 @@
       "official": [],
       "independent": [
         {
-          "id": "ru-independent-2e773de03ddc5e05",
-          "countryId": "ru",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Why Russia Holds Elections, and How the Kremlin Gets the Results It Wants - The New York Times",
-          "summary": "Why Russia Holds Elections, and How the Kremlin Gets the Results It Wants The New York Times Rosenberg: Russia's elections will have few surprises, but for the Kremlin they matter BBC Watch: Voting under way in Russiaâ€¦",
-          "date": "Sep 18, 2026 Â· 4:01 AM",
-          "publishedAt": "2026-09-18T04:01:08.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1jeGVHMmFTalFmTkdycnVQM3FxN2pjbW5sbDVNUmFmSUVBSUJmc1YtcDViOFNBY2NsYXVVbWdsVUc1Zm8tZGd6MVM2QzQ4RlAwMDkxWDRjNmtqenBfMnJvN3lOTS1NN1FIQThGeHo1WjFtNWVMWk9xZ0JtcEJ5dw?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ru-independent-abfcf532f7d3fbfa",
           "countryId": "ru",
           "sourceType": "independent",
@@ -1642,6 +1629,19 @@
           "publishedAt": "2026-09-18T12:26:05.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQX0VhdGZXV2FaaUVKYnczekhtalMwdUpSdmZJbFp0Uzk0VW5NUEU4TW55dUNRVkRVYW1xemx5ZmFzT2hYY0xFeXc0NkNnV1ZXZ0JQSXY2YkNOME9keXdMUlpHWGZqTU50VVlwWmNhNk00YmlCVGdLakhVZmxpSjAzazcxQ2ZOUTg?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ru-independent-2e773de03ddc5e05",
+          "countryId": "ru",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Why Russia Holds Elections, and How the Kremlin Gets the Results It Wants - The New York Times",
+          "summary": "Why Russia Holds Elections, and How the Kremlin Gets the Results It Wants The New York Times Russia votes in wartime parliamentary election set to secure the Kremlin’s power AP News Watch: Voting under way in Russian â€¦",
+          "date": "Sep 18, 2026 Â· 4:01 AM",
+          "publishedAt": "2026-09-18T04:01:08.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1jeGVHMmFTalFmTkdycnVQM3FxN2pjbW5sbDVNUmFmSUVBSUJmc1YtcDViOFNBY2NsYXVVbWdsVUc1Zm8tZGd6MVM2QzQ4RlAwMDkxWDRjNmtqenBfMnJvN3lOTS1NN1FIQThGeHo1WjFtNWVMWk9xZ0JtcEJ5dw?oc=5",
           "importance": 2
         },
         {
@@ -1658,19 +1658,6 @@
           "importance": 2
         },
         {
-          "id": "ru-independent-efa0cb672d8ccfab",
-          "countryId": "ru",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Kremlin Pushes to Keep Russia’s Edge as Biggest Wheat Exporter - Bloomberg.com",
-          "summary": "Kremlin Pushes to Keep Russia’s Edge as Biggest Wheat Exporter Bloomberg.com",
-          "date": "Sep 16, 2026 Â· 4:01 PM",
-          "publishedAt": "2026-09-16T16:01:37.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQRVEwZHhqNk1YMldGazhyUkY2VkJrR09jelRkXzItc1B5Vl9YMTJsVEdTZHFSZ3prUGV2TkRJR1M2WGV5YVNaU1lsU2czSWMyYUE3UmkzTTBkcTBDcUpHTGp6cXlNenBCZTZ6aktBNXNjVmhaeWJLSEhkbFZFYVVQOXFfS1FaVFh1WDlESVBueTAtYksyay1LeHJjb3NDLTRTVTJLN1ZSdU54eGVLUmk5NnFpWQ?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ru-independent-8472cd9b5767258c",
           "countryId": "ru",
           "sourceType": "independent",
@@ -1681,6 +1668,19 @@
           "publishedAt": "2026-09-17T14:51:51.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPUG9Ob0QxeGVRT01CRm5SRkVPbjhucEdDS3ZZZXVxWGVaMk5Db0taMUJLVkdTNjJESDJzc3RvZ3IySFIyVG1OUHZEb2daSUJrYmNpOTVoWTNSWFlkbVVmeEJrTUIzREs2bExteDJ6Nlhfdk9iWGhSeS15UG1Ec19nUTRudS0tWm9BSUpsc05GWFRDb0JVZkQycFpCVmQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ru-independent-efa0cb672d8ccfab",
+          "countryId": "ru",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Kremlin Pushes to Keep Russia’s Edge as Biggest Wheat Exporter - Bloomberg.com",
+          "summary": "Kremlin Pushes to Keep Russia’s Edge as Biggest Wheat Exporter Bloomberg.com",
+          "date": "Sep 16, 2026 Â· 4:01 PM",
+          "publishedAt": "2026-09-16T16:01:37.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQRVEwZHhqNk1YMldGazhyUkY2VkJrR09jelRkXzItc1B5Vl9YMTJsVEdTZHFSZ3prUGV2TkRJR1M2WGV5YVNaU1lsU2czSWMyYUE3UmkzTTBkcTBDcUpHTGp6cXlNenBCZTZ6aktBNXNjVmhaeWJLSEhkbFZFYVVQOXFfS1FaVFh1WDlESVBueTAtYksyay1LeHJjb3NDLTRTVTJLN1ZSdU54eGVLUmk5NnFpWQ?oc=5",
           "importance": 2
         },
         {
@@ -1720,8 +1720,8 @@
           "countryId": "tr",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "FAO, Türkiye Propose Initiative for Action at Food-Water-Climate Nexus - SDG Knowledge Hub",
-          "summary": "FAO, Türkiye Propose Initiative for Action at Food-Water-Climate Nexus SDG Knowledge Hub",
+          "headline": "FAO, Türkiye Propose Initiative for Action at Food-Water-Climate Nexus - sdg.iisd.org",
+          "summary": "FAO, Türkiye Propose Initiative for Action at Food-Water-Climate Nexus sdg.iisd.org",
           "date": "Jun 17, 2026 Â· 7:00 AM",
           "publishedAt": "2026-06-17T07:00:00.000Z",
           "dateOnly": false,
@@ -1852,16 +1852,16 @@
           "importance": 2
         },
         {
-          "id": "il-independent-8517bd11825c691a",
+          "id": "il-independent-458b4b8bf134d244",
           "countryId": "il",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Gaza: Hamas confirms Rafah Brigade commander killed in Israeli strike - i24NEWS",
-          "summary": "Gaza: Hamas confirms Rafah Brigade commander killed in Israeli strike i24NEWS",
-          "date": "Sep 16, 2026 Â· 10:23 AM",
-          "publishedAt": "2026-09-16T10:23:58.000Z",
+          "headline": "Israel releases expenses for Prime Minister Netanyahu’s visits to the US - UA.NEWS",
+          "summary": "Israel releases expenses for Prime Minister Netanyahu’s visits to the US UA.NEWS",
+          "date": "Sep 16, 2026 Â· 9:05 PM",
+          "publishedAt": "2026-09-16T21:05:16.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQbThfNUYtVEZHQzJIZUVuU2F6VVhFUGk3TzRlS0ZtQ3ZDeFRpaXA1SjhGcFdsYW1UUEJxSm9zMk1HTTBIVnJubVpHQXJGTG92WVVlU3ZjZmxuZEMtRkotTWVFd1NvcmpfMGJlWmNLTGZUTThXR3FNaWR1clVXU3k2ZmpXTlkySWpkZ0tKZlRtdXVQOHFVY3JabVFhSmVrLVYtWl9ZVGU2a0NWRXJEWTZLTU9vNmc?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNYWNRdnFPX0I0UWtraE5qM25xMHdLMlUxSkxVc0RSZ2daUlFld2hIOE1INUp2bjhXcTRTQ1VacGY4SmMzLUlrU1IzTmpzR2pwVl9mV3BLNGZfOWV5YXdRc04wMVJkSkZoMHN4ZUJ0VllGaVpnSEZFYXB5TGFNcC1qV1VNeVBDUS1sX05tWGhUam9JbUNLbkhFRXd2MVlPOXFUNFpB?oc=5",
           "importance": 2
         }
       ],
@@ -1870,6 +1870,19 @@
     "ir": {
       "official": [],
       "independent": [
+        {
+          "id": "ir-independent-e2350c916f725db7",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Slotkin urges Trump to press Xi on report that Iran used Chinese satellite info in deadly Jordan attack - CBS News",
+          "summary": "Slotkin urges Trump to press Xi on report that Iran used Chinese satellite info in deadly Jordan attack CBS News",
+          "date": "Sep 18, 2026 Â· 6:34 PM",
+          "publishedAt": "2026-09-18T18:34:19.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNdktWZUlValdmemJ0MWNCcFl0TVh5LVJsRXh4RHZmNFlLT1VxS2Q4QjRnNjBtS2VyVE5qZFo1dDlmSmhxcEpqTnJyZHVqZTFabFhDQ25udno1dFlnYy1HU3cwWWJRdTlHbUtyalVKd3pmdnhZUjA4UDRTNU5NenBOVGdlRVpsQjJHUTJHOWZiYkJZbWZKV2Zn?oc=5",
+          "importance": 2
+        },
         {
           "id": "ir-independent-8458e6befc65a4a9",
           "countryId": "ir",
@@ -1884,29 +1897,16 @@
           "importance": 2
         },
         {
-          "id": "ir-independent-9d1c28c4bf404a7c",
+          "id": "ir-independent-ade12e64b3defcda",
           "countryId": "ir",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Trump weighs ‘annihilating’ Iran as war drags into seventh month - NewsNation",
-          "summary": "Trump weighs ‘annihilating’ Iran as war drags into seventh month NewsNation Tête à tête - War in Iran 'jeopardises the Trump presidency', ex-Obama National Security Council member says France 24 Trump says ‘anything câ€¦",
-          "date": "Sep 18, 2026 Â· 10:53 AM",
-          "publishedAt": "2026-09-18T10:53:16.000Z",
+          "headline": "Trump tells Axios he's approaching major crossroads in Iran war - Axios",
+          "summary": "Trump tells Axios he's approaching major crossroads in Iran war Axios Trump Has Lost Interest in the Iran War, but It’s Still Quite Interested in Him The Nation Trump on war in Iran, Houthi advance in Yemen: ‘It’ll alâ€¦",
+          "date": "Sep 18, 2026 Â· 4:20 AM",
+          "publishedAt": "2026-09-18T04:20:43.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9nbjRKR0l5dUhZN1dELTUzbmRQTUNsY2NOaGpaa3VqdUk4WlpjdFdpWkxPeEJKdVVUQnNKOWRMSjZGTkhta0pBbEpDbHlPWXotRmVSM2g0NDNJb1RCc0w5Vm5fUkFkMzdrUTRsQUtwTHg4QTE2RzdTNFIza9IBgAFBVV95cUxQbEpQbmxxdkpSUDJMUFZDcmVsSlIzMWNvNEk4STFKQ2s2bVRlRnFTMkxVckNnaTdiOUN4VlV0anl0dlhLeFp5YXFnN3NqbWtQWDg5MHZVOVhYMWdQRlUxT09JanAtcF9lanF4dTBEMEc1WmlsZzNlcFA0SDVlZ1ZGSg?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-e2350c916f725db7",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Slotkin urges Trump to press Xi on report that Iran used Chinese satellite info in deadly Jordan attack - CBS News",
-          "summary": "Slotkin urges Trump to press Xi on report that Iran used Chinese satellite info in deadly Jordan attack CBS News",
-          "date": "Sep 18, 2026 Â· 3:32 PM",
-          "publishedAt": "2026-09-18T15:32:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNdktWZUlValdmemJ0MWNCcFl0TVh5LVJsRXh4RHZmNFlLT1VxS2Q4QjRnNjBtS2VyVE5qZFo1dDlmSmhxcEpqTnJyZHVqZTFabFhDQ25udno1dFlnYy1HU3cwWWJRdTlHbUtyalVKd3pmdnhZUjA4UDRTNU5NenBOVGdlRVpsQjJHUTJHOWZiYkJZbWZKV2Zn?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9ORmRyZmxVUFJPT1pwVFBYbk9mMnJKdmRGYlV4aEpJcXRUTFZWN1BITEd0WlZFZ3FZV0NqMnVBQnEzSmJ3OGxLQ2I3M19valJXbnBxNFRoMFZpRG5TRmJPN2ZUc3lrQlcxWmNyNDVTbEg?oc=5",
           "importance": 2
         },
         {
@@ -1968,6 +1968,19 @@
           "importance": 2
         },
         {
+          "id": "sa-independent-9a8a8faaac45828f",
+          "countryId": "sa",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Saudi Royal Court Advisor Dr. Majid Al-Fayyad - Arab News PK",
+          "summary": "Saudi Royal Court Advisor Dr. Majid Al-Fayyad Arab News PK",
+          "date": "Sep 1, 2026 Â· 9:38 PM",
+          "publishedAt": "2026-09-01T21:38:39.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9HbGZOOUtRM2Z5a1lzdUpvTm82TmlKMFA2dV9sMUdLYTYxUjNHVXg1T0hkc3Y0THdUODFDaU11Uk4tX0cxS01vLUlhQVBpUkJMeFc0OXdwQWNvc044OGwxVG5ERjJIcmxEWGxwUUxjUDNKV2xUTDgzM3VuZEk?oc=5",
+          "importance": 2
+        },
+        {
           "id": "sa-independent-9a7cd00228b59ef3",
           "countryId": "sa",
           "sourceType": "independent",
@@ -1981,16 +1994,16 @@
           "importance": 2
         },
         {
-          "id": "sa-independent-c195f564f80428c2",
+          "id": "sa-independent-ebb95193e3e489b7",
           "countryId": "sa",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Saudi Arabia's King Salman undergoes medical tests: royal court - The New Arab",
-          "summary": "Saudi Arabia's King Salman undergoes medical tests: royal court The New Arab",
-          "date": "Jan 16, 2026 Â· 8:00 AM",
-          "publishedAt": "2026-01-16T08:00:00.000Z",
+          "headline": "Royal Court Announces Passing of Prince Abdulaziz bin Saud bin Nasser bin Abdulaziz Al Saud - وكالة الأنباء السعودية",
+          "summary": "Royal Court Announces Passing of Prince Abdulaziz bin Saud bin Nasser bin Abdulaziz Al Saud وكالة الأنباء السعودية",
+          "date": "Sep 11, 2026 Â· 1:10 PM",
+          "publishedAt": "2026-09-11T13:10:05.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNczhSUC1LdnlvdTgzZ0ROTlV2WkpvNFVyYWo1Unh4c3d4RTA2a3lLc1dpVHFmd0haLVFMTVZmMTVLUmJfdHFRWlExMGx1UC1vU043TnV3M3NuZkFhRktYdU9NSUxZVm90LTBlUzZ0X2tvRGpBckpFd29EcXZFMlNHYjdqVzg3R0FfSkI1dFBzaGstNzk10gGaAUFVX3lxTFBUcjRnUFJqSjU2U0VoZVlRR3lkY0ExWEpGUDFZcTVWM3FNVElGNzhFOGIwZ2E0WngwbFNpaDRONlBkRHQtVWxhV3VTTER0enVERTcydk8tRGw5TmwxS3VZbHBiSjdtRTdqWDhkMkxTN0JKWnduNmRaMUROSFlUYS02cndRMVU5WXRwSUZlN2VQdGN2ODhIamtpbnc?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTFB2UVowZXBtVU9ndjlvOVVRa2JGN0dPZ25nQUtrQkdPV256WkpLREM4TTJra2FQV1JfUHB0d2ZDYjVpREh2YndhRlJn?oc=5",
           "importance": 2
         },
         {
@@ -2007,29 +2020,16 @@
           "importance": 2
         },
         {
-          "id": "sa-independent-9a8a8faaac45828f",
+          "id": "sa-independent-3cbb3a5b8ff0c450",
           "countryId": "sa",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Saudi Royal Court Advisor Dr. Majid Al-Fayyad - Arab News PK",
-          "summary": "Saudi Royal Court Advisor Dr. Majid Al-Fayyad Arab News PK",
-          "date": "Sep 1, 2026 Â· 9:38 PM",
-          "publishedAt": "2026-09-01T21:38:39.000Z",
+          "headline": "Saudi Arabia’s nuclear deal with Donald Trump raises questions over Iran and Israel - The Jerusalem Post",
+          "summary": "Saudi Arabia’s nuclear deal with Donald Trump raises questions over Iran and Israel The Jerusalem Post",
+          "date": "Jul 30, 2026 Â· 7:00 AM",
+          "publishedAt": "2026-07-30T07:00:00.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9HbGZOOUtRM2Z5a1lzdUpvTm82TmlKMFA2dV9sMUdLYTYxUjNHVXg1T0hkc3Y0THdUODFDaU11Uk4tX0cxS01vLUlhQVBpUkJMeFc0OXdwQWNvc044OGwxVG5ERjJIcmxEWGxwUUxjUDNKV2xUTDgzM3VuZEk?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "sa-independent-c7fffb0ccb97baa8",
-          "countryId": "sa",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "‘My Crazy Friend’: The Royals Who Stayed Close to Epstein - The New York Times",
-          "summary": "‘My Crazy Friend’: The Royals Who Stayed Close to Epstein The New York Times",
-          "date": "Feb 6, 2026 Â· 8:00 AM",
-          "publishedAt": "2026-02-06T08:00:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQRGYtQ1NUTUM0bk81bDZCOXJvWG5HVXR0dGlFZGg1MjNHOWVYZzlMbk1Ucy14cklrS2lrN0gwWDE4R0ZORlpxNnc0Mlk5alRQY1AwTUhReFFuWWlpYVNrN21UZ080ODRMNGpSa2xkU1B3UGRoMzNjeXI0cFE2QnhEdS1GN2N1SmRRUm1XR0RYVENIbUxUaEVyV0ZtOTlMMWhFNGJDcGowdG5JTjktOHhwdDNXcWprUQ?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5QTXRyOTB6WUtHOWRhZDZXdVN2TTEyMWpCN0k1Y1FOVFFwOXFKaW9Ra3Zka2xnZ0pMNUppQXBrVTd0RVE0b2YwNUZHOTczcmpSS0FYbDZVZw?oc=5",
           "importance": 2
         }
       ],
@@ -2038,6 +2038,19 @@
     "ae": {
       "official": [],
       "independent": [
+        {
+          "id": "ae-independent-e39df4dca6ad1bbc",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "President Sheikh Mohamed meets Ethara team after F1 Promoter of the Year win - thenationalnews.com",
+          "summary": "President Sheikh Mohamed meets Ethara team after F1 Promoter of the Year win thenationalnews.com",
+          "date": "Sep 18, 2026 Â· 12:42 PM",
+          "publishedAt": "2026-09-18T12:42:43.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNOTBsS1RCcTRQSG9nam1wdGZwSlc2RmFLYWRtNmNvYXBMMF9RbktobUhVdFV4ckdiWnBPUmNpOHpLR3d6THRaakZRUWk0bG5pMlBtdy1HRklrUjlqeTlCVlVuZFdHa3JNOVgwWHZoNHUyc2tPSlc2NjQtMnlZY0czNWc2QTZCX2xPYkNqME9PNkhzMk4wZm1xVzFfUWpZX25oZExZcGlmVmRrcmdpNkxoZFRBTnhLUXRLdnZReFRmUE5WT0RQZ1BzQQ?oc=5",
+          "importance": 2
+        },
         {
           "id": "ae-independent-20ac693bfc5a6cf9",
           "countryId": "ae",
@@ -2049,19 +2062,6 @@
           "publishedAt": "2026-09-15T15:48:58.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNd2F1dy1RYnpRNlNjX2VGdzR0b2VldGJfZzNQaUZFc3JZdkp4azNSQ3dad3VuMDFvRk5OS0xBZ2lBU21seDVjYXpWMWhDYjBNY2JQdmgtODFwT0VrbEx0SzFGUFdfN01FajR1N2ZYN043LXdQQXVjeDJJY2N2V3hzc0RNeHc5WEJTWC1ZQmdB?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ae-independent-7532366a60d57a11",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "President Sheikh Mohamed and Syria's Ahmad Al Shara discuss economic ties in Abu Dhabi - thenationalnews.com",
-          "summary": "President Sheikh Mohamed and Syria's Ahmad Al Shara discuss economic ties in Abu Dhabi thenationalnews.com",
-          "date": "Sep 15, 2026 Â· 6:21 PM",
-          "publishedAt": "2026-09-15T18:21:48.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNZGtoZDhDN1Y1NkNwTjhtZEVPcUJDNW1VZDNGMnJ0RE50cGJId2MxLUUxWHV5czJzTVVXczBoX0t1Wm4zZ3NrQ3ZudzRzVmN5SS1HTnlVS0lFcFBiVFloS2dvczc3b2RRTF9GQWs4R0dxYUtoa2cxRkl0UmxidVZ5MkxvcUl5NFUwSGVmZWY4RENaZVM1QTJGdjV3WF9ZRzEzem41YUdhdnA3MzgtVk1zekRudWx0dTZKM2pqeGhkTjJvYXAzM0Q3eHlNeEVOeXJFdUlKQw?oc=5",
           "importance": 2
         },
         {
@@ -2308,8 +2308,8 @@
           "countryId": "ng",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Govs, 36 assemblies decide fate of state police, consider amended bill - guardian.ng",
-          "summary": "Govs, 36 assemblies decide fate of state police, consider amended bill guardian.ng",
+          "headline": "Govs, 36 assemblies decide fate of state police, consider amended bill - The Guardian Nigeria News",
+          "summary": "Govs, 36 assemblies decide fate of state police, consider amended bill The Guardian Nigeria News",
           "date": "Sep 18, 2026 Â· 5:00 AM",
           "publishedAt": "2026-09-18T05:00:00.000Z",
           "dateOnly": false,
@@ -2336,8 +2336,8 @@
           "source": "Google News",
           "headline": "State Assemblies Await Constitution Review Bills — Guwor - Asaba Metro News",
           "summary": "State Assemblies Await Constitution Review Bills — Guwor Asaba Metro News",
-          "date": "Sep 18, 2026 Â· 12:43 PM",
-          "publishedAt": "2026-09-18T12:43:23.000Z",
+          "date": "Sep 18, 2026 Â· 2:45 PM",
+          "publishedAt": "2026-09-18T14:45:31.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNQ05DMUI3UURBTkp3NU0tdU1HbTcxV2F0b2VEdllPdUxlWU8tWktzTEVOT2h1ei1zak0zR0E5NlRWQzFXbnNIMzc2eWF6RlVfZDJKa19aOHJ1aldBaHpXZ0lDbTdoRkV3b2xzaExoUHB2SWQtVmJvSEtPbFFUdV92Zm9UQ2ZkMlJJcFE?oc=5",
           "importance": 2
@@ -2458,8 +2458,8 @@
           "countryId": "in",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "BRICS And Iran: Diplomatic Significance – OpEd - eurasiareview.com",
-          "summary": "BRICS And Iran: Diplomatic Significance – OpEd eurasiareview.com",
+          "headline": "BRICS And Iran: Diplomatic Significance – OpEd - Eurasia Review",
+          "summary": "BRICS And Iran: Diplomatic Significance – OpEd Eurasia Review",
           "date": "Sep 18, 2026 Â· 5:02 PM",
           "publishedAt": "2026-09-18T17:02:33.000Z",
           "dateOnly": false,
@@ -2493,16 +2493,16 @@
           "importance": 2
         },
         {
-          "id": "in-independent-81a05d22698523d1",
+          "id": "in-independent-edfa3bda11bf80a9",
           "countryId": "in",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "​Indian Prime Minister Narendra Modi Meets with Wang Yi and Other BRICS National Security Advisers and High Representatives_Permanent Mission of the People's Republic of China to the UN - 常驻联合国代表团",
-          "summary": "​Indian Prime Minister Narendra Modi Meets with Wang Yi and Other BRICS National Security Advisers and High Representatives_Permanent Mission of the People's Republic of China to the UN 常驻联合国代表团",
-          "date": "Jun 26, 2026 Â· 7:00 AM",
-          "publishedAt": "2026-06-26T07:00:00.000Z",
+          "headline": "PM Modi, UAE President discuss West Asia, strategic ties during phone call - The Federal",
+          "summary": "PM Modi, UAE President discuss West Asia, strategic ties during phone call The Federal",
+          "date": "Sep 18, 2026 Â· 12:22 PM",
+          "publishedAt": "2026-09-18T12:22:41.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE52NXBnU0JqLWNJVHRnaHJfTWhpZ2ltMlhLMktFWHl6SmI0bXhLaXVaZjdJQ01nRzdSU2MtRXhvQWRTbFIxcldCTkllTmJSM0w0QzRubmlBdFpKRm9pUzFseTcxcDQ5Z2dCM2hoUWhvc3ZfNDZMdmVORExB?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOa0NBOWdLNG9vc0FCYnNudEZ6SFBqYm5UblFfQnVicGpZWnpiRzdpeDZNOGNGdDY1VHNvd2VWNExyV0xxNGdYa0wyWnFOYUtTc01aRUUtUXIwLUNLSzdNd0dGdHdMemIyZDYwcUhPQ01PSkIydlF0VGFMcVU2eEdmS09lb0xQTVpjWHJza1ZaZFQzY3JxNVllenJRaUlwbjR6RGVnRjMzSEZSdE84Vmc?oc=5",
           "importance": 2
         },
         {
@@ -2519,16 +2519,16 @@
           "importance": 2
         },
         {
-          "id": "in-independent-6480800987eb34fe",
+          "id": "in-independent-290cc9dfdf3ab1dd",
           "countryId": "in",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "PM wishes Narendra Modi on his 76th birthday - bssnews.net",
-          "summary": "PM wishes Narendra Modi on his 76th birthday bssnews.net",
-          "date": "Sep 18, 2026 Â· 5:41 AM",
-          "publishedAt": "2026-09-18T05:41:08.000Z",
+          "headline": "UAE President Calls PM Modi, Reaffirms Commitment to West Asia Peace - The Statesman",
+          "summary": "UAE President Calls PM Modi, Reaffirms Commitment to West Asia Peace The Statesman",
+          "date": "Sep 18, 2026 Â· 11:52 AM",
+          "publishedAt": "2026-09-18T11:52:00.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBobTRDeUxoOGRwRUJUUXg2VEFCYkhvLTZ6NkdmOFpnVXAyU05mUGNKQXdtVGhZT2VfX21MQTNTVmJWUGw0bVRnMk1zbTdjeDdCc3BR?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOb0s5ekVoYU5yaVFXdUZYRFd4eU9oMHdTeXJ3RzlyQTN2a1NkUTFXUW9GY2lDTDF3eHY5R0p5V21PWnAtQWxuX1RLX1Rla3VrOURGbjRwd1AyU3FxelF5SVdYckNMR0xKd3JqLXhXREZKYkctWXZZOUtGWjVFaUdYb2xYMWtpVlFRZVhtcV9PNWtQZmdMcVFZdmdCSEZmVzkzVzhCbU5UTENNSnpnNTZDOTFIVkI2aHI1d2fSAb8BQVVfeXFMT2NYVjBYN2R1MmlEZDNzcXNfM3dCZmZBdEZqdTdObFFZY3dsUS1EZGN3VEVoMUZtODNZSDFaeS0tR2htQzVhTXBXLVdsX2NUQmdXczJ3UFpTTHFSeFJIcWk3Q0tCbmNwR2dHN3JkY2E1djBFVFFmWkdTSko3WTBaM0k4cXZXUjhTdHk3YVFGMllBaVJIZ2k1NjVYdGxIYkZkTkc0OWduekk1b19LdklCeDVSVVVHUWFOd01SVXRpV00?oc=5",
           "importance": 2
         }
       ],
@@ -2933,8 +2933,8 @@
           "countryId": "jp",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "How Bessent, America's bond salesman, cornered Japan on big spending - lufkindailynews.com",
-          "summary": "How Bessent, America's bond salesman, cornered Japan on big spending lufkindailynews.com",
+          "headline": "How Bessent, America's bond salesman, cornered Japan on big spending - The Lufkin Daily News",
+          "summary": "How Bessent, America's bond salesman, cornered Japan on big spending The Lufkin Daily News",
           "date": "Sep 18, 2026 Â· 8:57 AM",
           "publishedAt": "2026-09-18T08:57:19.000Z",
           "dateOnly": false,
@@ -3194,12 +3194,25 @@
           "countryId": "tw",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Taiwan holds first joint military drills using attack drones ahead of Trump-Xi summit in the US - ABC News - Breaking News, Latest News and Videos",
-          "summary": "Taiwan holds first joint military drills using attack drones ahead of Trump-Xi summit in the US ABC News - Breaking News, Latest News and Videos",
+          "headline": "Taiwan holds first joint military drills using attack drones ahead of Trump-Xi summit in the US - abcnews.com",
+          "summary": "Taiwan holds first joint military drills using attack drones ahead of Trump-Xi summit in the US abcnews.com",
           "date": "Sep 18, 2026 Â· 1:16 PM",
           "publishedAt": "2026-09-18T13:16:07.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPY0prWDNuWTM1NVltYTd6RV9hWHc5UmlnMnZuV3I5blRpZEh1Zng1dndsSG10S1FNWU1sODhETEdtQ3NaX2dBVHpTeVlzVnhKeDdNV2lYSW1WZk5sRjEtZVVUNjZpb01GUUYwMnpZREM1eFRWYUgyb1BGRWpfeUYzdk9mU3RnY3VJVUJteEZUUzBkZHRDaGRtWGNEeUVjNFd1ZkkwSUhETHFFQ3Vw0gGyAUFVX3lxTE9Jelh4ZkNxYjQ5ZzllYkNMUngza1RPTmZOSzlET0RqNUVYYV8ycm5VeTRmNnNnMjk3aU5reHBoNmliOHZKaEJGYmdXbDRrbzB3NHc4emtoTWhtZ3I3SU9GYTltNkdHMzNZbkxQQUktMHc2bnFQSDJsbXJKVnpxY0FESDVjZzNUOTdMZlBoMnduZjB2N01USmF2XzN6ZHBDRDl3ZWVQcUkzSmZNQmZ4aXc4QkE?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "tw-independent-30e894d46ab239c4",
+          "countryId": "tw",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Taiwan holds first joint military drills using attack drones ahead of Trump-Xi summit in the US - tdtnews.com",
+          "summary": "Taiwan holds first joint military drills using attack drones ahead of Trump-Xi summit in the US tdtnews.com",
+          "date": "Sep 18, 2026 Â· 12:20 PM",
+          "publishedAt": "2026-09-18T12:20:35.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNeVVESy1sajB6OWdZbzlPbHI4RFBZaG8wN0J2UEpjRzhzTUIxYkEtcGIwY1RxYTM0Zkl1cmJJYXFxNy1NQ2ZqcmRjM3NNSkpwXzZGVFpxVi1TYkFsbkZKVHE3QXIzWGtFYjZqU0dWT294dWhoQUlVZmxJTGt0RU9kc0VtWnYweUtKMlNyYjcxMk9sMGJWN2c?oc=5",
           "importance": 2
         },
         {
@@ -3216,29 +3229,16 @@
           "importance": 2
         },
         {
-          "id": "tw-independent-30e894d46ab239c4",
+          "id": "tw-independent-392eb0cc2c05c827",
           "countryId": "tw",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Taiwan holds first joint military drills using attack drones ahead of Trump-Xi summit in the US - Temple Daily Telegram",
-          "summary": "Taiwan holds first joint military drills using attack drones ahead of Trump-Xi summit in the US Temple Daily Telegram",
+          "headline": "Taiwan holds first joint military drills using attack drones ahead of Trump-Xi summit in the US - Goshen News",
+          "summary": "Taiwan holds first joint military drills using attack drones ahead of Trump-Xi summit in the US Goshen News",
           "date": "Sep 18, 2026 Â· 12:20 PM",
           "publishedAt": "2026-09-18T12:20:35.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNeVVESy1sajB6OWdZbzlPbHI4RFBZaG8wN0J2UEpjRzhzTUIxYkEtcGIwY1RxYTM0Zkl1cmJJYXFxNy1NQ2ZqcmRjM3NNSkpwXzZGVFpxVi1TYkFsbkZKVHE3QXIzWGtFYjZqU0dWT294dWhoQUlVZmxJTGt0RU9kc0VtWnYweUtKMlNyYjcxMk9sMGJWN2c?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "tw-independent-7fc6b2ecbb448380",
-          "countryId": "tw",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Taiwan holds first joint military drills using attack drones ahead of Trump-Xi summit in the US - The Killeen Daily Herald",
-          "summary": "Taiwan holds first joint military drills using attack drones ahead of Trump-Xi summit in the US The Killeen Daily Herald",
-          "date": "Sep 18, 2026 Â· 12:20 PM",
-          "publishedAt": "2026-09-18T12:20:35.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxNa1d6azR2NUVORl95ZkY4aWw2cE9DVFBPUGhTclhXUjZjcWJoUjdnelZvZU90R3ZVSklsZ3AzdTBlazBDS055aXViREhLQlZYbTYxNEo1NlVfcDVTTkRURlhpZXJGTEdpS3hYOGU0czJqUlJnNVRJMFF3LXVDTjhSay1ZWHJnUVRkcmhkZUdKa1JBb3B3QzQ1VjZNTE1tOXgwWnE3dlpkei05SDlnc0hPV3lySktxVW5ZSG4xMlhYcmU4ckRIYzNOUGxTS09SNXBtMTRfNjFFU3ZfcS1ZREF2QTRKb1llbWJMTXNMZ3RHeTROZ0p6SnpGbzU0VXV3dw?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMikgJBVV95cUxQa3hyQ082a3BrdlZOYXFzZGRKRUV2eGh6RTRBQjJQOGdKaUJrVEV1c2haNnZ2NU15VWVaTnNXWUJYa001ZW13dGNGQlh1UVBDUzFXVWZXWWpyRzNuRmx3UlpUczdGaENIaDVSU3lxVjRfNkhEaFc5Mll6NzFUNDJ3ejJ4bkttQUF1X2dNTk9Jb2lLNVI3ZVlHZzhma085UFRhWnNfazhQamdnVkpHV0xjVlJkSXpoLU1nZ1FXQlhCT1kxa3QwWW9oTFJnenpJeUoyaTJpd3U3R1Jjd0dYNHBvdi1xQUZOek1BRE5PcE1GWkhZXzl1dGVWR1ZIRjcwSXZiN0JSN2VDRGNNMDBtblZDdUFB?oc=5",
           "importance": 2
         },
         {
@@ -3255,16 +3255,16 @@
           "importance": 2
         },
         {
-          "id": "tw-independent-1a1afeaadc679d6d",
+          "id": "tw-independent-c218f02abb0347db",
           "countryId": "tw",
           "sourceType": "independent",
           "source": "Google News",
-          "headline": "Taiwan Drills - Goshen News",
-          "summary": "Taiwan Drills Goshen News",
+          "headline": "Taiwan Drills - GazetteXtra",
+          "summary": "Taiwan Drills GazetteXtra",
           "date": "Sep 18, 2026 Â· 7:59 AM",
           "publishedAt": "2026-09-18T07:59:21.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPdmtPOS1PaHN4UHVSZFNFSkdaVzNkc2NsVUx3QVpaZHpiaE0zbXJaVUc4QnJFUXhJQnB3U3VVeW9rOUFsU0g4d0RxZlpybTdDbVZRbEF1eXlyX0lKNGtrQjVTSmV6alZjTlBtVnhCTzdsdzd6RWZFT2Q1NzNmMFlRMnFwSUdiYUdURWhPRS1GQURGTFhiS3hJeXFfNzlBcTFPMzM0X0hGLXZhOEk?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOWTFVODhJRXhwUmpZOHR1a3ZnczA4OFByZWJRQ1pnMjRxYm9KZXh5c2xEX2RocE9WaVFlRHdkUDhzUEY2UW9WTTA5bm5qbUhyaWt1OURDNlktLVUteENDekkwSjZiVEloZmJXZ3N0YTdtRUQ2d2FzREVGVFQwWGpLUWNFX3lTTExLdXllSnZFV25CU3FCSTd4RzJOZ3NhaUJvVXduS2thckk4ekU?oc=5",
           "importance": 2
         }
       ],
@@ -3463,19 +3463,6 @@
           "importance": 2
         },
         {
-          "id": "au-independent-620d3aa8f8f4f786",
-          "countryId": "au",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "Australia, China Australian PM's Chinese interpreter under scrutiny for sensitive ties with China - intelligenceonline.com",
-          "summary": "Australia, China Australian PM's Chinese interpreter under scrutiny for sensitive ties with China intelligenceonline.com",
-          "date": "Sep 17, 2026 Â· 4:04 AM",
-          "publishedAt": "2026-09-17T04:04:24.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNMWxvWkY2Y2NfczM5VWx3NjJiREpuYVFpOXNoMTV2T18xOG9JVzN2dlgxZ3hkOTAwRzNJY0p5TnVzY0REYmg4ZUhnMDJ2TjBDTWlRS0xhcF84czJtOFgwRU5zanVSbWY2X3JnTDBOMm5ldDFXUF9ZVlF3LUNETEhhSkFVLVluemM4NWNURzNqTERRNHcxYURTTnNQVHNCMERocUhCQTNvWmJyWlcwbnUtUkhnLUFUZTk3eUJ6dnlKelJPTkhHalNjTDFtYW1ZQkxLRlIyX2MzUW1tWkswZGJpM2VidllyaTV1?oc=5",
-          "importance": 2
-        },
-        {
           "id": "au-independent-836a62682f9531c9",
           "countryId": "au",
           "sourceType": "independent",
@@ -3512,6 +3499,19 @@
           "publishedAt": "2026-07-06T07:00:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOV0FkWVFNcFY4R25xWENRWUhTZ0N2U1R2cWdFa3E4SUxJLXFLVUhFcmR2LVpnYTR5RVVVNWdtem1VeXF5b2xUZGVnOWQzUlByQWp4MkxaVVBjWkZpd0ctSGdOMmJiLVdIYnVfY19ISWNxT2tqZnFhUVJTZkJzTUpBMFFLUlphSlV2MUNhUnlqRjZLMGJ6TlZuMXljZGg3QTFCNEtaQ1p1MVNRV3M5QUFBTjFPU2RnU1Z3TzdTQQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "au-independent-a95fefff060d37ea",
+          "countryId": "au",
+          "sourceType": "independent",
+          "source": "Google News",
+          "headline": "Labor staffer and former Play School host sacked for ‘abhorrent’ posts attacking Peta Credlin - The Guardian",
+          "summary": "Labor staffer and former Play School host sacked for ‘abhorrent’ posts attacking Peta Credlin The Guardian",
+          "date": "Sep 15, 2026 Â· 8:54 AM",
+          "publishedAt": "2026-09-15T08:54:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxOYmdBdGlzek5mNGw5ZC00S2RIbXh3eU5LM09XanREQzk4RWN2emJ5TnY4Um1sUm9DUGROc29BQzdYOGM4US1RLTEzWnUxNmZVMExzd25hUk9mRVNiMHVmZjlCY0dRbTBpR2NpeTBPbXJMNkZtb0paN3hQSS1Pc3FQOThDb2FuM0swMkVOR3VNOTRWQ1luX3JEQXZXMng3SFp4NGxvYld2cnNIanRGUDFMTjktMDZneTZrNmlUaERCSm5GM2trNTFKSXhIajlWXzVlSWplbXY5ZF9zZlcwX0NwR3EwdlNERTZu?oc=5",
           "importance": 2
         }
       ],
