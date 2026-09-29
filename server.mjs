@@ -64,7 +64,7 @@ app.get("/api/global", (req, res) => {
     else if (mode === "news") items.push(...entry.independent);
     else items.push(...entry.official, ...entry.independent);
   }
-  items = items.sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0)).slice(0, 30);
+  items = items.sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0)).slice(0, 500);
   res.json({ items, generatedAt: cache.generatedAt });
 });
 app.get("/api/status", (req, res) => {

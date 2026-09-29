@@ -153,6 +153,7 @@ return [...items].sort((a, b) =>
   const pagedFeed = visibleFeed.slice(pageStart, pageStart + REPORTS_PER_PAGE);
 
   async function loadCountry(country, modeOverride) {
+    setPage(1);
     setSelected(country);
     setView("country");
     setLoading(true);
@@ -196,6 +197,7 @@ return [...items].sort((a, b) =>
     }
   }
   function loadGlobal() {
+    setPage(1);
     setSelected(null);
     setView("global");
     fetch(`${API_BASE}/api/global?mode=both`)
@@ -290,7 +292,7 @@ return [...items].sort((a, b) =>
             )}
           </div>
         )}
-                {selected && visibleFeed.length > 0 && (
+                {visibleFeed.length > 0 && (
           <div className="pagination">
             <span className="pagination-info">
               REPORTS {pageStart + 1}–{Math.min(pageStart + REPORTS_PER_PAGE, visibleFeed.length)} OF {visibleFeed.length}
@@ -312,7 +314,7 @@ return [...items].sort((a, b) =>
             </div>
           </div>
         )}
-        {(selected ? pagedFeed : visibleFeed).map(item=><NewsCard key={item.id} item={item}/>)}
+        {pagedFeed.map(item=><NewsCard key={item.id} item={item}/>)}
       </aside>
     </main>
   </div>;
