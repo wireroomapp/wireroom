@@ -720,7 +720,7 @@ return [...items].sort((a, b) =>
           </button>
         </div>
 
-        <div className="map-note">SELECT A COUNTRY â€¢ CLICK MARKER FOR SOURCES</div>
+        <div className="map-note">SELECT A COUNTRY &bull; CLICK MARKER FOR SOURCES</div>
         {view === "closed" && <button className="global-fab" onClick={loadGlobal}>GLOBAL FEED</button>}      </section>
 
       <aside className={`panel ${view !== "closed" ? "open" : ""}`}>
