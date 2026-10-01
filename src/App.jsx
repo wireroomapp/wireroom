@@ -76,6 +76,7 @@ export default function WireRoomV2() {
   const [region, setRegion] = useState("ALL");
   const [feed, setFeed] = useState(DEMO_NEWS);
   const [officialVerifiedMap, setOfficialVerifiedMap] = useState({});
+  const [officialStatusMap, setOfficialStatusMap] = useState({});
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [mapFeatures, setMapFeatures] = useState([]);
@@ -188,6 +189,7 @@ return [...items].sort((a, b) =>
     // the mode that was active at selection time.
     const activeMode = modeOverride || mode;
     setOfficialVerifiedMap(prev => { const next = { ...prev }; delete next[country.id]; return next; });
+    setOfficialStatusMap(prev => { const next = { ...prev }; delete next[country.id]; return next; });
 
     // Cancel whatever request was still in flight — without this, a
     // slower older request (e.g. from a tab you clicked a moment ago)
@@ -211,6 +213,7 @@ return [...items].sort((a, b) =>
 }
         if (typeof data.officialVerified === "boolean") {
           setOfficialVerifiedMap(prev => ({ ...prev, [country.id]: data.officialVerified }));
+          setOfficialStatusMap(prev => ({ ...prev, [country.id]: { status: data.officialStatus || null, lastOkAt: data.officialLastOkAt || null } }));
         }
       }
     } catch (err) {
@@ -726,13 +729,17 @@ return [...items].sort((a, b) =>
             <div className="eyebrow">COUNTRY BRIEF</div>
             <h1>{selected?.name || "GLOBAL FEED"}</h1>
             <p>{selected ? selected.sources.join(" • ") : "Official government statements and optional trusted independent reporting"}</p>
-            {selected && officialVerifiedMap[selected.id] !== undefined && (
-              <p className={`source-status ${officialVerifiedMap[selected.id] === false ? "unverified" : "verified"}`}>
-                {officialVerifiedMap[selected.id] === false
-                  ? "⚠ Official source: not yet verified for this country"
-                  : "✓ Official source: verified"}
-              </p>
-            )}
+            {selected && officialVerifiedMap[selected.id] !== undefined && (() => {
+              const info = officialStatusMap[selected.id] || {};
+              const notVerified = officialVerifiedMap[selected.id] === false || info.status === "not-configured";
+              const down = info.status === "unavailable";
+              const lastOk = info.lastOkAt ? new Date(info.lastOkAt).toLocaleDateString() : "";
+              let text = "\u2713 Official source: verified";
+              if (notVerified) text = "\u26a0 Official source: not yet verified for this country";
+              else if (down) text = "\u26a0 Official source temporarily unavailable \u2014 showing saved reports" + (lastOk ? " (last good: " + lastOk + ")" : "");
+              else if (info.status === "empty") text = "\u2713 Official source: verified \u2014 no new statements since last check";
+              return <p className={"source-status " + (notVerified || down ? "unverified" : "verified")}>{text}</p>;
+            })()}
           </div>
                  {view !== "closed" && <button onClick={closePanel}>×</button>}
         </div>
@@ -746,6 +753,8 @@ return [...items].sort((a, b) =>
           <div className="empty">
             {mode === "official" && selected && officialVerifiedMap[selected.id] === false ? (
               <>NO VERIFIED OFFICIAL SOURCE YET FOR THIS COUNTRY.<br/><small>We haven't found or confirmed a direct government feed for {selected.name} yet — this isn't the same as "nothing happening," it means the source itself is still unverified. Check the NEWS tab for independent coverage in the meantime.</small></>
+            ) : mode === "official" && selected && (officialStatusMap[selected.id] || {}).status === "unavailable" ? (
+              <>OFFICIAL SOURCE TEMPORARILY UNAVAILABLE.<br/><small>We couldn't reach {selected.name}'s official source on the last check, so nothing new is shown. That doesn't mean nothing was said. Check the NEWS tab for independent coverage in the meantime.</small></>
             ) : mode === "official" && selected ? (
               <>NO NEW OFFICIAL STATEMENTS RIGHT NOW.<br/><small>{selected.name}'s official source is verified and connected — it just hasn't published anything new since the last check.</small></>
             ) : (
