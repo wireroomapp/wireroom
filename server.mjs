@@ -52,7 +52,13 @@ app.get("/api/news", (req, res) => {
 
   items = [...items].sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
 
-  res.json({ items, generatedAt: cache.generatedAt, officialVerified });
+  res.json({
+    items,
+    generatedAt: cache.generatedAt,
+    officialVerified,
+    officialStatus: entry.officialStatus || (officialVerified ? null : "not-configured"),
+    officialLastOkAt: entry.officialLastOkAt || null,
+  });
 });
 app.get("/api/global", (req, res) => {
   const mode = String(req.query.mode || "both");

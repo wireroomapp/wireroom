@@ -47,6 +47,15 @@ async function main() {
         official: mergeHistory(previousEntry.official, result.official),
         independent: mergeHistory(previousEntry.independent, result.independent),
         officialVerified: result.officialVerified,
+        officialStatus: result.officialStatus,
+        officialLastOkAt:
+          result.official.length > 0
+            ? new Date().toISOString()
+            : previousEntry.officialLastOkAt || null,
+        officialLastError:
+          result.officialErrors && result.officialErrors.length
+            ? result.officialErrors[0]
+            : null,
       };
 
       const verifiedLabel = result.officialVerified
@@ -62,6 +71,9 @@ async function main() {
       console.log(`FAILED (${err.message}) - keeping previous cached history`);
 
       countries[countryId] = {
+        officialStatus: "unavailable",
+        officialLastOkAt: previousEntry.officialLastOkAt || null,
+        officialLastError: String(err.message).slice(0, 200),
         official: previousEntry.official || [],
         independent: previousEntry.independent || [],
         officialVerified:
@@ -70,6 +82,17 @@ async function main() {
             : hasVerifiedOfficialSource(countryId),
       };
     }
+  }
+
+  console.log("\n=== Official source health ===");
+  const unavailable = [];
+  for (const [id, c] of Object.entries(countries)) {
+    const status = c.officialStatus || "unknown";
+    console.log(`${id}: ${status}` + (c.officialLastError ? ` (${c.officialLastError})` : ""));
+    if (status === "unavailable") unavailable.push(id);
+  }
+  if (unavailable.length) {
+    console.log(`::warning::Official source unavailable: ${unavailable.join(", ")}`);
   }
 
   const cache = {

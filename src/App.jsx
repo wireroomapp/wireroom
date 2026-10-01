@@ -14,7 +14,7 @@ const MAP_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"
 
 // The real, deployed backend — no longer a same-origin /api proxy since
 // the frontend and backend now live on different domains.
-const API_BASE = "https://wireroom-backend.onrender.com";
+const API_BASE = import.meta.env.VITE_API_BASE || "https://wireroom-backend.onrender.com";
 
 const COUNTRIES = [
   { id:"us", name:"United States", code:"US", lat:38.9, lon:-77.0, region:"Americas", sources:["White House","Department of Defense","Department of State"] },
@@ -76,6 +76,7 @@ export default function WireRoomV2() {
   const [region, setRegion] = useState("ALL");
   const [feed, setFeed] = useState(DEMO_NEWS);
   const [officialVerifiedMap, setOfficialVerifiedMap] = useState({});
+  const [officialStatusMap, setOfficialStatusMap] = useState({});
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [mapFeatures, setMapFeatures] = useState([]);
@@ -85,6 +86,11 @@ export default function WireRoomV2() {
   const svgRef = useRef(null);
   const zoomRef = useRef(null);
   const abortRef = useRef(null); // cancels a stale request when a newer one starts
+  const [annotationTool, setAnnotationTool] = useState("select");
+  const [annotations, setAnnotations] = useState(() => { try { const raw = localStorage.getItem("wireroom-annotations-v1"); const saved = raw ? JSON.parse(raw) : null; return Array.isArray(saved) ? saved : []; } catch (_) { return []; } });
+  const [selectedAnnotationId, setSelectedAnnotationId] = useState(null);
+  const [annotationDraft, setAnnotationDraft] = useState(null);
+  const annotationHydratedRef = useRef(false);
 
   useEffect(() => {
     fetch(`${API_BASE}/api/global?mode=both`)
@@ -108,6 +114,24 @@ export default function WireRoomV2() {
   }, []);
 
   useEffect(() => {
+    try {
+      const raw = localStorage.getItem("wireroom-annotations-v1");
+      if (raw) {
+        const saved = JSON.parse(raw);
+        if (Array.isArray(saved)) setAnnotations(saved);
+      }
+    } catch (_) {}
+    annotationHydratedRef.current = true;
+  }, []);
+
+  useEffect(() => {
+    if (!annotationHydratedRef.current) return;
+    try {
+      localStorage.setItem("wireroom-annotations-v1", JSON.stringify(annotations));
+    } catch (_) {}
+  }, [annotations]);
+
+  useEffect(() => {
     const el = stageRef.current;
     if (!el) return;
     const ro = new ResizeObserver(entries => {
@@ -123,11 +147,14 @@ export default function WireRoomV2() {
 
   useEffect(() => {
     if (!svgRef.current) return;
-    const zoom = d3.zoom().scaleExtent([1,8]).on("zoom", e => setTransform(e.transform));
+    const zoom = d3.zoom()
+      .scaleExtent([1,8])
+      .filter(e => annotationTool === "select" || e.type === "wheel" || e.type === "touchstart")
+      .on("zoom", e => setTransform(e.transform));
     d3.select(svgRef.current).call(zoom);
     zoomRef.current = zoom;
     return () => d3.select(svgRef.current).on(".zoom",null);
-  }, [dims]);
+  }, [dims, annotationTool]);
 
   const filteredCountries = useMemo(() => COUNTRIES.filter(c => {
     const q = query.trim().toLowerCase();
@@ -162,7 +189,7 @@ return [...items].sort((a, b) =>
     // the mode that was active at selection time.
     const activeMode = modeOverride || mode;
     setOfficialVerifiedMap(prev => { const next = { ...prev }; delete next[country.id]; return next; });
-    setOfficialVerifiedMap(prev => { const next = { ...prev }; delete next[country.id]; return next; });
+    setOfficialStatusMap(prev => { const next = { ...prev }; delete next[country.id]; return next; });
 
     // Cancel whatever request was still in flight — without this, a
     // slower older request (e.g. from a tab you clicked a moment ago)
@@ -186,6 +213,7 @@ return [...items].sort((a, b) =>
 }
         if (typeof data.officialVerified === "boolean") {
           setOfficialVerifiedMap(prev => ({ ...prev, [country.id]: data.officialVerified }));
+          setOfficialStatusMap(prev => ({ ...prev, [country.id]: { status: data.officialStatus || null, lastOkAt: data.officialLastOkAt || null } }));
         }
       }
     } catch (err) {
@@ -218,6 +246,167 @@ return [...items].sort((a, b) =>
     if (selected) loadCountry(selected, newMode);
   }
 
+  function svgPointFromEvent(e) {
+    const svg = svgRef.current;
+    if (!svg) return { x: 0, y: 0 };
+    const point = svg.createSVGPoint();
+    point.x = e.clientX;
+    point.y = e.clientY;
+    const transformed = point.matrixTransform(svg.getScreenCTM().inverse());
+    return {
+      x: (transformed.x - transform.x) / transform.k,
+      y: (transformed.y - transform.y) / transform.k
+    };
+  }
+
+  function addAnnotation(annotation) {
+    const id = crypto.randomUUID
+      ? crypto.randomUUID()
+      : String(Date.now()) + "-" + Math.random();
+    const next = { id, ...annotation };
+    setAnnotations(prev => [...prev, next]);
+    setSelectedAnnotationId(id);
+  }
+
+  function handleMapPointerDown(e) {
+    if (annotationTool === "select" || e.button !== 0) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const point = svgPointFromEvent(e);
+
+    setAnnotationDraft({
+      tool: annotationTool,
+      start: point,
+      end: point
+    });
+
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch (_) {}
+  }
+
+  function handleMapPointerMove(e) {
+    if (!annotationDraft) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    setAnnotationDraft(prev => ({
+      ...prev,
+      end: svgPointFromEvent(e)
+    }));
+  }
+
+  function handleMapPointerUp(e) {
+    if (!annotationDraft) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const { tool, start, end } = annotationDraft;
+    const width = Math.abs(end.x - start.x);
+    const height = Math.abs(end.y - start.y);
+
+    if (tool === "marker") {
+      addAnnotation({
+        type: "marker",
+        x: start.x,
+        y: start.y,
+        label: ""
+      });
+    }
+
+    if (tool === "line" && Math.hypot(end.x - start.x, end.y - start.y) > 8) {
+      addAnnotation({
+        type: "line",
+        x1: start.x,
+        y1: start.y,
+        x2: end.x,
+        y2: end.y,
+        label: ""
+      });
+    }
+
+    if (tool === "shape" && width > 8 && height > 8) {
+      addAnnotation({
+        type: "shape",
+        x: Math.min(start.x, end.x),
+        y: Math.min(start.y, end.y),
+        width,
+        height,
+        label: ""
+      });
+    }
+
+    if (tool === "text") {
+      const text = window.prompt("Note text:");
+      if (text && text.trim()) {
+        addAnnotation({
+          type: "text",
+          x: start.x,
+          y: start.y,
+          text: text.trim()
+        });
+      }
+    }
+
+    setAnnotationDraft(null);
+  }
+
+  function editSelectedAnnotation() {
+    if (!selectedAnnotationId) return;
+
+    const current = annotations.find(a => a.id === selectedAnnotationId);
+    if (!current) return;
+
+    if (current.type === "text") {
+      const text = window.prompt("Edit note:", current.text || "");
+      if (text !== null && text.trim()) {
+        setAnnotations(prev => prev.map(a =>
+          a.id === current.id ? { ...a, text: text.trim() } : a
+        ));
+      }
+      return;
+    }
+
+    const label = window.prompt("Annotation label:", current.label || "");
+    if (label !== null) {
+      setAnnotations(prev => prev.map(a =>
+        a.id === current.id ? { ...a, label: label.trim() } : a
+      ));
+    }
+  }
+
+  function deleteSelectedAnnotation() {
+    if (!selectedAnnotationId) return;
+
+    setAnnotations(prev =>
+      prev.filter(a => a.id !== selectedAnnotationId)
+    );
+    setSelectedAnnotationId(null);
+  }
+
+  function clearAnnotations() {
+    if (!annotations.length) return;
+
+    if (window.confirm("Clear all map annotations?")) {
+      setAnnotations([]);
+      setSelectedAnnotationId(null);
+    }
+  }
+
+  const toolButtonStyle = active => ({
+    border: "1px solid rgba(255,255,255,.18)",
+    background: active ? "rgba(255,255,255,.16)" : "rgba(10,14,20,.78)",
+    color: "#fff",
+    padding: "6px 9px",
+    fontSize: "11px",
+    fontWeight: 700,
+    cursor: "pointer"
+  });
+
   const regions = ["ALL", ...Array.from(new Set(COUNTRIES.map(c=>c.region)))];
 
   return <div className="app">
@@ -238,7 +427,14 @@ return [...items].sort((a, b) =>
 
     <main className="layout">
       <section className="map-wrap" ref={stageRef}>
-        <svg ref={svgRef} className="map" viewBox={`0 0 ${dims.w} ${dims.h}`}>
+        <svg
+          ref={svgRef}
+          className="map"
+          viewBox={`0 0 ${dims.w} ${dims.h}`}
+          onPointerDown={handleMapPointerDown}
+          onPointerMove={handleMapPointerMove}
+          onPointerUp={handleMapPointerUp}
+          onPointerCancel={() => setAnnotationDraft(null)}>
           <g transform={`translate(${transform.x},${transform.y}) scale(${transform.k})`}>
             <path d={path({type:"Sphere"})} className="ocean"/>
             <path d={path(d3.geoGraticule().step([20,20])())} className="grid"/>
@@ -246,7 +442,17 @@ return [...items].sort((a, b) =>
             {filteredCountries.map(c=>{
               const [x,y]=projection([c.lon,c.lat]); const active=selected?.id===c.id;
               const has=feed.some(n=>n.countryId===c.id);
-              return <g key={c.id} transform={`translate(${x},${y})`} className="marker" onClick={()=>loadCountry(c)}>
+              return <g
+                key={c.id}
+                transform={`translate(${x},${y})`}
+                className="marker"
+                style={{pointerEvents: annotationTool === "select" ? "auto" : "none"}}
+                onClick={e => {
+                  if (annotationTool !== "select") return;
+                  e.stopPropagation();
+                  loadCountry(c);
+                }}
+              >
                   <circle r={active?6:has?4:3} transform={`scale(${1/transform.k})`} className={active?"dot active":"dot"}/>
                 {has && <circle r="7" transform={`scale(${1/transform.k})`} className="pulse"/>}
                 <g transform={`scale(${1/transform.k})`}>
@@ -254,9 +460,267 @@ return [...items].sort((a, b) =>
                 </g>
               </g>;
             })}
+            {annotations.map(a => {
+              const isSelected = selectedAnnotationId === a.id;
+              const stroke = isSelected ? "#ffffff" : "#d7dde8";
+
+              if (a.type === "marker") {
+                return (
+                  <g
+                    key={a.id}
+                    transform={`translate(${a.x},${a.y})`}
+                    onPointerDown={e => e.stopPropagation()}
+                    onClick={e => {
+                      e.stopPropagation();
+                      if (annotationTool === "select") {
+                        setSelectedAnnotationId(a.id);
+                      }
+                    }}
+                  >
+                    <circle
+                      r={isSelected ? 7 : 5}
+                      fill="rgba(255,255,255,.18)"
+                      stroke={stroke}
+                      strokeWidth={2}
+                    />
+                    {a.label && (
+                      <text
+                        x="9"
+                        y="4"
+                        fill="#fff"
+                        fontSize="12"
+                        fontWeight="700"
+                        paintOrder="stroke"
+                        stroke="#000"
+                        strokeWidth="3"
+                      >{a.label}</text>
+                    )}
+                  </g>
+                );
+              }
+
+              if (a.type === "line") {
+                return (
+                  <g
+                    key={a.id}
+                    onPointerDown={e => e.stopPropagation()}
+                    onClick={e => {
+                      e.stopPropagation();
+                      if (annotationTool === "select") {
+                        setSelectedAnnotationId(a.id);
+                      }
+                    }}
+                  >
+                    <line
+                      x1={a.x1}
+                      y1={a.y1}
+                      x2={a.x2}
+                      y2={a.y2}
+                      stroke={stroke}
+                      strokeWidth={isSelected ? 4 : 2.5}
+                      strokeLinecap="round"
+                    />
+                    {a.label && (
+                      <text
+                        x={(a.x1 + a.x2) / 2}
+                        y={(a.y1 + a.y2) / 2 - 7}
+                        fill="#fff"
+                        fontSize="12"
+                        fontWeight="700"
+                        textAnchor="middle"
+                        paintOrder="stroke"
+                        stroke="#000"
+                        strokeWidth="3"
+                      >{a.label}</text>
+                    )}
+                  </g>
+                );
+              }
+
+              if (a.type === "shape") {
+                return (
+                  <g
+                    key={a.id}
+                    onPointerDown={e => e.stopPropagation()}
+                    onClick={e => {
+                      e.stopPropagation();
+                      if (annotationTool === "select") {
+                        setSelectedAnnotationId(a.id);
+                      }
+                    }}
+                  >
+                    <rect
+                      x={a.x}
+                      y={a.y}
+                      width={a.width}
+                      height={a.height}
+                      fill="rgba(255,255,255,.05)"
+                      stroke={stroke}
+                      strokeWidth={isSelected ? 3 : 2}
+                    />
+                    {a.label && (
+                      <text
+                        x={a.x + 6}
+                        y={a.y + 16}
+                        fill="#fff"
+                        fontSize="12"
+                        fontWeight="700"
+                        paintOrder="stroke"
+                        stroke="#000"
+                        strokeWidth="3"
+                      >{a.label}</text>
+                    )}
+                  </g>
+                );
+              }
+
+              if (a.type === "text") {
+                return (
+                  <text
+                    key={a.id}
+                    x={a.x}
+                    y={a.y}
+                    fill="#fff"
+                    fontSize="13"
+                    fontWeight="700"
+                    style={{cursor: "pointer"}}
+                    paintOrder="stroke"
+                    stroke="#000"
+                    strokeWidth="3"
+                    onPointerDown={e => e.stopPropagation()}
+                    onClick={e => {
+                      e.stopPropagation();
+                      if (annotationTool === "select") {
+                        setSelectedAnnotationId(a.id);
+                      }
+                    }}
+                  >{a.text}</text>
+                );
+              }
+
+              return null;
+            })}
+
+            {annotationDraft && annotationDraft.tool === "line" && (
+              <line
+                x1={annotationDraft.start.x}
+                y1={annotationDraft.start.y}
+                x2={annotationDraft.end.x}
+                y2={annotationDraft.end.y}
+                stroke="#ffffff"
+                strokeWidth="2"
+                strokeDasharray="6 5"
+                pointerEvents="none"
+              />
+            )}
+
+            {annotationDraft && annotationDraft.tool === "shape" && (
+              <rect
+                x={Math.min(annotationDraft.start.x, annotationDraft.end.x)}
+                y={Math.min(annotationDraft.start.y, annotationDraft.end.y)}
+                width={Math.abs(annotationDraft.end.x - annotationDraft.start.x)}
+                height={Math.abs(annotationDraft.end.y - annotationDraft.start.y)}
+                fill="rgba(255,255,255,.04)"
+                stroke="#ffffff"
+                strokeWidth="2"
+                strokeDasharray="6 5"
+                pointerEvents="none"
+              />
+            )}
+
+            {annotationDraft && annotationDraft.tool === "marker" && (
+              <circle
+                cx={annotationDraft.start.x}
+                cy={annotationDraft.start.y}
+                r="6"
+                fill="rgba(255,255,255,.15)"
+                stroke="#ffffff"
+                strokeWidth="2"
+                pointerEvents="none"
+              />
+            )}
           </g>
         </svg>
-                <div className="map-note">SELECT A COUNTRY â€¢ CLICK MARKER FOR SOURCES</div>
+                <div
+          className="annotation-tools"
+          style={{
+            position: "absolute",
+            top: 10,
+            left: 10,
+            zIndex: 5,
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 5,
+            alignItems: "center",
+            maxWidth: "calc(100% - 20px)"
+          }}
+        >
+          <span
+            style={{
+              fontSize: "10px",
+              fontWeight: 800,
+              letterSpacing: ".08em",
+              color: "#fff",
+              background: "rgba(10,14,20,.78)",
+              padding: "7px 8px"
+            }}
+          >
+            ANALYST CANVAS
+          </span>
+
+          {[
+            ["select", "SELECT"],
+            ["marker", "MARKER"],
+            ["line", "LINE"],
+            ["shape", "SHAPE"],
+            ["text", "NOTE"]
+          ].map(([tool, label]) => (
+            <button
+              key={tool}
+              onClick={() => {
+                setAnnotationTool(tool);
+                setAnnotationDraft(null);
+                setSelectedAnnotationId(null);
+              }}
+              style={toolButtonStyle(annotationTool === tool)}
+            >
+              {label}
+            </button>
+          ))}
+
+          <button
+            onClick={editSelectedAnnotation}
+            disabled={!selectedAnnotationId}
+            style={{
+              ...toolButtonStyle(false),
+              opacity: selectedAnnotationId ? 1 : .45,
+              cursor: selectedAnnotationId ? "pointer" : "default"
+            }}
+          >
+            EDIT
+          </button>
+
+          <button
+            onClick={deleteSelectedAnnotation}
+            disabled={!selectedAnnotationId}
+            style={{
+              ...toolButtonStyle(false),
+              opacity: selectedAnnotationId ? 1 : .45,
+              cursor: selectedAnnotationId ? "pointer" : "default"
+            }}
+          >
+            DELETE
+          </button>
+
+          <button
+            onClick={clearAnnotations}
+            style={toolButtonStyle(false)}
+          >
+            CLEAR
+          </button>
+        </div>
+
+        <div className="map-note">SELECT A COUNTRY â€¢ CLICK MARKER FOR SOURCES</div>
         {view === "closed" && <button className="global-fab" onClick={loadGlobal}>GLOBAL FEED</button>}      </section>
 
       <aside className={`panel ${view !== "closed" ? "open" : ""}`}>
@@ -265,13 +729,17 @@ return [...items].sort((a, b) =>
             <div className="eyebrow">COUNTRY BRIEF</div>
             <h1>{selected?.name || "GLOBAL FEED"}</h1>
             <p>{selected ? selected.sources.join(" • ") : "Official government statements and optional trusted independent reporting"}</p>
-            {selected && officialVerifiedMap[selected.id] !== undefined && (
-              <p className={`source-status ${officialVerifiedMap[selected.id] === false ? "unverified" : "verified"}`}>
-                {officialVerifiedMap[selected.id] === false
-                  ? "⚠ Official source: not yet verified for this country"
-                  : "✓ Official source: verified"}
-              </p>
-            )}
+            {selected && officialVerifiedMap[selected.id] !== undefined && (() => {
+              const info = officialStatusMap[selected.id] || {};
+              const notVerified = officialVerifiedMap[selected.id] === false || info.status === "not-configured";
+              const down = info.status === "unavailable";
+              const lastOk = info.lastOkAt ? new Date(info.lastOkAt).toLocaleDateString() : "";
+              let text = "\u2713 Official source: verified";
+              if (notVerified) text = "\u26a0 Official source: not yet verified for this country";
+              else if (down) text = "\u26a0 Official source temporarily unavailable \u2014 showing saved reports" + (lastOk ? " (last good: " + lastOk + ")" : "");
+              else if (info.status === "empty") text = "\u2713 Official source: verified \u2014 no new statements since last check";
+              return <p className={"source-status " + (notVerified || down ? "unverified" : "verified")}>{text}</p>;
+            })()}
           </div>
                  {view !== "closed" && <button onClick={closePanel}>×</button>}
         </div>
@@ -285,6 +753,8 @@ return [...items].sort((a, b) =>
           <div className="empty">
             {mode === "official" && selected && officialVerifiedMap[selected.id] === false ? (
               <>NO VERIFIED OFFICIAL SOURCE YET FOR THIS COUNTRY.<br/><small>We haven't found or confirmed a direct government feed for {selected.name} yet — this isn't the same as "nothing happening," it means the source itself is still unverified. Check the NEWS tab for independent coverage in the meantime.</small></>
+            ) : mode === "official" && selected && (officialStatusMap[selected.id] || {}).status === "unavailable" ? (
+              <>OFFICIAL SOURCE TEMPORARILY UNAVAILABLE.<br/><small>We couldn't reach {selected.name}'s official source on the last check, so nothing new is shown. That doesn't mean nothing was said. Check the NEWS tab for independent coverage in the meantime.</small></>
             ) : mode === "official" && selected ? (
               <>NO NEW OFFICIAL STATEMENTS RIGHT NOW.<br/><small>{selected.name}'s official source is verified and connected — it just hasn't published anything new since the last check.</small></>
             ) : (
