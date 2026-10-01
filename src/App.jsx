@@ -149,7 +149,7 @@ export default function WireRoomV2() {
     if (!svgRef.current) return;
     const zoom = d3.zoom()
       .scaleExtent([1,8])
-      .filter(e => annotationTool === "select" || e.type === "wheel" || e.type === "touchstart")
+      .filter(e => e.type === "wheel" || (annotationTool === "select" ? (!e.ctrlKey && !e.button) : (e.type === "touchstart" && e.touches && e.touches.length > 1)))
       .on("zoom", e => setTransform(e.transform));
     d3.select(svgRef.current).call(zoom);
     zoomRef.current = zoom;
