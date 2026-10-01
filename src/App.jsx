@@ -14,7 +14,7 @@ const MAP_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"
 
 // The real, deployed backend — no longer a same-origin /api proxy since
 // the frontend and backend now live on different domains.
-const API_BASE = "https://wireroom-backend.onrender.com";
+const API_BASE = import.meta.env.VITE_API_BASE || "https://wireroom-backend.onrender.com";
 
 const COUNTRIES = [
   { id:"us", name:"United States", code:"US", lat:38.9, lon:-77.0, region:"Americas", sources:["White House","Department of Defense","Department of State"] },
@@ -87,7 +87,7 @@ export default function WireRoomV2() {
   const zoomRef = useRef(null);
   const abortRef = useRef(null); // cancels a stale request when a newer one starts
   const [annotationTool, setAnnotationTool] = useState("select");
-  const [annotations, setAnnotations] = useState([]);
+  const [annotations, setAnnotations] = useState(() => { try { const raw = localStorage.getItem("wireroom-annotations-v1"); const saved = raw ? JSON.parse(raw) : null; return Array.isArray(saved) ? saved : []; } catch (_) { return []; } });
   const [selectedAnnotationId, setSelectedAnnotationId] = useState(null);
   const [annotationDraft, setAnnotationDraft] = useState(null);
   const annotationHydratedRef = useRef(false);
