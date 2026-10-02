@@ -90,6 +90,7 @@ export default function WireRoomV2() {
   const [annotations, setAnnotations] = useState(() => { try { const raw = localStorage.getItem("wireroom-annotations-v1"); const saved = raw ? JSON.parse(raw) : null; return Array.isArray(saved) ? saved : []; } catch (_) { return []; } });
   const [selectedAnnotationId, setSelectedAnnotationId] = useState(null);
   const [annotationDraft, setAnnotationDraft] = useState(null);
+  const [annotationColor, setAnnotationColor] = useState("#d7dde8");
   const annotationHydratedRef = useRef(false);
 
   useEffect(() => {
@@ -149,7 +150,7 @@ export default function WireRoomV2() {
     if (!svgRef.current) return;
     const zoom = d3.zoom()
       .scaleExtent([1,8])
-      .filter(e => annotationTool === "select" || e.type === "wheel" || e.type === "touchstart")
+      .filter(e => e.type === "wheel" || (annotationTool === "select" ? (!e.ctrlKey && !e.button) : (e.type === "touchstart" && e.touches && e.touches.length > 1)))
       .on("zoom", e => setTransform(e.transform));
     d3.select(svgRef.current).call(zoom);
     zoomRef.current = zoom;
@@ -310,11 +311,14 @@ return [...items].sort((a, b) =>
     const height = Math.abs(end.y - start.y);
 
     if (tool === "marker") {
+      const label = window.prompt("Marker note / label (optional):", "");
+
       addAnnotation({
         type: "marker",
         x: start.x,
         y: start.y,
-        label: ""
+        label: label === null ? "" : label.trim(),
+        color: annotationColor
       });
     }
 
@@ -372,11 +376,31 @@ return [...items].sort((a, b) =>
     }
 
     const label = window.prompt("Annotation label:", current.label || "");
-    if (label !== null) {
+    if (label === null) return;
+
+    if (current.type === "marker") {
+      const color = window.prompt(
+        "Marker color (hex):",
+        current.color || "#d7dde8"
+      );
+
       setAnnotations(prev => prev.map(a =>
-        a.id === current.id ? { ...a, label: label.trim() } : a
+        a.id === current.id
+          ? {
+              ...a,
+              label: label.trim(),
+              color: /^#[0-9a-fA-F]{6}$/.test((color || "").trim())
+                ? color.trim()
+                : (a.color || "#d7dde8")
+            }
+          : a
       ));
+      return;
     }
+
+    setAnnotations(prev => prev.map(a =>
+      a.id === current.id ? { ...a, label: label.trim() } : a
+    ));
   }
 
   function deleteSelectedAnnotation() {
@@ -479,9 +503,10 @@ return [...items].sort((a, b) =>
                   >
                     <circle
                       r={isSelected ? 7 : 5}
-                      fill="rgba(255,255,255,.18)"
-                      stroke={stroke}
-                      strokeWidth={2}
+                      fill={a.color || "#d7dde8"}
+                      fillOpacity=".28"
+                      stroke={isSelected ? "#ffffff" : (a.color || "#d7dde8")}
+                      strokeWidth={isSelected ? 3 : 2}
                     />
                     {a.label && (
                       <text
@@ -647,7 +672,7 @@ return [...items].sort((a, b) =>
             position: "absolute",
             top: 10,
             left: 10,
-            zIndex: 5,
+            zIndex: 3,
             display: "flex",
             flexWrap: "wrap",
             gap: 5,
@@ -687,6 +712,38 @@ return [...items].sort((a, b) =>
               {label}
             </button>
           ))}
+
+          {annotationTool === "marker" && (
+            <label
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                background: "rgba(10,14,20,.78)",
+                color: "#fff",
+                border: "1px solid rgba(255,255,255,.18)",
+                padding: "4px 7px",
+                fontSize: "10px",
+                fontWeight: 700
+              }}
+            >
+              COLOR
+              <input
+                type="color"
+                value={annotationColor}
+                onChange={e => setAnnotationColor(e.target.value)}
+                title="Marker color"
+                style={{
+                  width: 24,
+                  height: 20,
+                  padding: 0,
+                  border: 0,
+                  cursor: "pointer",
+                  background: "transparent"
+                }}
+              />
+            </label>
+          )}
 
           <button
             onClick={editSelectedAnnotation}
