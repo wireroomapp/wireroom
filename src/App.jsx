@@ -90,6 +90,7 @@ export default function WireRoomV2() {
   const [annotations, setAnnotations] = useState(() => { try { const raw = localStorage.getItem("wireroom-annotations-v1"); const saved = raw ? JSON.parse(raw) : null; return Array.isArray(saved) ? saved : []; } catch (_) { return []; } });
   const [selectedAnnotationId, setSelectedAnnotationId] = useState(null);
   const [annotationDraft, setAnnotationDraft] = useState(null);
+  const drawingBlockedRef = useRef(false); // true while a pinch (2+ fingers) is in progress
   const [annotationColor, setAnnotationColor] = useState("#d7dde8");
   const annotationHydratedRef = useRef(false);
 
@@ -272,6 +273,15 @@ return [...items].sort((a, b) =>
   function handleMapPointerDown(e) {
     if (annotationTool === "select" || e.button !== 0) return;
 
+    // A second finger means pinch-zoom, not drawing: drop any half-started
+    // drawing and ignore this gesture until the next fresh touch.
+    if (!e.isPrimary) {
+      drawingBlockedRef.current = true;
+      setAnnotationDraft(null);
+      return;
+    }
+    drawingBlockedRef.current = false;
+
     e.preventDefault();
     e.stopPropagation();
 
@@ -294,6 +304,7 @@ return [...items].sort((a, b) =>
     e.preventDefault();
     e.stopPropagation();
 
+    if (drawingBlockedRef.current) return;
     setAnnotationDraft(prev => ({
       ...prev,
       end: svgPointFromEvent(e)
@@ -306,12 +317,21 @@ return [...items].sort((a, b) =>
     e.preventDefault();
     e.stopPropagation();
 
+    if (drawingBlockedRef.current) {
+      setAnnotationDraft(null);
+      return;
+    }
+
     const { tool, start, end } = annotationDraft;
     const width = Math.abs(end.x - start.x);
     const height = Math.abs(end.y - start.y);
 
     if (tool === "marker") {
-      const label = window.prompt("Marker note / label (optional):", "");
+      const label = window.prompt("Marker label (leave blank for none). Cancel = do not place a marker:", "");
+      if (label === null) {
+        setAnnotationDraft(null);
+        return;
+      }
 
       addAnnotation({
         type: "marker",
