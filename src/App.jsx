@@ -92,6 +92,7 @@ export default function WireRoomV2() {
   const [annotationDraft, setAnnotationDraft] = useState(null);
   const drawingBlockedRef = useRef(false); // true while a pinch (2+ fingers) is in progress
   const [annotationColor, setAnnotationColor] = useState("#d7dde8");
+  const MARKER_COLORS = ["#d7dde8", "#ff4d4d", "#ff9f43", "#ffd166", "#4cd964", "#35c7b0", "#4da3ff", "#9b7bff", "#ff6fb5"];
   const annotationHydratedRef = useRef(false);
 
   useEffect(() => {
@@ -399,19 +400,11 @@ return [...items].sort((a, b) =>
     if (label === null) return;
 
     if (current.type === "marker") {
-      const color = window.prompt(
-        "Marker color (hex):",
-        current.color || "#d7dde8"
-      );
-
       setAnnotations(prev => prev.map(a =>
         a.id === current.id
           ? {
               ...a,
-              label: label.trim(),
-              color: /^#[0-9a-fA-F]{6}$/.test((color || "").trim())
-                ? color.trim()
-                : (a.color || "#d7dde8")
+              label: label.trim()
             }
           : a
       ));
@@ -439,6 +432,14 @@ return [...items].sort((a, b) =>
       setAnnotations([]);
       setSelectedAnnotationId(null);
     }
+  }
+
+  function applyMarkerColor(color) {
+    setAnnotationColor(color);
+    if (annotationTool !== "select" || !selectedAnnotationId) return;
+    setAnnotations(prev => prev.map(a =>
+      a.id === selectedAnnotationId && a.type === "marker" ? { ...a, color } : a
+    ));
   }
 
   const toolButtonStyle = active => ({
@@ -733,37 +734,48 @@ return [...items].sort((a, b) =>
             </button>
           ))}
 
-          {annotationTool === "marker" && (
-            <label
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 5,
-                background: "rgba(10,14,20,.78)",
-                color: "#fff",
-                border: "1px solid rgba(255,255,255,.18)",
-                padding: "4px 7px",
-                fontSize: "10px",
-                fontWeight: 700
-              }}
-            >
-              COLOR
-              <input
-                type="color"
-                value={annotationColor}
-                onChange={e => setAnnotationColor(e.target.value)}
-                title="Marker color"
+          {(annotationTool === "marker" || (annotations.find(a => a.id === selectedAnnotationId) || {}).type === "marker") && (() => {
+            const sel = annotations.find(a => a.id === selectedAnnotationId);
+            const active = sel && sel.type === "marker" && annotationTool === "select" ? (sel.color || "#d7dde8") : annotationColor;
+            return (
+              <div
                 style={{
-                  width: 24,
-                  height: 20,
-                  padding: 0,
-                  border: 0,
-                  cursor: "pointer",
-                  background: "transparent"
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  background: "rgba(10,14,20,.78)",
+                  color: "#fff",
+                  border: "1px solid rgba(255,255,255,.18)",
+                  padding: "4px 7px",
+                  fontSize: "10px",
+                  fontWeight: 700
                 }}
-              />
-            </label>
-          )}
+              >
+                COLOR
+                <div style={{ display: "flex", gap: 5, alignItems: "center", flexWrap: "wrap" }}>
+                  {MARKER_COLORS.map(color => (
+                    <button
+                      key={color}
+                      type="button"
+                      title={"Marker color " + color}
+                      aria-label={"Marker color " + color}
+                      onClick={() => applyMarkerColor(color)}
+                      style={{
+                        width: 22,
+                        height: 22,
+                        borderRadius: "50%",
+                        padding: 0,
+                        border: active === color ? "2px solid #fff" : "1px solid rgba(255,255,255,.35)",
+                        background: color,
+                        cursor: "pointer",
+                        boxShadow: active === color ? "0 0 0 1px rgba(0,0,0,.9)" : "none"
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
 
           <button
             onClick={editSelectedAnnotation}
