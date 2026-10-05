@@ -12,12 +12,19 @@ function loadPreviousCache() {
   }
 }
 
+// Repairs a known text-encoding glitch where "..." was saved as three odd characters.
+const BAD_ELLIPSIS = "\u00e2\u20ac\u00a6";
+function fixText(item) {
+  const fix = (v) => (typeof v === "string" ? v.split(BAD_ELLIPSIS).join("\u2026") : v);
+  return { ...item, headline: fix(item.headline), summary: fix(item.summary) };
+}
+
 function mergeHistory(existing = [], incoming = []) {
   const byId = new Map();
 
   for (const item of [...existing, ...incoming]) {
     if (!item || !item.id) continue;
-    byId.set(item.id, item);
+    byId.set(item.id, fixText(item));
   }
 
   return [...byId.values()]
