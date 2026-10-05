@@ -90,6 +90,7 @@ export default function WireRoomV2() {
   const [annotations, setAnnotations] = useState(() => { try { const raw = localStorage.getItem("wireroom-annotations-v1"); const saved = raw ? JSON.parse(raw) : null; return Array.isArray(saved) ? saved : []; } catch (_) { return []; } });
   const [selectedAnnotationId, setSelectedAnnotationId] = useState(null);
   const [annotationDraft, setAnnotationDraft] = useState(null);
+  const [labelDialog, setLabelDialog] = useState(null); // in-page label box (replaces browser pop-ups)
   const drawingBlockedRef = useRef(false); // true while a pinch (2+ fingers) is in progress
   const [annotationColor, setAnnotationColor] = useState("#d7dde8");
   const MARKER_COLORS = ["#d7dde8", "#ff4d4d", "#ff9f43", "#ffd166", "#4cd964", "#35c7b0", "#4da3ff", "#9b7bff", "#ff6fb5"];
@@ -328,19 +329,7 @@ return [...items].sort((a, b) =>
     const height = Math.abs(end.y - start.y);
 
     if (tool === "marker") {
-      const label = window.prompt("Marker label (leave blank for none). Cancel = do not place a marker:", "");
-      if (label === null) {
-        setAnnotationDraft(null);
-        return;
-      }
-
-      addAnnotation({
-        type: "marker",
-        x: start.x,
-        y: start.y,
-        label: label === null ? "" : label.trim(),
-        color: annotationColor
-      });
+      setLabelDialog({ kind: "marker", value: "", point: { x: start.x, y: start.y }, color: annotationColor });
     }
 
     if (tool === "line" && Math.hypot(end.x - start.x, end.y - start.y) > 8) {
@@ -366,15 +355,7 @@ return [...items].sort((a, b) =>
     }
 
     if (tool === "text") {
-      const text = window.prompt("Note text:");
-      if (text && text.trim()) {
-        addAnnotation({
-          type: "text",
-          x: start.x,
-          y: start.y,
-          text: text.trim()
-        });
-      }
+      setLabelDialog({ kind: "text", value: "", point: { x: start.x, y: start.y } });
     }
 
     setAnnotationDraft(null);
@@ -387,33 +368,31 @@ return [...items].sort((a, b) =>
     if (!current) return;
 
     if (current.type === "text") {
-      const text = window.prompt("Edit note:", current.text || "");
-      if (text !== null && text.trim()) {
-        setAnnotations(prev => prev.map(a =>
-          a.id === current.id ? { ...a, text: text.trim() } : a
-        ));
-      }
+      setLabelDialog({ kind: "edit-text", id: current.id, value: current.text || "" });
       return;
     }
 
-    const label = window.prompt("Annotation label:", current.label || "");
-    if (label === null) return;
+    setLabelDialog({ kind: "edit-label", id: current.id, value: current.label || "" });
+  }
 
-    if (current.type === "marker") {
-      setAnnotations(prev => prev.map(a =>
-        a.id === current.id
-          ? {
-              ...a,
-              label: label.trim()
-            }
-          : a
-      ));
-      return;
+  function submitLabelDialog() {
+    const d = labelDialog;
+    if (!d) return;
+    const value = (d.value || "").trim();
+
+    if (d.kind === "marker") {
+      addAnnotation({ type: "marker", x: d.point.x, y: d.point.y, label: value, color: d.color });
+    } else if (d.kind === "text") {
+      if (!value) return; // a note needs some text
+      addAnnotation({ type: "text", x: d.point.x, y: d.point.y, text: value });
+    } else if (d.kind === "edit-text") {
+      if (!value) return;
+      setAnnotations(prev => prev.map(a => a.id === d.id ? { ...a, text: value } : a));
+    } else if (d.kind === "edit-label") {
+      setAnnotations(prev => prev.map(a => a.id === d.id ? { ...a, label: value } : a));
     }
 
-    setAnnotations(prev => prev.map(a =>
-      a.id === current.id ? { ...a, label: label.trim() } : a
-    ));
+    setLabelDialog(null);
   }
 
   function deleteSelectedAnnotation() {
@@ -808,6 +787,54 @@ return [...items].sort((a, b) =>
             CLEAR
           </button>
         </div>
+
+        {labelDialog && (
+          <div
+            onPointerDown={e => e.stopPropagation()}
+            style={{
+              position: "absolute",
+              top: 130,
+              left: "50%",
+              transform: "translateX(-50%)",
+              zIndex: 6,
+              width: "min(340px, calc(100% - 24px))",
+              boxSizing: "border-box",
+              background: "rgba(10,14,20,.96)",
+              border: "1px solid rgba(255,255,255,.28)",
+              padding: 12,
+              color: "#fff",
+              fontSize: 11,
+              fontWeight: 700,
+              display: "flex",
+              flexDirection: "column",
+              gap: 8
+            }}
+          >
+            <div>
+              {labelDialog.kind === "marker" ? "MARKER LABEL (OPTIONAL)"
+                : labelDialog.kind === "text" ? "NOTE TEXT"
+                : labelDialog.kind === "edit-text" ? "EDIT NOTE"
+                : "EDIT LABEL"}
+            </div>
+            <input
+              autoFocus
+              maxLength={140}
+              value={labelDialog.value}
+              onChange={e => setLabelDialog(prev => prev ? { ...prev, value: e.target.value } : prev)}
+              onKeyDown={e => {
+                if (e.key === "Enter") submitLabelDialog();
+                if (e.key === "Escape") setLabelDialog(null);
+              }}
+              style={{ fontSize: 16, padding: "6px 8px", background: "#0c1724", color: "#fff", border: "1px solid rgba(255,255,255,.28)" }}
+            />
+            <div style={{ display: "flex", gap: 6 }}>
+              <button type="button" onClick={submitLabelDialog} style={toolButtonStyle(true)}>
+                {labelDialog.kind === "marker" ? "PLACE MARKER" : labelDialog.kind === "text" ? "ADD NOTE" : "SAVE"}
+              </button>
+              <button type="button" onClick={() => setLabelDialog(null)} style={toolButtonStyle(false)}>CANCEL</button>
+            </div>
+          </div>
+        )}
 
         <div className="map-note">SELECT A COUNTRY &bull; CLICK MARKER FOR SOURCES</div>
         {view === "closed" && <button className="global-fab" onClick={loadGlobal}>GLOBAL FEED</button>}      </section>
