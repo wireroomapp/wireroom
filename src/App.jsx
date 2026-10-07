@@ -59,12 +59,13 @@ function SourceTag({ type }) {
   return <span className={`tag ${type === "official" ? "official" : "independent"}`}>{type === "official" ? "OFFICIAL" : "NEWS"}</span>;
 }
 
-function NewsCard({ item }) {
+function NewsCard({ item, onPin }) {
   return <article className="card">
     <div className="card-meta"><SourceTag type={item.sourceType}/><span>{item.source}</span><span>{item.date}</span></div>
     <h3>{item.headline}</h3>
     <p>{item.summary}</p>
     {item.url && item.url !== "#" && <a href={item.url} target="_blank" rel="noreferrer">READ ORIGINAL →</a>}
+  {onPin && <button type="button" onClick={() => onPin(item)} style={{ marginLeft: 12, background: "none", border: "1px solid #315e5b", color: "#4fa6a0", font: "10px monospace", padding: "4px 8px", cursor: "pointer" }}>PIN TO MAP</button>}
   </article>;
 }
 
@@ -89,6 +90,12 @@ export default function WireRoomV2() {
   const [annotationTool, setAnnotationTool] = useState("select");
   const [annotations, setAnnotations] = useState(() => { try { const raw = localStorage.getItem("wireroom-annotations-v1"); const saved = raw ? JSON.parse(raw) : null; return Array.isArray(saved) ? saved : []; } catch (_) { return []; } });
   const [selectedAnnotationId, setSelectedAnnotationId] = useState(null);
+  const [pinning, setPinning] = useState(null); // a report waiting to be pinned to a marker
+  const pinTapRef = useRef(null);
+  const [storageWarn, setStorageWarn] = useState(false);
+  useEffect(() => {
+    if (pinning && annotationTool !== "select") setPinning(null);
+  }, [pinning, annotationTool]);
   const [annotationDraft, setAnnotationDraft] = useState(null);
   const [labelDialog, setLabelDialog] = useState(null); // in-page label box (replaces browser pop-ups)
   const drawingBlockedRef = useRef(false); // true while a pinch (2+ fingers) is in progress
@@ -131,7 +138,7 @@ export default function WireRoomV2() {
   useEffect(() => {
     if (!annotationHydratedRef.current) return;
     try {
-      localStorage.setItem("wireroom-annotations-v1", JSON.stringify(annotations));
+      try { localStorage.setItem("wireroom-annotations-v1", JSON.stringify(annotations)); setStorageWarn(false); } catch (_) { setStorageWarn(true); }
     } catch (_) {}
   }, [annotations]);
 
@@ -272,7 +279,64 @@ return [...items].sort((a, b) =>
     setSelectedAnnotationId(id);
   }
 
+  function startPinReport(item) {
+    setSelectedAnnotationId(null);
+    setAnnotationTool("select");
+    setAnnotationDraft(null);
+    setLabelDialog(null);
+    setPinning({
+      id: item.id,
+      countryId: item.countryId || "",
+      sourceType: item.sourceType || "",
+      source: item.source || "",
+      headline: item.headline || "",
+      summary: (item.summary || "").slice(0, 400),
+      date: item.date || "",
+      publishedAt: item.publishedAt || null,
+      url: item.url || ""
+    });
+  }
+
+  function pinReportToMarker(markerId) {
+    const report = pinning;
+    if (!report) return;
+    setAnnotations(prev => prev.map(a => {
+      if (a.id !== markerId || a.type !== "marker") return a;
+      const pins = a.pins || [];
+      if (pins.some(p => p.id === report.id)) return a;
+      return { ...a, pins: [...pins, { ...report, pinnedAt: new Date().toISOString() }] };
+    }));
+    setSelectedAnnotationId(markerId);
+    setPinning(null);
+  }
+
+  function placePinnedReport(point) {
+    const report = pinning;
+    if (!report) return;
+    addAnnotation({
+      type: "marker",
+      x: point.x,
+      y: point.y,
+      label: "",
+      color: annotationColor,
+      pins: [{ ...report, pinnedAt: new Date().toISOString() }]
+    });
+    setPinning(null);
+  }
+
+  function unpinReport(markerId, pinId) {
+    setAnnotations(prev => prev.map(a =>
+      a.id === markerId ? { ...a, pins: (a.pins || []).filter(p => p.id !== pinId) } : a
+    ));
+  }
+
   function handleMapPointerDown(e) {
+    if (pinning && annotationTool === "select") {
+      pinTapRef.current = e.isPrimary && e.button === 0
+        ? { x: e.clientX, y: e.clientY, id: e.pointerId }
+        : null;
+      return;
+    }
     if (annotationTool === "select" || e.button !== 0) return;
 
     // A second finger means pinch-zoom, not drawing: drop any half-started
@@ -314,6 +378,14 @@ return [...items].sort((a, b) =>
   }
 
   function handleMapPointerUp(e) {
+    if (pinning && annotationTool === "select") {
+      const t = pinTapRef.current;
+      pinTapRef.current = null;
+      if (t && e.isPrimary && e.pointerId === t.id && Math.hypot(e.clientX - t.x, e.clientY - t.y) < 10) {
+        placePinnedReport(svgPointFromEvent(e));
+      }
+      return;
+    }
     if (!annotationDraft) return;
 
     e.preventDefault();
@@ -396,6 +468,9 @@ return [...items].sort((a, b) =>
   }
 
   function deleteSelectedAnnotation() {
+    const doomed = annotations.find(a => a.id === selectedAnnotationId);
+    if (doomed && doomed.pins && doomed.pins.length > 0 &&
+        !window.confirm("This marker has " + doomed.pins.length + " pinned report(s). Delete the marker and its pins?")) return;
     if (!selectedAnnotationId) return;
 
     setAnnotations(prev =>
@@ -405,6 +480,8 @@ return [...items].sort((a, b) =>
   }
 
   function clearAnnotations() {
+    const pinnedTotal = annotations.reduce((n, a) => n + ((a.pins && a.pins.length) || 0), 0);
+    if (pinnedTotal > 0 && !window.confirm("CLEAR removes every annotation, including " + pinnedTotal + " pinned report(s). Continue?")) return;
     if (!annotations.length) return;
 
     if (window.confirm("Clear all map annotations?")) {
@@ -496,6 +573,7 @@ return [...items].sort((a, b) =>
                     onPointerDown={e => e.stopPropagation()}
                     onClick={e => {
                       e.stopPropagation();
+                      if (pinning) { pinReportToMarker(a.id); return; }
                       if (annotationTool === "select") {
                         setSelectedAnnotationId(a.id);
                       }
@@ -508,6 +586,12 @@ return [...items].sort((a, b) =>
                       stroke={isSelected ? "#ffffff" : (a.color || "#d7dde8")}
                       strokeWidth={isSelected ? 3 : 2}
                     />
+                    {a.pins && a.pins.length > 0 && (
+                      <g pointerEvents="none">
+                        <circle cx="9" cy="-9" r="7" fill="#c9974b" stroke="#000" strokeWidth="1.5" />
+                        <text x="9" y="-5.5" textAnchor="middle" fontSize="10" fontWeight="800" fill="#000">{a.pins.length}</text>
+                      </g>
+                    )}
                     {a.label && (
                       <text
                         x="9"
@@ -836,6 +920,52 @@ return [...items].sort((a, b) =>
           </div>
         )}
 
+        {(() => {
+          const sel = annotations.find(a => a.id === selectedAnnotationId);
+          const showList = !pinning && annotationTool === "select" && sel && sel.type === "marker" && sel.pins && sel.pins.length > 0;
+          const box = { pointerEvents: "auto", background: "rgba(10,14,20,.96)", border: "1px solid rgba(255,255,255,.28)", padding: 10, color: "#fff", fontSize: 11, display: "flex", flexDirection: "column", gap: 6 };
+          return (
+            <>
+              {(pinning || showList) && <style>{"@media(max-width:800px){.panel,.panel.open{transform:translateX(100%) !important}}"}</style>}
+              <div style={{ position: "absolute", left: "50%", bottom: 56, transform: "translateX(-50%)", zIndex: 6, width: "min(420px, calc(100% - 24px))", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 8, pointerEvents: "none" }}>
+                {storageWarn && (
+                  <div style={{ ...box, borderColor: "#ff4d4d", color: "#ffb3b3" }}>
+                    STORAGE PROBLEM. New annotations and pins are not being saved. Delete some markers or press CLEAR.
+                  </div>
+                )}
+                {pinning && (
+                  <div onPointerDown={e => e.stopPropagation()} style={box}>
+                    <div style={{ fontWeight: 800 }}>PINNING: {pinning.headline.length > 90 ? pinning.headline.slice(0, 87) + "..." : pinning.headline}</div>
+                    <div>Tap a marker to pin this report, or tap the map to add a new marker.</div>
+                    <div><button type="button" onClick={() => setPinning(null)} style={toolButtonStyle(false)}>CANCEL</button></div>
+                  </div>
+                )}
+                {showList && (
+                  <div onPointerDown={e => e.stopPropagation()} style={{ ...box, maxHeight: "38vh", overflowY: "auto" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontWeight: 800 }}>
+                      <span>PINNED REPORTS ({sel.pins.length})</span>
+                      <button type="button" aria-label="Close" onClick={() => setSelectedAnnotationId(null)} style={toolButtonStyle(false)}>&times;</button>
+                    </div>
+                    {sel.pins.map(p => (
+                      <div key={p.id} style={{ borderTop: "1px solid rgba(255,255,255,.18)", paddingTop: 6, display: "flex", flexDirection: "column", gap: 4 }}>
+                        <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap", color: "#9ba8b8", fontSize: 10 }}>
+                          <SourceTag type={p.sourceType} /><span>{p.source}</span><span>{p.date}</span>
+                        </div>
+                        <div style={{ fontWeight: 700, fontSize: 12 }}>{p.headline}</div>
+                        {p.summary && <div style={{ color: "#9ba8b8", fontSize: 11, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical" }}>{p.summary}</div>}
+                        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                          {p.url && p.url !== "#" && <a href={p.url} target="_blank" rel="noreferrer" style={{ color: "#c9974b", fontSize: 10, textDecoration: "none" }}>OPEN ORIGINAL</a>}
+                          <button type="button" onClick={() => unpinReport(sel.id, p.id)} style={{ ...toolButtonStyle(false), fontSize: 10, padding: "3px 7px" }}>UNPIN</button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </>
+          );
+        })()}
+
         <div className="map-note">SELECT A COUNTRY &bull; CLICK MARKER FOR SOURCES</div>
         {view === "closed" && <button className="global-fab" onClick={loadGlobal}>GLOBAL FEED</button>}      </section>
 
@@ -900,7 +1030,7 @@ return [...items].sort((a, b) =>
             </div>
           </div>
         )}
-        {pagedFeed.map(item=><NewsCard key={item.id} item={item}/>)}
+        {pagedFeed.map(item=><NewsCard onPin={startPinReport} key={item.id} item={item}/>)}
       </aside>
     </main>
   </div>;
