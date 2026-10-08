@@ -74,6 +74,10 @@ export default function WireRoomV2() {
   const [view, setView] = useState("closed"); // "closed" | "country" | "global"
   const [mode, setMode] = useState("official"); // official | news | both
   const [query, setQuery] = useState("");
+  const [intelQuery, setIntelQuery] = useState("");
+  const [intelSource, setIntelSource] = useState("");
+  const [intelFrom, setIntelFrom] = useState("");
+  const [intelTo, setIntelTo] = useState("");
   const [region, setRegion] = useState("ALL");
   const [feed, setFeed] = useState(DEMO_NEWS);
   const [officialVerifiedMap, setOfficialVerifiedMap] = useState({});
@@ -175,20 +179,49 @@ export default function WireRoomV2() {
   const visibleFeed = useMemo(() => {
     let items = feed;
     if (selected) items = items.filter(i => i.countryId === selected.id);
-    // "news" mode maps to the backend's "independent" sourceType tag.
     if (mode !== "both") {
       const wantType = mode === "news" ? "independent" : mode;
       items = items.filter(i => i.sourceType === wantType);
     }
-return [...items].sort((a, b) =>
-  new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0)
-);
-  }, [feed,selected,mode]);
+    const keyword = intelQuery.trim().toLowerCase();
+    if (keyword) {
+      items = items.filter(i => [i.headline, i.summary, i.source].filter(Boolean).join(" ").toLowerCase().includes(keyword));
+    }
+    if (intelSource) items = items.filter(i => i.source === intelSource);
+    if (intelFrom || intelTo) {
+      const fromTime = intelFrom ? new Date(intelFrom + "T00:00:00").getTime() : -Infinity;
+      const toTime = intelTo ? new Date(intelTo + "T23:59:59").getTime() : Infinity;
+      items = items.filter(i => {
+        const time = new Date(i.publishedAt || i.date).getTime();
+        if (Number.isNaN(time)) return false;
+        return time >= fromTime && time <= toTime;
+      });
+    }
+    return [...items].sort((x, y) => new Date(y.publishedAt || 0) - new Date(x.publishedAt || 0));
+  }, [feed,selected,mode,intelQuery,intelSource,intelFrom,intelTo]);
 
   const REPORTS_PER_PAGE = 20;
   const totalPages = Math.max(1, Math.ceil(visibleFeed.length / REPORTS_PER_PAGE));
   const pageStart = (page - 1) * REPORTS_PER_PAGE;
   const pagedFeed = visibleFeed.slice(pageStart, pageStart + REPORTS_PER_PAGE);
+
+  const sourceOptions = useMemo(() =>
+    Array.from(new Set(feed.map(i => i.source).filter(Boolean))).sort((x, y) => x.localeCompare(y)),
+    [feed]
+  );
+
+  const intelFiltersActive = Boolean(intelQuery.trim() || intelSource || intelFrom || intelTo);
+
+  useEffect(() => {
+    setPage(1);
+  }, [intelQuery, intelSource, intelFrom, intelTo]);
+
+  useEffect(() => {
+    setIntelQuery("");
+    setIntelSource("");
+    setIntelFrom("");
+    setIntelTo("");
+  }, [selected ? selected.id : null, view]);
 
   async function loadCountry(country, modeOverride) {
     setPage(1);
@@ -997,7 +1030,9 @@ return [...items].sort((a, b) =>
         {loading && <div className="loading">CHECKING SOURCE FEEDS…</div>}
         {!loading && visibleFeed.length === 0 && (
           <div className="empty">
-            {mode === "official" && selected && officialVerifiedMap[selected.id] === false ? (
+            {intelFiltersActive ? (
+              <>NO MATCHING REPORTS.<br/><small>Try a different keyword, source, or date range.</small></>
+            ) : mode === "official" && selected && officialVerifiedMap[selected.id] === false ? (
               <>NO VERIFIED OFFICIAL SOURCE YET FOR THIS COUNTRY.<br/><small>We haven't found or confirmed a direct government feed for {selected.name} yet — this isn't the same as "nothing happening," it means the source itself is still unverified. Check the NEWS tab for independent coverage in the meantime.</small></>
             ) : mode === "official" && selected && (officialStatusMap[selected.id] || {}).status === "unavailable" ? (
               <>OFFICIAL SOURCE TEMPORARILY UNAVAILABLE.<br/><small>We couldn't reach {selected.name}'s official source on the last check, so nothing new is shown. That doesn't mean nothing was said. Check the NEWS tab for independent coverage in the meantime.</small></>
@@ -1008,7 +1043,32 @@ return [...items].sort((a, b) =>
             )}
           </div>
         )}
-                {visibleFeed.length > 0 && (
+                {(() => {
+          const fld = { minWidth: 0, background: "#0c1724", border: "1px solid #26384d", color: "#aeb8c6", padding: "7px 8px", font: "10px monospace", colorScheme: "dark" };
+          return (
+            <div style={{ border: "1px solid #1d2d40", background: "#071019", padding: 10, marginBottom: 10 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 8 }}>
+                <span style={{ font: "10px monospace", fontWeight: 700, color: "#aeb8c6", letterSpacing: ".05em" }}>INTEL FILTER</span>
+                {intelFiltersActive && (
+                  <button type="button" onClick={() => { setIntelQuery(""); setIntelSource(""); setIntelFrom(""); setIntelTo(""); }} style={{ background: "none", border: "1px solid #26384d", color: "#718198", padding: "4px 7px", font: "9px monospace", cursor: "pointer" }}>CLEAR FILTER</button>
+                )}
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: 6 }}>
+                <input value={intelQuery} onChange={e => setIntelQuery(e.target.value)} placeholder="KEYWORD" aria-label="Search reports by keyword" style={fld} />
+                <select value={intelSource} onChange={e => setIntelSource(e.target.value)} aria-label="Filter reports by source" style={fld}>
+                  <option value="">ALL SOURCES</option>
+                  {sourceOptions.map(src => (<option key={src} value={src}>{src}</option>))}
+                </select>
+                <input type="date" value={intelFrom} onChange={e => setIntelFrom(e.target.value)} aria-label="Filter reports from date" title="From date" style={fld} />
+                <input type="date" value={intelTo} onChange={e => setIntelTo(e.target.value)} aria-label="Filter reports through date" title="To date" style={fld} />
+              </div>
+              <div style={{ marginTop: 7, color: "#4e6076", font: "9px monospace" }}>
+                SEARCHES LOADED REPORTS ONLY{intelFiltersActive ? " - " + visibleFeed.length + " MATCHES" : ""}
+              </div>
+            </div>
+          );
+        })()}
+        {visibleFeed.length > 0 && (
           <div className="pagination">
             <span className="pagination-info">
               REPORTS {pageStart + 1}–{Math.min(pageStart + REPORTS_PER_PAGE, visibleFeed.length)} OF {visibleFeed.length}
