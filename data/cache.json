@@ -1,8 +1,21 @@
 {
-  "generatedAt": "2026-10-09T23:03:29.590Z",
+  "generatedAt": "2026-10-10T04:41:48.546Z",
   "countries": {
     "us": {
       "official": [
+        {
+          "id": "us-official-119448293e4fed32",
+          "countryId": "us",
+          "sourceType": "official",
+          "source": "White House",
+          "headline": "Presidential Message on Leif Erikson Day",
+          "summary": "Half a millennium before legendary American hero Christopher Columbus set foot in the New World, Norse explorer Leif Erikson made history as the first European to arrive on the North American continent. This Leif Erik…",
+          "date": "Oct 9, 2026 · 11:48 PM",
+          "publishedAt": "2026-10-09T23:48:59.000Z",
+          "dateOnly": false,
+          "url": "https://www.whitehouse.gov/briefings-statements/2026/10/presidential-message-on-leif-erikson-day/",
+          "importance": 3
+        },
         {
           "id": "us-official-2d90224fab0fc602",
           "countryId": "us",
@@ -7769,7 +7782,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-09T23:02:30.632Z",
+      "officialLastOkAt": "2026-10-10T04:36:36.766Z",
       "officialLastError": null
     },
     "ca": {
@@ -15020,7 +15033,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-09T23:02:32.829Z",
+      "officialLastOkAt": "2026-10-10T04:36:46.653Z",
       "officialLastError": null
     },
     "mx": {
@@ -20749,9 +20762,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-10-09T23:02:34.388Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=presidencia%20site%3Agob.mx&hl=es-MX&gl=MX&ceid=MX:es-MX: This operation was aborted"
     },
     "br": {
       "official": [
@@ -24906,9 +24919,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-10-09T23:02:36.872Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=Presidente%20da%20Rep%C3%BAblica%20site%3Agov.br%2Fplanalto&hl=pt-BR&gl=BR&ceid=BR:pt-BR: Status code 503"
     },
     "ar": {
       "official": [
@@ -28738,9 +28751,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-10-09T23:02:37.890Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=Comunicado%20Oficial%20N%C3%BAmero%20site%3Aargentina.gob.ar&hl=es-419&gl=AR&ceid=AR:es-419: This operation was aborted"
     },
     "gb": {
       "official": [
@@ -33455,7 +33468,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-09T23:02:38.738Z",
+      "officialLastOkAt": "2026-10-10T04:37:40.883Z",
       "officialLastError": null
     },
     "fr": {
@@ -39029,7 +39042,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-09T23:02:40.644Z",
+      "officialLastOkAt": "2026-10-10T04:37:49.091Z",
       "officialLastError": null
     },
     "de": {
@@ -43134,7 +43147,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-09T23:02:42.698Z",
+      "officialLastOkAt": "2026-10-10T04:37:57.881Z",
       "officialLastError": null
     },
     "it": {
@@ -49007,7 +49020,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-09T23:02:44.834Z",
+      "officialLastOkAt": "2026-10-10T04:38:06.574Z",
       "officialLastError": null
     },
     "es": {
@@ -54048,7 +54061,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-09T23:02:46.720Z",
+      "officialLastOkAt": "2026-10-10T04:38:15.539Z",
       "officialLastError": null
     },
     "pl": {
@@ -56801,7 +56814,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-09T23:02:49.967Z",
+      "officialLastOkAt": "2026-10-10T04:38:24.974Z",
       "officialLastError": null
     },
     "ua": {
@@ -69654,9 +69667,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-10-09T23:02:51.059Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Apresident.gov.ua%20OR%20site%3Amfa.gov.ua%20OR%20site%3Amod.gov.ua&hl=uk&gl=UA&ceid=UA:uk: Status code 503"
     },
     "ru": {
       "official": [
@@ -79570,9 +79583,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-10-09T23:02:53.439Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Akremlin.ru&hl=en-US&gl=US&ceid=US:en: This operation was aborted"
     },
     "tr": {
       "official": [],
@@ -89755,9 +89768,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-10-09T23:02:57.920Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Agov.il%2Fen%20%22Prime%20Minister%20Office%22&hl=en-US&gl=US&ceid=US:en: Status code 503"
     },
     "ir": {
       "official": [],
@@ -124890,6 +124903,32 @@
     "in": {
       "official": [
         {
+          "id": "in-official-78f74c100e4c0b80",
+          "countryId": "in",
+          "sourceType": "official",
+          "source": "Prime Minister's Office",
+          "headline": "Prime Minister condoles passing of Mr. Kuchi Rangkau Zeliang",
+          "summary": "Prime Minister condoles passing of Mr. Kuchi Rangkau Zeliang",
+          "date": "Oct 10, 2026",
+          "publishedAt": "2026-10-10T00:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://www.pib.gov.in/PressReleseDetail.aspx?PRID=2321628",
+          "importance": 3
+        },
+        {
+          "id": "in-official-d9eea42b3267da38",
+          "countryId": "in",
+          "sourceType": "official",
+          "source": "Prime Minister's Office",
+          "headline": "Prime Minister extends greetings on the occasion of Mahalaya",
+          "summary": "Prime Minister extends greetings on the occasion of Mahalaya",
+          "date": "Oct 10, 2026",
+          "publishedAt": "2026-10-10T00:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://www.pib.gov.in/PressReleseDetail.aspx?PRID=2321629",
+          "importance": 3
+        },
+        {
           "id": "in-official-56cf262a57985032",
           "countryId": "in",
           "sourceType": "official",
@@ -135229,7 +135268,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-09T23:03:07.963Z",
+      "officialLastOkAt": "2026-10-10T04:40:41.509Z",
       "officialLastError": null
     },
     "pk": {
@@ -141793,6 +141832,19 @@
           "publishedAt": "2026-09-30T23:55:00.000Z",
           "dateOnly": false,
           "url": "https://www.mfa.gov.cn/eng/xw/202610/t20261001_12034991.html",
+          "importance": 3
+        },
+        {
+          "id": "cn-official-929dbef20410f32d",
+          "countryId": "cn",
+          "sourceType": "official",
+          "source": "State Council",
+          "headline": "Ding Xuexiang Attends and Addresses the 2026 Annual General Meeting of China Council for International Cooperation on Environment and Development",
+          "summary": "Ding Xuexiang Attends and Addresses the 2026 Annual General Meeting of China Council for International Cooperation on Environment and Development",
+          "date": "Sep 30, 2026 · 12:41 PM",
+          "publishedAt": "2026-09-30T12:41:00.000Z",
+          "dateOnly": false,
+          "url": "https://www.mfa.gov.cn/eng/xw/202610/t20261010_12037780.html",
           "importance": 3
         },
         {
@@ -148911,7 +148963,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-09T23:03:19.133Z",
+      "officialLastOkAt": "2026-10-10T04:41:07.136Z",
       "officialLastError": null
     },
     "jp": {
@@ -156123,7 +156175,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-09T23:03:21.135Z",
+      "officialLastOkAt": "2026-10-10T04:41:15.691Z",
       "officialLastError": null
     },
     "kr": {
@@ -163231,11 +163283,24 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-09T23:03:24.037Z",
+      "officialLastOkAt": "2026-10-10T04:41:24.780Z",
       "officialLastError": null
     },
     "tw": {
       "official": [
+        {
+          "id": "tw-official-751452cf0e3b7051",
+          "countryId": "tw",
+          "sourceType": "official",
+          "source": "Presidential Office",
+          "headline": "President Lai receives congratulations from foreign guests attending 2026 National Day celebration",
+          "summary": "On the morning of October 10 at the Presidential Office Building, President Lai Ching-te and the Fir...",
+          "date": "Oct 10, 2026 · 4:29 AM",
+          "publishedAt": "2026-10-10T04:29:50.000Z",
+          "dateOnly": false,
+          "url": "https://english.president.gov.tw/NEWS/7225",
+          "importance": 3
+        },
         {
           "id": "tw-official-cde73c46cb885fb0",
           "countryId": "tw",
@@ -169494,7 +169559,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-09T23:03:26.641Z",
+      "officialLastOkAt": "2026-10-10T04:41:34.034Z",
       "officialLastError": null
     },
     "id": {
@@ -181369,7 +181434,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-09T23:03:29.589Z",
+      "officialLastOkAt": "2026-10-10T04:41:48.546Z",
       "officialLastError": null
     }
   }
