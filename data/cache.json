@@ -1,8 +1,34 @@
 {
-  "generatedAt": "2026-10-26T16:34:19.027Z",
+  "generatedAt": "2026-10-26T21:29:11.723Z",
   "countries": {
     "us": {
       "official": [
+        {
+          "id": "us-official-27d10e2812e214d3",
+          "countryId": "us",
+          "sourceType": "official",
+          "source": "White House",
+          "headline": "President Trump Puts Mississippi First with Historic Tax Cuts, Surging Investment, and Stronger Communities",
+          "summary": "Today, President Donald J. Trump returns to the Magnolia State to highlight a proven record of results that put Mississippi workers, families, seniors, farmers, and communities first. Under the leadership of President…",
+          "date": "Oct 26, 2026 · 6:22 PM",
+          "publishedAt": "2026-10-26T18:22:39.000Z",
+          "dateOnly": false,
+          "url": "https://www.whitehouse.gov/releases/2026/10/president-trump-puts-mississippi-first-with-historic-tax-cuts-surging-investment-and-stronger-communities/",
+          "importance": 3
+        },
+        {
+          "id": "us-official-c861d058055c548e",
+          "countryId": "us",
+          "sourceType": "official",
+          "source": "White House",
+          "headline": "From Coast to Coast, President Trump Is Putting American Industry Back on the Map",
+          "summary": "President Donald J. Trump is delivering an America First surge of manufacturing, energy, agriculture, semiconductor, shipbuilding, and national security investments that are bringing production home, expanding domesti…",
+          "date": "Oct 26, 2026 · 5:06 PM",
+          "publishedAt": "2026-10-26T17:06:13.000Z",
+          "dateOnly": false,
+          "url": "https://www.whitehouse.gov/releases/2026/10/from-coast-to-coast-president-trump-is-putting-american-industry-back-on-the-map/",
+          "importance": 3
+        },
         {
           "id": "us-official-36914d57178308b3",
           "countryId": "us",
@@ -8328,11 +8354,37 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-26T16:32:33.411Z",
+      "officialLastOkAt": "2026-10-26T21:23:55.535Z",
       "officialLastError": null
     },
     "ca": {
       "official": [
+        {
+          "id": "ca-official-13bab1f413185fbd",
+          "countryId": "ca",
+          "sourceType": "official",
+          "source": "Prime Minister's Office",
+          "headline": "Tuesday, October 27, 2026",
+          "summary": "Note: All times local National Capital Region, Canada 9:30 a.m. The Prime Minister will chair the Cabinet meeting. West Block Parliament Hill 12:00 p.m. The Prime Minister will greet the Crown Prince of Abu Dhabi, His…",
+          "date": "Oct 26, 2026 · 9:00 PM",
+          "publishedAt": "2026-10-26T21:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://www.pm.gc.ca/en/news/media-advisories/2026/10/26/tuesday-october-27-2026",
+          "importance": 3
+        },
+        {
+          "id": "ca-official-e1d69084815d3c06",
+          "countryId": "ca",
+          "sourceType": "official",
+          "source": "Prime Minister's Office",
+          "headline": "Prime Minister Carney convenes First Nations leadership and First Ministers for the first time in two decades, launches discussions on a new First Nations Sovereign Wealth Fund",
+          "summary": "Today, Prime Minister Mark Carney convened a meeting between First Nations leadership and First Ministers to advance shared priorities and build a stronger, fairer Canada. This was the first meeting of its kind. The l…",
+          "date": "Oct 26, 2026 · 8:20 PM",
+          "publishedAt": "2026-10-26T20:20:44.000Z",
+          "dateOnly": false,
+          "url": "https://www.pm.gc.ca/en/news/news-releases/2026/10/26/prime-minister-carney-convenes-first-nations-leadership-and-first",
+          "importance": 3
+        },
         {
           "id": "ca-official-bbaf25134e8702da",
           "countryId": "ca",
@@ -15917,7 +15969,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-26T16:32:37.659Z",
+      "officialLastOkAt": "2026-10-26T21:24:04.921Z",
       "officialLastError": null
     },
     "mx": {
@@ -24493,9 +24545,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-10-26T16:32:40.196Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=presidencia%20site%3Agob.mx&hl=es-MX&gl=MX&ceid=MX:es-MX: Status code 503"
     },
     "br": {
       "official": [
@@ -30795,9 +30847,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-10-26T16:32:41.403Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=Presidente%20da%20Rep%C3%BAblica%20site%3Agov.br%2Fplanalto&hl=pt-BR&gl=BR&ceid=BR:pt-BR: This operation was aborted"
     },
     "ar": {
       "official": [
@@ -35420,9 +35472,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-10-26T16:32:49.678Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=Comunicado%20Oficial%20N%C3%BAmero%20site%3Aargentina.gob.ar&hl=es-419&gl=AR&ceid=AR:es-419: This operation was aborted"
     },
     "gb": {
       "official": [
@@ -42178,7 +42230,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-26T16:32:54.788Z",
+      "officialLastOkAt": "2026-10-26T21:24:59.188Z",
       "officialLastError": null
     },
     "fr": {
@@ -49819,7 +49871,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-26T16:32:55.638Z",
+      "officialLastOkAt": "2026-10-26T21:25:07.472Z",
       "officialLastError": null
     },
     "de": {
@@ -56082,11 +56134,24 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-26T16:32:58.882Z",
+      "officialLastOkAt": "2026-10-26T21:25:15.899Z",
       "officialLastError": null
     },
     "it": {
       "official": [
+        {
+          "id": "it-official-bd1b796bf9230d4b",
+          "countryId": "it",
+          "sourceType": "official",
+          "source": "Presidenza del Consiglio",
+          "headline": "Dichiarazione del Presidente del Consiglio, Giorgia Meloni",
+          "summary": "Mi congratulo con il Presidente Lula per la rielezione e con il popolo brasiliano per la straordinaria prova di partecipazione elettorale. Italia e Brasile continueranno a lavorare insieme sui principali dossier bilat…",
+          "date": "Oct 26, 2026 · 5:19 PM",
+          "publishedAt": "2026-10-26T17:19:02.000Z",
+          "dateOnly": false,
+          "url": "https://www.governo.it/it/articolo/dichiarazione-del-presidente-del-consiglio-giorgia-meloni/32939",
+          "importance": 3
+        },
         {
           "id": "it-official-7d2339813ce1e8f2",
           "countryId": "it",
@@ -63645,11 +63710,24 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-26T16:33:05.098Z",
+      "officialLastOkAt": "2026-10-26T21:25:24.363Z",
       "officialLastError": null
     },
     "es": {
       "official": [
+        {
+          "id": "es-official-ffb24fb2185c1a9d",
+          "countryId": "es",
+          "sourceType": "official",
+          "source": "La Moncloa",
+          "headline": "Pedro Sánchez visita el centro educativo \"Los Nuberinos\", en Gijón",
+          "summary": "Gijón (Principado de Asturias), lunes 26 de octubre de 2026 Se trata del primer centro abierto en esta ciudad del proyecto \"Les Escuelines\", la red autonómica, pública y gratuita de escuelas de 0 a 3 años impulsada po…",
+          "date": "Oct 26, 2026 · 7:29 PM",
+          "publishedAt": "2026-10-26T19:29:00.000Z",
+          "dateOnly": false,
+          "url": "https://www.lamoncloa.gob.es/presidente/actividades/Paginas/2026/261026-sanchez-nuberinos-gijon.aspx?qfr=1",
+          "importance": 3
+        },
         {
           "id": "es-official-291590d6d2ca4c7d",
           "countryId": "es",
@@ -70038,7 +70116,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-26T16:33:06.923Z",
+      "officialLastOkAt": "2026-10-26T21:25:33.139Z",
       "officialLastError": null
     },
     "pl": {
@@ -73896,7 +73974,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-26T16:33:12.968Z",
+      "officialLastOkAt": "2026-10-26T21:25:42.029Z",
       "officialLastError": null
     },
     "ua": {
@@ -86905,9 +86983,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-10-26T16:33:14.202Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Apresident.gov.ua%20OR%20site%3Amfa.gov.ua%20OR%20site%3Amod.gov.ua&hl=uk&gl=UA&ceid=UA:uk: Status code 503"
     },
     "ru": {
       "official": [
@@ -98901,9 +98979,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-10-26T16:33:16.334Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Akremlin.ru&hl=en-US&gl=US&ceid=US:en: Status code 503"
     },
     "tr": {
       "official": [],
@@ -111413,9 +111491,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-10-26T16:33:24.991Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Agov.il%2Fen%20%22Prime%20Minister%20Office%22&hl=en-US&gl=US&ceid=US:en: This operation was aborted"
     },
     "ir": {
       "official": [],
@@ -160904,7 +160982,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-26T16:33:50.100Z",
+      "officialLastOkAt": "2026-10-26T21:28:02.733Z",
       "officialLastError": null
     },
     "pk": {
@@ -174924,7 +175002,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-26T16:34:04.124Z",
+      "officialLastOkAt": "2026-10-26T21:28:28.653Z",
       "officialLastError": null
     },
     "jp": {
@@ -182344,7 +182422,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-26T16:34:05.189Z",
+      "officialLastOkAt": "2026-10-26T21:28:36.787Z",
       "officialLastError": null
     },
     "kr": {
@@ -189855,7 +189933,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-26T16:34:08.105Z",
+      "officialLastOkAt": "2026-10-26T21:28:45.997Z",
       "officialLastError": null
     },
     "tw": {
@@ -196716,7 +196794,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-26T16:34:10.162Z",
+      "officialLastOkAt": "2026-10-26T21:28:55.317Z",
       "officialLastError": null
     },
     "id": {
@@ -210801,7 +210879,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-10-26T16:34:19.026Z",
+      "officialLastOkAt": "2026-10-26T21:29:11.722Z",
       "officialLastError": null
     }
   }
