@@ -16,6 +16,10 @@ const MAP_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"
 // the frontend and backend now live on different domains.
 const API_BASE = import.meta.env.VITE_API_BASE || "https://wireroom-backend.onrender.com";
 
+// Set VITE_FEEDBACK_URL (Render env var or .env.local) to a Google Form / mailto: link.
+// The FEEDBACK button only shows when this is set.
+const FEEDBACK_URL = import.meta.env.VITE_FEEDBACK_URL || "";
+
 const COUNTRIES = [
   { id:"us", name:"United States", code:"US", lat:38.9, lon:-77.0, region:"Americas", sources:["White House","Department of Defense","Department of State"] },
   { id:"ca", name:"Canada", code:"CA", lat:45.4, lon:-75.7, region:"Americas", sources:["Prime Minister's Office","Global Affairs Canada","National Defence"] },
@@ -97,6 +101,8 @@ export default function WireRoomV2() {
   const [pinning, setPinning] = useState(null); // a report waiting to be pinned to a marker
   const pinTapRef = useRef(null);
   const [storageWarn, setStorageWarn] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(() => { try { return !localStorage.getItem("wireroom-welcomed-v1"); } catch (_) { return true; } });
+  const dismissWelcome = () => { try { localStorage.setItem("wireroom-welcomed-v1", "1"); } catch (_) { /* private mode: just close */ } setShowWelcome(false); };
   useEffect(() => {
     if (pinning && annotationTool !== "select") setPinning(null);
   }, [pinning, annotationTool]);
@@ -545,10 +551,33 @@ export default function WireRoomV2() {
 
   return <div className="app">
     <style>{CSS}</style>
+    {showWelcome && (
+      <div className="welcome-back" onClick={dismissWelcome}>
+        <div className="welcome-card" role="dialog" aria-label="Welcome to Wire Room" onClick={e => e.stopPropagation()}>
+          <div className="eyebrow">EARLY ACCESS</div>
+          <h2>WIRE <b>ROOM</b></h2>
+          <p>What a government says, next to what independent outlets report, for each country, on one map.</p>
+          <ul>
+            <li>Tap a country to open its brief. Switch <b>OFFICIAL</b>, <b>NEWS</b>, or <b>BOTH</b>.</li>
+            <li>Use the drawing tools to mark up the map, add notes, and pin reports to markers.</li>
+            <li>Some countries have no verified official source yet. The panel says so instead of guessing.</li>
+          </ul>
+          <p className="welcome-fine">Your maps are saved in this browser only. Clearing site data will erase them. This is an early version, so rough edges are expected and feedback is welcome.</p>
+          <div className="welcome-actions">
+            <button className="welcome-go" onClick={dismissWelcome}>ENTER THE WIRE ROOM</button>
+            {FEEDBACK_URL && <a className="welcome-link" href={FEEDBACK_URL} target="_blank" rel="noreferrer">GIVE FEEDBACK</a>}
+          </div>
+        </div>
+      </div>
+    )}
     <header className="topbar">
-      <div className="brand">WORLD <b>WIRE</b></div>
-      <div className="subtitle">OFFICIAL STATEMENTS • GLOBAL NEWS</div>
-      <div className="status">LIVE MAP / V2</div>
+      <div className="brand">WIRE <b>ROOM</b></div>
+      <div className="subtitle">OFFICIAL STATEMENTS • INDEPENDENT NEWS</div>
+      <div className="status">
+        <span className="status-tag">EARLY ACCESS</span>
+        <button className="hdr-btn" onClick={() => setShowWelcome(true)} aria-label="About Wire Room">?</button>
+        {FEEDBACK_URL && <a className="hdr-btn" href={FEEDBACK_URL} target="_blank" rel="noreferrer">FEEDBACK</a>}
+      </div>
     </header>
 
            <div className="toolbar">
@@ -1039,7 +1068,7 @@ export default function WireRoomV2() {
             ) : mode === "official" && selected ? (
               <>NO NEW OFFICIAL STATEMENTS RIGHT NOW.<br/><small>{selected.name}'s official source is verified and connected — it just hasn't published anything new since the last check.</small></>
             ) : (
-              <>NO STORIES IN THIS FILTER YET.<br/><small>The backend source-ingestion layer will populate this feed.</small></>
+              <>NO STORIES IN THIS FILTER YET.<br/><small>Nothing has been collected for this view yet. Try another mode or country, or check back after the next hourly update.</small></>
             )}
           </div>
         )}
@@ -1106,6 +1135,9 @@ function geometryFromTopo(topology, geom) {
 }
 
 const CSS = `
+.status{display:flex;align-items:center;gap:10px}.status-tag{letter-spacing:.1em}.hdr-btn{background:none;border:1px solid #26384d;color:#aeb8c6;font:10px monospace;letter-spacing:.06em;padding:6px 10px;cursor:pointer;text-decoration:none;line-height:1}.hdr-btn:hover{border-color:#c9974b;color:#c9974b}
+.welcome-back{position:fixed;inset:0;z-index:100;background:rgba(4,9,15,.82);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}.welcome-card{background:#0c1724;border:1px solid #26384d;border-top:2px solid #c9974b;max-width:460px;width:100%;padding:22px;font-family:Arial,sans-serif}.welcome-card h2{margin:4px 0 10px;font-size:26px;letter-spacing:.12em}.welcome-card h2 b{color:#c9974b}.welcome-card p{margin:0 0 12px;color:#c4cbd6;font-size:14px;line-height:1.5}.welcome-card ul{margin:0 0 12px;padding-left:18px;color:#aeb8c6;font-size:13px;line-height:1.55}.welcome-card li{margin-bottom:6px}.welcome-card .welcome-fine{font:11px/1.5 monospace;color:#718198}.welcome-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}.welcome-go{background:#c9974b;color:#071019;border:0;font:700 12px monospace;letter-spacing:.08em;padding:11px 16px;cursor:pointer}.welcome-link{color:#c9974b;font:11px monospace;letter-spacing:.06em}
+@media(max-width:700px){.subtitle{display:none}.topbar{padding:0 14px}.status{margin-left:auto}.status-tag{display:none}}
 *{box-sizing:border-box} body{margin:0;background:#071019} .app{min-height:100vh;background:#071019;color:#e8e3d8;font-family:Arial,sans-serif}.topbar{height:64px;border-bottom:1px solid #1c2a3b;display:flex;align-items:center;padding:0 22px;gap:18px}.brand{font-weight:800;letter-spacing:.12em;font-size:21px}.brand b{color:#c9974b}.subtitle{font:11px monospace;color:#718198;letter-spacing:.08em}.status{margin-left:auto;font:10px monospace;color:#4fa6a0}.toolbar{height:54px;border-bottom:1px solid #162538;display:flex;align-items:center;gap:9px;padding:8px 18px}.toolbar input,.toolbar select,.mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace}.toolbar input{width:190px}.mode{margin-left:auto;display:flex}.mode button{cursor:pointer}.mode button.active{color:#c9974b;border-color:#c9974b}.layout{height:calc(100vh - 118px);display:flex}.map-wrap{position:relative;flex:1;min-width:0}.map{width:100%;height:100%;touch-action:none;cursor:grab}.map:active{cursor:grabbing}.ocean{fill:#0b1725;stroke:#21334a}.grid{fill:none;stroke:#142233;stroke-width:.5}.land{fill:#142230;stroke:#2a3c50;stroke-width:.65}.marker{cursor:pointer}.dot{fill:#c9974b}.dot.active{fill:#e8e3d8;stroke:#c9974b;stroke-width:2}.pulse{fill:none;stroke:#c9974b;stroke-width:1;opacity:.55;animation:pulse 2s infinite}.marker text{font:8px monospace;fill:#65758a;text-anchor:middle}.map-note{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:18px;font:10px monospace;color:#4e6076}.global-fab{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));right:18px;background:#0c1724;border:1px solid #c9974b;color:#c9974b;padding:8px 14px;font:10px monospace;letter-spacing:.06em;cursor:pointer;z-index:5}.panel{width:410px;background:#0c1724;border-left:1px solid #1c2a3b;padding:20px;overflow:auto;display:none;flex-direction:column}.panel.open{display:flex}.panel-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #1c2a3b;padding-bottom:14px;margin-bottom:14px}.panel-head h1{margin:2px 0 4px;font-size:28px}.panel-head p{margin:0;color:#718198;font:10px monospace;line-height:1.5}.panel-head button{height:30px;background:none;border:1px solid #26384d;color:#8795a7;cursor:pointer}.panel-mode{display:none}.panel-mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace;cursor:pointer}.panel-mode button.active{color:#c9974b;border-color:#c9974b}.eyebrow{font:9px monospace;letter-spacing:.12em;color:#4fa6a0}.source-status{margin:6px 0 0;font:10px monospace;letter-spacing:.04em}.source-status.verified{color:#4fa6a0}.source-status.unverified{color:#c9974b}.loading,.empty{font:11px monospace;color:#718198;padding:24px 4px;line-height:1.7}.card{border:1px solid #1d2d40;background:#071019;padding:13px;margin-bottom:10px}.card-meta{display:flex;gap:8px;align-items:center;color:#586b82;font:9px monospace;margin-bottom:8px}.tag{padding:2px 5px;border:1px solid}.tag.official{color:#4fa6a0;border-color:#315e5b}.tag.independent{color:#8a98aa;border-color:#3a4655}.card h3{font-size:14px;line-height:1.35;margin:0 0 7px}.card p{font-size:12px;line-height:1.5;color:#9ba8b8;margin:0 0 8px}.card a{font:10px monospace;color:#c9974b;text-decoration:none}.pagination{border:1px solid #1d2d40;background:#071019;padding:10px;margin-bottom:10px;font:9px monospace;color:#718198}.pagination-info{display:block;margin-bottom:8px}.pagination-buttons{display:flex;gap:6px}.pagination-buttons button{flex:1;background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:7px 8px;font:9px monospace;cursor:pointer}.pagination-buttons button:hover:not(:disabled){color:#c9974b;border-color:#c9974b}.pagination-buttons button:disabled{opacity:.35;cursor:default}@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.2);opacity:0}}@media(max-width:800px){.layout{height:calc(100dvh - 118px);min-height:0;position:relative;overflow:hidden}.panel{display:flex;position:absolute;right:0;top:0;bottom:0;width:min(420px,100%);transform:translateX(100%);transition:transform .25s;z-index:4}.panel.open{transform:translateX(0)}.subtitle{display:none}.toolbar{height:auto;min-height:54px;overflow:hidden;flex-wrap:wrap;padding:8px 10px;gap:6px}.toolbar input{width:min(150px,calc(100vw - 20px))}.toolbar select{max-width:110px}.mode{margin-left:auto;flex-shrink:0}.mode button{padding:8px 7px}.toolbar .mode{display:none}.panel-mode{display:flex;gap:6px;margin:-4px 0 14px;padding-bottom:12px;border-bottom:1px solid #1c2a3b}.panel-mode button{flex:1;padding:8px 5px}.map-wrap{height:100%;min-height:0}.status{display:none}}
 `;
 
