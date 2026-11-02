@@ -23,10 +23,21 @@ jobs:
       - name: Fetch all feeds
         run: node scripts/fetch-feeds.mjs
 
+      # Ships: listen to AISStream for ~2.5 minutes and save data/ships.json.
+      # Needs the AISSTREAM_API_KEY repository secret. If it fails or hears nothing,
+      # the previous snapshot is kept and the news update still goes out.
+      - name: Collect ship snapshot
+        continue-on-error: true
+        timeout-minutes: 6
+        env:
+          AISSTREAM_API_KEY: ${{ secrets.AISSTREAM_API_KEY }}
+        run: node scripts/collect-ships.mjs
+
       - name: Commit and push cache if it changed
         run: |
           git config user.name "wire-room-bot"
           git config user.email "bot@users.noreply.github.com"
           git add data/cache.json
+          if [ -f data/ships.json ]; then git add data/ships.json; fi
           git diff --staged --quiet || git commit -m "chore: update cached news feeds"
           git push

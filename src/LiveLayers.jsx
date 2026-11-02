@@ -138,7 +138,12 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
         </button>
       </div>
       {airOn && <div className="live-note">Air: military-flagged aircraft that broadcast ADS-B. Many don't.</div>}
-      {shipsOn && <div className="live-note">Ships: outlined chokepoints only. Free coverage comes from volunteer receivers, so some areas show none. Zoom in, then tap an icon.</div>}
+      {shipsOn && (
+        <div className="live-note">
+          Ships: outlined chokepoints only. Free coverage comes from volunteer receivers, so some areas show none.
+          {ships.meta?.snapshotAt ? ` Positions as of ${timeAgo(Date.parse(ships.meta.snapshotAt))}, refreshed hourly.` : ""} Zoom in, then tap an icon.
+        </div>
+      )}
       {shipsOn && (
         <div className="live-legend">
           {SHIP_LEGEND.map(([cat, label]) => (
