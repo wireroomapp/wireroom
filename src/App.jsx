@@ -1,5 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
+import { useTrackingFeed } from "./useTracking.js";
+import { WORLD_BBOX, visibleBbox, projectItems, hitTest, trackId } from "./trackingGeo.js";
+import { TrackLayerSvg, LiveLayerControls, TrackCard } from "./LiveLayers.jsx";
 
 /*
   WIRE ROOM — Global News Map V2
@@ -165,6 +168,18 @@ export default function WireRoomV2() {
 
   const projection = useMemo(() => d3.geoNaturalEarth1().fitSize([dims.w,dims.h],{type:"Sphere"}),[dims]);
   const path = useMemo(() => d3.geoPath(projection),[projection]);
+
+  // ---- Live layers: military aircraft + ships (off until the user turns them on) ----
+  const [airOn, setAirOn] = useState(false);
+  const [shipsOn, setShipsOn] = useState(false);
+  const [trackSel, setTrackSel] = useState(null); // { kind: "air" | "ship", id, item }
+  const suppressTrackClickUntilRef = useRef(0);
+  const shipsBbox = useMemo(() => visibleBbox(projection, transform, dims), [projection, transform, dims]);
+  // Aircraft: worldwide military feed (one cheap call). Ships: only the area on screen.
+  const airFeed = useTrackingFeed({ enabled: airOn, path: "/api/aircraft", bbox: WORLD_BBOX, extra: "&mil=1", pollMs: 15000 });
+  const shipFeed = useTrackingFeed({ enabled: shipsOn, path: "/api/ships", bbox: shipsBbox, pollMs: 20000 });
+  const airProjected = useMemo(() => projectItems(airFeed.items, projection), [airFeed.items, projection]);
+  const shipProjected = useMemo(() => projectItems(shipFeed.items, projection), [shipFeed.items, projection]);
 
   useEffect(() => {
     if (!svgRef.current) return;
@@ -422,6 +437,7 @@ export default function WireRoomV2() {
       pinTapRef.current = null;
       if (t && e.isPrimary && e.pointerId === t.id && Math.hypot(e.clientX - t.x, e.clientY - t.y) < 10) {
         placePinnedReport(svgPointFromEvent(e));
+        suppressTrackClickUntilRef.current = Date.now() + 600; // this tap placed a pin, don't also open a ship/plane
       }
       return;
     }
@@ -471,6 +487,30 @@ export default function WireRoomV2() {
 
     setAnnotationDraft(null);
   }
+
+  // Tap on empty map (select tool): open the nearest aircraft/ship, or close the card.
+  // Country dots and annotations stop their own clicks, so they still win.
+  function handleMapClick(e) {
+    if (Date.now() < suppressTrackClickUntilRef.current) return;
+    if (pinning || annotationTool !== "select" || (!airOn && !shipsOn)) return;
+    const hit = hitTest(
+      [{ kind: "air", projected: airProjected }, { kind: "ship", projected: shipProjected }],
+      svgPointFromEvent(e),
+      transform.k
+    );
+    if (hit) {
+      setSelectedAnnotationId(null);
+      setTrackSel({ kind: hit.kind, id: trackId(hit.kind, hit.item), item: hit.item });
+    } else {
+      setTrackSel(null);
+    }
+  }
+
+  const trackShown = Boolean(trackSel) && !pinning && annotationTool === "select" && !selectedAnnotationId &&
+    ((trackSel.kind === "air" && airOn) || (trackSel.kind === "ship" && shipsOn));
+  const trackLive = trackShown
+    ? (trackSel.kind === "air" ? airProjected : shipProjected).find(p => trackId(trackSel.kind, p.item) === trackSel.id) || null
+    : null;
 
   function editSelectedAnnotation() {
     if (!selectedAnnotationId) return;
@@ -597,11 +637,15 @@ export default function WireRoomV2() {
           onPointerDown={handleMapPointerDown}
           onPointerMove={handleMapPointerMove}
           onPointerUp={handleMapPointerUp}
+          onClick={handleMapClick}
           onPointerCancel={() => setAnnotationDraft(null)}>
           <g transform={`translate(${transform.x},${transform.y}) scale(${transform.k})`}>
             <path d={path({type:"Sphere"})} className="ocean"/>
             <path d={path(d3.geoGraticule().step([20,20])())} className="grid"/>
             {mapFeatures.map((f,i)=><path key={i} d={path(f)} className="land"/>)}
+            {(airOn || shipsOn) && (
+              <TrackLayerSvg aircraft={airProjected} ships={shipProjected} k={transform.k} selected={trackLive} />
+            )}
             {filteredCountries.map(c=>{
               const [x,y]=projection([c.lon,c.lat]); const active=selected?.id===c.id;
               const has=feed.some(n=>n.countryId===c.id);
@@ -1028,6 +1072,22 @@ export default function WireRoomV2() {
           );
         })()}
 
+        <LiveLayerControls
+          airOn={airOn}
+          onToggleAir={() => setAirOn(v => !v)}
+          shipsOn={shipsOn}
+          onToggleShips={() => setShipsOn(v => !v)}
+          air={airFeed}
+          ships={shipFeed}
+        />
+        {trackShown && (
+          <TrackCard
+            kind={trackSel.kind}
+            item={trackLive ? trackLive.item : trackSel.item}
+            fetchedAt={trackSel.kind === "air" ? airFeed.fetchedAt : null}
+            onClose={() => setTrackSel(null)}
+          />
+        )}
         <div className="map-note">SELECT A COUNTRY &bull; CLICK MARKER FOR SOURCES</div>
         {view === "closed" && <button className="global-fab" onClick={loadGlobal}>GLOBAL FEED</button>}      </section>
 

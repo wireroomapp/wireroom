@@ -2,6 +2,7 @@ import express from "express";
 import { readFileSync, statSync } from "fs";
 import compression from "compression";
 import { COUNTRY_INFO, hasVerifiedOfficialSource } from "./lib/feeds.mjs";
+import { registerTracking } from "./tracking/index.mjs";
 
 /*
   WIRE ROOM / WORLD WIRE — backend (cache-serving version)
@@ -90,6 +91,10 @@ app.get("/api/global", (req, res) => {
   globalMemo.set(mode, body);
   res.json(body);
 });
+// Live aircraft + ship layers. Sources are switched with environment variables,
+// see tracking/README.md. Adds /api/aircraft, /api/ships, /api/tracking/status.
+registerTracking(app);
+
 app.get("/api/health", (req, res) => res.json({ ok: true }));
 app.get("/api/status", (req, res) => {
   const cache = loadCache();

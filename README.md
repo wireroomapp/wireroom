@@ -11,6 +11,7 @@ An interactive world map that shows what governments say next to what independen
 - **Data pipeline:** a GitHub Action (`.github/workflows/fetch-news.yml`) runs `scripts/fetch-feeds.mjs` every hour. It pulls official government sources and independent publishers per country (`lib/feeds.mjs`) and commits the result to `data/cache.json`.
 - **Official-source status:** each country is marked verified, temporarily unavailable, or not yet verified. The UI shows this instead of implying "no news".
 - **Saved maps:** annotations are stored in the browser's localStorage. There are no accounts yet.
+- **Live layers (optional):** military aircraft (adsb.lol) and ships at strategic chokepoints (AISStream.io), served through `tracking/` so data providers can be swapped with environment variables. See [`tracking/README.md`](tracking/README.md).
 
 ## Run locally
 
@@ -30,7 +31,9 @@ Point the frontend at a local backend with `VITE_API_BASE=http://localhost:3001`
 | `VITE_FEEDBACK_URL` | Feedback form or `mailto:` link. Shows a FEEDBACK button when set |
 | `VITE_GOATCOUNTER` | GoatCounter site code for privacy-friendly analytics |
 
-Backend: `PROXY_URL` (optional) routes official-source fetches through a proxy for sites that block datacenter IPs.
+Backend: `PROXY_URL` (optional) routes official-source fetches through a proxy for sites that block datacenter IPs. `AISSTREAM_API_KEY` turns on the ships layer; other live-layer switches are in [`tracking/README.md`](tracking/README.md).
+
+Tests: `npm test` (offline, covers the live-layer backend).
 
 ## Known gaps
 
