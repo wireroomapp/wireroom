@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import { useTrackingFeed } from "./useTracking.js";
 import { WORLD_BBOX, visibleBbox, projectItems, projectZones, hitTest, trackId, trackToReport } from "./trackingGeo.js";
 import { exportMapImage } from "./exportMap.js";
+import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrateLegacy } from "./annotationSpace.js";
 import { TrackLayerSvg, LiveLayerControls, TrackCard, ZoneOutlines } from "./LiveLayers.jsx";
 
 /*
@@ -102,7 +103,8 @@ export default function WireRoomV2() {
   const zoomRef = useRef(null);
   const abortRef = useRef(null); // cancels a stale request when a newer one starts
   const [annotationTool, setAnnotationTool] = useState("select");
-  const [annotations, setAnnotations] = useState(() => { try { const raw = localStorage.getItem("wireroom-annotations-v1"); const saved = raw ? JSON.parse(raw) : null; return Array.isArray(saved) ? saved : []; } catch (_) { return []; } });
+  // Saved in map units (see annotationSpace.js) so they stay put when the map resizes.
+  const [annotations, setAnnotations] = useState(() => { try { return loadAnnotations(localStorage); } catch (_) { return []; } });
   const [selectedAnnotationId, setSelectedAnnotationId] = useState(null);
   const [pinning, setPinning] = useState(null); // a report waiting to be pinned to a marker
   const pinTapRef = useRef(null);
@@ -141,20 +143,14 @@ export default function WireRoomV2() {
   }, []);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem("wireroom-annotations-v1");
-      if (raw) {
-        const saved = JSON.parse(raw);
-        if (Array.isArray(saved)) setAnnotations(saved);
-      }
-    } catch (_) {}
+    // Annotations are loaded in the useState initializer above; from here on, changes are saved.
     annotationHydratedRef.current = true;
   }, []);
 
   useEffect(() => {
     if (!annotationHydratedRef.current) return;
     try {
-      try { localStorage.setItem("wireroom-annotations-v1", JSON.stringify(annotations)); setStorageWarn(false); } catch (_) { setStorageWarn(true); }
+      try { localStorage.setItem(ANNOTATION_KEY, JSON.stringify(annotations)); setStorageWarn(false); } catch (_) { setStorageWarn(true); }
     } catch (_) {}
   }, [annotations]);
 
@@ -163,7 +159,12 @@ export default function WireRoomV2() {
     if (!el) return;
     const ro = new ResizeObserver(entries => {
       const r = entries[0]?.contentRect;
-      if (r?.width && r?.height) setDims({w:r.width,h:r.height});
+      if (r?.width && r?.height) {
+        setDims({w:r.width,h:r.height});
+        // One-time upgrade of annotations saved in pixels by older versions, using the real map size.
+        const fitted = d3.geoNaturalEarth1().fitSize([r.width, r.height], {type:"Sphere"});
+        setAnnotations(prev => migrateLegacy(prev, fitted));
+      }
     });
     ro.observe(el);
     return () => ro.disconnect();
@@ -171,6 +172,8 @@ export default function WireRoomV2() {
 
   const projection = useMemo(() => d3.geoNaturalEarth1().fitSize([dims.w,dims.h],{type:"Sphere"}),[dims]);
   const path = useMemo(() => d3.geoPath(projection),[projection]);
+  // Annotations in screen pixels for drawing (stored in map units).
+  const viewAnnotations = useMemo(() => annotations.map(a => toPixel(a, projection)), [annotations, projection]);
 
   // ---- Live layers: military aircraft + ships (off until the user turns them on) ----
   const [airOn, setAirOn] = useState(false);
@@ -332,7 +335,7 @@ export default function WireRoomV2() {
     const id = crypto.randomUUID
       ? crypto.randomUUID()
       : String(Date.now()) + "-" + Math.random();
-    const next = { id, ...annotation };
+    const next = { id, ...toUnit(annotation, projection) };
     setAnnotations(prev => [...prev, next]);
     setSelectedAnnotationId(id);
   }
@@ -702,7 +705,7 @@ export default function WireRoomV2() {
                 </g>
               </g>;
             })}
-            {annotations.map(a => {
+            {viewAnnotations.map(a => {
               const isSelected = selectedAnnotationId === a.id;
               const stroke = isSelected ? "#ffffff" : "#d7dde8";
 
