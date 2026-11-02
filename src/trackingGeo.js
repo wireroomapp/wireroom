@@ -158,3 +158,47 @@ export function timeAgo(ms) {
   if (m < 60) return `${m} min ago`;
   return `${Math.round(m / 60)} h ago`;
 }
+
+// A pinnable snapshot of an aircraft or ship, shaped like a news report so the existing
+// "pin to marker" system can store and list it. Positions change, so the snapshot
+// records where it was and when.
+export function trackToReport(kind, item, fetchedAt) {
+  const isAir = kind === "air";
+  const t = isAir ? (fetchedAt ? Date.parse(fetchedAt) : Date.now()) : item.updatedAt || Date.now();
+  const when = new Date(t);
+  const p = (n) => String(n).padStart(2, "0");
+  const utc = `${p(when.getUTCHours())}:${p(when.getUTCMinutes())} UTC`;
+  const pos = `${Math.abs(item.lat).toFixed(2)}°${item.lat >= 0 ? "N" : "S"}, ${Math.abs(item.lon).toFixed(2)}°${item.lon >= 0 ? "E" : "W"}`;
+  const n = (v, unit) => (v == null ? null : `${Number(v).toLocaleString()}${unit}`);
+  const minute = Math.floor(t / 60000);
+  if (isAir) {
+    const name = item.callsign || item.reg || (item.id || "").toUpperCase() || "Unknown aircraft";
+    const bits = [item.onGround ? "on the ground" : n(item.altFt, " ft"), n(item.speedKt, " kt"), item.heading != null ? `heading ${item.heading}°` : null].filter(Boolean);
+    return {
+      id: `track:air:${item.id}:${minute}`,
+      sourceType: "aircraft",
+      source: "ADS-B · adsb.lol",
+      headline: `${name}${item.type ? ` · ${item.type}` : ""}`,
+      summary: `Military-flagged aircraft${bits.length ? `, ${bits.join(", ")}` : ""}. Position ${pos} at ${utc}.`,
+      date: when.toLocaleString([], { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" }),
+      publishedAt: when.toISOString(),
+      url: `https://globe.adsb.lol/?icao=${encodeURIComponent(item.id || "")}`,
+      lat: item.lat,
+      lon: item.lon,
+    };
+  }
+  const cat = item.category && item.category !== "unknown" ? item.category : "vessel";
+  const bits = [n(item.speedKt, " kt"), item.course != null ? `course ${item.course}°` : null, item.destination ? `bound for ${item.destination}` : null].filter(Boolean);
+  return {
+    id: `track:ship:${item.mmsi}:${minute}`,
+    sourceType: "vessel",
+    source: "AIS · AISStream.io",
+    headline: `${item.name || `MMSI ${item.mmsi}`} · ${cat.toUpperCase()}`,
+    summary: `${cat[0].toUpperCase()}${cat.slice(1)}${bits.length ? `, ${bits.join(", ")}` : ""}. Position ${pos} at ${utc}, self-reported by the ship.`,
+    date: when.toLocaleString([], { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" }),
+    publishedAt: when.toISOString(),
+    url: `https://www.marinetraffic.com/en/ais/details/ships/mmsi:${encodeURIComponent(item.mmsi)}`,
+    lat: item.lat,
+    lon: item.lon,
+  };
+}

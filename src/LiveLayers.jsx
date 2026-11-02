@@ -116,6 +116,7 @@ const LIVE_CSS = `
 .track-card .tc-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;font:9px monospace;color:#4e6076}
 .track-card a{color:#c9974b;font:10px monospace;text-decoration:none}
 .track-card button{background:none;border:1px solid #26384d;color:#8795a7;cursor:pointer;font:12px monospace;padding:2px 7px}
+.track-card .tc-pin{margin-top:9px;border-color:#315e5b;color:#4fa6a0;font:10px monospace;padding:5px 9px;letter-spacing:.04em}
 @media(max-width:800px){.live-box{left:10px;max-width:calc(100% - 140px);padding:6px}.live-title,.live-legend{display:none}.live-btn{padding:5px 6px}}
 `;
 
@@ -156,7 +157,7 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
 // ---------------------------------------------------------------------------
 const fmt = (v, unit = "") => (v == null || v === "" ? "—" : `${typeof v === "number" ? v.toLocaleString() : v}${unit}`);
 
-export function TrackCard({ kind, item, fetchedAt, onClose }) {
+export function TrackCard({ kind, item, fetchedAt, onClose, onPin }) {
   const isAir = kind === "air";
   const title = isAir ? item.callsign || item.reg || item.id?.toUpperCase() : item.name || `MMSI ${item.mmsi}`;
   const rows = isAir
@@ -198,6 +199,9 @@ export function TrackCard({ kind, item, fetchedAt, onClose }) {
         <span>{updated ? `Updated ${updated}` : ""}{isAir ? "" : " · self-reported by the ship"}</span>
         <a href={link} target="_blank" rel="noreferrer">{isAir ? "OPEN TRACK →" : "MORE DETAILS →"}</a>
       </div>
+      {onPin && (
+        <button type="button" className="tc-pin" onClick={onPin}>PIN TO MAP</button>
+      )}
     </div>
   );
 }
