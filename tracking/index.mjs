@@ -117,7 +117,7 @@ export function registerTracking(app, opts = {}) {
       : s.state === "stale" ? "Ship feed has gone quiet; positions may be old."
       : s.state === "warming" ? "Ship feed just restarted; more vessels will appear over the next few minutes."
       : "";
-    return res.json(envelope(key, shipsLicense, s.state, items, { message, coverage: config.ais.boxes === "global" ? "global" : "chokepoints", feed: s }));
+    return res.json(envelope(key, shipsLicense, s.state, items, { message, coverage: config.ais.boxes === "global" ? "global" : "chokepoints", zones: ships.zones ? ships.zones() : [], feed: s }));
   });
 
   // ---- Health for the admin / the investor "feed health" view ------------------

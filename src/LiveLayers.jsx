@@ -24,6 +24,43 @@ export const TrackLayerSvg = memo(function TrackLayerSvg({ aircraft, ships, k, s
 });
 
 // ---------------------------------------------------------------------------
+// Outlines of the areas the ship feed watches, with live counts. Areas with no
+// ships say so, so an empty sea looks deliberate rather than broken.
+// ---------------------------------------------------------------------------
+const ZONE_SHOW = new Set(["ok", "warming", "stale"]);
+
+export const ZoneOutlines = memo(function ZoneOutlines({ zones, k, status, width = 1200 }) {
+  if (!zones.length || !ZONE_SHOW.has(status)) return null;
+  const waiting = status === "warming";
+  const fs = 9 / k;
+  return (
+    <g className="ship-zones" pointerEvents="none">
+      {zones.map((z) => {
+        const empty = z.count === 0;
+        const color = empty ? "#c9974b" : "#4e6076";
+        const text = empty
+          ? `${z.name.toUpperCase()} · ${waiting ? "WAITING FOR DATA" : "NO FREE COVERAGE"}`
+          : `${z.name.toUpperCase()} · ${z.count.toLocaleString()}`;
+        // Labels only once the map is wide enough on screen that they don't pile up (phones need to zoom in).
+        const showLabel = width * k >= (empty ? 1100 : 2400);
+        return (
+          <g key={z.name} data-zone={z.name}>
+            <path d={z.d} fill={empty ? "rgba(201,151,75,.06)" : "none"} stroke={color}
+              strokeWidth={1 / k} strokeDasharray={`${4 / k} ${3 / k}`} strokeOpacity=".9" />
+            {showLabel && (
+              <text x={z.lx} y={z.ly - 4 / k} fontSize={fs} fontFamily="monospace" letterSpacing={0.6 / k}
+                fill={empty ? "#c9974b" : "#8795a7"} paintOrder="stroke" stroke="#071019" strokeWidth={3 / k}>
+                {text}
+              </text>
+            )}
+          </g>
+        );
+      })}
+    </g>
+  );
+});
+
+// ---------------------------------------------------------------------------
 // Toggle box (bottom-left of the map)
 // ---------------------------------------------------------------------------
 const PROBLEM_TEXT = {
@@ -100,7 +137,7 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
         </button>
       </div>
       {airOn && <div className="live-note">Air: military-flagged aircraft that broadcast ADS-B. Many don't.</div>}
-      {shipsOn && <div className="live-note">Ships: strategic chokepoints only. Coverage depends on volunteer receivers and is thin in some areas. Zoom in, then tap an icon.</div>}
+      {shipsOn && <div className="live-note">Ships: outlined chokepoints only. Free coverage comes from volunteer receivers, so some areas show none. Zoom in, then tap an icon.</div>}
       {shipsOn && (
         <div className="live-legend">
           {SHIP_LEGEND.map(([cat, label]) => (

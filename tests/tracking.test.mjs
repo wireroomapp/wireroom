@@ -263,3 +263,14 @@ test("coverage counts ships per chokepoint", () => {
   assert.equal(c["English Channel"], 2);
   assert.equal(c["Suez Canal"], 0);
 });
+
+test("/api/ships returns watched zones with counts", async () => {
+  const s = setup({ AISSTREAM_API_KEY: "k" }, async () => ({ ok: true, json: async () => ({}) }));
+  s.handle.ships.handleMessage(pos(5, 26.5, 56.2));
+  const r = (await call(s.app, "/api/ships", { bbox: "-90,-180,90,180" })).body;
+  assert.equal(r.meta.zones.length, 10);
+  const hormuz = r.meta.zones.find((z) => z.name === "Strait of Hormuz");
+  assert.equal(hormuz.count, 1);
+  assert.deepEqual(hormuz.box, [[24.0, 54.5], [27.8, 58.5]]);
+  assert.equal(r.meta.zones.find((z) => z.name === "Suez Canal").count, 0);
+});

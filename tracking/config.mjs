@@ -51,6 +51,7 @@ export function loadConfig(e = env) {
       staleAfterMs: Number(get("SHIPS_STALE_AFTER_MS", 10 * 60 * 1000)),
       keepMs: Number(get("SHIPS_KEEP_MS", 30 * 60 * 1000)),
       maxVessels: Number(get("SHIPS_MAX_VESSELS", 25000)),
+      warmupMs: Number(get("SHIPS_WARMUP_MS", 4 * 60 * 1000)), // "just restarted" period after a deploy
     },
 
     cleared: {

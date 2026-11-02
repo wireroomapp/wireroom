@@ -118,6 +118,34 @@ export function hitTest(layers, point, k, maxPx = 16) {
   return best;
 }
 
+// Watched ship areas (lat/lon boxes) -> outline paths in map coordinates.
+// Edges are sampled so they follow the map's curved meridians and parallels.
+export function projectZones(zones, projection) {
+  if (!Array.isArray(zones)) return [];
+  const out = [];
+  for (const z of zones) {
+    const [[a, b], [c, d]] = z.box || [[0, 0], [0, 0]];
+    const s = Math.min(a, c), n = Math.max(a, c), w = Math.min(b, d), e = Math.max(b, d);
+    const ring = [];
+    const N = 6;
+    for (let i = 0; i <= N; i++) ring.push([w + ((e - w) * i) / N, n]);
+    for (let i = 1; i <= N; i++) ring.push([e, n - ((n - s) * i) / N]);
+    for (let i = 1; i <= N; i++) ring.push([e - ((e - w) * i) / N, s]);
+    for (let i = 1; i < N; i++) ring.push([w, s + ((n - s) * i) / N]);
+    const pts = ring.map((ll) => projection(ll)).filter((p) => p && Number.isFinite(p[0]) && Number.isFinite(p[1]));
+    if (pts.length < 4) continue;
+    const label = projection([w, n]);
+    out.push({
+      name: z.name,
+      count: Number(z.count) || 0,
+      d: "M" + pts.map((p) => `${r2(p[0])},${r2(p[1])}`).join("L") + "Z",
+      lx: label ? label[0] : pts[0][0],
+      ly: label ? label[1] : pts[0][1],
+    });
+  }
+  return out;
+}
+
 export function trackId(kind, item) {
   return kind === "air" ? `air:${item.id}` : `ship:${item.mmsi}`;
 }

@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
 import { useTrackingFeed } from "./useTracking.js";
-import { WORLD_BBOX, visibleBbox, projectItems, hitTest, trackId } from "./trackingGeo.js";
-import { TrackLayerSvg, LiveLayerControls, TrackCard } from "./LiveLayers.jsx";
+import { WORLD_BBOX, visibleBbox, projectItems, projectZones, hitTest, trackId } from "./trackingGeo.js";
+import { TrackLayerSvg, LiveLayerControls, TrackCard, ZoneOutlines } from "./LiveLayers.jsx";
 
 /*
   WIRE ROOM — Global News Map V2
@@ -180,6 +180,7 @@ export default function WireRoomV2() {
   const shipFeed = useTrackingFeed({ enabled: shipsOn, path: "/api/ships", bbox: shipsBbox, pollMs: 20000 });
   const airProjected = useMemo(() => projectItems(airFeed.items, projection), [airFeed.items, projection]);
   const shipProjected = useMemo(() => projectItems(shipFeed.items, projection), [shipFeed.items, projection]);
+  const shipZones = useMemo(() => projectZones(shipFeed.meta?.zones, projection), [shipFeed.meta, projection]);
 
   useEffect(() => {
     if (!svgRef.current) return;
@@ -644,7 +645,10 @@ export default function WireRoomV2() {
             <path d={path(d3.geoGraticule().step([20,20])())} className="grid"/>
             {mapFeatures.map((f,i)=><path key={i} d={path(f)} className="land"/>)}
             {(airOn || shipsOn) && (
-              <TrackLayerSvg aircraft={airProjected} ships={shipProjected} k={transform.k} selected={trackLive} />
+              <>
+                {shipsOn && <ZoneOutlines zones={shipZones} k={transform.k} status={shipFeed.status} width={dims.w} />}
+                <TrackLayerSvg aircraft={airProjected} ships={shipProjected} k={transform.k} selected={trackLive} />
+              </>
             )}
             {filteredCountries.map(c=>{
               const [x,y]=projection([c.lon,c.lat]); const active=selected?.id===c.id;

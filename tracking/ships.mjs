@@ -194,8 +194,10 @@ export function createAisStreamProvider(aisConfig, { WebSocketImpl, now = () => 
       else if (st.startedAt && now() - st.startedAt < warmupMs) state = "warming";
       return { state, connected: st.connected, lastMessageAt: st.lastMessageAt || null, messages: st.messages, vessels: store.size, lastError: st.lastError };
     },
-    // Ships currently held per watched area. Shows where the free feed has receivers and where it doesn't.
-    coverage() {
+    // The watched areas with how many ships we currently hold in each. Drawn as outlines on the
+    // map, so an empty area reads as "no free coverage here" instead of "the app is broken".
+    zones() {
+      if (aisConfig.boxes === "global") return [];
       const named = boxes === CHOKEPOINT_BOXES;
       const counts = boxes.map(() => 0);
       for (const v of store.values()) {
@@ -204,8 +206,12 @@ export function createAisStreamProvider(aisConfig, { WebSocketImpl, now = () => 
           v.lat >= Math.min(a, c) && v.lat <= Math.max(a, c) && v.lon >= Math.min(b, d) && v.lon <= Math.max(b, d));
         if (i >= 0) counts[i] += 1;
       }
+      return boxes.map((box, i) => ({ name: named ? CHOKEPOINT_NAMES[i] : `Area ${i + 1}`, box, count: counts[i] }));
+    },
+    // Same counts as a simple { name: count } object, for /api/tracking/status.
+    coverage() {
       const out = {};
-      counts.forEach((n, i) => { out[named ? CHOKEPOINT_NAMES[i] : `box ${i + 1}`] = n; });
+      for (const z of this.zones()) out[z.name] = z.count;
       return out;
     },
     query(bbox, max = 1500) {
