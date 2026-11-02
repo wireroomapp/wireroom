@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { AIRCRAFT_COLOR, SHIP_LEGEND, shipColor, aircraftPath, shipPaths, timeAgo } from "./trackingGeo.js";
+import { AIRCRAFT_COLOR, SHIP_LEGEND, shipColor, aircraftPath, shipPaths, timeAgo, iconScale } from "./trackingGeo.js";
 
 // ---------------------------------------------------------------------------
 // Drawn inside the map's zoomed <g>. Pointer events are off: taps are matched
@@ -9,7 +9,7 @@ import { AIRCRAFT_COLOR, SHIP_LEGEND, shipColor, aircraftPath, shipPaths, timeAg
 export const TrackLayerSvg = memo(function TrackLayerSvg({ aircraft, ships, k, selected }) {
   const air = aircraft.length ? aircraftPath(aircraft, k) : "";
   const sea = ships.length ? shipPaths(ships, k) : [];
-  const strokeW = 0.7 / k;
+  const strokeW = (0.7 * Math.min(1.6, iconScale(k))) / k;
   return (
     <g className="tracks" pointerEvents="none">
       {sea.map(({ color, d }) => (
@@ -17,7 +17,7 @@ export const TrackLayerSvg = memo(function TrackLayerSvg({ aircraft, ships, k, s
       ))}
       {air && <path d={air} fill={AIRCRAFT_COLOR} stroke="#071019" strokeWidth={strokeW} />}
       {selected && (
-        <circle cx={selected.x} cy={selected.y} r={9 / k} fill="none" stroke="#fff" strokeWidth={1.6 / k} />
+        <circle cx={selected.x} cy={selected.y} r={(5 + 5 * iconScale(k)) / k} fill="none" stroke="#fff" strokeWidth={1.8 / k} />
       )}
     </g>
   );
@@ -100,7 +100,7 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
         </button>
       </div>
       {airOn && <div className="live-note">Air: military-flagged aircraft that broadcast ADS-B. Many don't.</div>}
-      {shipsOn && <div className="live-note">Ships: strategic chokepoints only. Zoom in, then tap an icon for details.</div>}
+      {shipsOn && <div className="live-note">Ships: strategic chokepoints only. Coverage depends on volunteer receivers and is thin in some areas. Zoom in, then tap an icon.</div>}
       {shipsOn && (
         <div className="live-legend">
           {SHIP_LEGEND.map(([cat, label]) => (

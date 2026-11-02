@@ -125,7 +125,7 @@ export function registerTracking(app, opts = {}) {
     res.json({
       mode: config.mode,
       aircraft: { provider: config.aircraftProvider, allowed: aircraftLicense.allowed, reason: aircraftLicense.reason, license: PROVIDER_INFO[config.aircraftProvider]?.commercial || null },
-      ships: { provider: config.shipsProvider, allowed: shipsLicense.allowed, reason: shipsLicense.reason, license: PROVIDER_INFO[config.shipsProvider]?.commercial || null, feed: ships ? ships.status() : null },
+      ships: { provider: config.shipsProvider, allowed: shipsLicense.allowed, reason: shipsLicense.reason, license: PROVIDER_INFO[config.shipsProvider]?.commercial || null, feed: ships ? ships.status() : null, coverage: ships?.coverage ? ships.coverage() : null },
     });
   });
 

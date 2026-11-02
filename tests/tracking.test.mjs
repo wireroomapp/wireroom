@@ -252,3 +252,14 @@ test("SHIPS_PROVIDER=none disables ships cleanly", async () => {
   const r = (await call(s.app, "/api/ships", { bbox: VIEW })).body;
   assert.equal(r.status, "disabled");
 });
+
+test("coverage counts ships per chokepoint", () => {
+  const p = createAisStreamProvider(aisCfg, {});
+  p.handleMessage(pos(1, 26.5, 56.2)); // Hormuz
+  p.handleMessage(pos(2, 50.5, 1.0)); // English Channel
+  p.handleMessage(pos(3, 50.6, 1.1)); // English Channel
+  const c = p.coverage();
+  assert.equal(c["Strait of Hormuz"], 1);
+  assert.equal(c["English Channel"], 2);
+  assert.equal(c["Suez Canal"], 0);
+});

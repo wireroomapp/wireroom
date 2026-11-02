@@ -20,6 +20,10 @@ export const CHOKEPOINT_BOXES = [
   [[49.5, -2.0], [51.5, 2.5]], // English Channel / Dover
   [[54.5, 9.5], [56.5, 13.5]], // Danish straits / Baltic entrance
 ];
+export const CHOKEPOINT_NAMES = [
+  "Strait of Hormuz", "Bab el-Mandeb", "Suez Canal", "Malacca / Singapore", "Taiwan Strait",
+  "Black Sea", "Gibraltar", "Panama Canal", "English Channel", "Danish straits",
+];
 
 export function shipCategory(code) {
   const t = Number(code);
@@ -189,6 +193,20 @@ export function createAisStreamProvider(aisConfig, { WebSocketImpl, now = () => 
       else if (age === null || age > aisConfig.staleAfterMs) state = "stale";
       else if (st.startedAt && now() - st.startedAt < warmupMs) state = "warming";
       return { state, connected: st.connected, lastMessageAt: st.lastMessageAt || null, messages: st.messages, vessels: store.size, lastError: st.lastError };
+    },
+    // Ships currently held per watched area. Shows where the free feed has receivers and where it doesn't.
+    coverage() {
+      const named = boxes === CHOKEPOINT_BOXES;
+      const counts = boxes.map(() => 0);
+      for (const v of store.values()) {
+        if (v.lat === undefined) continue;
+        const i = boxes.findIndex(([[a, b], [c, d]]) =>
+          v.lat >= Math.min(a, c) && v.lat <= Math.max(a, c) && v.lon >= Math.min(b, d) && v.lon <= Math.max(b, d));
+        if (i >= 0) counts[i] += 1;
+      }
+      const out = {};
+      counts.forEach((n, i) => { out[named ? CHOKEPOINT_NAMES[i] : `box ${i + 1}`] = n; });
+      return out;
     },
     query(bbox, max = 1500) {
       const out = [];

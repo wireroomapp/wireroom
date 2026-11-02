@@ -29,6 +29,12 @@ export function shipColor(category) {
 
 const r2 = (n) => Math.round(n * 100) / 100;
 
+// Icons grow as you zoom in: small on the world view (where ships bunch up at chokepoints),
+// about 2.5x bigger at full zoom so individual ships are easy to see and tap.
+export function iconScale(k) {
+  return 1 + 0.5 * Math.log2(Math.max(1, k));
+}
+
 // The part of the world currently on screen, as "south,west,north,east".
 // Snapped outward to 5 degrees so small pans reuse the same request.
 // Falls back to the whole world when zoomed out or when the view reaches past the globe's edge.
@@ -68,12 +74,13 @@ export function projectItems(items, projection) {
 // One SVG path for every aircraft: a small arrowhead pointing along its heading.
 // Sizes are divided by the zoom level so icons stay the same size on screen.
 export function aircraftPath(projected, k) {
-  const L = 6.5 / k;
-  const W = 4.5 / k;
+  const z = iconScale(k);
+  const L = (6.5 * z) / k;
+  const W = (4.5 * z) / k;
   let d = "";
   for (const { x, y, item } of projected) {
     if (item.heading == null) {
-      const s = 3.2 / k;
+      const s = (3.2 * z) / k;
       d += `M${r2(x)},${r2(y - s)}L${r2(x + s)},${r2(y)}L${r2(x)},${r2(y + s)}L${r2(x - s)},${r2(y)}Z`;
       continue;
     }
@@ -86,7 +93,7 @@ export function aircraftPath(projected, k) {
 
 // Ships as small diamonds, one path per colour so the whole layer is a handful of DOM nodes.
 export function shipPaths(projected, k) {
-  const s = 3 / k;
+  const s = (3.4 * iconScale(k)) / k;
   const byColor = new Map();
   for (const { x, y, item } of projected) {
     const c = shipColor(item.category);
@@ -98,7 +105,7 @@ export function shipPaths(projected, k) {
 // Nearest aircraft/ship to a tap, within maxPx screen pixels.
 export function hitTest(layers, point, k, maxPx = 16) {
   let best = null;
-  let bestDist = maxPx / k;
+  let bestDist = Math.max(maxPx, 6 + 6 * iconScale(k)) / k;
   for (const { kind, projected } of layers) {
     for (const p of projected) {
       const dist = Math.hypot(p.x - point.x, p.y - point.y);
