@@ -49,7 +49,7 @@ export default function MapLibreView({
   const [prefs, setPrefs] = useState(loadPrefs);
   const lookup = useRef(new Map()); // track key -> full item, for taps
   const terrainOn = useRef(false); // 3D terrain setting, readable from map event handlers
-  const autoTilted = useRef(false); // did we already tilt for this zoom-in?
+  const userPitched = useRef(false); // did the person tilt the map by hand? then leave the angle alone
   const prevTerrain = useRef(null);
   const prefsRef = useRef(prefs);
   const draft = useRef(null); // line/shape being drawn: { start: [lon,lat], startPt, last }
@@ -99,6 +99,9 @@ export default function MapLibreView({
     // out when you zoom back out to the whole globe (a tilted globe gets cut off).
     // Checked when the map has fully stopped ("moveend"), not when zooming ends: a phone pinch
     // keeps gliding after the fingers lift, so at "zoomend" the map is still moving.
+    // A tilt started by a gesture (two-finger drag, right-drag, compass control) carries the
+    // original browser event; our own animations don't.
+    map.on("pitchstart", (e) => { if (e && e.originalEvent) userPitched.current = true; });
     let lastZoom = map.getZoom();
     map.on("moveend", () => {
       const z = map.getZoom();
@@ -107,10 +110,10 @@ export default function MapLibreView({
       if (Math.abs(z - lastZoom) < 0.05) return;
       lastZoom = z;
       if (z < TILT_ZOOM - 1) {
-        autoTilted.current = false;
+        userPitched.current = false;
         if (map.getPitch() > 1) map.easeTo({ pitch: 0, duration: 500 });
-      } else if (terrainOn.current && z >= TILT_ZOOM && !autoTilted.current && map.getPitch() < 30) {
-        autoTilted.current = true;
+      } else if (terrainOn.current && z >= TILT_ZOOM && !userPitched.current && map.getPitch() < 30) {
+        // If this tilt gets interrupted (e.g. by the next pinch), the next stop simply tries again.
         map.easeTo({ pitch: 55, duration: 800 });
       }
     });
@@ -229,11 +232,10 @@ export default function MapLibreView({
     if (prefs.terrain) {
       map.setTerrain({ source: "dem", exaggeration: 1.5 });
       if (terrainChanged && map.getZoom() >= TILT_ZOOM && map.getPitch() < 30) {
-        autoTilted.current = true;
         map.easeTo({ pitch: 55, duration: 800 });
       }
     } else {
-      autoTilted.current = false;
+      userPitched.current = false;
       // Drop the terrain first, then level the camera a moment later (removing terrain
       // during a camera move cancels that move).
       map.setTerrain(null);
