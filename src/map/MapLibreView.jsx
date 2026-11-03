@@ -97,8 +97,9 @@ export default function MapLibreView({
     // Zooming back out to the whole globe: level the camera so the Earth isn't cut off.
     // With 3D terrain on: tilt once when you zoom in close enough to see mountains, and level
     // out when you zoom back out to the whole globe (a tilted globe gets cut off).
-    map.on("zoomend", () => {
-      if (map.isMoving()) return;
+    // Checked when the map has fully stopped ("moveend"), not when zooming ends: a phone pinch
+    // keeps gliding after the fingers lift, so at "zoomend" the map is still moving.
+    map.on("moveend", () => {
       const z = map.getZoom();
       if (z < TILT_ZOOM - 1) {
         autoTilted.current = false;
@@ -228,12 +229,11 @@ export default function MapLibreView({
       }
     } else {
       autoTilted.current = false;
+      // Drop the terrain first, then level the camera a moment later (removing terrain
+      // during a camera move cancels that move).
+      map.setTerrain(null);
       if (terrainChanged && map.getPitch() > 0) {
-        // Level the camera first, then drop the terrain (removing it mid-move cancels the move).
-        map.easeTo({ pitch: 0, duration: 600 });
-        map.once("moveend", () => { if (!terrainOn.current) map.setTerrain(null); });
-      } else {
-        map.setTerrain(null);
+        setTimeout(() => { if (!terrainOn.current && mapRef.current) mapRef.current.easeTo({ pitch: 0, duration: 600 }); }, 60);
       }
     }
     savePrefs(prefs);
