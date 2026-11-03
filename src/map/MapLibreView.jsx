@@ -45,6 +45,9 @@ export default function MapLibreView({
   const [ready, setReady] = useState(false);
   const [prefs, setPrefs] = useState(loadPrefs);
   const lookup = useRef(new Map()); // track key -> full item, for taps
+  const terrainOn = useRef(false); // 3D terrain setting, readable from map event handlers
+  const autoTilted = useRef(false); // did we already tilt for this zoom-in?
+  const prevTerrain = useRef(null);
   // Latest callbacks for the map's event handlers (which are set up once).
   const cb = useRef({});
   useLayoutEffect(() => {
@@ -83,8 +86,18 @@ export default function MapLibreView({
     map.on("styleimagemissing", (e) => { if (e.id === "wr-plane" || e.id === "wr-ship") addIcons(); });
     map.on("moveend", () => cb.current.onViewChange?.(viewBbox(map)));
     // Zooming back out to the whole globe: level the camera so the Earth isn't cut off.
+    // With 3D terrain on: tilt once when you zoom in close enough to see mountains, and level
+    // out when you zoom back out to the whole globe (a tilted globe gets cut off).
     map.on("zoomend", () => {
-      if (map.getZoom() < TILT_ZOOM - 1 && map.getPitch() > 0 && !map.isMoving()) map.easeTo({ pitch: 0, duration: 500 });
+      if (map.isMoving()) return;
+      const z = map.getZoom();
+      if (z < TILT_ZOOM - 1) {
+        autoTilted.current = false;
+        if (map.getPitch() > 0) map.easeTo({ pitch: 0, duration: 500 });
+      } else if (terrainOn.current && z >= TILT_ZOOM && !autoTilted.current && map.getPitch() < 30) {
+        autoTilted.current = true;
+        map.easeTo({ pitch: 55, duration: 800 });
+      }
     });
     // Tile or font failures (e.g. a free service is down) shouldn't break the page.
     map.on("error", (e) => console.warn("Map:", e && e.error ? e.error.message : e));
@@ -128,14 +141,25 @@ export default function MapLibreView({
     if (!ready || !map) return;
     applyBase(map, prefs.base);
     map.setProjection({ type: prefs.globe ? "globe" : "mercator" });
+    // Only the 3D button changes the tilt; switching looks or globe leaves the camera alone.
+    const terrainChanged = prevTerrain.current !== prefs.terrain;
+    prevTerrain.current = prefs.terrain;
+    terrainOn.current = prefs.terrain;
     if (prefs.terrain) {
       map.setTerrain({ source: "dem", exaggeration: 1.5 });
-      // Tilt only when zoomed in enough to see mountains. Tilting the whole globe cuts it off.
-      if (map.getZoom() >= TILT_ZOOM && map.getPitch() < 30) map.easeTo({ pitch: 55, duration: 800 });
-      else if (map.getZoom() < TILT_ZOOM && map.getPitch() > 0) map.easeTo({ pitch: 0, duration: 600 });
+      if (terrainChanged && map.getZoom() >= TILT_ZOOM && map.getPitch() < 30) {
+        autoTilted.current = true;
+        map.easeTo({ pitch: 55, duration: 800 });
+      }
     } else {
-      map.setTerrain(null);
-      if (map.getPitch() > 0) map.easeTo({ pitch: 0, duration: 600 });
+      autoTilted.current = false;
+      if (terrainChanged && map.getPitch() > 0) {
+        // Level the camera first, then drop the terrain (removing it mid-move cancels the move).
+        map.easeTo({ pitch: 0, duration: 600 });
+        map.once("moveend", () => { if (!terrainOn.current) map.setTerrain(null); });
+      } else {
+        map.setTerrain(null);
+      }
     }
     savePrefs(prefs);
   }, [ready, prefs]);
