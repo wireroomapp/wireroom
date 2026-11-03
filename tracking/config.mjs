@@ -4,7 +4,7 @@
 // Set these on Render (backend service -> Environment):
 //   TRACKING_MODE        mvp | commercial        (default: mvp)
 //   AIRCRAFT_PROVIDER    adsblol | airplaneslive | adsbx   (default: adsblol)
-//   SHIPS_PROVIDER       aisstream | none        (default: aisstream)
+//   SHIPS_PROVIDER       snapshot | aisstream | none   (default: snapshot)
 //   AISSTREAM_API_KEY    your free key from aisstream.io (backend only, never in App.jsx)
 //
 // For a paid ADS-B Exchange-style API (commercial licence), set AIRCRAFT_PROVIDER=adsbx plus:
@@ -29,7 +29,9 @@ export function loadConfig(e = env) {
   return {
     mode: String(get("TRACKING_MODE", "mvp")).toLowerCase(),
     aircraftProvider: String(get("AIRCRAFT_PROVIDER", "adsblol")).toLowerCase(),
-    shipsProvider: String(get("SHIPS_PROVIDER", "aisstream")).toLowerCase(),
+    // "snapshot" (default): serve data/ships.json collected hourly. "aisstream": live connection
+    // (works from a computer with its own internet address, not from Render's shared ones).
+    shipsProvider: String(get("SHIPS_PROVIDER", "snapshot")).toLowerCase(),
 
     aircraftCacheMs: Number(get("AIRCRAFT_CACHE_MS", 15000)),
     // Public ADS-B feeds ask for ~1 request/second. We stay a bit under that.
@@ -41,6 +43,14 @@ export function loadConfig(e = env) {
       baseUrl: get("ADSBX_BASE_URL", ""),
       apiKey: get("ADSBX_API_KEY", ""),
       keyHeader: get("ADSBX_KEY_HEADER", "api-auth"),
+    },
+
+    snapshot: {
+      file: get("SHIPS_SNAPSHOT_FILE", "data/ships.json"),
+      // Hourly job; allow a missed run before calling it out of date.
+      staleAfterMs: Number(get("SHIPS_SNAPSHOT_STALE_MS", 3 * 60 * 60 * 1000)),
+      // Where the snapshot's data comes from; the license guard and credit follow this.
+      source: String(get("SHIPS_SNAPSHOT_SOURCE", "aisstream")).toLowerCase(),
     },
 
     ais: {

@@ -7,12 +7,15 @@ import { loadConfig } from "./config.mjs";
 import { checkLicense, PROVIDER_INFO } from "./license.mjs";
 import { createAircraftProvider } from "./aircraft.mjs";
 import { createAisStreamProvider } from "./ships.mjs";
+import { createSnapshotShipsProvider } from "./shipsSnapshot.mjs";
 import { parseBbox, inBbox, bboxToCircle, quantizeCircle, createCache } from "./util.mjs";
 
 function createShipsProvider(config, WebSocketImpl) {
   switch (config.shipsProvider) {
     case "aisstream":
       return createAisStreamProvider(config.ais, { WebSocketImpl });
+    case "snapshot":
+      return createSnapshotShipsProvider(config.snapshot);
     default:
       return null;
   }
@@ -24,7 +27,10 @@ export function registerTracking(app, opts = {}) {
   const cache = createCache();
 
   const aircraftLicense = checkLicense(config.aircraftProvider, config);
-  const shipsLicense = checkLicense(config.shipsProvider, config);
+  // A snapshot carries another provider's data, so the license check and credit follow that source.
+  const shipsSourceKey = config.shipsProvider === "snapshot" ? config.snapshot.source : config.shipsProvider;
+  const shipsLicense = config.shipsProvider === "none" ? { allowed: true, reason: "" } : checkLicense(shipsSourceKey, config);
+  const shipsAttribution = PROVIDER_INFO[shipsSourceKey]?.attribution || "";
 
   const aircraft = aircraftLicense.allowed ? createAircraftProvider(config, fetchImpl) : null;
   const ships = shipsLicense.allowed ? createShipsProvider(config, opts.WebSocketImpl || WebSocket) : null;
@@ -105,19 +111,21 @@ export function registerTracking(app, opts = {}) {
     const key = config.shipsProvider;
     if (key === "none") return res.json(envelope(key, null, "disabled", []));
     if (!shipsLicense.allowed) {
-      return res.json(envelope(key, shipsLicense, "license_blocked", [], { message: shipsLicense.reason }));
+      return res.json(envelope(key, shipsLicense, "license_blocked", [], { message: shipsLicense.reason, attribution: shipsAttribution }));
     }
-    if (!ships) return res.json(envelope(key, shipsLicense, "not-configured", [], { message: "Ships provider is not configured." }));
+    if (!ships) return res.json(envelope(key, shipsLicense, "not-configured", [], { message: "Ships provider is not configured.", attribution: shipsAttribution }));
 
     const s = ships.status();
     const items = ships.query(bbox, config.maxResults);
+    const snap = key === "snapshot";
     const message =
-      s.state === "not-configured" ? "AISSTREAM_API_KEY is not set on the server."
+      s.state === "not-configured" ? (snap ? "No ship snapshot has been collected yet." : "AISSTREAM_API_KEY is not set on the server.")
+      : snap && s.state === "stale" ? "The latest ship snapshot is more than a few hours old."
       : s.state === "unavailable" ? "Ship feed is connecting or unavailable."
       : s.state === "stale" ? "Ship feed has gone quiet; positions may be old."
       : s.state === "warming" ? "Ship feed just restarted; more vessels will appear over the next few minutes."
       : "";
-    return res.json(envelope(key, shipsLicense, s.state, items, { message, coverage: config.ais.boxes === "global" ? "global" : "chokepoints", zones: ships.zones ? ships.zones() : [], feed: s }));
+    return res.json(envelope(key, shipsLicense, s.state, items, { message, attribution: shipsAttribution, coverage: config.ais.boxes === "global" ? "global" : "chokepoints", zones: ships.zones ? ships.zones() : [], snapshotAt: s.snapshotAt || null, feed: s }));
   });
 
   // ---- Health for the admin / the investor "feed health" view ------------------
@@ -125,7 +133,7 @@ export function registerTracking(app, opts = {}) {
     res.json({
       mode: config.mode,
       aircraft: { provider: config.aircraftProvider, allowed: aircraftLicense.allowed, reason: aircraftLicense.reason, license: PROVIDER_INFO[config.aircraftProvider]?.commercial || null },
-      ships: { provider: config.shipsProvider, allowed: shipsLicense.allowed, reason: shipsLicense.reason, license: PROVIDER_INFO[config.shipsProvider]?.commercial || null, feed: ships ? ships.status() : null, coverage: ships?.coverage ? ships.coverage() : null },
+      ships: { provider: config.shipsProvider, allowed: shipsLicense.allowed, reason: shipsLicense.reason, source: shipsSourceKey, license: PROVIDER_INFO[shipsSourceKey]?.commercial || null, feed: ships ? ships.status() : null, coverage: ships?.coverage ? ships.coverage() : null },
     });
   });
 

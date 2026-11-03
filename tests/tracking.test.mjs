@@ -208,7 +208,7 @@ test("route: bad bbox -> 400", async () => {
 
 test("commercial mode blocks uncleared providers, never calls upstream", async () => {
   let calls = 0;
-  const { app } = setup({ TRACKING_MODE: "commercial" }, async () => { calls++; return { ok: true, json: async () => ({}) }; });
+  const { app } = setup({ TRACKING_MODE: "commercial", SHIPS_PROVIDER: "aisstream" }, async () => { calls++; return { ok: true, json: async () => ({}) }; });
   const a = (await call(app, "/api/aircraft", { bbox: VIEW })).body;
   assert.equal(a.status, "license_blocked");
   assert.match(a.meta.message, /LICENSE_CLEARED_ADSBLOL/);
@@ -234,12 +234,12 @@ test("provider switch via env: airplanes.live and custom adsbx", async () => {
 });
 
 test("route /api/ships: no key -> not-configured with message; key set -> ok after messages", async () => {
-  let s = setup({}, async () => ({ ok: true, json: async () => ({}) }));
+  let s = setup({ SHIPS_PROVIDER: "aisstream" }, async () => ({ ok: true, json: async () => ({}) }));
   let r = (await call(s.app, "/api/ships", { bbox: "24,54,28,58" })).body;
   assert.equal(r.status, "not-configured");
   assert.match(r.meta.message, /AISSTREAM_API_KEY/);
 
-  s = setup({ AISSTREAM_API_KEY: "k" }, async () => ({ ok: true, json: async () => ({}) }));
+  s = setup({ SHIPS_PROVIDER: "aisstream", AISSTREAM_API_KEY: "k" }, async () => ({ ok: true, json: async () => ({}) }));
   s.handle.ships.handleMessage(pos(5, 26.5, 56.2));
   r = (await call(s.app, "/api/ships", { bbox: "24,54,28,58" })).body;
   assert.equal(r.items.length, 1);
@@ -265,7 +265,7 @@ test("coverage counts ships per chokepoint", () => {
 });
 
 test("/api/ships returns watched zones with counts", async () => {
-  const s = setup({ AISSTREAM_API_KEY: "k" }, async () => ({ ok: true, json: async () => ({}) }));
+  const s = setup({ SHIPS_PROVIDER: "aisstream", AISSTREAM_API_KEY: "k" }, async () => ({ ok: true, json: async () => ({}) }));
   s.handle.ships.handleMessage(pos(5, 26.5, 56.2));
   const r = (await call(s.app, "/api/ships", { bbox: "-90,-180,90,180" })).body;
   assert.equal(r.meta.zones.length, 10);

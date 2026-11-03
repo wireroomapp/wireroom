@@ -629,7 +629,7 @@ export default function WireRoomV2() {
           </ul>
           <div className="welcome-note">
             <h3>About the live layers</h3>
-            <p>Aircraft and ship positions come from free, volunteer-run networks, so coverage has gaps. Many military aircraft don't broadcast their position, and some chokepoints, including the Strait of Hormuz, show no ships yet. The map labels these gaps instead of hiding them.</p>
+            <p>Aircraft and ship positions come from free, volunteer-run networks, so coverage has gaps, and ship positions refresh about once an hour. Many military aircraft don't broadcast their position, and some chokepoints, including the Strait of Hormuz, show no ships yet. The map labels these gaps instead of hiding them.</p>
             <h3>What funding will add</h3>
             <ul>
               <li>Satellite ship tracking and licensed flight data for worldwide coverage</li>
