@@ -1,3 +1,5 @@
+import { geoNaturalEarth1 } from "d3";
+
 // Where analyst annotations (markers, lines, shapes, notes) are stored.
 //
 // The map redraws itself to fit its box: opening the side panel narrows the map, which
@@ -65,4 +67,43 @@ export function migrateLegacy(list, projection) {
     delete rest.legacy;
     return toUnit(rest, projection);
   });
+}
+
+// ---- Bridge to real-world coordinates (used by the MapLibre map) ----
+// "Map units" are Natural Earth projection coordinates at scale 1 with no offset, so the
+// same projection with scale 1 converts them to and from longitude/latitude exactly.
+const UNIT = geoNaturalEarth1().scale(1).translate([0, 0]);
+
+export function unitToLonLat(x, y) {
+  const ll = UNIT.invert([x, y]);
+  return ll && Number.isFinite(ll[0]) && Number.isFinite(ll[1]) && Math.abs(ll[1]) <= 90 ? [Math.max(-180, Math.min(180, ll[0])), ll[1]] : null;
+}
+export function lonLatToUnit(lon, lat) {
+  const p = UNIT([lon, lat]);
+  return p && Number.isFinite(p[0]) ? { x: p[0], y: p[1] } : null;
+}
+
+// Annotations (stored in map units) as GeoJSON features for MapLibre.
+export function annotationsToGeoJSON(list, selectedId) {
+  const features = [];
+  for (const a of list) {
+    if (a.legacy) continue; // still in old pixel form; converted shortly after load
+    const sel = a.id === selectedId;
+    if (a.type === "marker" || a.type === "text") {
+      const ll = unitToLonLat(a.x, a.y);
+      if (!ll) continue;
+      features.push({ type: "Feature", geometry: { type: "Point", coordinates: ll },
+        properties: { id: a.id, kind: a.type, label: (a.type === "text" ? a.text : a.label) || "", color: a.color || "#d7dde8", pins: (a.pins || []).length, sel } });
+    } else if (a.type === "line") {
+      const p1 = unitToLonLat(a.x1, a.y1), p2 = unitToLonLat(a.x2, a.y2);
+      if (!p1 || !p2) continue;
+      features.push({ type: "Feature", geometry: { type: "LineString", coordinates: [p1, p2] }, properties: { id: a.id, kind: "line", label: a.label || "", sel } });
+    } else if (a.type === "shape") {
+      const nw = unitToLonLat(a.x, a.y), se = unitToLonLat(a.x + a.width, a.y + a.height);
+      if (!nw || !se) continue;
+      const [w, n] = nw, [e, s] = se;
+      features.push({ type: "Feature", geometry: { type: "Polygon", coordinates: [[[w, n], [e, n], [e, s], [w, s], [w, n]]] }, properties: { id: a.id, kind: "shape", label: a.label || "", sel, lx: w, ly: n } });
+    }
+  }
+  return { type: "FeatureCollection", features };
 }

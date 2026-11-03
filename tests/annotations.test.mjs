@@ -46,3 +46,19 @@ test("new storage wins over the old one", () => {
   const store = new Map([[STORAGE_KEY, "[]"], [LEGACY_KEY, '[{"id":"old","type":"marker","x":1,"y":2}]']]);
   assert.deepEqual(loadAnnotations({ getItem: (k) => store.get(k) ?? null }), []);
 });
+
+test("map units <-> longitude/latitude round trip (shared by both maps)", async () => {
+  const { unitToLonLat, lonLatToUnit, annotationsToGeoJSON } = await import("../src/annotationSpace.js");
+  const u = lonLatToUnit(56.3, 26.5);
+  const ll = unitToLonLat(u.x, u.y);
+  assert.ok(Math.abs(ll[0] - 56.3) < 1e-6 && Math.abs(ll[1] - 26.5) < 1e-6);
+  // A marker drawn on the classic map at Hormuz shows at Hormuz on the new map.
+  const wide = fit(1366, 702);
+  const [x, y] = wide([56.3, 26.5]);
+  const stored = toUnit({ id: "m", type: "marker", x, y, label: "H", pins: [{}, {}] }, wide);
+  const gj = annotationsToGeoJSON([stored], "m");
+  const [lon, lat] = gj.features[0].geometry.coordinates;
+  assert.ok(Math.abs(lon - 56.3) < 1e-6 && Math.abs(lat - 26.5) < 1e-6);
+  assert.equal(gj.features[0].properties.pins, 2);
+  assert.equal(gj.features[0].properties.sel, true);
+});

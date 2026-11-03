@@ -3,7 +3,24 @@ import * as d3 from "d3";
 import { useTrackingFeed } from "./useTracking.js";
 import { WORLD_BBOX, visibleBbox, projectItems, projectZones, hitTest, trackId, trackToReport } from "./trackingGeo.js";
 import { exportMapImage } from "./exportMap.js";
-import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrateLegacy } from "./annotationSpace.js";
+import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrateLegacy, annotationsToGeoJSON } from "./annotationSpace.js";
+import MapLibreView from "./map/MapLibreView.jsx";
+
+// Which map to draw. "maplibre" = the full-scale map (OpenFreeMap + NASA + MapLibre, globe and terrain).
+// "d3" = the classic flat map. Override in the address bar with ?engine=d3 or ?engine=maplibre.
+// The new map needs WebGL (3D graphics in the browser). Very old devices without it get the classic map.
+function webglAvailable() {
+  try {
+    const c = document.createElement("canvas");
+    return Boolean(c.getContext("webgl2") || c.getContext("webgl"));
+  } catch { return false; }
+}
+const MAP_ENGINE = (() => {
+  try { const q = new URLSearchParams(window.location.search).get("engine"); if (q) return q.toLowerCase(); } catch { /* no window */ }
+  const wanted = (import.meta.env.VITE_MAP_ENGINE || "maplibre").toLowerCase();
+  return wanted === "maplibre" && !webglAvailable() ? "d3" : wanted;
+})();
+const ML = MAP_ENGINE === "maplibre";
 import { TrackLayerSvg, LiveLayerControls, TrackCard, ZoneOutlines } from "./LiveLayers.jsx";
 
 /*
@@ -180,12 +197,16 @@ export default function WireRoomV2() {
   const [shipsOn, setShipsOn] = useState(false);
   const [trackSel, setTrackSel] = useState(null); // { kind: "air" | "ship", id, item }
   const suppressTrackClickUntilRef = useRef(0);
-  const shipsBbox = useMemo(() => visibleBbox(projection, transform, dims), [projection, transform, dims]);
+  const d3ShipsBbox = useMemo(() => visibleBbox(projection, transform, dims), [projection, transform, dims]);
+  const [mlBbox, setMlBbox] = useState(WORLD_BBOX); // visible area reported by the MapLibre map
+  const shipsBbox = ML ? mlBbox : d3ShipsBbox;
   // Aircraft: worldwide military feed (one cheap call). Ships: only the area on screen.
   const airFeed = useTrackingFeed({ enabled: airOn, path: "/api/aircraft", bbox: WORLD_BBOX, extra: "&mil=1", pollMs: 15000 });
   const shipFeed = useTrackingFeed({ enabled: shipsOn, path: "/api/ships", bbox: shipsBbox, pollMs: 20000 });
   const airProjected = useMemo(() => projectItems(airFeed.items, projection), [airFeed.items, projection]);
   const shipProjected = useMemo(() => projectItems(shipFeed.items, projection), [shipFeed.items, projection]);
+  const hasNewsSet = useMemo(() => new Set(feed.map(n => n.countryId)), [feed]);
+  const annotationsGeo = useMemo(() => (ML ? annotationsToGeoJSON(annotations, selectedAnnotationId) : null), [annotations, selectedAnnotationId]);
   const shipZones = useMemo(() => projectZones(shipFeed.meta?.zones, projection), [shipFeed.meta, projection]);
 
   useEffect(() => {
@@ -523,17 +544,50 @@ export default function WireRoomV2() {
   // Save the current map view (markers, lines, notes, live layers) as a PNG.
   const [exportState, setExportState] = useState("idle"); // idle | busy | error
   async function exportMap() {
-    if (!svgRef.current || exportState === "busy") return;
+    if ((!ML && !svgRef.current) || exportState === "busy") return;
     setExportState("busy");
     try {
       const credits = [airOn && airFeed.attribution, shipsOn && shipFeed.attribution].filter(Boolean);
-      await exportMapImage(svgRef.current, { width: dims.w, height: dims.h, credits });
+      if (ML) {
+        const canvas = mlRef.current && mlRef.current.getCanvas();
+        if (!canvas) throw new Error("Map not ready");
+        await exportMapImage(canvas, { width: canvas.clientWidth, height: canvas.clientHeight, credits: [...mlRef.current.credits(), ...credits] });
+      } else {
+        await exportMapImage(svgRef.current, { width: dims.w, height: dims.h, credits });
+      }
       setExportState("idle");
     } catch (err) {
       console.error("Map export failed", err);
       setExportState("error");
       setTimeout(() => setExportState("idle"), 3000);
     }
+  }
+
+  // ---- Analyst tools on the new map (it reports longitude/latitude) ----
+  const mlRef = useRef(null);
+  const llToPx = ll => { const p = projection(ll); return p && Number.isFinite(p[0]) ? { x: p[0], y: p[1] } : null; };
+  function mlDrawPoint(tool, ll) {
+    const point = llToPx(ll);
+    if (!point) return;
+    setLabelDialog(tool === "marker" ? { kind: "marker", value: "", point, color: annotationColor } : { kind: "text", value: "", point });
+  }
+  function mlDrawDrag(tool, a, b) {
+    const p1 = llToPx(a), p2 = llToPx(b);
+    if (!p1 || !p2) return;
+    if (tool === "line") addAnnotation({ type: "line", x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, label: "" });
+    else addAnnotation({ type: "shape", x: Math.min(p1.x, p2.x), y: Math.min(p1.y, p2.y), width: Math.abs(p2.x - p1.x), height: Math.abs(p2.y - p1.y), label: "" });
+  }
+  function mlAnnotationTap(id) {
+    if (pinning) {
+      const a = annotations.find(x => x.id === id);
+      if (a && a.type === "marker") pinReportToMarker(id);
+      return;
+    }
+    if (annotationTool === "select") { setSelectedAnnotationId(id); setTrackSel(null); }
+  }
+  function mlPinPlace(ll) {
+    const point = llToPx(ll);
+    if (point) placePinnedReport(point);
   }
 
   function editSelectedAnnotation() {
@@ -626,6 +680,7 @@ export default function WireRoomV2() {
             <li>Use the drawing tools to mark up the map, add notes, and pin reports to markers.</li>
             <li>Some countries have no verified official source yet. The panel says so instead of guessing.</li>
             <li>Tap <b>LIVE</b> (bottom-left of the map) to show military aircraft and ships at key chokepoints.</li>
+            {ML && <li>Switch the map to <b>SATELLITE</b>, <b>RELIEF</b> or <b>NIGHT</b> (NASA imagery), spin it as a <b>GLOBE</b>, or raise mountains in <b>3D</b>.</li>}
           </ul>
           <div className="welcome-note">
             <h3>About the live layers</h3>
@@ -665,6 +720,32 @@ export default function WireRoomV2() {
 
     <main className="layout">
       <section className="map-wrap" ref={stageRef}>
+        {ML ? (
+          <MapLibreView
+            countries={filteredCountries}
+            selectedId={selected ? selected.id : null}
+            hasNews={hasNewsSet}
+            onCountryClick={c => loadCountry(c)}
+            aircraft={airFeed.items}
+            ships={shipFeed.items}
+            zones={shipFeed.meta?.zones}
+            shipsStatus={shipFeed.status}
+            airOn={airOn}
+            shipsOn={shipsOn}
+            selectedTrack={trackShown ? { ...trackSel, item: trackLive ? trackLive.item : trackSel.item } : null}
+            onTrackClick={(kind, item) => { setSelectedAnnotationId(null); setTrackSel({ kind, id: trackId(kind, item), item }); }}
+            onEmptyClick={() => { setTrackSel(null); setSelectedAnnotationId(null); }}
+            onViewChange={setMlBbox}
+            annotations={annotationsGeo}
+            tool={annotationTool}
+            pinning={Boolean(pinning)}
+            onAnnotationTap={mlAnnotationTap}
+            onDrawPoint={mlDrawPoint}
+            onDrawDrag={mlDrawDrag}
+            onPinPlace={mlPinPlace}
+            controlRef={mlRef}
+          />
+        ) : (
         <svg
           ref={svgRef}
           className="map"
@@ -894,7 +975,8 @@ export default function WireRoomV2() {
             )}
           </g>
         </svg>
-                <div
+        )}
+        <div
           className="annotation-tools"
           style={{
             position: "absolute",

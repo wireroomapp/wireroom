@@ -47,7 +47,13 @@ function fitText(ctx, text, maxWidth) {
   return t + "…";
 }
 
-export async function renderMapPng(svgEl, { width, height, credits = [], now = new Date() }) {
+export async function renderMapPng(mapEl, { width, height, credits = [], now = new Date() }) {
+  // The new map (MapLibre) is already a drawn canvas; the classic map is an SVG to turn into an image.
+  const img = typeof HTMLCanvasElement !== "undefined" && mapEl instanceof HTMLCanvasElement ? mapEl : await svgToImage(mapEl, width, height);
+  return compose(img, { width, height, credits, now });
+}
+
+async function svgToImage(svgEl, width, height) {
   const clone = svgEl.cloneNode(true);
   clone.setAttribute("xmlns", SVG_NS);
   clone.setAttribute("width", String(width));
@@ -59,13 +65,14 @@ export async function renderMapPng(svgEl, { width, height, credits = [], now = n
 
   const xml = new XMLSerializer().serializeToString(clone);
   const url = URL.createObjectURL(new Blob([xml], { type: "image/svg+xml;charset=utf-8" }));
-  let img;
   try {
-    img = await loadImage(url);
+    return await loadImage(url);
   } finally {
     URL.revokeObjectURL(url);
   }
+}
 
+async function compose(img, { width, height, credits, now }) {
   const scale = 2; // sharp on phones and in documents
   const header = 46;
   const footer = 30;
@@ -118,8 +125,8 @@ export async function renderMapPng(svgEl, { width, height, credits = [], now = n
 }
 
 // Phones: open the share sheet (post it, message it, save it). Desktop: download the file.
-export async function exportMapImage(svgEl, opts) {
-  const { blob, filename } = await renderMapPng(svgEl, opts);
+export async function exportMapImage(mapEl, opts) {
+  const { blob, filename } = await renderMapPng(mapEl, opts);
   const file = typeof File !== "undefined" ? new File([blob], filename, { type: "image/png" }) : null;
   const touch = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
   if (touch && file && navigator.canShare && navigator.canShare({ files: [file] })) {
