@@ -10,6 +10,7 @@ import { WORLD_BBOX, trackId } from "../trackingGeo.js";
 // MapLibre too, so they stay attached to the right place at every zoom, size and projection.
 
 const PREFS_KEY = "wireroom-map-view-v1";
+const TILT_ZOOM = 4; // below this zoom the camera stays level (whole-globe view)
 const ZONE_SHOW = new Set(["ok", "warming", "stale"]);
 const EMPTY = { type: "FeatureCollection", features: [] };
 
@@ -81,6 +82,10 @@ export default function MapLibreView({
     if (map.isStyleLoaded()) start(); else map.once("style.load", start);
     map.on("styleimagemissing", (e) => { if (e.id === "wr-plane" || e.id === "wr-ship") addIcons(); });
     map.on("moveend", () => cb.current.onViewChange?.(viewBbox(map)));
+    // Zooming back out to the whole globe: level the camera so the Earth isn't cut off.
+    map.on("zoomend", () => {
+      if (map.getZoom() < TILT_ZOOM - 1 && map.getPitch() > 0 && !map.isMoving()) map.easeTo({ pitch: 0, duration: 500 });
+    });
     // Tile or font failures (e.g. a free service is down) shouldn't break the page.
     map.on("error", (e) => console.warn("Map:", e && e.error ? e.error.message : e));
 
@@ -125,7 +130,9 @@ export default function MapLibreView({
     map.setProjection({ type: prefs.globe ? "globe" : "mercator" });
     if (prefs.terrain) {
       map.setTerrain({ source: "dem", exaggeration: 1.5 });
-      if (map.getPitch() < 30) map.easeTo({ pitch: 55, duration: 800 });
+      // Tilt only when zoomed in enough to see mountains. Tilting the whole globe cuts it off.
+      if (map.getZoom() >= TILT_ZOOM && map.getPitch() < 30) map.easeTo({ pitch: 55, duration: 800 });
+      else if (map.getZoom() < TILT_ZOOM && map.getPitch() > 0) map.easeTo({ pitch: 0, duration: 600 });
     } else {
       map.setTerrain(null);
       if (map.getPitch() > 0) map.easeTo({ pitch: 0, duration: 600 });
@@ -200,7 +207,7 @@ export default function MapLibreView({
         </div>
         <div className="ml-row">
           <button type="button" className={prefs.globe ? "on" : ""} aria-pressed={prefs.globe} onClick={() => set({ globe: !prefs.globe })} title="Show the Earth as a globe">GLOBE</button>
-          <button type="button" className={prefs.terrain ? "on" : ""} aria-pressed={prefs.terrain} onClick={() => set({ terrain: !prefs.terrain })} title="Raise mountains in 3D (tilt the map with right-drag or two fingers)">3D TERRAIN</button>
+          <button type="button" className={prefs.terrain ? "on" : ""} aria-pressed={prefs.terrain} onClick={() => set({ terrain: !prefs.terrain })} title="Raise mountains in 3D. Zoom in to see them; tilt with right-drag or two fingers.">3D TERRAIN</button>
         </div>
       </div>
     </div>
