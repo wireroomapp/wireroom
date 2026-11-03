@@ -6,7 +6,8 @@ An interactive world map that shows what governments say next to what independen
 
 ## How it works
 
-- **Frontend:** Vite + React (`src/App.jsx`), D3 for the map. Deployed on Render.
+- **Frontend:** Vite + React (`src/App.jsx`). Deployed on Render.
+- **Map:** MapLibre GL JS (`src/map/`), free and open source: OpenStreetMap data from OpenFreeMap (borders, roads, places), NASA GIBS imagery (Blue Marble, shaded relief, city lights), and AWS Terrain Tiles for hillshading and 3D terrain. Flat or globe view. Devices without WebGL fall back to the classic D3 map; `?engine=d3` forces it. No API keys or accounts needed.
 - **Backend:** small Express server (`server.mjs`) that serves a pre-built cache. It never fetches news live.
 - **Data pipeline:** a GitHub Action (`.github/workflows/fetch-news.yml`) runs `scripts/fetch-feeds.mjs` every hour. It pulls official government sources and independent publishers per country (`lib/feeds.mjs`) and commits the result to `data/cache.json`.
 - **Official-source status:** each country is marked verified, temporarily unavailable, or not yet verified. The UI shows this instead of implying "no news".
@@ -30,6 +31,7 @@ Point the frontend at a local backend with `VITE_API_BASE=http://localhost:3001`
 | `VITE_API_BASE` | Backend URL (defaults to the deployed Render backend) |
 | `VITE_FEEDBACK_URL` | Feedback form or `mailto:` link. Shows a FEEDBACK button when set |
 | `VITE_GOATCOUNTER` | GoatCounter site code for privacy-friendly analytics |
+| `VITE_MAP_ENGINE` | `maplibre` (default) or `d3` for the classic map |
 
 Backend: `PROXY_URL` (optional) routes official-source fetches through a proxy for sites that block datacenter IPs. `AISSTREAM_API_KEY` turns on the ships layer; other live-layer switches are in [`tracking/README.md`](tracking/README.md).
 

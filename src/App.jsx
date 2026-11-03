@@ -8,9 +8,17 @@ import MapLibreView from "./map/MapLibreView.jsx";
 
 // Which map to draw. "maplibre" = the full-scale map (OpenFreeMap + NASA + MapLibre, globe and terrain).
 // "d3" = the classic flat map. Override in the address bar with ?engine=d3 or ?engine=maplibre.
+// The new map needs WebGL (3D graphics in the browser). Very old devices without it get the classic map.
+function webglAvailable() {
+  try {
+    const c = document.createElement("canvas");
+    return Boolean(c.getContext("webgl2") || c.getContext("webgl"));
+  } catch { return false; }
+}
 const MAP_ENGINE = (() => {
   try { const q = new URLSearchParams(window.location.search).get("engine"); if (q) return q.toLowerCase(); } catch { /* no window */ }
-  return (import.meta.env.VITE_MAP_ENGINE || "maplibre").toLowerCase();
+  const wanted = (import.meta.env.VITE_MAP_ENGINE || "maplibre").toLowerCase();
+  return wanted === "maplibre" && !webglAvailable() ? "d3" : wanted;
 })();
 const ML = MAP_ENGINE === "maplibre";
 import { TrackLayerSvg, LiveLayerControls, TrackCard, ZoneOutlines } from "./LiveLayers.jsx";
@@ -672,6 +680,7 @@ export default function WireRoomV2() {
             <li>Use the drawing tools to mark up the map, add notes, and pin reports to markers.</li>
             <li>Some countries have no verified official source yet. The panel says so instead of guessing.</li>
             <li>Tap <b>LIVE</b> (bottom-left of the map) to show military aircraft and ships at key chokepoints.</li>
+            {ML && <li>Switch the map to <b>SATELLITE</b>, <b>RELIEF</b> or <b>NIGHT</b> (NASA imagery), spin it as a <b>GLOBE</b>, or raise mountains in <b>3D</b>.</li>}
           </ul>
           <div className="welcome-note">
             <h3>About the live layers</h3>
