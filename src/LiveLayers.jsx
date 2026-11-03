@@ -141,7 +141,7 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
       {shipsOn && (
         <div className="live-note">
           Ships: outlined chokepoints only. Free coverage comes from volunteer receivers, so some areas show none.
-          {ships.meta?.snapshotAt ? ` Positions as of ${timeAgo(Date.parse(ships.meta.snapshotAt))}, refreshed hourly.` : ""} Zoom in, then tap an icon.
+          {ships.meta?.snapshotAt ? ` Positions as of ${timeAgo(Date.parse(ships.meta.snapshotAt))} (snapshots, not live).` : ""} Zoom in, then tap an icon.
         </div>
       )}
       {shipsOn && (
