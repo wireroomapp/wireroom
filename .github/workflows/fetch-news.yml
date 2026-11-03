@@ -2,7 +2,9 @@ name: Fetch News Feeds
 
 on:
   schedule:
-    - cron: '0 * * * *'   # every hour, on the hour
+    # GitHub delays and drops scheduled jobs at the top of the hour (everyone's jobs start then).
+    # Running at :17 avoids that rush. GitHub still doesn't guarantee exact timing.
+    - cron: '17 * * * *'  # every hour, at 17 minutes past
   workflow_dispatch: {}    # lets us trigger it manually from GitHub's UI
 
 jobs:
@@ -23,14 +25,16 @@ jobs:
       - name: Fetch all feeds
         run: node scripts/fetch-feeds.mjs
 
-      # Ships: listen to AISStream for ~2.5 minutes and save data/ships.json.
+      # Ships: listen to AISStream for ~5 minutes and save data/ships.json.
       # Needs the AISSTREAM_API_KEY repository secret. If it fails or hears nothing,
       # the previous snapshot is kept and the news update still goes out.
       - name: Collect ship snapshot
         continue-on-error: true
-        timeout-minutes: 6
+        timeout-minutes: 9
         env:
           AISSTREAM_API_KEY: ${{ secrets.AISSTREAM_API_KEY }}
+          # Ships send their name and type every ~6 minutes, so listening longer labels more of them.
+          SHIPS_COLLECT_SECONDS: "300"
         run: node scripts/collect-ships.mjs
 
       - name: Commit and push cache if it changed
