@@ -99,11 +99,16 @@ export default function MapLibreView({
     // out when you zoom back out to the whole globe (a tilted globe gets cut off).
     // Checked when the map has fully stopped ("moveend"), not when zooming ends: a phone pinch
     // keeps gliding after the fingers lift, so at "zoomend" the map is still moving.
+    let lastZoom = map.getZoom();
     map.on("moveend", () => {
       const z = map.getZoom();
+      // Only react when the zoom actually changed. Our own tilt/level animations also end with
+      // "moveend"; reacting to those could loop forever (the camera can stop a hair off level).
+      if (Math.abs(z - lastZoom) < 0.05) return;
+      lastZoom = z;
       if (z < TILT_ZOOM - 1) {
         autoTilted.current = false;
-        if (map.getPitch() > 0) map.easeTo({ pitch: 0, duration: 500 });
+        if (map.getPitch() > 1) map.easeTo({ pitch: 0, duration: 500 });
       } else if (terrainOn.current && z >= TILT_ZOOM && !autoTilted.current && map.getPitch() < 30) {
         autoTilted.current = true;
         map.easeTo({ pitch: 55, duration: 800 });
@@ -233,7 +238,7 @@ export default function MapLibreView({
       // during a camera move cancels that move).
       map.setTerrain(null);
       if (terrainChanged && map.getPitch() > 0) {
-        setTimeout(() => { if (!terrainOn.current && mapRef.current) mapRef.current.easeTo({ pitch: 0, duration: 600 }); }, 60);
+        setTimeout(() => { if (!terrainOn.current && mapRef.current && mapRef.current.getPitch() > 1) mapRef.current.easeTo({ pitch: 0, duration: 600 }); }, 60);
       }
     }
     savePrefs(prefs);
