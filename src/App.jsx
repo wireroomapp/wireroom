@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import { useTrackingFeed } from "./useTracking.js";
 import { WORLD_BBOX, visibleBbox, projectItems, projectZones, hitTest, trackId, trackToReport } from "./trackingGeo.js";
 import { exportMapImage } from "./exportMap.js";
-import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrateLegacy } from "./annotationSpace.js";
+import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrateLegacy, annotationsToGeoJSON } from "./annotationSpace.js";
 import MapLibreView from "./map/MapLibreView.jsx";
 
 // Which map to draw. "maplibre" = the full-scale map (OpenFreeMap + NASA + MapLibre, globe and terrain).
@@ -198,6 +198,7 @@ export default function WireRoomV2() {
   const airProjected = useMemo(() => projectItems(airFeed.items, projection), [airFeed.items, projection]);
   const shipProjected = useMemo(() => projectItems(shipFeed.items, projection), [shipFeed.items, projection]);
   const hasNewsSet = useMemo(() => new Set(feed.map(n => n.countryId)), [feed]);
+  const annotationsGeo = useMemo(() => (ML ? annotationsToGeoJSON(annotations, selectedAnnotationId) : null), [annotations, selectedAnnotationId]);
   const shipZones = useMemo(() => projectZones(shipFeed.meta?.zones, projection), [shipFeed.meta, projection]);
 
   useEffect(() => {
@@ -535,17 +536,50 @@ export default function WireRoomV2() {
   // Save the current map view (markers, lines, notes, live layers) as a PNG.
   const [exportState, setExportState] = useState("idle"); // idle | busy | error
   async function exportMap() {
-    if (!svgRef.current || exportState === "busy") return;
+    if ((!ML && !svgRef.current) || exportState === "busy") return;
     setExportState("busy");
     try {
       const credits = [airOn && airFeed.attribution, shipsOn && shipFeed.attribution].filter(Boolean);
-      await exportMapImage(svgRef.current, { width: dims.w, height: dims.h, credits });
+      if (ML) {
+        const canvas = mlRef.current && mlRef.current.getCanvas();
+        if (!canvas) throw new Error("Map not ready");
+        await exportMapImage(canvas, { width: canvas.clientWidth, height: canvas.clientHeight, credits: [...mlRef.current.credits(), ...credits] });
+      } else {
+        await exportMapImage(svgRef.current, { width: dims.w, height: dims.h, credits });
+      }
       setExportState("idle");
     } catch (err) {
       console.error("Map export failed", err);
       setExportState("error");
       setTimeout(() => setExportState("idle"), 3000);
     }
+  }
+
+  // ---- Analyst tools on the new map (it reports longitude/latitude) ----
+  const mlRef = useRef(null);
+  const llToPx = ll => { const p = projection(ll); return p && Number.isFinite(p[0]) ? { x: p[0], y: p[1] } : null; };
+  function mlDrawPoint(tool, ll) {
+    const point = llToPx(ll);
+    if (!point) return;
+    setLabelDialog(tool === "marker" ? { kind: "marker", value: "", point, color: annotationColor } : { kind: "text", value: "", point });
+  }
+  function mlDrawDrag(tool, a, b) {
+    const p1 = llToPx(a), p2 = llToPx(b);
+    if (!p1 || !p2) return;
+    if (tool === "line") addAnnotation({ type: "line", x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, label: "" });
+    else addAnnotation({ type: "shape", x: Math.min(p1.x, p2.x), y: Math.min(p1.y, p2.y), width: Math.abs(p2.x - p1.x), height: Math.abs(p2.y - p1.y), label: "" });
+  }
+  function mlAnnotationTap(id) {
+    if (pinning) {
+      const a = annotations.find(x => x.id === id);
+      if (a && a.type === "marker") pinReportToMarker(id);
+      return;
+    }
+    if (annotationTool === "select") { setSelectedAnnotationId(id); setTrackSel(null); }
+  }
+  function mlPinPlace(ll) {
+    const point = llToPx(ll);
+    if (point) placePinnedReport(point);
   }
 
   function editSelectedAnnotation() {
@@ -690,9 +724,17 @@ export default function WireRoomV2() {
             airOn={airOn}
             shipsOn={shipsOn}
             selectedTrack={trackShown ? { ...trackSel, item: trackLive ? trackLive.item : trackSel.item } : null}
-            onTrackClick={(kind, item) => setTrackSel({ kind, id: trackId(kind, item), item })}
-            onEmptyClick={() => setTrackSel(null)}
+            onTrackClick={(kind, item) => { setSelectedAnnotationId(null); setTrackSel({ kind, id: trackId(kind, item), item }); }}
+            onEmptyClick={() => { setTrackSel(null); setSelectedAnnotationId(null); }}
             onViewChange={setMlBbox}
+            annotations={annotationsGeo}
+            tool={annotationTool}
+            pinning={Boolean(pinning)}
+            onAnnotationTap={mlAnnotationTap}
+            onDrawPoint={mlDrawPoint}
+            onDrawDrag={mlDrawDrag}
+            onPinPlace={mlPinPlace}
+            controlRef={mlRef}
           />
         ) : (
         <svg
@@ -925,12 +967,7 @@ export default function WireRoomV2() {
           </g>
         </svg>
         )}
-        {ML && (
-          <div className="ml-phase-note">
-            NEW MAP PREVIEW · drawing, pinning and export return in phase 2 · <a href="?engine=d3">classic map</a>
-          </div>
-        )}
-        {!ML && <div
+        <div
           className="annotation-tools"
           style={{
             position: "absolute",
@@ -1059,7 +1096,7 @@ export default function WireRoomV2() {
           >
             {exportState === "busy" ? "EXPORTING…" : exportState === "error" ? "EXPORT FAILED" : "EXPORT"}
           </button>
-        </div>}
+        </div>
 
         {labelDialog && (
           <div
@@ -1177,7 +1214,7 @@ export default function WireRoomV2() {
             item={trackLive ? trackLive.item : trackSel.item}
             fetchedAt={trackSel.kind === "air" ? airFeed.fetchedAt : null}
             onClose={() => setTrackSel(null)}
-            onPin={ML ? undefined : () => startPinReport(trackToReport(trackSel.kind, trackLive ? trackLive.item : trackSel.item, airFeed.fetchedAt))}
+            onPin={() => startPinReport(trackToReport(trackSel.kind, trackLive ? trackLive.item : trackSel.item, airFeed.fetchedAt))}
           />
         )}
         <div className="map-note">SELECT A COUNTRY &bull; CLICK MARKER FOR SOURCES</div>
@@ -1271,7 +1308,7 @@ export default function WireRoomV2() {
             </div>
           </div>
         )}
-        {pagedFeed.map(item=><NewsCard onPin={ML ? undefined : startPinReport} key={item.id} item={item}/>)}
+        {pagedFeed.map(item=><NewsCard onPin={startPinReport} key={item.id} item={item}/>)}
       </aside>
     </main>
   </div>;
@@ -1288,7 +1325,7 @@ function geometryFromTopo(topology, geom) {
 
 const CSS = `
 .status{display:flex;align-items:center;gap:10px}.status-tag{letter-spacing:.1em}.hdr-btn{background:none;border:1px solid #26384d;color:#aeb8c6;font:10px monospace;letter-spacing:.06em;padding:6px 10px;cursor:pointer;text-decoration:none;line-height:1}.hdr-btn:hover{border-color:#c9974b;color:#c9974b}
-.welcome-back{position:fixed;inset:0;z-index:100;background:rgba(4,9,15,.82);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}.welcome-card{background:#0c1724;border:1px solid #26384d;border-top:2px solid #c9974b;max-width:460px;width:100%;padding:22px;font-family:Arial,sans-serif}.welcome-card h2{margin:4px 0 10px;font-size:26px;letter-spacing:.12em}.welcome-card h2 b{color:#c9974b}.welcome-card p{margin:0 0 12px;color:#c4cbd6;font-size:14px;line-height:1.5}.welcome-card ul{margin:0 0 12px;padding-left:18px;color:#aeb8c6;font-size:13px;line-height:1.55}.welcome-card li{margin-bottom:6px}.welcome-card .welcome-fine{font:11px/1.5 monospace;color:#718198}.ml-phase-note{position:absolute;top:10px;left:10px;z-index:3;max-width:calc(100% - 300px);background:rgba(10,14,20,.86);border:1px solid #26384d;color:#8795a7;font:10px/1.5 monospace;padding:6px 8px}.ml-phase-note a{color:#c9974b}@media(max-width:800px){.ml-phase-note{top:auto;bottom:calc(16px + env(safe-area-inset-bottom));left:auto;right:10px;max-width:200px;display:none}}.welcome-note{border-left:2px solid #26384d;padding:2px 0 2px 12px;margin:0 0 12px}.welcome-note h3{margin:0 0 5px;font:700 10px monospace;letter-spacing:.1em;color:#4fa6a0;text-transform:uppercase}.welcome-note p{font-size:13px;color:#aeb8c6;margin:0 0 10px}.welcome-note ul{margin:0;font-size:12.5px}.welcome-note li{margin-bottom:4px}.welcome-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}.welcome-go{background:#c9974b;color:#071019;border:0;font:700 12px monospace;letter-spacing:.08em;padding:11px 16px;cursor:pointer}.welcome-link{color:#c9974b;font:11px monospace;letter-spacing:.06em}
+.welcome-back{position:fixed;inset:0;z-index:100;background:rgba(4,9,15,.82);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}.welcome-card{background:#0c1724;border:1px solid #26384d;border-top:2px solid #c9974b;max-width:460px;width:100%;padding:22px;font-family:Arial,sans-serif}.welcome-card h2{margin:4px 0 10px;font-size:26px;letter-spacing:.12em}.welcome-card h2 b{color:#c9974b}.welcome-card p{margin:0 0 12px;color:#c4cbd6;font-size:14px;line-height:1.5}.welcome-card ul{margin:0 0 12px;padding-left:18px;color:#aeb8c6;font-size:13px;line-height:1.55}.welcome-card li{margin-bottom:6px}.welcome-card .welcome-fine{font:11px/1.5 monospace;color:#718198}.welcome-note{border-left:2px solid #26384d;padding:2px 0 2px 12px;margin:0 0 12px}.welcome-note h3{margin:0 0 5px;font:700 10px monospace;letter-spacing:.1em;color:#4fa6a0;text-transform:uppercase}.welcome-note p{font-size:13px;color:#aeb8c6;margin:0 0 10px}.welcome-note ul{margin:0;font-size:12.5px}.welcome-note li{margin-bottom:4px}.welcome-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}.welcome-go{background:#c9974b;color:#071019;border:0;font:700 12px monospace;letter-spacing:.08em;padding:11px 16px;cursor:pointer}.welcome-link{color:#c9974b;font:11px monospace;letter-spacing:.06em}
 @media(max-width:700px){.subtitle{display:none}.topbar{padding:0 14px}.status{margin-left:auto}.status-tag{display:none}}
 *{box-sizing:border-box} body{margin:0;background:#071019} .app{min-height:100vh;background:#071019;color:#e8e3d8;font-family:Arial,sans-serif}.topbar{height:64px;border-bottom:1px solid #1c2a3b;display:flex;align-items:center;padding:0 22px;gap:18px}.brand{font-weight:800;letter-spacing:.12em;font-size:21px}.brand b{color:#c9974b}.subtitle{font:11px monospace;color:#718198;letter-spacing:.08em}.status{margin-left:auto;font:10px monospace;color:#4fa6a0}.toolbar{height:54px;border-bottom:1px solid #162538;display:flex;align-items:center;gap:9px;padding:8px 18px}.toolbar input,.toolbar select,.mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace}.toolbar input{width:190px}.mode{margin-left:auto;display:flex}.mode button{cursor:pointer}.mode button.active{color:#c9974b;border-color:#c9974b}.layout{height:calc(100vh - 118px);display:flex}.map-wrap{position:relative;flex:1;min-width:0}.map{width:100%;height:100%;touch-action:none;cursor:grab}.map:active{cursor:grabbing}.ocean{fill:#0b1725;stroke:#21334a}.grid{fill:none;stroke:#142233;stroke-width:.5}.land{fill:#142230;stroke:#2a3c50;stroke-width:.65}.marker{cursor:pointer}.dot{fill:#c9974b}.dot.active{fill:#e8e3d8;stroke:#c9974b;stroke-width:2}.pulse{fill:none;stroke:#c9974b;stroke-width:1;opacity:.55;animation:pulse 2s infinite;pointer-events:none}.marker text{font:8px monospace;fill:#65758a;text-anchor:middle}.map-note{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:18px;font:10px monospace;color:#4e6076}.global-fab{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));right:18px;background:#0c1724;border:1px solid #c9974b;color:#c9974b;padding:8px 14px;font:10px monospace;letter-spacing:.06em;cursor:pointer;z-index:5}.panel{width:410px;background:#0c1724;border-left:1px solid #1c2a3b;padding:20px;overflow:auto;display:none;flex-direction:column}.panel.open{display:flex}.panel-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #1c2a3b;padding-bottom:14px;margin-bottom:14px}.panel-head h1{margin:2px 0 4px;font-size:28px}.panel-head p{margin:0;color:#718198;font:10px monospace;line-height:1.5}.panel-head button{height:30px;background:none;border:1px solid #26384d;color:#8795a7;cursor:pointer}.panel-mode{display:none}.panel-mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace;cursor:pointer}.panel-mode button.active{color:#c9974b;border-color:#c9974b}.eyebrow{font:9px monospace;letter-spacing:.12em;color:#4fa6a0}.source-status{margin:6px 0 0;font:10px monospace;letter-spacing:.04em}.source-status.verified{color:#4fa6a0}.source-status.unverified{color:#c9974b}.loading,.empty{font:11px monospace;color:#718198;padding:24px 4px;line-height:1.7}.card{border:1px solid #1d2d40;background:#071019;padding:13px;margin-bottom:10px}.card-meta{display:flex;gap:8px;align-items:center;color:#586b82;font:9px monospace;margin-bottom:8px}.tag{padding:2px 5px;border:1px solid}.tag.official{color:#4fa6a0;border-color:#315e5b}.tag.independent{color:#8a98aa;border-color:#3a4655}.tag.track{color:#7cc4ff;border-color:#2f4f6b}.card h3{font-size:14px;line-height:1.35;margin:0 0 7px}.card p{font-size:12px;line-height:1.5;color:#9ba8b8;margin:0 0 8px}.card a{font:10px monospace;color:#c9974b;text-decoration:none}.pagination{border:1px solid #1d2d40;background:#071019;padding:10px;margin-bottom:10px;font:9px monospace;color:#718198}.pagination-info{display:block;margin-bottom:8px}.pagination-buttons{display:flex;gap:6px}.pagination-buttons button{flex:1;background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:7px 8px;font:9px monospace;cursor:pointer}.pagination-buttons button:hover:not(:disabled){color:#c9974b;border-color:#c9974b}.pagination-buttons button:disabled{opacity:.35;cursor:default}@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.2);opacity:0}}@media(max-width:800px){.layout{height:calc(100dvh - 118px);min-height:0;position:relative;overflow:hidden}.panel{display:flex;position:absolute;right:0;top:0;bottom:0;width:min(420px,100%);transform:translateX(100%);transition:transform .25s;z-index:4}.panel.open{transform:translateX(0)}.subtitle{display:none}.toolbar{height:auto;min-height:54px;overflow:hidden;flex-wrap:wrap;padding:8px 10px;gap:6px}.toolbar input{width:min(150px,calc(100vw - 20px))}.toolbar select{max-width:110px}.mode{margin-left:auto;flex-shrink:0}.mode button{padding:8px 7px}.toolbar .mode{display:none}.panel-mode{display:flex;gap:6px;margin:-4px 0 14px;padding-bottom:12px;border-bottom:1px solid #1c2a3b}.panel-mode button{flex:1;padding:8px 5px}.map-wrap{height:100%;min-height:0}.status{display:none}}
 `;

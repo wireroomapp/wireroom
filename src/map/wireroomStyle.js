@@ -68,6 +68,8 @@ export function buildStyle() {
       "wr-ships": { type: "geojson", data: EMPTY },
       "wr-planes": { type: "geojson", data: EMPTY },
       "wr-selected": { type: "geojson", data: EMPTY },
+      "wr-ann": { type: "geojson", data: EMPTY }, // the user's markers, lines, shapes, notes
+      "wr-draft": { type: "geojson", data: EMPTY }, // the line/shape being drawn right now
     },
     layers: [
       // Land is the background; water is drawn on top of it.
@@ -126,12 +128,40 @@ export function buildStyle() {
       { id: "wr-country-code", type: "symbol", source: "wr-countries",
         layout: { "text-field": ["get", "code"], "text-font": FONT_BOLD, "text-size": 9, "text-offset": [0, 1.25], "text-anchor": "top", "text-allow-overlap": true },
         paint: { "text-color": "#8a98aa", "text-halo-color": "#071019", "text-halo-width": 1.2 } },
+
+      // ---- The user's analysis (markers, lines, shapes, notes). Fixed size on screen at any zoom. ----
+      { id: "wr-ann-shape-fill", type: "fill", source: "wr-ann", filter: ["==", ["get", "kind"], "shape"], paint: { "fill-color": "#ffffff", "fill-opacity": 0.05 } },
+      { id: "wr-ann-shape-line", type: "line", source: "wr-ann", filter: ["==", ["get", "kind"], "shape"], paint: { "line-color": ["case", ["get", "sel"], "#ffffff", "#d7dde8"], "line-width": ["case", ["get", "sel"], 3, 2] } },
+      { id: "wr-ann-line", type: "line", source: "wr-ann", filter: ["==", ["get", "kind"], "line"], layout: { "line-cap": "round" }, paint: { "line-color": ["case", ["get", "sel"], "#ffffff", "#d7dde8"], "line-width": ["case", ["get", "sel"], 4, 2.5] } },
+      { id: "wr-draft-fill", type: "fill", source: "wr-draft", filter: ["==", ["geometry-type"], "Polygon"], paint: { "fill-color": "#ffffff", "fill-opacity": 0.04 } },
+      { id: "wr-draft-line", type: "line", source: "wr-draft", paint: { "line-color": "#ffffff", "line-width": 2, "line-dasharray": [3, 2] } },
+      { id: "wr-ann-marker", type: "circle", source: "wr-ann", filter: ["==", ["get", "kind"], "marker"],
+        paint: { "circle-radius": ["case", ["get", "sel"], 7.5, 6], "circle-color": ["get", "color"], "circle-opacity": 0.3, "circle-stroke-color": ["case", ["get", "sel"], "#ffffff", ["get", "color"]], "circle-stroke-width": ["case", ["get", "sel"], 3, 2] } },
+      { id: "wr-ann-pin-badge", type: "circle", source: "wr-ann", filter: ["all", ["==", ["get", "kind"], "marker"], [">", ["get", "pins"], 0]],
+        paint: { "circle-radius": 7.5, "circle-color": "#c9974b", "circle-stroke-color": "#000000", "circle-stroke-width": 1.5, "circle-translate": [10, -10] } },
+      { id: "wr-ann-pin-count", type: "symbol", source: "wr-ann", filter: ["all", ["==", ["get", "kind"], "marker"], [">", ["get", "pins"], 0]],
+        layout: { "text-field": ["to-string", ["get", "pins"]], "text-font": FONT_BOLD, "text-size": 10, "text-allow-overlap": true, "text-ignore-placement": true },
+        paint: { "text-color": "#000000", "text-translate": [10, -10] } },
+      { id: "wr-ann-marker-label", type: "symbol", source: "wr-ann", filter: ["all", ["==", ["get", "kind"], "marker"], ["!=", ["get", "label"], ""]],
+        layout: { "text-field": ["get", "label"], "text-font": FONT_BOLD, "text-size": 12.5, "text-anchor": "left", "text-offset": [0.9, 0], "text-allow-overlap": true, "text-ignore-placement": true, "text-max-width": 20 },
+        paint: { "text-color": "#ffffff", "text-halo-color": "#000000", "text-halo-width": 2 } },
+      { id: "wr-ann-text", type: "symbol", source: "wr-ann", filter: ["==", ["get", "kind"], "text"],
+        layout: { "text-field": ["get", "label"], "text-font": FONT_BOLD, "text-size": 13.5, "text-anchor": "left", "text-allow-overlap": true, "text-ignore-placement": true, "text-max-width": 24 },
+        paint: { "text-color": ["case", ["get", "sel"], "#ffe9b8", "#ffffff"], "text-halo-color": "#000000", "text-halo-width": 2 } },
+      { id: "wr-ann-line-label", type: "symbol", source: "wr-ann", filter: ["all", ["==", ["get", "kind"], "line"], ["!=", ["get", "label"], ""]],
+        layout: { "symbol-placement": "line-center", "text-field": ["get", "label"], "text-font": FONT_BOLD, "text-size": 12, "text-offset": [0, -0.9], "text-allow-overlap": true, "text-ignore-placement": true },
+        paint: { "text-color": "#ffffff", "text-halo-color": "#000000", "text-halo-width": 2 } },
+      { id: "wr-ann-shape-label", type: "symbol", source: "wr-ann", filter: ["all", ["==", ["get", "kind"], "shape"], ["!=", ["get", "label"], ""]],
+        layout: { "text-field": ["get", "label"], "text-font": FONT_BOLD, "text-size": 12, "text-allow-overlap": true, "text-ignore-placement": true },
+        paint: { "text-color": "#ffffff", "text-halo-color": "#000000", "text-halo-width": 2 } },
     ],
   };
 }
 
 // Show the chosen base look by flipping visibility. The plain MAP keeps the dark land/water
 // colors; imagery looks hide the water fill so NASA's picture shows through.
+export const ANNOTATION_LAYERS = ["wr-ann-marker", "wr-ann-pin-badge", "wr-ann-marker-label", "wr-ann-text", "wr-ann-line", "wr-ann-line-label", "wr-ann-shape-line", "wr-ann-shape-fill", "wr-ann-shape-label"];
+
 export function applyBase(map, baseId) {
   const base = BASES.find((b) => b.id === baseId) || BASES[0];
   for (const id of IMAGERY_LAYERS) map.setLayoutProperty(id, "visibility", id === base.imagery ? "visible" : "none");

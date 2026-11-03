@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { buildStyle, applyBase, makeIcons, BASES } from "./wireroomStyle.js";
+import { buildStyle, applyBase, makeIcons, BASES, ANNOTATION_LAYERS, NASA_CREDIT, DEM_CREDIT } from "./wireroomStyle.js";
 import { WORLD_BBOX, trackId } from "../trackingGeo.js";
 
 // The full-scale map: MapLibre (free, open source) drawing OpenStreetMap data from
@@ -39,6 +39,9 @@ export default function MapLibreView({
   countries, selectedId, hasNews, onCountryClick,
   aircraft, ships, zones, shipsStatus, airOn, shipsOn,
   selectedTrack, onTrackClick, onEmptyClick, onViewChange,
+  // Analyst tools
+  annotations, tool = "select", pinning = false,
+  onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace, controlRef,
 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
@@ -48,10 +51,14 @@ export default function MapLibreView({
   const terrainOn = useRef(false); // 3D terrain setting, readable from map event handlers
   const autoTilted = useRef(false); // did we already tilt for this zoom-in?
   const prevTerrain = useRef(null);
+  const prefsRef = useRef(prefs);
+  const draft = useRef(null); // line/shape being drawn: { start: [lon,lat], startPt, last }
+  const suppressClickUntil = useRef(0);
   // Latest callbacks for the map's event handlers (which are set up once).
   const cb = useRef({});
   useLayoutEffect(() => {
-    cb.current = { onCountryClick, onTrackClick, onEmptyClick, onViewChange, countries };
+    cb.current = { onCountryClick, onTrackClick, onEmptyClick, onViewChange, countries, tool, pinning, onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace };
+    prefsRef.current = prefs;
   });
 
   // Create the map once.
@@ -65,6 +72,8 @@ export default function MapLibreView({
       maxZoom: 14,
       attributionControl: false,
       dragRotate: true,
+      // Lets EXPORT read the map image. NASA, OpenFreeMap and the elevation tiles all allow this.
+      canvasContextAttributes: { preserveDrawingBuffer: true },
     });
     mapRef.current = map;
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "bottom-right");
@@ -103,12 +112,30 @@ export default function MapLibreView({
     map.on("error", (e) => console.warn("Map:", e && e.error ? e.error.message : e));
 
     const box = (p, r) => [[p.x - r, p.y - r], [p.x + r, p.y + r]];
+    const hitAnnotation = (pt) => {
+      const f = map.queryRenderedFeatures(box(pt, 10), { layers: ANNOTATION_LAYERS });
+      return f.length ? f[0].properties : null;
+    };
     map.on("click", (e) => {
       if (!map.getLayer("wr-country-dot")) return;
+      if (Date.now() < suppressClickUntil.current) return; // this click ended a line/shape drag
+      const k = cb.current;
+      const ll = [e.lngLat.lng, e.lngLat.lat];
+      // Drawing tools: a tap places a marker or a note.
+      if (k.tool === "marker" || k.tool === "text") { k.onDrawPoint?.(k.tool, ll); return; }
+      if (k.tool !== "select") return; // line/shape are drawn by dragging
+      const ann = hitAnnotation(e.point);
+      // Pinning a report/ship/plane: tap a marker to pin to it, or tap the map for a new marker.
+      if (k.pinning) {
+        if (ann && ann.kind === "marker") k.onAnnotationTap?.(ann.id);
+        else k.onPinPlace?.(ll);
+        return;
+      }
+      if (ann) { k.onAnnotationTap?.(ann.id); return; }
       const c = map.queryRenderedFeatures(box(e.point, 10), { layers: ["wr-country-dot", "wr-country-code"] });
       if (c.length) {
-        const country = cb.current.countries.find((x) => x.id === c[0].properties.id);
-        if (country) cb.current.onCountryClick?.(country);
+        const country = k.countries.find((x) => x.id === c[0].properties.id);
+        if (country) k.onCountryClick?.(country);
         return;
       }
       const t = map.queryRenderedFeatures(box(e.point, 14), { layers: ["wr-ships", "wr-planes"] });
@@ -120,13 +147,61 @@ export default function MapLibreView({
           if (d < bd) { bd = d; best = f; }
         }
         const hit = lookup.current.get(best.properties.key);
-        if (hit) { cb.current.onTrackClick?.(hit.kind, hit.item); return; }
+        if (hit) { k.onTrackClick?.(hit.kind, hit.item); return; }
       }
-      cb.current.onEmptyClick?.();
+      k.onEmptyClick?.();
     });
-    const hoverLayers = ["wr-country-dot", "wr-country-code", "wr-ships", "wr-planes"];
+
+    // Drawing lines and shapes by dragging (mouse or one finger). Two fingers still zoom.
+    const draftShape = (a, b, tool) => {
+      if (tool === "line") return { type: "Feature", geometry: { type: "LineString", coordinates: [a, b] }, properties: {} };
+      const [w, e] = [Math.min(a[0], b[0]), Math.max(a[0], b[0])], [s2, n] = [Math.min(a[1], b[1]), Math.max(a[1], b[1])];
+      return { type: "Feature", geometry: { type: "Polygon", coordinates: [[[w, n], [e, n], [e, s2], [w, s2], [w, n]]] }, properties: {} };
+    };
+    const setDraft = (f) => map.getSource("wr-draft")?.setData({ type: "FeatureCollection", features: f ? [f] : [] });
+    const dragTool = () => cb.current.tool === "line" || cb.current.tool === "shape";
+    const startDraw = (e) => {
+      if (!dragTool()) return;
+      const touches = e.originalEvent && e.originalEvent.touches;
+      if (touches && touches.length > 1) { draft.current = null; setDraft(null); return; }
+      e.preventDefault();
+      const ll = [e.lngLat.lng, e.lngLat.lat];
+      draft.current = { start: ll, startPt: e.point, last: ll, lastPt: e.point };
+    };
+    const moveDraw = (e) => {
+      const d = draft.current;
+      if (!d) return;
+      const touches = e.originalEvent && e.originalEvent.touches;
+      if (touches && touches.length > 1) { draft.current = null; setDraft(null); return; } // pinch: cancel
+      d.last = [e.lngLat.lng, e.lngLat.lat];
+      d.lastPt = e.point;
+      setDraft(draftShape(d.start, d.last, cb.current.tool));
+    };
+    const endDraw = () => {
+      const d = draft.current;
+      if (!d) return;
+      draft.current = null;
+      setDraft(null);
+      const dx = Math.abs(d.lastPt.x - d.startPt.x), dy = Math.abs(d.lastPt.y - d.startPt.y);
+      const tool = cb.current.tool;
+      const bigEnough = tool === "line" ? Math.hypot(dx, dy) > 8 : dx > 8 && dy > 8;
+      if (bigEnough) {
+        suppressClickUntil.current = Date.now() + 400;
+        cb.current.onDrawDrag?.(tool, d.start, d.last);
+      }
+    };
+    map.on("mousedown", startDraw);
+    map.on("touchstart", startDraw);
+    map.on("mousemove", moveDraw);
+    map.on("touchmove", moveDraw);
+    map.on("mouseup", endDraw);
+    map.on("touchend", endDraw);
+    map.on("touchcancel", () => { draft.current = null; setDraft(null); });
+
+    const hoverLayers = ["wr-country-dot", "wr-country-code", "wr-ships", "wr-planes", ...ANNOTATION_LAYERS];
     map.on("mousemove", (e) => {
       if (!map.getLayer("wr-country-dot")) return;
+      if (cb.current.tool !== "select") { map.getCanvas().style.cursor = "crosshair"; return; }
       const over = map.queryRenderedFeatures(box(e.point, 8), { layers: hoverLayers }).length > 0;
       map.getCanvas().style.cursor = over ? "pointer" : "";
     });
@@ -210,6 +285,37 @@ export default function MapLibreView({
     map.getSource("wr-zone-labels").setData({ type: "FeatureCollection", features: labels });
   }, [ready, zones, shipsStatus, shipsOn]);
 
+  // The user's annotations.
+  useEffect(() => {
+    const src = ready && mapRef.current?.getSource("wr-ann");
+    if (src && annotations) src.setData(annotations);
+  }, [ready, annotations]);
+
+  // Line/shape tools: one finger or mouse drag draws instead of moving the map.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!ready || !map) return;
+    if (tool === "line" || tool === "shape") map.dragPan.disable(); else map.dragPan.enable();
+    if (tool === "select") map.getCanvas().style.cursor = "";
+  }, [ready, tool]);
+
+  // What EXPORT needs from this map: the drawn image and the credits for what's on it.
+  useEffect(() => {
+    if (!controlRef) return undefined;
+    controlRef.current = {
+      getCanvas: () => mapRef.current?.getCanvas() || null,
+      credits: () => {
+        const p = prefsRef.current;
+        const strip = (h) => h.replace(/<[^>]+>/g, "");
+        const out = ["Map data © OpenStreetMap contributors (OpenFreeMap)"];
+        if (p.base !== "map") out.push(strip(NASA_CREDIT));
+        if (p.base === "map" || p.base === "satellite" || p.terrain) out.push(strip(DEM_CREDIT).replace(" via AWS Open Data", ""));
+        return out;
+      },
+    };
+    return () => { controlRef.current = null; };
+  }, [controlRef]);
+
   // Ring around the tapped plane or ship.
   useEffect(() => {
     const src = ready && mapRef.current?.getSource("wr-selected");
@@ -252,5 +358,5 @@ const ML_CSS = `
 .ml-wrap .maplibregl-ctrl-attrib{background:rgba(10,14,20,.8);color:#718198;font:10px monospace}
 .ml-wrap .maplibregl-ctrl-attrib a{color:#8a98aa}
 .ml-wrap .maplibregl-ctrl-attrib-button{filter:invert(.8)}
-@media(max-width:800px){.ml-controls button{padding:5px 6px;font-size:9px}}
+@media(max-width:800px){.ml-controls{top:50%;transform:translateY(-60%);gap:4px}.ml-row{flex-direction:column;align-items:flex-end}.ml-controls button{padding:5px 6px;font-size:9px;min-width:66px;text-align:center}}
 `;
