@@ -89,7 +89,7 @@ export default function SourcesPanel({ apiBase, feedbackUrl, onClose, onOpenCoun
           <button type="button" className="src-x" onClick={onClose} aria-label="Close">×</button>
         </div>
 
-        <p>Wire Room collects reports automatically about once an hour. Each one shows the source's own headline and opening lines (shortened), in the original language, with a link to the full original. Nothing is rewritten by AI.</p>
+        <p>Wire Room collects reports automatically about once an hour. Each one shows the source's own headline and opening lines (shortened), with a link to the full original. Nothing is rewritten or summarized. Reports in other languages also get a machine translation into English, clearly labeled, with the original one tap away.</p>
 
         <h3>HOW TO READ THE LABELS</h3>
         <ul>

@@ -30,6 +30,19 @@ jobs:
       - name: Fetch all feeds
         run: node scripts/fetch-feeds.mjs
 
+      # English translations of non-English reports (lib/translate.mjs). Needs the
+      # TRANSLATE_API_KEY repository secret (DeepL by default; set the TRANSLATE_PROVIDER
+      # repository variable to "microsoft" for Microsoft Translator). Without a key it only
+      # re-attaches saved translations. Never blocks the news update.
+      - name: Translate new reports to English
+        continue-on-error: true
+        timeout-minutes: 5
+        env:
+          TRANSLATE_API_KEY: ${{ secrets.TRANSLATE_API_KEY }}
+          TRANSLATE_PROVIDER: ${{ vars.TRANSLATE_PROVIDER }}
+          TRANSLATE_REGION: ${{ vars.TRANSLATE_REGION }}
+        run: node scripts/translate-reports.mjs
+
       # Ships: listen to AISStream for ~5 minutes and save data/ships.json.
       # Needs the AISSTREAM_API_KEY repository secret. If it fails or hears nothing,
       # the previous snapshot is kept and the news update still goes out.
@@ -48,5 +61,6 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           git add data/cache.json
           if [ -f data/ships.json ]; then git add data/ships.json; fi
+          if [ -f data/translations.json ]; then git add data/translations.json; fi
           git diff --staged --quiet || git commit -m "chore: update cached news feeds"
           git push
