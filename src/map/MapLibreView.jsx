@@ -42,6 +42,7 @@ export default function MapLibreView({
   // Analyst tools
   annotations, tool = "select", pinning = false,
   onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace, controlRef,
+  focus = null, // { lon, lat, key }: fly here once (used when a shared link opens a country)
 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
@@ -60,6 +61,15 @@ export default function MapLibreView({
     cb.current = { onCountryClick, onTrackClick, onEmptyClick, onViewChange, countries, tool, pinning, onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace };
     prefsRef.current = prefs;
   });
+
+  // Fly to a place when asked (once per key).
+  const focusedKey = useRef(null);
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!ready || !map || !focus || focusedKey.current === focus.key) return;
+    focusedKey.current = focus.key;
+    map.flyTo({ center: [focus.lon, focus.lat], zoom: Math.max(map.getZoom(), 3.2), duration: 1600, essential: true });
+  }, [ready, focus]);
 
   // Create the map once.
   useEffect(() => {
