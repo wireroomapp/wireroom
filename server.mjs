@@ -4,6 +4,7 @@ import compression from "compression";
 import { COUNTRY_INFO, hasVerifiedOfficialSource } from "./lib/feeds.mjs";
 import { registerTracking } from "./tracking/index.mjs";
 import { describeSources } from "./lib/sources.mjs";
+import { createWatchdog } from "./scheduler/watchdog.mjs";
 
 /*
   WIRE ROOM / WORLD WIRE — backend (cache-serving version)
@@ -102,9 +103,19 @@ app.get("/api/sources", (req, res) => {
 });
 
 app.get("/api/health", (req, res) => res.json({ ok: true }));
+// Starts the hourly data job if GitHub's scheduler lets it slip (needs GITHUB_DISPATCH_TOKEN).
+const watchdog = createWatchdog();
+watchdog.start();
+
 app.get("/api/status", (req, res) => {
   const cache = loadCache();
-  res.json({ generatedAt: cache.generatedAt, countriesCached: Object.keys(cache.countries).length });
+  const ageMin = cache.generatedAt ? Math.round((Date.now() - Date.parse(cache.generatedAt)) / 60000) : null;
+  res.json({
+    generatedAt: cache.generatedAt,
+    dataAgeMinutes: ageMin,
+    countriesCached: Object.keys(cache.countries).length,
+    dataJob: watchdog.state,
+  });
 });
 
 app.listen(PORT, () => {

@@ -65,7 +65,7 @@ npm run build
 | `VITE_GOATCOUNTER` | GoatCounter site code for privacy-friendly analytics |
 | `VITE_MAP_ENGINE` | `maplibre` (default) or `d3` for the classic map |
 
-Backend: `PROXY_URL` (optional) routes official-source fetches through a proxy for sites that block datacenter IPs. `AISSTREAM_API_KEY` turns on the ships layer; other live-layer switches are in [`tracking/README.md`](tracking/README.md).
+Backend: `PROXY_URL` (optional) routes official-source fetches through a proxy for sites that block datacenter IPs. `GITHUB_DISPATCH_TOKEN` (fine-grained token, this repo only, Actions: read and write) turns on the watchdog in `scheduler/watchdog.mjs`, which starts the data job whenever GitHub's schedule lets it run more than 70 minutes late; `/api/status` shows the data's age and the watchdog's state. `AISSTREAM_API_KEY` turns on the ships layer; other live-layer switches are in [`tracking/README.md`](tracking/README.md).
 
 ## Known gaps
 
