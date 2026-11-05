@@ -3,6 +3,7 @@ import { readFileSync, statSync } from "fs";
 import compression from "compression";
 import { COUNTRY_INFO, hasVerifiedOfficialSource } from "./lib/feeds.mjs";
 import { registerTracking } from "./tracking/index.mjs";
+import { describeSources } from "./lib/sources.mjs";
 
 /*
   WIRE ROOM / WORLD WIRE — backend (cache-serving version)
@@ -94,6 +95,11 @@ app.get("/api/global", (req, res) => {
 // Live aircraft + ship layers. Sources are switched with environment variables,
 // see tracking/README.md. Adds /api/aircraft, /api/ships, /api/tracking/status.
 registerTracking(app);
+
+// Where every country's reports come from (the SOURCES page).
+app.get("/api/sources", (req, res) => {
+  res.json(describeSources(loadCache()));
+});
 
 app.get("/api/health", (req, res) => res.json({ ok: true }));
 app.get("/api/status", (req, res) => {

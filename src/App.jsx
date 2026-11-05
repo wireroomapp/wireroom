@@ -1,10 +1,12 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
 import { useTrackingFeed } from "./useTracking.js";
 import { WORLD_BBOX, visibleBbox, projectItems, projectZones, hitTest, trackId, trackToReport } from "./trackingGeo.js";
 import { exportMapImage } from "./exportMap.js";
 import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrateLegacy, annotationsToGeoJSON } from "./annotationSpace.js";
 import MapLibreView from "./map/MapLibreView.jsx";
+import { readViewFromUrl, viewToSearch } from "./urlState.js";
+import SourcesPanel from "./SourcesPanel.jsx";
 
 // Which map to draw. "maplibre" = the full-scale map (OpenFreeMap + NASA + MapLibre, globe and terrain).
 // "d3" = the classic flat map. Override in the address bar with ?engine=d3 or ?engine=maplibre.
@@ -74,6 +76,12 @@ const COUNTRIES = [
   { id:"au", name:"Australia", code:"AU", lat:-35.3, lon:149.1, region:"Oceania", sources:["Prime Minister's Office","Department of Foreign Affairs and Trade","Department of Defence"] },
 ];
 
+// What a shared link asks to open (?country=ua&mode=both, or ?view=global). See urlState.js.
+const INITIAL_URL_VIEW = (() => {
+  try { return readViewFromUrl(window.location.search, COUNTRIES.map(c => c.id)); } catch { return { country: null, mode: null, global: false }; }
+})();
+const INITIAL_COUNTRY = COUNTRIES.find(c => c.id === INITIAL_URL_VIEW.country) || null;
+
 const DEMO_NEWS = [
   { id:"demo-1", countryId:"us", sourceType:"official", source:"White House", headline:"Latest presidential statements and announcements", summary:"Demo content for the V2 interface. The production backend will replace this with a verified official source result.", date:"Demo", url:"#", importance:3 },
   { id:"demo-2", countryId:"us", sourceType:"independent", source:"Reuters", headline:"Independent coverage will appear here when enabled", summary:"The independent layer is optional and will be kept separate from official government reporting.", date:"Demo", url:"#", importance:2 },
@@ -98,9 +106,13 @@ function NewsCard({ item, onPin }) {
 }
 
 export default function WireRoomV2() {
-    const [selected, setSelected] = useState(null);
-  const [view, setView] = useState("closed"); // "closed" | "country" | "global"
-  const [mode, setMode] = useState("official"); // official | news | both
+  const [selected, setSelected] = useState(INITIAL_COUNTRY);
+  const [view, setView] = useState(INITIAL_COUNTRY ? "country" : INITIAL_URL_VIEW.global ? "global" : "closed"); // "closed" | "country" | "global"
+  const [mode, setMode] = useState(INITIAL_URL_VIEW.mode || "official"); // official | news | both
+  // A shared link to a country also flies the map there (new map only).
+  const [mapFocus] = useState(() => (INITIAL_COUNTRY ? { lon: INITIAL_COUNTRY.lon, lat: INITIAL_COUNTRY.lat, key: INITIAL_COUNTRY.id } : null));
+  const [linkNote, setLinkNote] = useState("");
+  const [showSources, setShowSources] = useState(false);
   const [query, setQuery] = useState("");
   const [intelQuery, setIntelQuery] = useState("");
   const [intelSource, setIntelSource] = useState("");
@@ -110,7 +122,7 @@ export default function WireRoomV2() {
   const [feed, setFeed] = useState(DEMO_NEWS);
   const [officialVerifiedMap, setOfficialVerifiedMap] = useState({});
   const [officialStatusMap, setOfficialStatusMap] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(Boolean(INITIAL_COUNTRY));
   const [page, setPage] = useState(1);
   const [mapFeatures, setMapFeatures] = useState([]);
   const [dims, setDims] = useState({w:1200,h:700});
@@ -121,16 +133,13 @@ export default function WireRoomV2() {
   const abortRef = useRef(null); // cancels a stale request when a newer one starts
   const [annotationTool, setAnnotationTool] = useState("select");
   // Saved in map units (see annotationSpace.js) so they stay put when the map resizes.
-  const [annotations, setAnnotations] = useState(() => { try { return loadAnnotations(localStorage); } catch (_) { return []; } });
+  const [annotations, setAnnotations] = useState(() => { try { return loadAnnotations(localStorage); } catch { return []; } });
   const [selectedAnnotationId, setSelectedAnnotationId] = useState(null);
   const [pinning, setPinning] = useState(null); // a report waiting to be pinned to a marker
   const pinTapRef = useRef(null);
   const [storageWarn, setStorageWarn] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(() => { try { return !localStorage.getItem("wireroom-welcomed-v2"); } catch (_) { return true; } });
-  const dismissWelcome = () => { try { localStorage.setItem("wireroom-welcomed-v2", "1"); } catch (_) { /* private mode: just close */ } setShowWelcome(false); };
-  useEffect(() => {
-    if (pinning && annotationTool !== "select") setPinning(null);
-  }, [pinning, annotationTool]);
+  const [showWelcome, setShowWelcome] = useState(() => { try { return !localStorage.getItem("wireroom-welcomed-v2"); } catch { return true; } });
+  const dismissWelcome = () => { try { localStorage.setItem("wireroom-welcomed-v2", "1"); } catch { /* private mode: just close */ } setShowWelcome(false); };
   const [annotationDraft, setAnnotationDraft] = useState(null);
   const [labelDialog, setLabelDialog] = useState(null); // in-page label box (replaces browser pop-ups)
   const drawingBlockedRef = useRef(false); // true while a pinch (2+ fingers) is in progress
@@ -142,6 +151,8 @@ export default function WireRoomV2() {
     fetch(`${API_BASE}/api/global?mode=both`)
       .then(r => r.ok ? r.json() : null)
       .then(data => {
+        // If a country was opened meanwhile (e.g. from a shared link), its reports win.
+        if (abortRef.current) return;
         if (data && Array.isArray(data.items) && data.items.length) {
           setFeed(data.items);
         }
@@ -166,9 +177,10 @@ export default function WireRoomV2() {
 
   useEffect(() => {
     if (!annotationHydratedRef.current) return;
-    try {
-      try { localStorage.setItem(ANNOTATION_KEY, JSON.stringify(annotations)); setStorageWarn(false); } catch (_) { setStorageWarn(true); }
-    } catch (_) {}
+    let saved = true;
+    try { localStorage.setItem(ANNOTATION_KEY, JSON.stringify(annotations)); } catch { saved = false; }
+    // Warn if the browser refused to save (private mode, storage full).
+    setStorageWarn(!saved);
   }, [annotations]);
 
   useEffect(() => {
@@ -210,14 +222,15 @@ export default function WireRoomV2() {
   const shipZones = useMemo(() => projectZones(shipFeed.meta?.zones, projection), [shipFeed.meta, projection]);
 
   useEffect(() => {
-    if (!svgRef.current) return;
+    const svg = svgRef.current;
+    if (!svg) return;
     const zoom = d3.zoom()
       .scaleExtent([1,8])
       .filter(e => e.type === "wheel" || (annotationTool === "select" ? (!e.ctrlKey && !e.button) : (e.type === "touchstart" && e.touches && e.touches.length > 1)))
       .on("zoom", e => setTransform(e.transform));
-    d3.select(svgRef.current).call(zoom);
+    d3.select(svg).call(zoom);
     zoomRef.current = zoom;
-    return () => d3.select(svgRef.current).on(".zoom",null);
+    return () => d3.select(svg).on(".zoom",null);
   }, [dims, annotationTool]);
 
   const filteredCountries = useMemo(() => COUNTRIES.filter(c => {
@@ -261,18 +274,16 @@ export default function WireRoomV2() {
 
   const intelFiltersActive = Boolean(intelQuery.trim() || intelSource || intelFrom || intelTo);
 
-  useEffect(() => {
-    setPage(1);
-  }, [intelQuery, intelSource, intelFrom, intelTo]);
-
-  useEffect(() => {
+  // Filters belong to one panel: cleared when you open a different country or the global feed.
+  function resetIntelFilters() {
     setIntelQuery("");
     setIntelSource("");
     setIntelFrom("");
     setIntelTo("");
-  }, [selected ? selected.id : null, view]);
+  }
 
   async function loadCountry(country, modeOverride) {
+    if (!selected || selected.id !== country.id || view !== "country") resetIntelFilters();
     setPage(1);
     setSelected(country);
     setView("country");
@@ -283,7 +294,11 @@ export default function WireRoomV2() {
     const activeMode = modeOverride || mode;
     setOfficialVerifiedMap(prev => { const next = { ...prev }; delete next[country.id]; return next; });
     setOfficialStatusMap(prev => { const next = { ...prev }; delete next[country.id]; return next; });
+    return fetchCountryReports(country, activeMode);
+  }
 
+  // Fetch one country's reports for a mode (OFFICIAL / NEWS / BOTH).
+  async function fetchCountryReports(country, activeMode) {
     // Cancel whatever request was still in flight — without this, a
     // slower older request (e.g. from a tab you clicked a moment ago)
     // can resolve AFTER a newer one and silently overwrite it, showing
@@ -317,7 +332,41 @@ export default function WireRoomV2() {
       if (abortRef.current === controller) setLoading(false);
     }
   }
+  // Opened from a shared link: load that country's reports once.
+  useEffect(() => {
+    if (INITIAL_COUNTRY) fetchCountryReports(INITIAL_COUNTRY, INITIAL_URL_VIEW.mode || "official");
+  }, []); // only on the first page load
+
+  // Keep the address bar in step with what's open, so copying it shares this exact view.
+  useEffect(() => {
+    try {
+      const search = viewToSearch({ country: view === "country" && selected ? selected.id : null, global: view === "global", mode }, window.location.search);
+      if (search !== window.location.search) window.history.replaceState(null, "", window.location.pathname + search + window.location.hash);
+    } catch { /* very old browser: links just won't update */ }
+  }, [selected, view, mode]);
+
+  // LINK button: phones get the share sheet, computers copy the link.
+  async function shareView() {
+    const url = window.location.href;
+    const title = selected ? `${selected.name} on Wire Room` : "Wire Room";
+    const touch = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+    if (touch && navigator.share) {
+      try { await navigator.share({ title, url }); return; } catch (e) { if (e && e.name === "AbortError") return; }
+    }
+    let copied;
+    try { await navigator.clipboard.writeText(url); copied = true; } catch {
+      try {
+        const box = document.createElement("textarea");
+        box.value = url; box.setAttribute("readonly", ""); box.style.position = "fixed"; box.style.opacity = "0";
+        document.body.appendChild(box); box.select(); copied = document.execCommand("copy"); box.remove();
+      } catch { copied = false; }
+    }
+    setLinkNote(copied ? "LINK COPIED" : "COPY THE ADDRESS BAR TO SHARE");
+    setTimeout(() => setLinkNote(""), 2200);
+  }
+
   function loadGlobal() {
+    if (view !== "global") resetIntelFilters();
     setPage(1);
     setSelected(null);
     setView("global");
@@ -331,6 +380,7 @@ export default function WireRoomV2() {
       .catch(() => {});
   }
   function closePanel() {
+    resetIntelFilters();
     setSelected(null);
     setView("closed");
   }
@@ -444,7 +494,7 @@ export default function WireRoomV2() {
 
     try {
       e.currentTarget.setPointerCapture(e.pointerId);
-    } catch (_) {}
+    } catch { /* not supported: drawing still works without capture */ }
   }
 
   function handleMapPointerMove(e) {
@@ -700,11 +750,14 @@ export default function WireRoomV2() {
         </div>
       </div>
     )}
+    {linkNote && <div className="link-toast" role="status">{linkNote}</div>}
+    {showSources && <SourcesPanel apiBase={API_BASE} feedbackUrl={FEEDBACK_URL} onClose={() => setShowSources(false)} onOpenCountry={id => { const c = COUNTRIES.find(x => x.id === id); setShowSources(false); if (c) loadCountry(c); }} />}
     <header className="topbar">
       <div className="brand">WIRE <b>ROOM</b></div>
       <div className="subtitle">OFFICIAL STATEMENTS • INDEPENDENT NEWS</div>
       <div className="status">
         <span className="status-tag">EARLY ACCESS</span>
+        <button className="hdr-btn" onClick={() => setShowSources(true)}>SOURCES</button>
         <button className="hdr-btn" onClick={() => setShowWelcome(true)} aria-label="About Wire Room">?</button>
         {FEEDBACK_URL && <a className="hdr-btn" href={FEEDBACK_URL} target="_blank" rel="noreferrer">FEEDBACK</a>}
       </div>
@@ -744,6 +797,7 @@ export default function WireRoomV2() {
             onDrawDrag={mlDrawDrag}
             onPinPlace={mlPinPlace}
             controlRef={mlRef}
+            focus={mapFocus}
           />
         ) : (
         <svg
@@ -1014,6 +1068,7 @@ export default function WireRoomV2() {
               key={tool}
               onClick={() => {
                 setAnnotationTool(tool);
+                if (tool !== "select") setPinning(null); // picking a drawing tool cancels a pending pin
                 setAnnotationDraft(null);
                 setSelectedAnnotationId(null);
               }}
@@ -1240,14 +1295,22 @@ export default function WireRoomV2() {
               const notVerified = officialVerifiedMap[selected.id] === false || info.status === "not-configured";
               const down = info.status === "unavailable";
               const lastOk = info.lastOkAt ? new Date(info.lastOkAt).toLocaleDateString() : "";
-              let text = "\u2713 Official source: verified";
-              if (notVerified) text = "\u26a0 Official source: not yet verified for this country";
+              let text = "\u2713 Verified government channel";
+              if (notVerified) text = "\u26a0 No verified government channel yet for this country";
               else if (down) text = "\u26a0 Official source temporarily unavailable \u2014 showing saved reports" + (lastOk ? " (last good: " + lastOk + ")" : "");
-              else if (info.status === "empty") text = "\u2713 Official source: verified \u2014 no new statements since last check";
-              return <p className={"source-status " + (notVerified || down ? "unverified" : "verified")}>{text}</p>;
+              else if (info.status === "empty") text = "\u2713 Verified government channel \u2014 no new statements since last check";
+              return <>
+                <p className={"source-status " + (notVerified || down ? "unverified" : "verified")}>{text}</p>
+                {!notVerified && <p className="source-note">Verified means these statements come from the government itself, not that they are accurate.</p>}
+              </>;
             })()}
           </div>
-                 {view !== "closed" && <button onClick={closePanel}>×</button>}
+          {view !== "closed" && (
+            <div className="panel-actions">
+              <button type="button" className="link-btn" onClick={shareView} title="Share a link to this view">{linkNote ? "\u2713" : "LINK"}</button>
+              <button type="button" onClick={closePanel} aria-label="Close panel">×</button>
+            </div>
+          )}
         </div>
         <div className="panel-mode">
           <button className={mode==="official"?"active":""} onClick={()=>changeMode("official")}>OFFICIAL</button>
@@ -1260,11 +1323,11 @@ export default function WireRoomV2() {
             {intelFiltersActive ? (
               <>NO MATCHING REPORTS.<br/><small>Try a different keyword, source, or date range.</small></>
             ) : mode === "official" && selected && officialVerifiedMap[selected.id] === false ? (
-              <>NO VERIFIED OFFICIAL SOURCE YET FOR THIS COUNTRY.<br/><small>We haven't found or confirmed a direct government feed for {selected.name} yet — this isn't the same as "nothing happening," it means the source itself is still unverified. Check the NEWS tab for independent coverage in the meantime.</small></>
+              <>NO VERIFIED GOVERNMENT CHANNEL YET FOR THIS COUNTRY.<br/><small>We haven't found or confirmed a direct government channel for {selected.name} yet. That isn't the same as "nothing happening": the source itself is still unverified. Check the NEWS tab for independent coverage in the meantime.</small></>
             ) : mode === "official" && selected && (officialStatusMap[selected.id] || {}).status === "unavailable" ? (
               <>OFFICIAL SOURCE TEMPORARILY UNAVAILABLE.<br/><small>We couldn't reach {selected.name}'s official source on the last check, so nothing new is shown. That doesn't mean nothing was said. Check the NEWS tab for independent coverage in the meantime.</small></>
             ) : mode === "official" && selected ? (
-              <>NO NEW OFFICIAL STATEMENTS RIGHT NOW.<br/><small>{selected.name}'s official source is verified and connected — it just hasn't published anything new since the last check.</small></>
+              <>NO NEW OFFICIAL STATEMENTS RIGHT NOW.<br/><small>{selected.name}'s government channel is verified and connected. It just hasn't published anything new since the last check.</small></>
             ) : (
               <>NO STORIES IN THIS FILTER YET.<br/><small>Nothing has been collected for this view yet. Try another mode or country, or check back after the next hourly update.</small></>
             )}
@@ -1277,17 +1340,17 @@ export default function WireRoomV2() {
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 8 }}>
                 <span style={{ font: "10px monospace", fontWeight: 700, color: "#aeb8c6", letterSpacing: ".05em" }}>INTEL FILTER</span>
                 {intelFiltersActive && (
-                  <button type="button" onClick={() => { setIntelQuery(""); setIntelSource(""); setIntelFrom(""); setIntelTo(""); }} style={{ background: "none", border: "1px solid #26384d", color: "#718198", padding: "4px 7px", font: "9px monospace", cursor: "pointer" }}>CLEAR FILTER</button>
+                  <button type="button" onClick={() => { resetIntelFilters(); setPage(1); }} style={{ background: "none", border: "1px solid #26384d", color: "#718198", padding: "4px 7px", font: "9px monospace", cursor: "pointer" }}>CLEAR FILTER</button>
                 )}
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: 6 }}>
-                <input value={intelQuery} onChange={e => setIntelQuery(e.target.value)} placeholder="KEYWORD" aria-label="Search reports by keyword" style={fld} />
-                <select value={intelSource} onChange={e => setIntelSource(e.target.value)} aria-label="Filter reports by source" style={fld}>
+                <input value={intelQuery} onChange={e => { setIntelQuery(e.target.value); setPage(1); }} placeholder="KEYWORD" aria-label="Search reports by keyword" style={fld} />
+                <select value={intelSource} onChange={e => { setIntelSource(e.target.value); setPage(1); }} aria-label="Filter reports by source" style={fld}>
                   <option value="">ALL SOURCES</option>
                   {sourceOptions.map(src => (<option key={src} value={src}>{src}</option>))}
                 </select>
-                <input type="date" value={intelFrom} onChange={e => setIntelFrom(e.target.value)} aria-label="Filter reports from date" title="From date" style={fld} />
-                <input type="date" value={intelTo} onChange={e => setIntelTo(e.target.value)} aria-label="Filter reports through date" title="To date" style={fld} />
+                <input type="date" value={intelFrom} onChange={e => { setIntelFrom(e.target.value); setPage(1); }} aria-label="Filter reports from date" title="From date" style={fld} />
+                <input type="date" value={intelTo} onChange={e => { setIntelTo(e.target.value); setPage(1); }} aria-label="Filter reports through date" title="To date" style={fld} />
               </div>
               <div style={{ marginTop: 7, color: "#4e6076", font: "9px monospace" }}>
                 SEARCHES LOADED REPORTS ONLY{intelFiltersActive ? " - " + visibleFeed.length + " MATCHES" : ""}
@@ -1336,7 +1399,7 @@ const CSS = `
 .status{display:flex;align-items:center;gap:10px}.status-tag{letter-spacing:.1em}.hdr-btn{background:none;border:1px solid #26384d;color:#aeb8c6;font:10px monospace;letter-spacing:.06em;padding:6px 10px;cursor:pointer;text-decoration:none;line-height:1}.hdr-btn:hover{border-color:#c9974b;color:#c9974b}
 .welcome-back{position:fixed;inset:0;z-index:100;background:rgba(4,9,15,.82);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}.welcome-card{background:#0c1724;border:1px solid #26384d;border-top:2px solid #c9974b;max-width:460px;width:100%;padding:22px;font-family:Arial,sans-serif}.welcome-card h2{margin:4px 0 10px;font-size:26px;letter-spacing:.12em}.welcome-card h2 b{color:#c9974b}.welcome-card p{margin:0 0 12px;color:#c4cbd6;font-size:14px;line-height:1.5}.welcome-card ul{margin:0 0 12px;padding-left:18px;color:#aeb8c6;font-size:13px;line-height:1.55}.welcome-card li{margin-bottom:6px}.welcome-card .welcome-fine{font:11px/1.5 monospace;color:#718198}.welcome-note{border-left:2px solid #26384d;padding:2px 0 2px 12px;margin:0 0 12px}.welcome-note h3{margin:0 0 5px;font:700 10px monospace;letter-spacing:.1em;color:#4fa6a0;text-transform:uppercase}.welcome-note p{font-size:13px;color:#aeb8c6;margin:0 0 10px}.welcome-note ul{margin:0;font-size:12.5px}.welcome-note li{margin-bottom:4px}.welcome-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}.welcome-go{background:#c9974b;color:#071019;border:0;font:700 12px monospace;letter-spacing:.08em;padding:11px 16px;cursor:pointer}.welcome-link{color:#c9974b;font:11px monospace;letter-spacing:.06em}
 @media(max-width:700px){.subtitle{display:none}.topbar{padding:0 14px}.status{margin-left:auto}.status-tag{display:none}}
-*{box-sizing:border-box} body{margin:0;background:#071019} .app{min-height:100vh;background:#071019;color:#e8e3d8;font-family:Arial,sans-serif}.topbar{height:64px;border-bottom:1px solid #1c2a3b;display:flex;align-items:center;padding:0 22px;gap:18px}.brand{font-weight:800;letter-spacing:.12em;font-size:21px}.brand b{color:#c9974b}.subtitle{font:11px monospace;color:#718198;letter-spacing:.08em}.status{margin-left:auto;font:10px monospace;color:#4fa6a0}.toolbar{height:54px;border-bottom:1px solid #162538;display:flex;align-items:center;gap:9px;padding:8px 18px}.toolbar input,.toolbar select,.mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace}.toolbar input{width:190px}.mode{margin-left:auto;display:flex}.mode button{cursor:pointer}.mode button.active{color:#c9974b;border-color:#c9974b}.layout{height:calc(100vh - 118px);display:flex}.map-wrap{position:relative;flex:1;min-width:0}.map{width:100%;height:100%;touch-action:none;cursor:grab}.map:active{cursor:grabbing}.ocean{fill:#0b1725;stroke:#21334a}.grid{fill:none;stroke:#142233;stroke-width:.5}.land{fill:#142230;stroke:#2a3c50;stroke-width:.65}.marker{cursor:pointer}.dot{fill:#c9974b}.dot.active{fill:#e8e3d8;stroke:#c9974b;stroke-width:2}.pulse{fill:none;stroke:#c9974b;stroke-width:1;opacity:.55;animation:pulse 2s infinite;pointer-events:none}.marker text{font:8px monospace;fill:#65758a;text-anchor:middle}.map-note{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:18px;font:10px monospace;color:#4e6076}.global-fab{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));right:18px;background:#0c1724;border:1px solid #c9974b;color:#c9974b;padding:8px 14px;font:10px monospace;letter-spacing:.06em;cursor:pointer;z-index:5}.panel{width:410px;background:#0c1724;border-left:1px solid #1c2a3b;padding:20px;overflow:auto;display:none;flex-direction:column}.panel.open{display:flex}.panel-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #1c2a3b;padding-bottom:14px;margin-bottom:14px}.panel-head h1{margin:2px 0 4px;font-size:28px}.panel-head p{margin:0;color:#718198;font:10px monospace;line-height:1.5}.panel-head button{height:30px;background:none;border:1px solid #26384d;color:#8795a7;cursor:pointer}.panel-mode{display:none}.panel-mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace;cursor:pointer}.panel-mode button.active{color:#c9974b;border-color:#c9974b}.eyebrow{font:9px monospace;letter-spacing:.12em;color:#4fa6a0}.source-status{margin:6px 0 0;font:10px monospace;letter-spacing:.04em}.source-status.verified{color:#4fa6a0}.source-status.unverified{color:#c9974b}.loading,.empty{font:11px monospace;color:#718198;padding:24px 4px;line-height:1.7}.card{border:1px solid #1d2d40;background:#071019;padding:13px;margin-bottom:10px}.card-meta{display:flex;gap:8px;align-items:center;color:#586b82;font:9px monospace;margin-bottom:8px}.tag{padding:2px 5px;border:1px solid}.tag.official{color:#4fa6a0;border-color:#315e5b}.tag.independent{color:#8a98aa;border-color:#3a4655}.tag.track{color:#7cc4ff;border-color:#2f4f6b}.card h3{font-size:14px;line-height:1.35;margin:0 0 7px}.card p{font-size:12px;line-height:1.5;color:#9ba8b8;margin:0 0 8px}.card a{font:10px monospace;color:#c9974b;text-decoration:none}.pagination{border:1px solid #1d2d40;background:#071019;padding:10px;margin-bottom:10px;font:9px monospace;color:#718198}.pagination-info{display:block;margin-bottom:8px}.pagination-buttons{display:flex;gap:6px}.pagination-buttons button{flex:1;background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:7px 8px;font:9px monospace;cursor:pointer}.pagination-buttons button:hover:not(:disabled){color:#c9974b;border-color:#c9974b}.pagination-buttons button:disabled{opacity:.35;cursor:default}@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.2);opacity:0}}@media(max-width:800px){.layout{height:calc(100dvh - 118px);min-height:0;position:relative;overflow:hidden}.panel{display:flex;position:absolute;right:0;top:0;bottom:0;width:min(420px,100%);transform:translateX(100%);transition:transform .25s;z-index:4}.panel.open{transform:translateX(0)}.subtitle{display:none}.toolbar{height:auto;min-height:54px;overflow:hidden;flex-wrap:wrap;padding:8px 10px;gap:6px}.toolbar input{width:min(150px,calc(100vw - 20px))}.toolbar select{max-width:110px}.mode{margin-left:auto;flex-shrink:0}.mode button{padding:8px 7px}.toolbar .mode{display:none}.panel-mode{display:flex;gap:6px;margin:-4px 0 14px;padding-bottom:12px;border-bottom:1px solid #1c2a3b}.panel-mode button{flex:1;padding:8px 5px}.map-wrap{height:100%;min-height:0}.status{display:none}}
+*{box-sizing:border-box} body{margin:0;background:#071019} .app{min-height:100vh;background:#071019;color:#e8e3d8;font-family:Arial,sans-serif}.topbar{height:64px;border-bottom:1px solid #1c2a3b;display:flex;align-items:center;padding:0 22px;gap:18px}.brand{font-weight:800;letter-spacing:.12em;font-size:21px}.brand b{color:#c9974b}.subtitle{font:11px monospace;color:#718198;letter-spacing:.08em}.status{margin-left:auto;font:10px monospace;color:#4fa6a0}.toolbar{height:54px;border-bottom:1px solid #162538;display:flex;align-items:center;gap:9px;padding:8px 18px}.toolbar input,.toolbar select,.mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace}.toolbar input{width:190px}.mode{margin-left:auto;display:flex}.mode button{cursor:pointer}.mode button.active{color:#c9974b;border-color:#c9974b}.layout{height:calc(100vh - 118px);display:flex}.map-wrap{position:relative;flex:1;min-width:0}.map{width:100%;height:100%;touch-action:none;cursor:grab}.map:active{cursor:grabbing}.ocean{fill:#0b1725;stroke:#21334a}.grid{fill:none;stroke:#142233;stroke-width:.5}.land{fill:#142230;stroke:#2a3c50;stroke-width:.65}.marker{cursor:pointer}.dot{fill:#c9974b}.dot.active{fill:#e8e3d8;stroke:#c9974b;stroke-width:2}.pulse{fill:none;stroke:#c9974b;stroke-width:1;opacity:.55;animation:pulse 2s infinite;pointer-events:none}.marker text{font:8px monospace;fill:#65758a;text-anchor:middle}.map-note{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:18px;font:10px monospace;color:#4e6076}.global-fab{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));right:18px;background:#0c1724;border:1px solid #c9974b;color:#c9974b;padding:8px 14px;font:10px monospace;letter-spacing:.06em;cursor:pointer;z-index:5}.panel{width:410px;background:#0c1724;border-left:1px solid #1c2a3b;padding:20px;overflow:auto;display:none;flex-direction:column}.panel.open{display:flex}.panel-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #1c2a3b;padding-bottom:14px;margin-bottom:14px}.panel-head h1{margin:2px 0 4px;font-size:28px}.panel-head p{margin:0;color:#718198;font:10px monospace;line-height:1.5}.panel-head button{height:30px;background:none;border:1px solid #26384d;color:#8795a7;cursor:pointer}.panel-actions{display:flex;gap:6px;align-items:flex-start;flex-shrink:0}.panel-head .link-btn{font:10px monospace;letter-spacing:.06em;padding:0 9px;min-width:44px}.panel-head .link-btn:hover{border-color:#c9974b;color:#e8e3d8}.link-toast{position:fixed;left:50%;top:76px;transform:translateX(-50%);z-index:120;background:#0c1724;border:1px solid #c9974b;color:#e8e3d8;font:10px monospace;letter-spacing:.08em;padding:8px 12px}.panel-mode{display:none}.panel-mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace;cursor:pointer}.panel-mode button.active{color:#c9974b;border-color:#c9974b}.eyebrow{font:9px monospace;letter-spacing:.12em;color:#4fa6a0}.source-status{margin:6px 0 0;font:10px monospace;letter-spacing:.04em}.source-status.verified{color:#4fa6a0}.source-status.unverified{color:#c9974b}.source-note{margin:3px 0 0;font:9px/1.4 monospace;color:#5d6d81}.loading,.empty{font:11px monospace;color:#718198;padding:24px 4px;line-height:1.7}.card{border:1px solid #1d2d40;background:#071019;padding:13px;margin-bottom:10px}.card-meta{display:flex;gap:8px;align-items:center;color:#586b82;font:9px monospace;margin-bottom:8px}.tag{padding:2px 5px;border:1px solid}.tag.official{color:#4fa6a0;border-color:#315e5b}.tag.independent{color:#8a98aa;border-color:#3a4655}.tag.track{color:#7cc4ff;border-color:#2f4f6b}.card h3{font-size:14px;line-height:1.35;margin:0 0 7px}.card p{font-size:12px;line-height:1.5;color:#9ba8b8;margin:0 0 8px}.card a{font:10px monospace;color:#c9974b;text-decoration:none}.pagination{border:1px solid #1d2d40;background:#071019;padding:10px;margin-bottom:10px;font:9px monospace;color:#718198}.pagination-info{display:block;margin-bottom:8px}.pagination-buttons{display:flex;gap:6px}.pagination-buttons button{flex:1;background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:7px 8px;font:9px monospace;cursor:pointer}.pagination-buttons button:hover:not(:disabled){color:#c9974b;border-color:#c9974b}.pagination-buttons button:disabled{opacity:.35;cursor:default}@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.2);opacity:0}}@media(max-width:800px){.layout{height:calc(100dvh - 118px);min-height:0;position:relative;overflow:hidden}.panel{display:flex;position:absolute;right:0;top:0;bottom:0;width:min(420px,100%);transform:translateX(100%);transition:transform .25s;z-index:4}.panel.open{transform:translateX(0)}.subtitle{display:none}.toolbar{height:auto;min-height:54px;overflow:hidden;flex-wrap:wrap;padding:8px 10px;gap:6px}.toolbar input{width:min(150px,calc(100vw - 20px))}.toolbar select{max-width:110px}.mode{margin-left:auto;flex-shrink:0}.mode button{padding:8px 7px}.toolbar .mode{display:none}.panel-mode{display:flex;gap:6px;margin:-4px 0 14px;padding-bottom:12px;border-bottom:1px solid #1c2a3b}.panel-mode button{flex:1;padding:8px 5px}.map-wrap{height:100%;min-height:0}.status{margin-left:auto;gap:6px}.status-tag{display:none}.hdr-btn{padding:6px 7px;letter-spacing:.03em}}
 `;
 
 
