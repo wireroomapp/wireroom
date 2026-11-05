@@ -25,6 +25,7 @@ An interactive world map that shows what governments say next to what independen
 - **Data pipeline:** a GitHub Action (`.github/workflows/fetch-news.yml`) runs `scripts/fetch-feeds.mjs` every hour. It pulls official government sources and independent publishers per country (`lib/feeds.mjs`) and commits the result to `data/cache.json`. The same job collects the ship snapshot (`data/ships.json`).
 - **Official-source status:** each country is marked verified, temporarily unavailable, or not yet verified. The UI shows this instead of implying "no news". `/api/sources` (built by `lib/sources.mjs` from the same configuration) powers the Sources page.
 - **Saved maps:** annotations are stored in the browser's localStorage. There are no accounts yet.
+- **Translation:** after each fetch, `scripts/translate-reports.mjs` machine-translates recent non-English reports into English (`lib/translate.mjs`; DeepL or Microsoft Translator, chosen by the `TRANSLATE_API_KEY` repository secret and optional `TRANSLATE_PROVIDER` variable). Each report is translated once and remembered in `data/translations.json`; the original text is never changed, and the app shows it on request. A character budget keeps it inside free tiers.
 - **Live layers:** served through `tracking/` so data providers can be swapped with environment variables. See [`tracking/README.md`](tracking/README.md).
 
 ```
