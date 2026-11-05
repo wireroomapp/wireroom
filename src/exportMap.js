@@ -47,10 +47,10 @@ function fitText(ctx, text, maxWidth) {
   return t + "…";
 }
 
-export async function renderMapPng(mapEl, { width, height, credits = [], now = new Date() }) {
+export async function renderMapPng(mapEl, { width, height, credits = [], annotated = false, now = new Date() }) {
   // The new map (MapLibre) is already a drawn canvas; the classic map is an SVG to turn into an image.
   const img = typeof HTMLCanvasElement !== "undefined" && mapEl instanceof HTMLCanvasElement ? mapEl : await svgToImage(mapEl, width, height);
-  return compose(img, { width, height, credits, now });
+  return compose(img, { width, height, credits, annotated, now });
 }
 
 async function svgToImage(svgEl, width, height) {
@@ -72,9 +72,14 @@ async function svgToImage(svgEl, width, height) {
   }
 }
 
-async function compose(img, { width, height, credits, now }) {
+// Shown on exports that include the person's own drawings, so a shared image can't pass
+// their markings off as Wire Room data.
+export const ANNOTATION_NOTE = "Markings and notes are the author's own analysis, not Wire Room data.";
+
+async function compose(img, { width, height, credits, annotated, now }) {
   const scale = 2; // sharp on phones and in documents
-  const header = 46;
+  const band = annotated ? 20 : 0;
+  const header = 46 + band;
   const footer = 30;
   const canvas = document.createElement("canvas");
   canvas.width = Math.round(width * scale);
@@ -90,17 +95,27 @@ async function compose(img, { width, height, credits, now }) {
   ctx.textBaseline = "middle";
   ctx.font = "800 20px Arial, sans-serif";
   ctx.fillStyle = "#e8e3d8";
-  ctx.fillText("WIRE", 16, header / 2);
+  const row = (header - band) / 2;
+  ctx.fillText("WIRE", 16, row);
   const wireW = ctx.measureText("WIRE ").width;
   ctx.fillStyle = "#c9974b";
-  ctx.fillText("ROOM", 16 + wireW, header / 2);
+  ctx.fillText("ROOM", 16 + wireW, row);
   ctx.font = "11px monospace";
   ctx.fillStyle = "#718198";
   ctx.textAlign = "right";
-  ctx.fillText(humanUtc(now), width - 16, header / 2);
+  const top = header - band; // the brand row
+  ctx.fillText(humanUtc(now), width - 16, top / 2);
   ctx.textAlign = "left";
   ctx.strokeStyle = "#1c2a3b";
   ctx.lineWidth = 1;
+  if (band) {
+    ctx.fillStyle = "#0c1724";
+    ctx.fillRect(0, top, width, band);
+    ctx.font = "10px monospace";
+    ctx.fillStyle = "#c9974b";
+    ctx.fillText(fitText(ctx, ANNOTATION_NOTE, width - 32), 16, top + band / 2);
+    ctx.beginPath(); ctx.moveTo(0, top - 0.5); ctx.lineTo(width, top - 0.5); ctx.stroke();
+  }
   ctx.beginPath(); ctx.moveTo(0, header - 0.5); ctx.lineTo(width, header - 0.5); ctx.stroke();
 
   // Footer: where it was made, and the data credits the sources ask for.

@@ -268,9 +268,22 @@ test("/api/ships returns watched zones with counts", async () => {
   const s = setup({ SHIPS_PROVIDER: "aisstream", AISSTREAM_API_KEY: "k" }, async () => ({ ok: true, json: async () => ({}) }));
   s.handle.ships.handleMessage(pos(5, 26.5, 56.2));
   const r = (await call(s.app, "/api/ships", { bbox: "-90,-180,90,180" })).body;
-  assert.equal(r.meta.zones.length, 10);
+  assert.equal(r.meta.zones.length, 15);
+  // Indian Ocean areas are watched too
+  assert.ok(r.meta.zones.some((z) => z.name === "Colombo / Hambantota"));
   const hormuz = r.meta.zones.find((z) => z.name === "Strait of Hormuz");
   assert.equal(hormuz.count, 1);
   assert.deepEqual(hormuz.box, [[24.0, 54.5], [27.8, 58.5]]);
   assert.equal(r.meta.zones.find((z) => z.name === "Suez Canal").count, 0);
+});
+
+test("every watched area has a name and a valid, non-overlapping box", async () => {
+  const { CHOKEPOINT_BOXES, CHOKEPOINT_NAMES } = await import("../tracking/ships.mjs");
+  assert.equal(CHOKEPOINT_BOXES.length, CHOKEPOINT_NAMES.length);
+  const ok = ([[a, b], [c, d]]) => a < c && b < d && a >= -90 && c <= 90 && b >= -180 && d <= 180;
+  for (const box of CHOKEPOINT_BOXES) assert.ok(ok(box), JSON.stringify(box));
+  const overlap = ([[a1, b1], [c1, d1]], [[a2, b2], [c2, d2]]) => a1 < c2 && a2 < c1 && b1 < d2 && b2 < d1;
+  for (let i = 0; i < CHOKEPOINT_BOXES.length; i++)
+    for (let j = i + 1; j < CHOKEPOINT_BOXES.length; j++)
+      assert.ok(!overlap(CHOKEPOINT_BOXES[i], CHOKEPOINT_BOXES[j]), `${CHOKEPOINT_NAMES[i]} overlaps ${CHOKEPOINT_NAMES[j]}`);
 });

@@ -6,7 +6,7 @@
 
 import { inBbox } from "./util.mjs";
 
-// Strategic chokepoints / conflict-relevant waters (APPROXIMATE boxes: [[lat1,lon1],[lat2,lon2]]).
+// Watched waters: strategic chokepoints and Indian Ocean ports (APPROXIMATE boxes: [[lat1,lon1],[lat2,lon2]]).
 // Watching only these keeps the free stream light and fits a geopolitics product.
 export const CHOKEPOINT_BOXES = [
   [[24.0, 54.5], [27.8, 58.5]], // Strait of Hormuz / Gulf of Oman
@@ -19,10 +19,18 @@ export const CHOKEPOINT_BOXES = [
   [[8.5, -80.2], [9.6, -79.3]], // Panama Canal
   [[49.5, -2.0], [51.5, 2.5]], // English Channel / Dover
   [[54.5, 9.5], [56.5, 13.5]], // Danish straits / Baltic entrance
+  // Indian Ocean ports and passages (Djibouti is inside the Bab el-Mandeb box)
+  [[18.6, 72.5], [19.3, 73.1]], // Mumbai / Nhava Sheva (JNPT)
+  [[5.7, 79.5], [7.3, 81.4]], // Sri Lanka: Colombo and Hambantota
+  [[24.8, 61.9], [25.4, 62.7]], // Gwadar
+  [[21.7, 91.3], [22.5, 92.0]], // Chittagong
+  [[5.5, 92.5], [7.5, 95.5]], // Six Degree Channel (western entrance to Malacca)
 ];
+// Display names, same order as the boxes above.
 export const CHOKEPOINT_NAMES = [
   "Strait of Hormuz", "Bab el-Mandeb", "Suez Canal", "Malacca / Singapore", "Taiwan Strait",
   "Black Sea", "Gibraltar", "Panama Canal", "English Channel", "Danish straits",
+  "Mumbai / JNPT", "Colombo / Hambantota", "Gwadar", "Chittagong", "Six Degree Channel",
 ];
 
 export function shipCategory(code) {

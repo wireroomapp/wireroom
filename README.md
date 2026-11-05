@@ -13,7 +13,7 @@ An interactive world map that shows what governments say next to what independen
 - **OFFICIAL / NEWS / BOTH:** each country's own government statements next to independent reporting, with the publisher named on every report.
 - **Sources page:** where every country's reports come from, what "verified" means, and what isn't covered yet (`SOURCES` in the header).
 - **Analyst canvas:** markers, lines, shapes and notes; pin any report, ship or aircraft to a marker; export the map as a PNG.
-- **Live layers:** military aircraft (ADS-B) and ships at 10 maritime chokepoints (AIS, hourly snapshots), with coverage gaps labeled.
+- **Live layers:** military aircraft (ADS-B) and ships at 10 maritime chokepoints and 5 Indian Ocean ports (AIS, hourly snapshots), with coverage gaps labeled.
 - **Map:** flat or globe view, NASA imagery, 3D terrain.
 - **Shareable links:** the address bar follows what's open, e.g. [`?country=ua&mode=both`](https://wireroom.onrender.com/?country=ua&mode=both) or [`?view=global`](https://wireroom.onrender.com/?view=global). The `LINK` button in the panel copies it.
 
