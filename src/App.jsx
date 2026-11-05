@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import * as d3 from "d3";
 import { useTrackingFeed } from "./useTracking.js";
 import { WORLD_BBOX, visibleBbox, projectItems, projectZones, hitTest, trackId, trackToReport } from "./trackingGeo.js";
@@ -535,7 +536,7 @@ export default function WireRoomV2() {
     const height = Math.abs(end.y - start.y);
 
     if (tool === "marker") {
-      setLabelDialog({ kind: "marker", value: "", point: { x: start.x, y: start.y }, color: annotationColor });
+      openLabelDialog({ kind: "marker", value: "", point: { x: start.x, y: start.y }, color: annotationColor });
     }
 
     if (tool === "line" && Math.hypot(end.x - start.x, end.y - start.y) > 8) {
@@ -561,7 +562,7 @@ export default function WireRoomV2() {
     }
 
     if (tool === "text") {
-      setLabelDialog({ kind: "text", value: "", point: { x: start.x, y: start.y } });
+      openLabelDialog({ kind: "text", value: "", point: { x: start.x, y: start.y } });
     }
 
     setAnnotationDraft(null);
@@ -619,7 +620,7 @@ export default function WireRoomV2() {
   function mlDrawPoint(tool, ll) {
     const point = llToPx(ll);
     if (!point) return;
-    setLabelDialog(tool === "marker" ? { kind: "marker", value: "", point, color: annotationColor } : { kind: "text", value: "", point });
+    openLabelDialog(tool === "marker" ? { kind: "marker", value: "", point, color: annotationColor } : { kind: "text", value: "", point });
   }
   function mlDrawDrag(tool, a, b) {
     const p1 = llToPx(a), p2 = llToPx(b);
@@ -640,6 +641,21 @@ export default function WireRoomV2() {
     if (point) placePinnedReport(point);
   }
 
+  // Open the label/note box and put the cursor in it during the same tap. Phones (iPhones
+  // especially, some Android keyboards too) only open the keyboard when focus happens inside
+  // the tap itself; focusing after React re-renders on its own schedule can leave it closed.
+  const labelInputRef = useRef(null);
+  function openLabelDialog(d) {
+    try { flushSync(() => setLabelDialog(d)); } catch { setLabelDialog(d); }
+    const el = labelInputRef.current;
+    if (!el) return;
+    try {
+      el.focus({ preventScroll: true });
+      const end = el.value.length;
+      el.setSelectionRange(end, end);
+    } catch { /* focus not allowed: tapping the box still works */ }
+  }
+
   function editSelectedAnnotation() {
     if (!selectedAnnotationId) return;
 
@@ -647,11 +663,11 @@ export default function WireRoomV2() {
     if (!current) return;
 
     if (current.type === "text") {
-      setLabelDialog({ kind: "edit-text", id: current.id, value: current.text || "" });
+      openLabelDialog({ kind: "edit-text", id: current.id, value: current.text || "" });
       return;
     }
 
-    setLabelDialog({ kind: "edit-label", id: current.id, value: current.label || "" });
+    openLabelDialog({ kind: "edit-label", id: current.id, value: current.label || "" });
   }
 
   function submitLabelDialog() {
@@ -1191,7 +1207,11 @@ export default function WireRoomV2() {
                 : "EDIT LABEL"}
             </div>
             <input
+              ref={labelInputRef}
               autoFocus
+              type="text"
+              enterKeyHint="done"
+              autoComplete="off"
               maxLength={140}
               value={labelDialog.value}
               onChange={e => setLabelDialog(prev => prev ? { ...prev, value: e.target.value } : prev)}
