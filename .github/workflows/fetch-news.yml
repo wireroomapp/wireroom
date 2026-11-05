@@ -5,7 +5,12 @@ on:
     # GitHub delays and drops scheduled jobs at the top of the hour (everyone's jobs start then).
     # Running at :17 avoids that rush. GitHub still doesn't guarantee exact timing.
     - cron: '17 * * * *'  # every hour, at 17 minutes past
-  workflow_dispatch: {}    # lets us trigger it manually from GitHub's UI
+  workflow_dispatch: {}    # manual runs, and the backend's watchdog when the schedule slips (scheduler/watchdog.mjs)
+
+# Never run two copies at once (a late scheduled run and a watchdog run could overlap).
+concurrency:
+  group: fetch-news
+  cancel-in-progress: false
 
 jobs:
   fetch:
