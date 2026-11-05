@@ -3,7 +3,7 @@
 Two map layers, both **off by default**. Users turn them on with the **LIVE** box at the bottom-left of the map.
 
 - **MIL AIR:** military-flagged aircraft worldwide that broadcast ADS-B (many military aircraft don't).
-- **SHIPS:** vessels at about 10 strategic chokepoints (Hormuz, Bab el-Mandeb, Suez, Malacca, Taiwan Strait, Black Sea, Gibraltar, Panama, English Channel, Danish straits).
+- **SHIPS:** vessels in 15 watched areas: 10 strategic chokepoints (Hormuz, Bab el-Mandeb, Suez, Malacca, Taiwan Strait, Black Sea, Gibraltar, Panama, English Channel, Danish straits) and 5 Indian Ocean ports and passages (Mumbai/JNPT, Colombo/Hambantota, Gwadar, Chittagong, Six Degree Channel).
 
 The browser only ever talks to **our** backend. Switching from free to commercial data sources is done with
 environment variables on Render. No frontend change, no code change.
@@ -67,5 +67,5 @@ Setting `LICENSE_CLEARED_*=true` means you hold the right to use that source. On
   Ships refill over a few minutes. The map says "just restarted" during that time.
 - Free AIS coverage depends on volunteer receivers. Some areas will be thin.
 - AISStream is a free beta service with no uptime promise.
-- Chokepoint boxes are approximate; edit `CHOKEPOINT_BOXES` in `ships.mjs`.
+- Watched-area boxes are approximate; edit `CHOKEPOINT_BOXES` and `CHOKEPOINT_NAMES` in `ships.mjs` (same order).
 - Licensing status of each source is in `license.mjs`. Re-check the providers' terms before charging money.

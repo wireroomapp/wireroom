@@ -156,8 +156,10 @@ export default function SourcesPanel({ apiBase, feedbackUrl, onClose, onOpenCoun
         <h3>LIVE LAYERS AND MAP</h3>
         <ul>
           <li><b>Military aircraft</b>: <a href="https://adsb.lol" target="_blank" rel="noreferrer">adsb.lol</a>, a volunteer ADS-B network (ODbL). Only aircraft that broadcast their position appear.</li>
-          <li><b>Ships</b>: <a href="https://aisstream.io" target="_blank" rel="noreferrer">AISStream.io</a>, volunteer AIS receivers. Collected as snapshots about once an hour at 10 chokepoints. Some areas have no free coverage, and the map says so.</li>
+          <li><b>Ships</b>: <a href="https://aisstream.io" target="_blank" rel="noreferrer">AISStream.io</a>, volunteer AIS receivers. Collected as snapshots about once an hour in 15 outlined areas: 10 chokepoints (Hormuz, Bab el-Mandeb, Suez, Malacca, Taiwan Strait, Black Sea, Gibraltar, Panama, English Channel, Danish straits) and 5 Indian Ocean ports and passages (Mumbai, Colombo and Hambantota, Gwadar, Chittagong, Six Degree Channel). Some areas have no free coverage, and the map says so.</li>
           <li><b>Map</b>: <a href="https://openfreemap.org" target="_blank" rel="noreferrer">OpenFreeMap</a> with OpenStreetMap data; imagery from <a href="https://earthdata.nasa.gov/gibs" target="_blank" rel="noreferrer">NASA GIBS</a>; terrain from Mapzen Terrain Tiles via AWS Open Data.</li>
+          <li><b>Borders</b>: drawn from OpenStreetMap, which maps the line each side actually controls. Disputed boundaries, including in Kashmir, Aksai Chin and Arunachal Pradesh, are shown as dashed amber lines. Wire Room takes no position on territorial claims.</li>
+          <li><b>Your markings</b>: lines, markers, shapes and notes you draw are your own analysis. They're saved only in your browser and never change what anyone else sees. Exported images label them as the author's own.</li>
         </ul>
 
         <h3>KNOWN LIMITS</h3>

@@ -133,14 +133,14 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
           <Swatch kind="air" color={AIRCRAFT_COLOR} />MIL AIR{airOn && <span className="n">{countLabel(air)}</span>}
         </button>
         <button type="button" className={`live-btn ${shipsOn ? "on" : ""}`} aria-pressed={shipsOn} onClick={onToggleShips}
-          title="Ships at strategic chokepoints (AIS)">
+          title="Ships at strategic chokepoints and Indian Ocean ports (AIS)">
           <Swatch kind="ship" color={shipColor("cargo")} />SHIPS{shipsOn && <span className="n">{countLabel(ships)}</span>}
         </button>
       </div>
       {airOn && <div className="live-note">Air: military-flagged aircraft that broadcast ADS-B. Many don't.</div>}
       {shipsOn && (
         <div className="live-note">
-          Ships: outlined chokepoints only. Free coverage comes from volunteer receivers, so some areas show none.
+          Ships: outlined areas only (chokepoints and Indian Ocean ports). Free coverage comes from volunteer receivers, so some areas show none.
           {ships.meta?.snapshotAt ? ` Positions as of ${timeAgo(Date.parse(ships.meta.snapshotAt))} (snapshots, not live).` : ""} Zoom in, then tap an icon.
         </div>
       )}

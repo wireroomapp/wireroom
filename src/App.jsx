@@ -601,9 +601,9 @@ export default function WireRoomV2() {
       if (ML) {
         const canvas = mlRef.current && mlRef.current.getCanvas();
         if (!canvas) throw new Error("Map not ready");
-        await exportMapImage(canvas, { width: canvas.clientWidth, height: canvas.clientHeight, credits: [...mlRef.current.credits(), ...credits] });
+        await exportMapImage(canvas, { width: canvas.clientWidth, height: canvas.clientHeight, credits: [...mlRef.current.credits(), ...credits], annotated: annotations.length > 0 });
       } else {
-        await exportMapImage(svgRef.current, { width: dims.w, height: dims.h, credits });
+        await exportMapImage(svgRef.current, { width: dims.w, height: dims.h, credits, annotated: annotations.length > 0 });
       }
       setExportState("idle");
     } catch (err) {
@@ -729,7 +729,7 @@ export default function WireRoomV2() {
             <li>Tap a country to open its brief. Switch <b>OFFICIAL</b>, <b>NEWS</b>, or <b>BOTH</b>.</li>
             <li>Use the drawing tools to mark up the map, add notes, and pin reports to markers.</li>
             <li>Some countries have no verified official source yet. The panel says so instead of guessing.</li>
-            <li>Tap <b>LIVE</b> (bottom-left of the map) to show military aircraft and ships at key chokepoints.</li>
+            <li>Tap <b>LIVE</b> (bottom-left of the map) to show military aircraft, and ships at key chokepoints and Indian Ocean ports.</li>
             {ML && <li>Switch the map to <b>SATELLITE</b>, <b>RELIEF</b> or <b>NIGHT</b> (NASA imagery), spin it as a <b>GLOBE</b>, or raise mountains in <b>3D</b>.</li>}
           </ul>
           <div className="welcome-note">
