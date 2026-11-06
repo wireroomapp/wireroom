@@ -130,3 +130,19 @@ test("DeepL and Microsoft requests are built correctly", async () => {
   assert.equal(baseLang("PT-BR"), "pt");
   assert.equal(memoryKey({ headline: "a", summary: "b" }), memoryKey({ headline: "a", summary: "b" }));
 });
+
+test("DeepL: tries the other address once if the first says wrong endpoint", async () => {
+  const hosts = [];
+  const fetchImpl = async (url) => {
+    hosts.push(new URL(url).host);
+    if (url.startsWith("https://api.deepl.com")) return { ok: false, status: 403 };
+    return { ok: true, status: 200, json: async () => ({ translations: [{ detected_source_language: "ES", text: "Hi" }] }) };
+  };
+  const d = makeProvider({ provider: "deepl", key: "developer-key-without-suffix", fetchImpl });
+  assert.deepEqual(await d.translate(["Hola"]), [{ from: "es", text: "Hi" }]);
+  await d.translate(["Hola"]); // remembers the working address
+  assert.deepEqual(hosts, ["api.deepl.com", "api-free.deepl.com", "api-free.deepl.com"]);
+
+  const used = makeProvider({ provider: "deepl", key: "k:fx", fetchImpl: async () => ({ ok: false, status: 456 }) });
+  await assert.rejects(used.translate(["Hola"]), /allowance used up/);
+});
