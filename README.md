@@ -4,6 +4,8 @@
 
 **Live: [wireroom.onrender.com](https://wireroom.onrender.com)**
 
+![Wire Room: 3D satellite view of the Taiwan Strait with live ship positions, a shipping-lane line and a pinned Taiwan government statement](docs/wire-room-taiwan-strait.jpg)
+
 An interactive world map that shows what governments say next to what independent outlets report, country by country. Read both side by side, mark up the map, pin reports to markers, and export the result as an image.
 
 **Status:** early access MVP. 20 of 29 countries have a verified government channel; the rest say so on screen.
