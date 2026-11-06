@@ -106,8 +106,9 @@ export function buildStyle() {
       // ---- Wire Room layers ----
       { id: "wr-zones-fill", type: "fill", source: "wr-zones", filter: ["==", ["get", "count"], 0], paint: { "fill-color": "#c9974b", "fill-opacity": 0.07 } },
       { id: "wr-zones-line", type: "line", source: "wr-zones", paint: { "line-color": ["case", ["==", ["get", "count"], 0], "#c9974b", "#5b7390"], "line-width": 1, "line-dasharray": [3, 2] } },
-      // Areas with no ships are labeled from further out; the rest once you zoom in.
-      { id: "wr-zones-label-empty", type: "symbol", source: "wr-zone-labels", filter: ["==", ["get", "count"], 0],
+      // Areas with no ships are labeled a little earlier than the rest. At world view only the
+      // amber outline shows, so seven "NO FREE COVERAGE" labels don't crowd the globe.
+      { id: "wr-zones-label-empty", type: "symbol", source: "wr-zone-labels", minzoom: 3, filter: ["==", ["get", "count"], 0],
         layout: { "text-field": ["get", "label"], "text-font": FONT, "text-size": 9.5, "text-anchor": "bottom-left", "text-offset": [0, -0.3], "text-letter-spacing": 0.06, "text-max-width": 40 },
         paint: { "text-color": "#c9974b", "text-halo-color": "#071019", "text-halo-width": 1.5 } },
       { id: "wr-zones-label", type: "symbol", source: "wr-zone-labels", minzoom: 4, filter: [">", ["get", "count"], 0],
