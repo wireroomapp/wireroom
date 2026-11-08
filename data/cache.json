@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T09:08:06.897Z",
+  "generatedAt": "2026-11-08T10:19:40.077Z",
   "countries": {
     "us": {
       "official": [
@@ -8757,7 +8757,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:24.352Z",
+      "officialLastOkAt": "2026-11-08T10:18:57.235Z",
       "officialLastError": null
     },
     "ca": {
@@ -16736,7 +16736,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:26.386Z",
+      "officialLastOkAt": "2026-11-08T10:18:59.191Z",
       "officialLastError": null
     },
     "mx": {
@@ -27729,7 +27729,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:27.357Z",
+      "officialLastOkAt": "2026-11-08T10:19:00.242Z",
       "officialLastError": null
     },
     "br": {
@@ -31415,8 +31415,8 @@
           "countryId": "br",
           "sourceType": "official",
           "source": "Presidência",
-          "headline": "Notícias — Planalto - www.gov.br",
-          "summary": "Notícias — Planalto www.gov.br",
+          "headline": "Notícias — Planalto - GOV.BR",
+          "summary": "Notícias — Planalto GOV.BR",
           "date": "Dec 5, 2018",
           "publishedAt": "2018-12-05T08:00:00.000Z",
           "dateOnly": true,
@@ -31428,8 +31428,8 @@
           "countryId": "br",
           "sourceType": "official",
           "source": "Presidência",
-          "headline": "Acompanhe o Planalto - www.gov.br",
-          "summary": "Acompanhe o Planalto www.gov.br",
+          "headline": "Acompanhe o Planalto - GOV.BR",
+          "summary": "Acompanhe o Planalto GOV.BR",
           "date": "Dec 5, 2018",
           "publishedAt": "2018-12-05T08:00:00.000Z",
           "dateOnly": true,
@@ -35861,7 +35861,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:28.370Z",
+      "officialLastOkAt": "2026-11-08T10:19:01.172Z",
       "officialLastError": null
     },
     "ar": {
@@ -37363,6 +37363,19 @@
         }
       ],
       "independent": [
+        {
+          "id": "ar-independent-739b1dd043dae989",
+          "countryId": "ar",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "Pope Leo heads to Milei's Argentina as tensions loom over austerity, Iran - Reuters",
+          "summary": "Pope Leo heads to Milei's Argentina as tensions loom over austerity, Iran Reuters",
+          "date": "Nov 8, 2026 · 10:04 AM",
+          "publishedAt": "2026-11-08T10:04:13.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNYV8wSU00NXg1Q0xRcmpIZWxTdkhGYV8zZmZuZ1pxdWpwQWpabFdGQVFQY1VSUkY5cUdNd1lnQWJjV3VkYy11Sk1nUHdkeGdnbFZ3bXRTNGxaeE9XWnVHRHlMVEF2T0I3QjVEX2dLY054QlZWUi1aTnBzc01RY21GUG1MYXhTcXhmZTl2UF9XZDh5WHlrNjk4ZXZ0OU16UkNhdnBjUi1mSDAwSkpxTnRMQjBLa3BVaWs?oc=5",
+          "importance": 2
+        },
         {
           "id": "ar-independent-6feacd45ca39fdbf",
           "countryId": "ar",
@@ -40863,7 +40876,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:29.365Z",
+      "officialLastOkAt": "2026-11-08T10:19:02.120Z",
       "officialLastError": null
     },
     "gb": {
@@ -41924,14 +41937,27 @@
       ],
       "independent": [
         {
+          "id": "gb-independent-db51c297789f892e",
+          "countryId": "gb",
+          "sourceType": "independent",
+          "source": "BBC",
+          "headline": "First British Titanic diver to tell stories from wreck visits - BBC",
+          "summary": "First British Titanic diver to tell stories from wreck visits BBC",
+          "date": "Nov 8, 2026 · 7:09 AM",
+          "publishedAt": "2026-11-08T07:09:54.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1PQ0RTSVgtNXJzRW5YcDFDMEZqQkljUFFLa2p5WXVIZnRRNXMyQzBXaXZlOGR1THQ2VmtjRjlPa01XR29nSUZGbENRazB1QnByUjRPVENYUmEzTkk?oc=5",
+          "importance": 2
+        },
+        {
           "id": "gb-independent-e966c4b11da8c3d0",
           "countryId": "gb",
           "sourceType": "independent",
           "source": "Financial Times",
           "headline": "Far-right British MP outperforms most world leaders on X - Financial Times",
           "summary": "Far-right British MP outperforms most world leaders on X Financial Times",
-          "date": "Nov 8, 2026 · 5:02 AM",
-          "publishedAt": "2026-11-08T05:02:04.000Z",
+          "date": "Nov 8, 2026 · 5:00 AM",
+          "publishedAt": "2026-11-08T05:00:10.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPYmVBRTlteDZfRi1RNG1IalRQWmVUVGRETWxHZnFjWmhtazB4YklZbVNaWklFdWZ6M1hiUVBzNkIwY0l2RnJ0bGlVaHVmMEdLVkt1TE9PNngzeHY4bzBDcTBiallOS2ZBV2VHTGtlaWlwYlZPSlFjT1U0T2dJbjAzXzdNM18?oc=5",
           "importance": 2
@@ -48409,24 +48435,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQYzdYeGd4TEltaVBKYTlQbWlzM1lCazdaX1cycFE0LUJwZVN1NGZ6OWZKcTNpeEdWU28zYl8zd0tUZldvT0lXQ2UySmZIbFhGNlAtVnc2X1c5NDg0RURoU2JKdkRuM09WUDYyak1FOE40YVJhVWc4WVlYOE9fOE5YTmxpejhBd01GU1p6UG03M1dsdVNtZHVxcjBfVGY1LWlsbFVYd052dllMTlE?oc=5",
           "importance": 2
-        },
-        {
-          "id": "gb-independent-b1bc2fe343d41ba3",
-          "countryId": "gb",
-          "sourceType": "independent",
-          "source": "Google News",
-          "headline": "6 leaders in 10 years. A look at the quick succession of British prime ministers - PBS",
-          "summary": "6 leaders in 10 years. A look at the quick succession of British prime ministers PBS",
-          "date": "Jun 22, 2026 · 7:00 AM",
-          "publishedAt": "2026-06-22T07:00:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNM1g4SjBFSElTZUlMX2sxckQ1ejdQTElfZ2NKODFlVm03TE50ZW9DZWRiNkhYYmZEaHBlX3N3Z19QQTYweFJ6dk1wRmtvNXVEUjBXZ0NtUmczS2RtSjFNVHJIamVodW5yR0pNSF8yNkwwZ2VkX2I4OS1FcmRHSVJVcE1rTzR1Q2VPam1XY1ZRRFc5R0VobWRyT2pYcTVTZGI1VzV6R1ljcTdHa3A3SUVJejAtOXrSAboBQVVfeXFMTWNXOWctTXJFcDAwYVJnSWNnbGpwb0lSaGFuRktQekVMalVBR09Tc1F5SmQ3WEk5bjU1dFlEVUpRVU1xcVZNOUZiNGNrSFV4NElCMHA4eGxpZ3ZaeExoM3ZzcHRyT0NhS2w0eXZoYzdsTW9heU0wWFBMYzgxQ1ItVUZtaXNuY2tCLTVIUEkxWmsxNTF4TVk0TUNsbERWU1ZYLUkySzhTWFBoSmJtR0dmbFhzSUszcGFCRGZ3?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:31.324Z",
+      "officialLastOkAt": "2026-11-08T10:19:03.427Z",
       "officialLastError": null
     },
     "fr": {
@@ -56160,7 +56173,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:32.006Z",
+      "officialLastOkAt": "2026-11-08T10:19:03.931Z",
       "officialLastError": null
     },
     "de": {
@@ -56638,6 +56651,32 @@
           "importance": 2
         },
         {
+          "id": "de-independent-cc29b5f4126dbddd",
+          "countryId": "de",
+          "sourceType": "independent",
+          "source": "Deutsche Welle",
+          "headline": "Germany news: Friedrich Merz set to confirm presidential nominee - DW.com",
+          "summary": "Germany news: Friedrich Merz set to confirm presidential nominee DW.com",
+          "date": "Nov 7, 2026 · 6:11 PM",
+          "publishedAt": "2026-11-07T18:11:47.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOZlVfYlM2TFRFS2VhSlRRY2hXeVpXZ3BYaXg0UENWanlJX0lhUVFWclRXeTUzeVZOLWEzS2Z5Q3BuU3Z6SWowU0h0WUVBTjJUZTM1NDlUb1VEdWRYcGY1TzFZTEZhc0sweXEzWk56Nkh6NXFrNEZZNzA3Z3ktYjlnN1BtaTlDaXdJWUIzb0w0Q01EVzRWVTNveFZBR254cnBX?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "de-independent-cc792d819874f65c",
+          "countryId": "de",
+          "sourceType": "independent",
+          "source": "Deutsche Welle",
+          "headline": "Germany news: Son of Iran's last shah takes center stage in Frankfurt - DW.com",
+          "summary": "Germany news: Son of Iran's last shah takes center stage in Frankfurt DW.com",
+          "date": "Nov 7, 2026 · 5:33 PM",
+          "publishedAt": "2026-11-07T17:33:22.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNYV83OE1mcVEwUHV5akF3NHhoVVpacnB3X1YxLS1OR1p0SXZCWVowamtjTkV0Y0hqX0ZKbG5SYXpvQklKNmhwZVgtTER2U0x6TXV5czR4ZjBybUpiLW5idUNWeWJjVWJ0dWREVERKXy1BNmE3MWd5R0hxNXJDUEItYm9GLVJOenVaVUxLR1NLT05lUmRyTU95WERjQVpoWnZSS2Fmai13?oc=5",
+          "importance": 2
+        },
+        {
           "id": "de-independent-e5c7b32a3482d19a",
           "countryId": "de",
           "sourceType": "independent",
@@ -56648,19 +56687,6 @@
           "publishedAt": "2026-11-07T16:31:56.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1JMWoxWkRYSkY1c09yUDRkbndza0hTZVJXbWQxQ1RWRld6d2l1ZWpQSnVhRDJGNURUNjY2aUdZak1PR3NmX1I4RC1fenVvWUVNLU1ubXg4Ym5XZnJKR3NQRHo5bXFCelRCZThkakkwQTZ4NGI0eTc4VGIwNA?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "de-independent-cc792d819874f65c",
-          "countryId": "de",
-          "sourceType": "independent",
-          "source": "Deutsche Welle",
-          "headline": "Germany news: Son of Iran's last shah takes center stage in Frankfurt - DW.com",
-          "summary": "Germany news: Son of Iran's last shah takes center stage in Frankfurt DW.com",
-          "date": "Nov 7, 2026 · 4:19 PM",
-          "publishedAt": "2026-11-07T16:19:58.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNYV83OE1mcVEwUHV5akF3NHhoVVpacnB3X1YxLS1OR1p0SXZCWVowamtjTkV0Y0hqX0ZKbG5SYXpvQklKNmhwZVgtTER2U0x6TXV5czR4ZjBybUpiLW5idUNWeWJjVWJ0dWREVERKXy1BNmE3MWd5R0hxNXJDUEItYm9GLVJOenVaVUxLR1NLT05lUmRyTU95WERjQVpoWnZSS2Fmai13?oc=5",
           "importance": 2
         },
         {
@@ -63110,24 +63136,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxONk50SzZjeVRjeVNKSlFMbUdCbUI0NXBCa0p4cjF6VXlaVWxxQmFnSjFZdnpVWVF5Y200M0M0cThxd3hPNzhxVndFUWZ1N1pfdkJ4TXZkVDBGTWJic1hGQ1d6VmtackxVaWNtNzNESGVNdVg4QkNqY0UwMUlJZFduakFWZC05X1BPaUpCWGhIeG1mSEdua2pB?oc=5",
           "importance": 2
-        },
-        {
-          "id": "de-independent-40eb530758d8b5cb",
-          "countryId": "de",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Trains halted across Germany because of communication system problem - AP News",
-          "summary": "Trains halted across Germany because of communication system problem AP News",
-          "date": "Jun 23, 2026 · 7:00 AM",
-          "publishedAt": "2026-06-23T07:00:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxORmdjb1p0RTZETDI1XzhnSjJpTnpRSkJuSENLLU5ZQmQ2emZ5QjVLZWhxdS1MQXFIZUk4OVdITVpPdjAxS1E5eUxCWTFIX2NrVEtOUjFmek5NM1REUWR0LUl3ZW83VFhCYlFyTER3ZnlfVEVLYldpWGk2UXQ1Z0h0ekhPalFoTS1yLVB0cjgwOFF1OEdYcDhXVk0xSmJXQ05XM3NKOUZ5Mlo1UkpTaDJjYjExMC1xZ25hTW1BbmNfdS1rUQ?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:34.456Z",
+      "officialLastOkAt": "2026-11-08T10:19:05.170Z",
       "officialLastError": null
     },
     "it": {
@@ -71266,7 +71279,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:35.749Z",
+      "officialLastOkAt": "2026-11-08T10:19:06.589Z",
       "officialLastError": null
     },
     "es": {
@@ -72980,19 +72993,6 @@
           "importance": 2
         },
         {
-          "id": "es-independent-b6502ea55bb7ae3f",
-          "countryId": "es",
-          "sourceType": "independent",
-          "source": "El Pais",
-          "headline": "Madrid - EL PAÍS - EL PAÍS",
-          "summary": "Madrid - EL PAÍS EL PAÍS",
-          "date": "Nov 8, 2026 · 1:45 AM",
-          "publishedAt": "2026-11-08T01:45:28.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiqwJBVV95cUxNMWFGR1RrQy1OUU9aRWdvVlE3WW1GOFlQTzU4LUs4dU92VHRDZW5qbm8xdFZWeW5RRzlGUEZKTG9TTHFZQWZ3Qm1laTFHOVluaWt0Ylk2UUJ2VzVaUXBfSHk1YU5DSUM5b1hmUlR5anJsRE1zNzdEMkpQN2EtbGY3NGloakhPT1IwUXg0NUNsWjlTSHhmclJtSW5QQjZVVnZsNDd3SENiMzJvQkI5UEd4ZTktVk9xakRwWlNsbmQwT0xOQU9ETUk3SU1raU9qNUVIZ0dGOUdJVlptM21tTE14V3lpOEM4eW9aVndYQ0UxYlphbkVHcVpYQ1BfMk9VeHhuVXlkVzEzZE9NeGdkc1hpQUVuY0Z1V25GZk1WbXFLWmdkaEVyN0lnR2llTQ?oc=5",
-          "importance": 2
-        },
-        {
           "id": "es-independent-2f5b17c27479bc18",
           "countryId": "es",
           "sourceType": "independent",
@@ -73003,19 +73003,6 @@
           "publishedAt": "2026-11-08T01:17:02.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMixwJBVV95cUxNQWNRNF80ZFRjRXN3Q0xNQUxvVVZEYlFUaDhGMEVHYWxFM1gwUkM5ZzNIR3RQZlI1UFNtNTFKYnRKX3FXa0pvR3lFSTFqSUZDckhfcGI3NWtSS0lQLWI2VDZEejdscnRHUmZNNnFYNDZmU1FKdEdrT1lnVUxhU1ZEanoyaWp3eXNOUzk4UlNpdjJMSkdiN0JCVkFadFhSeUx3UzhqZFA4YXBMdFg0cElEeHZHaHUzSk11T3YzcVFxVWNSME1DR3JudG50ZnBERUJUaWExUW1FU0hwZ3QtQy1qOVBxdkdyaW4zV3lqVHpseThMNHJpSk9VTXNXQmMzenRfNGJkQUJTRU5FclBGXzRJelZmX2gtdG51ZFNVZzZ5SkF1SGQwODZCSk9DakI5cGFzazhTSWpjczZiSWt3QXU5M3BKZ0gtcVE?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "es-independent-3d43714774c53a7c",
-          "countryId": "es",
-          "sourceType": "independent",
-          "source": "El Pais",
-          "headline": "Madrid - EL PAÍS - EL PAÍS",
-          "summary": "Madrid - EL PAÍS EL PAÍS",
-          "date": "Nov 7, 2026 · 11:55 PM",
-          "publishedAt": "2026-11-07T23:55:06.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxOS2lWNms3cXVubjdVWEdpb2drcUQyZlpMa2R0WUJjdGEzMlE1TVM1dWhJWjBFM2gwVUE3NUZrUXZ3Sjc3bmhrc3lSbF9MTllKUHJ1MkZsT0Q1ZmNmZmV2Sk1NZG9wcENIc0JYSm9rZGxnVFJyVmYxWnZXUUJIaDRHak1VaDFIYWhvR00wcVRkNWhFdGgxMlVHVGRHZlZUbjVxeHBVZkp6dzVRN25hQ05qbTdXb0p0bC1nR2RmODVyekt6elU3NFowWmRKeTh6TGhkanJLZ2tkUkRLd2M3SzlVS3c4bHYtdTlldlhOQXQyMEZyOXFsT0RWMnQyUQ?oc=5",
           "importance": 2
         },
         {
@@ -73188,6 +73175,19 @@
           "importance": 2
         },
         {
+          "id": "es-independent-b6502ea55bb7ae3f",
+          "countryId": "es",
+          "sourceType": "independent",
+          "source": "El Pais",
+          "headline": "Madrid - EL PAÍS - EL PAÍS",
+          "summary": "Madrid - EL PAÍS EL PAÍS",
+          "date": "Nov 7, 2026 · 4:43 PM",
+          "publishedAt": "2026-11-07T16:43:48.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiqwJBVV95cUxNMWFGR1RrQy1OUU9aRWdvVlE3WW1GOFlQTzU4LUs4dU92VHRDZW5qbm8xdFZWeW5RRzlGUEZKTG9TTHFZQWZ3Qm1laTFHOVluaWt0Ylk2UUJ2VzVaUXBfSHk1YU5DSUM5b1hmUlR5anJsRE1zNzdEMkpQN2EtbGY3NGloakhPT1IwUXg0NUNsWjlTSHhmclJtSW5QQjZVVnZsNDd3SENiMzJvQkI5UEd4ZTktVk9xakRwWlNsbmQwT0xOQU9ETUk3SU1raU9qNUVIZ0dGOUdJVlptM21tTE14V3lpOEM4eW9aVndYQ0UxYlphbkVHcVpYQ1BfMk9VeHhuVXlkVzEzZE9NeGdkc1hpQUVuY0Z1V25GZk1WbXFLWmdkaEVyN0lnR2llTQ?oc=5",
+          "importance": 2
+        },
+        {
           "id": "es-independent-5a1addc26166db6b",
           "countryId": "es",
           "sourceType": "independent",
@@ -73341,6 +73341,19 @@
           "publishedAt": "2026-11-07T13:24:01.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOeUY1ZWdMd183WDJGWWlzdEs4SS1LdmxsRzJCaE5iTm9hNDhsXzNVNlhSN3Y1Umt3Tzg5Z3pOSFU3ajAxOXFkZXlUZURkVWVoMHFCRjF5RUZXUzBwX3RUR0d5NzY0Q1pHdTQtOG5vN0ppU0hZMWo1aTBxZ3piRzZTdkZhby1ZTF9FbXlhRWpKdTBBQ3A3NVdrZTJ1Mmh4ei1YMHpwY1d2bnlXd21tX3ZGbmNKaDVIUVpCdmg2QjdVZDhaZGJjQlJXQjVTblN4bmxO?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "es-independent-3d43714774c53a7c",
+          "countryId": "es",
+          "sourceType": "independent",
+          "source": "El Pais",
+          "headline": "Madrid - EL PAÍS - EL PAÍS",
+          "summary": "Madrid - EL PAÍS EL PAÍS",
+          "date": "Nov 7, 2026 · 10:56 AM",
+          "publishedAt": "2026-11-07T10:56:38.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxOS2lWNms3cXVubjdVWEdpb2drcUQyZlpMa2R0WUJjdGEzMlE1TVM1dWhJWjBFM2gwVUE3NUZrUXZ3Sjc3bmhrc3lSbF9MTllKUHJ1MkZsT0Q1ZmNmZmV2Sk1NZG9wcENIc0JYSm9rZGxnVFJyVmYxWnZXUUJIaDRHak1VaDFIYWhvR00wcVRkNWhFdGgxMlVHVGRHZlZUbjVxeHBVZkp6dzVRN25hQ05qbTdXb0p0bC1nR2RmODVyekt6elU3NFowWmRKeTh6TGhkanJLZ2tkUkRLd2M3SzlVS3c4bHYtdTlldlhOQXQyMEZyOXFsT0RWMnQyUQ?oc=5",
           "importance": 2
         },
         {
@@ -79461,7 +79474,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:37.454Z",
+      "officialLastOkAt": "2026-11-08T10:19:09.553Z",
       "officialLastError": null
     },
     "pl": {
@@ -82049,8 +82062,8 @@
           "source": "Reuters",
           "headline": "Polish bishop convicted of failing to report clergy abuse of minors - Reuters",
           "summary": "Polish bishop convicted of failing to report clergy abuse of minors Reuters",
-          "date": "Oct 29, 2026 · 11:07 AM",
-          "publishedAt": "2026-10-29T11:07:43.000Z",
+          "date": "Oct 29, 2026 · 7:00 AM",
+          "publishedAt": "2026-10-29T07:00:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNTHFMQ2FGc203bGVITWJXSEFzQi1nUzIwa0t4VkR3N0VKNkNxWEtrVXJfcjFhTDRmVWRKLTVHdmlabDJCWjdLb2doQmF0NTFqcnM0RVZoXzRoTFFNS01kUGh1WGNOeFMwLTRrUkUxMUJPQ0tpZ0ZHMXYxX0F3RXptSjhBMzdKV0lXcXo2R3ROUEJhUER4ZC1PWkI5YVdfbUpnS3c?oc=5",
           "importance": 2
@@ -84151,7 +84164,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:39.226Z",
+      "officialLastOkAt": "2026-11-08T10:19:11.400Z",
       "officialLastError": null
     },
     "ua": {
@@ -98786,7 +98799,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:40.128Z",
+      "officialLastOkAt": "2026-11-08T10:19:12.216Z",
       "officialLastError": null
     },
     "ru": {
@@ -98909,19 +98922,6 @@
           "importance": 3
         },
         {
-          "id": "ru-official-66709e33bbf3373c",
-          "countryId": "ru",
-          "sourceType": "official",
-          "source": "Kremlin",
-          "headline": "Meeting with Government members - Президент России",
-          "summary": "Meeting with Government members Президент России",
-          "date": "Nov 5, 2026 · 11:44 PM",
-          "publishedAt": "2026-11-05T23:44:41.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9ReHRWdmJfdjdxTW5RTEsxSnRZMDJrdGN3QlRNNTF1R0hDVXprUGc3dHJEbnpyQ2JLZU9WMUxkNmozakRFc0dlbEFwSEg0alRtY0IzUFQ1WVNaMGZk?oc=5",
-          "importance": 3
-        },
-        {
           "id": "ru-official-cb80d2b95315d3ef",
           "countryId": "ru",
           "sourceType": "official",
@@ -98945,6 +98945,19 @@
           "publishedAt": "2026-11-05T18:17:04.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE52NE1GZy1HUWNOc3luclFySWwyU2gyVWVXaWVTRXpQaFhmX1ROa3k2WDdEbDhDNGwwY3BrUnhFSDBjRFRFX1U2czV2SlA?oc=5",
+          "importance": 3
+        },
+        {
+          "id": "ru-official-66709e33bbf3373c",
+          "countryId": "ru",
+          "sourceType": "official",
+          "source": "Kremlin",
+          "headline": "Meeting with Government members - Президент России",
+          "summary": "Meeting with Government members Президент России",
+          "date": "Nov 5, 2026 · 5:50 PM",
+          "publishedAt": "2026-11-05T17:50:31.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9ReHRWdmJfdjdxTW5RTEsxSnRZMDJrdGN3QlRNNTF1R0hDVXprUGc3dHJEbnpyQ2JLZU9WMUxkNmozakRFc0dlbEFwSEg0alRtY0IzUFQ1WVNaMGZk?oc=5",
           "importance": 3
         },
         {
@@ -99878,19 +99891,6 @@
           "importance": 3
         },
         {
-          "id": "ru-official-e102f08e2fb5b083",
-          "countryId": "ru",
-          "sourceType": "official",
-          "source": "Kremlin",
-          "headline": "Foreign Minister Sergey Lavrov’s opening remarks at a working breakfast with foreign ministers from African countries, Moscow, October 28, 2026 - The Ministry of Foreign Affairs of the Russian Federation - Министерство иностранных дел России",
-          "summary": "Foreign Minister Sergey Lavrov’s opening remarks at a working breakfast with foreign ministers from African countries, Moscow, October 28, 2026 - The Ministry of Foreign Affairs of the Russian Federation Министерство …",
-          "date": "Oct 28, 2026 · 2:44 PM",
-          "publishedAt": "2026-10-28T14:44:44.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9NNE5YYllpWUJvaHZWVzhnd3VpZUJ4Zmsyc3Vqby0zMGJLay1SMVU3UnhfX1RqdUhIREh3Rzh0SnZ6Qm0tSVV4ZjFQb2NDT3J3SnVzclNXczBvQQ?oc=5",
-          "importance": 3
-        },
-        {
           "id": "ru-official-d9ff938464d361b5",
           "countryId": "ru",
           "sourceType": "official",
@@ -99940,6 +99940,19 @@
           "publishedAt": "2026-10-28T09:14:50.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE54YWlpdGlIYW1ncGhwUUlTX0lhV2h3YlBuUWNlajNqcUlkcmlWN19rMk00UVFPc2VaMFVTemFaTEtVWUFpWG5nZDI5clJHSVJBb3J4R1NDNS1fQ0Zt?oc=5",
+          "importance": 3
+        },
+        {
+          "id": "ru-official-e102f08e2fb5b083",
+          "countryId": "ru",
+          "sourceType": "official",
+          "source": "Kremlin",
+          "headline": "Foreign Minister Sergey Lavrov’s opening remarks at a working breakfast with foreign ministers from African countries, Moscow, October 28, 2026 - The Ministry of Foreign Affairs of the Russian Federation - Министерство иностранных дел Российской Федерации",
+          "summary": "Foreign Minister Sergey Lavrov’s opening remarks at a working breakfast with foreign ministers from African countries, Moscow, October 28, 2026 - The Ministry of Foreign Affairs of the Russian Federation Министерство …",
+          "date": "Oct 28, 2026 · 7:00 AM",
+          "publishedAt": "2026-10-28T07:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9NNE5YYllpWUJvaHZWVzhnd3VpZUJ4Zmsyc3Vqby0zMGJLay1SMVU3UnhfX1RqdUhIREh3Rzh0SnZ6Qm0tSVV4ZjFQb2NDT3J3SnVzclNXczBvQQ?oc=5",
           "importance": 3
         },
         {
@@ -102921,8 +102934,8 @@
           "countryId": "ru",
           "sourceType": "official",
           "source": "Kremlin",
-          "headline": "Press release on Foreign Minister Sergey Lavrov’s meeting with Foreign Minister of Jordan Ayman Safadi - Министерство иностранных дел Российской Федерации",
-          "summary": "Press release on Foreign Minister Sergey Lavrov’s meeting with Foreign Minister of Jordan Ayman Safadi Министерство иностранных дел Российской Федерации",
+          "headline": "Press release on Foreign Minister Sergey Lavrov’s meeting with Foreign Minister of Jordan Ayman Safadi - Министерство иностранных дел России",
+          "summary": "Press release on Foreign Minister Sergey Lavrov’s meeting with Foreign Minister of Jordan Ayman Safadi Министерство иностранных дел России",
           "date": "Sep 24, 2026 · 7:00 AM",
           "publishedAt": "2026-09-24T07:00:00.000Z",
           "dateOnly": false,
@@ -111831,7 +111844,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:41.513Z",
+      "officialLastOkAt": "2026-11-08T10:19:13.433Z",
       "officialLastError": null
     },
     "tr": {
@@ -112111,6 +112124,19 @@
           "importance": 2
         },
         {
+          "id": "tr-independent-88cf6c13f5db0f14",
+          "countryId": "tr",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Turkey’s solar boom shines ahead of a UN climate summit but coal and other fossil fuels loom large - AP News",
+          "summary": "Turkey’s solar boom shines ahead of a UN climate summit but coal and other fossil fuels loom large AP News",
+          "date": "Nov 5, 2026 · 10:30 PM",
+          "publishedAt": "2026-11-05T22:30:22.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNSXdTLTNENnRHcWRXbExOX3hCWWt1MkZjLUlYaDFtRktjN2QwbTA1TFZNcUlVc3JpUVdTOEhkSTZCQ0xTODAwT0lDU1RfVU9RWDRjZ1h2WTdFY25LUm4zbHpOY05ZV29fNlVOZy1hem1jS0VjVmNxRW5DQ0xCRVpPeUM5TEhMSXdwUDZnaXlmV1ZkeUpQRkE?oc=5",
+          "importance": 2
+        },
+        {
           "id": "tr-independent-7e0dd5f42cdc95ec",
           "countryId": "tr",
           "sourceType": "independent",
@@ -112277,19 +112303,6 @@
           "publishedAt": "2026-11-05T03:31:38.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPcHhpeU9NSmpEVl9uU3diWi1QRFUxY21KM0hwamZxMmZxSl9SdURyZHFnZ1hmY1BfRTVyVVJ6WjdOTHl5SGxfd3RhVWhtemVJbGtGUXJyTFBtdEU4TUp2bFFMV09SZ1BDU1JQd1JkLUN5bUVRV1FsSk1LQnFUanNUTExMMnU4RzhRaEc2b0xtOWJvSnZ6YW9ZVzNYd1dUeGM?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "tr-independent-88cf6c13f5db0f14",
-          "countryId": "tr",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Turkey’s solar boom shines ahead of a UN climate summit but coal and other fossil fuels loom large - AP News",
-          "summary": "Turkey’s solar boom shines ahead of a UN climate summit but coal and other fossil fuels loom large AP News",
-          "date": "Nov 5, 2026 · 2:02 AM",
-          "publishedAt": "2026-11-05T02:02:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNSXdTLTNENnRHcWRXbExOX3hCWWt1MkZjLUlYaDFtRktjN2QwbTA1TFZNcUlVc3JpUVdTOEhkSTZCQ0xTODAwT0lDU1RfVU9RWDRjZ1h2WTdFY25LUm4zbHpOY05ZV29fNlVOZy1hem1jS0VjVmNxRW5DQ0xCRVpPeUM5TEhMSXdwUDZnaXlmV1ZkeUpQRkE?oc=5",
           "importance": 2
         },
         {
@@ -120571,6 +120584,19 @@
       ],
       "independent": [
         {
+          "id": "il-independent-0bdbded143320e48",
+          "countryId": "il",
+          "sourceType": "independent",
+          "source": "The Times of Israel",
+          "headline": "Aramco building in Riyadh financial district is damaged in Houthi attack, witnesses say - The Times of Israel",
+          "summary": "Aramco building in Riyadh financial district is damaged in Houthi attack, witnesses say The Times of Israel",
+          "date": "Nov 8, 2026 · 7:12 AM",
+          "publishedAt": "2026-11-08T07:12:33.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPNFFDTlFqQ1RsSS01amNJVGY2OTFaeV9jclJzRmVBaHhUSmRXY1c1LWc5Rnl0ZDVHWm93cThBNkVBdENGb2o1WVduTzYyTEVreUpDb0NKRFZ2SXF5SDZCZzBfXzdnb0pqVXJrZEpBVlQ3dWlnOW82NTg3dENORE40VlNxWjR2VEZVNzZmclhfcFA0M0ZaZWlNSVU2R09lelYtVjlpVDl4RjIxNE5VdUhOVE1yT3I1ZHdKeGVSejVDbDZwTHpnSGRxQzE2UmY?oc=5",
+          "importance": 2
+        },
+        {
           "id": "il-independent-349c9409a4354a0d",
           "countryId": "il",
           "sourceType": "independent",
@@ -120590,10 +120616,23 @@
           "source": "The Times of Israel",
           "headline": "Report: Ra’am will vote for new Eisenkot-led government even without coalition deal - The Times of Israel",
           "summary": "Report: Ra’am will vote for new Eisenkot-led government even without coalition deal The Times of Israel",
-          "date": "Nov 8, 2026 · 6:03 AM",
-          "publishedAt": "2026-11-08T06:03:36.000Z",
+          "date": "Nov 8, 2026 · 6:17 AM",
+          "publishedAt": "2026-11-08T06:17:33.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPOW52OFdaTzdSVmFLdGt6V0tZSnpTV2E5Vkt0RDdadEp2c0gwbGxxMDBQUUpTaW5BYXpzUDNleVFyNExsQ2RHQkpOVlJ5WGdYMTl4SmpZblduS3VtYUJOSHprYkhXN2E3WXRiVm9ULWdWd3ZkU0c2LUpnZ3BZeklOdjJITzI1Y3poRGFjVnpBREZOM01TYl9VczNLQ25lY0RmX3BoT3pMR0otVlNlajBTWWNZZUREMG1QdUh3V1I3djJZM0NIQ1E?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "il-independent-4b8430abe9efd632",
+          "countryId": "il",
+          "sourceType": "independent",
+          "source": "The Times of Israel",
+          "headline": "Iran’s Next Strike: When Will Israel Face the Fire? - The Times of Israel",
+          "summary": "Iran’s Next Strike: When Will Israel Face the Fire? The Times of Israel",
+          "date": "Nov 8, 2026 · 4:23 AM",
+          "publishedAt": "2026-11-08T04:23:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxONXNNX3NzMU1sU1pYWFJVYjcza1U5YlZWbkpZakMzRUo2ZVFhcnh3aGpMd0Z5TWhabDBPZGdlcWtleExZYnFvel9LQi1XZ1Q4RzVBU3RVUkxBcS01NnowQWJJYkE2N2N6cXlQNHJLVDRzdjdFUmpSdHMzLVhmbmxDWnZjejFtQ05q?oc=5",
           "importance": 2
         },
         {
@@ -120601,8 +120640,8 @@
           "countryId": "il",
           "sourceType": "independent",
           "source": "Haaretz",
-          "headline": "Opinion | Why Israel needs its own El-Sayed - Haaretz",
-          "summary": "Opinion | Why Israel needs its own El-Sayed Haaretz",
+          "headline": "Opinion | Israel needs an Abdul El-Sayed of its own - Haaretz",
+          "summary": "Opinion | Israel needs an Abdul El-Sayed of its own Haaretz",
           "date": "Nov 8, 2026 · 3:39 AM",
           "publishedAt": "2026-11-08T03:39:00.000Z",
           "dateOnly": false,
@@ -127043,37 +127082,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOLTVGMUcxbl9yQVYtZlRIeHJ4T0NGTFNSXzFmcklIcVRiTWtwaXE0TUtlYkw0ZGVXQTJzUmdWRWdHbld4cE42OWtHUEw5X24yRmxpUEluejNqN2dwYk9lYkpJVGNZaUxyUE10UWI4Z0FQNDVYaGhrcXM0Z0k2d3V1UlpDaW1pNXhXQ2YwcFdwRWJyY3huTEVRT0JKOU9hZU9PeVBfYzdhVExFSV93Ym93dVlPdlRvTDNKamtZaVBn?oc=5",
           "importance": 2
-        },
-        {
-          "id": "il-independent-1f1e7c43fc497807",
-          "countryId": "il",
-          "sourceType": "independent",
-          "source": "The Times of Israel",
-          "headline": "A century after his death, Budapest circus revives Houdini’s daring escapes - The Times of Israel",
-          "summary": "A century after his death, Budapest circus revives Houdini’s daring escapes The Times of Israel",
-          "date": "Oct 31, 2026 · 6:02 AM",
-          "publishedAt": "2026-10-31T06:02:32.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOaDlJSWp4OGtBSkMxTmNTRGJ4NGxHRzJTN20ybDJEejUxT0owOVdzZi1vdV9WYUI3elZQQnVrTExQclUwOXVBRG9SZVltdDlDMU5zLXZQdXhnSXdwVGozbnVsYmJLQkpnd0RwaGIxc1FBakVuNS1KM1I3U2NoZXZIM1U3WElEd0p0UFRlSi1JdzhTVHltRlhSS25LLTRFQzhFa0IzVlN0RdIBrAFBVV95cUxOUlRlclc4ZXljZW43WV9BX2JrZ3N3b25TbEsxSWp6MEVCa2NKYkFWdUI5Z0pMTXBXMEdZYmxKOW5tZU5WWnRzUGN4dGIxbHFBSERQLW84dGEzaHp4LTRqbnBSSi1wRjEyTjljUW5zZExzekc5UU5YRTVQbTM1dnYyMWhBcF92SDdvTmJFT29hWVZtc1g5WkdnRzZURUhEaDBKbWRkNHRPS01RanNk?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "il-independent-e9cb5c18f90cd915",
-          "countryId": "il",
-          "sourceType": "independent",
-          "source": "The Times of Israel",
-          "headline": "Anti-Netanyahu bloc said to weigh direct PM elections to break political deadlock - The Times of Israel",
-          "summary": "Anti-Netanyahu bloc said to weigh direct PM elections to break political deadlock The Times of Israel",
-          "date": "Oct 31, 2026 · 5:57 AM",
-          "publishedAt": "2026-10-31T05:57:32.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPUHVLODNnWlhoeUdxQkdVMV9zTkVma1IzQ01aSUR3SHFoa1BmZjI3dEZHeDJRbHM2LWd0dXNJWjE2RGYzWmVvVXpGOGFxM0lRSWRTNEhzQm5mb0lhV3dWSHIyQTdMSE4xREg3V1kyXzlnbVp1aW1fdGxkV01DbGxWYUxLb1JwTVNDUjBCOTVYVlFYVmtKdk5HVUYwbmJVcHRxSUQ0VUVvNWJPVEhwWXotY1dnbnpRbEc0YWhPaTBZTGRtSlJIMXc?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:43.405Z",
+      "officialLastOkAt": "2026-11-08T10:19:15.138Z",
       "officialLastError": null
     },
     "ir": {
@@ -127086,8 +127099,8 @@
           "source": "Al Jazeera",
           "headline": "Breaking News, World News and Video from Al Jazeera - Al Jazeera",
           "summary": "Breaking News, World News and Video from Al Jazeera Al Jazeera",
-          "date": "Nov 8, 2026 · 8:04 AM",
-          "publishedAt": "2026-11-08T08:04:22.000Z",
+          "date": "Nov 8, 2026 · 10:03 AM",
+          "publishedAt": "2026-11-08T10:03:05.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiP0FVX3lxTFBPd3h6VGM0TDlnQTJRaHcwMHkxaG5HcFFUY08yOEpFQ3FjZHB3b3h1bGlwSnRkT3k5SXZORXhjYw?oc=5",
           "importance": 2
@@ -127175,8 +127188,8 @@
           "countryId": "ir",
           "sourceType": "independent",
           "source": "Reuters",
-          "headline": "Saudi-led coalition intercepts two Houthi missiles fired towards Riyadh - Reuters",
-          "summary": "Saudi-led coalition intercepts two Houthi missiles fired towards Riyadh Reuters",
+          "headline": "Saudi Aramco building in Riyadh damaged by falling debris after attempted attack, ministry says - Reuters",
+          "summary": "Saudi Aramco building in Riyadh damaged by falling debris after attempted attack, ministry says Reuters",
           "date": "Nov 8, 2026 · 5:24 AM",
           "publishedAt": "2026-11-08T05:24:00.000Z",
           "dateOnly": false,
@@ -133589,6 +133602,32 @@
       "official": [],
       "independent": [
         {
+          "id": "sa-independent-86615fcf4bddd060",
+          "countryId": "sa",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Saudi Arabia intercepts missiles as Aramco building in Riyadh is damaged, and other Mideast news - AP News",
+          "summary": "Saudi Arabia intercepts missiles as Aramco building in Riyadh is damaged, and other Mideast news AP News",
+          "date": "Nov 8, 2026 · 10:05 AM",
+          "publishedAt": "2026-11-08T10:05:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOU1hPV0p1dkZfcU92OEJVMkYtQTNHb3hKSDdGZHp5U1RkUTZlc2dzTU9oNjQ4dk5nUGZ6WVhkTlk2VTJ0cFkxOHozbE9aWUJObXFUYVBCZEwtaktnOGExQjVfUlhNdFlxRV9KeHMzS1Rsc2c3OFAxNHF6RjM2X0FRamhCalJsTk1BY1g2NFhHX2ZnUQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "sa-independent-620a49458af0aa0f",
+          "countryId": "sa",
+          "sourceType": "independent",
+          "source": "Al Arabiya",
+          "headline": "Saudi Aramco administrative building in Riyadh damaged in attempted attack - Al Arabiya English",
+          "summary": "Saudi Aramco administrative building in Riyadh damaged in attempted attack Al Arabiya English",
+          "date": "Nov 8, 2026 · 9:20 AM",
+          "publishedAt": "2026-11-08T09:20:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNS3FyUHVkRUlGN1dYeDJRU3dGSHZ4VkJ3X19WLWZUTkRwNW81U0JWcVNwX0ZuQUlqYTV4dFpkQVI5eEhheDgwNzg3QWppUDZuUlhwVkU3eFdMbEpKelJjT3B0bzRrQUNpMG1FR3hOMk5ZU0JDVG54ZzdiOGFtVVV3dkx2ajVtSXFKSncxMnlBWHNVM21vSHpjaTZLSTRtdEJCYW9xNno0dExzdERHZGZBY3JSVWEtdWIwWXhvMzlZbTllVUJrUFRyZ2RyUjLSAdIBQVVfeXFMUFVMcFV1WFRqd1lmQjVuSGhWSzVjQl9YLVE2bEw4NnBHcHhfUmxfT3Nqamw3RUpJcE9vcmVmTjY5RklORkthdUppRWNSQm9id2ZGZHJRUzZyUkpVNVNWQkE2Z291Q05vcDZXV2N1M3dyX3RWTEFCMHZFOFZYMkxwcXRqVmd5RlduUUpjSFhrRktpaDFaSE9fRDUyaU9vdzEyc2M4Tlh3SmlGaW10bjkxamNGNDduM0xvZlczNTAyQ05fS1d6R28zaVJyOEkwbHNUV3lB?oc=5",
+          "importance": 2
+        },
+        {
           "id": "sa-independent-ab8e38404b449d44",
           "countryId": "sa",
           "sourceType": "independent",
@@ -133606,8 +133645,8 @@
           "countryId": "sa",
           "sourceType": "independent",
           "source": "Reuters",
-          "headline": "Saudi-led coalition intercepts two Houthi missiles fired towards Riyadh - Reuters",
-          "summary": "Saudi-led coalition intercepts two Houthi missiles fired towards Riyadh Reuters",
+          "headline": "Saudi Aramco building in Riyadh damaged by falling debris after attempted attack, ministry says - Reuters",
+          "summary": "Saudi Aramco building in Riyadh damaged by falling debris after attempted attack, ministry says Reuters",
           "date": "Nov 8, 2026 · 5:24 AM",
           "publishedAt": "2026-11-08T05:24:00.000Z",
           "dateOnly": false,
@@ -133648,7 +133687,7 @@
           "headline": "Saudi Arabia to expand renewables fivefold, IEA reports - Arab News",
           "summary": "Saudi Arabia to expand renewables fivefold, IEA reports Arab News",
           "date": "Nov 7, 2026 · 8:05 PM",
-          "publishedAt": "2026-11-07T20:05:39.000Z",
+          "publishedAt": "2026-11-07T20:05:51.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPeFkzcjZVQlFQcXNkQkk4Wm9POV9HLU1NNUtlU0R1V25zWWtDU1RyTEVwYU5BaVpJTVpHdDdPUDBNZGtWR3lTYTF5dE8tS2FuU3FlLWhKQjhKOXBzZXdacDJkZTB2MFJIb2hOVTA4TkJFSUFKVE9xbE1rNkU5OU8wa1FKY3RkeW9xVDV0Q1lIbFR1S0Jma0hPdHZR?oc=5",
           "importance": 2
@@ -140061,32 +140100,6 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNVFY1ajEtUWRnV1hUYkxoN3hwTGx3aUVRUnVmcXJmUG5Jc3dMcDVxaTI5aDE3aFpOQTMzNzdRXzdvVDRDaTVGWDZqUGhwN3cyYjE4eUtjTThpLTZwY1FDSTVvc0pQaElkM1JaVEJDckpnbm5uZmNlaW9oOFZkQ0F5ZDNMNktsaVMxOXF5WGZxVVpXRl90SmlnZUdZTUYzRlFyRmtwZkFKbW53RkE0YlJtdmJmRGhxNmtHU0lpRU50SW1QZw?oc=5",
           "importance": 2
-        },
-        {
-          "id": "sa-independent-510c90fa4ede5fc8",
-          "countryId": "sa",
-          "sourceType": "independent",
-          "source": "Al Arabiya",
-          "headline": "Saudi Arabia reaffirms full support for Yemen government against Houthis - Al Arabiya English",
-          "summary": "Saudi Arabia reaffirms full support for Yemen government against Houthis Al Arabiya English",
-          "date": "Oct 6, 2026 · 4:42 PM",
-          "publishedAt": "2026-10-06T16:42:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNdWRZMy1pVmtRT01kZTVhSGdJU2RKSVFfMmRUS29ydkNXLVQzMkZKSFB6V1d4NWk0bFlKc0xVY1lUZmNzSnphX2tnY01xbjZRaXNJNUJPRkhBRHlLYzdvcHVndU9qVTJWSlVHZDBPRHBrdDFkbEV2YjZ6aURpT2FPbFFuVXVJN0k0NzRNS2lqR1BoeDdaUDlEZXJQMHN0WGNXb1Jmb2tuMF9oOW90OHo1NXBzUlBCVExoU0dqZW1qdElRVVg0RnpWRlQyTXMzQUHSAc8BQVVfeXFMTXVkWTMtaVZrUU9NZGU1YUhnSVNkSklRXzJkVEtvcnZDVy1UMzJGSkhQeldXeDVpNGxZSnNMVWNZVGZjc0p6YV9rZ2NNcW42UWlzSTVCT0ZIQUR5S2M3b3B1Z3VPalUyVkpVR2QwT0Rwa3QxZGxFdmI2emlEaU9hT2xRblV1STdJNDc0TUtpakdQaHg3WlA5RGVyUDBzdFhjV29SZm9rbjBfaDlvdDh6NTVwc1JQQlRMaFNHamVtanRJUVVYNEZ6VkZUMk1zM0FB?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "sa-independent-cc83dfc383e95f67",
-          "countryId": "sa",
-          "sourceType": "independent",
-          "source": "Al Arabiya",
-          "headline": "Saudi Arabia reaffirms full support for Yemen government against Houthis - Al Arabiya English",
-          "summary": "Saudi Arabia reaffirms full support for Yemen government against Houthis Al Arabiya English",
-          "date": "Oct 6, 2026 · 4:42 PM",
-          "publishedAt": "2026-10-06T16:42:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPeXN1ZTFNempLa0ZWUE1qRDRUZWVNbmFvMDR4WWtCSFBQT0U5UURvU1BJOXhFeU8zcjZpYUh0cWVYdzdvNElEWUNOZE1BLVRkOTlQbW83akRoZ3ZRNjJFSXZjOGI0RkNrUERSUDVjOFBKMlVmMEY2X2VLam1pc3FfY1pvU21ZMTc1WWg2a281MEh3ZmIwSXZFaTU5aS1OVG5oZU5Td1RKVTMwTGJtTnFLTDJEVnlVVUtKN1YxVmt0bVZZWEFwcS0tdnNR0gHPAUFVX3lxTE11ZFkzLWlWa1FPTWRlNWFIZ0lTZEpJUV8yZFRLb3J2Q1ctVDMyRkpIUHpXV3g1aTRsWUpzTFVjWVRmY3NKemFfa2djTXFuNlFpc0k1Qk9GSEFEeUtjN29wdWd1T2pVMlZKVUdkME9EcGt0MWRsRXZiNnppRGlPYU9sUW5VdUk3STQ3NE1LaWpHUGh4N1pQOURlclAwc3RYY1dvUmZva24wX2g5b3Q4ejU1cHNSUEJUTGhTR2plbWp0SVFVWDRGelZGVDJNczNBQQ?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": false,
@@ -140108,6 +140121,32 @@
           "publishedAt": "2026-11-08T08:48:45.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOY29oa2dsSGVZVjBuRGRqZkZsTTQwUmRIY2F0VXpQZWRRQWlvUEV0d19yMklhMUk5U0R5UmVsZDQxOGtwR01iRXFWOU5zNFl2MEJPenNIVVJrVkg3SGQtdnZ3YURFOGtpdHVVUFF1Yi1hdENaU2VsLU82RG5vTWtnNm0yckdmaWM4QTBNUks3UFZDeW5nZnZwb2NZbWhQMjctZVBPS0MxVnFTYTA0RVJvRWhVci1veDJ2TktPZXZYTzJpdVlVWEV3cEdR?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ae-independent-a64dc1f188aab91a",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "Khaleej Times",
+          "headline": "Abu Dhabi court rules BR Shetty, ex-CEO liable in $5.4 billion NMC Health case - Khaleej Times",
+          "summary": "Abu Dhabi court rules BR Shetty, ex-CEO liable in $5.4 billion NMC Health case Khaleej Times",
+          "date": "Nov 8, 2026 · 8:21 AM",
+          "publishedAt": "2026-11-08T08:21:21.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxObk1FZ0dWZFp0akdVT3NlNWwxVWdNS3hkMElDY2FsUWJsVm1GNGlJRW92OWJkT2tvanBWUDdYVDdWY1ptYUNUQVlkN1NoSHBIaXFxaUVpcmdXaWw0a2xLdU1rQTVncm5mSWhYbzVNa3p5V3dyb3V4OUY4NHcwem5mVHZTb3lpTTVaNmpsT2J0NXZNN3NDUnZlQTIxOEM5Q3pwX0RQX3NxWXlYcTB1QVlldHpxVdIBuwFBVV95cUxPNnJfVFNJeEtqSE01dUNpUFBTRHp3VWRVMVQ3dk53TjhVcVhjTzdpWmx2UEZhcGx2TTROYUVwMXQtQmNNNlJ1a1B0dUJCQnlGTDNXeEYxMi1ZQUxsT3JGc2hLbzdDNVhTd3BLc2RMR3h3YzlBdGhQZk9WNUJJUG03dk43bnZLRndDM1JYVjJMTzJZTTNDRVl3Q01KQmFPWmZmTFZVcWJreWVIcFZsMEZlMFE5cmF5ekNaZVFB?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ae-independent-361bd2d8f1122a97",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "The National",
+          "headline": "Middle East latest: Projectile damages tower in Riyadh’s financial district, reports say - The National",
+          "summary": "Middle East latest: Projectile damages tower in Riyadh’s financial district, reports say The National",
+          "date": "Nov 8, 2026 · 8:19 AM",
+          "publishedAt": "2026-11-08T08:19:42.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNME42cE40Mk9sODA3dHc5LWNWZTRab1JhY1RmcVA0WklGQ0VOUlRUSkhXc0x2eThQM3lCVE43VlpnSWgwVUFSb29RVW5oZnBPMjFzWXkxYXAxSEUtTHpRcmRFR3pBTUxIX1F4clI5clBrTVNodTRPOHl2c3dlREFqdW9ROWx3R2xoS1JLMWVPSXI?oc=5",
           "importance": 2
         },
         {
@@ -140180,8 +140219,8 @@
           "countryId": "ae",
           "sourceType": "independent",
           "source": "Reuters",
-          "headline": "Saudi-led coalition intercepts two Houthi missiles fired towards Riyadh - Reuters",
-          "summary": "Saudi-led coalition intercepts two Houthi missiles fired towards Riyadh Reuters",
+          "headline": "Saudi Aramco building in Riyadh damaged by falling debris after attempted attack, ministry says - Reuters",
+          "summary": "Saudi Aramco building in Riyadh damaged by falling debris after attempted attack, ministry says Reuters",
           "date": "Nov 8, 2026 · 5:24 AM",
           "publishedAt": "2026-11-08T05:24:00.000Z",
           "dateOnly": false,
@@ -140199,6 +140238,19 @@
           "publishedAt": "2026-11-08T05:13:56.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNSVB4Z0k3Tnkzb0owYUx4SlBRY3BNUjQzeTJwMTRfNHNibHEtQlVMdGNVdjE1Y1NUNW13VGt2bDY0VUhQT0JqZFNlTzhVX0VlbkozYmRsZ281R2E1eVNES2xUZVY4aGN2eDVLVmFESU1CRlNUMnZsWEhDQTBOMXVxUmxqbk5CdGFWeE1INjZtbnIzcmh4bEVGOXZhLXpLWWFRb003Q1ltQUF4YkY1SXhPYnc0UWlaVWJzbC1BREhKTGZ5ak1KY3FZM3N1dDVISktGZ1E?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ae-independent-5e1a4a4bdcc9ed12",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "Iran executes three men over armed unrest during January protests - Reuters",
+          "summary": "Iran executes three men over armed unrest during January protests Reuters",
+          "date": "Nov 8, 2026 · 4:41 AM",
+          "publishedAt": "2026-11-08T04:41:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNQ3AtenozM05Va3RPQ1JUYWZ2T2ZYSHVLeDVpN0pKd2lObzVlTjFmSTAyazZoUzNFbHNEc3F5NVBsclI5Rkt3MlpQaVpISy1HdEtOTmNWQVFPQ0IyOGVMOUp0aURUQWJNWENqTklhSUlNQkRqTnFSWm9QR2o3R201b0FVRk00WjV2dG5XaEwzRjIwWVoxQUtkRExIVWdUV1FqdFdPNUQxRjBIdXdfUVJ5RWJ3RkFEX0p5dUZtSzFVLVpsQlI2OTdRQ0pJeDl5djg?oc=5",
           "importance": 2
         },
         {
@@ -140277,6 +140329,19 @@
           "publishedAt": "2026-11-07T21:57:14.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxObzVlZDVLRWxGVlQ1a2V1cTY5NXBjcjlJVzVqbjBKRGpRLUpnWndzNlM5bFpUYjJaUU5UeG1OS2E3c205RVVNMDJaUWxoWFN2ODc1bVhnc096VFlpOFo1N1YwR2JGS2JQYURyQ3NHZEVZaFhvQU5IaWZ1VFZHRjZNTkstbVhiOTUyTDJKTjAySmE0N3FiUzZLUGJKdDdrcGllOTNmMEdHUC1DanlqZ3V5MA?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ae-independent-294f2d9c7b087e24",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "US military says it disabled cargo vessel in Gulf of Oman - Reuters",
+          "summary": "US military says it disabled cargo vessel in Gulf of Oman Reuters",
+          "date": "Nov 7, 2026 · 9:22 PM",
+          "publishedAt": "2026-11-07T21:22:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNT3Z5Um5vZGVEQndERDNUZDljektyalQxMjB1SVk0SkNJOWRSSWJRLVBUc0czRzIxMWtFSEs0WnFoVk81XzN6V0xKOGZkNkUzYXFiM2wwdGE2cks3Uk05RlRpQk92SWp3REllTGF4cUVFV0IyelBXbFJNRzVJem5DRkVCLWRKQ0tPQTNVWi04NU5yRlJEeE1MUmVreHVHQ2RrYTZrUHpuLUs?oc=5",
           "importance": 2
         },
         {
@@ -140732,6 +140797,19 @@
           "publishedAt": "2026-11-07T02:00:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOUXhicGktMko0ZVdOMWozTzdrdXdsaUZOVXpIV2doWktMUWN3Y2I4MC15LXpxMmVlUTVMRkFkMnE4S0N1S3VfNGw0S1FLN1RlZ1BIcGhvWU82Ukt5b0RoaWNDa05rYUdHV1ZZeldKNUl6UHVYZVRPUGFNZFJ5QzJlbEs1Q1k5MGJsX291SFpYQ0lyRG94dUpUSTNhbXZhOFpQ0gGoAUFVX3lxTFA4aUhHa2g5VXhMaVRqcHlUZDZMX1c4MW1JNHl6SW1fLWJYMGNmQTF4MWlGbmJNVEo2eExYdWZCNHBlaWFwUGlIa2NIYmJWdzdKanVSdW5QRFZrY3pzRUxpV3B4Z3ZzQ2ZSTDdpeTdhM2dERW9yRFFzX0ZGeEdCRTNOc2JyVk53NXZ4cF82T3hyOHE2c2FucG56Q1RHVXpoM3BFMWZUbDczZQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ae-independent-8a5431c8c7f6864c",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "Khaleej Times",
+          "headline": "Explainer: Why Wall Street’s sell-off is spreading to Europe and worrying Gulf investors - Khaleej Times",
+          "summary": "Explainer: Why Wall Street’s sell-off is spreading to Europe and worrying Gulf investors Khaleej Times",
+          "date": "Nov 7, 2026 · 2:00 AM",
+          "publishedAt": "2026-11-07T02:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQeHNmb2RxTUNTYXE5TmlNMG5NdFhwamZPTkFqdFEzazNnal9reHVTOEFpWUViLVBkZ0hiMW1qOHUxSkI5enlMRXp6UVNaQi1faHE2WXI0NGlYSE5wNFlnaEF0MWU4Vi1objZ4cGVQWVVYcmRHTzFjRC1EbXlmdGljQTJpWDJ0c0c1Q3djM0hmQUZIYUNxTjRhbjhUYXh0cHBQRHNDZUdxSzBjc0RZLWx0QVZXSmY5cEh1Unc2YkFwRWRPX2pr0gHMAUFVX3lxTE00WTRwcHN2UXFGQlJWOTFUcW1OcjJOejJPUnFDaXJ5VWo1QUlFcWh1MGhLTjNjTXZkdlByV3UxVVQ2RGRuYmNMcDdNTVBsaVYzTDF1bU5LY3F3a0xmSzZIZFJMTEExX2NYM1gxSEhDYzR3cTFGbS1WQl9Tbi02a1RkQ3NJYTVIZXdfakRnd3RDdDNwMDBHUlNKS3JFUWdTRVE0Y0dUS090bzJmeHlIUFBfMHpqUllldnhJUlpUbXlRSXNsY1lPWVVqXzlOTg?oc=5",
           "importance": 2
         },
         {
@@ -146531,71 +146609,6 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOTnlBRUt1RWZ3Z05vSTZuZXZLdENxUnktWlJTeHBKN0FkWlJJX1p1NUx5M1hIcDZFWExPVmtSNXFURzV3SlVReVlIeDdSRzNFWXl6UzA3R25sN09ZQkNhV2h3QU1FMFFjOUVwZnR4aUhmWENnSDFEMmcxLXJKR3NiNFkxVEN2OUZ4YnfSAZIBQVVfeXFMTy1udjdRUWpQVnIzbDUxR0xEVXJCc2xiQWJPUk1MaHVMV2MtaEJxYktBdmJnRENDZ0t0MjNGeGxoeHRhb0FWc1BQeEhuY0NFRF9GeFRwMUlDQUtnMl9SOGtoREkzTmgzbkx6amRaZlNQbzh4bHhjWlJ2QVpBMzhKeFFhMjBoZVBaR1dqSVRqRFROVGc?oc=5",
           "importance": 2
-        },
-        {
-          "id": "ae-independent-16170d741df1067d",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "The National",
-          "headline": "Best photos of November 1: Dubai Ride to Istanbul marathon - The National",
-          "summary": "Best photos of November 1: Dubai Ride to Istanbul marathon The National",
-          "date": "Nov 1, 2026 · 11:36 AM",
-          "publishedAt": "2026-11-01T11:36:31.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNQ2ZvcTVVSVVxVElHZDhCZkZ0TnRKMzdNUFNJa1c3akJodTRWQjZVZzZsS1NiTTQxVTVha0xQeDRJaVpoTUVIdTRWNGlwNVVJVkFNaGNsNmxjRlpYQ0xsa3FiZFc1b1VlOUpKZ0dXVFlJN2RfbzgtTDZoSE0wYk53QkdOMnpweWxPaXoyM19oLThFNFI3VzJvRXNpRXlzUXZraGg0eUhIeERhdw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ae-independent-414f234ff7078aa0",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "The National",
-          "headline": "UN expresses outrage after staff member dies in Houthi custody - The National",
-          "summary": "UN expresses outrage after staff member dies in Houthi custody The National",
-          "date": "Nov 1, 2026 · 11:30 AM",
-          "publishedAt": "2026-11-01T11:30:05.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPek1wSEZjNWQzVjJNT3B6c2N2dVhMZGgzdzN6NldhdDBkVElVaDlxVFBYaDBHOEVfZE5veXB0S1JzZmVHNDhYLXdJMjJZLXduQThFMW9QODRxNEt1WlNpZGw1eW11SzZXMldGQXp4NWZ6cmdFeG10RUdKcWhxTHpseWpQVVh1dURJZjc1aWNNcWpoMVlEeTZpSjh1WDQ5RU94dGI0ZmJB?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ae-independent-7e1061089b5765c6",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "Khaleej Times",
-          "headline": "Binance resumes bitcoin, ether withdrawals after covering bulk of stolen $6.3 billion - Khaleej Times",
-          "summary": "Binance resumes bitcoin, ether withdrawals after covering bulk of stolen $6.3 billion Khaleej Times",
-          "date": "Nov 1, 2026 · 10:33 AM",
-          "publishedAt": "2026-11-01T10:33:31.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNTDVQOU90N2JIbVVHNTNEbU11TzRZbzFoOFRoSlk0RXhjVEtqeGxVVEowVHFucmt2eW84SzdBc0FUalBzWFBBZEJ6RUpwbTZIVmtlN19nVWNFV3BhbFdpSHRaYlM4V1czY3BpUDhKUWEzT1pCTkZ3SGNoQjZacWdENWNjY3JCSUZzdmVzU1FxYU5Zb053UkZVUUx6ZlRrNm1JaW5oLUVFTWQ1aDh3RU1oRGw1Y3VJM1I1S0NJM9IBxAFBVV95cUxPRDNWWU9UMnFmWk04TEl2OEZDQk9oWVBhRFFWQWhSLWJ4UktqZE9vd2t3N2hUUG95R2haaEpfeVBVS0xzR2hMYzgyb3ZkcXB0X3l6MHZEcVljMzN0dWdsU2xnN3J4b0lla2VhNklYZ1A3OXlfS3IyalNoRmg0SnNWZDVJTnJrS3ZxZm1GMVVUNjBac3FBSWZ6eVp2S0M5Q1dPQXBJR0RTdzNHRGhnT0RFX2VSa002dGxBOXJSck5Uc1Nxb3BY?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ae-independent-5a9c368e30dac022",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "Khaleej Times",
-          "headline": "Visit Dubai to offer single-, multiple-entry tourist visa applications - Khaleej Times",
-          "summary": "Visit Dubai to offer single-, multiple-entry tourist visa applications Khaleej Times",
-          "date": "Nov 1, 2026 · 10:30 AM",
-          "publishedAt": "2026-11-01T10:30:47.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQNmd1aTRmRERTOG5SMXI1bTF5cEN3SENMRmVHdlp2Z20xcnN2QmJDZ0pzWDJDZlVtODgxRFI3aURoR2QwU2R6QWJLYTc4NWd5OURNLThGeDgzai1BUnVaZG5YNGZtMXYxVEs4a2Z3RWxfblh5VUw2eHFQNVdzMlVlZDBzd2lZajlJZjRpVFJqSUlCeW1KbVNHU2JnMjRuQV91dEk00gGrAUFVX3lxTFBPMExock5tdktMU0FYaF9tS3hUN29jcFdQRm9jYWNRUWdJT2V0UzZfWGJiZVdtbVNSZVI0Vi1uQTFrOUlBdWROV2Z2YklxclZHaXI5aUxuSDN3Q3lhdUQwTDl5cm8zNTNiNkRESHdQWURjcUlpWEZwNzUwcjkza3IyX0Jxd0pWQ0pTdHZGWnpzbVl3RE0yWDNaTk45RmZrVGM2M0hqU0V1YlByaw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ae-independent-e30cf3d434bb926b",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "Khaleej Times",
-          "headline": "From sleepy 1-year-old to 3.45am start: Dubai Ride brings thousands to Sheikh Zayed Road - Khaleej Times",
-          "summary": "From sleepy 1-year-old to 3.45am start: Dubai Ride brings thousands to Sheikh Zayed Road Khaleej Times",
-          "date": "Nov 1, 2026 · 10:29 AM",
-          "publishedAt": "2026-11-01T10:29:21.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQR2ZwNjlJSVpOVnZ2OExXejNGVzkzOXh2d0R4cTJoX0tVOHl3ZGlTc2IxaVFxTXdnWUZmblRvREJPT1FIZmdHRTAwYWFyeE54Yk1ua19xSC1uNDFabXlOdXFIR3pZSTRUc19Xc09pMWNRcjdDVGtiSko1RnYwcnJCU0pRSTFMd0xodVJSOGtXONIBlwFBVV95cUxOTHduUF9JM0I1TDRwQ0ZYT3VHenIwT2wwVV9Xb3Rwc2s0cldDa1JyMV9KZENrYzRRY3lrQzllanFaZG01WUZ1U1ZJblRQWkdGNERFUTR2cnFNbndUaHZYRnNYWHFoZzhUVjN5Y2gxWjFhQ1BYSVRZLXZ1WVN4bGRaRjVyd1RnT1EwTmV0Y3Q1S0F6V3N0M1dZ?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": false,
@@ -146606,6 +146619,45 @@
     "eg": {
       "official": [],
       "independent": [
+        {
+          "id": "eg-independent-1c0a2ccf085e6f9e",
+          "countryId": "eg",
+          "sourceType": "independent",
+          "source": "Ahram Online",
+          "headline": "Egypt - Urban & Transport - Ahram Online",
+          "summary": "Egypt - Urban & Transport Ahram Online",
+          "date": "Nov 8, 2026 · 10:00 AM",
+          "publishedAt": "2026-11-08T10:00:28.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPaU54TkpPVmJ1bUpNZWcxYWtBaklubmdESUFXMVhhaHZHTjNncy1QM18zeHl5dTZKcHVxX3E4WXR3eTBzRUdmbDRENW4zNmx4Z0dlSDNEcE8zSHlyWTRvOUtEdGMxMVpTWDVWbVgwUEVrdkt5alZhT3VkNWJWc3JiYml5N3hTbkYtYm1mLXhVb2ZUaU5YNkpmVFM4Z0Q?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "eg-independent-85820a6f1f40b71c",
+          "countryId": "eg",
+          "sourceType": "independent",
+          "source": "Ahram Online",
+          "headline": "Egypt to launch national childhood cancer early detection initiative in January 2027 - Health - Egypt - Ahram Online",
+          "summary": "Egypt to launch national childhood cancer early detection initiative in January 2027 - Health - Egypt Ahram Online",
+          "date": "Nov 8, 2026 · 9:59 AM",
+          "publishedAt": "2026-11-08T09:59:30.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOeXhqOU05LTJHU3RsZHJPTTdRWkY5LTEza3lDWmo4ZUUwV2Roa05HRVNXaEpHX1M4VUtyU1Z6dF80WTVQQ3dpNHVNdjRZMjB1dHhlXzBKNjItUTRjTEZwUF9pWEcweWFaTGFyVWRBNm9sZXYzeE4zeEpMWUl5VV8xeG5ZNnZyZVBrSVFIaHRROHIzWXVtcGx1cnV4UTl0ZTh2WFdmazlpdlhDYjdQN3NJSEFlNUpUcGREYmMwZmZuYlA?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "eg-independent-42cda18301f9c09c",
+          "countryId": "eg",
+          "sourceType": "independent",
+          "source": "Ahram Online",
+          "headline": "African judges back Egyptian proposal for AI guidelines in courts - Politics - African Media Digest - Ahram Online",
+          "summary": "African judges back Egyptian proposal for AI guidelines in courts - Politics - African Media Digest Ahram Online",
+          "date": "Nov 8, 2026 · 9:25 AM",
+          "publishedAt": "2026-11-08T09:25:46.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxONC04ZGJqRTE2aDNtRGxldW9UUjdOWHpqd3Q1aGt2YkpyQUhiUUZsZDF3VUxOR194RERPRjVyXzJUZlZEdTlneDI5YWFxTTNHTGdNLVJ4M0FCU2l5alg0TFVVR3VRdzd1R3g0R285dnRHakl5Z1c3RWY4M3FXdWZTVjM2TGwtaFRXMUdpeHdIdGJodUV4Rk1TZUExVURfLXB6cldLNFdvcE1FdDJiakJjbWF1V3lzVWk3czlrQi1jT0UxU3ZqTlJyWVdVMEltS1QzalladmVGVkk?oc=5",
+          "importance": 2
+        },
         {
           "id": "eg-independent-49d0544914e18e91",
           "countryId": "eg",
@@ -153066,45 +153118,6 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQaTFlRnBhZ284eWc3cEp1ZlBnbHFodWFQZnF6RF9UcXY0ME04d0FNa2pCUVVRbTh0ZHJ5aW5CVHdoREktU3BfRmIwaExtSlhEX3F1M21iYmJuUTBSTVdzTFYxYU9Qb3BoU1NSNUxKRjZ6TC10Y0FIYWQ3ckZrdUFnTzY1R2YwV2IzS21SU2IyMC13ZzdTTDQxSWxRc1ZhTWJ6RG5qRVJ0QU5LeUVCcXBpZ3FKUHNjNVBIMmZUWXdHd0lSZw?oc=5",
           "importance": 2
-        },
-        {
-          "id": "eg-independent-0cc9b6732a37ccc6",
-          "countryId": "eg",
-          "sourceType": "independent",
-          "source": "Ahram Online",
-          "headline": "Egyptian Navy marks 59th anniversary of October 1967 naval victory - Defence - Egypt - Ahram Online",
-          "summary": "Egyptian Navy marks 59th anniversary of October 1967 naval victory - Defence - Egypt Ahram Online",
-          "date": "Oct 21, 2026 · 9:18 AM",
-          "publishedAt": "2026-10-21T09:18:48.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5MQnhSTy1uOXpRX1JUMVJHVTF4eXlHUHVyRTZfLVJla0pZeXFrZGNMdVV2MmVRNFE1WGtEOFZEX2dEZDhieEszcWU4aWhyZVNMd3VfcDVMVHk?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "eg-independent-d4634a02a1a65b40",
-          "countryId": "eg",
-          "sourceType": "independent",
-          "source": "Ahram Online",
-          "headline": "Al-Burhan reassures Egypt over citizens safety in Sudan, urges continued trade - Foreign Affairs - Egypt - Ahram Online",
-          "summary": "Al-Burhan reassures Egypt over citizens safety in Sudan, urges continued trade - Foreign Affairs - Egypt Ahram Online",
-          "date": "Oct 21, 2026 · 8:54 AM",
-          "publishedAt": "2026-10-21T08:54:50.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPbGtDd0U4c1VPSlgyeERlRE92UUktOXdnNFhwOGh2VDNwSHpUVUc5S2M5cWg5UlV1bnhWN2lndXU5Rk9Zb2N1YktKd2g2TmdrRWFZeEJYNkxWMklUcW5pQ3FCYi1ZNjVVSzlBdnFUTG5NY0Nwd0kwQ0U2UURGOTFBQnFYbGI4eVZ0aWlzYjJkME02ZzF6LUp5TXJLS3NEX1Rrd1JCQThuM3AyQk9TdkNTZmJB?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "eg-independent-63df2eb812463645",
-          "countryId": "eg",
-          "sourceType": "independent",
-          "source": "Ahram Online",
-          "headline": "Egypt–Italy Ro-Ro service doubles to 2 weekly sailings - Urban & Transport - Egypt - Ahram Online",
-          "summary": "Egypt–Italy Ro-Ro service doubles to 2 weekly sailings - Urban & Transport - Egypt Ahram Online",
-          "date": "Oct 21, 2026 · 8:12 AM",
-          "publishedAt": "2026-10-21T08:12:24.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBNNnoyX2NscHB2bHprWWlOY1JCbFlXYnhJMzlTX0RKWEs4WWZYd211U2YwWndpYldqLTFMVUsxRFpZcHhKdFl4ZHRXcWhMcDVMMlViOVV4OG8?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": false,
@@ -158884,19 +158897,6 @@
           "importance": 2
         },
         {
-          "id": "ng-independent-8bf20673437eb813",
-          "countryId": "ng",
-          "sourceType": "independent",
-          "source": "Channels TV",
-          "headline": "Tinubu Departs Nigeria For Saudi Arabia Thursday To ‘Pray’ For Nigeria - Channels Television",
-          "summary": "Tinubu Departs Nigeria For Saudi Arabia Thursday To ‘Pray’ For Nigeria Channels Television",
-          "date": "Oct 29, 2026 · 10:24 AM",
-          "publishedAt": "2026-10-29T10:24:16.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQR1c0N1RPVEozUUJ6a3FTUnVQMC1PQkZGdGcyOG5LdWcwN3JWSUdQQjRQUlgwazJnMmx0OTRjR29nbl93Y1RhMXdVMG5sdlNMcEpDd2w0dFNfWVM4TGJEbnhkcVRSSERCUkc1WDhKakFaSlRNSFZ6czFzRnhRdGRXa1RXRW1yRjhxVWhPUG1XdHRlbGF0R3dTZVIxN29ENXVjZWhubzFOWHoyN28?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ng-independent-0441ee7a82b5642b",
           "countryId": "ng",
           "sourceType": "independent",
@@ -159193,6 +159193,19 @@
           "publishedAt": "2026-10-28T07:38:37.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxPRFVvaTJ2eFk3Q0c1VC1fQkJuTFZZcG1KRnFwTmtLdFlWX3BXNVZBN1ZvS0tST0FPcmxRRGNEVGdJdGdFOThVSnAtbW1IdlVEa0tTcW5MVDRYb2hyQWhVQ28wTXZJZmdwdHpiaTh2QlgtUmlCUmRKeGV2Y21lU0Z3bkNrQUlPaHFxZHkyRWQ0Q3lOaFNSOUFpcW9PUlUtM2w5dXQwZWZscFowTEQzczVUTDkyLWZVMF9MZFc1T1ZncWlzd21HMTlCVEtnWW5VUjd0ekYweXpzdVQ3eFdCdkVrQ1dHcnlfVE04bzZwVnJ0azY?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ng-independent-8bf20673437eb813",
+          "countryId": "ng",
+          "sourceType": "independent",
+          "source": "Channels TV",
+          "headline": "Tinubu Departs Nigeria For Saudi Arabia Thursday To ‘Pray’ For Nigeria - Channels Television",
+          "summary": "Tinubu Departs Nigeria For Saudi Arabia Thursday To ‘Pray’ For Nigeria Channels Television",
+          "date": "Oct 28, 2026 · 7:00 AM",
+          "publishedAt": "2026-10-28T07:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQR1c0N1RPVEozUUJ6a3FTUnVQMC1PQkZGdGcyOG5LdWcwN3JWSUdQQjRQUlgwazJnMmx0OTRjR29nbl93Y1RhMXdVMG5sdlNMcEpDd2w0dFNfWVM4TGJEbnhkcVRSSERCUkc1WDhKakFaSlRNSFZ6czFzRnhRdGRXa1RXRW1yRjhxVWhPUG1XdHRlbGF0R3dTZVIxN29ENXVjZWhubzFOWHoyN28?oc=5",
           "importance": 2
         },
         {
@@ -163998,6 +164011,19 @@
           "publishedAt": "2026-11-08T00:00:00.000Z",
           "dateOnly": true,
           "url": "https://www.pib.gov.in/PressReleseDetail.aspx?PRID=2334072",
+          "importance": 3
+        },
+        {
+          "id": "in-official-4d7d0d64d75b42d6",
+          "countryId": "in",
+          "sourceType": "official",
+          "source": "Prime Minister's Office",
+          "headline": "Prime Minister distributes sweets and celebrates Diwali with Jawans at CoBRA Operations Base at Bastar",
+          "summary": "Prime Minister distributes sweets and celebrates Diwali with Jawans at CoBRA Operations Base at Bastar",
+          "date": "Nov 8, 2026",
+          "publishedAt": "2026-11-08T00:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://www.pib.gov.in/PressReleseDetail.aspx?PRID=2334101",
           "importance": 3
         },
         {
@@ -170433,19 +170459,6 @@
           "publishedAt": "2026-09-08T00:00:00.000Z",
           "dateOnly": true,
           "url": "https://www.pib.gov.in/PressReleseDetail.aspx?PRID=2307731",
-          "importance": 3
-        },
-        {
-          "id": "in-official-b39e4e49633719ff",
-          "countryId": "in",
-          "sourceType": "official",
-          "source": "Prime Minister's Office",
-          "headline": "Prime Minister shares Sanskrit Subhashitam highlighting the importance of discerning wisdom",
-          "summary": "Prime Minister shares Sanskrit Subhashitam highlighting the importance of discerning wisdom",
-          "date": "Sep 8, 2026",
-          "publishedAt": "2026-09-08T00:00:00.000Z",
-          "dateOnly": true,
-          "url": "https://www.pib.gov.in/PressReleseDetail.aspx?PRID=2307703",
           "importance": 3
         }
       ],
@@ -176953,12 +176966,25 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:49.622Z",
+      "officialLastOkAt": "2026-11-08T10:19:22.415Z",
       "officialLastError": null
     },
     "pk": {
       "official": [],
       "independent": [
+        {
+          "id": "pk-independent-7b9c601988c8880c",
+          "countryId": "pk",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Pakistan looks to youngsters to beat Sri Lanka in first test - AP News",
+          "summary": "Pakistan looks to youngsters to beat Sri Lanka in first test AP News",
+          "date": "Nov 8, 2026 · 9:25 AM",
+          "publishedAt": "2026-11-08T09:25:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNMXNRZzJnVTFOaXVPRmhSNktOQlotWFBtb2ZvQjBmSE9VRHVtTTYzV0cyMnBJNngtNjE1RUNkMmlGdGwwY0hKeXJBVWJicUU2endwUWEtME15ZGRqOS1fcHBvZmpBSTl3aktuUjBaX0xCZkgxTGdkZzVLVktGeFpDRmhTYnlqcHRSMC1JbXM5dVBrN2VRbVQxZWdJTV9fUQ?oc=5",
+          "importance": 2
+        },
         {
           "id": "pk-independent-9a5be230c8531c39",
           "countryId": "pk",
@@ -183445,19 +183471,6 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1CdU42S0lWM1JQTlM1V1NUY08ybWNTQUhvajZRZ25rV3ZLQXAtSDdyWjRrbFBMZ3N2bURraEdzWnFkbEEzWWhlaA?oc=5",
           "importance": 2
-        },
-        {
-          "id": "pk-independent-9af305c139af7685",
-          "countryId": "pk",
-          "sourceType": "independent",
-          "source": "Dawn",
-          "headline": "'Largest hypocrisy in the world': Pakistan tells UNGA India’s 'terrorist exports' have gone global - Dawn",
-          "summary": "'Largest hypocrisy in the world': Pakistan tells UNGA India’s 'terrorist exports' have gone global Dawn",
-          "date": "Sep 26, 2026 · 10:41 AM",
-          "publishedAt": "2026-09-26T10:41:24.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOel9odXJPVlliNkFEcmhjM2VSNVk4ZjZSMzhEUTYzUEFyOUNxUGlrSURSd1l1RFpabWlGbTRLb0trdzc1WTJMckNxZEZ6Y0hRelhnVVdUR2F2Y3g5MjhGRzN1TDlkNHh2WmUxY3Z5LWVOOE5VWm9SSjQ0U0VwV0JtQTY5NEY1U2c5SDNBTnpsaWI3SVEzMXg3R0VsNDlNeS1MLWVfQU1KZXNFSmlLQzhvcElmcXR5X25wRW56bmF0WEcwRG9s0gFOQVVfeXFMUDFwc1NHWFV2X29JOVR1dlk1OGJKNzg2MTJRTks4Sk0zbm43VUdDWkFhbmtSeF9wWmpOcHI4Yy0xLUw5Q0NvQjFheFd5cGJR?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": false,
@@ -183530,6 +183543,97 @@
           "publishedAt": "2026-11-06T00:00:00.000Z",
           "dateOnly": true,
           "url": "https://www.mfa.gov.cn/eng/xw/202611/t20261106_12054912.html",
+          "importance": 3
+        },
+        {
+          "id": "cn-official-0a008404672c317a",
+          "countryId": "cn",
+          "sourceType": "official",
+          "source": "State Council",
+          "headline": "Ambassador for the Affairs of the Forum on China-Africa Cooperation Liu Yuxi Attends Nigeria’s Independence Day Reception",
+          "summary": "Ambassador for the Affairs of the Forum on China-Africa Cooperation Liu Yuxi Attends Nigeria’s Independence Day Reception",
+          "date": "Nov 5, 2026",
+          "publishedAt": "2026-11-05T00:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://www.mfa.gov.cn/eng/xw/202611/t20261108_12055560.html",
+          "importance": 3
+        },
+        {
+          "id": "cn-official-43606635e083ca89",
+          "countryId": "cn",
+          "sourceType": "official",
+          "source": "State Council",
+          "headline": "China and the UAE Hold the Third Round of Consular Consultations",
+          "summary": "China and the UAE Hold the Third Round of Consular Consultations",
+          "date": "Nov 5, 2026",
+          "publishedAt": "2026-11-05T00:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://www.mfa.gov.cn/eng/xw/202611/t20261108_12055558.html",
+          "importance": 3
+        },
+        {
+          "id": "cn-official-5fe25e02a3ec7f56",
+          "countryId": "cn",
+          "sourceType": "official",
+          "source": "State Council",
+          "headline": "Special Representative of the Chinese Government on African Affairs Liu Xianfa Meets with Ethiopian Foreign Minister Gedion Timothewos",
+          "summary": "Special Representative of the Chinese Government on African Affairs Liu Xianfa Meets with Ethiopian Foreign Minister Gedion Timothewos",
+          "date": "Nov 5, 2026",
+          "publishedAt": "2026-11-05T00:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://www.mfa.gov.cn/eng/xw/202611/t20261108_12055559.html",
+          "importance": 3
+        },
+        {
+          "id": "cn-official-bf5c25c6fa0cb3b3",
+          "countryId": "cn",
+          "sourceType": "official",
+          "source": "State Council",
+          "headline": "Assistant Foreign Minister Cai Wei and Director General of the World Intellectual Property Organization Daren Tang Sign Letter of Intent on Cooperation",
+          "summary": "Assistant Foreign Minister Cai Wei and Director General of the World Intellectual Property Organization Daren Tang Sign Letter of Intent on Cooperation",
+          "date": "Nov 5, 2026",
+          "publishedAt": "2026-11-05T00:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://www.mfa.gov.cn/eng/xw/202611/t20261108_12055561.html",
+          "importance": 3
+        },
+        {
+          "id": "cn-official-716196b15731b7b1",
+          "countryId": "cn",
+          "sourceType": "official",
+          "source": "State Council",
+          "headline": "Ambassador for the Affairs of the Forum on China-Africa Cooperation Liu Yuxi Attends Reception Commemorating the Independence Day of Lesotho",
+          "summary": "Ambassador for the Affairs of the Forum on China-Africa Cooperation Liu Yuxi Attends Reception Commemorating the Independence Day of Lesotho",
+          "date": "Nov 4, 2026",
+          "publishedAt": "2026-11-04T00:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://www.mfa.gov.cn/eng/xw/202611/t20261108_12055555.html",
+          "importance": 3
+        },
+        {
+          "id": "cn-official-adf4f68077c7dcde",
+          "countryId": "cn",
+          "sourceType": "official",
+          "source": "State Council",
+          "headline": "Special Envoy Zhai Jun of the Chinese Government on the Middle East Issue Has a Phone Call with Minister of State at the Ministry of Foreign Affairs of Qatar Mohammed bin Abdulaziz Al-Khulaifi",
+          "summary": "Special Envoy Zhai Jun of the Chinese Government on the Middle East Issue Has a Phone Call with Minister of State at the Ministry of Foreign Affairs of Qatar Mohammed bin Abdulaziz Al-Khulaifi",
+          "date": "Nov 4, 2026",
+          "publishedAt": "2026-11-04T00:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://www.mfa.gov.cn/eng/xw/202611/t20261108_12055556.html",
+          "importance": 3
+        },
+        {
+          "id": "cn-official-d64a4e8277133d86",
+          "countryId": "cn",
+          "sourceType": "official",
+          "source": "State Council",
+          "headline": "Assistant Foreign Minister Liu Bin and First Deputy Minister of Foreign Affairs of Belarus Sergey Lukashevich Hold Consultations between the Ministries of Foreign Affairs of China and Belarus",
+          "summary": "Assistant Foreign Minister Liu Bin and First Deputy Minister of Foreign Affairs of Belarus Sergey Lukashevich Hold Consultations between the Ministries of Foreign Affairs of China and Belarus",
+          "date": "Nov 4, 2026",
+          "publishedAt": "2026-11-04T00:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://www.mfa.gov.cn/eng/xw/202611/t20261108_12055557.html",
           "importance": 3
         },
         {
@@ -185004,6 +185108,19 @@
           "importance": 2
         },
         {
+          "id": "cn-independent-9e67c7766138a268",
+          "countryId": "cn",
+          "sourceType": "independent",
+          "source": "South China Morning Post",
+          "headline": "Robots’ arrival set to give Chinese asparagus farmers a boost - South China Morning Post",
+          "summary": "Robots’ arrival set to give Chinese asparagus farmers a boost South China Morning Post",
+          "date": "Nov 8, 2026 · 3:00 AM",
+          "publishedAt": "2026-11-08T03:00:38.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQb0thV0ozMkt6NDVkOW94blV1aDFIbmx0NjlVRDV0V1dBbjlUVzZKckoxS2liMjhwTUtucjM0a0I5SGIzdlh0ZExTNnBzREpwVmtSR0MyOWQtQjIweGJ6VGIyVnNidmExbUIwckt0X3oyTHM0YjB5a1RlX2VWbjJrUDAtelJRc2RQS1piajg4Mk9pU0Q2ZVZBcHBwRjMwVzNLMDZaTmZjNFY0LXRsZWZWZ1lWYXbSAbQBQVVfeXFMT3RVSFFGakRrZ1o4LXZNNkhxT3plNXFxWHo0VUUyNDJ1di02eE5lY1JhbE5xaGdfankzQjJkZ3FjNjUyUFBlYUZ3MFh3d2x3WDYzSFhHSk5BcVlGaGI4aVFoR0RMaGZVdVh4Q21aSnpRdGtReU9sdy1PdzhBUktjMXB3LTRzYS1za2FfWDVjN3E5SkFsb0p3ZWo3eTQwQVhEME80aE9iSFpSUnVLN2U0a3lQczgt?oc=5",
+          "importance": 2
+        },
+        {
           "id": "cn-independent-89322f353f8319c3",
           "countryId": "cn",
           "sourceType": "independent",
@@ -185686,8 +185803,8 @@
           "source": "Reuters",
           "headline": "China's yuan dilemma: too weak abroad and too strong at home - Reuters",
           "summary": "China's yuan dilemma: too weak abroad and too strong at home Reuters",
-          "date": "Nov 5, 2026 · 11:03 PM",
-          "publishedAt": "2026-11-05T23:03:00.000Z",
+          "date": "Nov 5, 2026 · 11:15 PM",
+          "publishedAt": "2026-11-05T23:15:38.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOdG8tUkNHdE1DSTdndG40UGVsSEh6cVBmcFZBSmFHNi10VU9ET3JPbU1XRlg3bHI4SnptNGcxV3BGNHdXT2Qycm9Oa1VfRmJNNFFyNGxJN0ZfbHdyNi1zbHRISnBlZWNKUGdqT0V0UVJHRHhFLWRYVTB1alpvSGRCZWZaTzJyaHdicWpyVDdGQmVWVlFqREs2TTNMcVZYVlllb1FCUlVZMDMxQQ?oc=5",
           "importance": 2
@@ -191476,24 +191593,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQLXlMZldxT1N2akxLYmE3cUF3VmxTa2hsS1MydmhkdW9NT0wzMEFjZGRPWlp3ZENXdVhWcC1jcHgwME9SeHRfcnNhMlI2clFXaHlHcmI2NnpDS3VIQVdIX0NOQWlqMzBrMW9IVmJ0VnU2dkVNeVRfNkxobUlraDNkVk9KLXFvZkdXSWNHTjAzZmVudElNZGR2ZHYwdEM1M3RaRXcyLTZuYzVkQnYxZVhMeXVzcXlMaWxVenV4RU9IWElIWDBISkE?oc=5",
           "importance": 2
-        },
-        {
-          "id": "cn-independent-2e788ad0447b0ed0",
-          "countryId": "cn",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "Foreign investment flows into China fall 4.3% y/y in first three quarters - Reuters",
-          "summary": "Foreign investment flows into China fall 4.3% y/y in first three quarters Reuters",
-          "date": "Oct 22, 2026 · 8:31 AM",
-          "publishedAt": "2026-10-22T08:31:44.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQdzRHVjFYRmlzYmJrR0FLY2M5YXdGSXN0NmhTRVdEMkpfd2dkMkx3a1g4WGpvSVNyTGxvdzA5V3pWcy1vbTU2ZWdfbDBidm04ckJGbnFOT1pZTDR0akRzbTJYbXpqcy1PT0pFbVFrcGYtSWw4RmNmU3U1RlBfb0lwNWo3dlZXRkFhV3UyS01MTTZ2eGswck9HVzN5MzZUdjdTYWdkb3VveVBOTkhYSXVmbGpySHJHQUhoNUU5Yzh4NA?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:07:59.556Z",
+      "officialLastOkAt": "2026-11-08T10:19:30.110Z",
       "officialLastError": null
     },
     "jp": {
@@ -199186,7 +199290,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:08:01.077Z",
+      "officialLastOkAt": "2026-11-08T10:19:31.880Z",
       "officialLastError": null
     },
     "kr": {
@@ -200656,6 +200760,19 @@
         }
       ],
       "independent": [
+        {
+          "id": "kr-independent-173d47518eede69f",
+          "countryId": "kr",
+          "sourceType": "independent",
+          "source": "The Korea Herald",
+          "headline": "Vietnam takes baton from Seoul for 2028 gathering of Asia, Oceanian parties - The Korea Herald",
+          "summary": "Vietnam takes baton from Seoul for 2028 gathering of Asia, Oceanian parties The Korea Herald",
+          "date": "Nov 8, 2026 · 9:33 AM",
+          "publishedAt": "2026-11-08T09:33:21.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9DNjBVVVVleFhOa0RCRnN2Qkc2ZGlxTnVjc053MXp3QmY3RVNmS2JOYVFQc0pDYWhVRG9JRVp3Q21IdXFhMUsxWEQ2empNOFUtbk05Qm1ybw?oc=5",
+          "importance": 2
+        },
         {
           "id": "kr-independent-40ae5deb70572622",
           "countryId": "kr",
@@ -207142,24 +207259,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE54bVhKaUFoQ29haXUtdHFzYkMtcTNPdGxySzhxY2laallINHc3YWxWWVVUSmpYcjJtRjI2Y0dSek9HMzd5T2t4ZDdRZ2pvMEJoZ25sMDJVZw?oc=5",
           "importance": 2
-        },
-        {
-          "id": "kr-independent-aa634954ba7a4660",
-          "countryId": "kr",
-          "sourceType": "independent",
-          "source": "The Korea Herald",
-          "headline": "A new gateway between North Korea and China - The Korea Herald",
-          "summary": "A new gateway between North Korea and China The Korea Herald",
-          "date": "Oct 24, 2026 · 6:38 AM",
-          "publishedAt": "2026-10-24T06:38:18.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBXOGNqcVZVQ3k3OUpkaUsteDFlVUtaR3JTVGVaTWJ6VElsaG9Ta1FuVzd2YVZRQl9MUVFIZ05hcVlrdUMwWHlna05XRU5fR2h3U3R3b0VSVQ?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:08:03.028Z",
+      "officialLastOkAt": "2026-11-08T10:19:34.900Z",
       "officialLastError": null
     },
     "tw": {
@@ -207595,6 +207699,19 @@
         }
       ],
       "independent": [
+        {
+          "id": "tw-independent-9b3894494f7c8dfa",
+          "countryId": "tw",
+          "sourceType": "independent",
+          "source": "Focus Taiwan",
+          "headline": "Taiwan People's Communist Party chief detained in China funding probe - Focus Taiwan",
+          "summary": "Taiwan People's Communist Party chief detained in China funding probe Focus Taiwan",
+          "date": "Nov 8, 2026 · 9:41 AM",
+          "publishedAt": "2026-11-08T09:41:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1wRF9lb1hQcURralZUY1ktQVo2cGhGWjBrV2JBaHJON1BISTBmRy13RmNVVlZkendzMHZGYnI0MWQtQm1UMzEzZUZ5ZG4tSTJrblJVclNR?oc=5",
+          "importance": 2
+        },
         {
           "id": "tw-independent-9ea0688b095d4732",
           "countryId": "tw",
@@ -214081,24 +214198,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5OdmVqRmJWZVVwcTlOazlmeXJmZWRlREg2TUU0aGNzeHVKTzVBRERaWnY3eHMza0tMVjNpdUtTaEQ2LVNYd2hRM0Q5RE9MWXM?oc=5",
           "importance": 2
-        },
-        {
-          "id": "tw-independent-7ff3b5cd7f14d46d",
-          "countryId": "tw",
-          "sourceType": "independent",
-          "source": "Focus Taiwan",
-          "headline": "A breakdown of Taiwan's F-16V purchase, as first two jets arrive - focustaiwan.tw",
-          "summary": "A breakdown of Taiwan's F-16V purchase, as first two jets arrive focustaiwan.tw",
-          "date": "Oct 2, 2026 · 4:39 AM",
-          "publishedAt": "2026-10-02T04:39:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBIM2REVHZONm1CeGlXWk42UXNHVmY0Vzl6T2o2MUl4Ukt5dDlPNUlWTTZVRnkzc21DZUE0RzBLVDROSjNrS3h6VWt5YWlXUHRQd2lpQlN2SQ?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:08:04.837Z",
+      "officialLastOkAt": "2026-11-08T10:19:37.031Z",
       "officialLastError": null
     },
     "id": {
@@ -228396,7 +228500,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-08T09:08:06.897Z",
+      "officialLastOkAt": "2026-11-08T10:19:40.077Z",
       "officialLastError": null
     }
   }
