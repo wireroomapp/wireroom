@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T22:36:48.610Z",
+  "generatedAt": "2026-11-11T22:47:41.492Z",
   "countries": {
     "us": {
       "official": [
@@ -2502,14 +2502,27 @@
       ],
       "independent": [
         {
+          "id": "us-independent-183797951037c8f2",
+          "countryId": "us",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "2026 U.S. Senate Election Results - AP News",
+          "summary": "2026 U.S. Senate Election Results AP News",
+          "date": "Nov 11, 2026 · 10:42 PM",
+          "publishedAt": "2026-11-11T22:42:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1ycUhlZzZ2V1lhd2pzVExlRFNUOVV5M0N6VHB5a2FuNFU2NDNaV0dSTV9hUVZTZHZCeVRjeWRWMnh0NUVIRW1vbmhfNFRsSVRqSWIwM21iUmMxTE4zYzhocm81ajd4U0x2R0R0Q1Bn?oc=5",
+          "importance": 2
+        },
+        {
           "id": "us-independent-e7a6f6ae6169bc50",
           "countryId": "us",
           "sourceType": "independent",
           "source": "AP",
           "headline": "Mississippi U.S. Senate Election Live Results 2026 - AP News",
           "summary": "Mississippi U.S. Senate Election Live Results 2026 AP News",
-          "date": "Nov 11, 2026 · 10:32 PM",
-          "publishedAt": "2026-11-11T22:32:32.000Z",
+          "date": "Nov 11, 2026 · 10:41 PM",
+          "publishedAt": "2026-11-11T22:41:58.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE40QzF6VWVSbVp6Zkx1Q0I1OGU4aG5UVTdmMDM5UTdIVTNDd0t5RmJ1RHUxVW9DMmVialI4TWxCMERpUy1pTk1la01IS1ZVdFJJUnJGNmdBX29GU2M5ZlVqaDJ5VFctbUZtRXpLbVlpNGlYNDdkdkM0UEhod0Jmdw?oc=5",
           "importance": 2
@@ -6337,19 +6350,6 @@
           "importance": 2
         },
         {
-          "id": "us-independent-183797951037c8f2",
-          "countryId": "us",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "2026 U.S. Senate Election Results - AP News",
-          "summary": "2026 U.S. Senate Election Results AP News",
-          "date": "Nov 1, 2026 · 4:19 AM",
-          "publishedAt": "2026-11-01T04:19:33.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1ycUhlZzZ2V1lhd2pzVExlRFNUOVV5M0N6VHB5a2FuNFU2NDNaV0dSTV9hUVZTZHZCeVRjeWRWMnh0NUVIRW1vbmhfNFRsSVRqSWIwM21iUmMxTE4zYzhocm81ajd4U0x2R0R0Q1Bn?oc=5",
-          "importance": 2
-        },
-        {
           "id": "us-independent-810ca27a72b4aa61",
           "countryId": "us",
           "sourceType": "independent",
@@ -9004,7 +9004,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:35:46.135Z",
+      "officialLastOkAt": "2026-11-11T22:46:37.075Z",
       "officialLastError": null
     },
     "ca": {
@@ -17105,7 +17105,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:35:48.325Z",
+      "officialLastOkAt": "2026-11-11T22:46:39.050Z",
       "officialLastError": null
     },
     "mx": {
@@ -28620,7 +28620,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:35:49.339Z",
+      "officialLastOkAt": "2026-11-11T22:46:41.026Z",
       "officialLastError": null
     },
     "br": {
@@ -32551,6 +32551,19 @@
         }
       ],
       "independent": [
+        {
+          "id": "br-independent-0356171bf65ea786",
+          "countryId": "br",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "Brazil unveils fiscal package worth up to $10.8 billion for next year - Reuters",
+          "summary": "Brazil unveils fiscal package worth up to $10.8 billion for next year Reuters",
+          "date": "Nov 11, 2026 · 6:43 PM",
+          "publishedAt": "2026-11-11T21:43:57.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPUWhIT1NHMGE1SU4yUUVlNEEyUDhReGdPeUU5ak1aXzFyUlAtWG52TVFBX290MUZFWE53QThINHprU0hKRzdWSHljeWMzSm1XN1Jnc1RpQ1NuWTNmMlpaZHp5TlZnTTZKQzJjNFRnZXNXamd0ODhxSk5ONE5XU3ZNRnhnNjJkNGN2MXhXRzg4b1ZBdjV4Z2xNT25FekQ4UkhQUURRZC1IaDNSNlNFc2Jkdy1WZFBwY19zdldnRHotc1NfZw?oc=5",
+          "importance": 2
+        },
         {
           "id": "br-independent-9caf69f92fbb770e",
           "countryId": "br",
@@ -37195,7 +37208,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:35:50.130Z",
+      "officialLastOkAt": "2026-11-11T22:46:41.881Z",
       "officialLastError": null
     },
     "ar": {
@@ -38802,19 +38815,6 @@
           "importance": 2
         },
         {
-          "id": "ar-independent-d3bb543e1e2a589e",
-          "countryId": "ar",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Pope urges Argentina to protect the vulnerable from Milei’s austerity measures - AP News",
-          "summary": "Pope urges Argentina to protect the vulnerable from Milei’s austerity measures AP News",
-          "date": "Nov 9, 2026 · 10:18 PM",
-          "publishedAt": "2026-11-09T22:18:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOeVRYYVFlTmhzSWxTS2N2VjJUX0kwVzBDVTZhSlpqTzFmUUFIUDZhdV9kX0ZtLXVpX3ZtcUV5dGNyQ1lXWURvWTZGYmhkaVNES1Y2dzRDcE0zN1hwazI4bFo1MzhSNHRBTGZRR3RSLUVYX2g5Q3RaQ3ozenp6MGg3MnhxQ0xTdnp5QnFiNUlmU0FvWFEtQS1WTjZXZjJYTUllSnFPTG85dGxubmNCZ0xEd1lB?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ar-independent-c67593767869e4f8",
           "countryId": "ar",
           "sourceType": "independent",
@@ -38825,6 +38825,19 @@
           "publishedAt": "2026-11-09T19:21:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPRGI0WXhlRzV5UTJLYkdaakc0ajBrSTc4Y3VYRTY1cDRMMDNWM3c0Z0xmNzFXOXFVMXlSUmxQem5tSTZGNjZWaklkc2Z2bFpfNkh5VF9JemhlbzJjRjZVS05vTFNGRTg0MEtiTXptNUdYeEhYaU80aTI4WE1zclJvUDhMVndUSC1FREtSaVk2RjEyRnlJMmRzNklvaEctNWRR?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ar-independent-d3bb543e1e2a589e",
+          "countryId": "ar",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Pope urges Argentina to protect the vulnerable from Milei’s austerity measures - AP News",
+          "summary": "Pope urges Argentina to protect the vulnerable from Milei’s austerity measures AP News",
+          "date": "Nov 9, 2026 · 3:10 PM",
+          "publishedAt": "2026-11-09T15:10:04.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOeVRYYVFlTmhzSWxTS2N2VjJUX0kwVzBDVTZhSlpqTzFmUUFIUDZhdV9kX0ZtLXVpX3ZtcUV5dGNyQ1lXWURvWTZGYmhkaVNES1Y2dzRDcE0zN1hwazI4bFo1MzhSNHRBTGZRR3RSLUVYX2g5Q3RaQ3ozenp6MGg3MnhxQ0xTdnp5QnFiNUlmU0FvWFEtQS1WTjZXZjJYTUllSnFPTG85dGxubmNCZ0xEd1lB?oc=5",
           "importance": 2
         },
         {
@@ -42353,7 +42366,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:35:51.683Z",
+      "officialLastOkAt": "2026-11-11T22:46:43.304Z",
       "officialLastError": null
     },
     "gb": {
@@ -49981,7 +49994,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:35:53.306Z",
+      "officialLastOkAt": "2026-11-11T22:46:45.767Z",
       "officialLastError": null
     },
     "fr": {
@@ -57908,7 +57921,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:35:53.972Z",
+      "officialLastOkAt": "2026-11-11T22:46:46.771Z",
       "officialLastError": null
     },
     "de": {
@@ -64875,7 +64888,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:35:55.320Z",
+      "officialLastOkAt": "2026-11-11T22:46:49.031Z",
       "officialLastError": null
     },
     "it": {
@@ -73179,7 +73192,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:35:56.386Z",
+      "officialLastOkAt": "2026-11-11T22:46:52.862Z",
       "officialLastError": null
     },
     "es": {
@@ -81446,7 +81459,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:35:58.174Z",
+      "officialLastOkAt": "2026-11-11T22:46:55.863Z",
       "officialLastError": null
     },
     "pl": {
@@ -86416,7 +86429,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:36:00.111Z",
+      "officialLastOkAt": "2026-11-11T22:46:58.531Z",
       "officialLastError": null
     },
     "ua": {
@@ -95129,6 +95142,19 @@
       ],
       "independent": [
         {
+          "id": "ua-independent-e46a5ddacc68e5f7",
+          "countryId": "ua",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "Russia, Ukraine reach deal on prisoner swap as US says lack of trust holds back talks - Reuters",
+          "summary": "Russia, Ukraine reach deal on prisoner swap as US says lack of trust holds back talks Reuters",
+          "date": "Nov 11, 2026 · 10:28 PM",
+          "publishedAt": "2026-11-11T22:28:23.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPdEZkalllTkswSW1lWVlXanFsVFBfVnBSUmE0U1VNWTJ4c3BrS3dzTDZWQUhwM3NfOTFMdjVuaHBqZVRTVFBYU2JEOWtpX2VoR1ZtUzZVcDlTN0tKVzVtczFhYThSSHpDTjJXSHV4U1Rqc0doRElpcW1WTGQwdmF6bE1VN3BpU2J4U3V1Rld3S25XNXZxWkVVNVlRZDAzLWpIVGFHWG9Bd2M?oc=5",
+          "importance": 2
+        },
+        {
           "id": "ua-independent-7e4b9559601e4bb0",
           "countryId": "ua",
           "sourceType": "independent",
@@ -95139,19 +95165,6 @@
           "publishedAt": "2026-11-11T20:59:58.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPLVVESEhzeFJHMmo1SUlBcWswbUctbUprbnVPc1pSRWx1ay00ci1hbmYyUjBqOE1JazB2c1l0dVE3cGtGbDc0QldyN3VqYkdGMUtQWlE1cG9FRnV3b2VkUENMbGxyMlJQdmg2MkJxTThvSENGVVVkR3IwcFlXMEJHWUJ5a0dTY0R2b1k2ZXpOUVdvcGkzWWtGcFc1VHl2MDR1UUxaWF9DdmdMY2JaNU5RM3g0UTBDdm1tUHIw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ua-independent-e46a5ddacc68e5f7",
-          "countryId": "ua",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "Russia and Ukraine say some progress made at talks, US cites a lack of trust - Reuters",
-          "summary": "Russia and Ukraine say some progress made at talks, US cites a lack of trust Reuters",
-          "date": "Nov 11, 2026 · 8:54 PM",
-          "publishedAt": "2026-11-11T20:54:57.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPdEZkalllTkswSW1lWVlXanFsVFBfVnBSUmE0U1VNWTJ4c3BrS3dzTDZWQUhwM3NfOTFMdjVuaHBqZVRTVFBYU2JEOWtpX2VoR1ZtUzZVcDlTN0tKVzVtczFhYThSSHpDTjJXSHV4U1Rqc0doRElpcW1WTGQwdmF6bE1VN3BpU2J4U3V1Rld3S25XNXZxWkVVNVlRZDAzLWpIVGFHWG9Bd2M?oc=5",
           "importance": 2
         },
         {
@@ -101443,8 +101456,8 @@
           "countryId": "ua",
           "sourceType": "independent",
           "source": "Suspilne",
-          "headline": "“Supporting independent Ukrainian media is an investment in European information resilience,” says Mariya Frey at a parliamentary event in Berlin - Корпоративний Сайт Суспільного",
-          "summary": "“Supporting independent Ukrainian media is an investment in European information resilience,” says Mariya Frey at a parliamentary event in Berlin Корпоративний Сайт Суспільного",
+          "headline": "“Supporting independent Ukrainian media is an investment in European information resilience,” says Mariya Frey at a parliamentary event in Berlin - Суспільне Мовлення",
+          "summary": "“Supporting independent Ukrainian media is an investment in European information resilience,” says Mariya Frey at a parliamentary event in Berlin Суспільне Мовлення",
           "date": "Oct 12, 2026 · 7:00 AM",
           "publishedAt": "2026-10-12T07:00:00.000Z",
           "dateOnly": false,
@@ -101636,7 +101649,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:36:00.930Z",
+      "officialLastOkAt": "2026-11-11T22:46:59.579Z",
       "officialLastError": null
     },
     "ru": {
@@ -108183,10 +108196,10 @@
           "countryId": "ru",
           "sourceType": "independent",
           "source": "Reuters",
-          "headline": "Russia and Ukraine say some progress made at talks, US cites a lack of trust - Reuters",
-          "summary": "Russia and Ukraine say some progress made at talks, US cites a lack of trust Reuters",
-          "date": "Nov 11, 2026 · 8:54 PM",
-          "publishedAt": "2026-11-11T20:54:57.000Z",
+          "headline": "Russia, Ukraine reach deal on prisoner swap as US says lack of trust holds back talks - Reuters",
+          "summary": "Russia, Ukraine reach deal on prisoner swap as US says lack of trust holds back talks Reuters",
+          "date": "Nov 11, 2026 · 10:28 PM",
+          "publishedAt": "2026-11-11T22:28:23.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPdEZkalllTkswSW1lWVlXanFsVFBfVnBSUmE0U1VNWTJ4c3BrS3dzTDZWQUhwM3NfOTFMdjVuaHBqZVRTVFBYU2JEOWtpX2VoR1ZtUzZVcDlTN0tKVzVtczFhYThSSHpDTjJXSHV4U1Rqc0doRElpcW1WTGQwdmF6bE1VN3BpU2J4U3V1Rld3S25XNXZxWkVVNVlRZDAzLWpIVGFHWG9Bd2M?oc=5",
           "importance": 2
@@ -114681,7 +114694,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:36:02.310Z",
+      "officialLastOkAt": "2026-11-11T22:47:01.249Z",
       "officialLastError": null
     },
     "tr": {
@@ -123007,8 +123020,8 @@
           "countryId": "il",
           "sourceType": "official",
           "source": "Prime Minister's Office",
-          "headline": "Prime Minister's Office announcement - GOV.IL",
-          "summary": "Prime Minister's Office announcement GOV.IL",
+          "headline": "Prime Minister's Office announcement - Gov.il",
+          "summary": "Prime Minister's Office announcement Gov.il",
           "date": "Sep 3, 2026 · 7:00 AM",
           "publishedAt": "2026-09-03T07:00:00.000Z",
           "dateOnly": false,
@@ -123254,8 +123267,8 @@
           "countryId": "il",
           "sourceType": "official",
           "source": "Prime Minister's Office",
-          "headline": "Prime Minister’s Office statement - 18 August 2026 Ministry of Foreign Affairs - Gov.il",
-          "summary": "Prime Minister’s Office statement - 18 August 2026 Ministry of Foreign Affairs Gov.il",
+          "headline": "Prime Minister’s Office statement - 18 August 2026 Ministry of Foreign Affairs - GOV.IL",
+          "summary": "Prime Minister’s Office statement - 18 August 2026 Ministry of Foreign Affairs GOV.IL",
           "date": "Aug 17, 2026 · 7:00 AM",
           "publishedAt": "2026-08-17T07:00:00.000Z",
           "dateOnly": false,
@@ -123384,8 +123397,8 @@
           "countryId": "il",
           "sourceType": "official",
           "source": "Prime Minister's Office",
-          "headline": "Statement by the Prime Minister’s Office - 23 July 2026 Ministry of Foreign Affairs - Gov.il",
-          "summary": "Statement by the Prime Minister’s Office - 23 July 2026 Ministry of Foreign Affairs Gov.il",
+          "headline": "Statement by the Prime Minister’s Office - 23 July 2026 Ministry of Foreign Affairs - gov.il",
+          "summary": "Statement by the Prime Minister’s Office - 23 July 2026 Ministry of Foreign Affairs gov.il",
           "date": "Jul 23, 2026 · 7:00 AM",
           "publishedAt": "2026-07-23T07:00:00.000Z",
           "dateOnly": false,
@@ -124029,6 +124042,19 @@
           "publishedAt": "2026-11-11T17:48:30.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNYzRCVnlCMlg0YUE2UzRwMGVNQ0dqa1ctMWJ2LU8xUGNELVd0VDU3b1pSb1Nzd1diZ1B1OWRoM2FPZ1NpV3AtLXVQNVA0dVhLSVE2dGdlX0R6VnlRLXVlT2Fmc2hWY28yeE9ZRC1Ia1VEWTcza2xvV1hqZmwzZTczQ3oxOHpEeUFPd3FYOGdwVTg3ZnRGYVVBQ3hSM2ROVUZIZ0FmdXAzYzNrQUZvbjNRdkY3U2V2ajhRcjZ6OVRlMHdIS0hobVI1MnlKLTRkeWY2Xzlka0JIb1hkVFpVZkdnYkFEdEViWUdNWF9V?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "il-independent-710b678907ec7621",
+          "countryId": "il",
+          "sourceType": "independent",
+          "source": "The Times of Israel",
+          "headline": "Stanley Zabar, co-owner of iconic New York Jewish grocery, dies at 94 - The Times of Israel",
+          "summary": "Stanley Zabar, co-owner of iconic New York Jewish grocery, dies at 94 The Times of Israel",
+          "date": "Nov 11, 2026 · 5:22 PM",
+          "publishedAt": "2026-11-11T17:22:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNMkFYUGM2cFctZ1hObUF4TzduY1dTS1htMy05Tlh5WFZ4T3IxRGlJTFZkdTFiZm9hRklyT2tnLUhELW1OZmQwelVpQnpjbTA0N01qbE9Xc1BiQ2pkN0U3dDA5Ukw2ajI5eml2VmpmdjVwUnRlRnNUOXVza1FWZDJJSlhVMGtTNXZ0OElRYWZFSk8wRVJzcVdJOTNaemlRRTDSAaQBQVVfeXFMTS1SSjUyX3lmV3lUM21pUmlZRVlZdkZNaldIa0VwTW1mcDZ1TUxrMjdQRjlMcmVvZHMzX0JmWDFiZWQzQUFwWk5PcG02b0lGcFV4bmxZeDl0NWpqNEJ5M2pURkpqOElQVWhYcDBPcGdMSkJzVFJlVVNHeDlkWTBGdkM5aFpLYzFMRmxNRDdXRXl3QVM3QmhtNWdiOHJmdk9WeXl1bEg?oc=5",
           "importance": 2
         },
         {
@@ -130426,24 +130452,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOc1JiWE9yNWFadjltVjE5bmgtbWNPYVB1ZkFVZEw3YlZRdWRaQTRFeTVVcEcxOGFBbGo0Mm1yYzdZd2ZSUEc3RXRSRkg1eGR3X1FZdVY4bFZYaGdtU3JxVXBHc0s1bXNhb0lGUHdGZHdjWnltRjA0QTljckc1WnhITmRkU2xmcjcyUlRYZ3plNXN3RUJaNjEzc3g3SVYzWmhNcFlUcWVyRlUweWfSAbABQVVfeXFMUFcwMGoyVnE5OTRyWW02dFhlNFZIYXhoaThkN05hTHI3OHF2Zjk5aXl4czA5alpJd3N5U3UzTUdObXotOWFPVkw2WTl3WHFuRlFOa01adzU0dzJvSXE5aXpoZHduazVrbjFlZFFVaUtVenRUdWJvT3pyMElqUDhBWHFsNDR2Yk4yQVJOSHB0WHVuT3NYM3ZDR2dmaTh1aHVOZURXX3Q2VklobWpwZVBJTnQ?oc=5",
           "importance": 2
-        },
-        {
-          "id": "il-independent-de1cd0bd52ee4b75",
-          "countryId": "il",
-          "sourceType": "independent",
-          "source": "The Times of Israel",
-          "headline": "Election chief presents results to president, says casting doubt on them a ‘real danger’ to democracy - The Times of Israel",
-          "summary": "Election chief presents results to president, says casting doubt on them a ‘real danger’ to democracy The Times of Israel",
-          "date": "Nov 4, 2026 · 3:32 PM",
-          "publishedAt": "2026-11-04T15:32:36.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPZGEyUUo0MVU3MDdETy1IUklhY1U1SWVIa1F5cXBHd2xzRGtVVTVpNkU1MXNtVXNmWWJYWEZQRVc0YVNYY3Q0Z2FfWWFYTFJsN0oxX3BSTnhYc1g3ZllGWkhsRWRSZWtCY3c5MWlrT1RwSTl5Wm9nbWJycWJrYXJkQThvOVg1dElFQVVESlJyNmVEU0RUcHo1eHItUnNyU3M5djRRS2lBSFhCTEw4eGdIa1FEanR2R3RuVEVHbGdldDc0cTl4WWV5OdIBzgFBVV95cUxQT2VtcWI5ZGgzRHRBdlJFQ01iQXcyMG1vakFtSUFfeTBrUTAzVS1mY2JTNEZKM3poNUI4V3JHNmtBeXgyYWdsTEg3dXUwdDk1dVM1cUV2eERkUmswOFoxbXNVQmwwSzFpU0pmWHUzQldaUkEwRGlMZFFvZlZ6ckZrRHFfQ0xYd19rQVdqc3FKLVQ4aGo3MlZKZXNhejVuYS1nQ0EtTzU1ekM0SjE4TVlLN2ZpVmlYSWgtX2E2OEUyaFVnRWR0TkxwSWhoQU1OUQ?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:36:04.128Z",
+      "officialLastOkAt": "2026-11-11T22:47:05.160Z",
       "officialLastError": null
     },
     "ir": {
@@ -130460,6 +130473,19 @@
           "publishedAt": "2026-11-11T22:20:21.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiP0FVX3lxTFBPd3h6VGM0TDlnQTJRaHcwMHkxaG5HcFFUY08yOEpFQ3FjZHB3b3h1bGlwSnRkT3k5SXZORXhjYw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-65bad857c45d8730",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "New York City building collapse traps people in rubble - AP News",
+          "summary": "New York City building collapse traps people in rubble AP News",
+          "date": "Nov 11, 2026 · 10:16 PM",
+          "publishedAt": "2026-11-11T22:16:22.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQMlZId0RsMUdSc3RNcWhhS3NHaFNVUXJBMGtVWVJhZHZ5WWIxOHk2MnJKUHRLNlV5aGEyYmZ6TEhKQmYxaE9JWGh5dVdfOGg2LWxUUEVuV3JoYjNGb0c4M0lmZDdGRS1yTG9ydmNfdHlsNDllQWJySlVZcDh2b3A4Y0t3NWZ6S0I0aFQtazUwRQ?oc=5",
           "importance": 2
         },
         {
@@ -136940,19 +136966,6 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQeC1mdElFZXUyYm4xaVhUemJnQm5XVUcybXJBYmdBRi1leDJwLTRPVnljdjFvYmJLemFubkpMaml3R0M5MjIxSk9IOHpNNnV2NXNNR1FiMllyc1l0SFhDdFB4N0hMYW1OajJqMGtBUy1JajR3UjVFVmdFcVA1S2c0OUFFY25hM3owcUszOFFhOVloS3R3VEM0bGVZX1ItRVVQYlM4OTNaQTcxNXBSOUY1SnpHaDQ?oc=5",
           "importance": 2
-        },
-        {
-          "id": "ir-independent-6289680b58c36ca2",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Paraguay’s ousted president charged with crimes linked to collapse of major bank - AP News",
-          "summary": "Paraguay’s ousted president charged with crimes linked to collapse of major bank AP News",
-          "date": "Nov 7, 2026 · 10:52 PM",
-          "publishedAt": "2026-11-07T22:52:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOaGdEQkFnWDY3dUY3dkxiZlhQQkxPRTU1UWRVSWJxckJCS3dHMEthWXU1ek1oVFB3TnVYQVI5cEF2dWUxQjVYN2o0VWpGVVNNQ0VRS19LbDlYYk5PWmkyYUt2dXJQdmV6SG83Z0RXSW9QcERyeENTVkVDWFA0aEV2NGhoY1Njc0RGb1dPcnFnb2VucFNtLTZZTw?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": false,
@@ -136983,8 +136996,8 @@
           "source": "AP",
           "headline": "Saudi Arabia - AP News",
           "summary": "Saudi Arabia AP News",
-          "date": "Nov 11, 2026 · 8:02 PM",
-          "publishedAt": "2026-11-11T20:02:31.000Z",
+          "date": "Nov 11, 2026 · 8:41 PM",
+          "publishedAt": "2026-11-11T20:41:58.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE12VXhMYm1uTGxmeUo1WHZNRUJHb1MzQW1CZ1ktVEV3V29saXhhaHVMZnMwcE1OWHhCSVQ0b1ktQTZ6WUhpYUFQNnptWQ?oc=5",
           "importance": 2
@@ -143473,6 +143486,19 @@
       "official": [],
       "independent": [
         {
+          "id": "ae-independent-e46a5ddacc68e5f7",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "Russia, Ukraine reach deal on prisoner swap as US says lack of trust holds back talks - Reuters",
+          "summary": "Russia, Ukraine reach deal on prisoner swap as US says lack of trust holds back talks Reuters",
+          "date": "Nov 11, 2026 · 10:28 PM",
+          "publishedAt": "2026-11-11T22:28:23.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPdEZkalllTkswSW1lWVlXanFsVFBfVnBSUmE0U1VNWTJ4c3BrS3dzTDZWQUhwM3NfOTFMdjVuaHBqZVRTVFBYU2JEOWtpX2VoR1ZtUzZVcDlTN0tKVzVtczFhYThSSHpDTjJXSHV4U1Rqc0doRElpcW1WTGQwdmF6bE1VN3BpU2J4U3V1Rld3S25XNXZxWkVVNVlRZDAzLWpIVGFHWG9Bd2M?oc=5",
+          "importance": 2
+        },
+        {
           "id": "ae-independent-7e4b9559601e4bb0",
           "countryId": "ae",
           "sourceType": "independent",
@@ -143499,19 +143525,6 @@
           "importance": 2
         },
         {
-          "id": "ae-independent-e46a5ddacc68e5f7",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "Russia and Ukraine say some progress made at talks, US cites a lack of trust - Reuters",
-          "summary": "Russia and Ukraine say some progress made at talks, US cites a lack of trust Reuters",
-          "date": "Nov 11, 2026 · 8:54 PM",
-          "publishedAt": "2026-11-11T20:54:57.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPdEZkalllTkswSW1lWVlXanFsVFBfVnBSUmE0U1VNWTJ4c3BrS3dzTDZWQUhwM3NfOTFMdjVuaHBqZVRTVFBYU2JEOWtpX2VoR1ZtUzZVcDlTN0tKVzVtczFhYThSSHpDTjJXSHV4U1Rqc0doRElpcW1WTGQwdmF6bE1VN3BpU2J4U3V1Rld3S25XNXZxWkVVNVlRZDAzLWpIVGFHWG9Bd2M?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ae-independent-271e4027638f294c",
           "countryId": "ae",
           "sourceType": "independent",
@@ -143522,19 +143535,6 @@
           "publishedAt": "2026-11-11T20:03:05.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNSmRMSFZZUld1UEFab291N25WYXZVNENjbmtrWVU0OEEwZm84Z2RONXZHM0JnY2FId2ROLTRvek9lWmZiSFNQNlMwVVpVQ0Q1V3NsSDk1alc5Z0JoMExVY3NpYjVSVDhXd3RtYmo2M2lsdHoydlUteHlDMkp5QlZsWGQxam1JUXFuRkV0UHhOTVB0ZWtxeUhCTkNHNkRMMG5TaUdQaHBUYTlmMkhBRjBWUkZUTlNMVU1ISzFfVlduXzBJd3p0U0psdDNTa1F4Zw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ae-independent-0a76885060a0c598",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "The National",
-          "headline": "Middle East latest: Iran warns of domestic gas shortages from war this winter - The National",
-          "summary": "Middle East latest: Iran warns of domestic gas shortages from war this winter The National",
-          "date": "Nov 11, 2026 · 7:40 PM",
-          "publishedAt": "2026-11-11T19:40:49.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOX1E2VFlpWERDcU1PanZ2RkFFbXN6OFJvZ2ljaUdxVjAzemJXZFlRcTFpMEZyc1FBWE9zQ1JWUy1kUHBpdHZYM2xUbDVWUHRiUEZLRjBFWGtYMUFYeExqQzdXa2lqbWl0clBvLVRXZGZqRzZ2Uk00WmlGT1hnSEZBdWFOa1ljT045RUthemFUcDhjdm1EODNtNDUtdW5SOWxpeFZPMQ?oc=5",
           "importance": 2
         },
         {
@@ -143847,6 +143847,19 @@
           "publishedAt": "2026-11-11T12:44:18.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPaWMwR2k0Z2Z4Y1U1SnFZZXNRMUwtd1haeVBrV2FKTW5jeTVlckZjUmhJeVFpcG5iUEFtQkcxMUdXOVlpRnBRV3didHhIZUliaWNvc19PaFBwZURSYjc3d0pGR2dReGFpRDR3eXJmNXRYRlJWU09SeXRvY1A2akREbk5kZW4wUFlCVWhsTzFfRjZTd3RIOUsxSTR0LWJJYnBiS1hnWVJNU04yZC1scHlSdmwwU0dETUVy0gHAAUFVX3lxTE51ZHExSjc2ZkF6VlpheEhIc2xrNC1mQlZGSkdfZkoxNFJpV3RTWTQzZko0d1BvdEFXc05qSHd6bTVmanNFVGl5QTdud1hmWG5Xckp6bjkya3VHUlJsdjEtcklkTmJ4X1hNRzc0d29UeVBxSXBmWmtiS2Fxdm4xNVBPWFJtMS0tZjdMbnhtMFVnUFBLb09scllfS1ZWWi1NWktYYnFEdTNQQ25KWTA5QjJlejFMMmgyMUFEWkYyUDlpXw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ae-independent-0a76885060a0c598",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "The National",
+          "headline": "Middle East latest: Iran warns of domestic gas shortages from war this winter - The National",
+          "summary": "Middle East latest: Iran warns of domestic gas shortages from war this winter The National",
+          "date": "Nov 11, 2026 · 12:32 PM",
+          "publishedAt": "2026-11-11T12:32:37.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOX1E2VFlpWERDcU1PanZ2RkFFbXN6OFJvZ2ljaUdxVjAzemJXZFlRcTFpMEZyc1FBWE9zQ1JWUy1kUHBpdHZYM2xUbDVWUHRiUEZLRjBFWGtYMUFYeExqQzdXa2lqbWl0clBvLVRXZGZqRzZ2Uk00WmlGT1hnSEZBdWFOa1ljT045RUthemFUcDhjdm1EODNtNDUtdW5SOWxpeFZPMQ?oc=5",
           "importance": 2
         },
         {
@@ -180372,7 +180385,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:36:10.400Z",
+      "officialLastOkAt": "2026-11-11T22:47:16.004Z",
       "officialLastError": null
     },
     "pk": {
@@ -195016,7 +195029,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:36:40.933Z",
+      "officialLastOkAt": "2026-11-11T22:47:25.352Z",
       "officialLastError": null
     },
     "jp": {
@@ -197546,6 +197559,19 @@
           "importance": 2
         },
         {
+          "id": "jp-independent-13348b7be6e50a8f",
+          "countryId": "jp",
+          "sourceType": "independent",
+          "source": "NHK",
+          "headline": "Yen up, stocks down in Tokyo as Japan digests midterms - NHKニュース",
+          "summary": "Yen up, stocks down in Tokyo as Japan digests midterms NHKニュース",
+          "date": "Nov 4, 2026 · 11:09 AM",
+          "publishedAt": "2026-11-04T11:09:10.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE84QnEzYlhVWm1XaEZDZm1TbVY4bWE5M0t5MFRiVTlsMmlzbVU5dS1HM1kwQ2h0SnVCZHhoQmpMWENVdU1vcndydXpscElScmt0bi0zbVRySEw5WUVhc09NUVhDdlNldHJzbGtia0FR?oc=5",
+          "importance": 2
+        },
+        {
           "id": "jp-independent-008ad7c660088e41",
           "countryId": "jp",
           "sourceType": "independent",
@@ -197595,19 +197621,6 @@
           "publishedAt": "2026-11-04T07:10:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOS29NZWpKWGFzd1MxbmMzODhtc0xoakdqY2kzRS0yNmZlV21YWG5CY2lIaDdneWxrdGVPeEZva1NLRXdMTHd2NVpQeE9hWml3ZFJsdHhhM09IMTNZNmMxMTdCWk1IZXJhOU5leVRMVWU5OHdUeUY2RXZKMkRiREhUVXF2V1BOYzM4UFE?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "jp-independent-13348b7be6e50a8f",
-          "countryId": "jp",
-          "sourceType": "independent",
-          "source": "NHK",
-          "headline": "Yen up, stocks down in Tokyo as Japan digests midterms - NHKニュース",
-          "summary": "Yen up, stocks down in Tokyo as Japan digests midterms NHKニュース",
-          "date": "Nov 4, 2026 · 6:48 AM",
-          "publishedAt": "2026-11-04T06:48:45.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE84QnEzYlhVWm1XaEZDZm1TbVY4bWE5M0t5MFRiVTlsMmlzbVU5dS1HM1kwQ2h0SnVCZHhoQmpMWENVdU1vcndydXpscElScmt0bi0zbVRySEw5WUVhc09NUVhDdlNldHJzbGtia0FR?oc=5",
           "importance": 2
         },
         {
@@ -202813,7 +202826,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:36:42.262Z",
+      "officialLastOkAt": "2026-11-11T22:47:27.807Z",
       "officialLastError": null
     },
     "kr": {
@@ -210876,7 +210889,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:36:44.027Z",
+      "officialLastOkAt": "2026-11-11T22:47:30.623Z",
       "officialLastError": null
     },
     "tw": {
@@ -225766,8 +225779,8 @@
           "countryId": "au",
           "sourceType": "independent",
           "source": "ABC News Australia",
-          "headline": "Breaking: Human remains found inside sofa dumped in Sydney bushland - ABC News & Headlines – Australian Broadcasting Corporation",
-          "summary": "Breaking: Human remains found inside sofa dumped in Sydney bushland ABC News & Headlines – Australian Broadcasting Corporation",
+          "headline": "Human remains found inside sofa dumped in Sydney bushland - ABC News & Headlines – Australian Broadcasting Corporation",
+          "summary": "Human remains found inside sofa dumped in Sydney bushland ABC News & Headlines – Australian Broadcasting Corporation",
           "date": "Nov 11, 2026 · 8:58 PM",
           "publishedAt": "2026-11-11T20:58:49.000Z",
           "dateOnly": false,
@@ -232279,7 +232292,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-11T22:36:48.609Z",
+      "officialLastOkAt": "2026-11-11T22:47:41.491Z",
       "officialLastError": null
     }
   }
