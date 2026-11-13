@@ -11,4 +11,12 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci
-      - run: node scripts/verify-sources.mjs
+      - run: rm -f data/conflict.json data/advisories.json data/context-state.json && node scripts/collect-context.mjs
+      - run: ls -la data/ && node -e "const c=require('./data/conflict.json');console.log('events',c.events.length,c.coverage,c.releases);const a=require('./data/advisories.json');console.log('advisories',a.advisories.length,'of',a.countries,'unplaced',a.unplaced);console.log(a.advisories.slice(0,8).map(x=>x.name+' L'+x.level+' '+x.risks.join('/')).join(' | '))"
+      - run: node -e "const {fetchAllForCountry}=await import('./lib/feeds.mjs');for(const c of ['us','gb','jp']){const r=await fetchAllForCountry(c);const cy=r.official.filter(i=>i.agency);console.log(c,r.officialStatus,'official',r.official.length,'cyber',cy.length,cy.slice(0,3).map(i=>i.source+': '+i.headline).join(' || '))}" --input-type=module
+      - uses: actions/upload-artifact@v4
+        with:
+          name: context-data
+          path: |
+            data/conflict.json
+            data/advisories.json
