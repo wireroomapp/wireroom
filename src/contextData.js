@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
 // Trackers (new map only): MILITARY, TERRORISM and CYBER markers from /api/incidents, built
-// hourly by scripts/collect-incidents.mjs (see lib/incidents.mjs for how reports become markers).
-// Loaded once, when a tracker is first turned on.
+// hourly by scripts/collect-incidents.mjs (see lib/incidents.mjs for how reports become markers,
+// lib/history.mjs for past days). Loaded when a tracker is first turned on; today's map is
+// refreshed every 30 minutes, past days are kept once loaded.
 
 export const TRACKER_COLORS = { war: "#ff4d4d", strike: "#ff8a3d", terrorism: "#f5c242", cyber: "#ff5fd2" };
 export const TRACKER_CREDITS = {
@@ -11,21 +12,50 @@ export const TRACKER_CREDITS = {
   places: "Places: GeoNames (CC BY 4.0), OurAirports, Natural Earth",
 };
 
-export function useContextData(apiBase, path, enabled) {
-  const [state, setState] = useState({ status: "idle", data: null });
-  const wanted = enabled && state.status === "idle";
+// Local calendar days ("2026-11-13"). A past day is shown as the map stood at the end of it.
+export function localDay(d = new Date()) {
+  const p = (x) => String(x).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+export function dayEnd(day) {
+  const [y, m, d] = day.split("-").map(Number);
+  return new Date(y, m - 1, d, 23, 59, 59, 999);
+}
+export function shiftDay(day, n) {
+  const [y, m, d] = day.split("-").map(Number);
+  return localDay(new Date(y, m - 1, d + n, 12));
+}
+export function longDay(day) {
+  const [y, m, d] = day.split("-").map(Number);
+  return new Date(y, m - 1, d, 12).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });
+}
+
+// Tracker data for today (day = null) or a past day.
+export function useTrackerData(apiBase, day, enabled, refreshMs = 30 * 60000) {
+  const key = day ? `/api/incidents?until=${encodeURIComponent(dayEnd(day).toISOString())}` : "/api/incidents";
+  const [store, setStore] = useState({}); // key -> { status, data, at }
+  const [tick, setTick] = useState(0);
+  const entry = store[key];
   useEffect(() => {
-    if (!wanted) return undefined;
+    if (!enabled) return undefined;
+    const fresh = entry && entry.status === "ok" && (day || Date.now() - entry.at < refreshMs - 60000);
+    if (fresh) return undefined;
     let live = true;
-    fetch(`${apiBase}${path}`)
+    fetch(`${apiBase}${key}`)
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
-      .then((d) => { if (live) setState({ status: "ok", data: d }); })
-      .catch(() => { if (live) setState({ status: "unavailable", data: null }); });
+      .then((d) => { if (live) setStore((s) => ({ ...s, [key]: { status: "ok", data: d, at: Date.now() } })); })
+      .catch(() => { if (live) setStore((s) => ({ ...s, [key]: { status: "unavailable", data: null, at: Date.now() } })); });
     return () => { live = false; };
-  }, [apiBase, path, wanted]);
-  // Let a failed load be retried by turning the tracker off and on.
-  const retry = () => setState((s) => (s.status === "unavailable" ? { status: "idle", data: null } : s));
-  return { ...state, status: wanted ? "loading" : state.status, retry };
+  }, [apiBase, key, enabled, tick]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Today's map: check for a fresh one every half hour while a tracker is on.
+  useEffect(() => {
+    if (!enabled || day) return undefined;
+    const t = setInterval(() => setTick((x) => x + 1), refreshMs);
+    return () => clearInterval(t);
+  }, [enabled, day, refreshMs]);
+  const retry = () => { setStore((s) => { const n = { ...s }; if (n[key] && n[key].status === "unavailable") delete n[key]; return n; }); setTick((x) => x + 1); };
+  const status = entry ? entry.status : enabled ? "loading" : "idle";
+  return { status, data: entry && entry.status === "ok" ? entry.data : null, retry };
 }
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

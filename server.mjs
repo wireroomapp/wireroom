@@ -5,6 +5,8 @@ import { COUNTRY_INFO, hasVerifiedOfficialSource } from "./lib/feeds.mjs";
 import { registerTracking } from "./tracking/index.mjs";
 import { describeSources } from "./lib/sources.mjs";
 import { createWatchdog } from "./scheduler/watchdog.mjs";
+import { snapshot } from "./lib/history.mjs";
+import { warReports } from "./lib/incidents.mjs";
 
 /*
   WIRE ROOM / WORLD WIRE — backend (cache-serving version)
@@ -111,6 +113,45 @@ function loadDataFile(file) {
     return contextMemo.get(file)?.data || null;
   }
 }
+// The trackers as of a past day (?until=<end of that day, ISO>): built from the incident archive
+// and UCDP events (lib/history.mjs), kept in memory for the most recent requests.
+const pastMemo = new Map();
+function parseUntil(q) {
+  const t = Date.parse(String(q || ""));
+  if (!Number.isFinite(t) || t < Date.parse("2020-01-01") || t > Date.now() - 3600000) return null;
+  return new Date(Math.floor(t / 60000) * 60000);
+}
+function pastSnapshot(until) {
+  const archive = loadDataFile("data/history/incidents.json");
+  const conflict = loadDataFile("data/conflict.json");
+  if (!archive && !conflict) return null;
+  const key = until.toISOString();
+  const hit = pastMemo.get(key);
+  if (hit && hit.archive === archive && hit.conflict === conflict) return hit.data;
+  const current = loadDataFile("data/incidents.json") || {};
+  const data = {
+    version: 1,
+    generatedAt: current.generatedAt,
+    past: true,
+    historyFrom: current.historyFrom || (archive && archive.incidents[0] ? archive.incidents[0].firstReported : null),
+    dataFrom: conflict && conflict.coverage ? conflict.coverage.from : null,
+    aiCheck: current.aiCheck,
+    ...snapshot({ archive: archive ? archive.incidents : [], conflict }, until),
+  };
+  pastMemo.delete(key);
+  pastMemo.set(key, { archive, conflict, data });
+  if (pastMemo.size > 40) pastMemo.delete(pastMemo.keys().next().value);
+  return data;
+}
+app.get("/api/incidents", (req, res, next) => {
+  const until = parseUntil(req.query.until);
+  if (!until) return next();
+  const data = pastSnapshot(until);
+  if (!data) return res.status(503).json({ status: "unavailable", error: "Not collected yet" });
+  res.set("Cache-Control", "public, max-age=3600");
+  res.json({ status: "ok", ...data });
+});
+
 for (const [route, file] of [["/api/conflict", "data/conflict.json"], ["/api/advisories", "data/advisories.json"], ["/api/incidents", "data/incidents.json"]]) {
   app.get(route, (req, res) => {
     const data = loadDataFile(file);
@@ -122,6 +163,16 @@ for (const [route, file] of [["/api/conflict", "data/conflict.json"], ["/api/adv
 
 // One war's intel panel: the latest related official statements and outlet reports.
 app.get("/api/war-intel", (req, res) => {
+  // A past day: work it out from the news archive (only reports it still holds).
+  const until = parseUntil(req.query.until);
+  if (until) {
+    const snap = pastSnapshot(until);
+    const war = snap && snap.wars.find((w) => w.id === String(req.query.id || ""));
+    const gaz = loadDataFile("lib/gazetteer.json");
+    if (!war || !gaz) return res.status(404).json({ status: "not-found", error: "No such war that day" });
+    res.set("Cache-Control", "public, max-age=3600");
+    return res.json({ status: "ok", id: war.id, asOf: until.toISOString(), items: warReports(loadCache(), war, gaz, { now: until }) });
+  }
   const data = loadDataFile("data/war-intel.json");
   if (!data) return res.status(503).json({ status: "unavailable", error: "Not collected yet" });
   const id = String(req.query.id || "");

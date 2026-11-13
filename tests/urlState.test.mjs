@@ -5,12 +5,12 @@ import { readViewFromUrl, viewToSearch } from "../src/urlState.js";
 const IDS = ["us", "ua", "cn"];
 
 test("reads a country and mode from a shared link", () => {
-  assert.deepEqual(readViewFromUrl("?country=UA&mode=both", IDS), { country: "ua", mode: "both", global: false, war: null });
+  assert.deepEqual(readViewFromUrl("?country=UA&mode=both", IDS), { country: "ua", mode: "both", global: false, war: null, day: null });
 });
 
 test("ignores unknown countries and modes instead of failing", () => {
-  assert.deepEqual(readViewFromUrl("?country=zz&mode=lol", IDS), { country: null, mode: null, global: false, war: null });
-  assert.deepEqual(readViewFromUrl("", IDS), { country: null, mode: null, global: false, war: null });
+  assert.deepEqual(readViewFromUrl("?country=zz&mode=lol", IDS), { country: null, mode: null, global: false, war: null, day: null });
+  assert.deepEqual(readViewFromUrl("", IDS), { country: null, mode: null, global: false, war: null, day: null });
 });
 
 test("reads the global feed", () => {
@@ -33,7 +33,7 @@ test("keeps unrelated parameters like the map engine", () => {
 
 test("round trip", () => {
   const search = viewToSearch({ country: "us", mode: "news" });
-  assert.deepEqual(readViewFromUrl(search, IDS), { country: "us", mode: "news", global: false, war: null });
+  assert.deepEqual(readViewFromUrl(search, IDS), { country: "us", mode: "news", global: false, war: null, day: null });
 });
 
 test("reads and builds war links", () => {
