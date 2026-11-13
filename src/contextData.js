@@ -67,6 +67,26 @@ export const PRECISION_TEXT = {
 export const KIND_LABEL = { terrorism: "TERRORISM", cyber: "CYBER", strike: "MILITARY STRIKE" };
 export const SUBTYPE_LABEL = { attack: "ATTACK REPORTED", threat: "THREAT REPORTED", warning: "WARNING" };
 
+// One map marker per place and tracker: every terrorism (or cyber, or strike) event reported at
+// the same city, airport or region, or in the same country with no city named, shares a marker
+// that lists them all when tapped.
+export function groupByPlace(incidents) {
+  const groups = new Map();
+  for (const i of incidents || []) {
+    if (!Number.isFinite(i.lon) || !Number.isFinite(i.lat)) continue;
+    const where = i.precision === "country" ? `country:${i.iso || i.place}` : `${i.precision}:${i.place}:${i.iso}`;
+    const key = `${i.kind}|${where}`;
+    if (!groups.has(key)) groups.set(key, { key, kind: i.kind, place: i.place, precision: i.precision, iso: i.iso, lon: i.lon, lat: i.lat, items: [] });
+    groups.get(key).items.push(i);
+  }
+  return [...groups.values()].map((g) => {
+    g.items.sort((a, b) => String(b.lastReported).localeCompare(String(a.lastReported)));
+    g.subtype = g.items.some((x) => x.subtype === "attack") ? "attack" : g.items[0].subtype;
+    g.lastReported = g.items[0].lastReported;
+    return g;
+  });
+}
+
 // Pin an incident or a war to a marker: the marker keeps its own copy, like any report.
 export function incidentToReport(i) {
   const lead = i.sources[0] || {};
@@ -82,6 +102,10 @@ export function incidentToReport(i) {
     lat: i.lat,
     lon: i.lon,
   };
+}
+export function nodeSearchUrl(node) {
+  const q = String(node.headline || "").split(/\s+/).slice(0, 14).join(" ");
+  return q ? `https://www.google.com/search?tbm=nws&q=${encodeURIComponent(q)}` : "";
 }
 export function warToReport(w) {
   const lm = w.latestMonth || {};

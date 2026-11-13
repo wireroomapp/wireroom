@@ -30,6 +30,13 @@ test("classifies attacks, threats and hacks, not policy news", () => {
     "Prime Minister meets President of the European Council",
   ]) assert.equal(c(h), null, h);
   assert.equal(c("Guidance for small businesses", { agency: "cyber" }), null);
+  for (const h of [
+    "Why experts fear Canada's not-for-profits are prime targets for hackers",
+    "Can Iran attack Israel with its own Operation Spiderweb?",
+    "Russia planning strikes on Ukraine's food industry, intelligence source says",
+    "Trump holds off Iran strikes",
+  ]) assert.equal(c(h), null, h);
+  assert.deepEqual(c("Tehran says city in southern Iran hit by ‘an enemy strike’"), { kind: "strike", subtype: "attack" });
 });
 
 test("reads where it happened from the headline", () => {
@@ -41,6 +48,10 @@ test("reads where it happened from the headline", () => {
   assert.equal(at("Zelensky confirms Ukrainian hackers breached Russia’s emergency alert app in retaliation for earlier attack on Ukraine’s warning system"), "Russia|country");
   assert.equal(at("Moscow says Ukraine launched drones at Belgorod overnight"), "Belgorod|city");
   assert.equal(at("Explosion reported in Belfast, Northern Ireland"), "Belfast|city");
+  assert.notEqual(at("Strikes on bridges along the Dnipro River"), "Dnipro|city", "a river is not its city");
+  assert.equal(at("Zelensky says Russia is trying to divide Ukraine along the Dnipro River with strikes on bridges"), "Ukraine|country");
+  assert.equal(at("Ukraine strikes Russia's second-largest oil refinery in overnight drone attack"), "Russia|country");
+  assert.equal(at("France accuses Iran of hacking supermarket fridges"), "France|country");
   // Names that are usually something else, or no place at all.
   assert.equal(at("Europe hit by fresh wave of bomb threats targeting flights"), null);
   assert.equal(at("Trump says talks will continue"), null);
@@ -57,6 +68,7 @@ test("groups reports of the same event and drops guesses", () => {
         independent: [
           item("a", "Bomb threat forces evacuation of Gatwick airport terminal", "2026-11-09T08:00:00Z", { source: "BBC" }),
           item("b", "Gatwick airport evacuated after bomb threat, flights delayed", "2026-11-09T10:30:00Z", { source: "Reuters" }),
+          item("c", "Flights halted at Gatwick airport as police investigate bomb threat", "2026-11-09T11:30:00Z", { source: "Sky" }),
           item("old", "Bomb threat at Heathrow airport", "2026-10-01T08:00:00Z"),
           item("noplace", "Bomb threat emails sent to dozens of schools", "2026-11-09T12:00:00Z"),
         ],
@@ -68,9 +80,10 @@ test("groups reports of the same event and drops guesses", () => {
   assert.equal(gatwick.place, "London Gatwick Airport");
   assert.equal(gatwick.kind, "terrorism");
   assert.equal(gatwick.subtype, "threat");
-  assert.equal(gatwick.sourceCount, 2);
-  assert.equal(gatwick.sources.length, 2);
+  assert.equal(gatwick.sourceCount, 3);
+  assert.equal(gatwick.sources.length, 3);
   assert.ok(!out.some((i) => /Heathrow/.test(i.title)), "older than the window");
+  assert.equal(out.filter((i) => i.precision === "airport").length, 1, "differently worded reports of one event are grouped");
   assert.ok(!out.some((i) => /schools/.test(i.title)), "an outlet's report with no place is left off the map");
 });
 
