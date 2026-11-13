@@ -78,4 +78,10 @@ jobs:
           if [ -f data/translations.json ]; then git add data/translations.json; fi
           for f in data/conflict.json data/advisories.json data/context-state.json data/incidents.json data/war-intel.json; do if [ -f "$f" ]; then git add "$f"; fi; done
           git diff --staged --quiet || git commit -m "chore: update cached news feeds"
-          git push
+          # If someone pushed code while this job ran, rebase onto it and try again instead of
+          # losing the hour's data.
+          for attempt in 1 2 3; do
+            if git push; then exit 0; fi
+            git pull --rebase origin main || { git rebase --abort; exit 1; }
+          done
+          exit 1
