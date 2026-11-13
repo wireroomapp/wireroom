@@ -9,7 +9,7 @@ import MapLibreView from "./map/MapLibreView.jsx";
 import { readViewFromUrl, viewToSearch } from "./urlState.js";
 import SourcesPanel from "./SourcesPanel.jsx";
 import { PlaceCard, WarCard, NodeCard } from "./TrackerCards.jsx";
-import { useContextData, incidentToReport, warToReport, TRACKER_CREDITS, monthLabel, coverageLabel, n as num } from "./contextData.js";
+import { useContextData, incidentToReport, warToReport, TRACKER_CREDITS, LEVEL_TEXT, sidesText, monthLabel, coverageLabel, n as num } from "./contextData.js";
 
 // Which map to draw. "maplibre" = the full-scale map (OpenFreeMap + NASA + MapLibre, globe and terrain).
 // "d3" = the classic flat map. Override in the address bar with ?engine=d3 or ?engine=maplibre.
@@ -1434,7 +1434,7 @@ export default function WireRoomV2() {
       <aside className={`panel ${view !== "closed" ? "open" : ""}`}>
         <div className="panel-head">
           <div>
-            <div className="eyebrow">{view === "war" ? "WAR BRIEF · MILITARY TRACKER" : "COUNTRY BRIEF"}</div>
+            <div className="eyebrow">{view === "war" && warView ? `${(LEVEL_TEXT[warView.level] || LEVEL_TEXT.war).label} BRIEF · MILITARY TRACKER` : "COUNTRY BRIEF"}</div>
             <h1>{view === "war" && warView ? warView.name : selected?.name || "GLOBAL FEED"}</h1>
             {view === "war" && warView ? (() => {
               const lm = warView.latestMonth || {};
@@ -1443,7 +1443,7 @@ export default function WireRoomV2() {
               const have = sides.filter(c => found.has(c.id)).map(c => c.name);
               const missing = sides.filter(c => !found.has(c.id)).map(c => c.name);
               return <>
-                <p>{warView.sides.a.join(", ")} vs {warView.sides.b.join(", ") || "—"}</p>
+                <p>{sidesText(warView.sides)}</p>
                 <p className="source-status war">{num(lm.best)} killed in {monthLabel(lm.month)} · {num(warView.deaths.best)} in {coverageLabel(warView.coverage)} (UCDP best estimates, 1–2 months behind)</p>
                 <p className="source-note">
                   Official statements from the governments Wire Room follows, and outlet reports, that mention this war in the last 30 days.

@@ -1,6 +1,10 @@
 import React from "react";
 import { Swatch } from "./LiveLayers.jsx";
-import { TRACKER_COLORS, KIND_LABEL, SUBTYPE_LABEL, PRECISION_TEXT, dayLabel, whenLabel, monthLabel, coverageLabel, deathsText, n, nodeSearchUrl } from "./contextData.js";
+import { TRACKER_COLORS, KIND_LABEL, SUBTYPE_LABEL, PRECISION_TEXT, LEVEL_TEXT, dayLabel, whenLabel, monthLabel, coverageLabel, deathsText, n, nodeSearchUrl, sidesText, isUnnamed } from "./contextData.js";
+
+const whereText = (i) => (i.precision === "country" || !i.country ? i.place : `${i.place}, ${i.country}`);
+const byText = (i) => (i.by && i.by.length ? i.by.join(", ") : "not named in the reports");
+const checkedText = (i) => (i.checkedBy === "ai" ? "Checked by an AI model, then placed from the report" : "Placed automatically from the headline");
 
 // Details cards for the MILITARY, TERRORISM and CYBER trackers (data: contextData.js).
 // Same frame as the plane/ship card (.track-card, styled in LiveLayers.jsx).
@@ -61,6 +65,7 @@ export function PlaceCard({ group, onClose, onPin, warOf }) {
                 {whenLabel(it.lastReported)} · {it.sourceCount} outlet{it.sourceCount === 1 ? "" : "s"}{w ? ` · ${w.name}` : ""}
               </div>
               <div className="ev-title">{it.title}</div>
+              {it.kind !== "cyber" && <div className="ev-by">By: {byText(it)}{it.target ? ` · Target: ${it.target}` : ""}</div>}
               <Sources item={it} max={3} />
               {onPin && <button type="button" className="tc-pin ev-pin" onClick={() => onPin(it)}>PIN TO MAP</button>}
             </li>
@@ -68,7 +73,7 @@ export function PlaceCard({ group, onClose, onPin, warOf }) {
         })}
       </ol>
       <div className="tc-foot">
-        <span>Placed automatically from the headlines. Reported, not verified by Wire Room.</span>
+        <span>{group.items.some((x) => x.checkedBy === "ai") ? "Checked by an AI model and placed from the reports" : "Placed automatically from the headlines"}. Reported, not verified by Wire Room.</span>
       </div>
     </div>
   );
@@ -79,7 +84,9 @@ export function IncidentCard({ item, onClose, onPin, war = null }) {
   const color = item.kind === "strike" ? TRACKER_COLORS.strike : TRACKER_COLORS[item.kind];
   const hollow = item.subtype !== "attack";
   const rows = [
-    ["Where", `${item.place} · ${PRECISION_TEXT[item.precision] || item.precision}`],
+    ["Where", `${whereText(item)} · ${PRECISION_TEXT[item.precision] || item.precision}`],
+    ...(item.kind !== "cyber" || (item.by && item.by.length) ? [["By", byText(item)]] : []),
+    ...(item.target ? [["Target", item.target]] : []),
     ["Reported", item.firstReported === item.lastReported ? whenLabel(item.firstReported) : `${whenLabel(item.firstReported)}, latest ${whenLabel(item.lastReported)}`],
     ["Sources", `${item.sourceCount} outlet${item.sourceCount === 1 ? "" : "s"}${item.officialCount ? `, ${item.officialCount} official statement${item.officialCount === 1 ? "" : "s"}` : ""}`],
   ];
@@ -98,7 +105,7 @@ export function IncidentCard({ item, onClose, onPin, war = null }) {
       )}
       <Sources item={item} />
       <div className="tc-foot">
-        <span>Placed automatically from the headline{item.translatedFrom ? " (machine-translated)" : ""}. Reported, not verified by Wire Room.</span>
+        <span>{checkedText(item)}{item.translatedFrom ? " (machine-translated)" : ""}. Reported, not verified by Wire Room.</span>
       </div>
       {onPin && <button type="button" className="tc-pin" onClick={onPin}>PIN TO MAP</button>}
     </div>
@@ -109,15 +116,16 @@ export function IncidentCard({ item, onClose, onPin, war = null }) {
 export function WarCard({ war, onClose, onPin, intelOpen, onToggleIntel, reportedCount = 0 }) {
   const lm = war.latestMonth || {};
   const rows = [
-    ["Sides", `${war.sides.a.join(", ")} vs ${war.sides.b.join(", ") || "—"}`],
+    ["Sides", sidesText(war.sides)],
+    ["Level", (LEVEL_TEXT[war.level] || LEVEL_TEXT.war).note],
     [coverageLabel(war.coverage) || "Total", `${deathsText(war.deaths)} · ${n(war.events)} events`],
     ["Latest event", dayLabel(war.latestEvent)],
     ["Reported strikes", reportedCount ? `${reportedCount} in the news, last 10 days` : "none matched in the last 10 days"],
   ];
   return (
     <div className="track-card" role="dialog" aria-label="War details" {...stop}>
-      <Head onClose={onClose} title={war.name} icon={<Swatch kind="war" color={TRACKER_COLORS.war} size={12} />} kindText="WAR · UCDP VERIFIED EVENTS" />
-      <div className="tc-big">{n(lm.best)} killed<small>{monthLabel(lm.month)} · best estimate{lm.low !== lm.high ? `, range ${n(lm.low)}–${n(lm.high)}` : ""}</small></div>
+      <Head onClose={onClose} title={war.name} icon={<Swatch kind="war" color={TRACKER_COLORS.war} size={12} />} kindText={`${(LEVEL_TEXT[war.level] || LEVEL_TEXT.war).label} · UCDP VERIFIED EVENTS`} />
+      <div className="tc-big">{n(lm.best)} killed<small>{monthLabel(lm.month)} · best estimate{lm.low !== lm.high ? `, range ${n(lm.low)}–${n(lm.high)}` : ""}{!lm.best && war.latestEvent ? ` · last event ${dayLabel(war.latestEvent)}` : ""}</small></div>
       <div style={{ font: "9px monospace", color: "#718198", margin: "0 0 8px" }}>LATEST MONTH UCDP HAS PUBLISHED (1–2 MONTHS BEHIND). TOTALS COVER {(coverageLabel(war.coverage) || "THE LATEST 3 MONTHS").toUpperCase()} ONLY; EARLIER FIGHTING ISN'T INCLUDED.</div>
       <dl>
         {rows.map(([k, v]) => (<React.Fragment key={k}><dt>{k}</dt><dd>{v}</dd></React.Fragment>))}
@@ -157,7 +165,7 @@ export function NodeCard({ node, war, onClose, onOpenWar }) {
       <dl>
         <dt>Date</dt><dd>{dayLabel(node.date)}</dd>
         <dt>Deaths</dt><dd>{deathsText(node)}{node.civilians ? ` · ${n(node.civilians)} civilian${node.civilians === 1 ? "" : "s"}` : ""}</dd>
-        <dt>Who</dt><dd>{[node.sideA, node.sideB].filter(Boolean).join(" vs ") || war.name}</dd>
+        <dt>Who</dt><dd>{isUnnamed(node.sideA) ? "Sides not yet identified by UCDP" : [node.sideA, node.sideB].filter(Boolean).join(" vs ") || war.name}</dd>
         <dt>Source</dt><dd>{node.office || "—"}{node.sources > 1 ? ` (1 of ${node.sources} reports UCDP used)` : ""}</dd>
         <dt>Place</dt><dd>{approx ? "Approximate: UCDP only knows the wider area" : "Location known"}</dd>
       </dl>

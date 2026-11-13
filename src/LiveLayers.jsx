@@ -167,6 +167,7 @@ const LIVE_CSS = `
 .track-card .ev-title{font:600 13px/1.35 Arial,sans-serif;color:#f0ece4;margin-bottom:5px}
 .track-card .tc-events .tc-src{margin-bottom:4px}
 .track-card .ev-pin{margin-top:2px;padding:3px 7px}
+.track-card .ev-by{font:10px monospace;color:#c4cbd6;margin:0 0 4px}
 .track-card .tc-foot a,.track-card .tc-foot button{white-space:nowrap}
 @media(max-width:800px){.live-box{left:10px;max-width:calc(100% - 140px);padding:6px}.live-title,.live-sub,.live-legend,.ctx-long{display:none}.live-btn{padding:5px 6px}.track-card{max-height:52vh}}
 `;
@@ -223,7 +224,7 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
         {!t && <span className="live-title">TRACKERS</span>}
         {tab === "live" && btn(airOn, onToggleAir, "Military-flagged aircraft worldwide (ADS-B)", <Swatch kind="air" color={AIRCRAFT_COLOR} />, "PLANES", countLabel(air))}
         {tab === "live" && btn(shipsOn, onToggleShips, "Ships at strategic chokepoints and Indian Ocean ports (AIS)", <Swatch kind="ship" color={shipColor("cargo")} />, "SHIPS", countLabel(ships))}
-        {tab === "events" && btn(t.militaryOn, () => t.onToggle("military"), "Wars (UCDP verified) and strikes reported in the news", <Swatch kind="war" color={TRACKER_COLORS.war} />, "MILITARY",
+        {tab === "events" && btn(t.militaryOn, () => t.onToggle("military"), "Armed conflicts (UCDP verified) and strikes reported in the news", <Swatch kind="war" color={TRACKER_COLORS.war} />, "MILITARY",
           inc ? trkCount(d, inc.wars.length) : trkCount(d, 0))}
         {tab === "events" && btn(t.terrorOn, () => t.onToggle("terrorism"), "Terrorist attacks and threats reported in the last days", <Swatch kind="terrorism" color={TRACKER_COLORS.terrorism} />, "TERRORISM",
           inc ? trkCount(d, inc.terrorism.length) : trkCount(d, 0))}
@@ -246,12 +247,14 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
       )}
       {tab === "events" && t.militaryOn && (
         <>
-          <div className="live-note ctx-short">Military: wars (UCDP{cov ? `, ${cov}` : ""}) and strikes reported in the last {days} days. Tap a war.</div>
+          <div className="live-note ctx-short">Military: every armed conflict UCDP recorded{cov ? ` (${cov})` : ""}, and strikes reported in the last {days} days. Tap one.</div>
           <div className="live-note ctx-long">
-            Military: wars from UCDP's researcher-verified events{cov ? ` (${cov}, 1–2 months behind)` : ""}, and strikes reported in the news in the last {days} days. Tap a war for casualties, a web of its latest attacks and an intel panel.
+            Military: every armed conflict in UCDP's researcher-verified events{cov ? ` (${cov}, 1–2 months behind)` : ""}, however small, sized war / armed conflict / clashes by deaths; and every strike reported in the news in the last {days} days, with who carried it out when the report says. Tap a conflict for casualties, a web of its latest attacks and an intel panel.
           </div>
           <div className="live-legend">
-            <span><Swatch kind="war" color={TRACKER_COLORS.war} />War (UCDP)</span>
+            <span><Swatch kind="war" color={TRACKER_COLORS.war} size={13} />War</span>
+            <span><Swatch kind="war" color={TRACKER_COLORS.war} size={10} />Armed conflict</span>
+            <span><Swatch kind="war" color={TRACKER_COLORS.war} size={8} />Clashes</span>
             <span><Swatch kind="strike" color={TRACKER_COLORS.strike} />Strike reported</span>
           </div>
         </>

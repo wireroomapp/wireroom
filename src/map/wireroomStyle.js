@@ -44,6 +44,7 @@ const SLOT_EXPR = ["match", ["get", "slot"], ...SLOT_OFFSETS.slice(1).flatMap((o
 // The count badge sits at the icon's top-right corner (text offsets are in ems at size 10).
 const BADGE_EXPR = ["match", ["get", "slot"], ...SLOT_OFFSETS.flatMap((o, i) => [i, ["literal", [(o[0] + 9) / 10, (o[1] - 9) / 10]]]), ["literal", [0.9, -0.9]]];
 const WAR_RED = "#ff4d4d", STRIKE_ORANGE = "#ff8a3d";
+const LEVEL_SIZE = ["match", ["get", "level"], "war", 1, "armed conflict", 0.78, 0.6];
 
 export function buildStyle() {
   return {
@@ -159,13 +160,17 @@ export function buildStyle() {
         } },
       { id: "wr-wars", type: "symbol", source: "wr-wars",
         layout: {
-          "icon-image": "wr-war", "icon-size": ["interpolate", ["linear"], ["zoom"], 1, 0.85, 6, 1.1],
+          // Size by UCDP level: war (1,000+ deaths) > armed conflict (25+) > armed clashes.
+          "icon-image": "wr-war", "icon-size": ["interpolate", ["linear"], ["zoom"], 1, ["*", 0.85, LEVEL_SIZE], 6, ["*", 1.1, LEVEL_SIZE]],
           "icon-allow-overlap": true, "icon-ignore-placement": true, "symbol-sort-key": ["-", 0, ["get", "best"]],
-          "text-field": ["get", "label"], "text-font": FONT_BOLD, "text-size": 9.5, "text-anchor": "top", "text-offset": [0, 1.25],
+          // Wars are labeled at any zoom, armed conflicts from zoom 2.5, small clashes from zoom 4.
+          "text-field": ["step", ["zoom"], ["case", ["==", ["get", "level"], "war"], ["get", "label"], ""],
+            2.5, ["case", ["!=", ["get", "level"], "armed clashes"], ["get", "label"], ""], 4, ["get", "label"]],
+          "text-font": FONT_BOLD, "text-size": 9.5, "text-anchor": "top", "text-offset": [0, 1.25],
           "text-optional": true, "text-max-width": 16, "text-letter-spacing": 0.04,
         },
         paint: {
-          "icon-opacity": ["case", ["get", "dim"], 0.4, 1],
+          "icon-opacity": ["case", ["get", "dim"], 0.4, ["get", "quiet"], 0.55, 1],
           "text-color": ["case", ["get", "sel"], "#ffffff", "#ffb3ad"], "text-opacity": ["case", ["get", "dim"], 0.4, 1],
           "text-halo-color": "#071019", "text-halo-width": 1.6,
         } },

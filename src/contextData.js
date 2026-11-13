@@ -65,6 +65,14 @@ export const PRECISION_TEXT = {
   country: "country only: the report names no city, so the marker sits mid-country",
 };
 export const KIND_LABEL = { terrorism: "TERRORISM", cyber: "CYBER", strike: "MILITARY STRIKE" };
+// UCDP's definitions, counted over the months Wire Room keeps (about a year).
+export const LEVEL_TEXT = {
+  war: { label: "WAR", note: "1,000+ battle deaths in the period (UCDP's definition of a war)" },
+  "armed conflict": { label: "ARMED CONFLICT", note: "25+ battle deaths in the period (UCDP's definition of an armed conflict)" },
+  "armed clashes": { label: "ARMED CLASHES", note: "fewer than 25 deaths in the period: below UCDP's armed-conflict line so far" },
+};
+export const sidesText = (sides) => [sides.a.join(", "), sides.b.join(", ")].filter(Boolean).join(" vs ") || "—";
+export const isUnnamed = (s) => /^XXX\d/.test(String(s || ""));
 export const SUBTYPE_LABEL = { attack: "ATTACK REPORTED", threat: "THREAT REPORTED", warning: "WARNING" };
 
 // One map marker per place and tracker: every terrorism (or cyber, or strike) event reported at
@@ -95,7 +103,7 @@ export function incidentToReport(i) {
     sourceType: lead.sourceType === "official" ? "official" : "independent",
     source: lead.source || "Report",
     headline: i.title,
-    summary: `${KIND_LABEL[i.kind]} · ${SUBTYPE_LABEL[i.subtype]} at ${i.place} (${i.precision}). Reported by ${i.sourceCount} source${i.sourceCount === 1 ? "" : "s"}; not verified by Wire Room.`,
+    summary: `${KIND_LABEL[i.kind]} · ${SUBTYPE_LABEL[i.subtype]} at ${i.place}${i.country && i.precision !== "country" ? `, ${i.country}` : ""} (${i.precision}).${i.by && i.by.length ? ` By (as reported): ${i.by.join(", ")}.` : ""} Reported by ${i.sourceCount} source${i.sourceCount === 1 ? "" : "s"}; not verified by Wire Room.`,
     date: dayLabel(i.lastReported),
     publishedAt: i.lastReported,
     url: lead.url || "",
@@ -114,7 +122,7 @@ export function warToReport(w) {
     sourceType: "conflict",
     source: "UCDP (verified dataset)",
     headline: `${w.name} · ${n(lm.best)} killed in ${monthLabel(lm.month)}`,
-    summary: `${w.sides.a.join(", ")} vs ${w.sides.b.join(", ")}. ${n(w.deaths.best)} killed in ${n(w.events)} events, ${coverageLabel(w.coverage)} (UCDP best estimate; range ${n(w.deaths.low)}–${n(w.deaths.high)}).`,
+    summary: `${sidesText(w.sides)}. ${n(w.deaths.best)} killed in ${n(w.events)} events, ${coverageLabel(w.coverage)} (UCDP best estimate; range ${n(w.deaths.low)}–${n(w.deaths.high)}).`,
     date: monthLabel(lm.month),
     publishedAt: lm.month ? `${lm.month}-28T00:00:00Z` : null,
     url: "https://ucdp.uu.se/downloads/",
