@@ -97,6 +97,29 @@ app.get("/api/global", (req, res) => {
 // see tracking/README.md. Adds /api/aircraft, /api/ships, /api/tracking/status.
 registerTracking(app);
 
+// Context layers (see lib/context.mjs): files written by the hourly job, re-read when they change.
+const contextMemo = new Map();
+function loadDataFile(file) {
+  try {
+    const { mtimeMs } = statSync(file);
+    const hit = contextMemo.get(file);
+    if (hit && hit.mtimeMs === mtimeMs) return hit.data;
+    const data = JSON.parse(readFileSync(file, "utf-8"));
+    contextMemo.set(file, { mtimeMs, data });
+    return data;
+  } catch {
+    return contextMemo.get(file)?.data || null;
+  }
+}
+for (const [route, file] of [["/api/conflict", "data/conflict.json"], ["/api/advisories", "data/advisories.json"]]) {
+  app.get(route, (req, res) => {
+    const data = loadDataFile(file);
+    if (!data) return res.status(503).json({ status: "unavailable", error: "Not collected yet" });
+    res.set("Cache-Control", "public, max-age=900");
+    res.json({ status: "ok", ...data });
+  });
+}
+
 // Where every country's reports come from (the SOURCES page).
 app.get("/api/sources", (req, res) => {
   res.json(describeSources(loadCache()));

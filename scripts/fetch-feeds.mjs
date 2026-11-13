@@ -56,7 +56,7 @@ async function main() {
         officialVerified: result.officialVerified,
         officialStatus: result.officialStatus,
         officialLastOkAt:
-          result.official.length > 0
+          result.officialStatus === "ok" // the government channel itself, not cyber-agency extras
             ? new Date().toISOString()
             : previousEntry.officialLastOkAt || null,
         officialLastError:

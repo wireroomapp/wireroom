@@ -8,6 +8,7 @@ import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrat
 import MapLibreView from "./map/MapLibreView.jsx";
 import { readViewFromUrl, viewToSearch } from "./urlState.js";
 import SourcesPanel from "./SourcesPanel.jsx";
+import { TOPICS, topicsFor } from "./topics.js";
 
 // Which map to draw. "maplibre" = the full-scale map (OpenFreeMap + NASA + MapLibre, globe and terrain).
 // "d3" = the classic flat map. Override in the address bar with ?engine=d3 or ?engine=maplibre.
@@ -111,14 +112,15 @@ function sameText(a, b) {
   return x.slice(0, n) === y.slice(0, n);
 }
 
-function NewsCard({ item, onPin }) {
+function NewsCard({ item, onPin, topics = [] }) {
   // Reports not in English carry a machine translation (item.tr, added by the hourly job).
   // English is shown first; the original is one tap away.
   const [showOriginal, setShowOriginal] = useState(false);
   const tr = item.tr && item.tr.headline ? item.tr : null;
   const english = Boolean(tr) && !showOriginal;
   return <article className="card">
-    <div className="card-meta"><SourceTag type={item.sourceType}/><span>{item.source}</span><span>{item.date}</span></div>
+    <div className="card-meta"><SourceTag type={item.sourceType}/><span>{item.source}</span><span>{item.date}</span>
+      {topics.map(t => <span key={t} className={"topic-chip t-" + t}>{t.toUpperCase()}</span>)}</div>
     {tr && (
       <div className="tr-note">
         <span>{english ? `MACHINE-TRANSLATED FROM ${languageName(tr.from).toUpperCase()}` : `ORIGINAL · ${languageName(tr.from).toUpperCase()}`}</span>
@@ -147,6 +149,7 @@ export default function WireRoomV2() {
   const [query, setQuery] = useState("");
   const [intelQuery, setIntelQuery] = useState("");
   const [intelSource, setIntelSource] = useState("");
+  const [intelTopic, setIntelTopic] = useState(""); // "", conflict, cyber, terrorism
   const [intelFrom, setIntelFrom] = useState("");
   const [intelTo, setIntelTo] = useState("");
   const [region, setRegion] = useState("ALL");
@@ -269,6 +272,14 @@ export default function WireRoomV2() {
     return (!q || c.name.toLowerCase().includes(q) || c.code.toLowerCase().includes(q)) && (region === "ALL" || c.region === region);
   }), [query,region]);
 
+  // Topic tags (keyword-based reading aid; see topics.js), computed once per loaded report.
+  const topicMap = useMemo(() => {
+    const m = new WeakMap();
+    for (const i of feed) m.set(i, topicsFor(i));
+    return m;
+  }, [feed]);
+  const topicsOf = (i) => topicMap.get(i) || topicsFor(i);
+
   const visibleFeed = useMemo(() => {
     let items = feed;
     if (selected) items = items.filter(i => i.countryId === selected.id);
@@ -281,6 +292,7 @@ export default function WireRoomV2() {
       items = items.filter(i => [i.headline, i.summary, i.source, i.tr && i.tr.headline, i.tr && i.tr.summary].filter(Boolean).join(" ").toLowerCase().includes(keyword));
     }
     if (intelSource) items = items.filter(i => i.source === intelSource);
+    if (intelTopic) items = items.filter(i => (topicMap.get(i) || topicsFor(i)).includes(intelTopic));
     if (intelFrom || intelTo) {
       const fromTime = intelFrom ? new Date(intelFrom + "T00:00:00").getTime() : -Infinity;
       const toTime = intelTo ? new Date(intelTo + "T23:59:59").getTime() : Infinity;
@@ -291,7 +303,20 @@ export default function WireRoomV2() {
       });
     }
     return [...items].sort((x, y) => new Date(y.publishedAt || 0) - new Date(x.publishedAt || 0));
-  }, [feed,selected,mode,intelQuery,intelSource,intelFrom,intelTo]);
+  }, [feed,selected,mode,intelQuery,intelSource,intelTopic,intelFrom,intelTo,topicMap]);
+
+  // How many loaded reports in this panel carry each topic (shown on the topic buttons).
+  const topicCounts = useMemo(() => {
+    let items = feed;
+    if (selected) items = items.filter(i => i.countryId === selected.id);
+    if (mode !== "both") {
+      const wantType = mode === "news" ? "independent" : mode;
+      items = items.filter(i => i.sourceType === wantType);
+    }
+    const counts = {};
+    for (const i of items) for (const t of (topicMap.get(i) || [])) counts[t] = (counts[t] || 0) + 1;
+    return counts;
+  }, [feed, selected, mode, topicMap]);
 
   const REPORTS_PER_PAGE = 20;
   const totalPages = Math.max(1, Math.ceil(visibleFeed.length / REPORTS_PER_PAGE));
@@ -303,12 +328,13 @@ export default function WireRoomV2() {
     [feed]
   );
 
-  const intelFiltersActive = Boolean(intelQuery.trim() || intelSource || intelFrom || intelTo);
+  const intelFiltersActive = Boolean(intelQuery.trim() || intelSource || intelTopic || intelFrom || intelTo);
 
   // Filters belong to one panel: cleared when you open a different country or the global feed.
   function resetIntelFilters() {
     setIntelQuery("");
     setIntelSource("");
+    setIntelTopic("");
     setIntelFrom("");
     setIntelTo("");
   }
@@ -1394,6 +1420,15 @@ export default function WireRoomV2() {
                   <button type="button" onClick={() => { resetIntelFilters(); setPage(1); }} style={{ background: "none", border: "1px solid #26384d", color: "#718198", padding: "4px 7px", font: "9px monospace", cursor: "pointer" }}>CLEAR FILTER</button>
                 )}
               </div>
+              <div className="topic-row" role="group" aria-label="Filter reports by topic">
+                <button type="button" className={!intelTopic ? "on" : ""} aria-pressed={!intelTopic} onClick={() => { setIntelTopic(""); setPage(1); }}>ALL</button>
+                {TOPICS.map(t => (
+                  <button key={t.id} type="button" className={intelTopic === t.id ? "on" : ""} aria-pressed={intelTopic === t.id}
+                    onClick={() => { setIntelTopic(intelTopic === t.id ? "" : t.id); setPage(1); }}>
+                    {t.label}<span className="n">{topicCounts[t.id] || 0}</span>
+                  </button>
+                ))}
+              </div>
               <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: 6 }}>
                 <input value={intelQuery} onChange={e => { setIntelQuery(e.target.value); setPage(1); }} placeholder="KEYWORD" aria-label="Search reports by keyword" style={fld} />
                 <select value={intelSource} onChange={e => { setIntelSource(e.target.value); setPage(1); }} aria-label="Filter reports by source" style={fld}>
@@ -1405,6 +1440,7 @@ export default function WireRoomV2() {
               </div>
               <div style={{ marginTop: 7, color: "#4e6076", font: "9px monospace" }}>
                 SEARCHES LOADED REPORTS ONLY{intelFiltersActive ? " - " + visibleFeed.length + " MATCHES" : ""}
+                {intelTopic && <div style={{ marginTop: 4, color: "#718198" }}>TOPICS ARE MATCHED BY KEYWORDS: A REPORT ABOUT A TOPIC, NOT A CONFIRMED EVENT.</div>}
               </div>
             </div>
           );
@@ -1431,7 +1467,7 @@ export default function WireRoomV2() {
             </div>
           </div>
         )}
-        {pagedFeed.map(item=><NewsCard onPin={startPinReport} key={item.id} item={item}/>)}
+        {pagedFeed.map(item=><NewsCard onPin={startPinReport} key={item.id} item={item} topics={topicsOf(item)}/>)}
       </aside>
     </main>
   </div>;
@@ -1450,7 +1486,7 @@ const CSS = `
 .status{display:flex;align-items:center;gap:10px}.status-tag{letter-spacing:.1em}.hdr-btn{background:none;border:1px solid #26384d;color:#aeb8c6;font:10px monospace;letter-spacing:.06em;padding:6px 10px;cursor:pointer;text-decoration:none;line-height:1}.hdr-btn:hover{border-color:#c9974b;color:#c9974b}
 .welcome-back{position:fixed;inset:0;z-index:100;background:rgba(4,9,15,.82);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}.welcome-card{background:#0c1724;border:1px solid #26384d;border-top:2px solid #c9974b;max-width:460px;width:100%;padding:22px;font-family:Arial,sans-serif}.welcome-card h2{margin:4px 0 10px;font-size:26px;letter-spacing:.12em}.welcome-card h2 b{color:#c9974b}.welcome-card p{margin:0 0 12px;color:#c4cbd6;font-size:14px;line-height:1.5}.welcome-card ul{margin:0 0 12px;padding-left:18px;color:#aeb8c6;font-size:13px;line-height:1.55}.welcome-card li{margin-bottom:6px}.welcome-card .welcome-fine{font:11px/1.5 monospace;color:#718198}.welcome-note{border-left:2px solid #26384d;padding:2px 0 2px 12px;margin:0 0 12px}.welcome-note h3{margin:0 0 5px;font:700 10px monospace;letter-spacing:.1em;color:#4fa6a0;text-transform:uppercase}.welcome-note p{font-size:13px;color:#aeb8c6;margin:0 0 10px}.welcome-note ul{margin:0;font-size:12.5px}.welcome-note li{margin-bottom:4px}.welcome-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}.welcome-go{background:#c9974b;color:#071019;border:0;font:700 12px monospace;letter-spacing:.08em;padding:11px 16px;cursor:pointer}.welcome-link{color:#c9974b;font:11px monospace;letter-spacing:.06em}
 @media(max-width:700px){.subtitle{display:none}.topbar{padding:0 14px}.status{margin-left:auto}.status-tag{display:none}}
-*{box-sizing:border-box} body{margin:0;background:#071019} .app{min-height:100vh;background:#071019;color:#e8e3d8;font-family:Arial,sans-serif}.topbar{height:64px;border-bottom:1px solid #1c2a3b;display:flex;align-items:center;padding:0 22px;gap:18px}.brand{font-weight:800;letter-spacing:.12em;font-size:21px}.brand b{color:#c9974b}.subtitle{font:11px monospace;color:#718198;letter-spacing:.08em}.status{margin-left:auto;font:10px monospace;color:#4fa6a0}.toolbar{height:54px;border-bottom:1px solid #162538;display:flex;align-items:center;gap:9px;padding:8px 18px}.toolbar input,.toolbar select,.mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace}.toolbar input{width:190px}.mode{margin-left:auto;display:flex}.mode button{cursor:pointer}.mode button.active{color:#c9974b;border-color:#c9974b}.layout{height:calc(100vh - 118px);display:flex}.map-wrap{position:relative;flex:1;min-width:0}.map{width:100%;height:100%;touch-action:none;cursor:grab}.map:active{cursor:grabbing}.ocean{fill:#0b1725;stroke:#21334a}.grid{fill:none;stroke:#142233;stroke-width:.5}.land{fill:#142230;stroke:#2a3c50;stroke-width:.65}.marker{cursor:pointer}.dot{fill:#c9974b}.dot.active{fill:#e8e3d8;stroke:#c9974b;stroke-width:2}.pulse{fill:none;stroke:#c9974b;stroke-width:1;opacity:.55;animation:pulse 2s infinite;pointer-events:none}.marker text{font:8px monospace;fill:#65758a;text-anchor:middle}.map-note{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:18px;font:10px monospace;color:#4e6076}.global-fab{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));right:18px;background:#0c1724;border:1px solid #c9974b;color:#c9974b;padding:8px 14px;font:10px monospace;letter-spacing:.06em;cursor:pointer;z-index:5}.panel{width:410px;background:#0c1724;border-left:1px solid #1c2a3b;padding:20px;overflow:auto;display:none;flex-direction:column}.panel.open{display:flex}.panel-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #1c2a3b;padding-bottom:14px;margin-bottom:14px}.panel-head h1{margin:2px 0 4px;font-size:28px}.panel-head p{margin:0;color:#718198;font:10px monospace;line-height:1.5}.panel-head button{height:30px;background:none;border:1px solid #26384d;color:#8795a7;cursor:pointer}.panel-actions{display:flex;gap:6px;align-items:flex-start;flex-shrink:0}.panel-head .link-btn{font:10px monospace;letter-spacing:.06em;padding:0 9px;min-width:44px}.panel-head .link-btn:hover{border-color:#c9974b;color:#e8e3d8}.link-toast{position:fixed;left:50%;top:76px;transform:translateX(-50%);z-index:120;background:#0c1724;border:1px solid #c9974b;color:#e8e3d8;font:10px monospace;letter-spacing:.08em;padding:8px 12px}.panel-mode{display:none}.panel-mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace;cursor:pointer}.panel-mode button.active{color:#c9974b;border-color:#c9974b}.eyebrow{font:9px monospace;letter-spacing:.12em;color:#4fa6a0}.source-status{margin:6px 0 0;font:10px monospace;letter-spacing:.04em}.source-status.verified{color:#4fa6a0}.source-status.unverified{color:#c9974b}.source-note{margin:3px 0 0;font:9px/1.4 monospace;color:#5d6d81}.loading,.empty{font:11px monospace;color:#718198;padding:24px 4px;line-height:1.7}.card{border:1px solid #1d2d40;background:#071019;padding:13px;margin-bottom:10px}.annotation-tools{max-width:calc(100% - 350px)}@media(max-width:800px){.annotation-tools{max-width:calc(100% - 20px)}}.card-meta{display:flex;gap:8px;align-items:center;color:#586b82;font:9px monospace;margin-bottom:8px}.tr-note{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:-2px 0 6px;font:9px monospace;letter-spacing:.06em;color:#4fa6a0}.tr-note button{background:none;border:1px solid #26384d;color:#8795a7;font:9px monospace;letter-spacing:.06em;padding:2px 6px;cursor:pointer}.tr-note button:hover{border-color:#c9974b;color:#e8e3d8}.tag{padding:2px 5px;border:1px solid}.tag.official{color:#4fa6a0;border-color:#315e5b}.tag.independent{color:#8a98aa;border-color:#3a4655}.tag.track{color:#7cc4ff;border-color:#2f4f6b}.card h3{font-size:14px;line-height:1.35;margin:0 0 7px}.card p{font-size:12px;line-height:1.5;color:#9ba8b8;margin:0 0 8px}.card a{font:10px monospace;color:#c9974b;text-decoration:none}.pagination{border:1px solid #1d2d40;background:#071019;padding:10px;margin-bottom:10px;font:9px monospace;color:#718198}.pagination-info{display:block;margin-bottom:8px}.pagination-buttons{display:flex;gap:6px}.pagination-buttons button{flex:1;background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:7px 8px;font:9px monospace;cursor:pointer}.pagination-buttons button:hover:not(:disabled){color:#c9974b;border-color:#c9974b}.pagination-buttons button:disabled{opacity:.35;cursor:default}@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.2);opacity:0}}@media(max-width:800px){.layout{height:calc(100dvh - 118px);min-height:0;position:relative;overflow:hidden}.panel{display:flex;position:absolute;right:0;top:0;bottom:0;width:min(420px,100%);transform:translateX(100%);transition:transform .25s;z-index:4}.panel.open{transform:translateX(0)}.subtitle{display:none}.toolbar{height:auto;min-height:54px;overflow:hidden;flex-wrap:wrap;padding:8px 10px;gap:6px}.toolbar input{width:min(150px,calc(100vw - 20px))}.toolbar select{max-width:110px}.mode{margin-left:auto;flex-shrink:0}.mode button{padding:8px 7px}.toolbar .mode{display:none}.panel-mode{display:flex;gap:6px;margin:-4px 0 14px;padding-bottom:12px;border-bottom:1px solid #1c2a3b}.panel-mode button{flex:1;padding:8px 5px}.map-wrap{height:100%;min-height:0}.status{margin-left:auto;gap:6px}.status-tag{display:none}.hdr-btn{padding:6px 7px;letter-spacing:.03em}}
+*{box-sizing:border-box} body{margin:0;background:#071019} .app{min-height:100vh;background:#071019;color:#e8e3d8;font-family:Arial,sans-serif}.topbar{height:64px;border-bottom:1px solid #1c2a3b;display:flex;align-items:center;padding:0 22px;gap:18px}.brand{font-weight:800;letter-spacing:.12em;font-size:21px}.brand b{color:#c9974b}.subtitle{font:11px monospace;color:#718198;letter-spacing:.08em}.status{margin-left:auto;font:10px monospace;color:#4fa6a0}.toolbar{height:54px;border-bottom:1px solid #162538;display:flex;align-items:center;gap:9px;padding:8px 18px}.toolbar input,.toolbar select,.mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace}.toolbar input{width:190px}.mode{margin-left:auto;display:flex}.mode button{cursor:pointer}.mode button.active{color:#c9974b;border-color:#c9974b}.layout{height:calc(100vh - 118px);display:flex}.map-wrap{position:relative;flex:1;min-width:0}.map{width:100%;height:100%;touch-action:none;cursor:grab}.map:active{cursor:grabbing}.ocean{fill:#0b1725;stroke:#21334a}.grid{fill:none;stroke:#142233;stroke-width:.5}.land{fill:#142230;stroke:#2a3c50;stroke-width:.65}.marker{cursor:pointer}.dot{fill:#c9974b}.dot.active{fill:#e8e3d8;stroke:#c9974b;stroke-width:2}.pulse{fill:none;stroke:#c9974b;stroke-width:1;opacity:.55;animation:pulse 2s infinite;pointer-events:none}.marker text{font:8px monospace;fill:#65758a;text-anchor:middle}.map-note{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:18px;font:10px monospace;color:#4e6076}.global-fab{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));right:18px;background:#0c1724;border:1px solid #c9974b;color:#c9974b;padding:8px 14px;font:10px monospace;letter-spacing:.06em;cursor:pointer;z-index:5}.panel{width:410px;background:#0c1724;border-left:1px solid #1c2a3b;padding:20px;overflow:auto;display:none;flex-direction:column}.panel.open{display:flex}.panel-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #1c2a3b;padding-bottom:14px;margin-bottom:14px}.panel-head h1{margin:2px 0 4px;font-size:28px}.panel-head p{margin:0;color:#718198;font:10px monospace;line-height:1.5}.panel-head button{height:30px;background:none;border:1px solid #26384d;color:#8795a7;cursor:pointer}.panel-actions{display:flex;gap:6px;align-items:flex-start;flex-shrink:0}.panel-head .link-btn{font:10px monospace;letter-spacing:.06em;padding:0 9px;min-width:44px}.panel-head .link-btn:hover{border-color:#c9974b;color:#e8e3d8}.link-toast{position:fixed;left:50%;top:76px;transform:translateX(-50%);z-index:120;background:#0c1724;border:1px solid #c9974b;color:#e8e3d8;font:10px monospace;letter-spacing:.08em;padding:8px 12px}.panel-mode{display:none}.panel-mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace;cursor:pointer}.panel-mode button.active{color:#c9974b;border-color:#c9974b}.eyebrow{font:9px monospace;letter-spacing:.12em;color:#4fa6a0}.source-status{margin:6px 0 0;font:10px monospace;letter-spacing:.04em}.source-status.verified{color:#4fa6a0}.source-status.unverified{color:#c9974b}.source-note{margin:3px 0 0;font:9px/1.4 monospace;color:#5d6d81}.loading,.empty{font:11px monospace;color:#718198;padding:24px 4px;line-height:1.7}.card{border:1px solid #1d2d40;background:#071019;padding:13px;margin-bottom:10px}.annotation-tools{max-width:calc(100% - 350px)}@media(max-width:800px){.annotation-tools{max-width:calc(100% - 20px)}}.topic-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px}.topic-row button{background:#0c1724;border:1px solid #26384d;color:#8795a7;font:9px monospace;letter-spacing:.06em;padding:5px 7px;cursor:pointer;display:inline-flex;gap:5px;align-items:center}.topic-row button.on{border-color:#c9974b;color:#e8e3d8}.topic-row .n{color:#c9974b}.topic-chip{font:8px monospace;letter-spacing:.06em;padding:1px 4px;border:1px solid #3a4a5e;color:#8795a7}.topic-chip.t-conflict{border-color:#7a3b3b;color:#e07a6a}.topic-chip.t-cyber{border-color:#2f5a73;color:#6fb3d9}.topic-chip.t-terrorism{border-color:#6b4a2a;color:#e0a15a}.card-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:#586b82;font:9px monospace;margin-bottom:8px}.tr-note{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:-2px 0 6px;font:9px monospace;letter-spacing:.06em;color:#4fa6a0}.tr-note button{background:none;border:1px solid #26384d;color:#8795a7;font:9px monospace;letter-spacing:.06em;padding:2px 6px;cursor:pointer}.tr-note button:hover{border-color:#c9974b;color:#e8e3d8}.tag{padding:2px 5px;border:1px solid}.tag.official{color:#4fa6a0;border-color:#315e5b}.tag.independent{color:#8a98aa;border-color:#3a4655}.tag.track{color:#7cc4ff;border-color:#2f4f6b}.card h3{font-size:14px;line-height:1.35;margin:0 0 7px}.card p{font-size:12px;line-height:1.5;color:#9ba8b8;margin:0 0 8px}.card a{font:10px monospace;color:#c9974b;text-decoration:none}.pagination{border:1px solid #1d2d40;background:#071019;padding:10px;margin-bottom:10px;font:9px monospace;color:#718198}.pagination-info{display:block;margin-bottom:8px}.pagination-buttons{display:flex;gap:6px}.pagination-buttons button{flex:1;background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:7px 8px;font:9px monospace;cursor:pointer}.pagination-buttons button:hover:not(:disabled){color:#c9974b;border-color:#c9974b}.pagination-buttons button:disabled{opacity:.35;cursor:default}@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.2);opacity:0}}@media(max-width:800px){.layout{height:calc(100dvh - 118px);min-height:0;position:relative;overflow:hidden}.panel{display:flex;position:absolute;right:0;top:0;bottom:0;width:min(420px,100%);transform:translateX(100%);transition:transform .25s;z-index:4}.panel.open{transform:translateX(0)}.subtitle{display:none}.toolbar{height:auto;min-height:54px;overflow:hidden;flex-wrap:wrap;padding:8px 10px;gap:6px}.toolbar input{width:min(150px,calc(100vw - 20px))}.toolbar select{max-width:110px}.mode{margin-left:auto;flex-shrink:0}.mode button{padding:8px 7px}.toolbar .mode{display:none}.panel-mode{display:flex;gap:6px;margin:-4px 0 14px;padding-bottom:12px;border-bottom:1px solid #1c2a3b}.panel-mode button{flex:1;padding:8px 5px}.map-wrap{height:100%;min-height:0}.status{margin-left:auto;gap:6px}.status-tag{display:none}.hdr-btn{padding:6px 7px;letter-spacing:.03em}}
 `;
 
 

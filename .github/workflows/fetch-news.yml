@@ -43,6 +43,13 @@ jobs:
           TRANSLATE_REGION: ${{ vars.TRANSLATE_REGION }}
         run: node scripts/translate-reports.mjs
 
+      # Context layers: UCDP conflict events (checked daily) and US travel advisories that
+      # name terrorism (lib/context.mjs). Never blocks the news update.
+      - name: Collect conflict events and advisories
+        continue-on-error: true
+        timeout-minutes: 5
+        run: node scripts/collect-context.mjs
+
       # Ships: listen to AISStream for ~5 minutes and save data/ships.json.
       # Needs the AISSTREAM_API_KEY repository secret. If it fails or hears nothing,
       # the previous snapshot is kept and the news update still goes out.
@@ -62,5 +69,6 @@ jobs:
           git add data/cache.json
           if [ -f data/ships.json ]; then git add data/ships.json; fi
           if [ -f data/translations.json ]; then git add data/translations.json; fi
+          for f in data/conflict.json data/advisories.json data/context-state.json; do if [ -f "$f" ]; then git add "$f"; fi; done
           git diff --staged --quiet || git commit -m "chore: update cached news feeds"
           git push
