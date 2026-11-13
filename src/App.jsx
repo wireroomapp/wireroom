@@ -8,7 +8,7 @@ import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrat
 import MapLibreView from "./map/MapLibreView.jsx";
 import { readViewFromUrl, viewToSearch } from "./urlState.js";
 import SourcesPanel from "./SourcesPanel.jsx";
-import { IncidentCard, WarCard, NodeCard } from "./TrackerCards.jsx";
+import { PlaceCard, WarCard, NodeCard } from "./TrackerCards.jsx";
 import { useContextData, incidentToReport, warToReport, TRACKER_CREDITS, monthLabel, coverageLabel, n as num } from "./contextData.js";
 
 // Which map to draw. "maplibre" = the full-scale map (OpenFreeMap + NASA + MapLibre, globe and terrain).
@@ -248,7 +248,7 @@ export default function WireRoomV2() {
   const [militaryOn, setMilitaryOn] = useState(Boolean(ML && INITIAL_URL_VIEW.war));
   const [terrorOn, setTerrorOn] = useState(false);
   const [cyberOn, setCyberOn] = useState(false);
-  const [trkSel, setTrkSel] = useState(null); // { kind: "incident" | "war" | "node", item, war }
+  const [trkSel, setTrkSel] = useState(null); // { kind: "place" | "war" | "node", item, war }
   const [warView, setWarView] = useState(null); // the war whose intel panel is open
   const incidentData = useContextData(API_BASE, "/api/incidents", ML && (militaryOn || terrorOn || cyberOn));
   const incidentSet = incidentData.data;
@@ -678,16 +678,17 @@ export default function WireRoomV2() {
 
   const trackShown = Boolean(trackSel) && !pinning && annotationTool === "select" && !selectedAnnotationId &&
     ((trackSel.kind === "air" && airOn) || (trackSel.kind === "ship" && shipsOn));
-  const trkKindOn = (sel) => sel.kind === "incident"
+  const trkKindOn = (sel) => sel.kind === "place"
     ? (sel.item.kind === "strike" ? militaryOn : sel.item.kind === "terrorism" ? terrorOn : cyberOn)
     : militaryOn;
+  const warOfIncident = (i) => (shownWars || []).find(w => (w.reported || []).includes(i.id)) || null;
   const trkShown = Boolean(trkSel) && ML && !pinning && annotationTool === "select" && !selectedAnnotationId && trkKindOn(trkSel);
   // The war whose web of latest attacks is drawn: the one tapped, or the one whose panel is open.
   const webWar = !militaryOn ? null
     : trkShown && trkSel.kind === "war" ? trkSel.item
     : trkShown && trkSel.war && trkSel.kind === "node" ? trkSel.war
     : view === "war" ? warView : null;
-  const trkKey = trkShown ? (trkSel.kind === "incident" ? `i:${trkSel.item.id}` : trkSel.kind === "war" ? `w:${trkSel.item.id}` : `n:${trkSel.war.id}:${trkSel.item.id}`) : null;
+  const trkKey = trkShown ? (trkSel.kind === "place" ? `g:${trkSel.item.key}` : trkSel.kind === "war" ? `w:${trkSel.item.id}` : `n:${trkSel.war.id}:${trkSel.item.id}`) : null;
   function toggleTracker(kind) {
     if (!militaryOn && !terrorOn && !cyberOn) incidentData.retry();
     if (kind === "military") setMilitaryOn(v => !v);
@@ -1405,9 +1406,10 @@ export default function WireRoomV2() {
           air={airFeed}
           ships={shipFeed}
           trackers={ML ? { militaryOn, terrorOn, cyberOn, onToggle: toggleTracker, data: incidentData } : null}
+          initialTab={ML && INITIAL_URL_VIEW.war ? "events" : null}
         />
-        {trkShown && !trackShown && trkSel.kind === "incident" && (
-          <IncidentCard item={trkSel.item} war={trkSel.war} onClose={() => setTrkSel(null)} onPin={() => startPinReport(incidentToReport(trkSel.item))} />
+        {trkShown && !trackShown && trkSel.kind === "place" && (
+          <PlaceCard group={trkSel.item} warOf={warOfIncident} onClose={() => setTrkSel(null)} onPin={(it) => startPinReport(incidentToReport(it))} />
         )}
         {trkShown && !trackShown && trkSel.kind === "war" && (
           <WarCard war={trkSel.item} onClose={() => setTrkSel(null)} onPin={() => startPinReport(warToReport(trkSel.item))}

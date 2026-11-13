@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
+import { groupByPlace } from "../contextData.js";
 import { buildStyle, applyBase, makeIcons, ICON_IDS, SLOT_OFFSETS, BASES, ANNOTATION_LAYERS, NASA_CREDIT, DEM_CREDIT } from "./wireroomStyle.js";
 import { WORLD_BBOX, trackId } from "../trackingGeo.js";
 
@@ -309,15 +310,16 @@ export default function MapLibreView({
     const RANK = { cyber: 1, terrorism: 2, strike: 3 };
     const warOf = new Map();
     for (const w of wars || []) for (const id of w.reported || []) warOf.set(id, w);
-    const inc = (incidents || []).filter((i) => Number.isFinite(i.lon) && Number.isFinite(i.lat)).map((i) => {
-      const key = `i:${i.id}`;
-      incById.set(i.id, i);
-      m.set(key, { kind: "incident", item: i, war: warOf.get(i.id) || null });
-      const spot = `${i.lon.toFixed(1)},${i.lat.toFixed(1)}`;
-      const slot = used.has(spot) ? used.get(spot) : i.precision === "country" ? 1 : 0;
+    // One marker per tracker per place; the count badge says how many events it holds.
+    const inc = groupByPlace(incidents).map((g) => {
+      const key = `g:${g.key}`;
+      for (const i of g.items) incById.set(i.id, g);
+      m.set(key, { kind: "place", item: g, war: g.items.map((i) => warOf.get(i.id)).find(Boolean) || null });
+      const spot = `${g.lon.toFixed(1)},${g.lat.toFixed(1)}`;
+      const slot = used.has(spot) ? used.get(spot) : g.precision === "country" ? 1 : 0;
       used.set(spot, slot + 1);
-      const dim = Boolean(selectedTrackerKey && selectedTrackerKey.startsWith("i:") && selectedTrackerKey !== key);
-      return point(i.lon, i.lat, { key, icon: (ICON[i.kind] || ICON.strike)(i), slot: slot % SLOT_OFFSETS.length, rank: RANK[i.kind] || 0, dim });
+      const dim = Boolean(selectedTrackerKey && selectedTrackerKey.startsWith("g:") && selectedTrackerKey !== key);
+      return point(g.lon, g.lat, { key, icon: (ICON[g.kind] || ICON.strike)(g), slot: slot % SLOT_OFFSETS.length, rank: RANK[g.kind] || 0, dim, count: g.items.length });
     });
     const MON = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
     const ws = (wars || []).map((w) => {
@@ -341,9 +343,12 @@ export default function MapLibreView({
         m.set(key, { kind: "node", item: nd, war: w });
         nodes.push(point(nd.lon, nd.lat, { key, best: nd.best || 0, wp: nd.wp || 0 }));
       }
+      const linked = new Set();
       for (const id of w.reported || []) {
-        const s = incById.get(id);
-        if (s) lines.push({ type: "Feature", geometry: { type: "LineString", coordinates: [from, [s.lon, s.lat]] }, properties: { kind: "report" } });
+        const g = incById.get(id);
+        if (!g || linked.has(g)) continue;
+        linked.add(g);
+        lines.push({ type: "Feature", geometry: { type: "LineString", coordinates: [from, [g.lon, g.lat]] }, properties: { kind: "report" } });
       }
     }
     trkLookup.current = m;

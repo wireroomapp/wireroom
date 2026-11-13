@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { AIRCRAFT_COLOR, SHIP_LEGEND, shipColor, aircraftPath, shipPaths, timeAgo, iconScale } from "./trackingGeo.js";
 import { TRACKER_COLORS, TRACKER_CREDITS, coverageLabel } from "./contextData.js";
 
@@ -154,6 +154,19 @@ const LIVE_CSS = `
 .track-card .tc-legend{font:9px/1.5 monospace;color:#718198;margin:0 0 8px;display:flex;flex-direction:column;gap:2px}
 .track-card .tc-legend span{display:inline-flex;align-items:center;gap:5px}
 .live-btn .sw{display:inline-flex}
+.live-tabs{display:flex;align-items:center;gap:4px;margin-bottom:6px;border-bottom:1px solid #1d2a38;padding-bottom:5px;flex-wrap:wrap}
+.live-tab{background:none;border:0;border-bottom:2px solid transparent;color:#718198;font:700 10px monospace;letter-spacing:.1em;padding:3px 6px 4px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.live-tab.on{color:#4fa6a0;border-bottom-color:#4fa6a0}
+.live-tab .n{font-weight:400;color:#c9974b;letter-spacing:.04em}
+.live-tabs .live-sub{margin-left:4px;color:#5d6b7d;font:9px monospace}
+.track-card .tc-events{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-direction:column;gap:9px}
+.track-card .tc-events>li{border-top:1px solid #1d2a38;padding-top:8px}
+.track-card .ev-meta{font:9px monospace;color:#8795a7;letter-spacing:.04em;margin-bottom:3px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.track-card .ev-tag{border:1px solid currentColor;padding:0 4px;color:#ff9d96}
+.track-card .ev-tag.threat,.track-card .ev-tag.warning{color:#c9974b}
+.track-card .ev-title{font:600 13px/1.35 Arial,sans-serif;color:#f0ece4;margin-bottom:5px}
+.track-card .tc-events .tc-src{margin-bottom:4px}
+.track-card .ev-pin{margin-top:2px;padding:3px 7px}
 .track-card .tc-foot a,.track-card .tc-foot button{white-space:nowrap}
 @media(max-width:800px){.live-box{left:10px;max-width:calc(100% - 140px);padding:6px}.live-title,.live-sub,.live-legend,.ctx-long{display:none}.live-btn{padding:5px 6px}.track-card{max-height:52vh}}
 `;
@@ -166,8 +179,19 @@ function trkCount(data, n) {
 
 // The five trackers. PLANES and SHIPS are live positions; MILITARY, TERRORISM and CYBER are
 // markers built hourly from reports and the UCDP dataset (trackers prop, new map only).
-export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, air, ships, trackers = null }) {
+// Two tabs: LIVE (planes, ships: positions) and EVENTS (military, terrorism, cyber: reported
+// events). Trackers stay on when you switch tabs; each tab says how many of its trackers are on.
+const TAB_KEY = "wireroom-trackers-tab";
+function readTab() { try { return localStorage.getItem(TAB_KEY); } catch { return null; } }
+function saveTab(v) { try { localStorage.setItem(TAB_KEY, v); } catch { /* private mode */ } }
+
+export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, air, ships, trackers = null, initialTab = null }) {
   const t = trackers;
+  const [tabState, setTab] = useState(() => initialTab || (readTab() === "events" ? "events" : "live"));
+  const tab = t ? tabState : "live";
+  const pick = (v) => { setTab(v); saveTab(v); };
+  const liveOn = (airOn ? 1 : 0) + (shipsOn ? 1 : 0);
+  const eventsOn = t ? (t.militaryOn ? 1 : 0) + (t.terrorOn ? 1 : 0) + (t.cyberOn ? 1 : 0) : 0;
   const d = t ? t.data : null;
   const inc = d && d.data;
   const problems = [airOn && feedProblem(air, "Planes"), shipsOn && feedProblem(ships, "Ships"),
@@ -184,32 +208,43 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
   return (
     <div className="live-box" onPointerDown={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
       <style>{LIVE_CSS}</style>
+      {t ? (
+        <div className="live-tabs" role="tablist" aria-label="Tracker groups">
+          <button type="button" role="tab" aria-selected={tab === "live"} className={`live-tab ${tab === "live" ? "on" : ""}`} onClick={() => pick("live")}>
+            LIVE{liveOn > 0 && <span className="n">{liveOn} ON</span>}
+          </button>
+          <button type="button" role="tab" aria-selected={tab === "events"} className={`live-tab ${tab === "events" ? "on" : ""}`} onClick={() => pick("events")}>
+            EVENTS{eventsOn > 0 && <span className="n">{eventsOn} ON</span>}
+          </button>
+          <span className="live-sub">{tab === "live" ? "Positions of planes and ships" : "Wars, attacks and hacks, from reports"}</span>
+        </div>
+      ) : null}
       <div className="live-row">
-        <span className="live-title">TRACKERS</span>
-        {btn(airOn, onToggleAir, "Military-flagged aircraft worldwide (ADS-B)", <Swatch kind="air" color={AIRCRAFT_COLOR} />, "PLANES", countLabel(air))}
-        {btn(shipsOn, onToggleShips, "Ships at strategic chokepoints and Indian Ocean ports (AIS)", <Swatch kind="ship" color={shipColor("cargo")} />, "SHIPS", countLabel(ships))}
-        {t && btn(t.militaryOn, () => t.onToggle("military"), "Wars (UCDP verified) and strikes reported in the news", <Swatch kind="war" color={TRACKER_COLORS.war} />, "MILITARY",
+        {!t && <span className="live-title">TRACKERS</span>}
+        {tab === "live" && btn(airOn, onToggleAir, "Military-flagged aircraft worldwide (ADS-B)", <Swatch kind="air" color={AIRCRAFT_COLOR} />, "PLANES", countLabel(air))}
+        {tab === "live" && btn(shipsOn, onToggleShips, "Ships at strategic chokepoints and Indian Ocean ports (AIS)", <Swatch kind="ship" color={shipColor("cargo")} />, "SHIPS", countLabel(ships))}
+        {tab === "events" && btn(t.militaryOn, () => t.onToggle("military"), "Wars (UCDP verified) and strikes reported in the news", <Swatch kind="war" color={TRACKER_COLORS.war} />, "MILITARY",
           inc ? trkCount(d, inc.wars.length) : trkCount(d, 0))}
-        {t && btn(t.terrorOn, () => t.onToggle("terrorism"), "Terrorist attacks and threats reported in the last days", <Swatch kind="terrorism" color={TRACKER_COLORS.terrorism} />, "TERRORISM",
+        {tab === "events" && btn(t.terrorOn, () => t.onToggle("terrorism"), "Terrorist attacks and threats reported in the last days", <Swatch kind="terrorism" color={TRACKER_COLORS.terrorism} />, "TERRORISM",
           inc ? trkCount(d, inc.terrorism.length) : trkCount(d, 0))}
-        {t && btn(t.cyberOn, () => t.onToggle("cyber"), "Cyberattacks and warnings reported in the last days", <Swatch kind="cyber" color={TRACKER_COLORS.cyber} />, "CYBER",
+        {tab === "events" && btn(t.cyberOn, () => t.onToggle("cyber"), "Cyberattacks and warnings reported in the last days", <Swatch kind="cyber" color={TRACKER_COLORS.cyber} />, "CYBER",
           inc ? trkCount(d, inc.cyber.length) : trkCount(d, 0))}
       </div>
-      {airOn && <div className="live-note">Planes: military-flagged aircraft that broadcast ADS-B. Many don't.</div>}
-      {shipsOn && (
+      {tab === "live" && airOn && <div className="live-note">Planes: military-flagged aircraft that broadcast ADS-B. Many don't.</div>}
+      {tab === "live" && shipsOn && (
         <div className="live-note">
           Ships: outlined areas only (chokepoints and Indian Ocean ports). Free coverage comes from volunteer receivers, so some areas show none.
           {ships.meta?.snapshotAt ? ` Positions as of ${timeAgo(Date.parse(ships.meta.snapshotAt))} (snapshots, not live).` : ""} Zoom in, then tap an icon.
         </div>
       )}
-      {shipsOn && (
+      {tab === "live" && shipsOn && (
         <div className="live-legend">
           {SHIP_LEGEND.map(([cat, label]) => (
             <span key={cat}><Swatch kind="ship" color={shipColor(cat)} />{label}</span>
           ))}
         </div>
       )}
-      {t && t.militaryOn && (
+      {tab === "events" && t.militaryOn && (
         <>
           <div className="live-note ctx-short">Military: wars (UCDP{cov ? `, ${cov}` : ""}) and strikes reported in the last {days} days. Tap a war.</div>
           <div className="live-note ctx-long">
@@ -221,7 +256,7 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
           </div>
         </>
       )}
-      {t && (t.terrorOn || t.cyberOn) && (
+      {tab === "events" && (t.terrorOn || t.cyberOn) && (
         <>
           <div className="live-note ctx-short">Reported in the last {days} days, placed from the headline. Not verified.</div>
           <div className="live-note ctx-long">

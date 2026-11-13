@@ -41,6 +41,8 @@ export const SHIP_COLOR_EXPR = [
 // Slot 0 sits on the spot; country-level markers start at slot 1 so the country dot stays clear.
 export const SLOT_OFFSETS = [[0, 0], [15, -13], [-15, -13], [15, 13], [-15, 13], [0, -20], [0, 20], [22, 0], [-22, 0]];
 const SLOT_EXPR = ["match", ["get", "slot"], ...SLOT_OFFSETS.slice(1).flatMap((o, i) => [i + 1, ["literal", o]]), ["literal", [0, 0]]];
+// The count badge sits at the icon's top-right corner (text offsets are in ems at size 10).
+const BADGE_EXPR = ["match", ["get", "slot"], ...SLOT_OFFSETS.flatMap((o, i) => [i, ["literal", [(o[0] + 9) / 10, (o[1] - 9) / 10]]]), ["literal", [0.9, -0.9]]];
 const WAR_RED = "#ff4d4d", STRIKE_ORANGE = "#ff8a3d";
 
 export function buildStyle() {
@@ -148,8 +150,13 @@ export function buildStyle() {
           "icon-image": ["get", "icon"], "icon-offset": SLOT_EXPR,
           "icon-size": ["interpolate", ["linear"], ["zoom"], 1, 0.85, 6, 1, 10, 1.15],
           "icon-allow-overlap": true, "icon-ignore-placement": true, "symbol-sort-key": ["get", "rank"],
+          "text-field": ["case", [">", ["get", "count"], 1], ["to-string", ["get", "count"]], ""], "text-font": FONT_BOLD, "text-size": 10,
+          "text-offset": BADGE_EXPR, "text-allow-overlap": true, "text-ignore-placement": true,
         },
-        paint: { "icon-opacity": ["case", ["get", "dim"], 0.35, 1] } },
+        paint: {
+          "icon-opacity": ["case", ["get", "dim"], 0.35, 1], "text-opacity": ["case", ["get", "dim"], 0.35, 1],
+          "text-color": "#ffffff", "text-halo-color": "#071019", "text-halo-width": 2.2,
+        } },
       { id: "wr-wars", type: "symbol", source: "wr-wars",
         layout: {
           "icon-image": "wr-war", "icon-size": ["interpolate", ["linear"], ["zoom"], 1, 0.85, 6, 1.1],
