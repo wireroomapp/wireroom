@@ -1,0 +1,14 @@
+name: verify-sources-tmp
+on:
+  push:
+    branches: [verify-sources-tmp]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: node scripts/verify-sources.mjs
