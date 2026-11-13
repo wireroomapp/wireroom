@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { buildStyle, applyBase, makeIcons, BASES, ANNOTATION_LAYERS, NASA_CREDIT, DEM_CREDIT } from "./wireroomStyle.js";
+import { buildStyle, applyBase, makeIcons, ICON_IDS, SLOT_OFFSETS, BASES, ANNOTATION_LAYERS, NASA_CREDIT, DEM_CREDIT } from "./wireroomStyle.js";
 import { WORLD_BBOX, trackId } from "../trackingGeo.js";
 
 // The full-scale map: MapLibre (free, open source) drawing OpenStreetMap data from
@@ -43,15 +43,15 @@ export default function MapLibreView({
   annotations, tool = "select", pinning = false,
   onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace, controlRef,
   focus = null, // { lon, lat, key }: fly here once (used when a shared link opens a country)
-  // Context layers: UCDP conflict events and US terrorism advisories (see ContextLayers.jsx)
-  conflict = null, advisories = null, onContextClick,
+  // Trackers: reported incidents (strikes, terrorism, cyber) and wars (see TrackerCards.jsx)
+  incidents = null, wars = null, selectedWar = null, selectedTrackerKey = null, onTrackerClick,
 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const [ready, setReady] = useState(false);
   const [prefs, setPrefs] = useState(loadPrefs);
   const lookup = useRef(new Map()); // track key -> full item, for taps
-  const ctxLookup = useRef(new Map()); // context feature key -> { kind, item }
+  const trkLookup = useRef(new Map()); // tracker feature key -> { kind, item, war }
   const terrainOn = useRef(false); // 3D terrain setting, readable from map event handlers
   const userPitched = useRef(false); // did the person tilt the map by hand? then leave the angle alone
   const prevTerrain = useRef(null);
@@ -61,7 +61,7 @@ export default function MapLibreView({
   // Latest callbacks for the map's event handlers (which are set up once).
   const cb = useRef({});
   useLayoutEffect(() => {
-    cb.current = { onCountryClick, onTrackClick, onEmptyClick, onViewChange, countries, tool, pinning, onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace, onContextClick };
+    cb.current = { onCountryClick, onTrackClick, onEmptyClick, onViewChange, countries, tool, pinning, onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace, onTrackerClick };
     prefsRef.current = prefs;
   });
 
@@ -96,8 +96,9 @@ export default function MapLibreView({
     // outside service; if OpenFreeMap or NASA is down it may never fire, and the map would stay empty.)
     const addIcons = () => {
       const icons = makeIcons();
-      if (!map.hasImage("wr-plane")) map.addImage("wr-plane", icons.plane, { pixelRatio: 2 });
-      if (!map.hasImage("wr-ship")) map.addImage("wr-ship", icons.ship, { pixelRatio: 2, sdf: true });
+      for (const [name, id] of Object.entries(ICON_IDS)) {
+        if (!map.hasImage(id)) map.addImage(id, icons[name], { pixelRatio: 2, sdf: name === "ship" });
+      }
     };
     const start = () => {
       addIcons();
@@ -105,7 +106,7 @@ export default function MapLibreView({
       cb.current.onViewChange?.(viewBbox(map));
     };
     if (map.isStyleLoaded()) start(); else map.once("style.load", start);
-    map.on("styleimagemissing", (e) => { if (e.id === "wr-plane" || e.id === "wr-ship") addIcons(); });
+    map.on("styleimagemissing", (e) => { if (Object.values(ICON_IDS).includes(e.id)) addIcons(); });
     map.on("moveend", () => cb.current.onViewChange?.(viewBbox(map)));
     // Zooming back out to the whole globe: level the camera so the Earth isn't cut off.
     // With 3D terrain on: tilt once when you zoom in close enough to see mountains, and level
@@ -154,30 +155,36 @@ export default function MapLibreView({
         return;
       }
       if (ann) { k.onAnnotationTap?.(ann.id); return; }
-      const c = map.queryRenderedFeatures(box(e.point, 10), { layers: ["wr-country-dot", "wr-country-code"] });
-      if (c.length) {
-        const country = k.countries.find((x) => x.id === c[0].properties.id);
-        if (country) k.onCountryClick?.(country);
-        return;
-      }
-      const t = map.queryRenderedFeatures(box(e.point, 14), { layers: ["wr-ships", "wr-planes"] });
-      if (t.length) {
-        let best = null, bd = Infinity;
-        for (const f of t) {
+      // Everything else: the nearest thing to the tap wins (country dots, planes/ships, trackers),
+      // so a war marker near a country dot is still easy to open.
+      const cands = [];
+      const near = (layers, r, act, offset) => {
+        for (const f of map.queryRenderedFeatures(box(e.point, r), { layers: layers.filter((l) => map.getLayer(l)) })) {
           const p = map.project(f.geometry.coordinates);
-          const d = Math.hypot(p.x - e.point.x, p.y - e.point.y);
-          if (d < bd) { bd = d; best = f; }
+          const [ox, oy] = offset ? offset(f) : [0, 0];
+          cands.push({ d: Math.hypot(p.x + ox - e.point.x, p.y + oy - e.point.y), act: () => act(f) });
         }
-        const hit = lookup.current.get(best.properties.key);
-        if (hit) { k.onTrackClick?.(hit.kind, hit.item); return; }
-      }
-      // Context layers: an advisory badge first (it's small and offset), then the nearest conflict event.
-      const adv = map.queryRenderedFeatures(box(e.point, 9), { layers: ["wr-adv", "wr-adv-label"] });
-      const ev = adv.length ? adv : map.queryRenderedFeatures(box(e.point, 8), { layers: ["wr-conflict"] });
-      if (ev.length) {
-        const hit = ctxLookup.current.get(ev[0].properties.key);
-        if (hit) { k.onContextClick?.(hit.kind, hit.item); return; }
-      }
+      };
+      near(["wr-country-dot", "wr-country-code"], 10, (f) => {
+        const country = k.countries.find((x) => x.id === f.properties.id);
+        if (country) { k.onCountryClick?.(country); return true; }
+        return false;
+      });
+      near(["wr-ships", "wr-planes"], 14, (f) => {
+        const hit = lookup.current.get(f.properties.key);
+        if (hit) { k.onTrackClick?.(hit.kind, hit.item); return true; }
+        return false;
+      });
+      const trk = (f) => {
+        const hit = trkLookup.current.get(f.properties.key);
+        if (hit) { k.onTrackerClick?.(hit.kind, hit.item, hit.war); return true; }
+        return false;
+      };
+      near(["wr-incidents"], 14, trk, (f) => SLOT_OFFSETS[f.properties.slot] || [0, 0]);
+      near(["wr-wars"], 16, trk);
+      near(["wr-web-node"], 9, trk);
+      cands.sort((a, b) => a.d - b.d);
+      for (const c of cands) if (c.act()) return;
       k.onEmptyClick?.();
     });
 
@@ -227,7 +234,7 @@ export default function MapLibreView({
     map.on("touchend", endDraw);
     map.on("touchcancel", () => { draft.current = null; setDraft(null); });
 
-    const hoverLayers = ["wr-country-dot", "wr-country-code", "wr-ships", "wr-planes", "wr-adv", "wr-conflict", ...ANNOTATION_LAYERS];
+    const hoverLayers = ["wr-country-dot", "wr-country-code", "wr-ships", "wr-planes", "wr-incidents", "wr-wars", "wr-web-node", ...ANNOTATION_LAYERS];
     map.on("mousemove", (e) => {
       if (!map.getLayer("wr-country-dot")) return;
       if (cb.current.tool !== "select") { map.getCanvas().style.cursor = "crosshair"; return; }
@@ -291,23 +298,60 @@ export default function MapLibreView({
     map.getSource("wr-ships").setData({ type: "FeatureCollection", features: boats });
   }, [ready, aircraft, ships, airOn, shipsOn]);
 
-  // Context layers.
+  // Trackers: reported incidents, wars, and the selected war's web of latest attacks.
   useEffect(() => {
     const map = mapRef.current;
-    if (!ready || !map) return;
+    if (!ready || !map || !map.getSource("wr-incidents")) return;
     const m = new Map();
-    const evs = (conflict || []).map((e) => {
-      const key = `c:${e.id}`; m.set(key, { kind: "conflict", item: e });
-      return point(e.lon, e.lat, { key, type: e.type, best: e.deaths ? e.deaths.best : 0, wp: e.wherePrec || 0 });
+    const used = new Map(); // spot -> next free slot
+    const incById = new Map();
+    const ICON = { strike: () => "wr-strike", terrorism: (i) => (i.subtype === "attack" ? "wr-terror-attack" : "wr-terror-threat"), cyber: (i) => (i.subtype === "attack" ? "wr-cyber-attack" : "wr-cyber-warning") };
+    const RANK = { cyber: 1, terrorism: 2, strike: 3 };
+    const warOf = new Map();
+    for (const w of wars || []) for (const id of w.reported || []) warOf.set(id, w);
+    const inc = (incidents || []).filter((i) => Number.isFinite(i.lon) && Number.isFinite(i.lat)).map((i) => {
+      const key = `i:${i.id}`;
+      incById.set(i.id, i);
+      m.set(key, { kind: "incident", item: i, war: warOf.get(i.id) || null });
+      const spot = `${i.lon.toFixed(1)},${i.lat.toFixed(1)}`;
+      const slot = used.has(spot) ? used.get(spot) : i.precision === "country" ? 1 : 0;
+      used.set(spot, slot + 1);
+      const dim = Boolean(selectedTrackerKey && selectedTrackerKey.startsWith("i:") && selectedTrackerKey !== key);
+      return point(i.lon, i.lat, { key, icon: (ICON[i.kind] || ICON.strike)(i), slot: slot % SLOT_OFFSETS.length, rank: RANK[i.kind] || 0, dim });
     });
-    const advs = (advisories || []).filter((a) => Number.isFinite(a.lon)).map((a) => {
-      const key = `a:${a.name}`; m.set(key, { kind: "advisory", item: a });
-      return point(a.lon, a.lat, { key, level: a.level });
+    const MON = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    const ws = (wars || []).map((w) => {
+      const key = `w:${w.id}`;
+      m.set(key, { kind: "war", item: w });
+      const lm = w.latestMonth || {};
+      const mon = lm.month ? MON[Number(lm.month.slice(5, 7)) - 1] : "";
+      return point(w.lon, w.lat, {
+        key, best: lm.best || 0, sel: selectedWar ? selectedWar.id === w.id : false, dim: Boolean(selectedWar && selectedWar.id !== w.id),
+        label: `${w.name.toUpperCase()}\n${(lm.best || 0).toLocaleString()} KILLED · ${mon}`,
+      });
     });
-    ctxLookup.current = m;
-    map.getSource("wr-conflict")?.setData({ type: "FeatureCollection", features: evs });
-    map.getSource("wr-advisories")?.setData({ type: "FeatureCollection", features: advs });
-  }, [ready, conflict, advisories]);
+    const lines = [], nodes = [];
+    if (selectedWar) {
+      const w = (wars || []).find((x) => x.id === selectedWar.id) || selectedWar;
+      const from = [w.lon, w.lat];
+      for (const nd of w.nodes || []) {
+        if (!Number.isFinite(nd.lon)) continue;
+        lines.push({ type: "Feature", geometry: { type: "LineString", coordinates: [from, [nd.lon, nd.lat]] }, properties: { kind: "ucdp" } });
+        const key = `n:${w.id}:${nd.id}`;
+        m.set(key, { kind: "node", item: nd, war: w });
+        nodes.push(point(nd.lon, nd.lat, { key, best: nd.best || 0, wp: nd.wp || 0 }));
+      }
+      for (const id of w.reported || []) {
+        const s = incById.get(id);
+        if (s) lines.push({ type: "Feature", geometry: { type: "LineString", coordinates: [from, [s.lon, s.lat]] }, properties: { kind: "report" } });
+      }
+    }
+    trkLookup.current = m;
+    map.getSource("wr-incidents").setData({ type: "FeatureCollection", features: inc });
+    map.getSource("wr-wars").setData({ type: "FeatureCollection", features: ws });
+    map.getSource("wr-web").setData({ type: "FeatureCollection", features: lines });
+    map.getSource("wr-web-nodes").setData({ type: "FeatureCollection", features: nodes });
+  }, [ready, incidents, wars, selectedWar, selectedTrackerKey]);
 
   // Coverage outlines for the watched ship areas.
   useEffect(() => {
