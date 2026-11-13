@@ -9,7 +9,8 @@ import MapLibreView from "./map/MapLibreView.jsx";
 import { readViewFromUrl, viewToSearch } from "./urlState.js";
 import SourcesPanel from "./SourcesPanel.jsx";
 import { PlaceCard, WarCard, NodeCard } from "./TrackerCards.jsx";
-import { useContextData, incidentToReport, warToReport, TRACKER_CREDITS, LEVEL_TEXT, sidesText, monthLabel, coverageLabel, n as num } from "./contextData.js";
+import { DayBar } from "./DayBar.jsx";
+import { useTrackerData, localDay, dayEnd, longDay, incidentToReport, warToReport, TRACKER_CREDITS, LEVEL_TEXT, sidesText, monthLabel, coverageLabel, n as num } from "./contextData.js";
 
 // Which map to draw. "maplibre" = the full-scale map (OpenFreeMap + NASA + MapLibre, globe and terrain).
 // "d3" = the classic flat map. Override in the address bar with ?engine=d3 or ?engine=maplibre.
@@ -83,7 +84,7 @@ const COUNTRY_BY_ID = Object.fromEntries(COUNTRIES.map(c => [c.id, c]));
 
 // What a shared link asks to open (?country=ua&mode=both, ?view=global, ?war=...). See urlState.js.
 const INITIAL_URL_VIEW = (() => {
-  try { return readViewFromUrl(window.location.search, COUNTRIES.map(c => c.id)); } catch { return { country: null, mode: null, global: false, war: null }; }
+  try { return readViewFromUrl(window.location.search, COUNTRIES.map(c => c.id)); } catch { return { country: null, mode: null, global: false, war: null, day: null }; }
 })();
 const INITIAL_COUNTRY = COUNTRIES.find(c => c.id === INITIAL_URL_VIEW.country) || null;
 
@@ -245,12 +246,16 @@ export default function WireRoomV2() {
   const [shipsOn, setShipsOn] = useState(false);
   const [trackSel, setTrackSel] = useState(null); // { kind: "air" | "ship", id, item }
   // Trackers (new map only): MILITARY (wars + reported strikes), TERRORISM, CYBER. See contextData.js.
-  const [militaryOn, setMilitaryOn] = useState(Boolean(ML && INITIAL_URL_VIEW.war));
+  const [militaryOn, setMilitaryOn] = useState(Boolean(ML && (INITIAL_URL_VIEW.war || INITIAL_URL_VIEW.day)));
+  // The day the EVENTS trackers show: null = today (live), or a past local day "YYYY-MM-DD".
+  const [mapDay, setMapDay] = useState(() => (ML && INITIAL_URL_VIEW.day && INITIAL_URL_VIEW.day < localDay() ? INITIAL_URL_VIEW.day : null));
   const [terrorOn, setTerrorOn] = useState(false);
   const [cyberOn, setCyberOn] = useState(false);
   const [trkSel, setTrkSel] = useState(null); // { kind: "place" | "war" | "node", item, war }
   const [warView, setWarView] = useState(null); // the war whose intel panel is open
-  const incidentData = useContextData(API_BASE, "/api/incidents", ML && (militaryOn || terrorOn || cyberOn));
+  const eventsOn = militaryOn || terrorOn || cyberOn;
+  const shownDay = ML && eventsOn ? mapDay : null; // planes/ships and the URL only care while trackers show it
+  const incidentData = useTrackerData(API_BASE, ML ? mapDay : null, ML && eventsOn);
   const incidentSet = incidentData.data;
   const shownIncidents = useMemo(() => (incidentSet ? [
     ...(militaryOn ? incidentSet.strikes || [] : []),
@@ -258,13 +263,25 @@ export default function WireRoomV2() {
     ...(cyberOn ? incidentSet.cyber || [] : []),
   ] : null), [incidentSet, militaryOn, terrorOn, cyberOn]);
   const shownWars = militaryOn && incidentSet ? incidentSet.wars || [] : null;
+  // A selected war follows the day shown (its figures as of that day), or hides if it wasn't active.
+  const dayWars = (incidentSet && incidentSet.wars) || [];
+  const trkSelDay = trkSel && trkSel.kind === "war" ? (() => { const w = dayWars.find(x => x.id === trkSel.item.id); return w ? { ...trkSel, item: w } : null; })() : trkSel;
+  const warViewDay = warView ? dayWars.find(x => x.id === warView.id) || (incidentSet ? null : warView) : null;
+  function changeDay(d) {
+    setMapDay(d);
+    setTrackSel(null);
+    if (trkSel && trkSel.kind !== "war") setTrkSel(null);
+    if (view === "war" && warView) loadWarIntel(warView, d);
+  }
   const suppressTrackClickUntilRef = useRef(0);
   const d3ShipsBbox = useMemo(() => visibleBbox(projection, transform, dims), [projection, transform, dims]);
   const [mlBbox, setMlBbox] = useState(WORLD_BBOX); // visible area reported by the MapLibre map
   const shipsBbox = ML ? mlBbox : d3ShipsBbox;
   // Aircraft: worldwide military feed (one cheap call). Ships: only the area on screen.
-  const airFeed = useTrackingFeed({ enabled: airOn, path: "/api/aircraft", bbox: WORLD_BBOX, extra: "&mil=1", pollMs: 15000 });
-  const shipFeed = useTrackingFeed({ enabled: shipsOn, path: "/api/ships", bbox: shipsBbox, pollMs: 20000 });
+  // Planes and ships are live positions only: hidden while the map shows a past day.
+  const liveAir = airOn && !shownDay, liveShips = shipsOn && !shownDay;
+  const airFeed = useTrackingFeed({ enabled: liveAir, path: "/api/aircraft", bbox: WORLD_BBOX, extra: "&mil=1", pollMs: 15000 });
+  const shipFeed = useTrackingFeed({ enabled: liveShips, path: "/api/ships", bbox: shipsBbox, pollMs: 20000 });
   const airProjected = useMemo(() => projectItems(airFeed.items, projection), [airFeed.items, projection]);
   const shipProjected = useMemo(() => projectItems(shipFeed.items, projection), [shipFeed.items, projection]);
   const hasNewsSet = useMemo(() => new Set(feed.map(n => n.countryId)), [feed]);
@@ -391,10 +408,10 @@ export default function WireRoomV2() {
   // Keep the address bar in step with what's open, so copying it shares this exact view.
   useEffect(() => {
     try {
-      const search = viewToSearch({ country: view === "country" && selected ? selected.id : null, global: view === "global", war: view === "war" && warView ? warView.id : null, mode }, window.location.search);
+      const search = viewToSearch({ country: view === "country" && selected ? selected.id : null, global: view === "global", war: view === "war" && warView ? warView.id : null, day: shownDay, mode }, window.location.search);
       if (search !== window.location.search) window.history.replaceState(null, "", window.location.pathname + search + window.location.hash);
     } catch { /* very old browser: links just won't update */ }
-  }, [selected, view, mode, warView]);
+  }, [selected, view, mode, warView, shownDay]);
 
   // LINK button: phones get the share sheet, computers copy the link.
   async function shareView() {
@@ -441,19 +458,23 @@ export default function WireRoomV2() {
   // follows) and outlet reports, collected hourly (scripts/collect-incidents.mjs).
   function openWarIntel(war) {
     if (view !== "war" || !warView || warView.id !== war.id) resetIntelFilters();
-    if (abortRef.current) abortRef.current.abort();
-    const controller = new AbortController();
-    abortRef.current = controller;
     setPage(1);
     setSelected(null);
     setWarView(war);
     setView("war");
     setMode("both");
-    setFeed([]);
-    setLoading(true);
     // On a phone the panel covers the map, so the war card steps aside (the web stays drawn).
     try { if (window.matchMedia("(max-width: 800px)").matches) setTrkSel(null); } catch { /* old browser */ }
-    fetch(`${API_BASE}/api/war-intel?id=${encodeURIComponent(war.id)}`, { signal: controller.signal })
+    loadWarIntel(war, mapDay);
+  }
+  function loadWarIntel(war, day) {
+    if (abortRef.current) abortRef.current.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+    setFeed([]);
+    setLoading(true);
+    const until = day ? `&until=${encodeURIComponent(dayEnd(day).toISOString())}` : "";
+    fetch(`${API_BASE}/api/war-intel?id=${encodeURIComponent(war.id)}${until}`, { signal: controller.signal })
       .then(r => (r.ok ? r.json() : null))
       .then(d => { if (abortRef.current === controller) setFeed(d && Array.isArray(d.items) ? d.items : []); })
       .catch(() => {})
@@ -662,7 +683,7 @@ export default function WireRoomV2() {
   // Country dots and annotations stop their own clicks, so they still win.
   function handleMapClick(e) {
     if (Date.now() < suppressTrackClickUntilRef.current) return;
-    if (pinning || annotationTool !== "select" || (!airOn && !shipsOn)) return;
+    if (pinning || annotationTool !== "select" || (!liveAir && !liveShips)) return;
     const hit = hitTest(
       [{ kind: "air", projected: airProjected }, { kind: "ship", projected: shipProjected }],
       svgPointFromEvent(e),
@@ -677,18 +698,18 @@ export default function WireRoomV2() {
   }
 
   const trackShown = Boolean(trackSel) && !pinning && annotationTool === "select" && !selectedAnnotationId &&
-    ((trackSel.kind === "air" && airOn) || (trackSel.kind === "ship" && shipsOn));
+    ((trackSel.kind === "air" && liveAir) || (trackSel.kind === "ship" && liveShips));
   const trkKindOn = (sel) => sel.kind === "place"
     ? (sel.item.kind === "strike" ? militaryOn : sel.item.kind === "terrorism" ? terrorOn : cyberOn)
     : militaryOn;
   const warOfIncident = (i) => (shownWars || []).find(w => (w.reported || []).includes(i.id)) || null;
-  const trkShown = Boolean(trkSel) && ML && !pinning && annotationTool === "select" && !selectedAnnotationId && trkKindOn(trkSel);
+  const trkShown = Boolean(trkSelDay) && ML && !pinning && annotationTool === "select" && !selectedAnnotationId && trkKindOn(trkSelDay);
   // The war whose web of latest attacks is drawn: the one tapped, or the one whose panel is open.
   const webWar = !militaryOn ? null
-    : trkShown && trkSel.kind === "war" ? trkSel.item
-    : trkShown && trkSel.war && trkSel.kind === "node" ? trkSel.war
-    : view === "war" ? warView : null;
-  const trkKey = trkShown ? (trkSel.kind === "place" ? `g:${trkSel.item.key}` : trkSel.kind === "war" ? `w:${trkSel.item.id}` : `n:${trkSel.war.id}:${trkSel.item.id}`) : null;
+    : trkShown && trkSelDay.kind === "war" ? trkSelDay.item
+    : trkShown && trkSelDay.war && trkSelDay.kind === "node" ? trkSelDay.war
+    : view === "war" ? warViewDay : null;
+  const trkKey = trkShown ? (trkSelDay.kind === "place" ? `g:${trkSelDay.item.key}` : trkSelDay.kind === "war" ? `w:${trkSelDay.item.id}` : `n:${trkSelDay.war.id}:${trkSelDay.item.id}`) : null;
   function toggleTracker(kind) {
     if (!militaryOn && !terrorOn && !cyberOn) incidentData.retry();
     if (kind === "military") setMilitaryOn(v => !v);
@@ -705,7 +726,7 @@ export default function WireRoomV2() {
     if ((!ML && !svgRef.current) || exportState === "busy") return;
     setExportState("busy");
     try {
-      const credits = [airOn && airFeed.attribution, shipsOn && shipFeed.attribution,
+      const credits = [shownDay && `Events as of the end of ${longDay(shownDay)}`, liveAir && airFeed.attribution, liveShips && shipFeed.attribution,
         ML && militaryOn && TRACKER_CREDITS.military, ML && (militaryOn || terrorOn || cyberOn) && TRACKER_CREDITS.reports,
         ML && (militaryOn || terrorOn || cyberOn) && TRACKER_CREDITS.places].filter(Boolean);
       if (ML) {
@@ -908,9 +929,9 @@ export default function WireRoomV2() {
             ships={shipFeed.items}
             zones={shipFeed.meta?.zones}
             shipsStatus={shipFeed.status}
-            airOn={airOn}
-            shipsOn={shipsOn}
-            selectedTrack={trackShown ? { ...trackSel, item: trackLive ? trackLive.item : trackSel.item } : trkShown && trkSel.kind === "node" ? trkSel : null}
+            airOn={liveAir}
+            shipsOn={liveShips}
+            selectedTrack={trackShown ? { ...trackSel, item: trackLive ? trackLive.item : trackSel.item } : trkShown && trkSelDay.kind === "node" ? trkSelDay : null}
             onTrackClick={(kind, item) => { setSelectedAnnotationId(null); setTrkSel(null); setTrackSel({ kind, id: trackId(kind, item), item }); }}
             onTrackerClick={(kind, item, war) => { setSelectedAnnotationId(null); setTrackSel(null); setTrkSel({ kind, item, war: war || null }); }}
             incidents={shownIncidents}
@@ -1406,18 +1427,30 @@ export default function WireRoomV2() {
           air={airFeed}
           ships={shipFeed}
           trackers={ML ? { militaryOn, terrorOn, cyberOn, onToggle: toggleTracker, data: incidentData } : null}
-          initialTab={ML && INITIAL_URL_VIEW.war ? "events" : null}
+          pastDay={shownDay}
+          dayBar={ML && eventsOn ? (
+            <DayBar embedded day={mapDay} past={Boolean(mapDay)} loading={incidentData.status === "loading"}
+              minDay={`${((incidentSet && incidentSet.dataFrom) || "2025-10")}-01`}
+              historyFrom={incidentSet && incidentSet.historyFrom} onChange={changeDay} />
+          ) : null}
+          initialTab={ML && (INITIAL_URL_VIEW.war || INITIAL_URL_VIEW.day) ? "events" : null}
         />
-        {trkShown && !trackShown && trkSel.kind === "place" && (
-          <PlaceCard group={trkSel.item} warOf={warOfIncident} onClose={() => setTrkSel(null)} onPin={(it) => startPinReport(incidentToReport(it))} />
+        {ML && eventsOn && (
+          <DayBar day={mapDay} past={Boolean(mapDay)} loading={incidentData.status === "loading"}
+            minDay={`${((incidentSet && incidentSet.dataFrom) || "2025-10")}-01`}
+            historyFrom={incidentSet && incidentSet.historyFrom}
+            onChange={changeDay} />
         )}
-        {trkShown && !trackShown && trkSel.kind === "war" && (
-          <WarCard war={trkSel.item} onClose={() => setTrkSel(null)} onPin={() => startPinReport(warToReport(trkSel.item))}
-            intelOpen={view === "war" && warView && warView.id === trkSel.item.id} onToggleIntel={() => toggleWarIntel(trkSel.item)}
-            reportedCount={(trkSel.item.reported || []).length} />
+        {trkShown && !trackShown && trkSelDay.kind === "place" && (
+          <PlaceCard group={trkSelDay.item} warOf={warOfIncident} onClose={() => setTrkSel(null)} onPin={(it) => startPinReport(incidentToReport(it))} />
         )}
-        {trkShown && !trackShown && trkSel.kind === "node" && (
-          <NodeCard node={trkSel.item} war={trkSel.war} onClose={() => setTrkSel(null)} onOpenWar={() => setTrkSel({ kind: "war", item: trkSel.war })} />
+        {trkShown && !trackShown && trkSelDay.kind === "war" && (
+          <WarCard war={trkSelDay.item} onClose={() => setTrkSel(null)} onPin={() => startPinReport(warToReport(trkSelDay.item))}
+            intelOpen={view === "war" && warView && warView.id === trkSelDay.item.id} onToggleIntel={() => toggleWarIntel(trkSelDay.item)}
+            reportedCount={(trkSelDay.item.reported || []).length} />
+        )}
+        {trkShown && !trackShown && trkSelDay.kind === "node" && (
+          <NodeCard node={trkSelDay.item} war={trkSelDay.war} onClose={() => setTrkSel(null)} onOpenWar={() => setTrkSel({ kind: "war", item: trkSelDay.war })} />
         )}
         {trackShown && (
           <TrackCard
@@ -1434,21 +1467,24 @@ export default function WireRoomV2() {
       <aside className={`panel ${view !== "closed" ? "open" : ""}`}>
         <div className="panel-head">
           <div>
-            <div className="eyebrow">{view === "war" && warView ? `${(LEVEL_TEXT[warView.level] || LEVEL_TEXT.war).label} BRIEF · MILITARY TRACKER` : "COUNTRY BRIEF"}</div>
+            <div className="eyebrow">{view === "war" && warView ? `${(LEVEL_TEXT[(warViewDay || warView).level] || LEVEL_TEXT.war).label} BRIEF · MILITARY TRACKER` : "COUNTRY BRIEF"}</div>
             <h1>{view === "war" && warView ? warView.name : selected?.name || "GLOBAL FEED"}</h1>
-            {view === "war" && warView ? (() => {
-              const lm = warView.latestMonth || {};
-              const sides = (warView.ourCountries || []).map(id => COUNTRY_BY_ID[id]).filter(Boolean);
-              const found = new Set(warView.officialFrom || []);
+            {view === "war" && warView && !warViewDay ? (
+              <p className="source-status war">Not active as of {shownDay ? longDay(shownDay) : "today"}: no UCDP event in the 3 months before, and no strike reported that week.</p>
+            ) : view === "war" && warView ? (() => {
+              const wv = warViewDay;
+              const lm = wv.latestMonth || {};
+              const sides = (wv.ourCountries || []).map(id => COUNTRY_BY_ID[id]).filter(Boolean);
+              const found = new Set(feed.filter(r => r.sourceType === "official").map(r => r.countryId));
               const have = sides.filter(c => found.has(c.id)).map(c => c.name);
               const missing = sides.filter(c => !found.has(c.id)).map(c => c.name);
               return <>
-                <p>{sidesText(warView.sides)}</p>
-                <p className="source-status war">{num(lm.best)} killed in {monthLabel(lm.month)} · {num(warView.deaths.best)} in {coverageLabel(warView.coverage)} (UCDP best estimates, 1–2 months behind)</p>
+                <p>{sidesText(wv.sides)}</p>
+                <p className="source-status war">{num(lm.best)} killed in {monthLabel(lm.month)} · {num(wv.deaths.best)} in {coverageLabel(wv.coverage)} (UCDP best estimates, 1–2 months behind)</p>
                 <p className="source-note">
-                  Official statements from the governments Wire Room follows, and outlet reports, that mention this war in the last 30 days.
-                  {have.length ? ` Statements found from: ${have.join(", ")}.` : ""}
-                  {missing.length ? ` None found from: ${missing.join(", ")}.` : ""}
+                  Official statements from the governments Wire Room follows, and outlet reports, that mention this war in the 30 days up to {shownDay ? longDay(shownDay) : "today"}{shownDay ? " (only reports still in Wire Room's news archive)" : ""}.
+                  {!loading && have.length ? ` Statements found from: ${have.join(", ")}.` : ""}
+                  {!loading && missing.length ? ` None found from: ${missing.join(", ")}.` : ""}
                   {!sides.length ? " Wire Room doesn't follow these governments yet, so this panel is outlet reports only." : ""}
                 </p>
               </>;

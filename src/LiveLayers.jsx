@@ -1,6 +1,6 @@
 import React, { memo, useState } from "react";
 import { AIRCRAFT_COLOR, SHIP_LEGEND, shipColor, aircraftPath, shipPaths, timeAgo, iconScale } from "./trackingGeo.js";
-import { TRACKER_COLORS, TRACKER_CREDITS, coverageLabel } from "./contextData.js";
+import { TRACKER_COLORS, TRACKER_CREDITS } from "./contextData.js";
 
 // ---------------------------------------------------------------------------
 // Drawn inside the map's zoomed <g>. Pointer events are off: taps are matched
@@ -154,6 +154,7 @@ const LIVE_CSS = `
 .track-card .tc-legend{font:9px/1.5 monospace;color:#718198;margin:0 0 8px;display:flex;flex-direction:column;gap:2px}
 .track-card .tc-legend span{display:inline-flex;align-items:center;gap:5px}
 .live-btn .sw{display:inline-flex}
+.live-box.past{border-color:#c9974b}
 .live-tabs{display:flex;align-items:center;gap:4px;margin-bottom:6px;border-bottom:1px solid #1d2a38;padding-bottom:5px;flex-wrap:wrap}
 .live-tab{background:none;border:0;border-bottom:2px solid transparent;color:#718198;font:700 10px monospace;letter-spacing:.1em;padding:3px 6px 4px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
 .live-tab.on{color:#4fa6a0;border-bottom-color:#4fa6a0}
@@ -186,7 +187,7 @@ const TAB_KEY = "wireroom-trackers-tab";
 function readTab() { try { return localStorage.getItem(TAB_KEY); } catch { return null; } }
 function saveTab(v) { try { localStorage.setItem(TAB_KEY, v); } catch { /* private mode */ } }
 
-export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, air, ships, trackers = null, initialTab = null }) {
+export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, air, ships, trackers = null, initialTab = null, pastDay = null, dayBar = null }) {
   const t = trackers;
   const [tabState, setTab] = useState(() => initialTab || (readTab() === "events" ? "events" : "live"));
   const tab = t ? tabState : "live";
@@ -195,11 +196,10 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
   const eventsOn = t ? (t.militaryOn ? 1 : 0) + (t.terrorOn ? 1 : 0) + (t.cyberOn ? 1 : 0) : 0;
   const d = t ? t.data : null;
   const inc = d && d.data;
-  const problems = [airOn && feedProblem(air, "Planes"), shipsOn && feedProblem(ships, "Ships"),
+  const problems = [airOn && !pastDay && feedProblem(air, "Planes"), shipsOn && !pastDay && feedProblem(ships, "Ships"),
     t && (t.militaryOn || t.terrorOn || t.cyberOn) && d.status === "unavailable" && "Trackers: not available right now. Turn one off and on to retry."].filter(Boolean);
   const credits = [airOn && air.attribution, shipsOn && ships.attribution,
     t && t.militaryOn && TRACKER_CREDITS.military, t && (t.militaryOn || t.terrorOn || t.cyberOn) && TRACKER_CREDITS.reports].filter(Boolean);
-  const cov = inc ? coverageLabel(inc.conflictCoverage) : "";
   const days = inc ? inc.windowDays : 10;
   const btn = (on, onClick, title, icon, label, count) => (
     <button type="button" className={`live-btn ${on ? "on" : ""}`} aria-pressed={on} onClick={onClick} title={title}>
@@ -207,8 +207,9 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
     </button>
   );
   return (
-    <div className="live-box" onPointerDown={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
+    <div className={`live-box ${pastDay ? "past" : ""}`} onPointerDown={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
       <style>{LIVE_CSS}</style>
+      {dayBar}
       {t ? (
         <div className="live-tabs" role="tablist" aria-label="Tracker groups">
           <button type="button" role="tab" aria-selected={tab === "live"} className={`live-tab ${tab === "live" ? "on" : ""}`} onClick={() => pick("live")}>
@@ -231,8 +232,9 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
         {tab === "events" && btn(t.cyberOn, () => t.onToggle("cyber"), "Cyberattacks and warnings reported in the last days", <Swatch kind="cyber" color={TRACKER_COLORS.cyber} />, "CYBER",
           inc ? trkCount(d, inc.cyber.length) : trkCount(d, 0))}
       </div>
-      {tab === "live" && airOn && <div className="live-note">Planes: military-flagged aircraft that broadcast ADS-B. Many don't.</div>}
-      {tab === "live" && shipsOn && (
+      {tab === "live" && pastDay && (airOn || shipsOn) && <div className="live-warn">Live positions only: hidden while the map shows a past day. Press TODAY to see them.</div>}
+      {tab === "live" && airOn && !pastDay && <div className="live-note">Planes: military-flagged aircraft that broadcast ADS-B. Many don't.</div>}
+      {tab === "live" && shipsOn && !pastDay && (
         <div className="live-note">
           Ships: outlined areas only (chokepoints and Indian Ocean ports). Free coverage comes from volunteer receivers, so some areas show none.
           {ships.meta?.snapshotAt ? ` Positions as of ${timeAgo(Date.parse(ships.meta.snapshotAt))} (snapshots, not live).` : ""} Zoom in, then tap an icon.
@@ -247,9 +249,9 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
       )}
       {tab === "events" && t.militaryOn && (
         <>
-          <div className="live-note ctx-short">Military: every armed conflict UCDP recorded{cov ? ` (${cov})` : ""}, and strikes reported in the last {days} days. Tap one.</div>
+          <div className="live-note ctx-short">Military: active armed conflicts (UCDP), and strikes reported in the last {days} days. Tap one.</div>
           <div className="live-note ctx-long">
-            Military: every armed conflict in UCDP's researcher-verified events{cov ? ` (${cov}, 1–2 months behind)` : ""}, however small, sized war / armed conflict / clashes by deaths; and every strike reported in the news in the last {days} days, with who carried it out when the report says. Tap a conflict for casualties, a web of its latest attacks and an intel panel.
+            Military: every active armed conflict in UCDP's researcher-verified events (an event in the last 3 months; data runs 1–2 months behind), however small, sized war / armed conflict / clashes by deaths over the past year; and every strike reported in the news in the last {days} days, with who carried it out when the report says. Tap a conflict for casualties, a web of its latest attacks and an intel panel.
           </div>
           <div className="live-legend">
             <span><Swatch kind="war" color={TRACKER_COLORS.war} size={13} />War</span>

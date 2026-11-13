@@ -80,7 +80,7 @@ jobs:
           git add data/cache.json
           if [ -f data/ships.json ]; then git add data/ships.json; fi
           if [ -f data/translations.json ]; then git add data/translations.json; fi
-          for f in data/conflict.json data/advisories.json data/context-state.json data/incidents.json data/war-intel.json data/ai-verdicts.json; do if [ -f "$f" ]; then git add "$f"; fi; done
+          for f in data/conflict.json data/advisories.json data/context-state.json data/incidents.json data/war-intel.json data/ai-verdicts.json data/history/incidents.json; do if [ -f "$f" ]; then git add "$f"; fi; done
           git diff --staged --quiet || git commit -m "chore: update cached news feeds"
           # If someone pushed code while this job ran, rebase onto it and try again instead of
           # losing the hour's data.
