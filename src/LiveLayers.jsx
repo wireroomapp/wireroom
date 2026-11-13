@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import { AIRCRAFT_COLOR, SHIP_LEGEND, shipColor, aircraftPath, shipPaths, timeAgo, iconScale } from "./trackingGeo.js";
+import { CONFLICT_TYPES, ADVISORY_COLORS, CONTEXT_CREDITS, coverageLabel } from "./contextData.js";
 
 // ---------------------------------------------------------------------------
 // Drawn inside the map's zoomed <g>. Pointer events are off: taps are matched
@@ -104,6 +105,8 @@ const LIVE_CSS = `
 .live-note{line-height:1.45}
 .live-warn{color:#c9974b;line-height:1.45}
 .live-legend{display:flex;flex-wrap:wrap;gap:3px 8px}
+.ctx-short{display:none}
+@media(max-width:800px){.ctx-short{display:block}}
 .live-legend span{display:inline-flex;align-items:center;gap:3px}
 .live-credit{color:#4e6076;line-height:1.4}
 .track-card{position:absolute;left:50%;bottom:calc(56px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:6;width:min(360px,calc(100% - 24px));background:rgba(10,14,20,.96);border:1px solid rgba(255,255,255,.28);padding:10px 12px;color:#e8e3d8;font-family:Arial,sans-serif}
@@ -116,13 +119,28 @@ const LIVE_CSS = `
 .track-card .tc-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;font:9px monospace;color:#4e6076}
 .track-card a{color:#c9974b;font:10px monospace;text-decoration:none}
 .track-card button{background:none;border:1px solid #26384d;color:#8795a7;cursor:pointer;font:12px monospace;padding:2px 7px}
+.track-card .tc-quote{font:11px/1.45 Arial,sans-serif;color:#9ba8b8;border-left:2px solid #26384d;padding-left:8px;margin:0 0 8px}
+.live-sub{font-weight:700;letter-spacing:.1em;color:#718198}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot.ring{background:none!important;border:1.5px solid #8795a7}
 .track-card .tc-pin{margin-top:9px;border-color:#315e5b;color:#4fa6a0;font:10px monospace;padding:5px 9px;letter-spacing:.04em}
-@media(max-width:800px){.live-box{left:10px;max-width:calc(100% - 140px);padding:6px}.live-title,.live-legend{display:none}.live-btn{padding:5px 6px}}
+@media(max-width:800px){.live-box{left:10px;max-width:calc(100% - 140px);padding:6px}.live-title,.live-sub,.live-legend,.ctx-long{display:none}.live-btn{padding:5px 6px}}
 `;
 
-export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, air, ships }) {
-  const problems = [airOn && feedProblem(air, "Air"), shipsOn && feedProblem(ships, "Ships")].filter(Boolean);
-  const credits = [airOn && air.attribution, shipsOn && ships.attribution].filter(Boolean);
+function ctxCount(layer, n) {
+  if (layer.status === "loading") return "…";
+  if (layer.status === "unavailable") return "!";
+  return layer.status === "ok" ? n.toLocaleString() : "";
+}
+
+export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, air, ships, context = null }) {
+  const c = context;
+  const problems = [airOn && feedProblem(air, "Air"), shipsOn && feedProblem(ships, "Ships"),
+    c && c.conflictOn && c.conflict.status === "unavailable" && "Conflict events: not available right now.",
+    c && c.advisoriesOn && c.advisories.status === "unavailable" && "Advisories: not available right now."].filter(Boolean);
+  const credits = [airOn && air.attribution, shipsOn && ships.attribution,
+    c && c.conflictOn && CONTEXT_CREDITS.conflict, c && c.advisoriesOn && CONTEXT_CREDITS.advisories].filter(Boolean);
+  const cov = c && c.conflict.data ? coverageLabel(c.conflict.data.coverage) : "";
   return (
     <div className="live-box" onPointerDown={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
       <style>{LIVE_CSS}</style>
@@ -137,6 +155,19 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
           <Swatch kind="ship" color={shipColor("cargo")} />SHIPS{shipsOn && <span className="n">{countLabel(ships)}</span>}
         </button>
       </div>
+      {c && (
+        <div className="live-row">
+          <span className="live-sub">CONTEXT</span>
+          <button type="button" className={`live-btn ${c.conflictOn ? "on" : ""}`} aria-pressed={c.conflictOn} onClick={c.onToggleConflict}
+            title="Verified conflict events (UCDP), released monthly">
+            <span className="dot" style={{ background: "#e05a4f" }} />CONFLICT{c.conflictOn && <span className="n">{ctxCount(c.conflict, c.conflict.data?.events?.length || 0)}</span>}
+          </button>
+          <button type="button" className={`live-btn ${c.advisoriesOn ? "on" : ""}`} aria-pressed={c.advisoriesOn} onClick={c.onToggleAdvisories}
+            title="Countries where the US State Department travel advisory names terrorism">
+            <span className="dot" style={{ background: "#e39a45" }} />TERRORISM ADVISORIES{c.advisoriesOn && <span className="n">{ctxCount(c.advisories, c.advisories.data?.advisories?.length || 0)}</span>}
+          </button>
+        </div>
+      )}
       {airOn && <div className="live-note">Air: military-flagged aircraft that broadcast ADS-B. Many don't.</div>}
       {shipsOn && (
         <div className="live-note">
@@ -149,6 +180,28 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
           {SHIP_LEGEND.map(([cat, label]) => (
             <span key={cat}><Swatch kind="ship" color={shipColor(cat)} />{label}</span>
           ))}
+        </div>
+      )}
+      {c && c.conflictOn && (
+        <>
+          <div className="live-note ctx-short">Conflict: UCDP verified events{cov ? `, ${cov}` : ""} (1–2 months behind). Tap one for details.</div>
+          <div className="live-note ctx-long">
+            Conflict: events verified by UCDP researchers{cov ? `, ${cov}` : ""}. Released monthly, so 1–2 months behind. Size = deaths (best estimate); hollow = location only known roughly. Tap for ranges and sources.
+          </div>
+          <div className="live-legend">
+            {CONFLICT_TYPES.map(([id, label, color]) => (<span key={id}><span className="dot" style={{ background: color }} />{label}</span>))}
+            <span><span className="dot ring" />Approximate place</span>
+          </div>
+        </>
+      )}
+      {c && c.advisoriesOn && (
+        <div className="live-note ctx-short">Advisories: US State Dept view; number = level 1–4.</div>
+      )}
+      {c && c.advisoriesOn && (
+        <div className="live-note ctx-long">
+          Advisories: countries where the US State Department's travel advisory names terrorism. Number = advisory level (
+          {[1, 2, 3, 4].map((l) => (<span key={l} style={{ color: ADVISORY_COLORS[l] }}>{l}{l < 4 ? " " : ""}</span>))}
+          ). One government's guidance, not an intelligence assessment.
         </div>
       )}
       {problems.map((p) => <div key={p} className="live-warn">{p}</div>)}

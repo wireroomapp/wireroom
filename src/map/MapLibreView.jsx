@@ -43,12 +43,15 @@ export default function MapLibreView({
   annotations, tool = "select", pinning = false,
   onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace, controlRef,
   focus = null, // { lon, lat, key }: fly here once (used when a shared link opens a country)
+  // Context layers: UCDP conflict events and US terrorism advisories (see ContextLayers.jsx)
+  conflict = null, advisories = null, onContextClick,
 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const [ready, setReady] = useState(false);
   const [prefs, setPrefs] = useState(loadPrefs);
   const lookup = useRef(new Map()); // track key -> full item, for taps
+  const ctxLookup = useRef(new Map()); // context feature key -> { kind, item }
   const terrainOn = useRef(false); // 3D terrain setting, readable from map event handlers
   const userPitched = useRef(false); // did the person tilt the map by hand? then leave the angle alone
   const prevTerrain = useRef(null);
@@ -58,7 +61,7 @@ export default function MapLibreView({
   // Latest callbacks for the map's event handlers (which are set up once).
   const cb = useRef({});
   useLayoutEffect(() => {
-    cb.current = { onCountryClick, onTrackClick, onEmptyClick, onViewChange, countries, tool, pinning, onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace };
+    cb.current = { onCountryClick, onTrackClick, onEmptyClick, onViewChange, countries, tool, pinning, onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace, onContextClick };
     prefsRef.current = prefs;
   });
 
@@ -168,6 +171,13 @@ export default function MapLibreView({
         const hit = lookup.current.get(best.properties.key);
         if (hit) { k.onTrackClick?.(hit.kind, hit.item); return; }
       }
+      // Context layers: an advisory badge first (it's small and offset), then the nearest conflict event.
+      const adv = map.queryRenderedFeatures(box(e.point, 9), { layers: ["wr-adv", "wr-adv-label"] });
+      const ev = adv.length ? adv : map.queryRenderedFeatures(box(e.point, 8), { layers: ["wr-conflict"] });
+      if (ev.length) {
+        const hit = ctxLookup.current.get(ev[0].properties.key);
+        if (hit) { k.onContextClick?.(hit.kind, hit.item); return; }
+      }
       k.onEmptyClick?.();
     });
 
@@ -217,7 +227,7 @@ export default function MapLibreView({
     map.on("touchend", endDraw);
     map.on("touchcancel", () => { draft.current = null; setDraft(null); });
 
-    const hoverLayers = ["wr-country-dot", "wr-country-code", "wr-ships", "wr-planes", ...ANNOTATION_LAYERS];
+    const hoverLayers = ["wr-country-dot", "wr-country-code", "wr-ships", "wr-planes", "wr-adv", "wr-conflict", ...ANNOTATION_LAYERS];
     map.on("mousemove", (e) => {
       if (!map.getLayer("wr-country-dot")) return;
       if (cb.current.tool !== "select") { map.getCanvas().style.cursor = "crosshair"; return; }
@@ -280,6 +290,24 @@ export default function MapLibreView({
     map.getSource("wr-planes").setData({ type: "FeatureCollection", features: planes });
     map.getSource("wr-ships").setData({ type: "FeatureCollection", features: boats });
   }, [ready, aircraft, ships, airOn, shipsOn]);
+
+  // Context layers.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!ready || !map) return;
+    const m = new Map();
+    const evs = (conflict || []).map((e) => {
+      const key = `c:${e.id}`; m.set(key, { kind: "conflict", item: e });
+      return point(e.lon, e.lat, { key, type: e.type, best: e.deaths ? e.deaths.best : 0, wp: e.wherePrec || 0 });
+    });
+    const advs = (advisories || []).filter((a) => Number.isFinite(a.lon)).map((a) => {
+      const key = `a:${a.name}`; m.set(key, { kind: "advisory", item: a });
+      return point(a.lon, a.lat, { key, level: a.level });
+    });
+    ctxLookup.current = m;
+    map.getSource("wr-conflict")?.setData({ type: "FeatureCollection", features: evs });
+    map.getSource("wr-advisories")?.setData({ type: "FeatureCollection", features: advs });
+  }, [ready, conflict, advisories]);
 
   // Coverage outlines for the watched ship areas.
   useEffect(() => {
