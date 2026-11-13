@@ -125,7 +125,7 @@ export function WarCard({ war, onClose, onPin, intelOpen, onToggleIntel, reporte
   return (
     <div className="track-card" role="dialog" aria-label="War details" {...stop}>
       <Head onClose={onClose} title={war.name} icon={<Swatch kind="war" color={TRACKER_COLORS.war} size={12} />} kindText={`${(LEVEL_TEXT[war.level] || LEVEL_TEXT.war).label} · UCDP VERIFIED EVENTS`} />
-      <div className="tc-big">{n(lm.best)} killed<small>{monthLabel(lm.month)} · best estimate{lm.low !== lm.high ? `, range ${n(lm.low)}–${n(lm.high)}` : ""}{!lm.best && war.latestEvent ? ` · last event ${dayLabel(war.latestEvent)}` : ""}</small></div>
+      <div className="tc-big">{n(lm.best)} killed<small>{monthLabel(lm.month)} · best estimate{Math.min(lm.low, lm.best) !== Math.max(lm.high, lm.best) ? `, range ${n(Math.min(lm.low, lm.best))}–${n(Math.max(lm.high, lm.best))}` : ""}{!lm.best && war.latestEvent ? ` · last event ${dayLabel(war.latestEvent)}` : ""}</small></div>
       <div style={{ font: "9px monospace", color: "#718198", margin: "0 0 8px" }}>LATEST MONTH UCDP HAS PUBLISHED (1–2 MONTHS BEHIND). TOTALS COVER {(coverageLabel(war.coverage) || "THE LATEST 3 MONTHS").toUpperCase()} ONLY; EARLIER FIGHTING ISN'T INCLUDED.</div>
       <dl>
         {rows.map(([k, v]) => (<React.Fragment key={k}><dt>{k}</dt><dd>{v}</dd></React.Fragment>))}

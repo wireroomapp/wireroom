@@ -54,7 +54,9 @@ export function whenLabel(iso) {
 export const n = (v) => Number(v || 0).toLocaleString();
 export function deathsText(d) {
   if (!d) return "—";
-  const range = d.low !== d.high ? ` (range ${n(d.low)}–${n(d.high)})` : "";
+  // UCDP's low/high can come out of order when many events are added up; show the true span.
+  const lo = Math.min(d.low ?? d.best, d.best), hi = Math.max(d.high ?? d.best, d.best);
+  const range = lo !== hi ? ` (range ${n(lo)}–${n(hi)})` : "";
   return `${n(d.best)} best estimate${range}`;
 }
 
@@ -122,7 +124,7 @@ export function warToReport(w) {
     sourceType: "conflict",
     source: "UCDP (verified dataset)",
     headline: `${w.name} · ${n(lm.best)} killed in ${monthLabel(lm.month)}`,
-    summary: `${sidesText(w.sides)}. ${n(w.deaths.best)} killed in ${n(w.events)} events, ${coverageLabel(w.coverage)} (UCDP best estimate; range ${n(w.deaths.low)}–${n(w.deaths.high)}).`,
+    summary: `${sidesText(w.sides)}. ${n(w.deaths.best)} killed in ${n(w.events)} events, ${coverageLabel(w.coverage)} (UCDP best estimate; range ${n(Math.min(w.deaths.low, w.deaths.best))}–${n(Math.max(w.deaths.high, w.deaths.best))}).`,
     date: monthLabel(lm.month),
     publishedAt: lm.month ? `${lm.month}-28T00:00:00Z` : null,
     url: "https://ucdp.uu.se/downloads/",
