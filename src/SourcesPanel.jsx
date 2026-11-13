@@ -133,6 +133,11 @@ export default function SourcesPanel({ apiBase, feedbackUrl, onClose, onOpenCoun
                     ) : (
                       <div><span className="m">Official: </span>no verified government channel yet.</div>
                     )}
+                    {c.cyber && c.cyber.length > 0 && (
+                      <div><span className="m">Cyber agency: </span>{c.cyber.join(", ")}
+                        {(c.cyberLinks || []).map((l) => <span key={l} className="links"> · <a href={l} target="_blank" rel="noreferrer">{shortLink(l)}</a></span>)}
+                      </div>
+                    )}
                     {c.outlets.length > 0 && <div><span className="m">News: </span>{c.outlets.join(", ")}</div>}
                     <div className="meta">
                       {c.officialCount} official · {c.newsCount} news reports stored
@@ -145,6 +150,23 @@ export default function SourcesPanel({ apiBase, feedbackUrl, onClose, onOpenCoun
             })}
           </div>
         )}
+
+        <h3>HOW WIRE ROOM HANDLES UNCERTAINTY</h3>
+        <ul>
+          <li><b>No automated alerts.</b> Wire Room never decides on its own that an attack or incident happened. Everything shown comes from a named source, labeled with who said it and when.</li>
+          <li><b>Claims are kept apart from reporting.</b> OFFICIAL is what a government says, NEWS is what independent outlets report, and conflict data is coded by researchers. They are shown side by side, never merged into one verdict.</li>
+          <li><b>Ranges, not single numbers.</b> Conflict events show UCDP's low, best and high death estimates, how precisely the place and date are known, and whether UCDP is still checking the event.</li>
+          <li><b>Accuracy over speed.</b> Verified conflict data runs 1–2 months behind. The latest reporting is in the panels, clearly marked as reporting.</li>
+          <li><b>Topic tags are a reading aid.</b> CONFLICT, CYBER and TERRORISM tags come from keywords in the report. A tagged report is about that topic; it isn't proof that an event happened. Wire Room doesn't label groups as terrorist; it only uses words about terrorism and groups on UN terrorism sanctions lists.</li>
+        </ul>
+
+        <h3>CONFLICT, TERRORISM AND CYBER</h3>
+        <ul>
+          <li><b>Conflict events</b>: <a href="https://ucdp.uu.se/downloads/" target="_blank" rel="noreferrer">UCDP Candidate Events Dataset</a>, Uppsala University (CC BY 4.0). Researchers code each event of organized violence that caused (or may have caused) a death, from news and NGO reports. Released monthly; events are preliminary and can be revised. Citation: Hegre, Croicu, Eck &amp; Högbladh (2020), <i>Research &amp; Politics</i>.</li>
+          <li><b>Terrorism advisories</b>: <a href="https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html" target="_blank" rel="noreferrer">U.S. Department of State travel advisories</a>, the countries whose advisory names terrorism, with the advisory level (1–4). This is one government's guidance for its own travelers, not an intelligence assessment; other governments may judge differently.</li>
+          <li><b>Cyber</b>: official statements from national cyber agencies (US CISA, UK NCSC, Japan JPCERT/CC) appear in their countries' OFFICIAL reports, tagged CYBER. India's CERT-In, Australia's ASD and Canada's Cyber Centre aren't connected yet.</li>
+          <li><b>Not tracked:</b> troop or drone movements and live incidents. No free source reports these reliably; Wire Room won't guess.</li>
+        </ul>
 
         <h3>HOW REPORTS ARE FOUND</h3>
         <ul>

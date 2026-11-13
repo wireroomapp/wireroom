@@ -37,6 +37,9 @@ export const SHIP_COLOR_EXPR = [
   "#8795a7",
 ];
 
+export const CONFLICT_COLOR_EXPR = ["match", ["get", "type"], 1, "#e05a4f", 2, "#e39a45", 3, "#b07ad6", "#8795a7"];
+export const ADVISORY_COLOR_EXPR = ["match", ["get", "level"], 4, "#e05a4f", 3, "#e39a45", 2, "#d9c25a", "#8fa3b8"];
+
 export function buildStyle() {
   return {
     version: 8,
@@ -63,6 +66,8 @@ export function buildStyle() {
       },
       // Wire Room data (filled from React)
       "wr-countries": { type: "geojson", data: EMPTY },
+      "wr-conflict": { type: "geojson", data: EMPTY }, // UCDP conflict events (context layer)
+      "wr-advisories": { type: "geojson", data: EMPTY }, // US advisories naming terrorism (context layer)
       "wr-zones": { type: "geojson", data: EMPTY },
       "wr-zone-labels": { type: "geojson", data: EMPTY },
       "wr-ships": { type: "geojson", data: EMPTY },
@@ -104,6 +109,20 @@ export function buildStyle() {
       { id: "label-countries", type: "symbol", source: "openmaptiles", "source-layer": "place", maxzoom: 7, filter: ["==", ["get", "class"], "country"], layout: { "text-field": ["upcase", NAME], "text-font": FONT_BOLD, "text-size": ["interpolate", ["linear"], ["zoom"], 1, 8, 6, 12], "text-letter-spacing": 0.12, "text-max-width": 7 }, paint: { "text-color": "#56697f", "text-halo-color": "#071019", "text-halo-width": 1 } },
 
       // ---- Wire Room layers ----
+      // Conflict events: color = type of violence, size = deaths (best estimate, square-root scale),
+      // hollow = UCDP only knows the province, a vague area or just the country.
+      { id: "wr-conflict", type: "circle", source: "wr-conflict",
+        layout: { "circle-sort-key": ["get", "best"] },
+        paint: {
+          "circle-radius": ["interpolate", ["linear"], ["zoom"],
+            1, ["min", 9, ["+", 1.6, ["*", 0.45, ["sqrt", ["get", "best"]]]]],
+            6, ["min", 18, ["+", 3, ["*", 0.9, ["sqrt", ["get", "best"]]]]]],
+          "circle-color": CONFLICT_COLOR_EXPR,
+          "circle-opacity": ["case", [">=", ["get", "wp"], 4], 0, 0.55],
+          "circle-stroke-color": CONFLICT_COLOR_EXPR,
+          "circle-stroke-width": ["case", [">=", ["get", "wp"], 4], 1.2, 0.6],
+          "circle-stroke-opacity": 0.9,
+        } },
       { id: "wr-zones-fill", type: "fill", source: "wr-zones", filter: ["==", ["get", "count"], 0], paint: { "fill-color": "#c9974b", "fill-opacity": 0.07 } },
       { id: "wr-zones-line", type: "line", source: "wr-zones", paint: { "line-color": ["case", ["==", ["get", "count"], 0], "#c9974b", "#5b7390"], "line-width": 1, "line-dasharray": [3, 2] } },
       // Areas with no ships are labeled a little earlier than the rest. At world view only the
@@ -120,6 +139,13 @@ export function buildStyle() {
         paint: { "icon-color": SHIP_COLOR_EXPR, "icon-halo-color": "#071019", "icon-halo-width": 1 } },
       { id: "wr-planes", type: "symbol", source: "wr-planes",
         layout: { "icon-image": "wr-plane", "icon-size": ["interpolate", ["linear"], ["zoom"], 1, 0.4, 6, 0.65, 10, 0.95], "icon-rotate": ["coalesce", ["get", "heading"], 0], "icon-rotation-alignment": "map", "icon-allow-overlap": true, "icon-ignore-placement": true } },
+      // Terrorism advisories: a numbered badge (advisory level 1-4) just above-right of the
+      // country's center, so it doesn't sit on top of Wire Room's own country dot.
+      { id: "wr-adv", type: "circle", source: "wr-advisories",
+        paint: { "circle-radius": 7.5, "circle-color": ADVISORY_COLOR_EXPR, "circle-opacity": 0.92, "circle-stroke-color": "#071019", "circle-stroke-width": 1.5, "circle-translate": [11, -11] } },
+      { id: "wr-adv-label", type: "symbol", source: "wr-advisories",
+        layout: { "text-field": ["to-string", ["get", "level"]], "text-font": FONT_BOLD, "text-size": 10, "text-allow-overlap": true, "text-ignore-placement": true },
+        paint: { "text-color": "#071019", "text-translate": [11, -11] } },
       { id: "wr-selected", type: "circle", source: "wr-selected", paint: { "circle-radius": 13, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": "#ffffff", "circle-stroke-width": 1.8 } },
 
       // Country dots (open the country brief)

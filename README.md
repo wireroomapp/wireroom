@@ -15,6 +15,9 @@ An interactive world map that shows what governments say next to what independen
 - **OFFICIAL / NEWS / BOTH:** each country's own government statements next to independent reporting, with the publisher named on every report.
 - **Sources page:** where every country's reports come from, what "verified" means, and what isn't covered yet (`SOURCES` in the header).
 - **Analyst canvas:** markers, lines, shapes and notes; pin any report, ship or aircraft to a marker; export the map as a PNG.
+- **Topics:** CONFLICT / CYBER / TERRORISM filter on every panel (keyword tags, a reading aid, not a verdict).
+- **Context layers:** verified conflict events from the UCDP Candidate Events Dataset (monthly, with low/best/high death estimates and location/date precision) and countries whose US State Department travel advisory names terrorism. No automated alerts: every item names its source.
+- **Cyber:** national cyber agencies (US CISA, UK NCSC, Japan JPCERT/CC) in those countries' official reports.
 - **Live layers:** military aircraft (ADS-B) and ships at 10 maritime chokepoints and 5 Indian Ocean ports (AIS, hourly snapshots), with coverage gaps labeled.
 - **Map:** flat or globe view, NASA imagery, 3D terrain.
 - **Shareable links:** the address bar follows what's open, e.g. [`?country=ua&mode=both`](https://wireroom.onrender.com/?country=ua&mode=both) or [`?view=global`](https://wireroom.onrender.com/?view=global). The `LINK` button in the panel copies it.
@@ -26,6 +29,7 @@ An interactive world map that shows what governments say next to what independen
 - **Backend:** small Express server (`server.mjs`) that serves a pre-built cache. It never fetches news live.
 - **Data pipeline:** a GitHub Action (`.github/workflows/fetch-news.yml`) runs `scripts/fetch-feeds.mjs` every hour. It pulls official government sources and independent publishers per country (`lib/feeds.mjs`) and commits the result to `data/cache.json`. The same job collects the ship snapshot (`data/ships.json`).
 - **Official-source status:** each country is marked verified, temporarily unavailable, or not yet verified. The UI shows this instead of implying "no news". `/api/sources` (built by `lib/sources.mjs` from the same configuration) powers the Sources page.
+- **Context layers:** `scripts/collect-context.mjs` (in the same hourly job) writes `data/conflict.json` (UCDP, checked daily, CC BY 4.0) and `data/advisories.json` (US State Department); parsing and uncertainty fields are in `lib/context.mjs`; served at `/api/conflict` and `/api/advisories`. Files are only rewritten when their content changes.
 - **Saved maps:** annotations are stored in the browser's localStorage. There are no accounts yet.
 - **Translation:** after each fetch, `scripts/translate-reports.mjs` machine-translates recent non-English reports into English (`lib/translate.mjs`; DeepL or Microsoft Translator, chosen by the `TRANSLATE_API_KEY` repository secret and optional `TRANSLATE_PROVIDER` variable). Each report is translated once and remembered in `data/translations.json`; the original text is never changed, and the app shows it on request. A character budget keeps it inside free tiers.
 - **Live layers:** served through `tracking/` so data providers can be swapped with environment variables. See [`tracking/README.md`](tracking/README.md).
