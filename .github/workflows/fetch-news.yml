@@ -50,6 +50,13 @@ jobs:
         timeout-minutes: 5
         run: node scripts/collect-context.mjs
 
+      # Trackers: places reported terrorism, cyber and military incidents from the reports above,
+      # and summarizes wars from the UCDP events (lib/incidents.mjs). Never blocks the news update.
+      - name: Build tracker markers
+        continue-on-error: true
+        timeout-minutes: 3
+        run: node scripts/collect-incidents.mjs
+
       # Ships: listen to AISStream for ~5 minutes and save data/ships.json.
       # Needs the AISSTREAM_API_KEY repository secret. If it fails or hears nothing,
       # the previous snapshot is kept and the news update still goes out.
@@ -69,6 +76,6 @@ jobs:
           git add data/cache.json
           if [ -f data/ships.json ]; then git add data/ships.json; fi
           if [ -f data/translations.json ]; then git add data/translations.json; fi
-          for f in data/conflict.json data/advisories.json data/context-state.json; do if [ -f "$f" ]; then git add "$f"; fi; done
+          for f in data/conflict.json data/advisories.json data/context-state.json data/incidents.json data/war-intel.json; do if [ -f "$f" ]; then git add "$f"; fi; done
           git diff --staged --quiet || git commit -m "chore: update cached news feeds"
           git push

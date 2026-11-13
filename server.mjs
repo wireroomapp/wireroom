@@ -111,7 +111,7 @@ function loadDataFile(file) {
     return contextMemo.get(file)?.data || null;
   }
 }
-for (const [route, file] of [["/api/conflict", "data/conflict.json"], ["/api/advisories", "data/advisories.json"]]) {
+for (const [route, file] of [["/api/conflict", "data/conflict.json"], ["/api/advisories", "data/advisories.json"], ["/api/incidents", "data/incidents.json"]]) {
   app.get(route, (req, res) => {
     const data = loadDataFile(file);
     if (!data) return res.status(503).json({ status: "unavailable", error: "Not collected yet" });
@@ -119,6 +119,17 @@ for (const [route, file] of [["/api/conflict", "data/conflict.json"], ["/api/adv
     res.json({ status: "ok", ...data });
   });
 }
+
+// One war's intel panel: the latest related official statements and outlet reports.
+app.get("/api/war-intel", (req, res) => {
+  const data = loadDataFile("data/war-intel.json");
+  if (!data) return res.status(503).json({ status: "unavailable", error: "Not collected yet" });
+  const id = String(req.query.id || "");
+  const items = data.wars?.[id];
+  if (!items) return res.status(404).json({ status: "not-found", error: "No such war" });
+  res.set("Cache-Control", "public, max-age=900");
+  res.json({ status: "ok", generatedAt: data.generatedAt, id, items });
+});
 
 // Where every country's reports come from (the SOURCES page).
 app.get("/api/sources", (req, res) => {

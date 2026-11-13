@@ -37,8 +37,11 @@ export const SHIP_COLOR_EXPR = [
   "#8795a7",
 ];
 
-export const CONFLICT_COLOR_EXPR = ["match", ["get", "type"], 1, "#e05a4f", 2, "#e39a45", 3, "#b07ad6", "#8795a7"];
-export const ADVISORY_COLOR_EXPR = ["match", ["get", "level"], 4, "#e05a4f", 3, "#e39a45", 2, "#d9c25a", "#8fa3b8"];
+// Tracker markers that share a spot (several reports placed mid-country) fan out around it.
+// Slot 0 sits on the spot; country-level markers start at slot 1 so the country dot stays clear.
+export const SLOT_OFFSETS = [[0, 0], [15, -13], [-15, -13], [15, 13], [-15, 13], [0, -20], [0, 20], [22, 0], [-22, 0]];
+const SLOT_EXPR = ["match", ["get", "slot"], ...SLOT_OFFSETS.slice(1).flatMap((o, i) => [i + 1, ["literal", o]]), ["literal", [0, 0]]];
+const WAR_RED = "#ff4d4d", STRIKE_ORANGE = "#ff8a3d";
 
 export function buildStyle() {
   return {
@@ -66,8 +69,11 @@ export function buildStyle() {
       },
       // Wire Room data (filled from React)
       "wr-countries": { type: "geojson", data: EMPTY },
-      "wr-conflict": { type: "geojson", data: EMPTY }, // UCDP conflict events (context layer)
-      "wr-advisories": { type: "geojson", data: EMPTY }, // US advisories naming terrorism (context layer)
+      // Trackers (MILITARY, TERRORISM, CYBER): see src/contextData.js
+      "wr-web": { type: "geojson", data: EMPTY }, // lines from the selected war to its latest attacks
+      "wr-web-nodes": { type: "geojson", data: EMPTY }, // the selected war's latest UCDP events
+      "wr-incidents": { type: "geojson", data: EMPTY }, // reported strikes, terrorism, cyber
+      "wr-wars": { type: "geojson", data: EMPTY },
       "wr-zones": { type: "geojson", data: EMPTY },
       "wr-zone-labels": { type: "geojson", data: EMPTY },
       "wr-ships": { type: "geojson", data: EMPTY },
@@ -109,20 +115,6 @@ export function buildStyle() {
       { id: "label-countries", type: "symbol", source: "openmaptiles", "source-layer": "place", maxzoom: 7, filter: ["==", ["get", "class"], "country"], layout: { "text-field": ["upcase", NAME], "text-font": FONT_BOLD, "text-size": ["interpolate", ["linear"], ["zoom"], 1, 8, 6, 12], "text-letter-spacing": 0.12, "text-max-width": 7 }, paint: { "text-color": "#56697f", "text-halo-color": "#071019", "text-halo-width": 1 } },
 
       // ---- Wire Room layers ----
-      // Conflict events: color = type of violence, size = deaths (best estimate, square-root scale),
-      // hollow = UCDP only knows the province, a vague area or just the country.
-      { id: "wr-conflict", type: "circle", source: "wr-conflict",
-        layout: { "circle-sort-key": ["get", "best"] },
-        paint: {
-          "circle-radius": ["interpolate", ["linear"], ["zoom"],
-            1, ["min", 9, ["+", 1.6, ["*", 0.45, ["sqrt", ["get", "best"]]]]],
-            6, ["min", 18, ["+", 3, ["*", 0.9, ["sqrt", ["get", "best"]]]]]],
-          "circle-color": CONFLICT_COLOR_EXPR,
-          "circle-opacity": ["case", [">=", ["get", "wp"], 4], 0, 0.55],
-          "circle-stroke-color": CONFLICT_COLOR_EXPR,
-          "circle-stroke-width": ["case", [">=", ["get", "wp"], 4], 1.2, 0.6],
-          "circle-stroke-opacity": 0.9,
-        } },
       { id: "wr-zones-fill", type: "fill", source: "wr-zones", filter: ["==", ["get", "count"], 0], paint: { "fill-color": "#c9974b", "fill-opacity": 0.07 } },
       { id: "wr-zones-line", type: "line", source: "wr-zones", paint: { "line-color": ["case", ["==", ["get", "count"], 0], "#c9974b", "#5b7390"], "line-width": 1, "line-dasharray": [3, 2] } },
       // Areas with no ships are labeled a little earlier than the rest. At world view only the
@@ -139,13 +131,37 @@ export function buildStyle() {
         paint: { "icon-color": SHIP_COLOR_EXPR, "icon-halo-color": "#071019", "icon-halo-width": 1 } },
       { id: "wr-planes", type: "symbol", source: "wr-planes",
         layout: { "icon-image": "wr-plane", "icon-size": ["interpolate", ["linear"], ["zoom"], 1, 0.4, 6, 0.65, 10, 0.95], "icon-rotate": ["coalesce", ["get", "heading"], 0], "icon-rotation-alignment": "map", "icon-allow-overlap": true, "icon-ignore-placement": true } },
-      // Terrorism advisories: a numbered badge (advisory level 1-4) just above-right of the
-      // country's center, so it doesn't sit on top of Wire Room's own country dot.
-      { id: "wr-adv", type: "circle", source: "wr-advisories",
-        paint: { "circle-radius": 7.5, "circle-color": ADVISORY_COLOR_EXPR, "circle-opacity": 0.92, "circle-stroke-color": "#071019", "circle-stroke-width": 1.5, "circle-translate": [11, -11] } },
-      { id: "wr-adv-label", type: "symbol", source: "wr-advisories",
-        layout: { "text-field": ["to-string", ["get", "level"]], "text-font": FONT_BOLD, "text-size": 10, "text-allow-overlap": true, "text-ignore-placement": true },
-        paint: { "text-color": "#071019", "text-translate": [11, -11] } },
+      // ---- Trackers ----
+      // The selected war's web: solid lines to UCDP-verified events, dashed to strikes reported in the news.
+      { id: "wr-web-line", type: "line", source: "wr-web", filter: ["==", ["get", "kind"], "ucdp"], layout: { "line-cap": "round" },
+        paint: { "line-color": WAR_RED, "line-width": ["interpolate", ["linear"], ["zoom"], 2, 0.8, 7, 1.6], "line-opacity": 0.55 } },
+      { id: "wr-web-line-rep", type: "line", source: "wr-web", filter: ["==", ["get", "kind"], "report"],
+        paint: { "line-color": STRIKE_ORANGE, "line-width": ["interpolate", ["linear"], ["zoom"], 2, 1, 7, 1.8], "line-opacity": 0.85, "line-dasharray": [2, 1.5] } },
+      { id: "wr-web-node", type: "circle", source: "wr-web-nodes", layout: { "circle-sort-key": ["get", "best"] },
+        paint: {
+          "circle-radius": ["min", 11, ["+", 3, ["*", 0.55, ["sqrt", ["get", "best"]]]]],
+          "circle-color": WAR_RED, "circle-opacity": ["case", [">=", ["get", "wp"], 4], 0, 0.4],
+          "circle-stroke-color": WAR_RED, "circle-stroke-width": 1.3, "circle-stroke-opacity": 0.95,
+        } },
+      { id: "wr-incidents", type: "symbol", source: "wr-incidents",
+        layout: {
+          "icon-image": ["get", "icon"], "icon-offset": SLOT_EXPR,
+          "icon-size": ["interpolate", ["linear"], ["zoom"], 1, 0.85, 6, 1, 10, 1.15],
+          "icon-allow-overlap": true, "icon-ignore-placement": true, "symbol-sort-key": ["get", "rank"],
+        },
+        paint: { "icon-opacity": ["case", ["get", "dim"], 0.35, 1] } },
+      { id: "wr-wars", type: "symbol", source: "wr-wars",
+        layout: {
+          "icon-image": "wr-war", "icon-size": ["interpolate", ["linear"], ["zoom"], 1, 0.85, 6, 1.1],
+          "icon-allow-overlap": true, "icon-ignore-placement": true, "symbol-sort-key": ["-", 0, ["get", "best"]],
+          "text-field": ["get", "label"], "text-font": FONT_BOLD, "text-size": 9.5, "text-anchor": "top", "text-offset": [0, 1.25],
+          "text-optional": true, "text-max-width": 16, "text-letter-spacing": 0.04,
+        },
+        paint: {
+          "icon-opacity": ["case", ["get", "dim"], 0.4, 1],
+          "text-color": ["case", ["get", "sel"], "#ffffff", "#ffb3ad"], "text-opacity": ["case", ["get", "dim"], 0.4, 1],
+          "text-halo-color": "#071019", "text-halo-width": 1.6,
+        } },
       { id: "wr-selected", type: "circle", source: "wr-selected", paint: { "circle-radius": 13, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": "#ffffff", "circle-stroke-width": 1.8 } },
 
       // Country dots (open the country brief)
@@ -153,7 +169,7 @@ export function buildStyle() {
       { id: "wr-country-dot", type: "circle", source: "wr-countries",
         paint: { "circle-radius": ["case", ["get", "active"], 6.5, ["get", "has"], 4.5, 3.5], "circle-color": ["case", ["get", "active"], "#e8e3d8", "#c9974b"], "circle-stroke-color": ["case", ["get", "active"], "#c9974b", "#071019"], "circle-stroke-width": ["case", ["get", "active"], 2, 1] } },
       { id: "wr-country-code", type: "symbol", source: "wr-countries",
-        layout: { "text-field": ["get", "code"], "text-font": FONT_BOLD, "text-size": 9, "text-offset": [0, 1.25], "text-anchor": "top", "text-allow-overlap": true },
+        layout: { "text-field": ["get", "code"], "text-font": FONT_BOLD, "text-size": 9, "text-offset": [0, 1.25], "text-anchor": "top", "text-allow-overlap": true, "text-ignore-placement": true },
         paint: { "text-color": "#8a98aa", "text-halo-color": "#071019", "text-halo-width": 1.2 } },
 
       // ---- The user's analysis (markers, lines, shapes, notes). Fixed size on screen at any zoom. ----
@@ -198,24 +214,73 @@ export function applyBase(map, baseId) {
   map.setLayoutProperty("hillshade", "visibility", base.id === "map" || base.id === "satellite" ? "visible" : "none");
 }
 
-// Small icons drawn in code (no image files to host).
-export function makeIcons() {
-  const plane = document.createElement("canvas");
-  plane.width = plane.height = 32;
-  let c = plane.getContext("2d");
-  c.translate(16, 16);
-  c.beginPath(); c.moveTo(0, -13); c.lineTo(9, 11); c.lineTo(0, 5); c.lineTo(-9, 11); c.closePath();
-  c.fillStyle = "#7cc4ff"; c.strokeStyle = "#071019"; c.lineWidth = 2; c.fill(); c.stroke();
+// Small icons drawn in code (no image files to host). Drawn at 2x and shown at half size.
+function draw(size, fn) {
+  const cv = document.createElement("canvas");
+  cv.width = cv.height = size;
+  const c = cv.getContext("2d");
+  c.translate(size / 2, size / 2);
+  fn(c);
+  return c.getImageData(0, 0, size, size);
+}
+const DARK = "#071019";
+const poly = (c, pts) => { c.beginPath(); pts.forEach(([x, y], i) => (i ? c.lineTo(x, y) : c.moveTo(x, y))); c.closePath(); };
+const hexPts = (r) => Array.from({ length: 6 }, (_, i) => { const a = (i * Math.PI) / 3 - Math.PI / 2; return [r * Math.cos(a), r * Math.sin(a)]; }); // point at the top
+const bolt = [[2.2, -8], [-4.5, 1.5], [0.2, 1.5], [-2.2, 8], [4.5, -1.5], [-0.2, -1.5]];
 
+export function makeIcons() {
+  const plane = draw(32, (c) => {
+    poly(c, [[0, -13], [9, 11], [0, 5], [-9, 11]]);
+    c.fillStyle = "#7cc4ff"; c.strokeStyle = DARK; c.lineWidth = 2; c.fill(); c.stroke();
+  });
   // Ship: white diamond used as an SDF so MapLibre can color it per ship type.
-  const ship = document.createElement("canvas");
-  ship.width = ship.height = 24;
-  c = ship.getContext("2d");
-  c.translate(12, 12);
-  c.beginPath(); c.moveTo(0, -8); c.lineTo(8, 0); c.lineTo(0, 8); c.lineTo(-8, 0); c.closePath();
-  c.fillStyle = "#ffffff"; c.fill();
+  const ship = draw(24, (c) => {
+    poly(c, [[0, -8], [8, 0], [0, 8], [-8, 0]]);
+    c.fillStyle = "#ffffff"; c.fill();
+  });
+  // War: a red target with crosshair ticks.
+  const war = draw(52, (c) => {
+    const ring = (color, w) => {
+      c.strokeStyle = color; c.lineWidth = w;
+      c.beginPath(); c.arc(0, 0, 14, 0, Math.PI * 2); c.stroke();
+      c.beginPath();
+      for (const [x1, y1, x2, y2] of [[0, -14, 0, -23], [0, 14, 0, 23], [-14, 0, -23, 0], [14, 0, 23, 0]]) { c.moveTo(x1, y1); c.lineTo(x2, y2); }
+      c.stroke();
+    };
+    c.fillStyle = "rgba(7,16,25,.7)"; c.beginPath(); c.arc(0, 0, 14, 0, Math.PI * 2); c.fill();
+    ring(DARK, 8); ring(WAR_RED, 4);
+    c.fillStyle = WAR_RED; c.strokeStyle = DARK; c.lineWidth = 2; c.beginPath(); c.arc(0, 0, 5, 0, Math.PI * 2); c.fill(); c.stroke();
+  });
+  // Reported strike: an orange burst.
+  const strike = draw(34, (c) => {
+    const pts = [];
+    for (let i = 0; i < 16; i++) { const r = i % 2 ? 6.5 : 14.5, a = (i * Math.PI) / 8 - Math.PI / 2; pts.push([r * Math.cos(a), r * Math.sin(a)]); }
+    poly(c, pts);
+    c.fillStyle = STRIKE_ORANGE; c.strokeStyle = DARK; c.lineWidth = 2.5; c.lineJoin = "round"; c.fill(); c.stroke();
+  });
+  // Terrorism: warning triangle, solid for an attack, outlined for a threat.
+  const triangle = (solid) => draw(38, (c) => {
+    const pts = [[0, -15], [16, 13], [-16, 13]];
+    c.lineJoin = "round";
+    poly(c, pts); c.strokeStyle = DARK; c.lineWidth = solid ? 4 : 7; c.stroke();
+    poly(c, pts);
+    if (solid) { c.fillStyle = "#f5c242"; c.fill(); } else { c.fillStyle = "rgba(7,16,25,.85)"; c.fill(); c.strokeStyle = "#f5c242"; c.lineWidth = 3.2; c.stroke(); }
+    c.fillStyle = solid ? DARK : "#f5c242";
+    c.fillRect(-2, -6, 4, 10); c.beginPath(); c.arc(0, 8.2, 2.3, 0, Math.PI * 2); c.fill();
+  });
+  // Cyber: hexagon with a bolt, solid for an attack, outlined for a warning.
+  const hexagon = (solid) => draw(36, (c) => {
+    const pts = hexPts(14);
+    c.lineJoin = "round";
+    poly(c, pts); c.strokeStyle = DARK; c.lineWidth = solid ? 4 : 7; c.stroke();
+    poly(c, pts);
+    if (solid) { c.fillStyle = "#ff5fd2"; c.fill(); } else { c.fillStyle = "rgba(7,16,25,.85)"; c.fill(); c.strokeStyle = "#ff5fd2"; c.lineWidth = 3.2; c.stroke(); }
+    poly(c, bolt); c.fillStyle = solid ? DARK : "#ff5fd2"; c.fill();
+  });
   return {
-    plane: plane.getContext("2d").getImageData(0, 0, 32, 32),
-    ship: ship.getContext("2d").getImageData(0, 0, 24, 24),
+    plane, ship, war, strike,
+    "terror-attack": triangle(true), "terror-threat": triangle(false),
+    "cyber-attack": hexagon(true), "cyber-warning": hexagon(false),
   };
 }
+export const ICON_IDS = { plane: "wr-plane", ship: "wr-ship", war: "wr-war", strike: "wr-strike", "terror-attack": "wr-terror-attack", "terror-threat": "wr-terror-threat", "cyber-attack": "wr-cyber-attack", "cyber-warning": "wr-cyber-warning" };
