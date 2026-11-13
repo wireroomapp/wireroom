@@ -2,6 +2,8 @@ name: verify-sources-tmp
 on:
   push:
     branches: [verify-sources-tmp]
+permissions:
+  contents: write
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -18,9 +20,8 @@ jobs:
           node scripts/collect-context.mjs
           ls -la data/
       - run: node scripts/tmp-report.mjs
-      - uses: actions/upload-artifact@v4
-        with:
-          name: context-data
-          path: |
-            data/conflict.json
-            data/advisories.json
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898099+github-actions[bot]@users.noreply.github.com"
+          mkdir -p tmpdata && cp data/conflict.json data/advisories.json tmpdata/
+          git add tmpdata && git commit -m "tmp: collected context data" && git push
