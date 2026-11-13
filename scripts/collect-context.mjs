@@ -12,7 +12,7 @@ import { UCDP_BASE, ADVISORY_FEED, csvObjects, toConflictEvent, ucdpMonthlyVersi
 const STATE_FILE = "data/context-state.json";
 const CONFLICT_FILE = "data/conflict.json";
 const ADVISORY_FILE = "data/advisories.json";
-const RELEASES_TO_KEEP = Number(process.env.UCDP_RELEASES) || 3; // about three months of events
+const RELEASES_TO_KEEP = Number(process.env.UCDP_RELEASES) || 12; // about a year of events (one release per month)
 const HEADERS = { "User-Agent": "Mozilla/5.0 (compatible; WireRoomBot/1.0; +https://wireroom.onrender.com)" };
 
 const readJson = (f, fallback) => { try { return JSON.parse(readFileSync(f, "utf-8")); } catch { return fallback; } };
@@ -27,12 +27,12 @@ async function fetchText(url, timeoutMs = 60000) {
 
 async function conflict() {
   const last = Date.parse(state.ucdpCheckedAt || "");
-  if (Number.isFinite(last) && now - last < 20 * 3600 * 1000 && existsSync(CONFLICT_FILE)) {
+  if (Number.isFinite(last) && now - last < 20 * 3600 * 1000 && existsSync(CONFLICT_FILE) && state.ucdpKeep === RELEASES_TO_KEEP) {
     console.log(`Conflict: checked ${Math.round((now - last) / 3600000)}h ago, skipping (UCDP publishes monthly).`);
     return;
   }
   const releases = [];
-  for (const v of ucdpMonthlyVersions(now, 8)) {
+  for (const v of ucdpMonthlyVersions(now, RELEASES_TO_KEEP + 4)) {
     if (releases.length >= RELEASES_TO_KEEP) break;
     try {
       const rows = csvObjects(await fetchText(`${UCDP_BASE}GEDEvent_v${v}.csv`));
@@ -53,6 +53,7 @@ async function conflict() {
   else { writeFileSync(CONFLICT_FILE, JSON.stringify(built)); console.log(`Conflict: wrote ${built.events.length} events (${built.coverage.from} to ${built.coverage.to}).`); }
   state.ucdpCheckedAt = now.toISOString();
   state.ucdpReleases = built.releases;
+  state.ucdpKeep = RELEASES_TO_KEEP;
 }
 
 async function advisories() {

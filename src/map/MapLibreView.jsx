@@ -327,9 +327,11 @@ export default function MapLibreView({
       m.set(key, { kind: "war", item: w });
       const lm = w.latestMonth || {};
       const mon = lm.month ? MON[Number(lm.month.slice(5, 7)) - 1] : "";
+      const last = w.latestEvent ? `${MON[Number(w.latestEvent.slice(5, 7)) - 1]} ${Number(w.latestEvent.slice(8, 10))}` : "";
       return point(w.lon, w.lat, {
-        key, best: lm.best || 0, sel: selectedWar ? selectedWar.id === w.id : false, dim: Boolean(selectedWar && selectedWar.id !== w.id),
-        label: `${w.name.toUpperCase()}\n${(lm.best || 0).toLocaleString()} KILLED · ${mon}`,
+        key, best: (w.deaths && w.deaths.best) || 0, level: w.level || "war", quiet: Boolean(w.quiet),
+        sel: selectedWar ? selectedWar.id === w.id : false, dim: Boolean(selectedWar && selectedWar.id !== w.id),
+        label: `${w.name.toUpperCase()}\n${lm.best ? `${lm.best.toLocaleString()} KILLED · ${mon}` : `LAST EVENT ${last}`}`,
       });
     });
     const lines = [], nodes = [];

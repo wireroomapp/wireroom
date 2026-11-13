@@ -1,7 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { classify, buildGeocoder, extractIncidents, buildWars, warReports } from "../lib/incidents.mjs";
+import { classify, buildGeocoder, extractIncidents, buildWars, warReports, partiesFor } from "../lib/incidents.mjs";
+import { reportKey, parseVerdicts, requestBody, judgeReports } from "../lib/ai-check.mjs";
 
 const gaz = JSON.parse(readFileSync(new URL("../lib/gazetteer.json", import.meta.url), "utf8"));
 const geo = buildGeocoder(gaz);
@@ -93,14 +94,20 @@ test("summarizes wars from UCDP events", () => {
     coverage: { from: "2026-08", to: "2026-09" },
     events: [
       ...Array.from({ length: 12 }, (_, i) => ev(i, i < 6 ? "2026-08-10" : "2026-09-12", 10)),
-      ...Array.from({ length: 12 }, (_, i) => ev(100 + i, "2026-09-01", 50, { conflict: "XXX475 - Government", sideB: "XXX475" })),
+      ...Array.from({ length: 12 }, (_, i) => ev(100 + i, "2026-09-01", 50, { conflict: "XXX475", sideA: "XXX475", sideB: "XXX475", country: "Nigeria", lat: 9, lon: 8 })),
+      // One small clash between two countries: it still gets its own marker.
+      ev(900, "2026-09-20", 4, { conflict: "Australia - New Zealand", country: "Australia", sideA: "Government of Australia", sideB: "Government of New Zealand", lat: -33.9, lon: 151.2 }),
     ],
   };
   const strikes = [{ id: "s1", lat: 48.5, lon: 36.5, iso: "UA", place: "Kharkiv" }];
   const wars = buildWars(conflict, strikes);
-  assert.equal(wars.length, 1, "placeholder actors are skipped");
-  const w = wars[0];
-  assert.equal(w.name, "Russia – Ukraine");
+  assert.equal(wars.length, 3, "every conflict shows, however small");
+  const w = wars.find((x) => x.name === "Russia – Ukraine");
+  assert.equal(w.level, "armed conflict", "UCDP: 25+ deaths is an armed conflict, 1,000+ a war");
+  const small = wars.find((x) => x.name === "Australia – New Zealand");
+  assert.deepEqual([small.level, small.deaths.best, small.nodes.length, small.interstate], ["armed clashes", 4, 1, true]);
+  const unnamed = wars.find((x) => /^Nigeria: armed clashes, sides not yet identified/.test(x.name));
+  assert.equal(unnamed.level, "armed conflict");
   assert.equal(w.deaths.best, 120);
   assert.deepEqual([w.latestMonth.month, w.latestMonth.best, w.latestMonth.events], ["2026-09", 60, 6]);
   assert.deepEqual(w.ourCountries.sort(), ["ru", "ua"]);
@@ -120,4 +127,57 @@ test("finds reports about a war from both sides, not ones that only mention a sp
   };
   const got = warReports(cache, war, gaz, { now: NOW }).map((r) => r.id);
   assert.deepEqual(got.sort(), ["n1", "r1", "u1"]);
+});
+
+test("names who carried out a strike only when the headline does", () => {
+  const by = (headline) => partiesFor({ headline });
+  assert.deepEqual(by("Ukraine drone strike in Russia's Smolensk region kills 2"), ["Ukraine"]);
+  assert.deepEqual(by("Russian strikes kill three in Ukraine"), ["Russia"]);
+  assert.deepEqual(by("Saudi-led coalition says it shot down Houthi missiles aimed at Riyadh"), ["Houthis"]);
+  assert.deepEqual(by("New Zealand missile strike on Australian naval base kills 5"), ["New Zealand"]);
+  assert.deepEqual(by("Trump says US launched minor strikes on Iran"), ["United States"]);
+  assert.deepEqual(by("Tehran says city in southern Iran hit by 'an enemy strike'"), [], "a target is not an attacker");
+  assert.deepEqual(by("Explosion at port kills 3"), []);
+});
+
+test("a small strike between two countries becomes a marker with who did it", () => {
+  const cache = { countries: { au: { official: [], independent: [
+    item("nz1", "New Zealand missile strike on Australian naval base in Darwin kills 5", "2026-11-09T08:00:00Z", { source: "ABC" }),
+  ] } } };
+  const [i] = extractIncidents(cache, geo, { now: NOW });
+  assert.deepEqual([i.kind, i.place, i.country, i.by], ["strike", "Darwin", "Australia", ["New Zealand"]]);
+});
+
+test("AI verdicts replace the rules for the reports they cover", () => {
+  const explainer = item("x", "Why experts fear charities are prime targets for hackers", "2026-11-09T08:00:00Z");
+  const quiet = item("y", "Officials review footage after incident at the harbour", "2026-11-09T09:00:00Z");
+  const cache = { countries: { ca: { official: [], independent: [explainer, quiet] } } };
+  const verdicts = new Map([
+    [reportKey(explainer), { event: false }],
+    [reportKey(quiet), { event: true, kind: "military", subtype: "attack", place: "Halifax", country: "Canada", attacker: "Unknown", target: "naval yard" }],
+  ]);
+  const out = extractIncidents(cache, geo, { now: NOW, verdicts, keyOf: reportKey });
+  assert.equal(out.length, 1);
+  assert.deepEqual([out[0].kind, out[0].place, out[0].by, out[0].target, out[0].checkedBy], ["strike", "Halifax", [], "naval yard", "ai"]);
+});
+
+test("reads the AI model's answers safely", () => {
+  const batch = [item("a", "Drone strike hits Kharkiv", "2026-11-09T08:00:00Z"), item("b", "Why cyber matters", "2026-11-09T08:00:00Z")];
+  const text = 'Here you go:\n[{"i":0,"event":true,"kind":"military","subtype":"attack","place":"Kharkiv","country":"Ukraine","attacker":"Russia","target":null},{"i":1,"event":false},{"i":7,"event":true,"kind":"cyber"}]';
+  const v = parseVerdicts(text, batch, NOW);
+  assert.equal(v.size, 2, "answers for reports that weren't asked about are ignored");
+  assert.deepEqual(v.get(reportKey(batch[0])).attacker, "Russia");
+  assert.equal(v.get(reportKey(batch[1])).event, false);
+  assert.equal(parseVerdicts("not json", batch).size, 0);
+  const body = requestBody(batch);
+  assert.match(body.messages[0].content, /Drone strike hits Kharkiv/);
+});
+
+test("the AI check stops on an API error and keeps going without it", async () => {
+  const batch = [item("a", "Drone strike hits Kharkiv", "2026-11-09T08:00:00Z")];
+  const res = await judgeReports(batch, { apiKey: "test", fetchImpl: async () => ({ ok: false, status: 401 }) });
+  assert.equal(res.verdicts.size, 0);
+  assert.match(res.error, /401/);
+  const ok = await judgeReports(batch, { apiKey: "test", fetchImpl: async () => ({ ok: true, json: async () => ({ content: [{ type: "text", text: '[{"i":0,"event":true,"kind":"military","subtype":"attack","place":"Kharkiv","country":"Ukraine","attacker":"Russia","target":"power plant"}]' }] }) }) });
+  assert.equal(ok.verdicts.size, 1);
 });

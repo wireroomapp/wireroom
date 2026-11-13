@@ -1,11 +1,13 @@
 // Builds the tracker files from data Wire Room already has (see lib/incidents.mjs):
 //   data/incidents.json  reported terrorism, cyber and military incidents (last 10 days) and wars
 //   data/war-intel.json  for each war, the latest related official statements and outlet reports
+//   data/ai-verdicts.json the optional AI check's saved answers (only when ANTHROPIC_API_KEY is set)
 // Inputs: data/cache.json (reports), data/conflict.json (UCDP), data/advisories.json (optional).
 // Run by the hourly GitHub Action after the news and context steps. Always exits 0.
 
 import { readFileSync, writeFileSync } from "node:fs";
-import { WINDOW_DAYS, buildGeocoder, extractIncidents, buildWars, warReports } from "../lib/incidents.mjs";
+import { WINDOW_DAYS, buildGeocoder, extractIncidents, buildWars, warReports, englishHeadline, englishSummary } from "../lib/incidents.mjs";
+import { AI_MODEL, AI_SIGNAL, reportKey, judgeReports, pruneVerdicts } from "../lib/ai-check.mjs";
 
 const readJson = (f, fallback) => { try { return JSON.parse(readFileSync(f, "utf-8")); } catch { return fallback; } };
 const writeIfChanged = (file, data, label) => {
@@ -25,7 +27,33 @@ try {
   const gaz = JSON.parse(readFileSync(new URL("../lib/gazetteer.json", import.meta.url), "utf-8"));
   const geo = buildGeocoder(gaz);
 
-  const all = extractIncidents(cache, geo, { now });
+  // Optional AI check (lib/ai-check.mjs): new attack-like reports from the window, not yet judged.
+  const saved = readJson("data/ai-verdicts.json", { version: 1, verdicts: {} });
+  let verdicts = pruneVerdicts(saved.verdicts, now);
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (apiKey) {
+    const since = now.getTime() - WINDOW_DAYS * 86400000;
+    const pending = [];
+    const seen = new Set();
+    for (const entry of Object.values(cache.countries || {})) for (const type of ["official", "independent"]) for (const it of entry[type] || []) {
+      const t = Date.parse(it.publishedAt || "");
+      const key = reportKey(it);
+      if (!Number.isFinite(t) || t < since || seen.has(key) || verdicts[key]) continue;
+      seen.add(key);
+      if (AI_SIGNAL.test(`${englishHeadline(it)} ${englishSummary(it)}`)) pending.push(it);
+    }
+    const res = await judgeReports(pending, { apiKey, now });
+    for (const [k, v] of res.verdicts) verdicts[k] = v;
+    const events = [...res.verdicts.values()].filter((v) => v.event).length;
+    console.log(`AI check (${AI_MODEL}): ${res.verdicts.size} of ${pending.length} new reports judged, ${events} events, ${res.calls} calls${res.skipped ? `, ${res.skipped} left for the next run` : ""}.`);
+    if (res.error) console.log(`::warning::AI check stopped: ${res.error}. The keyword rules cover the rest.`);
+  } else {
+    console.log("AI check off (no ANTHROPIC_API_KEY): keyword rules only.");
+  }
+  writeIfChanged("data/ai-verdicts.json", { version: 1, model: AI_MODEL, verdicts }, "AI verdicts");
+  const verdictMap = new Map(Object.entries(verdicts));
+
+  const all = extractIncidents(cache, geo, { now, verdicts: verdictMap, keyOf: reportKey });
   const strikes = all.filter((i) => i.kind === "strike");
   const terrorism = all.filter((i) => i.kind === "terrorism");
   const cyber = all.filter((i) => i.kind === "cyber");
@@ -53,6 +81,7 @@ try {
     generatedAt,
     windowDays: WINDOW_DAYS,
     conflictCoverage: conflict?.coverage || null,
+    aiCheck: Boolean(apiKey) || Object.keys(verdicts).length > 0,
     conflictCitation: conflict?.citation || null,
     terrorism,
     cyber,
