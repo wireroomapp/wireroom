@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T23:27:40.068Z",
+  "generatedAt": "2026-11-13T23:40:47.220Z",
   "countries": {
     "us": {
       "official": [
@@ -2776,19 +2776,6 @@
       ],
       "independent": [
         {
-          "id": "us-independent-183797951037c8f2",
-          "countryId": "us",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "2026 U.S. Senate Election Results - AP News",
-          "summary": "2026 U.S. Senate Election Results AP News",
-          "date": "Nov 13, 2026 · 11:23 PM",
-          "publishedAt": "2026-11-13T23:23:25.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1ycUhlZzZ2V1lhd2pzVExlRFNUOVV5M0N6VHB5a2FuNFU2NDNaV0dSTV9hUVZTZHZCeVRjeWRWMnh0NUVIRW1vbmhfNFRsSVRqSWIwM21iUmMxTE4zYzhocm81ajd4U0x2R0R0Q1Bn?oc=5",
-          "importance": 2
-        },
-        {
           "id": "us-independent-f5ac6da0d197565b",
           "countryId": "us",
           "sourceType": "independent",
@@ -3371,6 +3358,19 @@
           "publishedAt": "2026-11-11T11:54:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE9GWDRUZGRSX05ZVmdtMTAxeHYzZmpZMXcwek51d3pJal9KTldSb2FjUkhGM3hnbTJselJSdzI4VjlVVWZzNkE3X0d2MER5aExTREZmSy1Qblp0SHpxaVdZZTF2SlZqbnY3c3Fz?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "us-independent-183797951037c8f2",
+          "countryId": "us",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "2026 U.S. Senate Election Results - AP News",
+          "summary": "2026 U.S. Senate Election Results AP News",
+          "date": "Nov 11, 2026 · 8:00 AM",
+          "publishedAt": "2026-11-11T08:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1ycUhlZzZ2V1lhd2pzVExlRFNUOVV5M0N6VHB5a2FuNFU2NDNaV0dSTV9hUVZTZHZCeVRjeWRWMnh0NUVIRW1vbmhfNFRsSVRqSWIwM21iUmMxTE4zYzhocm81ajd4U0x2R0R0Q1Bn?oc=5",
           "importance": 2
         },
         {
@@ -9278,7 +9278,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:26:49.054Z",
+      "officialLastOkAt": "2026-11-13T23:39:38.638Z",
       "officialLastError": null
     },
     "ca": {
@@ -11470,6 +11470,19 @@
           "importance": 2
         },
         {
+          "id": "ca-independent-4e0b1e6911a21448",
+          "countryId": "ca",
+          "sourceType": "independent",
+          "source": "CBC",
+          "headline": "Ottawa city councillors prepare to say goodbyes in last meeting of term - CBC",
+          "summary": "Ottawa city councillors prepare to say goodbyes in last meeting of term CBC",
+          "date": "Nov 12, 2026 · 9:00 AM",
+          "publishedAt": "2026-11-12T09:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNOW9XUVpjY21GdTN0dzlZYVdWV2ZVdU9hb3hwSmR0M0pfQWtMNVF6Zms2WlprZGY5V0stS3VxYVNfUTZLWVdDREhXTWpYY1ZhWFNMXzdLdTU4S0pKc2FENDFMLS1Jb2dyRmtqcjdwcHRsMEhPNmlHQTE5ZkxWLXE3T010ZlJGVGR6Q1RvZVZMR2ZlWURIa3ZJQmlMTEZFOWhVa1JkeG5YZjdmRkdTdWs4TzBmNVUyOWRXMnBR?oc=5",
+          "importance": 2
+        },
+        {
           "id": "ca-independent-b442946b3bf65994",
           "countryId": "ca",
           "sourceType": "independent",
@@ -11825,8 +11838,8 @@
           "countryId": "ca",
           "sourceType": "independent",
           "source": "The Globe and Mail",
-          "headline": "Globe editorial: Canada owes soldiers more than just remembrance - The Globe and Mail",
-          "summary": "Globe editorial: Canada owes soldiers more than just remembrance The Globe and Mail",
+          "headline": "Canada owes soldiers more than just remembrance - The Globe and Mail",
+          "summary": "Canada owes soldiers more than just remembrance The Globe and Mail",
           "date": "Nov 11, 2026 · 11:19 AM",
           "publishedAt": "2026-11-11T11:19:19.000Z",
           "dateOnly": false,
@@ -17414,24 +17427,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPSkxiNlN6Z0ZGZHlEdXc2R09fa1ZTZGxBTTl4WUVUcFN1MTdYeEVfVE0xcFpOcUxaZ0U2VVdOVXRsdE0tSzdQcDFuOElWeE1IRjcyM1ZUd0VqcnJVdHIyaUdObEptUkQwT3NPTXBQWkx4VE5QbF9XRzBkWWhEVzFDM2lDQnpmVlhCcV9DQ3FxZVE0Qmd0bVlUS1A2azQ4Z0lUd0w2VnVWYjJzZw?oc=5",
           "importance": 2
-        },
-        {
-          "id": "ca-independent-844689432f707650",
-          "countryId": "ca",
-          "sourceType": "independent",
-          "source": "The Globe and Mail",
-          "headline": "Morning Update: Canada’s UAE balancing act - The Globe and Mail",
-          "summary": "Morning Update: Canada’s UAE balancing act The Globe and Mail",
-          "date": "Oct 28, 2026 · 10:23 AM",
-          "publishedAt": "2026-10-28T10:23:12.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQTHBhOVp6RTVub2I1WmJCeFhLcVpNWHNaYWstbjVKZmp3MnVvZkJvRExiRkpZdjBmbldadmIxTHY0ejJsUk1DY3RscVJHMFk3Y1drYkhWamxxSGlHSmR3WHJ5OUQtOHBfbmNMTHVTd0ZvbWdtaWdmSHYyMFBxc2pnVXVMSUZmaXVXTkFLLWhIUDctZw?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:26:51.018Z",
+      "officialLastOkAt": "2026-11-13T23:39:40.664Z",
       "officialLastError": null
     },
     "mx": {
@@ -24053,6 +24053,19 @@
       ],
       "independent": [
         {
+          "id": "mx-independent-a3455acf74bd09d4",
+          "countryId": "mx",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "SpaceX’s attempt for a Starship double catch is thwarted when the booster ends up in Gulf of Mexico - AP News",
+          "summary": "SpaceX’s attempt for a Starship double catch is thwarted when the booster ends up in Gulf of Mexico AP News",
+          "date": "Nov 13, 2026 · 11:07 PM",
+          "publishedAt": "2026-11-13T23:07:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPbEJSd3lrcThXUUdyRWY1M1JSVzRrdG9OcFVQTUVRRXItcjlnN19uSFdqV1BJdEVFelI3anBNZm9lZkpsREYyTXNUVG5ndU5tZmlGY0ZtaGs5RHpQX0pVSllTV0M4RnlMeTFubXBydjVqN0k1V3VpeEZ1SEtVSUwtVkNIOWw5RDU4bWpJWmdwaHR2R2s0a0hR?oc=5",
+          "importance": 2
+        },
+        {
           "id": "mx-independent-a3b2b460b423ec52",
           "countryId": "mx",
           "sourceType": "independent",
@@ -29437,7 +29450,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:26:52.273Z",
+      "officialLastOkAt": "2026-11-13T23:39:41.661Z",
       "officialLastError": null
     },
     "br": {
@@ -38297,7 +38310,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:26:53.952Z",
+      "officialLastOkAt": "2026-11-13T23:39:43.302Z",
       "officialLastError": null
     },
     "ar": {
@@ -43520,7 +43533,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:26:55.022Z",
+      "officialLastOkAt": "2026-11-13T23:39:46.712Z",
       "officialLastError": null
     },
     "gb": {
@@ -51550,7 +51563,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:26:56.288Z",
+      "officialLastOkAt": "2026-11-13T23:39:51.793Z",
       "officialLastError": null
     },
     "fr": {
@@ -59562,7 +59575,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:26:56.988Z",
+      "officialLastOkAt": "2026-11-13T23:39:52.447Z",
       "officialLastError": null
     },
     "de": {
@@ -66560,7 +66573,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:26:58.392Z",
+      "officialLastOkAt": "2026-11-13T23:39:55.290Z",
       "officialLastError": null
     },
     "it": {
@@ -75065,7 +75078,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:26:59.919Z",
+      "officialLastOkAt": "2026-11-13T23:39:58.819Z",
       "officialLastError": null
     },
     "es": {
@@ -76920,6 +76933,19 @@
           "publishedAt": "2026-11-13T18:02:31.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE5oXy1JdWhtQnFROUl1WTVsTTlGM0cxRmFBc1BSYWVJdlIzZVFGRXRaWERmbWVSb2czazliOXFjYmZ6QQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "es-independent-b437cbf0acd8a28e",
+          "countryId": "es",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "Spanish prosecutor favours extraditing pro-Palestinian US Cox Enterprises heir - Reuters",
+          "summary": "Spanish prosecutor favours extraditing pro-Palestinian US Cox Enterprises heir Reuters",
+          "date": "Nov 13, 2026 · 5:47 PM",
+          "publishedAt": "2026-11-13T17:47:45.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOMTkyLXJpYkMzaktEOW9HcjZhbjFvUC1HWkppTTNGY2cweC1XRkxoRlVaVjhJbEpEUFktUGFGVk1QSXRneGtiVGVOWnh0TUEyWGNwOHdHSWQ1X2dGbG5FbW5tSTlUQ3JqWnZ4b3FEdXp4d2hrTE15cTZYZW4xVlN3d0t1M1RieDhlb2Y5c2lsTEJyNWZicWdOOHRTRW8wckMwWTZtT29PVFFlbTYySWtiM0JKVmpTOXRKQ1ZHRXRLT3FSOFFpWVZ4OWUxNA?oc=5",
           "importance": 2
         },
         {
@@ -83400,24 +83426,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPLUtrSDJveHRTZDZNeXRVeHZvdjh0TWl1TUc2ZE1lMHpsb0VXWDRvbmVDUUNoSUJ4c3VvTDFQQi11RWpCckRvTDZjM0YtdFRfM3FpYVZjSXp1eXU3TzZKZGFmcElqdWxxMXpsYWNwRV9VSGxCV2FXSS11VFFWdE95eHd2NUw0SlM2cl9Tc1VJdmktLU1VVGtnbDZ0dmluMENkajVNZU1zNFFUbXFtc3A0UXAwSnF3azhUMmc?oc=5",
           "importance": 2
-        },
-        {
-          "id": "es-independent-53295676a3a0128e",
-          "countryId": "es",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "Spanish scientists find first evidence of Diplodocus dinosaur in Europe - Reuters",
-          "summary": "Spanish scientists find first evidence of Diplodocus dinosaur in Europe Reuters",
-          "date": "Sep 15, 2026 · 7:00 AM",
-          "publishedAt": "2026-09-15T07:00:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOa3ptWGV4anRFdGlXZHRORnlkemhzQnNxTmhvLUxHUmwxaXR6UFg5bU1NenM3aEhRdVlOOFRoMWk4aTNPeFg4SzlFWHRoOHZwNjZtZ2NFWXVoc3lRT3p1SkpES21makpQNEx4RzZjUlBRcVB6MlllYXk4Qzd3bGlWZWZMVFFIRnROV2FONW1xdjg1SzhkN09NV1d5UkxzMnZWMmlxNTFwRS04eFZySkE?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:27:02.057Z",
+      "officialLastOkAt": "2026-11-13T23:40:01.789Z",
       "officialLastError": null
     },
     "pl": {
@@ -104011,7 +104024,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:27:05.366Z",
+      "officialLastOkAt": "2026-11-13T23:40:06.420Z",
       "officialLastError": null
     },
     "ru": {
@@ -110062,8 +110075,8 @@
           "countryId": "ru",
           "sourceType": "official",
           "source": "Kremlin",
-          "headline": "Detail news - The Ministry of Foreign Affairs of the Russian Federation - Министерство иностранных дел России",
-          "summary": "Detail news - The Ministry of Foreign Affairs of the Russian Federation Министерство иностранных дел России",
+          "headline": "News - The Ministry of Foreign Affairs of the Russian Federation - Министерство иностранных дел Российской Федерации",
+          "summary": "News - The Ministry of Foreign Affairs of the Russian Federation Министерство иностранных дел Российской Федерации",
           "date": "Aug 19, 2026 · 8:02 AM",
           "publishedAt": "2026-08-19T08:02:09.000Z",
           "dateOnly": false,
@@ -117056,7 +117069,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:27:07.037Z",
+      "officialLastOkAt": "2026-11-13T23:40:07.836Z",
       "officialLastError": null
     },
     "tr": {
@@ -126400,8 +126413,8 @@
           "source": "The Times of Israel",
           "headline": "Mossad chief in US for talks on Iran, Netanyahu didn’t update Eisenkot on visit – report - The Times of Israel",
           "summary": "Mossad chief in US for talks on Iran, Netanyahu didn’t update Eisenkot on visit – report The Times of Israel",
-          "date": "Nov 13, 2026 · 9:48 PM",
-          "publishedAt": "2026-11-13T21:48:40.000Z",
+          "date": "Nov 13, 2026 · 9:43 PM",
+          "publishedAt": "2026-11-13T21:43:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQaV9VSkxSWUVFcEUzdC1zV19zSjZtUWRWSmdEVlN0QzBCZV81TWpmN2plUkNHbEF5VHpGcnRTOG9DMGxwbGlYaWQ4am8zVnFURzRxdkdaeTQ5d241eldNdDBzbkVYTTlmMHZlYU9RYTBfUlZRZkVudGhkb2lDUllRTW5TcEZoM3J6SU53ZWtiQ21SZjBCVjJCcXVwX1NxNlVYNm1tU1lyWWxRQWcwTVh0MU1IajdLZ9IBuwFBVV95cUxQdC1DSVBuZllWd1FuNFNpTk1TQjcyNXV5cUt3S1BmMlNMRkRDNFBrdDFRYmhDelVqNmIybUw4MkFaQUpRMVBYSGY4bnRDYTVmdXdzQ2xCQWRfdzZCTmJ6LUlwYjhLbVUzRDg5RTRVM3FRZmZEc1diVUFNWTJWVER3ZW1hdy1WOEpUNzR0TGJkdTl0OHpobVllamxidzdKZlBhQnJZeVNfZnhSNlp5T0RRazRkRHFsT2xPUHJR?oc=5",
           "importance": 2
@@ -126498,6 +126511,19 @@
           "importance": 2
         },
         {
+          "id": "il-independent-cfe8c027fc3481bc",
+          "countryId": "il",
+          "sourceType": "independent",
+          "source": "The Times of Israel",
+          "headline": "Tibi shows text messages from Netanyahu aide seeking Arab party's cooperation against Eisenkot - The Times of Israel",
+          "summary": "Tibi shows text messages from Netanyahu aide seeking Arab party's cooperation against Eisenkot The Times of Israel",
+          "date": "Nov 13, 2026 · 6:03 PM",
+          "publishedAt": "2026-11-13T18:03:06.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQZEdmOFlubTNnLWZmM1JDMnZ1eGpQUUFvNEJfbWJMWmZ1OEpWaHRBaGNLWGJNX2t4MXhoQjdoM1VVZTVuMHBwY3ZFbGxTMm5uTnpEZ2o2Smp3ZktwencxTjBjZnhzejByUFZCN3JEOG5QaDREXzlpcFhyRGdNQkF0TXU0TXdiZzBzUEsyWV9RVVRtbTJyVlU3dUd0V2UtUzBVbXdJdGFQTXVlckwwd01HbVY3Z1ZjUzhxNG5uTjFxWmVqSGNXQXQyYzR3MnRKN0NTZTctanF3?oc=5",
+          "importance": 2
+        },
+        {
           "id": "il-independent-d4120800acdbde31",
           "countryId": "il",
           "sourceType": "independent",
@@ -126508,6 +126534,19 @@
           "publishedAt": "2026-11-13T17:24:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPNTJTMkcydFg3WlhJUW9nbUdlYUpXMjM1SmFtdTFqQ0Y1aEJSbkV4WXdLTGNMLXM4aldidnVjRGZLaWpLanp3ZEZxdllVN2FsZ2k0VGhhb0dkOVpubWhObUxhR09uczQ1QlRwUHpScUVrTEh6MG4wNUxGMWZrYS1sYTlNWmtTRFFKU1BQSmE3LWRTZVVqRkZBeGdna28yU3ZxWVRwYnJVeFdpeE02WGpEeGpvOHc5Wi12OGxURlQwS0h2bnZsYXktM181ME93bHRuTVNxaXFtcjJhUUw1TVp1dWtXd1hzcE1mQnFIZTZmNA?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "il-independent-903912cb07a89ebf",
+          "countryId": "il",
+          "sourceType": "independent",
+          "source": "The Times of Israel",
+          "headline": "Jaroslawa Lewicka, the last Righteous Among the Nations living in Israel, dies at 91 - The Times of Israel",
+          "summary": "Jaroslawa Lewicka, the last Righteous Among the Nations living in Israel, dies at 91 The Times of Israel",
+          "date": "Nov 13, 2026 · 5:08 PM",
+          "publishedAt": "2026-11-13T17:08:07.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQS2ZFaEQwSG5jeldzemhIbjFYc2pZUEFKUDRNVHRwcnVfeVhGdDhZckx0UFZ1UkI3YmZ0UHBZaEkyY0JjM3JabzNRUklWRjhFYV9Nc3BaY3V0MmdxNEhHWlVELWdocEp4QzBPMDNJMkR4eERYNEVHT2xfX3hOdl84cG9lenFPb0lBTk90dlk5TXRuc1BYazQ0M0Rvel91SGZwdU0zVlhsdml2VFpMV0ZycHV4MNIBuAFBVV95cUxObW5Bd2tMZmJwdzVCWTZfYVVsTXpPRWJQYkg3bC1TUkRDTHFnVzZfZ3JSRDJzbzA4UTV5X2tQYmpYWURKRnpYUXlhaFJ6TnE4ODQ0al9hMjkxZjdpVjM1alBMWFdVOElRMUlJMTR2ZERhaERIdFJLLTYtbzRJd01tRHBrZzkwMkp5LU1jOVAxbjZBd3JENkpLRmxYMWNoWG9xeEhqQmxMZTZtb2poWF9lT1VJQXhJNlZq?oc=5",
           "importance": 2
         },
         {
@@ -126543,8 +126582,8 @@
           "source": "The Times of Israel",
           "headline": "El-Sayed won 50% of Jewish vote but underperformed compared to other Democrats, poll finds - The Times of Israel",
           "summary": "El-Sayed won 50% of Jewish vote but underperformed compared to other Democrats, poll finds The Times of Israel",
-          "date": "Nov 13, 2026 · 4:15 PM",
-          "publishedAt": "2026-11-13T16:15:50.000Z",
+          "date": "Nov 13, 2026 · 4:09 PM",
+          "publishedAt": "2026-11-13T16:09:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOMnhHcUNGV29Xd2hsTE1sbFRDT2tfRDYtYWl1VXVJdW1qZm5SRDZBdXJyT0hlaEpnTjFHY3JQbDRPOF9VOFBlRlJFN0piX29NWDZnWEcwVE9KQkoxOHBid2xqMGdnNWU3dHBpSS01bzVldzJWY3V2YmtrTi1CVjRLQ1BGVzN1cllHSzdQNHJLSjBLWGhjam1scjJPZ1dKMVF2WDBwTmZoOW9LV3lud20zS1VJYWNwSTNQcWFz0gHAAUFVX3lxTE11MVNXeTJ1ODd3bGdyTzZhM2ZNQktRd2k0RDBIaUlSdWExUEVwV2hhZXNYbHd1MENnTVVaSUhzdkJzcVRJS3JmLWE1eGZEWmIxNHBLYzBfVTQ1RW5tQW9lR001X2ZzcVdTQ1gzSzFBTFVwRFBWcEhkd3JGVlZJMTExTGU0VUFPcU05RWNMbHBSMFZfdWE2Z2tBX195amt3N3BmOFNpUmpRMkVDamtUZ1lEc3BRSU1kUXczcXcwX0JOdA?oc=5",
           "importance": 2
@@ -132853,42 +132892,42 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiiAJBVV95cUxOQkhnWktrdEVfTThNaUN2N0c1WXEtN1c4VnBhMUlDVkprTTBDanpxUTFkUXYyd0xDN1c3cmZ4U09NbkIwa2Vya1Q1MjhJWVJOOFhGaHF6bnMtUTZPdnd4WndPRDNSMnNmRlp3TEt4WTVXaTJDYkxRa0dubEVYajU1Y1NQQ2lQZ3dYS3hldkMybExFaldQS0NJTnpoWlBsMTFpemJTVHp5MzJ0Wll3TXFTdUdLRWNRSWFyS0V6bFJ4N2dYVFZyMlNVdWM1NEtIdnA2YWV1akJUSVlscmFaOFRqYmdxbDNZbVpBRXNQX2xZM1ZwY2dVNnhfLWdhRk1EY3ZOaWptVFl4OHo?oc=5",
           "importance": 2
-        },
-        {
-          "id": "il-independent-4244e1157d1e46f4",
-          "countryId": "il",
-          "sourceType": "independent",
-          "source": "The Times of Israel",
-          "headline": "Meghan Markle’s father arrested in US over child sex abuse images - The Times of Israel",
-          "summary": "Meghan Markle’s father arrested in US over child sex abuse images The Times of Israel",
-          "date": "Nov 6, 2026 · 4:56 PM",
-          "publishedAt": "2026-11-06T16:56:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxObEtqT09VN2ZRM3BfQ0lKUWhkdzk5ZS1iLTQyM25idGtPQ1VQU0FmMlR4X0dHVGRnRjVHcjAybWFnaXFIWUxCVUYxd1lGYXMwekxIVEhfbHNOUjRKb2xiekIxS1RROGY4aUVhZEFETjdfZW5Qb0RlMVFkVmx4X1A2LWxBVFQ1ektBM0NiaVp1OERwQk1mWWpWSTI1ONIBoAFBVV95cUxQMk9uMGZYNFU3VnNobVhzOS1RUnV6djZ3b3lwbEFTV1d0X0c2VVNBN2ZVWk5EMlVleExEZFNCdVZ1QmQ3U1hlVWZfSkJtRlljdElSbnNPSFE3THVyaWp4TUxITnhYYTd5Z2dBVklYTncyMzhDM0NUb0VsM2VYTktVTjNyZlQ0LWRKUHJoODYtUG1OeXZ0MzFaVnM4T3lSZlBF?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "il-independent-f7eb879ac6d94ad7",
-          "countryId": "il",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Israel’s elections: What happens now? - AP News",
-          "summary": "Israel’s elections: What happens now? AP News",
-          "date": "Nov 6, 2026 · 4:56 PM",
-          "publishedAt": "2026-11-06T16:56:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPOWJ3QkJJRGhIRzVWZF9sX3ZWZkE3dEl6MU9ITnlXYmJISV9Nem9qbm5IWlBtbERrYUpCQzdDZkJLMHgzMmFnV2pSYXRDcDQ5X1Q5SnIwMHVMVmlScUlIRTQ4MHM3SUtFMktkM3J4TUtFeVlPdlVJaHQ1VnZkYk9uMDNoMHZUaVl0TG1FZUVSejM0aGdVdDUw?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:27:10.295Z",
+      "officialLastOkAt": "2026-11-13T23:40:11.332Z",
       "officialLastError": null
     },
     "ir": {
       "official": [],
       "independent": [
+        {
+          "id": "ir-independent-e0d32876989c587c",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "Al Jazeera",
+          "headline": "Breaking News, World News and Video from Al Jazeera - Al Jazeera",
+          "summary": "Breaking News, World News and Video from Al Jazeera Al Jazeera",
+          "date": "Nov 13, 2026 · 11:26 PM",
+          "publishedAt": "2026-11-13T23:26:19.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiP0FVX3lxTFBPd3h6VGM0TDlnQTJRaHcwMHkxaG5HcFFUY08yOEpFQ3FjZHB3b3h1bGlwSnRkT3k5SXZORXhjYw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-882476b23a689405",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Flights halted at airports across US due to air traffic control communications problems - AP News",
+          "summary": "Flights halted at airports across US due to air traffic control communications problems AP News",
+          "date": "Nov 13, 2026 · 11:26 PM",
+          "publishedAt": "2026-11-13T23:26:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOeFBta25Rakd3c0VBM0NUWjJzbmV2ajZwTWRtUFVTcTVzZ2otRGo0cXZSWWV0MzNBSXdmMXNzdm9SU1d1blBBNnktRlNqQmcwVUVxQzhCNERGel9ETDBHZjJwb29IYmhGX2VPNm8xeGwwU0VNajFzZnpIM19lejBOVTZrRVVjb2t4SDh3emhSZHI?oc=5",
+          "importance": 2
+        },
         {
           "id": "ir-independent-54d18176f42147d8",
           "countryId": "ir",
@@ -132900,6 +132939,19 @@
           "publishedAt": "2026-11-13T23:15:44.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQLUdWNjJsc1BWTC1ycV83cEN2S3d0Z3hoaW9Cc3FmTVN6dkJpUXpZNDdOSVI1MUh2ZjB6WVdmQ0pFN1I5anRJaXhXeUQ3a3dRT1Y0Qm9GU0ladWhHdmxsQjNpZXNZMTc4YmM3YjBRYXJiV25teHBCSG1IdC1hTTV4SlNjampqR0NfZlVSZ3Zja1h5ZE5fMkZZLVdjQlZkc3dKY0RR?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-a3455acf74bd09d4",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "SpaceX’s attempt for a Starship double catch is thwarted when the booster ends up in Gulf of Mexico - AP News",
+          "summary": "SpaceX’s attempt for a Starship double catch is thwarted when the booster ends up in Gulf of Mexico AP News",
+          "date": "Nov 13, 2026 · 11:07 PM",
+          "publishedAt": "2026-11-13T23:07:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPbEJSd3lrcThXUUdyRWY1M1JSVzRrdG9OcFVQTUVRRXItcjlnN19uSFdqV1BJdEVFelI3anBNZm9lZkpsREYyTXNUVG5ndU5tZmlGY0ZtaGs5RHpQX0pVSllTV0M4RnlMeTFubXBydjVqN0k1V3VpeEZ1SEtVSUwtVkNIOWw5RDU4bWpJWmdwaHR2R2s0a0hR?oc=5",
           "importance": 2
         },
         {
@@ -132929,16 +132981,16 @@
           "importance": 2
         },
         {
-          "id": "ir-independent-882476b23a689405",
+          "id": "ir-independent-18418026b6326836",
           "countryId": "ir",
           "sourceType": "independent",
           "source": "AP",
-          "headline": "Flights halted at airports across US due to air traffic control communications problems - AP News",
-          "summary": "Flights halted at airports across US due to air traffic control communications problems AP News",
-          "date": "Nov 13, 2026 · 10:18 PM",
-          "publishedAt": "2026-11-13T22:18:00.000Z",
+          "headline": "The US flu season is off to a very early start. It’s targeting the South and West now - AP News",
+          "summary": "The US flu season is off to a very early start. It’s targeting the South and West now AP News",
+          "date": "Nov 13, 2026 · 10:28 PM",
+          "publishedAt": "2026-11-13T22:28:56.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOeFBta25Rakd3c0VBM0NUWjJzbmV2ajZwTWRtUFVTcTVzZ2otRGo0cXZSWWV0MzNBSXdmMXNzdm9SU1d1blBBNnktRlNqQmcwVUVxQzhCNERGel9ETDBHZjJwb29IYmhGX2VPNm8xeGwwU0VNajFzZnpIM19lejBOVTZrRVVjb2t4SDh3emhSZHI?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQd0Mzb19TM0staG9UN2hSTUhhalFvTENMa3N1Z01KbW9BN0xNcFlyd3I4RnlaZE85NnVsTkViM0tTUHBYTTdQWXExaEJkcGdjUm56ZGJEbHRjZUZpSF8zc054U0JPRkJ2LXE4VXhVVWViMkFsdVdmazVTVDlwSkJndDVFdmltY0xubEpqR2ZGWHNYQQ?oc=5",
           "importance": 2
         },
         {
@@ -133017,19 +133069,6 @@
           "publishedAt": "2026-11-13T21:24:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPQmthd2p1bWNiTUNEQ1puWC14bVlmeTJ2MjVIcGN2ZEkzdVlncWJYVUZ2TGdEdzRQd1NCb2RGRG5ZRm9RX3BXMVJfd25SQjVzdEN1RTdpc2VkSkdlVkxGMW5CNURkb3gxS25uYzRuZGFqZjV5Mk1KSXlCR2NaTlI4NHZudkZXUXduU0lXNmpMZHl4LWdoZk82akdoenV5c1piemdKX0RaSEw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-e0d32876989c587c",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "Al Jazeera",
-          "headline": "Breaking News, World News and Video from Al Jazeera - Al Jazeera",
-          "summary": "Breaking News, World News and Video from Al Jazeera Al Jazeera",
-          "date": "Nov 13, 2026 · 9:22 PM",
-          "publishedAt": "2026-11-13T21:22:11.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiP0FVX3lxTFBPd3h6VGM0TDlnQTJRaHcwMHkxaG5HcFFUY08yOEpFQ3FjZHB3b3h1bGlwSnRkT3k5SXZORXhjYw?oc=5",
           "importance": 2
         },
         {
@@ -133264,19 +133303,6 @@
           "publishedAt": "2026-11-13T19:28:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOdnZWaFRlTXM4VXU2aXFVVWRxN2dYMkVGZTd6alN5UVFNYkQ5Zi1hTTZZOGxnSHNYcm01dWlJbkM5b1NhZjVTWlpHYXgyZTNxVWRoeEJuNGJQVmcxenRBWjJOdlZFS1lkU0FmSXpLMnd4S21FTGk0VkN3aWxpZGhweHFkTXNLdFE4WmFkaTUxa3ozZw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-a3455acf74bd09d4",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "SpaceX aims for first double catch of Starship in its most ambitious test flight yet - AP News",
-          "summary": "SpaceX aims for first double catch of Starship in its most ambitious test flight yet AP News",
-          "date": "Nov 13, 2026 · 7:28 PM",
-          "publishedAt": "2026-11-13T19:28:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPbEJSd3lrcThXUUdyRWY1M1JSVzRrdG9OcFVQTUVRRXItcjlnN19uSFdqV1BJdEVFelI3anBNZm9lZkpsREYyTXNUVG5ndU5tZmlGY0ZtaGs5RHpQX0pVSllTV0M4RnlMeTFubXBydjVqN0k1V3VpeEZ1SEtVSUwtVkNIOWw5RDU4bWpJWmdwaHR2R2s0a0hR?oc=5",
           "importance": 2
         },
         {
@@ -139379,19 +139405,6 @@
           "publishedAt": "2026-11-10T04:11:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPQWY3b0NNRFBNRG5jZVdXM05URnhOV19vQ24zV29la0k2S3FzZmN4ZzB3WlRwSXJMbHB6RE90MFVEZ2p4UUhMQUFlV0RMdmVZZUUxeFFEa2ljZTFlTlhXOFozaEczRlpPS2dmRXgxcGw2ZWdpNVJQVEltazV5UUZMUmpNMUdoX2NJRG1wVnJhbFRCTHBwbE1LcjZnMk4?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-4125e9c6317df54e",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "California voters reject measure to tax the wealth of billionaires - AP News",
-          "summary": "California voters reject measure to tax the wealth of billionaires AP News",
-          "date": "Nov 10, 2026 · 4:04 AM",
-          "publishedAt": "2026-11-10T04:04:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQY0JESW1QSUhockUwNGUtM21rdmJrcXNrVnE3WUI2ZWZNYno0ZXBDMmprN1k3WC1nYlAxRVJHbXJ1SW05R29XVUItZ1EzQWR3cWVxOXY3SDlhVzVaS0RGR3JYZ1A0MElEUGJ1OFlxZmNESW9yR3ZGS2k0QU1yZEswcVU3YUx0LXBNUGFXNktmUQ?oc=5",
           "importance": 2
         }
       ],
@@ -145913,6 +145926,19 @@
       "official": [],
       "independent": [
         {
+          "id": "ae-independent-d743f9eabead5fbc",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "PODCAST: FAA issues ground stop, Nvidia and Microsoft latest, Pope returns home in Peru (Updated) - Reuters",
+          "summary": "PODCAST: FAA issues ground stop, Nvidia and Microsoft latest, Pope returns home in Peru (Updated) Reuters",
+          "date": "Nov 13, 2026 · 11:09 PM",
+          "publishedAt": "2026-11-13T23:09:58.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNRWJ3V2hTUXNWcFdGRV9VLUt5WjFuYjV2T1g4QVJKbmVmNXYxSXZnV0tDWWh6RWdpVnJVa0tjMGJ3UHJOaXg3T2diS1J1RTBMQTVhV2lENG40WDZPRzA4S3B2YWxBTW92Y3VqQ28tZTJsTUpLcW5mbVNWZ1JmQW9oNHE3bDFRaFVlOElVRVNjb3hDQk5fSEU4SFhDem9SSnVmcElxSQ?oc=5",
+          "importance": 2
+        },
+        {
           "id": "ae-independent-f674a0cf5957af2e",
           "countryId": "ae",
           "sourceType": "independent",
@@ -146329,19 +146355,6 @@
           "importance": 2
         },
         {
-          "id": "ae-independent-d743f9eabead5fbc",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "PODCAST: Microsoft outage, Nvidia fallout and Ukraine drone evacuations - Reuters",
-          "summary": "PODCAST: Microsoft outage, Nvidia fallout and Ukraine drone evacuations Reuters",
-          "date": "Nov 13, 2026 · 11:48 AM",
-          "publishedAt": "2026-11-13T11:48:05.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNRWJ3V2hTUXNWcFdGRV9VLUt5WjFuYjV2T1g4QVJKbmVmNXYxSXZnV0tDWWh6RWdpVnJVa0tjMGJ3UHJOaXg3T2diS1J1RTBMQTVhV2lENG40WDZPRzA4S3B2YWxBTW92Y3VqQ28tZTJsTUpLcW5mbVNWZ1JmQW9oNHE3bDFRaFVlOElVRVNjb3hDQk5fSEU4SFhDem9SSnVmcElxSQ?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ae-independent-c9756a0dba45657b",
           "countryId": "ae",
           "sourceType": "independent",
@@ -146495,6 +146508,19 @@
           "publishedAt": "2026-11-13T08:49:09.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOdTlxSE1WU2o4cGtua3dPM1ZaWkFLdnBNT0hBMm1YcWNfY3U1WUF5cHJpX3pwMy1CTFBGbEJmSGgxYkNWUlNsczZhR1Y4N0t6MXBfczZZT0Q4TVRwQkk4T2h2Z3RpajhKU09hZHJJcjVmVTVjazNSaXVRRXZLRWVKald6QmtKYUJnYVBCMFE5MDRwLUZkTDRfTllMR2VLcnRnSzh0UzFvN1NqQnRycnJLR3V5TTBMaTFIZ0MzRUJZQlZ2clRuZUtZ0gHPAUFVX3lxTFBpUVJJWHhnNXBhVXlQaUZVUmxVdTdjam5CbDZIazY3ckttaEc5aURTMXNEaGx5UWthUEZBZFFJNm1hMk5Cc3JhR2NLTE01eGFnSnNIWlNNcWY4SXFILWI3dmJkTHhONUVHSHN2aFBIbnZhQzh3Y2U4eGhlRHpsRlo1WUh4MmRoWU52UjJvM1FycE0yVmtWUTFLY3RtR2pXRklEWFBBTVAzZUhfcmpYR0NkUFk1YWNyNkszN1BCSmZOVzgtWjFtczNUTjNyR0hEVQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ae-independent-c32991313056dfe3",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "Gillette India's quarterly profit rises as cost savings cushion commodity pressures - Reuters",
+          "summary": "Gillette India's quarterly profit rises as cost savings cushion commodity pressures Reuters",
+          "date": "Nov 13, 2026 · 8:28 AM",
+          "publishedAt": "2026-11-13T08:28:04.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQRi14V3pHa1QzY21ZU0hzZUVoZnpJR2J2WTl1TlB0WlBvQm1zSmduTlROelhpYm1Wdzc4bFFRSUZJSUFiY3JsdjB4X1VyT29aazJ1b25ZalBVRE5DemdydmhGVmZUeHJYVTZZSHJuWG45TGFZRVhjWVdRQUpDRk1WVlM2a2E3a3lMdzJ4Ti1MOWNqbGRpSjJzNTcxYUoySldFRnhjYm1JbFpaLUg3UGVzVWtuU2JWSXRoTW1DMV9rSWxHVGxYcU5z?oc=5",
           "importance": 2
         },
         {
@@ -152397,19 +152423,6 @@
           "publishedAt": "2026-11-10T07:33:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQSjlhLUw1bFlQYy04QmYtbUNLclI5ZGxOdUl1UG82dUN4cFVYQzFPVEo3a1U0dnZ1bEZ4QnRKSU1xal84WGZjTDdMZ0RtbmtUVkdIVWZpTUhqQzluUU5TQV9HT0pYSXgwdVlhdXFISzhvak5oMy1WMWhFQ19zMWVmOFVQYUd0OWIzY0V6OWlFWVlabDE1ZmZpQmstOUdPdF9PNTY5X2hBVDFPU3g1Tk1pa3FrWkNIVjBwOGFHSnlfQ2hzamtn?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ae-independent-a8f991341dbc6b1b",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "Hungary detains Viktor Orban's brother in people-smuggling probe, PM says - Reuters",
-          "summary": "Hungary detains Viktor Orban's brother in people-smuggling probe, PM says Reuters",
-          "date": "Nov 10, 2026 · 7:26 AM",
-          "publishedAt": "2026-11-10T07:26:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPaWtlUHNkRXpscUFMakl1dkxJREs1WktlV2NDWlRkc09FSjlGX3Y4ZjZGSkkzTy1ob0NuWktjc2dYVDVZZmwtdUZqd2dtTXFnbHdZVG5DYndNNWo3N1FpekpWTWkwVEdCUHVnQ19PUUhUZ3NMUEVsREFfVkh3V2ZSZ2FBS2dkQ0Uyak4zYmN1Zzh2eGtYZC01R25wN1hZUVlOdjZhbHUxZkFtS0hIMGZ0X0ZOLUU5MFAw?oc=5",
           "importance": 2
         }
       ],
@@ -176396,6 +176409,19 @@
           "importance": 2
         },
         {
+          "id": "in-independent-8db8b0bd1af11aa3",
+          "countryId": "in",
+          "sourceType": "independent",
+          "source": "The Hindu",
+          "headline": "Oil India on track for 4 MMT crude oil production this fiscal, officials state - The Hindu",
+          "summary": "Oil India on track for 4 MMT crude oil production this fiscal, officials state The Hindu",
+          "date": "Nov 13, 2026 · 9:28 PM",
+          "publishedAt": "2026-11-13T15:58:39.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOUTM4R3p2UjNtSlZtN2NYRDRpOUlmWjBuWENIaHk0QVlocmc5by1UN1lPMVUzS2VVZmg3R04xRzJ1ODhaU0VadEVoSHBhejVCOEpDVjdCTEZ5aE5JOG9EMjJNYnlGNHdZR0wtWlhOYld0NUJsM0ZLT1N3QWkybE4zd0t4SmI3Z3ZKelhBaTU4cnB6bHhCVlJSMDhZdVZDQW04WWpsZ2YxZHptOW1GVVdfM09YMXFBVGpBbWE3aWdONEJHeGl5Nk5WMTRINnp6SDlmell4N202Z9IB3gFBVV95cUxNWEduYV8yTEJseVRsSzVCd2lIZVdNdWhUUkFjRG0wMEpUQnp5REU4eXFIbkw3aklaMkVfVWgxOUlTdG1fTXVYeHlibnUtd0xxZHhwblRZUENnWHAwR2ZtT21WLVhacHJFbDJNUVFEV3RSRUhLUWVhUkVxWkhJVERuZ2J1VWFNaEoxRVY0d3NqbzlZUTdpTDNzRjltR3p0RTBCeWMzaDdYdlNmSHZYQnJfSkJrOEZhLUg2bUNOMElvUHNNSjI5XzFIVmVPZnhfS3RSRTUxNzFoQ2szdFNNS0E?oc=5",
+          "importance": 2
+        },
+        {
           "id": "in-independent-d963832766fd2fb7",
           "countryId": "in",
           "sourceType": "independent",
@@ -176669,19 +176695,6 @@
           "importance": 2
         },
         {
-          "id": "in-independent-59491bd62900fa11",
-          "countryId": "in",
-          "sourceType": "independent",
-          "source": "The Hindu",
-          "headline": "India tour of New Zealand: New Zealand vs India fourth ODI in Mount Maunganui on November 13, 2026 - The Hindu",
-          "summary": "India tour of New Zealand: New Zealand vs India fourth ODI in Mount Maunganui on November 13, 2026 The Hindu",
-          "date": "Nov 13, 2026 · 2:05 PM",
-          "publishedAt": "2026-11-13T08:35:31.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOZ1UxdGZ2ZGY3MTlGWHVzcVFNSE5ic1ZTSExJSEFaZmNJQ1hXcmtia0R4QjJtanBIdmtXUVVxdnNaNzg1el9kYXNuWlhhT3N5MFNjaG9vZlhjZ19XWXRKcktjM0NwRV9jcW5KVklfeTgwT2FidjBGUnM5Ukw4cmNFa2tVbVAwd21vQjRTVUdXVldLTWRiY19sRWxOSGY5SFcyMS10SjhUbGRLVFJMZ0HSAbQBQVVfeXFMTWI3YkRWeDk0MVkwcXNRd2VjMzdWVVZqNkJRQm04RndNcHRpRlVCaDgteVpncnhMV3RDREJ5RURqOVJOa1Q4WlpKR1hIbU84UzZodVFCRkVQbm53aHFfbmhpcDVrYlpHU0dXYmhLY1hYdnJIcS1mRzJLeVBNdnVSX1Z0LXZYYVRPOVpldlJZRW5rMFFmQWREUUF5TWoxUldPaExaZVo3NXhiWjgyVC1OOFJGU1du?oc=5",
-          "importance": 2
-        },
-        {
           "id": "in-independent-c32991313056dfe3",
           "countryId": "in",
           "sourceType": "independent",
@@ -176796,6 +176809,19 @@
           "publishedAt": "2026-11-13T03:02:51.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQZlQyOWtGalA5ZHVYWERnd1BaUzkwTkZFcVJ0ZUlFdjg5WFJNRm9McVlwTjctVjBQRVRFTGtxUDhqZXpzc2dNYk5oaHlOYUp0UnBBZ1lpSVNaZmVDZ05vUVhOM0lRdTN6dlpXRFdEOThuRkZQY0pKRmxPODQ5STJES3M2T3lNcUkyRkZiRXVxRHp0a093MkF6NXhYN0tKS1ZSc2hDWnNJMXNZYm5rQ2fSAbQBQVVfeXFMUHEzc2pJSjJ1YThOU1Ftc2tXUlRIRFFubEFnNkhZeTdFUnZ6YW05Zmpvc0hWeVhHeXF5czlLQ3MwY2ZEV1RJVnVHejltY05mYXNJSlJSaGQyTGE0N0YyakdWWng3dFYxN0NBVFJoMi1TcEpMdmZGZzYxa1ZTR0VKbHB6MzhPNDh1WU5fd2dhRFBoMFZzR25oQnNHZ2wzTVo3QlkwTU4tQmxNU3lWZEktRmtoZGIw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "in-independent-59491bd62900fa11",
+          "countryId": "in",
+          "sourceType": "independent",
+          "source": "The Hindu",
+          "headline": "India tour of New Zealand: New Zealand vs India fourth ODI in Mount Maunganui on November 13, 2026 - The Hindu",
+          "summary": "India tour of New Zealand: New Zealand vs India fourth ODI in Mount Maunganui on November 13, 2026 The Hindu",
+          "date": "Nov 13, 2026 · 7:48 AM",
+          "publishedAt": "2026-11-13T02:18:39.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOZ1UxdGZ2ZGY3MTlGWHVzcVFNSE5ic1ZTSExJSEFaZmNJQ1hXcmtia0R4QjJtanBIdmtXUVVxdnNaNzg1el9kYXNuWlhhT3N5MFNjaG9vZlhjZ19XWXRKcktjM0NwRV9jcW5KVklfeTgwT2FidjBGUnM5Ukw4cmNFa2tVbVAwd21vQjRTVUdXVldLTWRiY19sRWxOSGY5SFcyMS10SjhUbGRLVFJMZ0HSAbQBQVVfeXFMTWI3YkRWeDk0MVkwcXNRd2VjMzdWVVZqNkJRQm04RndNcHRpRlVCaDgteVpncnhMV3RDREJ5RURqOVJOa1Q4WlpKR1hIbU84UzZodVFCRkVQbm53aHFfbmhpcDVrYlpHU0dXYmhLY1hYdnJIcS1mRzJLeVBNdnVSX1Z0LXZYYVRPOVpldlJZRW5rMFFmQWREUUF5TWoxUldPaExaZVo3NXhiWjgyVC1OOFJGU1du?oc=5",
           "importance": 2
         },
         {
@@ -182795,24 +182821,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNQ1dfYTk0RzlialpPaktDVGMxbnlWOU4wVFczeXBsQmlfZ19zYmxqWGJZSGxTNFBqV0lfblFqTF9QTUVMemhyRG41czBCYUMtQWRTZ2xTTHhGT2VURWE1YVBjMlNSa1VXSzlqbEVMbkFHcVlONkxuVXdEVkpid05reEw3NDNlUmVtU2hOWV9rMThuVFZZUkNwamVLV3V0T3FGVkdCRzItb3lFa0t1dGfSAbQBQVVfeXFMUFV3ZENVZ0ZnenNLdm1TLTBOQzNEWFdNM2dkWU80THc4TjRPQ3p6NGdyeWhCYzdicXhEOWpYTUI3YlRNNTVBX21KUzZiQ21GWDMwZkN1WHh4UFl2RlBNOFA0QkxhOTQ5bVNqZERIYWpvUEZfcFB0ZWlVZTNBbG1yNXFjMjhmYzlVaVU4VmxFSmsxR3o0VldJVXFZdFJkSGlvTm4xMk0xMWZRUlYtWWU3aVQzSXBQ?oc=5",
           "importance": 2
-        },
-        {
-          "id": "in-independent-4840a9daacddca7a",
-          "countryId": "in",
-          "sourceType": "independent",
-          "source": "The Indian Express",
-          "headline": "Adani’s Mumbai airport shift hits turbulence – Air France, Emirates refuse to give in - The Indian Express",
-          "summary": "Adani’s Mumbai airport shift hits turbulence – Air France, Emirates refuse to give in The Indian Express",
-          "date": "Oct 29, 2026 · 7:00 AM",
-          "publishedAt": "2026-10-29T01:30:45.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNQ1dfYTk0RzlialpPaktDVGMxbnlWOU4wVFczeXBsQmlfZ19zYmxqWGJZSGxTNFBqV0lfblFqTF9QTUVMemhyRG41czBCYUMtQWRTZ2xTTHhGT2VURWE1YVBjMlNSa1VXSzlqbEVMbkFHcVlONkxuVXdEVkpid05reEw3NDNlUmVtU2hOWV9rMThuVFZZUkNwamVLV3V0T3FGVkdCRzItb3lFa0t1dGc?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:27:19.604Z",
+      "officialLastOkAt": "2026-11-13T23:40:22.684Z",
       "officialLastError": null
     },
     "pk": {
@@ -191266,19 +191279,6 @@
           "importance": 2
         },
         {
-          "id": "cn-independent-88df8c4222389893",
-          "countryId": "cn",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "China's Xi says Taiwan 'reunification' must happen as history cannot be stopped - Reuters",
-          "summary": "China's Xi says Taiwan 'reunification' must happen as history cannot be stopped Reuters",
-          "date": "Nov 12, 2026 · 12:42 PM",
-          "publishedAt": "2026-11-12T12:42:37.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQanhBckZWOGZoOFJnUGpQNkR5b25Ibm5RYzZRWGJReUNkM2l0dWJPNUdwSUxFbDRGdHNsWm9qaG1ZVm9fNW0yNUdHanFFV2pza05kbjJWREE2ZEFHdVNIT0pmR3JEMUFnVkhFaXdXQ25oUHdEcWVMUGYxX1VSeGh1RGVBT3Bhc3RJckpsVWtfRkpSNTBnWTRzVm1EenJUOFhnOGF3STJXbDUyV3NtUXAtSjFqU1lOTmN0Zm1FSFRn?oc=5",
-          "importance": 2
-        },
-        {
           "id": "cn-independent-8991788b8526928e",
           "countryId": "cn",
           "sourceType": "independent",
@@ -191458,6 +191458,19 @@
           "publishedAt": "2026-11-12T05:03:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOOG43c09QM3ZmaVpnZ1EwX1E5TlNiMUdLS1BKdWU0bHMxSkYwUmNoUzV6UG9aS3c0SXlIZXhXYXpZQzduQUt3MTRUSjdadVpHQ2wwM1RhZ0xVSTdNajZfODdzYk9zcl9MRzFRU3Fmdnc0S0hqQmRneGE1S0YzRm5KcDhTTnc1akRsZ19hXzhwelhuM1VyUXZNRDM0NlpTTVZndEdKMmlqVmo1TV9yTUV5LW9rbWRCRERX?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "cn-independent-88df8c4222389893",
+          "countryId": "cn",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "China's Xi says Taiwan 'reunification' must happen as history cannot be stopped - Reuters",
+          "summary": "China's Xi says Taiwan 'reunification' must happen as history cannot be stopped Reuters",
+          "date": "Nov 12, 2026 · 4:18 AM",
+          "publishedAt": "2026-11-12T04:18:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQanhBckZWOGZoOFJnUGpQNkR5b25Ibm5RYzZRWGJReUNkM2l0dWJPNUdwSUxFbDRGdHNsWm9qaG1ZVm9fNW0yNUdHanFFV2pza05kbjJWREE2ZEFHdVNIT0pmR3JEMUFnVkhFaXdXQ25oUHdEcWVMUGYxX1VSeGh1RGVBT3Bhc3RJckpsVWtfRkpSNTBnWTRzVm1EenJUOFhnOGF3STJXbDUyV3NtUXAtSjFqU1lOTmN0Zm1FSFRn?oc=5",
           "importance": 2
         },
         {
@@ -197495,7 +197508,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:27:27.672Z",
+      "officialLastOkAt": "2026-11-13T23:40:33.764Z",
       "officialLastError": null
     },
     "jp": {
@@ -205438,7 +205451,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:27:30.205Z",
+      "officialLastOkAt": "2026-11-13T23:40:35.717Z",
       "officialLastError": null
     },
     "kr": {
@@ -213627,7 +213640,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:27:32.661Z",
+      "officialLastOkAt": "2026-11-13T23:40:39.178Z",
       "officialLastError": null
     },
     "tw": {
@@ -214298,19 +214311,6 @@
           "importance": 2
         },
         {
-          "id": "tw-independent-88df8c4222389893",
-          "countryId": "tw",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "China's Xi says Taiwan 'reunification' must happen as history cannot be stopped - Reuters",
-          "summary": "China's Xi says Taiwan 'reunification' must happen as history cannot be stopped Reuters",
-          "date": "Nov 12, 2026 · 12:42 PM",
-          "publishedAt": "2026-11-12T12:42:37.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQanhBckZWOGZoOFJnUGpQNkR5b25Ibm5RYzZRWGJReUNkM2l0dWJPNUdwSUxFbDRGdHNsWm9qaG1ZVm9fNW0yNUdHanFFV2pza05kbjJWREE2ZEFHdVNIT0pmR3JEMUFnVkhFaXdXQ25oUHdEcWVMUGYxX1VSeGh1RGVBT3Bhc3RJckpsVWtfRkpSNTBnWTRzVm1EenJUOFhnOGF3STJXbDUyV3NtUXAtSjFqU1lOTmN0Zm1FSFRn?oc=5",
-          "importance": 2
-        },
-        {
           "id": "tw-independent-13a4d826e3a1c3be",
           "countryId": "tw",
           "sourceType": "independent",
@@ -214438,6 +214438,19 @@
           "publishedAt": "2026-11-12T05:49:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBYRmpoRzM1dDV1YUVXdEtvYXBRdzhNMGVZSHR2WElPTzUtYTR1Nlh1ekczeEMteXZ6WTRSOGw1a2Fpb1RmSTNLM05DeXoxa1J0ckdYbE96SQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "tw-independent-88df8c4222389893",
+          "countryId": "tw",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "China's Xi says Taiwan 'reunification' must happen as history cannot be stopped - Reuters",
+          "summary": "China's Xi says Taiwan 'reunification' must happen as history cannot be stopped Reuters",
+          "date": "Nov 12, 2026 · 4:18 AM",
+          "publishedAt": "2026-11-12T04:18:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQanhBckZWOGZoOFJnUGpQNkR5b25Ibm5RYzZRWGJReUNkM2l0dWJPNUdwSUxFbDRGdHNsWm9qaG1ZVm9fNW0yNUdHanFFV2pza05kbjJWREE2ZEFHdVNIT0pmR3JEMUFnVkhFaXdXQ25oUHdEcWVMUGYxX1VSeGh1RGVBT3Bhc3RJckpsVWtfRkpSNTBnWTRzVm1EenJUOFhnOGF3STJXbDUyV3NtUXAtSjFqU1lOTmN0Zm1FSFRn?oc=5",
           "importance": 2
         },
         {
@@ -220618,7 +220631,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:27:35.757Z",
+      "officialLastOkAt": "2026-11-13T23:40:41.342Z",
       "officialLastError": null
     },
     "id": {
@@ -221054,6 +221067,19 @@
           "importance": 2
         },
         {
+          "id": "id-independent-d828c36431d98e80",
+          "countryId": "id",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Indonesia’s vice president offers resignation as questions mount over his eligibility - AP News",
+          "summary": "Indonesia’s vice president offers resignation as questions mount over his eligibility AP News",
+          "date": "Nov 11, 2026 · 12:08 AM",
+          "publishedAt": "2026-11-11T00:08:39.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxORk9UY0QyRU1veHZjMzNpSTJvVW1wNlg1SVp5MDZLQ3ljSUNqd2NNMjFLd20ybFJpSVBLZ1I2eUFnN3RxWHR6VWVGUE5zUjMzN0pIUnpnSjdkZ1ZIUzVxTGVpNTEwaWUzNWUwSjgxQ3ZWNFF5Vzk5ZXlCTjFfVFpieGk1aEkzXzVNNldxQWw1UWdXNGlXTTMtLVJSNnpVZmhINnN1UTBaNGFGMk0?oc=5",
+          "importance": 2
+        },
+        {
           "id": "id-independent-b986d598328fdcc2",
           "countryId": "id",
           "sourceType": "independent",
@@ -221129,19 +221155,6 @@
           "publishedAt": "2026-11-10T12:02:34.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPc3VjVXhIX21CWW5OMnRmZWJkaGVYZUVTSHFrWHc1cWY2bGJpeFFfeG11NV9sUWp2U2JoNE9nUFZkUjAycGNHQm9jVF92SWluVVdtUlM5OEpvRUlUMF9zWWE1cmtwb0JJb0tOckNqV3V4NEkxTlA2QXYweVNaLWhRbnZsUUYyaWpUdXdMUW53TXF5RFhuX0lMQlJTaFgxLTFRWlh2MnQtRnVkMktaUHhZMTIxdXpicFV2ajFrZA?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "id-independent-d828c36431d98e80",
-          "countryId": "id",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Indonesia’s vice president offers resignation as questions mount over his eligibility - AP News",
-          "summary": "Indonesia’s vice president offers resignation as questions mount over his eligibility AP News",
-          "date": "Nov 10, 2026 · 12:00 PM",
-          "publishedAt": "2026-11-10T12:00:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxORk9UY0QyRU1veHZjMzNpSTJvVW1wNlg1SVp5MDZLQ3ljSUNqd2NNMjFLd20ybFJpSVBLZ1I2eUFnN3RxWHR6VWVGUE5zUjMzN0pIUnpnSjdkZ1ZIUzVxTGVpNTEwaWUzNWUwSjgxQ3ZWNFF5Vzk5ZXlCTjFfVFpieGk1aEkzXzVNNldxQWw1UWdXNGlXTTMtLVJSNnpVZmhINnN1UTBaNGFGMk0?oc=5",
           "importance": 2
         },
         {
@@ -235121,7 +235134,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-13T23:27:40.068Z",
+      "officialLastOkAt": "2026-11-13T23:40:47.220Z",
       "officialLastError": null
     }
   }
