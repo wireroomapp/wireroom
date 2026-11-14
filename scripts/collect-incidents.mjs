@@ -45,7 +45,7 @@ try {
     all.push({ it, key, t: Date.parse(it.publishedAt || "") || 0 });
   }
   let verdicts = pruneVerdicts(saved.verdicts, now, seen);
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = String(process.env.ANTHROPIC_API_KEY || "").trim(); // pasted keys often carry a stray space or newline
   if (apiKey) {
     const pending = all.filter((x) => !verdicts[x.key]).sort((a, b) => b.t - a.t).map((x) => x.it);
     const res = await judgeReports(pending, { apiKey, now });
