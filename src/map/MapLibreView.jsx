@@ -331,7 +331,7 @@ export default function MapLibreView({
       return point(w.lon, w.lat, {
         key, best: (w.deaths && w.deaths.best) || 0, level: w.level || "war", quiet: Boolean(w.quiet),
         sel: selectedWar ? selectedWar.id === w.id : false, dim: Boolean(selectedWar && selectedWar.id !== w.id),
-        label: `${w.name.toUpperCase()}\n${lm.best ? `${lm.best.toLocaleString()} KILLED · ${mon}` : `LAST EVENT ${last}`}`,
+        label: `${w.name.toUpperCase()}\n${lm.best ? `${lm.best.toLocaleString()} KILLED IN ${mon} (UCDP)` : `LAST EVENT ${last}`}`,
       });
     });
     const lines = [], nodes = [];

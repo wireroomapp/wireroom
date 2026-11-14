@@ -1,5 +1,5 @@
 // Builds the tracker files from data Wire Room already has (see lib/incidents.mjs):
-//   data/incidents.json  reported terrorism, cyber and military incidents (last 10 days) and wars
+//   data/incidents.json  reported terrorism, cyber and military incidents (last 7 days), active conflicts
 //   data/war-intel.json  for each war, the latest related official statements and outlet reports
 //   data/ai-verdicts.json the optional AI check's saved answers (only when ANTHROPIC_API_KEY is set)
 //   data/history/incidents.json every incident ever placed, so past days can be shown (lib/history.mjs)
@@ -93,6 +93,8 @@ try {
     windowDays: SHOW_DAYS,
     conflictCoverage: conflict?.coverage || null,
     historyFrom: (archive[0] || {}).firstReported || null, // earliest day with archived incidents
+    ucdpThrough: snap.ucdpThrough, // last day UCDP's data covers (it publishes 1–2 months late)
+    activeDays: snap.activeDays,
     dataFrom: conflict?.coverage?.from || null, // earliest UCDP month held (first day a past view can show)
     aiCheck: Boolean(apiKey) || Object.keys(verdicts).length > 0,
     conflictCitation: conflict?.citation || null,

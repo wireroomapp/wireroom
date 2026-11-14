@@ -1,6 +1,6 @@
 import React from "react";
 import { Swatch } from "./LiveLayers.jsx";
-import { TRACKER_COLORS, KIND_LABEL, SUBTYPE_LABEL, PRECISION_TEXT, LEVEL_TEXT, dayLabel, whenLabel, monthLabel, coverageLabel, deathsText, n, nodeSearchUrl, sidesText, isUnnamed } from "./contextData.js";
+import { localDay, daysBetween, TRACKER_COLORS, KIND_LABEL, SUBTYPE_LABEL, PRECISION_TEXT, LEVEL_TEXT, dayLabel, whenLabel, monthLabel, coverageLabel, deathsText, n, nodeSearchUrl, sidesText, isUnnamed } from "./contextData.js";
 
 const whereText = (i) => (i.precision === "country" || !i.country ? i.place : `${i.place}, ${i.country}`);
 const byText = (i) => (i.by && i.by.length ? i.by.join(", ") : "not named in the reports");
@@ -50,7 +50,7 @@ export function PlaceCard({ group, onClose, onPin, warOf }) {
     <div className="track-card" role="dialog" aria-label={`${KIND_LABEL[group.kind]} reports at ${group.place}`} {...stop}>
       <Head onClose={onClose} title={where}
         icon={<Swatch kind={ICON_KIND[group.kind]} color={color} hollow={group.subtype !== "attack" && group.kind !== "strike"} size={12} />}
-        kindText={`${KIND_LABEL[group.kind]} · ${group.items.length} EVENTS REPORTED · LAST 10 DAYS`} />
+        kindText={`${KIND_LABEL[group.kind]} · ${group.items.length} EVENTS REPORTED · LAST 7 DAYS`} />
       {group.precision === "country" && <div className="tc-adv" style={{ color: "#8795a7" }}>{PRECISION_TEXT.country}.</div>}
       {adv && (
         <div className="tc-adv">US travel advisory for {adv.name}: Level {adv.level} of 4, {adv.levelText}. <a href={adv.url} target="_blank" rel="noreferrer">READ →</a></div>
@@ -113,20 +113,28 @@ export function IncidentCard({ item, onClose, onPin, war = null }) {
 }
 
 // A war: casualties from UCDP, a web of its latest attacks on the map, and the intel panel.
-export function WarCard({ war, onClose, onPin, intelOpen, onToggleIntel, reportedCount = 0 }) {
+export function WarCard({ war, onClose, onPin, intelOpen, onToggleIntel, reportedCount = 0, ucdpThrough = null, refDay = null }) {
+  // UCDP publishes 1–2 months late: say exactly how far its data trails the day shown.
+  const lag = ucdpThrough && refDay ? daysBetween(ucdpThrough, refDay) : null;
+  const ago = (d) => (refDay && d ? ` (${daysBetween(d, refDay)} days before ${refDay === localDay() ? "today" : "this day"})` : "");
   const lm = war.latestMonth || {};
   const rows = [
     ["Sides", sidesText(war.sides)],
     ["Level", (LEVEL_TEXT[war.level] || LEVEL_TEXT.war).note],
     [coverageLabel(war.coverage) || "Total", `${deathsText(war.deaths)} · ${n(war.events)} events`],
-    ["Latest event", dayLabel(war.latestEvent)],
-    ["Reported strikes", reportedCount ? `${reportedCount} in the news, last 10 days` : "none matched in the last 10 days"],
+    ["Latest event", `${dayLabel(war.latestEvent)}${ago(war.latestEvent)}`],
+    ["Reported strikes", reportedCount ? `${reportedCount} in the news, last 7 days` : "none matched in the last 7 days"],
   ];
   return (
     <div className="track-card" role="dialog" aria-label="War details" {...stop}>
       <Head onClose={onClose} title={war.name} icon={<Swatch kind="war" color={TRACKER_COLORS.war} size={12} />} kindText={`${(LEVEL_TEXT[war.level] || LEVEL_TEXT.war).label} · UCDP VERIFIED EVENTS`} />
       <div className="tc-big">{n(lm.best)} killed<small>{monthLabel(lm.month)} · best estimate{Math.min(lm.low, lm.best) !== Math.max(lm.high, lm.best) ? `, range ${n(Math.min(lm.low, lm.best))}–${n(Math.max(lm.high, lm.best))}` : ""}{!lm.best && war.latestEvent ? ` · last event ${dayLabel(war.latestEvent)}` : ""}</small></div>
-      <div style={{ font: "9px monospace", color: "#718198", margin: "0 0 8px" }}>LATEST MONTH UCDP HAS PUBLISHED (1–2 MONTHS BEHIND). TOTALS COVER {(coverageLabel(war.coverage) || "THE LATEST 3 MONTHS").toUpperCase()} ONLY; EARLIER FIGHTING ISN'T INCLUDED.</div>
+      {lag !== null && lag > 0 ? (
+        <div className="tc-lag">UCDP DATA ENDS {dayLabel(ucdpThrough).toUpperCase()}: {lag} DAYS BEHIND {refDay === localDay() ? "TODAY" : "THIS DAY"}. Fighting since then shows only as strikes reported in the news (dashed lines).</div>
+      ) : (
+        <div className="tc-lag ok">UCDP verified events, published 1–2 months after they happen.</div>
+      )}
+      <div style={{ font: "9px monospace", color: "#718198", margin: "0 0 8px" }}>TOTALS COVER {(coverageLabel(war.coverage) || "THE LATEST 12 MONTHS").toUpperCase()} ONLY; EARLIER FIGHTING ISN'T INCLUDED.</div>
       <dl>
         {rows.map(([k, v]) => (<React.Fragment key={k}><dt>{k}</dt><dd>{v}</dd></React.Fragment>))}
       </dl>

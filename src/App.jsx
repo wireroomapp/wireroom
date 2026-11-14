@@ -10,7 +10,7 @@ import { readViewFromUrl, viewToSearch } from "./urlState.js";
 import SourcesPanel from "./SourcesPanel.jsx";
 import { PlaceCard, WarCard, NodeCard } from "./TrackerCards.jsx";
 import { DayBar } from "./DayBar.jsx";
-import { useTrackerData, localDay, dayEnd, longDay, incidentToReport, warToReport, TRACKER_CREDITS, LEVEL_TEXT, sidesText, monthLabel, coverageLabel, n as num } from "./contextData.js";
+import { useTrackerData, localDay, dayEnd, longDay, daysBetween, incidentToReport, warToReport, TRACKER_CREDITS, LEVEL_TEXT, sidesText, monthLabel, coverageLabel, n as num } from "./contextData.js";
 
 // Which map to draw. "maplibre" = the full-scale map (OpenFreeMap + NASA + MapLibre, globe and terrain).
 // "d3" = the classic flat map. Override in the address bar with ?engine=d3 or ?engine=maplibre.
@@ -1310,6 +1310,14 @@ export default function WireRoomV2() {
           >
             {exportState === "busy" ? "EXPORTING…" : exportState === "error" ? "EXPORT FAILED" : "EXPORT"}
           </button>
+          {/* The date bar: its own row under the drawing tools (desktop and phones). */}
+          {ML && eventsOn && (
+            <DayBar day={mapDay} past={Boolean(mapDay)} loading={incidentData.status === "loading"}
+              minDay={`${((incidentSet && incidentSet.dataFrom) || "2025-10")}-01`}
+              historyFrom={incidentSet && incidentSet.historyFrom}
+              ucdpThrough={militaryOn && incidentSet ? incidentSet.ucdpThrough : null}
+              onChange={changeDay} />
+          )}
         </div>
 
         {labelDialog && (
@@ -1428,26 +1436,16 @@ export default function WireRoomV2() {
           ships={shipFeed}
           trackers={ML ? { militaryOn, terrorOn, cyberOn, onToggle: toggleTracker, data: incidentData } : null}
           pastDay={shownDay}
-          dayBar={ML && eventsOn ? (
-            <DayBar embedded day={mapDay} past={Boolean(mapDay)} loading={incidentData.status === "loading"}
-              minDay={`${((incidentSet && incidentSet.dataFrom) || "2025-10")}-01`}
-              historyFrom={incidentSet && incidentSet.historyFrom} onChange={changeDay} />
-          ) : null}
           initialTab={ML && (INITIAL_URL_VIEW.war || INITIAL_URL_VIEW.day) ? "events" : null}
         />
-        {ML && eventsOn && (
-          <DayBar day={mapDay} past={Boolean(mapDay)} loading={incidentData.status === "loading"}
-            minDay={`${((incidentSet && incidentSet.dataFrom) || "2025-10")}-01`}
-            historyFrom={incidentSet && incidentSet.historyFrom}
-            onChange={changeDay} />
-        )}
+
         {trkShown && !trackShown && trkSelDay.kind === "place" && (
           <PlaceCard group={trkSelDay.item} warOf={warOfIncident} onClose={() => setTrkSel(null)} onPin={(it) => startPinReport(incidentToReport(it))} />
         )}
         {trkShown && !trackShown && trkSelDay.kind === "war" && (
           <WarCard war={trkSelDay.item} onClose={() => setTrkSel(null)} onPin={() => startPinReport(warToReport(trkSelDay.item))}
             intelOpen={view === "war" && warView && warView.id === trkSelDay.item.id} onToggleIntel={() => toggleWarIntel(trkSelDay.item)}
-            reportedCount={(trkSelDay.item.reported || []).length} />
+            reportedCount={(trkSelDay.item.reported || []).length} ucdpThrough={incidentSet && incidentSet.ucdpThrough} refDay={shownDay || localDay()} />
         )}
         {trkShown && !trackShown && trkSelDay.kind === "node" && (
           <NodeCard node={trkSelDay.item} war={trkSelDay.war} onClose={() => setTrkSel(null)} onOpenWar={() => setTrkSel({ kind: "war", item: trkSelDay.war })} />
@@ -1480,7 +1478,7 @@ export default function WireRoomV2() {
               const missing = sides.filter(c => !found.has(c.id)).map(c => c.name);
               return <>
                 <p>{sidesText(wv.sides)}</p>
-                <p className="source-status war">{num(lm.best)} killed in {monthLabel(lm.month)} · {num(wv.deaths.best)} in {coverageLabel(wv.coverage)} (UCDP best estimates, 1–2 months behind)</p>
+                <p className="source-status war">{num(lm.best)} killed in {monthLabel(lm.month)} · {num(wv.deaths.best)} in {coverageLabel(wv.coverage)} (UCDP best estimates{incidentSet && incidentSet.ucdpThrough ? `; UCDP's data ends ${longDay(incidentSet.ucdpThrough)}, ${daysBetween(incidentSet.ucdpThrough, shownDay || localDay())} days behind` : ", 1–2 months behind"})</p>
                 <p className="source-note">
                   Official statements from the governments Wire Room follows, and outlet reports, that mention this war in the 30 days up to {shownDay ? longDay(shownDay) : "today"}{shownDay ? " (only reports still in Wire Room's news archive)" : ""}.
                   {!loading && have.length ? ` Statements found from: ${have.join(", ")}.` : ""}
