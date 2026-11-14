@@ -54,6 +54,17 @@ test("reads where it happened from the headline", () => {
   assert.equal(at("Zelensky says Russia is trying to divide Ukraine along the Dnipro River with strikes on bridges"), "Ukraine|country");
   assert.equal(at("Ukraine strikes Russia's second-largest oil refinery in overnight drone attack"), "Russia|country");
   assert.equal(at("France accuses Iran of hacking supermarket fridges"), "France|country");
+  // At sea: drawn at sea, not on the nearest country. A city named as the place still wins.
+  assert.equal(at("Tanker carrying 6 Indian seafarers struck in Arabian Gulf, one injured: Minister"), "Persian Gulf (Arabian Gulf)|region");
+  assert.equal(at("Iran seizes tanker in Gulf of Oman"), "Gulf of Oman|region");
+  assert.equal(at("Russian missile hits Odesa port on Black Sea"), "Odessa|city");
+  assert.equal(at("Explosion at port in Bandar Abbas on Persian Gulf coast"), "Bandar Abbas|city");
+  assert.equal(at("Ukrainian drones strike Baltic Sea port, missile boat"), null, "a port on a sea is on land (and isn't named here)");
+  assert.equal(at("Caribbean leaders condemn US strikes on boats"), null);
+  // Usual English spellings of cities the place list spells another way.
+  assert.equal(at("Russian strike on residential district in Zaporizhzhia kills one"), "Zaporizhia|city");
+  assert.equal(at("Russian drones hit Mykolaiv overnight"), "Mykolayiv|city");
+  assert.equal(at("Oil tanker struck off UAE's Ras Al-Khaimah, all crew reported safe"), "Ras Al Khaimah City|city");
   // Names that are usually something else, or no place at all.
   assert.equal(at("Europe hit by fresh wave of bomb threats targeting flights"), null);
   assert.equal(at("Trump says talks will continue"), null);
@@ -160,6 +171,21 @@ test("AI verdicts replace the rules for the reports they cover", () => {
   const out = extractIncidents(cache, geo, { now: NOW, verdicts, keyOf: reportKey });
   assert.equal(out.length, 1);
   assert.deepEqual([out[0].kind, out[0].place, out[0].by, out[0].target, out[0].checkedBy], ["strike", "Halifax", [], "naval yard", "ai"]);
+});
+
+test("an attack at sea is drawn at sea, not on a country the AI guessed", () => {
+  const tanker = item("t", "Tanker carrying 6 Indian seafarers struck in Arabian Gulf, one injured: Minister", "2026-11-09T08:00:00Z");
+  const verdicts = new Map([[reportKey(tanker), { event: true, kind: "military", subtype: "attack", place: "Arabian Gulf", country: "Iran", attacker: null, target: "commercial tanker" }]]);
+  const out = extractIncidents({ countries: { ae: { official: [], independent: [tanker] } } }, geo, { now: NOW, verdicts, keyOf: reportKey });
+  assert.deepEqual([out[0].place, out[0].precision, out[0].iso, out[0].country], ["Persian Gulf (Arabian Gulf)", "region", "", ""]);
+});
+
+test("strikes on two different cities are separate events, even 70 km apart", () => {
+  const dnipro = item("d", "Russian missile strike on Dnipro kills 4", "2026-11-09T08:00:00Z");
+  const zap1 = item("z1", "Russian missile strike on Zaporizhzhia kills 3", "2026-11-09T09:00:00Z");
+  const zap2 = item("z2", "Three killed in Russian missile strike on Zaporizhzhia, governor says", "2026-11-09T10:00:00Z");
+  const out = extractIncidents({ countries: { ua: { official: [], independent: [dnipro, zap1, zap2] } } }, geo, { now: NOW });
+  assert.deepEqual(out.map((i) => `${i.place}:${i.sources.length}`).sort(), ["Dnipro:1", "Zaporizhia:2"]);
 });
 
 test("reads the AI model's answers safely", () => {
