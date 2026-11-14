@@ -1,6 +1,6 @@
 import React, { memo, useState } from "react";
 import { AIRCRAFT_COLOR, SHIP_LEGEND, shipColor, aircraftPath, shipPaths, timeAgo, iconScale } from "./trackingGeo.js";
-import { TRACKER_COLORS, TRACKER_CREDITS } from "./contextData.js";
+import { TRACKER_COLORS, TRACKER_CREDITS, shortDay, daysBetween, localDay } from "./contextData.js";
 
 // ---------------------------------------------------------------------------
 // Drawn inside the map's zoomed <g>. Pointer events are off: taps are matched
@@ -144,6 +144,8 @@ const LIVE_CSS = `
 .track-card .tc-intel{margin-top:9px;border-color:#7a2f2f;color:#ff9d96;font:10px monospace;padding:5px 9px;letter-spacing:.04em}
 .track-card .tc-intel.on{background:#2a1214;border-color:#ff4d4d;color:#ffd5d1}
 .track-card .tc-big{font:700 22px Arial,sans-serif;color:#ff6b62;margin:0 0 2px}
+.track-card .tc-lag{font:9px/1.45 monospace;color:#ff9d96;border:1px solid #4a2326;background:#1a0f11;padding:4px 6px;margin:0 0 6px;letter-spacing:.03em}
+.track-card .tc-lag.ok{color:#8795a7;border-color:#1d2a38;background:none}
 .track-card .tc-big small{display:block;font:10px monospace;color:#9ba8b8;margin-top:2px}
 .track-card .tc-src{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-direction:column;gap:5px}
 .track-card .tc-src li{font:11px/1.4 Arial,sans-serif;color:#c4cbd6;border-left:2px solid #26384d;padding-left:7px}
@@ -187,7 +189,7 @@ const TAB_KEY = "wireroom-trackers-tab";
 function readTab() { try { return localStorage.getItem(TAB_KEY); } catch { return null; } }
 function saveTab(v) { try { localStorage.setItem(TAB_KEY, v); } catch { /* private mode */ } }
 
-export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, air, ships, trackers = null, initialTab = null, pastDay = null, dayBar = null }) {
+export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, air, ships, trackers = null, initialTab = null, pastDay = null }) {
   const t = trackers;
   const [tabState, setTab] = useState(() => initialTab || (readTab() === "events" ? "events" : "live"));
   const tab = t ? tabState : "live";
@@ -209,7 +211,6 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
   return (
     <div className={`live-box ${pastDay ? "past" : ""}`} onPointerDown={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
       <style>{LIVE_CSS}</style>
-      {dayBar}
       {t ? (
         <div className="live-tabs" role="tablist" aria-label="Tracker groups">
           <button type="button" role="tab" aria-selected={tab === "live"} className={`live-tab ${tab === "live" ? "on" : ""}`} onClick={() => pick("live")}>
@@ -251,7 +252,7 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
         <>
           <div className="live-note ctx-short">Military: active armed conflicts (UCDP), and strikes reported in the last {days} days. Tap one.</div>
           <div className="live-note ctx-long">
-            Military: every active armed conflict in UCDP's researcher-verified events (an event in the last 3 months; data runs 1–2 months behind), however small, sized war / armed conflict / clashes by deaths over the past year; and every strike reported in the news in the last {days} days, with who carried it out when the report says. Tap a conflict for casualties, a web of its latest attacks and an intel panel.
+            Military: every active armed conflict in UCDP's researcher-verified events (an event in the last 3 months{inc && inc.ucdpThrough ? `; UCDP's data ends ${shortDay(inc.ucdpThrough)}, ${daysBetween(inc.ucdpThrough, pastDay || localDay())} days behind` : ""}), however small, sized war / armed conflict / clashes by deaths over the past year; and every strike reported in the news in the last {days} days, with who carried it out when the report says. Tap a conflict for casualties, a web of its latest attacks and an intel panel.
           </div>
           <div className="live-legend">
             <span><Swatch kind="war" color={TRACKER_COLORS.war} size={13} />War</span>

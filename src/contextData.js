@@ -25,6 +25,15 @@ export function shiftDay(day, n) {
   const [y, m, d] = day.split("-").map(Number);
   return localDay(new Date(y, m - 1, d + n, 12));
 }
+export function shortDay(day) {
+  const [y, m, d] = day.split("-").map(Number);
+  return new Date(y, m - 1, d, 12).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
+// Whole days from one "YYYY-MM-DD" to another (positive when b is later).
+export function daysBetween(a, b) {
+  const t = (s) => { const [y, m, d] = s.split("-").map(Number); return Date.UTC(y, m - 1, d); };
+  return Math.round((t(b) - t(a)) / 86400000);
+}
 export function longDay(day) {
   const [y, m, d] = day.split("-").map(Number);
   return new Date(y, m - 1, d, 12).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });

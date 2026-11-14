@@ -46,12 +46,19 @@ test("conflicts drop off after 3 months without events; past days use the events
     events: [
       ev("Russia - Ukraine", "2026-09-20"),
       ev("Armenia - Azerbaijan", "2026-03-02"),
+      ev("India - Pakistan", "2026-08-01"),
     ],
   };
   const today = snapshot({ archive: [], conflict }, new Date("2026-11-13T12:00:00Z"));
-  assert.deepEqual(today.wars.map((w) => w.name), ["Russia – Ukraine"], "Armenia–Azerbaijan: last event over 3 months before UCDP's latest data");
+  assert.deepEqual(today.wars.map((w) => w.name), ["Russia – Ukraine"], "Armenia–Azerbaijan: last event over 3 months ago");
+  assert.equal(today.ucdpThrough, "2026-09-20", "the app shows how far behind UCDP is");
   const march = snapshot({ archive: [], conflict }, new Date("2026-03-10T23:59:00Z"));
   assert.deepEqual(march.wars.map((w) => w.name), ["Armenia – Azerbaijan"], "in March, only what had happened by then");
+  // Counted from the day shown, not from where UCDP's data ends: Aug 1 is over 3 months before
+  // Nov 13, even though UCDP's data only runs to late September.
+  assert.ok(!today.wars.some((w) => w.name === "India – Pakistan"));
+  const sept = snapshot({ archive: [], conflict }, new Date("2026-09-30T23:59:00Z"));
+  assert.ok(sept.wars.some((w) => w.name === "India – Pakistan"));
   // A strike reported that week keeps a quiet conflict on the map.
   const strike = inc("s1", "strike", [src("s", "2026-11-12T08:00:00Z", "Azerbaijani drone strike on Armenian border post")], { place: "Armenia", precision: "country", iso: "AM", lat: 40.2, lon: 44.5 });
   const withStrike = snapshot({ archive: [strike], conflict: { ...conflict, events: [...conflict.events, { ...ev("Armenia - Azerbaijan", "2026-03-02"), country: "Armenia", lat: 40.2, lon: 44.6, id: "aa2" }] } }, new Date("2026-11-13T12:00:00Z"));
