@@ -47,6 +47,8 @@ try {
   let verdicts = pruneVerdicts(saved.verdicts, now, seen);
   const apiKey = String(process.env.ANTHROPIC_API_KEY || "").trim(); // pasted keys often carry a stray space or newline
   if (apiKey) {
+    // Safe hints about the key's shape (never the key itself) for when a pasted key won't work.
+    console.log(`AI key check: ${apiKey.length} characters, starts with "sk-ant-": ${apiKey.startsWith("sk-ant-")}, has spaces or line breaks inside: ${/\s/.test(apiKey)}, has unusual characters: ${/[^A-Za-z0-9_-]/.test(apiKey)}.`);
     const pending = all.filter((x) => !verdicts[x.key]).sort((a, b) => b.t - a.t).map((x) => x.it);
     const res = await judgeReports(pending, { apiKey, now });
     for (const [k, v] of res.verdicts) verdicts[k] = v;
