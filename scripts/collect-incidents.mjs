@@ -9,7 +9,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { buildGeocoder, extractIncidents, warReports } from "../lib/incidents.mjs";
-import { AI_MODEL, reportKey, judgeReports, pruneVerdicts, hiddenReports } from "../lib/ai-check.mjs";
+import { AI_MODEL, reportKey, judgeReports, pruneVerdicts, hiddenReports, needsReview } from "../lib/ai-check.mjs";
 import { SHOW_DAYS, mergeArchive, snapshot } from "../lib/history.mjs";
 
 const ARCHIVE_FILE = "data/history/incidents.json";
@@ -49,7 +49,7 @@ try {
   if (apiKey) {
     // Safe hints about the key's shape (never the key itself) for when a pasted key won't work.
     console.log(`AI key check: ${apiKey.length} characters, starts with "sk-ant-": ${apiKey.startsWith("sk-ant-")}, has spaces or line breaks inside: ${/\s/.test(apiKey)}, has unusual characters: ${/[^A-Za-z0-9_-]/.test(apiKey)}.`);
-    const pending = all.filter((x) => !verdicts[x.key]).sort((a, b) => b.t - a.t).map((x) => x.it);
+    const pending = all.filter((x) => needsReview(verdicts[x.key])).sort((a, b) => b.t - a.t).map((x) => x.it);
     const res = await judgeReports(pending, { apiKey, now });
     for (const [k, v] of res.verdicts) verdicts[k] = v;
     const vs = [...res.verdicts.values()];
@@ -60,7 +60,8 @@ try {
   }
   writeIfChanged("data/ai-verdicts.json", { version: 1, model: AI_MODEL, verdicts }, `AI verdicts (${Object.keys(verdicts).length} saved)`);
   const hidden = hiddenReports(cache, verdicts);
-  writeIfChanged("data/hidden-reports.json", { version: 1, model: AI_MODEL, count: Object.keys(hidden).length, urls: hidden }, `Hidden off-topic news: ${Object.keys(hidden).length}`);
+  writeIfChanged("data/hidden-reports.json", { version: 2, model: AI_MODEL, count: Object.keys(hidden.urls).length, urls: hidden.urls, elsewhere: hidden.elsewhere },
+    `Hidden news: ${Object.keys(hidden.urls).length} off-topic, ${Object.keys(hidden.elsewhere).length} about other countries`);
   const verdictMap = new Map(Object.entries(verdicts));
 
   // Every incident in the news cache, folded into the archive; then the map as of now.

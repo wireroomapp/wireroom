@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { classify, buildGeocoder, extractIncidents, buildWars, warReports, partiesFor } from "../lib/incidents.mjs";
-import { reportKey, parseVerdicts, requestBody, judgeReports, hiddenReports, pruneVerdicts } from "../lib/ai-check.mjs";
+import { reportKey, parseVerdicts, requestBody, judgeReports, hiddenReports, pruneVerdicts, needsReview } from "../lib/ai-check.mjs";
 
 const gaz = JSON.parse(readFileSync(new URL("../lib/gazetteer.json", import.meta.url), "utf8"));
 const geo = buildGeocoder(gaz);
@@ -194,7 +194,7 @@ test("the AI review hides off-topic news, never official statements", async () =
   assert.equal(v.get(reportKey(vote)).keep, true);
   const verdicts = Object.fromEntries(v);
   const cache = { countries: { us: { official: [gov], independent: [sports, vote] } } };
-  assert.deepEqual(hiddenReports(cache, verdicts), { [sports.url]: "sports" }, "official statements are never hidden");
+  assert.deepEqual(hiddenReports(cache, verdicts).urls, { [sports.url]: "sports" }, "official statements are never hidden");
   // A missing "keep" means keep.
   assert.equal(parseVerdicts('[{"i":0,"event":false}]', [vote], NOW).get(reportKey(vote)).keep, true);
 });
@@ -218,4 +218,15 @@ test("the AI review works through batches a few at a time", async () => {
   assert.equal(res.verdicts.size, 60);
   assert.equal(calls, 3);
   assert.ok(most <= 2);
+});
+
+test("a country's panel leaves out outlet reports about other countries", () => {
+  const dc = item("dc", "Gunman kills one in Washington, DC", "2026-11-13T10:00:00Z", { source: "AP" });
+  const both = item("b", "Iran says US strike hit Qeshm island", "2026-11-13T10:00:00Z", { source: "AP" });
+  const v = parseVerdicts('[{"i":0,"keep":true,"topic":"crime","countries":["US"],"event":false},{"i":1,"keep":true,"topic":"conflict","countries":["IR","us"],"event":false}]', [dc, both], NOW);
+  assert.deepEqual(v.get(reportKey(both)).countries, ["ir", "us"]);
+  const cache = { countries: { ir: { official: [], independent: [dc, both] }, us: { official: [], independent: [dc] } } };
+  const h = hiddenReports(cache, Object.fromEntries(v));
+  assert.deepEqual(h.elsewhere, { [dc.url]: ["us"] }, "hidden from Iran's panel, kept in the US panel");
+  assert.equal(needsReview({ keep: true }), true, "older answers without countries are asked again");
 });
