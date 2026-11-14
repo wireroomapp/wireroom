@@ -53,14 +53,18 @@ function loadCache() {
 
 // Off-topic NEWS reports hidden by the AI review (lib/ai-check.mjs, data/hidden-reports.json:
 // url -> topic). Official statements are never hidden. ?showHidden=1 returns them too, labeled.
-function hideOffTopic(items, showHidden) {
+// In a country's panel (countryId given), outlet reports about other countries are hidden too.
+function hideOffTopic(items, showHidden, countryId = null) {
   const data = loadDataFile("data/hidden-reports.json");
   const urls = data && data.urls ? data.urls : null;
   if (!urls) return { items, hidden: 0, aiReview: false };
+  const elsewhere = (countryId && data.elsewhere) || {};
   let hidden = 0;
   const out = [];
   for (const it of items) {
-    const topic = it.sourceType !== "official" && it.url ? urls[it.url] : undefined;
+    const official = it.sourceType === "official" || !it.url;
+    const about = !official && elsewhere[it.url];
+    const topic = official ? undefined : urls[it.url] || (about && !about.includes(countryId) ? `about ${about.map((c) => c.toUpperCase()).join(", ")}` : undefined);
     if (!topic) { out.push(it); continue; }
     hidden++;
     if (showHidden) out.push({ ...it, hiddenByAi: topic });
@@ -88,7 +92,7 @@ app.get("/api/news", (req, res) => {
   else items = [...entry.official, ...entry.independent];
 
   items = [...items].sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
-  const reviewed = hideOffTopic(items, wantsHidden(req));
+  const reviewed = hideOffTopic(items, wantsHidden(req), countryId);
 
   res.json({
     items: reviewed.items,

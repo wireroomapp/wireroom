@@ -125,7 +125,7 @@ function NewsCard({ item, onPin }) {
   return <article className={`card ${item.hiddenByAi ? "off-topic" : ""}`}>
     <div className="card-meta"><SourceTag type={item.sourceType}/><span>{item.source}</span><span>{item.date}</span>
       {item.countryLabel && <span className="card-gov">{item.countryLabel}</span>}
-      {item.hiddenByAi && <span className="card-offtopic">OFF-TOPIC (AI REVIEW): {String(item.hiddenByAi).toUpperCase()}</span>}</div>
+      {item.hiddenByAi && <span className="card-offtopic">{String(item.hiddenByAi).startsWith("about ") ? `NOT ABOUT THIS COUNTRY (AI REVIEW): ${String(item.hiddenByAi).toUpperCase()}` : `OFF-TOPIC (AI REVIEW): ${String(item.hiddenByAi).toUpperCase()}`}</span>}</div>
     {tr && (
       <div className="tr-note">
         <span>{english ? `MACHINE-TRANSLATED FROM ${languageName(tr.from).toUpperCase()}` : `ORIGINAL · ${languageName(tr.from).toUpperCase()}`}</span>
@@ -1583,8 +1583,8 @@ export default function WireRoomV2() {
             {view !== "war" && offTopic.aiReview && (offTopic.hidden > 0 || showOffTopic) && (
               <span className="offtopic-note">
                 {showOffTopic
-                  ? `SHOWING ${offTopic.hidden} OFF-TOPIC NEWS REPORT${offTopic.hidden === 1 ? "" : "S"} (MARKED)`
-                  : `AI REVIEW HID ${offTopic.hidden} NEWS REPORT${offTopic.hidden === 1 ? "" : "S"} IT JUDGED OFF-TOPIC`}
+                  ? `SHOWING ${offTopic.hidden} HIDDEN NEWS REPORT${offTopic.hidden === 1 ? "" : "S"} (MARKED)`
+                  : `AI REVIEW HID ${offTopic.hidden} NEWS REPORT${offTopic.hidden === 1 ? "" : "S"} ${view === "country" && selected ? `THAT ARE OFF-TOPIC OR NOT ABOUT ${selected.name.toUpperCase()}` : "IT JUDGED OFF-TOPIC"}`}
                 <button type="button" onClick={toggleOffTopic}>{showOffTopic ? "HIDE" : "SHOW"}</button>
               </span>
             )}
