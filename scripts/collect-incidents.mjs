@@ -1,14 +1,15 @@
 // Builds the tracker files from data Wire Room already has (see lib/incidents.mjs):
 //   data/incidents.json  reported terrorism, cyber and military incidents (last 7 days), active conflicts
 //   data/war-intel.json  for each war, the latest related official statements and outlet reports
-//   data/ai-verdicts.json the optional AI check's saved answers (only when ANTHROPIC_API_KEY is set)
+//   data/ai-verdicts.json the optional AI review's saved answers (only when ANTHROPIC_API_KEY is set)
+//   data/hidden-reports.json off-topic NEWS reports the AI review hides from the panels (url -> topic)
 //   data/history/incidents.json every incident ever placed, so past days can be shown (lib/history.mjs)
 // Inputs: data/cache.json (reports), data/conflict.json (UCDP), data/advisories.json (optional).
 // Run by the hourly GitHub Action after the news and context steps. Always exits 0.
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
-import { WINDOW_DAYS, buildGeocoder, extractIncidents, warReports, englishHeadline, englishSummary } from "../lib/incidents.mjs";
-import { AI_MODEL, AI_SIGNAL, reportKey, judgeReports, pruneVerdicts } from "../lib/ai-check.mjs";
+import { buildGeocoder, extractIncidents, warReports } from "../lib/incidents.mjs";
+import { AI_MODEL, reportKey, judgeReports, pruneVerdicts, hiddenReports } from "../lib/ai-check.mjs";
 import { SHOW_DAYS, mergeArchive, snapshot } from "../lib/history.mjs";
 
 const ARCHIVE_FILE = "data/history/incidents.json";
@@ -32,38 +33,40 @@ try {
   const gaz = JSON.parse(readFileSync(new URL("../lib/gazetteer.json", import.meta.url), "utf-8"));
   const geo = buildGeocoder(gaz);
 
-  // Optional AI check (lib/ai-check.mjs): new attack-like reports from the window, not yet judged.
+  // Optional AI review (lib/ai-check.mjs): every report in the news cache it hasn't read yet,
+  // newest first (a backlog is worked through over a few hourly runs).
   const saved = readJson("data/ai-verdicts.json", { version: 1, verdicts: {} });
-  let verdicts = pruneVerdicts(saved.verdicts, now);
+  const all = [];
+  const seen = new Set();
+  for (const entry of Object.values(cache.countries || {})) for (const type of ["official", "independent"]) for (const it of entry[type] || []) {
+    const key = reportKey(it);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    all.push({ it, key, t: Date.parse(it.publishedAt || "") || 0 });
+  }
+  let verdicts = pruneVerdicts(saved.verdicts, now, seen);
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (apiKey) {
-    const since = now.getTime() - WINDOW_DAYS * 86400000;
-    const pending = [];
-    const seen = new Set();
-    for (const entry of Object.values(cache.countries || {})) for (const type of ["official", "independent"]) for (const it of entry[type] || []) {
-      const t = Date.parse(it.publishedAt || "");
-      const key = reportKey(it);
-      if (!Number.isFinite(t) || t < since || seen.has(key) || verdicts[key]) continue;
-      seen.add(key);
-      if (AI_SIGNAL.test(`${englishHeadline(it)} ${englishSummary(it)}`)) pending.push(it);
-    }
+    const pending = all.filter((x) => !verdicts[x.key]).sort((a, b) => b.t - a.t).map((x) => x.it);
     const res = await judgeReports(pending, { apiKey, now });
     for (const [k, v] of res.verdicts) verdicts[k] = v;
-    const events = [...res.verdicts.values()].filter((v) => v.event).length;
-    console.log(`AI check (${AI_MODEL}): ${res.verdicts.size} of ${pending.length} new reports judged, ${events} events, ${res.calls} calls${res.skipped ? `, ${res.skipped} left for the next run` : ""}.`);
-    if (res.error) console.log(`::warning::AI check stopped: ${res.error}. The keyword rules cover the rest.`);
+    const vs = [...res.verdicts.values()];
+    console.log(`AI review (${AI_MODEL}): ${res.verdicts.size} of ${pending.length} unread reports reviewed in ${res.calls} calls: ${vs.filter((v) => !v.keep).length} off-topic, ${vs.filter((v) => v.event).length} events${res.skipped ? `; ${res.skipped} left for the next run` : ""}.`);
+    if (res.error) console.log(`::warning::AI review stopped: ${res.error}. Keyword rules cover the rest; nothing new is hidden.`);
   } else {
-    console.log("AI check off (no ANTHROPIC_API_KEY): keyword rules only.");
+    console.log("AI review off (no ANTHROPIC_API_KEY): keyword rules only, nothing hidden.");
   }
-  writeIfChanged("data/ai-verdicts.json", { version: 1, model: AI_MODEL, verdicts }, "AI verdicts");
+  writeIfChanged("data/ai-verdicts.json", { version: 1, model: AI_MODEL, verdicts }, `AI verdicts (${Object.keys(verdicts).length} saved)`);
+  const hidden = hiddenReports(cache, verdicts);
+  writeIfChanged("data/hidden-reports.json", { version: 1, model: AI_MODEL, count: Object.keys(hidden).length, urls: hidden }, `Hidden off-topic news: ${Object.keys(hidden).length}`);
   const verdictMap = new Map(Object.entries(verdicts));
 
   // Every incident in the news cache, folded into the archive; then the map as of now.
-  const all = extractIncidents(cache, geo, { now, windowDays: SCAN_DAYS, verdicts: verdictMap, keyOf: reportKey });
+  const found = extractIncidents(cache, geo, { now, windowDays: SCAN_DAYS, verdicts: verdictMap, keyOf: reportKey });
   const cacheUrls = new Set();
   for (const entry of Object.values(cache.countries || {})) for (const type of ["official", "independent"]) for (const it of entry[type] || []) if (it.url) cacheUrls.add(it.url);
   const prevArchive = readJson(ARCHIVE_FILE, { version: 1, incidents: [] });
-  const archive = mergeArchive(prevArchive.incidents, all, cacheUrls, now);
+  const archive = mergeArchive(prevArchive.incidents, found, cacheUrls, now);
   mkdirSync("data/history", { recursive: true });
   writeIfChanged(ARCHIVE_FILE, { version: 1, incidents: archive }, `Archive: ${archive.length} incidents since ${(archive[0] || {}).firstReported || "—"}`);
 

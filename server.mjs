@@ -51,6 +51,24 @@ function loadCache() {
   }
 }
 
+// Off-topic NEWS reports hidden by the AI review (lib/ai-check.mjs, data/hidden-reports.json:
+// url -> topic). Official statements are never hidden. ?showHidden=1 returns them too, labeled.
+function hideOffTopic(items, showHidden) {
+  const data = loadDataFile("data/hidden-reports.json");
+  const urls = data && data.urls ? data.urls : null;
+  if (!urls) return { items, hidden: 0, aiReview: false };
+  let hidden = 0;
+  const out = [];
+  for (const it of items) {
+    const topic = it.sourceType !== "official" && it.url ? urls[it.url] : undefined;
+    if (!topic) { out.push(it); continue; }
+    hidden++;
+    if (showHidden) out.push({ ...it, hiddenByAi: topic });
+  }
+  return { items: out, hidden, aiReview: true };
+}
+const wantsHidden = (req) => String(req.query.showHidden || "") === "1";
+
 app.get("/api/news", (req, res) => {
   const countryId = String(req.query.country || "").toLowerCase();
   const mode = String(req.query.mode || "both");
@@ -70,9 +88,12 @@ app.get("/api/news", (req, res) => {
   else items = [...entry.official, ...entry.independent];
 
   items = [...items].sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
+  const reviewed = hideOffTopic(items, wantsHidden(req));
 
   res.json({
-    items,
+    items: reviewed.items,
+    hidden: reviewed.hidden,
+    aiReview: reviewed.aiReview,
     generatedAt: cache.generatedAt,
     officialVerified,
     officialStatus: entry.officialStatus || (officialVerified ? null : "not-configured"),
@@ -81,8 +102,12 @@ app.get("/api/news", (req, res) => {
 });
 app.get("/api/global", (req, res) => {
   const mode = String(req.query.mode || "both");
+  const showHidden = wantsHidden(req);
   const cache = loadCache();
-  if (globalMemo.has(mode)) return res.json(globalMemo.get(mode));
+  const memoKey = `${mode}|${showHidden ? 1 : 0}`;
+  const hiddenData = loadDataFile("data/hidden-reports.json");
+  const hit = globalMemo.get(memoKey);
+  if (hit && hit.hiddenData === hiddenData) return res.json(hit.body);
   let items = [];
   for (const countryId of Object.keys(cache.countries)) {
     const entry = cache.countries[countryId] || { official: [], independent: [] };
@@ -90,9 +115,18 @@ app.get("/api/global", (req, res) => {
     else if (mode === "news") items.push(...entry.independent);
     else items.push(...entry.official, ...entry.independent);
   }
-  items = items.sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0)).slice(0, 500);
-  const body = { items, generatedAt: cache.generatedAt };
-  globalMemo.set(mode, body);
+  items = items.sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
+  const reviewed = hideOffTopic(items, showHidden);
+  const kept = reviewed.items.slice(0, 500);
+  // How many off-topic reports fall in the same time span as the 500 shown.
+  let hidden = 0;
+  if (showHidden) hidden = kept.filter((i) => i.hiddenByAi).length;
+  else if (reviewed.hidden && kept.length) {
+    const oldest = new Date(kept[kept.length - 1].publishedAt || 0);
+    hidden = items.length - reviewed.items.length - hideOffTopic(items.filter((i) => new Date(i.publishedAt || 0) < oldest), false).hidden;
+  }
+  const body = { items: kept, hidden, aiReview: reviewed.aiReview, generatedAt: cache.generatedAt };
+  globalMemo.set(memoKey, { body, hiddenData });
   res.json(body);
 });
 // Live aircraft + ship layers. Sources are switched with environment variables,
