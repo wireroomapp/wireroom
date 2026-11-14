@@ -2,7 +2,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { classify, buildGeocoder, extractIncidents, buildWars, warReports, partiesFor } from "../lib/incidents.mjs";
-import { reportKey, parseVerdicts, requestBody, judgeReports, hiddenReports, pruneVerdicts, needsReview } from "../lib/ai-check.mjs";
+import { reportKey, parseVerdicts, requestBody, judgeReports, hiddenReports, pruneVerdicts, needsReview, isAnswer, panelKeeps, readPanelRules, MAX_TRIES, REVIEW_VERSION } from "../lib/ai-check.mjs";
+import { COUNTRY_INFO } from "../lib/feeds.mjs";
 
 const gaz = JSON.parse(readFileSync(new URL("../lib/gazetteer.json", import.meta.url), "utf8"));
 const geo = buildGeocoder(gaz);
@@ -228,5 +229,88 @@ test("a country's panel leaves out outlet reports about other countries", () => 
   const cache = { countries: { ir: { official: [], independent: [dc, both] }, us: { official: [], independent: [dc] } } };
   const h = hiddenReports(cache, Object.fromEntries(v));
   assert.deepEqual(h.elsewhere, { [dc.url]: ["us"] }, "hidden from Iran's panel, kept in the US panel");
-  assert.equal(needsReview({ keep: true }), true, "older answers without countries are asked again");
+  assert.equal(needsReview({ keep: true, countries: ["us"] }), true, "answers from an older set of questions are asked again");
+  assert.equal(needsReview({ v: REVIEW_VERSION, keep: true, countries: [] }), false);
+});
+
+test("reads the AI's answers whatever shape the reply takes", () => {
+  const batch = Array.from({ length: 4 }, (_, i) => item(`p${i}`, `Report ${i}`, "2026-11-09T08:00:00Z"));
+  const one = (i, extra = "") => `{"i":${i},"keep":true,"topic":"politics","countries":["US"],"event":false${extra}}`;
+  // A clean array.
+  assert.equal(parseVerdicts(`[${[0, 1, 2, 3].map((i) => one(i)).join(",")}]`, batch, NOW).size, 4);
+  // One object per line, no brackets (this used to lose the whole batch).
+  assert.equal(parseVerdicts([0, 1, 2, 3].map((i) => one(i)).join("\n"), batch, NOW).size, 4);
+  // Markdown fences and a note with brackets and braces after the array.
+  assert.equal(parseVerdicts("```json\n[" + [0, 1, 2, 3].map((i) => one(i)).join(",\n") + "]\n```\nNote: report [2] {the short one} was hard to judge.", batch, NOW).size, 4);
+  // Cut off part-way: the complete answers still count.
+  assert.equal(parseVerdicts(`[${one(0)},${one(1)},{"i":2,"keep":true,"topic":"poli`, batch, NOW).size, 2);
+  // One broken answer doesn't take the others down.
+  assert.equal(parseVerdicts(`[${one(0)},{"i":1,"keep":true,"topic":"says "hi"","event":false},${one(2)}]`, batch, NOW).size, 2);
+  // Index as text, missing "event", quotes and braces inside a value.
+  const odd = parseVerdicts(`[{"i":"3","keep":false,"topic":"a \\"quoted\\" {thing}","countries":["uk","XX1","US"]}]`, batch, NOW).get(reportKey(batch[3]));
+  assert.deepEqual([odd.keep, odd.event, odd.countries, odd.v], [false, false, ["gb", "us"], REVIEW_VERSION]);
+  // A missing countries list means "no particular country", not "ask again forever".
+  const none = parseVerdicts('[{"i":0,"keep":true,"event":false}]', batch, NOW).get(reportKey(batch[0]));
+  assert.deepEqual(none.countries, []);
+  assert.equal(needsReview(none), false);
+});
+
+test("a report with no usable answer is retried a few times, then left to the keyword rules", async () => {
+  const reports = Array.from({ length: 3 }, (_, i) => item(`q${i}`, `Report ${i}`, "2026-11-09T08:00:00Z"));
+  const fetchImpl = async () => ({ ok: true, json: async () => ({ stop_reason: "end_turn", usage: { input_tokens: 900, output_tokens: 60 }, content: [{ type: "text", text: '[{"i":0,"keep":true,"topic":"x","countries":[],"event":false}] I could not judge the others.' }] }) });
+  const res = await judgeReports(reports, { apiKey: "k", fetchImpl });
+  assert.equal(res.verdicts.size, 1);
+  assert.deepEqual(res.unanswered.sort(), [reportKey(reports[1]), reportKey(reports[2])].sort());
+  assert.deepEqual(res.usage, { in: 900, out: 60 });
+  assert.deepEqual([res.problems[0].asked, res.problems[0].answered, res.problems[0].stop], [3, 1, "end_turn"]);
+  assert.equal(needsReview({ pending: true, tries: 1 }), true);
+  assert.equal(needsReview({ pending: true, tries: MAX_TRIES }), false, "given up");
+  assert.equal(isAnswer({ pending: true, tries: MAX_TRIES }), false);
+  // A given-up report is never hidden and doesn't override the keyword rules.
+  const cache = { countries: { us: { official: [], independent: reports } } };
+  assert.deepEqual(hiddenReports(cache, { [reportKey(reports[1])]: { pending: true, tries: 3 } }).urls, {});
+});
+
+test("a rate limit is waited out once", async () => {
+  const batch = [item("rl", "Report", "2026-11-09T08:00:00Z")];
+  let calls = 0; const waits = [];
+  const fetchImpl = async () => (++calls === 1
+    ? { ok: false, status: 429, headers: { get: () => "3" } }
+    : { ok: true, status: 200, json: async () => ({ content: [{ type: "text", text: '[{"i":0,"keep":true,"event":false}]' }] }) });
+  const res = await judgeReports(batch, { apiKey: "k", fetchImpl, wait: async (ms) => { waits.push(ms); } });
+  assert.equal(res.verdicts.size, 1);
+  assert.deepEqual(waits, [3000]);
+  assert.equal(res.error, null);
+});
+
+test("hand-made rules let a panel keep another country's news", () => {
+  assert.equal(panelKeeps(["ir"], "il", {}), false);
+  assert.equal(panelKeeps(["ir"], "il", { il: ["ir"] }), true);
+  assert.equal(panelKeeps(["gb", "ir"], "il", { il: ["ir"] }), true);
+  assert.equal(panelKeeps(["il"], "ir", { il: ["ir"] }), false, "one-way: Iran's panel doesn't gain Israel news");
+  assert.equal(panelKeeps(["us"], "il", { il: ["ir"] }), false);
+  assert.equal(panelKeeps([], "il", {}), true, "about no particular country: kept");
+  assert.equal(panelKeeps(["il", "us"], "il", {}), true);
+  // Messy hand edits are cleaned, never an error.
+  assert.deepEqual(readPanelRules({ alsoKeep: { IL: ["IR", " lb ", "il", 7, "lebanon"], kr: "kp", "": ["us"], ua: [] } }), { il: ["ir", "lb"] });
+  assert.deepEqual(readPanelRules(null), {});
+  // Counted per panel: one hidden from Iran's panel, one kept in Israel's by the rule.
+  const dc = item("dc2", "Gunman kills one in Washington, DC", "2026-11-13T10:00:00Z");
+  const nuke = item("n", "UN agency fears Iran diverted nuclear material", "2026-11-13T10:00:00Z");
+  const verdicts = { [reportKey(dc)]: { v: 2, keep: true, countries: ["us"] }, [reportKey(nuke)]: { v: 2, keep: true, countries: ["ir"] } };
+  const cache = { countries: { ir: { official: [], independent: [dc, nuke] }, il: { official: [], independent: [nuke] } } };
+  const h = hiddenReports(cache, verdicts, { il: ["ir"] });
+  assert.deepEqual(h.stats, { offTopic: 0, elsewhere: 1, keptByRule: 1 });
+  assert.deepEqual(h.elsewhere[nuke.url], ["ir"], "the server applies the rule, so the list still names it");
+});
+
+test("the rules file in the repo is valid", () => {
+  const raw = JSON.parse(readFileSync(new URL("../config/panel-rules.json", import.meta.url), "utf8"));
+  const rules = readPanelRules(raw);
+  assert.deepEqual(Object.keys(rules).sort(), Object.keys(raw.alsoKeep).sort(), "every line was understood");
+  for (const [panel, list] of Object.entries(raw.alsoKeep)) {
+    assert.ok(COUNTRY_INFO[panel], `${panel} is one of Wire Room's country panels`);
+    assert.deepEqual(rules[panel], list, `${panel}: 2-letter lowercase country ids`);
+  }
+  assert.deepEqual(rules.il, ["ir"]);
 });

@@ -9,7 +9,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { buildGeocoder, extractIncidents, warReports } from "../lib/incidents.mjs";
-import { AI_MODEL, reportKey, judgeReports, pruneVerdicts, hiddenReports, needsReview } from "../lib/ai-check.mjs";
+import { AI_MODEL, MAX_TRIES, reportKey, judgeReports, pruneVerdicts, hiddenReports, needsReview, isAnswer, readPanelRules, estimateCost } from "../lib/ai-check.mjs";
 import { SHOW_DAYS, mergeArchive, snapshot } from "../lib/history.mjs";
 
 const ARCHIVE_FILE = "data/history/incidents.json";
@@ -49,20 +49,54 @@ try {
   if (apiKey) {
     // Safe hints about the key's shape (never the key itself) for when a pasted key won't work.
     console.log(`AI key check: ${apiKey.length} characters, starts with "sk-ant-": ${apiKey.startsWith("sk-ant-")}, has spaces or line breaks inside: ${/\s/.test(apiKey)}, has unusual characters: ${/[^A-Za-z0-9_-]/.test(apiKey)}.`);
-    const pending = all.filter((x) => needsReview(verdicts[x.key])).sort((a, b) => b.t - a.t).map((x) => x.it);
-    const res = await judgeReports(pending, { apiKey, now });
-    for (const [k, v] of res.verdicts) verdicts[k] = v;
-    const vs = [...res.verdicts.values()];
-    console.log(`AI review (${AI_MODEL}): ${res.verdicts.size} of ${pending.length} unread reports reviewed in ${res.calls} calls: ${vs.filter((v) => !v.keep).length} off-topic, ${vs.filter((v) => v.event).length} events${res.skipped ? `; ${res.skipped} left for the next run` : ""}.`);
-    if (res.error) console.log(`::warning::AI review stopped: ${res.error}. Keyword rules cover the rest; nothing new is hidden.`);
+    // Newest first. A report the model gave no usable answer for is asked again in smaller
+    // groups (5 at a time, then alone), so one awkward report can't keep taking others down with
+    // it; after MAX_TRIES it is left to the keyword rules and never hidden.
+    const pending = all.filter((x) => needsReview(verdicts[x.key])).sort((a, b) => b.t - a.t);
+    const triesOf = (key) => (verdicts[key] && verdicts[key].pending ? verdicts[key].tries || 0 : 0);
+    const rounds = [
+      { label: "second try", batchSize: 5, max: 300, list: pending.filter((x) => triesOf(x.key) === 1) },
+      { label: "last try", batchSize: 1, max: 40, list: pending.filter((x) => triesOf(x.key) >= 2) },
+      { label: "new", batchSize: 25, max: 900, list: pending.filter((x) => triesOf(x.key) === 0) },
+    ];
+    const sum = { sent: 0, answered: 0, calls: 0, offTopic: 0, events: 0, usage: { in: 0, out: 0 }, problems: [], error: null, parts: [] };
+    for (const r of rounds) {
+      if (!r.list.length || sum.error) continue;
+      const res = await judgeReports(r.list.map((x) => x.it), { apiKey, now, batchSize: r.batchSize, maxReports: r.max });
+      for (const [k, v] of res.verdicts) verdicts[k] = v;
+      for (const k of res.unanswered) verdicts[k] = { pending: true, tries: triesOf(k) + 1, at: now.toISOString() };
+      const vs = [...res.verdicts.values()];
+      sum.sent += res.verdicts.size + res.unanswered.length;
+      sum.answered += res.verdicts.size;
+      sum.calls += res.calls;
+      sum.offTopic += vs.filter((v) => !v.keep).length;
+      sum.events += vs.filter((v) => v.event).length;
+      sum.usage.in += res.usage.in;
+      sum.usage.out += res.usage.out;
+      sum.problems.push(...res.problems);
+      sum.error = res.error;
+      sum.parts.push(`${r.label} ${res.verdicts.size}/${res.verdicts.size + res.unanswered.length}`);
+    }
+    const unread = all.filter((x) => needsReview(verdicts[x.key])).length;
+    const gaveUp = Object.values(verdicts).filter((v) => v.pending && (v.tries || 0) >= MAX_TRIES).length;
+    console.log(`AI review (${AI_MODEL}): ${sum.answered} of ${sum.sent} reports sent got an answer in ${sum.calls} calls (${sum.parts.join(", ") || "nothing to send"}): ${sum.offTopic} off-topic, ${sum.events} events. Still unread: ${unread}. Given up after ${MAX_TRIES} tries: ${gaveUp}.`);
+    console.log(`AI review cost: ${sum.usage.in.toLocaleString()} tokens in, ${sum.usage.out.toLocaleString()} out, about $${estimateCost(sum.usage).toFixed(3)} this run (estimate from secondhand prices).`);
+    // What an incomplete reply looked like (model output about public headlines), to fix the cause.
+    for (const p of sum.problems.slice(0, 3)) console.log(`AI reply incomplete (answered ${p.answered} of ${p.asked}, stop: ${p.stop || "?"}): ${JSON.stringify(p.head)}${p.tail ? ` … ${JSON.stringify(p.tail)}` : ""}`);
+    if (sum.problems.length > 3) console.log(`AI reply incomplete in ${sum.problems.length} calls in all.`);
+    if (sum.error) console.log(`::warning::AI review stopped: ${sum.error}. Keyword rules cover the rest; nothing new is hidden.`);
   } else {
     console.log("AI review off (no ANTHROPIC_API_KEY): keyword rules only, nothing hidden.");
   }
-  writeIfChanged("data/ai-verdicts.json", { version: 1, model: AI_MODEL, verdicts }, `AI verdicts (${Object.keys(verdicts).length} saved)`);
-  const hidden = hiddenReports(cache, verdicts);
+  writeIfChanged("data/ai-verdicts.json", { version: 1, model: AI_MODEL, verdicts }, `AI verdicts (${Object.values(verdicts).filter(isAnswer).length} answers saved)`);
+  // Manual exceptions (config/panel-rules.json) are applied by the server; here only for the count.
+  const alsoKeep = readPanelRules(readJson("config/panel-rules.json", null));
+  const hidden = hiddenReports(cache, verdicts, alsoKeep);
+  const ruleText = Object.entries(alsoKeep).map(([p, list]) => `${p} keeps ${list.join("+")}`).join(", ");
   writeIfChanged("data/hidden-reports.json", { version: 2, model: AI_MODEL, count: Object.keys(hidden.urls).length, urls: hidden.urls, elsewhere: hidden.elsewhere },
-    `Hidden news: ${Object.keys(hidden.urls).length} off-topic, ${Object.keys(hidden.elsewhere).length} about other countries`);
-  const verdictMap = new Map(Object.entries(verdicts));
+    `Hidden news: ${hidden.stats.offTopic} off-topic; ${hidden.stats.elsewhere} not about their panel's country (${hidden.stats.keptByRule} more kept by manual rules${ruleText ? `: ${ruleText}` : ""})`);
+  // The trackers use real answers only; a report with none falls back to the keyword rules.
+  const verdictMap = new Map(Object.entries(verdicts).filter(([, v]) => isAnswer(v)));
 
   // Every incident in the news cache, folded into the archive; then the map as of now.
   const found = extractIncidents(cache, geo, { now, windowDays: SCAN_DAYS, verdicts: verdictMap, keyOf: reportKey });

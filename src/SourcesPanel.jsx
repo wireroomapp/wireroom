@@ -177,8 +177,8 @@ export default function SourcesPanel({ apiBase, feedbackUrl, onClose, onOpenCoun
         <h3>AI REVIEW OF NEWS REPORTS</h3>
         <ul>
           <li>When it's on, a small AI model (Anthropic's Claude Haiku) reads each collected report once and judges whether it's useful for following government, politics, security, conflict, international affairs or the national economy.</li>
-          <li>NEWS reports it judges off-topic (sports, celebrity, entertainment, lifestyle, shopping…) are hidden from the intel panels. Each panel says how many were hidden, and <b>SHOW</b> brings them back, labeled with the topic the AI gave. Nothing is deleted.</li>
-          <li>In a country's panel, outlet reports that the AI judges aren't about that country (they reached its feed through a search match, like a US shooting in Iran's feed) are hidden too, and counted in the same notice. They still appear in the global feed.</li>
+          <li>NEWS reports it judges off-topic (sports, celebrity, entertainment, lifestyle, shopping…) don't appear in the intel panels. Nothing is deleted: the reports stay in Wire Room's data.</li>
+          <li>In a country's panel, outlet reports that the AI judges aren't about that country (they reached its feed through a search match, like a US shooting in Iran's feed) don't appear either. They still appear in the global feed. Exceptions are made by hand, one pair of countries at a time, where another country's news plainly matters to a panel (Israel's panel keeps news about Iran).</li>
           <li>Official government statements are never hidden: they're the government's own channel, whatever the subject.</li>
           <li>The same review checks tracker events (see Trackers above). It can make mistakes; when unsure it keeps a report.</li>
         </ul>

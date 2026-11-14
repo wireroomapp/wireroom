@@ -81,6 +81,9 @@ const COUNTRIES = [
 ];
 
 const COUNTRY_BY_ID = Object.fromEntries(COUNTRIES.map(c => [c.id, c]));
+// Review link (?review=1, not shown anywhere on the site): lists the NEWS reports the AI review
+// hid, marked, so its choices can be checked. Without it, hidden reports simply don't appear.
+const REVIEW_MODE = (() => { try { return new URLSearchParams(window.location.search).get("review") === "1"; } catch { return false; } })();
 
 // What a shared link asks to open (?country=ua&mode=both, ?view=global, ?war=...). See urlState.js.
 const INITIAL_URL_VIEW = (() => {
@@ -186,7 +189,7 @@ export default function WireRoomV2() {
   const annotationHydratedRef = useRef(false);
 
   useEffect(() => {
-    fetch(`${API_BASE}/api/global?mode=both`)
+    fetch(`${API_BASE}/api/global?mode=both${REVIEW_MODE ? "&showHidden=1" : ""}`)
       .then(r => r.ok ? r.json() : null)
       .then(data => {
         // If a country was opened meanwhile (e.g. from a shared link), its reports win.
@@ -251,7 +254,7 @@ export default function WireRoomV2() {
   const [militaryOn, setMilitaryOn] = useState(Boolean(ML && (INITIAL_URL_VIEW.war || INITIAL_URL_VIEW.day)));
   // The day the EVENTS trackers show: null = today (live), or a past local day "YYYY-MM-DD".
   // AI review (lib/ai-check.mjs): off-topic NEWS reports the server hides, and whether to show them.
-  const [showOffTopic, setShowOffTopic] = useState(false);
+  const [showOffTopic, setShowOffTopic] = useState(REVIEW_MODE);
   const [offTopic, setOffTopic] = useState({ hidden: 0, aiReview: false });
   const [mapDay, setMapDay] = useState(() => (ML && INITIAL_URL_VIEW.day && INITIAL_URL_VIEW.day < localDay() ? INITIAL_URL_VIEW.day : null));
   const [terrorOn, setTerrorOn] = useState(false);
@@ -1580,11 +1583,11 @@ export default function WireRoomV2() {
               REPORTS {pageStart + 1}–{Math.min(pageStart + REPORTS_PER_PAGE, visibleFeed.length)} OF {visibleFeed.length}
               {" "}•{" "}PAGE {Math.min(page, totalPages)} / {totalPages}
             </span>
-            {view !== "war" && offTopic.aiReview && (offTopic.hidden > 0 || showOffTopic) && (
+            {REVIEW_MODE && view !== "war" && offTopic.aiReview && (
               <span className="offtopic-note">
                 {showOffTopic
-                  ? `SHOWING ${offTopic.hidden} HIDDEN NEWS REPORT${offTopic.hidden === 1 ? "" : "S"} (MARKED)`
-                  : `AI REVIEW HID ${offTopic.hidden} NEWS REPORT${offTopic.hidden === 1 ? "" : "S"} ${view === "country" && selected ? `THAT ARE OFF-TOPIC OR NOT ABOUT ${selected.name.toUpperCase()}` : "IT JUDGED OFF-TOPIC"}`}
+                  ? `REVIEW LINK: SHOWING THE ${offTopic.hidden} NEWS REPORT${offTopic.hidden === 1 ? "" : "S"} THE AI REVIEW HIDES HERE (MARKED)`
+                  : `REVIEW LINK: THE AI REVIEW HIDES ${offTopic.hidden} NEWS REPORT${offTopic.hidden === 1 ? "" : "S"} HERE`}
                 <button type="button" onClick={toggleOffTopic}>{showOffTopic ? "HIDE" : "SHOW"}</button>
               </span>
             )}

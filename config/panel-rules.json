@@ -1,0 +1,6 @@
+{
+  "how": "Hand-made exceptions to the AI review. Normally a country's panel hides outlet reports that aren't about that country. Under alsoKeep, each line is a country panel (its 2-letter id, lowercase) and the other countries whose news that panel keeps anyway. Example: \"il\": [\"ir\"] keeps news about Iran in Israel's panel. It is one-way: it does not put news about Israel in Iran's panel (that would be its own line, \"ir\": [\"il\"]). Separate lines with commas. Changes go live a few minutes after saving, when the site redeploys.",
+  "alsoKeep": {
+    "il": ["ir"]
+  }
+}

@@ -7,6 +7,7 @@ import { describeSources } from "./lib/sources.mjs";
 import { createWatchdog } from "./scheduler/watchdog.mjs";
 import { snapshot } from "./lib/history.mjs";
 import { warReports } from "./lib/incidents.mjs";
+import { panelKeeps, readPanelRules } from "./lib/ai-check.mjs";
 
 /*
   WIRE ROOM / WORLD WIRE — backend (cache-serving version)
@@ -53,18 +54,20 @@ function loadCache() {
 
 // Off-topic NEWS reports hidden by the AI review (lib/ai-check.mjs, data/hidden-reports.json:
 // url -> topic). Official statements are never hidden. ?showHidden=1 returns them too, labeled.
-// In a country's panel (countryId given), outlet reports about other countries are hidden too.
+// In a country's panel (countryId given), outlet reports about other countries are hidden too,
+// unless a hand-made rule keeps them (config/panel-rules.json: Israel's panel keeps news about Iran).
 function hideOffTopic(items, showHidden, countryId = null) {
   const data = loadDataFile("data/hidden-reports.json");
   const urls = data && data.urls ? data.urls : null;
   if (!urls) return { items, hidden: 0, aiReview: false };
   const elsewhere = (countryId && data.elsewhere) || {};
+  const alsoKeep = countryId ? readPanelRules(loadDataFile("config/panel-rules.json")) : {};
   let hidden = 0;
   const out = [];
   for (const it of items) {
     const official = it.sourceType === "official" || !it.url;
     const about = !official && elsewhere[it.url];
-    const topic = official ? undefined : urls[it.url] || (about && !about.includes(countryId) ? `about ${about.map((c) => c.toUpperCase()).join(", ")}` : undefined);
+    const topic = official ? undefined : urls[it.url] || (about && !panelKeeps(about, countryId, alsoKeep) ? `about ${about.map((c) => c.toUpperCase()).join(", ")}` : undefined);
     if (!topic) { out.push(it); continue; }
     hidden++;
     if (showHidden) out.push({ ...it, hiddenByAi: topic });
