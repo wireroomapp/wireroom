@@ -77,8 +77,18 @@ out.regions = [
   [["taiwan strait"], "", 119.6, 24.3], [["kashmir"], "IN", 75.3, 34.2], [["balochistan", "baluchistan"], "PK", 65.6, 28.6], [["khyber pakhtunkhwa"], "PK", 71.8, 34.5],
   [["sinai"], "EG", 33.8, 29.5], [["darfur"], "SD", 24.0, 13.5], [["golan heights"], "IL", 35.75, 33.0], [["northern israel"], "IL", 35.3, 32.9], [["southern lebanon", "south lebanon"], "LB", 35.4, 33.25],
   [["northern ireland"], "GB", -6.7, 54.65], [["scotland"], "GB", -4.2, 56.8], [["wales"], "GB", -3.7, 52.3],
+  // More waters, so an attack at sea is drawn at sea and not on the nearest country named in the
+  // report. An optional fifth item is the label to show when it isn't simply the first name. The
+  // Gulf is labelled with both of its names: Iran and the Arab states each use one.
+  [["persian gulf", "arabian gulf"], "", 51.8, 26.9, "Persian Gulf (Arabian Gulf)"], [["gulf of oman", "sea of oman"], "", 58.8, 24.7, "Gulf of Oman"], [["arabian sea"], "", 64.0, 17.0],
+  [["bab el-mandeb", "bab al-mandab", "bab al-mandeb", "bab el mandeb", "bab al mandab", "bab el-mandeb strait", "bab al-mandab strait", "bab al-mandeb strait"], "", 43.4, 12.6, "Bab el-Mandeb"],
+  [["indian ocean"], "", 80.0, -10.0], [["mediterranean sea", "mediterranean"], "", 18.0, 35.0], [["baltic sea"], "", 20.0, 56.5], [["sea of azov", "azov sea"], "", 36.6, 46.1, "Sea of Azov"],
+  [["caspian sea"], "", 51.0, 41.5], [["gulf of guinea"], "", 3.0, 2.0, "Gulf of Guinea"], [["east china sea"], "", 125.0, 29.0], [["caribbean sea", "caribbean"], "", -75.0, 15.0],
 ];
 // Aliases for cities whose usual English spelling differs from GeoNames
-out.aliases = { kiev: "kyiv", odesa: "odessa", kharkov: "kharkiv", bombay: "mumbai", "khan younis": "khan yunis", mykolayiv: "mykolaiv", "st petersburg": "saint petersburg", "st. petersburg": "saint petersburg" };
+out.aliases = { kiev: "kyiv", odesa: "odessa", kharkov: "kharkiv", bombay: "mumbai", "khan younis": "khan yunis", mykolaiv: "mykolayiv", zaporizhzhia: "zaporizhia", zaporizhzhya: "zaporizhia", "st petersburg": "saint petersburg", "st. petersburg": "saint petersburg",
+  // Gulf and Red Sea ports that are often in shipping-attack news
+  fujairah: "al fujairah city", "ras al khaimah": "ras al khaimah city", "ras al-khaimah": "ras al khaimah city", ajman: "ajman city", "al ain": "al ain city",
+  hodeidah: "al hudaydah", hodeida: "al hudaydah", hudaydah: "al hudaydah" };
 fs.writeFileSync(process.argv[3], JSON.stringify(out));
 console.log("cities", out.cities.length, "airports", out.airports.length, "countries", out.countries.length, "size", fs.statSync(process.argv[3]).size);
