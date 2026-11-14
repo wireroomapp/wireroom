@@ -69,6 +69,12 @@ for (const k of out.countries) {
   k[2] = Math.round(wmedian(cs.map((c) => [c[3], c[2]])) * 100) / 100;
   k[3] = Math.round(wmedian(cs.map((c) => [c[4], c[2]])) * 100) / 100;
 }
+// Small places that are often in conflict news but fall under the size limits above (added by hand)
+for (const [names, iso, pop, lon, lat, name] of [
+  [["kuwait city"], "KW", 300000, 47.978, 29.369, "Kuwait City"], [["marib", "ma'rib"], "YE", 17000, 45.326, 15.463, "Marib"], [["natanz"], "IR", 12000, 51.916, 33.513, "Natanz"],
+  [["fordow", "fordo"], "IR", 1000, 50.99, 34.88, "Fordow"], [["duqm"], "OM", 12000, 57.7, 19.66, "Duqm"], [["pahalgam"], "IN", 6000, 75.32, 34.01, "Pahalgam"],
+  [["sderot"], "IL", 28000, 34.596, 31.525, "Sderot"], [["ust-luga"], "RU", 2000, 28.32, 59.67, "Ust-Luga"], [["ras tanura"], "SA", 70000, 50.16, 26.64, "Ras Tanura"],
+]) if (!out.cities.some((c) => c[1] === iso && c[0].includes(names[0]))) out.cities.push([names, iso, pop, lon, lat, name]);
 // Regions and seas that often appear in conflict and shipping news (approximate centers)
 out.regions = [
   [["gaza strip", "gaza"], "PS", 34.4, 31.42], [["west bank"], "PS", 35.25, 31.95], [["crimea"], "UA", 34.1, 45.3], [["donbas", "donbass"], "UA", 38.5, 48.2],
@@ -89,6 +95,25 @@ out.regions = [
 out.aliases = { kiev: "kyiv", odesa: "odessa", kharkov: "kharkiv", bombay: "mumbai", "khan younis": "khan yunis", mykolaiv: "mykolayiv", zaporizhzhia: "zaporizhia", zaporizhzhya: "zaporizhia", "st petersburg": "saint petersburg", "st. petersburg": "saint petersburg",
   // Gulf and Red Sea ports that are often in shipping-attack news
   fujairah: "al fujairah city", "ras al khaimah": "ras al khaimah city", "ras al-khaimah": "ras al khaimah city", ajman: "ajman city", "al ain": "al ain city",
-  hodeidah: "al hudaydah", hodeida: "al hudaydah", hudaydah: "al hudaydah" };
+  hodeidah: "al hudaydah", hodeida: "al hudaydah", hudaydah: "al hudaydah",
+  // Usual news spellings of cities GeoNames spells another way (audit of conflict-zone cities, Nov 2026)
+  kramatorsk: "kramators'k", kostiantynivka: "kostyantynivka", kupiansk: "kupjansk", kupyansk: "kupjansk", izium: "izyum", berdiansk: "berdyansk", makiivka: "makiyivka",
+  chornomorsk: "chornomors'k", sievierodonetsk: "syevyerodonets'k", severodonetsk: "syevyerodonets'k", lysychansk: "lysychans'k",
+  // "Rostov" in war news is Rostov-on-Don, not the small town of Rostov 1,000 km north
+  "rostov-on-don": "rostov-na-donu", rostov: "rostov-na-donu", ryazan: "ryazan'", engels: "engel's", grozny: "groznyy", syzran: "syzran'", "nizhny novgorod": "nizhniy novgorod", "veliky novgorod": "velikiy novgorod", novgorod: "velikiy novgorod", oryol: "orel",
+  "kiryat shmona": "qiryat shemona", nahariya: "nahariyya", jabalia: "jabalya", jabaliya: "jabalya", "deir al-balah": "dayr al balah", "deir al balah": "dayr al balah", jenin: "janin", tulkarem: "tulkarm",
+  "beit lahia": "bayt lahya", "beit lahiya": "bayt lahya", "beit hanoun": "bayt hanun", qalqilya: "qalqilyah", nabatieh: "nabatiye et tahta", nabatiyeh: "nabatiye et tahta",
+  daraa: "dar'a", deraa: "dar'a", hama: "hamah", raqqa: "ar raqqah", sweida: "as-suwayda", suwayda: "as-suwayda", tartus: "tartouss", palmyra: "tadmur", hasakah: "al hasakah", "deir ezzor": "deir ez-zor", "deir al-zor": "deir ez-zor",
+  taiz: "ta'izz", saada: "sa'dah", basra: "basrah", sulaymaniyah: "as sulaymaniyah", fallujah: "al fallujah", duhok: "dihok", dohuk: "dihok",
+  jazan: "jizan", jubail: "al jubayl", "khamis mushayt": "khamis mushait", misrata: "misratah", derna: "darnah", "al-fashir": "el fasher", "al fashir": "el fasher", "el-fasher": "el fasher" };
+// The name shown on the map, where the usual English spelling differs from GeoNames (list key -> label)
+out.labels = { "rostov-na-donu": "Rostov-on-Don", orel: "Oryol", "ryazan'": "Ryazan", "engel's": "Engels", groznyy: "Grozny", "syzran'": "Syzran", "nizhniy novgorod": "Nizhny Novgorod", "velikiy novgorod": "Veliky Novgorod",
+  kupjansk: "Kupiansk", "kramators'k": "Kramatorsk", kostyantynivka: "Kostiantynivka", izyum: "Izium", berdyansk: "Berdiansk", makiyivka: "Makiivka", "chornomors'k": "Chornomorsk", "syevyerodonets'k": "Sievierodonetsk", "lysychans'k": "Lysychansk",
+  zaporizhia: "Zaporizhzhia", mykolayiv: "Mykolaiv", odessa: "Odesa", "qiryat shemona": "Kiryat Shmona", nahariyya: "Nahariya", jabalya: "Jabalia", "dayr al balah": "Deir al-Balah", janin: "Jenin", tulkarm: "Tulkarem",
+  "bayt lahya": "Beit Lahia", "bayt hanun": "Beit Hanoun", qalqilyah: "Qalqilya", "nabatiye et tahta": "Nabatieh", "dar'a": "Daraa", hamah: "Hama", "ar raqqah": "Raqqa", "as-suwayda": "Sweida", tartouss: "Tartus", tadmur: "Palmyra", "al hasakah": "Hasakah",
+  "ta'izz": "Taiz", "sa'dah": "Saada", "al hudaydah": "Hodeidah", basrah: "Basra", "as sulaymaniyah": "Sulaymaniyah", "al fallujah": "Fallujah", dihok: "Duhok", jizan: "Jazan", "al jubayl": "Jubail", misratah: "Misrata", darnah: "Derna",
+  "al fujairah city": "Fujairah", "ras al khaimah city": "Ras Al Khaimah", "ajman city": "Ajman", "al ain city": "Al Ain" };
+for (const c of out.cities) { const l = c[0].map((n) => out.labels[n]).find(Boolean); if (l && !(c[1] === "US")) c[5] = l; }
+delete out.labels;
 fs.writeFileSync(process.argv[3], JSON.stringify(out));
 console.log("cities", out.cities.length, "airports", out.airports.length, "countries", out.countries.length, "size", fs.statSync(process.argv[3]).size);

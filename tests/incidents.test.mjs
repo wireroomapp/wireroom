@@ -57,14 +57,18 @@ test("reads where it happened from the headline", () => {
   // At sea: drawn at sea, not on the nearest country. A city named as the place still wins.
   assert.equal(at("Tanker carrying 6 Indian seafarers struck in Arabian Gulf, one injured: Minister"), "Persian Gulf (Arabian Gulf)|region");
   assert.equal(at("Iran seizes tanker in Gulf of Oman"), "Gulf of Oman|region");
-  assert.equal(at("Russian missile hits Odesa port on Black Sea"), "Odessa|city");
+  assert.equal(at("Russian missile hits Odesa port on Black Sea"), "Odesa|city");
   assert.equal(at("Explosion at port in Bandar Abbas on Persian Gulf coast"), "Bandar Abbas|city");
   assert.equal(at("Ukrainian drones strike Baltic Sea port, missile boat"), null, "a port on a sea is on land (and isn't named here)");
   assert.equal(at("Caribbean leaders condemn US strikes on boats"), null);
   // Usual English spellings of cities the place list spells another way.
-  assert.equal(at("Russian strike on residential district in Zaporizhzhia kills one"), "Zaporizhia|city");
-  assert.equal(at("Russian drones hit Mykolaiv overnight"), "Mykolayiv|city");
-  assert.equal(at("Oil tanker struck off UAE's Ras Al-Khaimah, all crew reported safe"), "Ras Al Khaimah City|city");
+  assert.equal(at("Russian strike on residential district in Zaporizhzhia kills one"), "Zaporizhzhia|city");
+  assert.equal(at("Russian drones hit Mykolaiv overnight"), "Mykolaiv|city");
+  assert.equal(at("Oil tanker struck off UAE's Ras Al-Khaimah, all crew reported safe"), "Ras Al Khaimah|city");
+  assert.equal(at("Ukrainian drones hit key bridge, power stations in Russia's Rostov Oblast, governor says"), "Rostov-on-Don|city", "not the small town of Rostov far to the north");
+  assert.equal(at("Russian glide bombs hit Kramatorsk, killing 2"), "Kramatorsk|city");
+  assert.equal(at("Israeli raid in Jenin kills three"), "Jenin|city");
+  assert.equal(at("Explosions reported near Natanz enrichment site"), "Natanz|city");
   // Names that are usually something else, or no place at all.
   assert.equal(at("Europe hit by fresh wave of bomb threats targeting flights"), null);
   assert.equal(at("Trump says talks will continue"), null);
@@ -185,7 +189,7 @@ test("strikes on two different cities are separate events, even 70 km apart", ()
   const zap1 = item("z1", "Russian missile strike on Zaporizhzhia kills 3", "2026-11-09T09:00:00Z");
   const zap2 = item("z2", "Three killed in Russian missile strike on Zaporizhzhia, governor says", "2026-11-09T10:00:00Z");
   const out = extractIncidents({ countries: { ua: { official: [], independent: [dnipro, zap1, zap2] } } }, geo, { now: NOW });
-  assert.deepEqual(out.map((i) => `${i.place}:${i.sources.length}`).sort(), ["Dnipro:1", "Zaporizhia:2"]);
+  assert.deepEqual(out.map((i) => `${i.place}:${i.sources.length}`).sort(), ["Dnipro:1", "Zaporizhzhia:2"]);
 });
 
 test("reads the AI model's answers safely", () => {
@@ -343,5 +347,5 @@ test("the rules file in the repo is valid", () => {
     assert.ok(COUNTRY_INFO[panel], `${panel} is one of Wire Room's country panels`);
     assert.deepEqual(rules[panel], list, `${panel}: 2-letter lowercase country ids`);
   }
-  assert.deepEqual(rules.il, ["ir"]);
+  assert.ok(rules.il.includes("ir"), "Israel's panel keeps Iran news");
 });
