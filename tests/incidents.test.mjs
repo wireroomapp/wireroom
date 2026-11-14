@@ -172,6 +172,11 @@ test("reads the AI model's answers safely", () => {
   assert.equal(parseVerdicts("not json", batch).size, 0);
   const body = requestBody(batch);
   assert.match(body.messages[0].content, /Drone strike hits Kharkiv/);
+  // What this model requires: no assistant prefill, no sampling settings; low effort; room to think.
+  assert.equal(body.messages[body.messages.length - 1].role, "user");
+  assert.ok(!("temperature" in body) && !("top_p" in body));
+  assert.deepEqual(body.output_config, { effort: "low" });
+  assert.ok(body.max_tokens >= 2500);
 });
 
 test("the AI check stops on an API error and keeps going without it", async () => {

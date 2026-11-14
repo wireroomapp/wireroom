@@ -9,7 +9,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { buildGeocoder, extractIncidents, warReports } from "../lib/incidents.mjs";
-import { AI_MODEL, MAX_TRIES, reportKey, judgeReports, pruneVerdicts, hiddenReports, needsReview, isAnswer, readPanelRules, estimateCost } from "../lib/ai-check.mjs";
+import { AI_MODEL, AI_EFFORT, MAX_TRIES, reportKey, judgeReports, pruneVerdicts, hiddenReports, needsReview, isAnswer, readPanelRules, estimateCost } from "../lib/ai-check.mjs";
 import { SHOW_DAYS, mergeArchive, snapshot } from "../lib/history.mjs";
 
 const ARCHIVE_FILE = "data/history/incidents.json";
@@ -80,7 +80,7 @@ try {
     const unread = all.filter((x) => needsReview(verdicts[x.key])).length;
     const gaveUp = Object.values(verdicts).filter((v) => v.pending && (v.tries || 0) >= MAX_TRIES).length;
     console.log(`AI review (${AI_MODEL}): ${sum.answered} of ${sum.sent} reports sent got an answer in ${sum.calls} calls (${sum.parts.join(", ") || "nothing to send"}): ${sum.offTopic} off-topic, ${sum.events} events. Still unread: ${unread}. Given up after ${MAX_TRIES} tries: ${gaveUp}.`);
-    console.log(`AI review cost: ${sum.usage.in.toLocaleString()} tokens in, ${sum.usage.out.toLocaleString()} out, about $${estimateCost(sum.usage).toFixed(3)} this run (estimate from secondhand prices).`);
+    console.log(`AI review cost: ${sum.usage.in.toLocaleString()} tokens in, ${sum.usage.out.toLocaleString()} out, about $${estimateCost(sum.usage).toFixed(3)} this run at Anthropic's listed prices (${sum.answered ? Math.round(sum.usage.out / sum.answered) : 0} output tokens per report, effort ${AI_EFFORT}).`);
     // What an incomplete reply looked like (model output about public headlines), to fix the cause.
     for (const p of sum.problems.slice(0, 3)) console.log(`AI reply incomplete (answered ${p.answered} of ${p.asked}, stop: ${p.stop || "?"}): ${JSON.stringify(p.head)}${p.tail ? ` … ${JSON.stringify(p.tail)}` : ""}`);
     if (sum.problems.length > 3) console.log(`AI reply incomplete in ${sum.problems.length} calls in all.`);
