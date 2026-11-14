@@ -122,9 +122,10 @@ function NewsCard({ item, onPin }) {
   const [showOriginal, setShowOriginal] = useState(false);
   const tr = item.tr && item.tr.headline ? item.tr : null;
   const english = Boolean(tr) && !showOriginal;
-  return <article className="card">
+  return <article className={`card ${item.hiddenByAi ? "off-topic" : ""}`}>
     <div className="card-meta"><SourceTag type={item.sourceType}/><span>{item.source}</span><span>{item.date}</span>
-      {item.countryLabel && <span className="card-gov">{item.countryLabel}</span>}</div>
+      {item.countryLabel && <span className="card-gov">{item.countryLabel}</span>}
+      {item.hiddenByAi && <span className="card-offtopic">OFF-TOPIC (AI REVIEW): {String(item.hiddenByAi).toUpperCase()}</span>}</div>
     {tr && (
       <div className="tr-note">
         <span>{english ? `MACHINE-TRANSLATED FROM ${languageName(tr.from).toUpperCase()}` : `ORIGINAL · ${languageName(tr.from).toUpperCase()}`}</span>
@@ -192,6 +193,7 @@ export default function WireRoomV2() {
         if (abortRef.current) return;
         if (data && Array.isArray(data.items) && data.items.length) {
           setFeed(data.items);
+          setOffTopic({ hidden: data.hidden || 0, aiReview: Boolean(data.aiReview) });
         }
       })
       .catch(() => {
@@ -248,6 +250,9 @@ export default function WireRoomV2() {
   // Trackers (new map only): MILITARY (wars + reported strikes), TERRORISM, CYBER. See contextData.js.
   const [militaryOn, setMilitaryOn] = useState(Boolean(ML && (INITIAL_URL_VIEW.war || INITIAL_URL_VIEW.day)));
   // The day the EVENTS trackers show: null = today (live), or a past local day "YYYY-MM-DD".
+  // AI review (lib/ai-check.mjs): off-topic NEWS reports the server hides, and whether to show them.
+  const [showOffTopic, setShowOffTopic] = useState(false);
+  const [offTopic, setOffTopic] = useState({ hidden: 0, aiReview: false });
   const [mapDay, setMapDay] = useState(() => (ML && INITIAL_URL_VIEW.day && INITIAL_URL_VIEW.day < localDay() ? INITIAL_URL_VIEW.day : null));
   const [terrorOn, setTerrorOn] = useState(false);
   const [cyberOn, setCyberOn] = useState(false);
@@ -366,7 +371,7 @@ export default function WireRoomV2() {
   }
 
   // Fetch one country's reports for a mode (OFFICIAL / NEWS / BOTH).
-  async function fetchCountryReports(country, activeMode) {
+  async function fetchCountryReports(country, activeMode, showHiddenOverride) {
     // Cancel whatever request was still in flight — without this, a
     // slower older request (e.g. from a tab you clicked a moment ago)
     // can resolve AFTER a newer one and silently overwrite it, showing
@@ -378,7 +383,7 @@ export default function WireRoomV2() {
     try {
       // Production contract. No browser API key: the future backend owns this request.
       const response = await fetch(
-        `${API_BASE}/api/news?country=${encodeURIComponent(country.id)}&mode=${encodeURIComponent(activeMode)}`,
+        `${API_BASE}/api/news?country=${encodeURIComponent(country.id)}&mode=${encodeURIComponent(activeMode)}${(typeof showHiddenOverride === "boolean" ? showHiddenOverride : showOffTopic) ? "&showHidden=1" : ""}`,
         { signal: controller.signal, cache: "no-store" }
       );
       if (response.ok) {
@@ -386,6 +391,7 @@ export default function WireRoomV2() {
  	if (abortRef.current !== controller) return;
        if (Array.isArray(data.items) && abortRef.current === controller) {
   setFeed(data.items);
+  setOffTopic({ hidden: data.hidden || 0, aiReview: Boolean(data.aiReview) });
 }
         if (typeof data.officialVerified === "boolean") {
           setOfficialVerifiedMap(prev => ({ ...prev, [country.id]: data.officialVerified }));
@@ -403,7 +409,7 @@ export default function WireRoomV2() {
   // Opened from a shared link: load that country's reports once.
   useEffect(() => {
     if (INITIAL_COUNTRY) fetchCountryReports(INITIAL_COUNTRY, INITIAL_URL_VIEW.mode || "official");
-  }, []); // only on the first page load
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- only on the first page load
 
   // Keep the address bar in step with what's open, so copying it shares this exact view.
   useEffect(() => {
@@ -433,20 +439,29 @@ export default function WireRoomV2() {
     setTimeout(() => setLinkNote(""), 2200);
   }
 
-  function loadGlobal() {
+  function loadGlobal(showHiddenOverride = undefined) {
     if (view !== "global") resetIntelFilters();
     setPage(1);
     setSelected(null);
     setView("global");
     setWarView(null);
-    fetch(`${API_BASE}/api/global?mode=both`)
+    const show = typeof showHiddenOverride === "boolean" ? showHiddenOverride : showOffTopic;
+    fetch(`${API_BASE}/api/global?mode=both${show ? "&showHidden=1" : ""}`)
       .then(r => r.ok ? r.json() : null)
       .then(data => {
         if (data && Array.isArray(data.items) && data.items.length) {
           setFeed(data.items);
+          setOffTopic({ hidden: data.hidden || 0, aiReview: Boolean(data.aiReview) });
         }
       })
       .catch(() => {});
+  }
+  // SHOW / HIDE the reports the AI review marked off-topic, for the panel that's open.
+  function toggleOffTopic() {
+    const next = !showOffTopic;
+    setShowOffTopic(next);
+    if (view === "country" && selected) { setLoading(true); fetchCountryReports(selected, mode, next); }
+    else if (view === "global") loadGlobal(next);
   }
   function closePanel() {
     resetIntelFilters();
@@ -1460,7 +1475,7 @@ export default function WireRoomV2() {
           />
         )}
         <div className="map-note">SELECT A COUNTRY &bull; CLICK MARKER FOR SOURCES</div>
-        {view === "closed" && <button className="global-fab" onClick={loadGlobal}>GLOBAL FEED</button>}      </section>
+        {view === "closed" && <button className="global-fab" onClick={() => loadGlobal()}>GLOBAL FEED</button>}      </section>
 
       <aside className={`panel ${view !== "closed" ? "open" : ""}`}>
         <div className="panel-head">
@@ -1565,6 +1580,14 @@ export default function WireRoomV2() {
               REPORTS {pageStart + 1}–{Math.min(pageStart + REPORTS_PER_PAGE, visibleFeed.length)} OF {visibleFeed.length}
               {" "}•{" "}PAGE {Math.min(page, totalPages)} / {totalPages}
             </span>
+            {view !== "war" && offTopic.aiReview && (offTopic.hidden > 0 || showOffTopic) && (
+              <span className="offtopic-note">
+                {showOffTopic
+                  ? `SHOWING ${offTopic.hidden} OFF-TOPIC NEWS REPORT${offTopic.hidden === 1 ? "" : "S"} (MARKED)`
+                  : `AI REVIEW HID ${offTopic.hidden} NEWS REPORT${offTopic.hidden === 1 ? "" : "S"} IT JUDGED OFF-TOPIC`}
+                <button type="button" onClick={toggleOffTopic}>{showOffTopic ? "HIDE" : "SHOW"}</button>
+              </span>
+            )}
             <div className="pagination-buttons">
               <button
                 disabled={page <= 1}
@@ -1602,7 +1625,11 @@ const CSS = `
 @media(max-width:700px){.subtitle{display:none}.topbar{padding:0 14px}.status{margin-left:auto}.status-tag{display:none}}
 *{box-sizing:border-box} body{margin:0;background:#071019} .app{min-height:100vh;background:#071019;color:#e8e3d8;font-family:Arial,sans-serif}.topbar{height:64px;border-bottom:1px solid #1c2a3b;display:flex;align-items:center;padding:0 22px;gap:18px}.brand{font-weight:800;letter-spacing:.12em;font-size:21px}.brand b{color:#c9974b}.subtitle{font:11px monospace;color:#718198;letter-spacing:.08em}.status{margin-left:auto;font:10px monospace;color:#4fa6a0}.toolbar{height:54px;border-bottom:1px solid #162538;display:flex;align-items:center;gap:9px;padding:8px 18px}.toolbar input,.toolbar select,.mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace}.toolbar input{width:190px}.mode{margin-left:auto;display:flex}.mode button{cursor:pointer}.mode button.active{color:#c9974b;border-color:#c9974b}.layout{height:calc(100vh - 118px);display:flex}.map-wrap{position:relative;flex:1;min-width:0}.map{width:100%;height:100%;touch-action:none;cursor:grab}.map:active{cursor:grabbing}.ocean{fill:#0b1725;stroke:#21334a}.grid{fill:none;stroke:#142233;stroke-width:.5}.land{fill:#142230;stroke:#2a3c50;stroke-width:.65}.marker{cursor:pointer}.dot{fill:#c9974b}.dot.active{fill:#e8e3d8;stroke:#c9974b;stroke-width:2}.pulse{fill:none;stroke:#c9974b;stroke-width:1;opacity:.55;animation:pulse 2s infinite;pointer-events:none}.marker text{font:8px monospace;fill:#65758a;text-anchor:middle}.map-note{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:18px;font:10px monospace;color:#4e6076}.global-fab{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));right:18px;background:#0c1724;border:1px solid #c9974b;color:#c9974b;padding:8px 14px;font:10px monospace;letter-spacing:.06em;cursor:pointer;z-index:5}.panel{width:410px;background:#0c1724;border-left:1px solid #1c2a3b;padding:20px;overflow:auto;display:none;flex-direction:column}.panel.open{display:flex}.panel-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #1c2a3b;padding-bottom:14px;margin-bottom:14px}.panel-head h1{margin:2px 0 4px;font-size:28px}.panel-head p{margin:0;color:#718198;font:10px monospace;line-height:1.5}.panel-head button{height:30px;background:none;border:1px solid #26384d;color:#8795a7;cursor:pointer}.panel-actions{display:flex;gap:6px;align-items:flex-start;flex-shrink:0}.panel-head .link-btn{font:10px monospace;letter-spacing:.06em;padding:0 9px;min-width:44px}.panel-head .link-btn:hover{border-color:#c9974b;color:#e8e3d8}.link-toast{position:fixed;left:50%;top:76px;transform:translateX(-50%);z-index:120;background:#0c1724;border:1px solid #c9974b;color:#e8e3d8;font:10px monospace;letter-spacing:.08em;padding:8px 12px}.panel-mode{display:none}.panel-mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace;cursor:pointer}.panel-mode button.active{color:#c9974b;border-color:#c9974b}.eyebrow{font:9px monospace;letter-spacing:.12em;color:#4fa6a0}.source-status{margin:6px 0 0;font:10px monospace;letter-spacing:.04em}.source-status.verified{color:#4fa6a0}.source-status.unverified{color:#c9974b}
 .source-status.war{color:#ff8a82}
-.card-gov{color:#c9974b;letter-spacing:.04em}.source-note{margin:3px 0 0;font:9px/1.4 monospace;color:#5d6d81}.loading,.empty{font:11px monospace;color:#718198;padding:24px 4px;line-height:1.7}.card{border:1px solid #1d2d40;background:#071019;padding:13px;margin-bottom:10px}.annotation-tools{max-width:calc(100% - 350px)}@media(max-width:800px){.annotation-tools{max-width:calc(100% - 20px)}}.card-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:#586b82;font:9px monospace;margin-bottom:8px}.tr-note{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:-2px 0 6px;font:9px monospace;letter-spacing:.06em;color:#4fa6a0}.tr-note button{background:none;border:1px solid #26384d;color:#8795a7;font:9px monospace;letter-spacing:.06em;padding:2px 6px;cursor:pointer}.tr-note button:hover{border-color:#c9974b;color:#e8e3d8}.tag{padding:2px 5px;border:1px solid}.tag.official{color:#4fa6a0;border-color:#315e5b}.tag.independent{color:#8a98aa;border-color:#3a4655}.tag.track{color:#7cc4ff;border-color:#2f4f6b}.card h3{font-size:14px;line-height:1.35;margin:0 0 7px}.card p{font-size:12px;line-height:1.5;color:#9ba8b8;margin:0 0 8px}.card a{font:10px monospace;color:#c9974b;text-decoration:none}.pagination{border:1px solid #1d2d40;background:#071019;padding:10px;margin-bottom:10px;font:9px monospace;color:#718198}.pagination-info{display:block;margin-bottom:8px}.pagination-buttons{display:flex;gap:6px}.pagination-buttons button{flex:1;background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:7px 8px;font:9px monospace;cursor:pointer}.pagination-buttons button:hover:not(:disabled){color:#c9974b;border-color:#c9974b}.pagination-buttons button:disabled{opacity:.35;cursor:default}@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.2);opacity:0}}@media(max-width:800px){.layout{height:calc(100dvh - 118px);min-height:0;position:relative;overflow:hidden}.panel{display:flex;position:absolute;right:0;top:0;bottom:0;width:min(420px,100%);transform:translateX(100%);transition:transform .25s;z-index:4}.panel.open{transform:translateX(0)}.subtitle{display:none}.toolbar{height:auto;min-height:54px;overflow:hidden;flex-wrap:wrap;padding:8px 10px;gap:6px}.toolbar input{width:min(150px,calc(100vw - 20px))}.toolbar select{max-width:110px}.mode{margin-left:auto;flex-shrink:0}.mode button{padding:8px 7px}.toolbar .mode{display:none}.panel-mode{display:flex;gap:6px;margin:-4px 0 14px;padding-bottom:12px;border-bottom:1px solid #1c2a3b}.panel-mode button{flex:1;padding:8px 5px}.map-wrap{height:100%;min-height:0}.status{margin-left:auto;gap:6px}.status-tag{display:none}.hdr-btn{padding:6px 7px;letter-spacing:.03em}}
+.card-gov{color:#c9974b;letter-spacing:.04em}
+.card.off-topic{opacity:.62}
+.card-offtopic{color:#9b7bff;letter-spacing:.04em}
+.offtopic-note{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font:9px monospace;color:#9ba8b8;letter-spacing:.05em;margin-top:6px;flex-basis:100%}
+.offtopic-note button{background:none;border:1px solid #3d3566;color:#b7a4ff;font:9px monospace;padding:3px 7px;cursor:pointer;letter-spacing:.06em}.source-note{margin:3px 0 0;font:9px/1.4 monospace;color:#5d6d81}.loading,.empty{font:11px monospace;color:#718198;padding:24px 4px;line-height:1.7}.card{border:1px solid #1d2d40;background:#071019;padding:13px;margin-bottom:10px}.annotation-tools{max-width:calc(100% - 350px)}@media(max-width:800px){.annotation-tools{max-width:calc(100% - 20px)}}.card-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:#586b82;font:9px monospace;margin-bottom:8px}.tr-note{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:-2px 0 6px;font:9px monospace;letter-spacing:.06em;color:#4fa6a0}.tr-note button{background:none;border:1px solid #26384d;color:#8795a7;font:9px monospace;letter-spacing:.06em;padding:2px 6px;cursor:pointer}.tr-note button:hover{border-color:#c9974b;color:#e8e3d8}.tag{padding:2px 5px;border:1px solid}.tag.official{color:#4fa6a0;border-color:#315e5b}.tag.independent{color:#8a98aa;border-color:#3a4655}.tag.track{color:#7cc4ff;border-color:#2f4f6b}.card h3{font-size:14px;line-height:1.35;margin:0 0 7px}.card p{font-size:12px;line-height:1.5;color:#9ba8b8;margin:0 0 8px}.card a{font:10px monospace;color:#c9974b;text-decoration:none}.pagination{border:1px solid #1d2d40;background:#071019;padding:10px;margin-bottom:10px;font:9px monospace;color:#718198}.pagination-info{display:block;margin-bottom:8px}.pagination-buttons{display:flex;gap:6px}.pagination-buttons button{flex:1;background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:7px 8px;font:9px monospace;cursor:pointer}.pagination-buttons button:hover:not(:disabled){color:#c9974b;border-color:#c9974b}.pagination-buttons button:disabled{opacity:.35;cursor:default}@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.2);opacity:0}}@media(max-width:800px){.layout{height:calc(100dvh - 118px);min-height:0;position:relative;overflow:hidden}.panel{display:flex;position:absolute;right:0;top:0;bottom:0;width:min(420px,100%);transform:translateX(100%);transition:transform .25s;z-index:4}.panel.open{transform:translateX(0)}.subtitle{display:none}.toolbar{height:auto;min-height:54px;overflow:hidden;flex-wrap:wrap;padding:8px 10px;gap:6px}.toolbar input{width:min(150px,calc(100vw - 20px))}.toolbar select{max-width:110px}.mode{margin-left:auto;flex-shrink:0}.mode button{padding:8px 7px}.toolbar .mode{display:none}.panel-mode{display:flex;gap:6px;margin:-4px 0 14px;padding-bottom:12px;border-bottom:1px solid #1c2a3b}.panel-mode button{flex:1;padding:8px 5px}.map-wrap{height:100%;min-height:0}.status{margin-left:auto;gap:6px}.status-tag{display:none}.hdr-btn{padding:6px 7px;letter-spacing:.03em}}
 `;
 
 

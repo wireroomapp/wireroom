@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { classify, buildGeocoder, extractIncidents, buildWars, warReports, partiesFor } from "../lib/incidents.mjs";
-import { reportKey, parseVerdicts, requestBody, judgeReports } from "../lib/ai-check.mjs";
+import { reportKey, parseVerdicts, requestBody, judgeReports, hiddenReports, pruneVerdicts } from "../lib/ai-check.mjs";
 
 const gaz = JSON.parse(readFileSync(new URL("../lib/gazetteer.json", import.meta.url), "utf8"));
 const geo = buildGeocoder(gaz);
@@ -180,4 +180,42 @@ test("the AI check stops on an API error and keeps going without it", async () =
   assert.match(res.error, /401/);
   const ok = await judgeReports(batch, { apiKey: "test", fetchImpl: async () => ({ ok: true, json: async () => ({ content: [{ type: "text", text: '[{"i":0,"event":true,"kind":"military","subtype":"attack","place":"Kharkiv","country":"Ukraine","attacker":"Russia","target":"power plant"}]' }] }) }) });
   assert.equal(ok.verdicts.size, 1);
+});
+
+test("the AI review hides off-topic news, never official statements", async () => {
+  const sports = item("s", "Meet the new 'Bachelor,' a quarterback for the Washington Commanders", "2026-11-13T15:53:00Z", { source: "AP" });
+  const vote = item("v", "2026 U.S. Senate Election Results", "2026-11-13T18:58:00Z", { source: "AP" });
+  const gov = item("g", "President hosts the champions of the World Series", "2026-11-13T12:00:00Z", { sourceType: "official", source: "White House" });
+  const reply = '[{"i":0,"keep":false,"topic":"sports","event":false},{"i":1,"keep":true,"topic":"elections","event":false},{"i":2,"keep":false,"topic":"sports","event":false}]';
+  const batch = [sports, vote, gov];
+  const v = parseVerdicts(reply, batch, NOW);
+  assert.equal(v.get(reportKey(sports)).keep, false);
+  assert.equal(v.get(reportKey(sports)).topic, "sports");
+  assert.equal(v.get(reportKey(vote)).keep, true);
+  const verdicts = Object.fromEntries(v);
+  const cache = { countries: { us: { official: [gov], independent: [sports, vote] } } };
+  assert.deepEqual(hiddenReports(cache, verdicts), { [sports.url]: "sports" }, "official statements are never hidden");
+  // A missing "keep" means keep.
+  assert.equal(parseVerdicts('[{"i":0,"event":false}]', [vote], NOW).get(reportKey(vote)).keep, true);
+});
+
+test("saved answers last as long as their report is in the news cache", () => {
+  const saved = { a: { keep: true, at: "2026-01-01T00:00:00Z" }, b: { keep: false, at: "2026-01-01T00:00:00Z" }, c: { keep: true, at: "2026-11-12T00:00:00Z" } };
+  assert.deepEqual(Object.keys(pruneVerdicts(saved, NOW, new Set(["a"]))).sort(), ["a", "c"]);
+});
+
+test("the AI review works through batches a few at a time", async () => {
+  const reports = Array.from({ length: 60 }, (_, i) => item(`r${i}`, `Report ${i}`, "2026-11-09T08:00:00Z"));
+  let inFlight = 0, most = 0, calls = 0;
+  const fetchImpl = async (url, opts) => {
+    calls++; inFlight++; most = Math.max(most, inFlight);
+    await new Promise((r) => setTimeout(r, 5));
+    inFlight--;
+    const n = JSON.parse(opts.body).messages[0].content.split("\n").length - 1;
+    return { ok: true, json: async () => ({ content: [{ type: "text", text: JSON.stringify(Array.from({ length: n }, (_, i) => ({ i, keep: true, topic: "politics", event: false }))) }] }) };
+  };
+  const res = await judgeReports(reports, { apiKey: "k", fetchImpl, batchSize: 25, concurrency: 2 });
+  assert.equal(res.verdicts.size, 60);
+  assert.equal(calls, 3);
+  assert.ok(most <= 2);
 });

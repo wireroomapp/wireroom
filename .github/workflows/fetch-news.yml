@@ -54,9 +54,10 @@ jobs:
       # and summarizes wars from the UCDP events (lib/incidents.mjs). Never blocks the news update.
       - name: Build tracker markers
         continue-on-error: true
-        timeout-minutes: 5
-        # Optional: with an ANTHROPIC_API_KEY secret, an AI model double-checks attack-like reports
-        # (lib/ai-check.mjs). Without it, keyword rules only.
+        timeout-minutes: 10
+        # Optional: with an ANTHROPIC_API_KEY secret, an AI model reviews every new report once
+        # (lib/ai-check.mjs): hides off-topic news and checks tracker events. Without it, keyword
+        # rules only and nothing is hidden.
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node scripts/collect-incidents.mjs
@@ -80,7 +81,7 @@ jobs:
           git add data/cache.json
           if [ -f data/ships.json ]; then git add data/ships.json; fi
           if [ -f data/translations.json ]; then git add data/translations.json; fi
-          for f in data/conflict.json data/advisories.json data/context-state.json data/incidents.json data/war-intel.json data/ai-verdicts.json data/history/incidents.json; do if [ -f "$f" ]; then git add "$f"; fi; done
+          for f in data/conflict.json data/advisories.json data/context-state.json data/incidents.json data/war-intel.json data/ai-verdicts.json data/hidden-reports.json data/history/incidents.json; do if [ -f "$f" ]; then git add "$f"; fi; done
           git diff --staged --quiet || git commit -m "chore: update cached news feeds"
           # If someone pushed code while this job ran, rebase onto it and try again instead of
           # losing the hour's data.
