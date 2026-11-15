@@ -938,7 +938,10 @@ export default function WireRoomV2() {
       <div className="subtitle">Official statements and independent news, side by side</div>
       <div className="status">
         <span className="status-tag">Early access</span>
-        <button className="hdr-btn" onClick={() => setShowSources(true)}>Sources</button>
+        <button className="hdr-btn hdr-sources" onClick={() => setShowSources(true)} aria-label="Sources and method">
+          <svg className="hdr-sources-icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10l4 4v12H5z M15 4v4h4 M8 12h8 M8 16h8" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
+          <span className="hdr-sources-text">Sources</span>
+        </button>
         <button className="hdr-btn hdr-icon" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label={theme === "light" ? "Switch to dark theme" : "Switch to light theme"} title={theme === "light" ? "Dark theme" : "Light theme"}>
           {theme === "light"
             ? <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
@@ -1680,9 +1683,16 @@ const CSS = `
 .app .day-bar{background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);font-family:var(--font)}
 .app .day-row button{border-radius:6px;color:var(--text);font:500 13px var(--font)}
 @media(max-width:800px){
+.app{min-height:100dvh}
+.brand{white-space:nowrap;font-size:16px;gap:8px}
 .toolbar select{max-width:none;width:auto}
-.topbar{padding:0 10px 0 14px;gap:8px}.status{gap:6px}.status-tag{display:none}
-.hdr-btn{height:40px;padding:0 10px}.hdr-icon{width:40px}
+.topbar{padding:0 8px 0 12px;gap:6px}.status{gap:6px}.status-tag{display:none}
+.status{gap:4px}.hdr-btn{height:38px;padding:0 9px;font-size:13px}.hdr-icon{width:38px}
+.toolbar{flex-wrap:nowrap;height:56px}.toolbar input{flex:1 1 auto;min-width:0;width:auto}.toolbar select{flex:0 0 auto}
+}
+.hdr-sources-icon{display:none}
+@media(max-width:420px){
+.hdr-sources{width:38px;padding:0}.hdr-sources-text{display:none}.hdr-sources-icon{display:block}
 .layout{height:calc(100dvh - 112px)}
 .toolbar{height:auto;min-height:56px;padding:8px 10px;gap:6px}
 .tool-group .tool-btn{height:40px}
