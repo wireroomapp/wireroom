@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T09:59:02.088Z",
+  "generatedAt": "2026-11-15T11:14:59.720Z",
   "countries": {
     "us": {
       "official": [
@@ -9278,7 +9278,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-15T09:58:17.289Z",
+      "officialLastOkAt": "2026-11-15T11:09:57.170Z",
       "officialLastError": null
     },
     "ca": {
@@ -17509,7 +17509,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-15T09:58:19.325Z",
+      "officialLastOkAt": "2026-11-15T11:10:06.424Z",
       "officialLastError": null
     },
     "mx": {
@@ -29664,9 +29664,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-15T09:58:20.375Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=presidencia%20site%3Agob.mx&hl=es-MX&gl=MX&ceid=MX:es-MX: Status code 503"
     },
     "br": {
       "official": [
@@ -38695,9 +38695,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-15T09:58:21.505Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=Presidente%20da%20Rep%C3%BAblica%20site%3Agov.br%2Fplanalto&hl=pt-BR&gl=BR&ceid=BR:pt-BR: Status code 503"
     },
     "ar": {
       "official": [
@@ -44022,9 +44022,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-15T09:58:22.889Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=Comunicado%20Oficial%20N%C3%BAmero%20site%3Aargentina.gob.ar&hl=es-419&gl=AR&ceid=AR:es-419: Status code 503"
     },
     "gb": {
       "official": [
@@ -52066,7 +52066,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-15T09:58:24.151Z",
+      "officialLastOkAt": "2026-11-15T11:10:56.394Z",
       "officialLastError": null
     },
     "fr": {
@@ -60132,7 +60132,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-15T09:58:24.875Z",
+      "officialLastOkAt": "2026-11-15T11:11:04.451Z",
       "officialLastError": null
     },
     "de": {
@@ -67130,7 +67130,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-15T09:58:26.526Z",
+      "officialLastOkAt": "2026-11-15T11:11:12.898Z",
       "officialLastError": null
     },
     "it": {
@@ -75635,7 +75635,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-15T09:58:28.803Z",
+      "officialLastOkAt": "2026-11-15T11:11:21.441Z",
       "officialLastError": null
     },
     "es": {
@@ -83987,7 +83987,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-15T09:58:30.978Z",
+      "officialLastOkAt": "2026-11-15T11:11:30.167Z",
       "officialLastError": null
     },
     "pl": {
@@ -104580,9 +104580,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-15T09:58:33.920Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Apresident.gov.ua%20OR%20site%3Amfa.gov.ua%20OR%20site%3Amod.gov.ua&hl=uk&gl=UA&ceid=UA:uk: Status code 503"
     },
     "ru": {
       "official": [
@@ -117625,9 +117625,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-15T09:58:35.241Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Akremlin.ru&hl=en-US&gl=US&ceid=US:en: Status code 503"
     },
     "tr": {
       "official": [],
@@ -133465,9 +133465,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-15T09:58:37.948Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Agov.il%2Fen%20%22Prime%20Minister%20Office%22&hl=en-US&gl=US&ceid=US:en: Status code 503"
     },
     "ir": {
       "official": [],
@@ -170438,6 +170438,19 @@
           "importance": 3
         },
         {
+          "id": "in-official-81d67caf87b2716d",
+          "countryId": "in",
+          "sourceType": "official",
+          "source": "Prime Minister's Office",
+          "headline": "Prime Minister extends greetings to the nation on Sandhya Arghya of Chhath Mahaparv",
+          "summary": "Prime Minister extends greetings to the nation on Sandhya Arghya of Chhath Mahaparv",
+          "date": "Nov 15, 2026",
+          "publishedAt": "2026-11-15T00:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://www.pib.gov.in/PressReleseDetail.aspx?PRID=2336514",
+          "importance": 3
+        },
+        {
           "id": "in-official-511843622a42d9d9",
           "countryId": "in",
           "sourceType": "official",
@@ -176870,19 +176883,6 @@
           "publishedAt": "2026-09-13T00:00:00.000Z",
           "dateOnly": true,
           "url": "https://www.pib.gov.in/PressReleseDetail.aspx?PRID=2309664",
-          "importance": 3
-        },
-        {
-          "id": "in-official-4e7631e304c03e82",
-          "countryId": "in",
-          "sourceType": "official",
-          "source": "Prime Minister's Office",
-          "headline": "Prime Minister chaired the BRICS session on “Inclusive Global Governance and Strengthening Multilateralism” (September 12, 2026)",
-          "summary": "Prime Minister chaired the BRICS session on “Inclusive Global Governance and Strengthening Multilateralism” (September 12, 2026)",
-          "date": "Sep 13, 2026",
-          "publishedAt": "2026-09-13T00:00:00.000Z",
-          "dateOnly": true,
-          "url": "https://www.pib.gov.in/PressReleseDetail.aspx?PRID=2309642",
           "importance": 3
         }
       ],
@@ -183395,7 +183395,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-15T09:58:45.987Z",
+      "officialLastOkAt": "2026-11-15T11:13:53.762Z",
       "officialLastError": null
     },
     "pk": {
@@ -198078,7 +198078,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-15T09:58:53.463Z",
+      "officialLastOkAt": "2026-11-15T11:14:15.160Z",
       "officialLastError": null
     },
     "jp": {
@@ -206021,7 +206021,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-15T09:58:56.480Z",
+      "officialLastOkAt": "2026-11-15T11:14:24.630Z",
       "officialLastError": null
     },
     "kr": {
@@ -214228,7 +214228,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-15T09:58:58.064Z",
+      "officialLastOkAt": "2026-11-15T11:14:33.917Z",
       "officialLastError": null
     },
     "tw": {
@@ -221219,7 +221219,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-15T09:58:59.783Z",
+      "officialLastOkAt": "2026-11-15T11:14:43.401Z",
       "officialLastError": null
     },
     "id": {
@@ -235774,7 +235774,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-15T09:59:02.088Z",
+      "officialLastOkAt": "2026-11-15T11:14:59.720Z",
       "officialLastError": null
     }
   }
