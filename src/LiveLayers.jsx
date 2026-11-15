@@ -40,8 +40,8 @@ export const ZoneOutlines = memo(function ZoneOutlines({ zones, k, status, width
         const empty = z.count === 0;
         const color = empty ? "#c9974b" : "#4e6076";
         const text = empty
-          ? `${z.name.toUpperCase()} · ${waiting ? "WAITING FOR DATA" : "NO FREE COVERAGE"}`
-          : `${z.name.toUpperCase()} · ${z.count.toLocaleString()}`;
+          ? `${z.name} · ${waiting ? "waiting for data" : "no free coverage"}`
+          : `${z.name} · ${z.count.toLocaleString()}`;
         // Labels only once the map is wide enough on screen that they don't pile up (phones need to zoom in).
         const showLabel = width * k >= (empty ? 1100 : 2400);
         return (
@@ -112,65 +112,65 @@ export function Swatch({ kind, color, hollow = false, size = 11 }) {
 }
 
 const LIVE_CSS = `
-.live-box{position:absolute;left:18px;bottom:calc(36px + env(safe-area-inset-bottom));z-index:3;max-width:min(290px,calc(100% - 150px));background:rgba(10,14,20,.86);border:1px solid #26384d;padding:7px 8px;font:9px monospace;color:#8795a7;display:flex;flex-direction:column;gap:5px}
+.live-box{position:absolute;left:18px;bottom:calc(36px + env(safe-area-inset-bottom));z-index:3;max-width:min(290px,calc(100% - 150px));background:var(--overlay);border:1px solid var(--line-2);padding:7px 8px;font:11px var(--font);color:var(--muted);display:flex;flex-direction:column;gap:5px}
 .live-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.live-title{font-weight:700;letter-spacing:.1em;color:#4fa6a0}
-.live-btn{display:inline-flex;align-items:center;gap:5px;background:#0c1724;border:1px solid #26384d;color:#aeb8c6;font:10px monospace;padding:5px 7px;cursor:pointer;letter-spacing:.04em}
-.live-btn.on{border-color:#c9974b;color:#e8e3d8}
-.live-btn .n{color:#c9974b}
+.live-title{font-weight:700;letter-spacing:0;color:var(--ok)}
+.live-btn{display:inline-flex;align-items:center;gap:5px;background:var(--surface);border:1px solid var(--line-2);color:var(--text-2);font:12px var(--font);padding:5px 7px;cursor:pointer;letter-spacing:0}
+.live-btn.on{border-color:var(--accent);color:var(--text)}
+.live-btn .n{color:var(--accent)}
 .live-note{line-height:1.45}
-.live-warn{color:#c9974b;line-height:1.45}
+.live-warn{color:var(--accent);line-height:1.45}
 .live-legend{display:flex;flex-wrap:wrap;gap:3px 8px}
 .ctx-short{display:none}
 @media(max-width:800px){.ctx-short{display:block}}
 .live-legend span{display:inline-flex;align-items:center;gap:3px}
-.live-credit{color:#4e6076;line-height:1.4}
-.track-card{position:absolute;left:50%;bottom:calc(56px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:6;width:min(380px,calc(100% - 24px));max-height:min(62vh,560px);overflow:auto;background:rgba(10,14,20,.96);border:1px solid rgba(255,255,255,.28);padding:10px 12px;color:#e8e3d8;font-family:Arial,sans-serif}
+.live-credit{color:var(--muted);line-height:1.4}
+.track-card{position:absolute;left:50%;bottom:calc(56px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:6;width:min(380px,calc(100% - 24px));max-height:min(62vh,560px);overflow:auto;background:var(--overlay);border:1px solid var(--line-2);padding:10px 12px;color:var(--text);font-family:var(--font)}
 .track-card .tc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
-.track-card .tc-kind{font:9px monospace;letter-spacing:.1em;color:#4fa6a0}
-.track-card h3{margin:2px 0 8px;font-size:15px;letter-spacing:.02em}
-.track-card dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:0 0 8px;font:11px monospace}
-.track-card dt{color:#718198}
-.track-card dd{margin:0;color:#c4cbd6;overflow-wrap:anywhere}
-.track-card .tc-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;font:9px monospace;color:#4e6076}
-.track-card a{color:#c9974b;font:10px monospace;text-decoration:none}
-.track-card button{background:none;border:1px solid #26384d;color:#8795a7;cursor:pointer;font:12px monospace;padding:2px 7px}
-.track-card .tc-quote{font:11px/1.45 Arial,sans-serif;color:#9ba8b8;border-left:2px solid #26384d;padding-left:8px;margin:0 0 8px}
-.live-sub{font-weight:700;letter-spacing:.1em;color:#718198}
+.track-card .tc-kind{font:11px var(--font);letter-spacing:0;color:var(--ok)}
+.track-card h3{margin:2px 0 8px;font-size:15px;letter-spacing:0}
+.track-card dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:0 0 8px;font:13px var(--font)}
+.track-card dt{color:var(--muted)}
+.track-card dd{margin:0;color:var(--text-2);overflow-wrap:anywhere}
+.track-card .tc-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;font:11px var(--font);color:var(--muted)}
+.track-card a{color:var(--accent);font:12px var(--font);text-decoration:none}
+.track-card button{background:none;border:1px solid var(--line-2);color:var(--muted);cursor:pointer;font:14px var(--font);padding:2px 7px}
+.track-card .tc-quote{font:11px/1.45 var(--font);color:var(--text-2);border-left:2px solid var(--line-2);padding-left:8px;margin:0 0 8px}
+.live-sub{font-weight:700;letter-spacing:0;color:var(--muted)}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.dot.ring{background:none!important;border:1.5px solid #8795a7}
-.track-card .tc-pin{margin-top:9px;border-color:#315e5b;color:#4fa6a0;font:10px monospace;padding:5px 9px;letter-spacing:.04em}
+.dot.ring{background:none!important;border:1.5px solid var(--muted)}
+.track-card .tc-pin{margin-top:9px;border-color:var(--ok-line);color:var(--ok);font:12px var(--font);padding:5px 9px;letter-spacing:0}
 .track-card .tc-actions{display:flex;gap:6px;flex-wrap:wrap}
-.track-card .tc-intel{margin-top:9px;border-color:#7a2f2f;color:#ff9d96;font:10px monospace;padding:5px 9px;letter-spacing:.04em}
-.track-card .tc-intel.on{background:#2a1214;border-color:#ff4d4d;color:#ffd5d1}
-.track-card .tc-big{font:700 22px Arial,sans-serif;color:#ff6b62;margin:0 0 2px}
-.track-card .tc-lag{font:9px/1.45 monospace;color:#ff9d96;border:1px solid #4a2326;background:#1a0f11;padding:4px 6px;margin:0 0 6px;letter-spacing:.03em}
-.track-card .tc-lag.ok{color:#8795a7;border-color:#1d2a38;background:none}
-.track-card .tc-big small{display:block;font:10px monospace;color:#9ba8b8;margin-top:2px}
+.track-card .tc-intel{margin-top:9px;border-color:var(--danger-line);color:var(--danger);font:12px var(--font);padding:5px 9px;letter-spacing:0}
+.track-card .tc-intel.on{background:var(--danger-bg);border-color:#ff4d4d;color:var(--danger-strong)}
+.track-card .tc-big{font:700 22px var(--font);color:var(--danger);margin:0 0 2px}
+.track-card .tc-lag{font:11px/1.45 var(--font);color:var(--danger);border:1px solid var(--danger-line);background:var(--danger-bg);padding:4px 6px;margin:0 0 6px;letter-spacing:0}
+.track-card .tc-lag.ok{color:var(--muted);border-color:var(--line);background:none}
+.track-card .tc-big small{display:block;font:12px var(--font);color:var(--text-2);margin-top:2px}
 .track-card .tc-src{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-direction:column;gap:5px}
-.track-card .tc-src li{font:11px/1.4 Arial,sans-serif;color:#c4cbd6;border-left:2px solid #26384d;padding-left:7px}
-.track-card .tc-src li b{font:9px monospace;letter-spacing:.06em;color:#8795a7;margin-right:5px}
-.track-card .tc-src li b.off{color:#c9974b}
+.track-card .tc-src li{font:11px/1.4 var(--font);color:var(--text-2);border-left:2px solid var(--line-2);padding-left:7px}
+.track-card .tc-src li b{font:11px var(--font);letter-spacing:0;color:var(--muted);margin-right:5px}
+.track-card .tc-src li b.off{color:var(--accent)}
 .track-card .tc-src li a{margin-left:6px}
-.track-card .tc-adv{font:10px/1.45 monospace;color:#c9974b;margin:0 0 8px}
-.track-card .tc-legend{font:9px/1.5 monospace;color:#718198;margin:0 0 8px;display:flex;flex-direction:column;gap:2px}
+.track-card .tc-adv{font:12px/1.45 var(--font);color:var(--accent);margin:0 0 8px}
+.track-card .tc-legend{font:11px/1.5 var(--font);color:var(--muted);margin:0 0 8px;display:flex;flex-direction:column;gap:2px}
 .track-card .tc-legend span{display:inline-flex;align-items:center;gap:5px}
 .live-btn .sw{display:inline-flex}
-.live-box.past{border-color:#c9974b}
-.live-tabs{display:flex;align-items:center;gap:4px;margin-bottom:6px;border-bottom:1px solid #1d2a38;padding-bottom:5px;flex-wrap:wrap}
-.live-tab{background:none;border:0;border-bottom:2px solid transparent;color:#718198;font:700 10px monospace;letter-spacing:.1em;padding:3px 6px 4px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
-.live-tab.on{color:#4fa6a0;border-bottom-color:#4fa6a0}
-.live-tab .n{font-weight:400;color:#c9974b;letter-spacing:.04em}
-.live-tabs .live-sub{margin-left:4px;color:#5d6b7d;font:9px monospace}
+.live-box.past{border-color:var(--accent)}
+.live-tabs{display:flex;align-items:center;gap:4px;margin-bottom:6px;border-bottom:1px solid var(--line);padding-bottom:5px;flex-wrap:wrap}
+.live-tab{background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);font:700 12px var(--font);letter-spacing:0;padding:3px 6px 4px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.live-tab.on{color:var(--ok);border-bottom-color:var(--ok)}
+.live-tab .n{font-weight:400;color:var(--accent);letter-spacing:0}
+.live-tabs .live-sub{margin-left:4px;color:var(--muted);font:11px var(--font)}
 .track-card .tc-events{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-direction:column;gap:9px}
-.track-card .tc-events>li{border-top:1px solid #1d2a38;padding-top:8px}
-.track-card .ev-meta{font:9px monospace;color:#8795a7;letter-spacing:.04em;margin-bottom:3px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.track-card .ev-tag{border:1px solid currentColor;padding:0 4px;color:#ff9d96}
-.track-card .ev-tag.threat,.track-card .ev-tag.warning{color:#c9974b}
-.track-card .ev-title{font:600 13px/1.35 Arial,sans-serif;color:#f0ece4;margin-bottom:5px}
+.track-card .tc-events>li{border-top:1px solid var(--line);padding-top:8px}
+.track-card .ev-meta{font:11px var(--font);color:var(--muted);letter-spacing:0;margin-bottom:3px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.track-card .ev-tag{border:1px solid currentColor;padding:0 4px;color:var(--danger)}
+.track-card .ev-tag.threat,.track-card .ev-tag.warning{color:var(--accent)}
+.track-card .ev-title{font:600 13px/1.35 var(--font);color:var(--text);margin-bottom:5px}
 .track-card .tc-events .tc-src{margin-bottom:4px}
 .track-card .ev-pin{margin-top:2px;padding:3px 7px}
-.track-card .ev-by{font:10px monospace;color:#c4cbd6;margin:0 0 4px}
+.track-card .ev-by{font:12px var(--font);color:var(--text-2);margin:0 0 4px}
 .track-card .tc-foot a,.track-card .tc-foot button{white-space:nowrap}
 @media(max-width:800px){.live-box{left:10px;max-width:calc(100% - 140px);padding:6px}.live-title,.live-sub,.live-legend,.ctx-long{display:none}.live-btn{padding:5px 6px}.track-card{max-height:52vh}}
 `;
@@ -214,26 +214,26 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
       {t ? (
         <div className="live-tabs" role="tablist" aria-label="Tracker groups">
           <button type="button" role="tab" aria-selected={tab === "live"} className={`live-tab ${tab === "live" ? "on" : ""}`} onClick={() => pick("live")}>
-            LIVE{liveOn > 0 && <span className="n">{liveOn} ON</span>}
+            Live{liveOn > 0 && <span className="n">{liveOn} on</span>}
           </button>
           <button type="button" role="tab" aria-selected={tab === "events"} className={`live-tab ${tab === "events" ? "on" : ""}`} onClick={() => pick("events")}>
-            EVENTS{eventsOn > 0 && <span className="n">{eventsOn} ON</span>}
+            Events{eventsOn > 0 && <span className="n">{eventsOn} on</span>}
           </button>
           <span className="live-sub">{tab === "live" ? "Positions of planes and ships" : "Wars, attacks and hacks, from reports"}</span>
         </div>
       ) : null}
       <div className="live-row">
-        {!t && <span className="live-title">TRACKERS</span>}
-        {tab === "live" && btn(airOn, onToggleAir, "Military-flagged aircraft worldwide (ADS-B)", <Swatch kind="air" color={AIRCRAFT_COLOR} />, "PLANES", countLabel(air))}
-        {tab === "live" && btn(shipsOn, onToggleShips, "Ships at strategic chokepoints and Indian Ocean ports (AIS)", <Swatch kind="ship" color={shipColor("cargo")} />, "SHIPS", countLabel(ships))}
-        {tab === "events" && btn(t.militaryOn, () => t.onToggle("military"), "Armed conflicts (UCDP verified) and strikes reported in the news", <Swatch kind="war" color={TRACKER_COLORS.war} />, "MILITARY",
+        {!t && <span className="live-title">Trackers</span>}
+        {tab === "live" && btn(airOn, onToggleAir, "Military-flagged aircraft worldwide (ADS-B)", <Swatch kind="air" color={AIRCRAFT_COLOR} />, "Planes", countLabel(air))}
+        {tab === "live" && btn(shipsOn, onToggleShips, "Ships at strategic chokepoints and Indian Ocean ports (AIS)", <Swatch kind="ship" color={shipColor("cargo")} />, "Ships", countLabel(ships))}
+        {tab === "events" && btn(t.militaryOn, () => t.onToggle("military"), "Armed conflicts (UCDP verified) and strikes reported in the news", <Swatch kind="war" color={TRACKER_COLORS.war} />, "Military",
           inc ? trkCount(d, inc.wars.length) : trkCount(d, 0))}
-        {tab === "events" && btn(t.terrorOn, () => t.onToggle("terrorism"), "Terrorist attacks and threats reported in the last days", <Swatch kind="terrorism" color={TRACKER_COLORS.terrorism} />, "TERRORISM",
+        {tab === "events" && btn(t.terrorOn, () => t.onToggle("terrorism"), "Terrorist attacks and threats reported in the last days", <Swatch kind="terrorism" color={TRACKER_COLORS.terrorism} />, "Terrorism",
           inc ? trkCount(d, inc.terrorism.length) : trkCount(d, 0))}
-        {tab === "events" && btn(t.cyberOn, () => t.onToggle("cyber"), "Cyberattacks and warnings reported in the last days", <Swatch kind="cyber" color={TRACKER_COLORS.cyber} />, "CYBER",
+        {tab === "events" && btn(t.cyberOn, () => t.onToggle("cyber"), "Cyberattacks and warnings reported in the last days", <Swatch kind="cyber" color={TRACKER_COLORS.cyber} />, "Cyber",
           inc ? trkCount(d, inc.cyber.length) : trkCount(d, 0))}
       </div>
-      {tab === "live" && pastDay && (airOn || shipsOn) && <div className="live-warn">Live positions only: hidden while the map shows a past day. Press TODAY to see them.</div>}
+      {tab === "live" && pastDay && (airOn || shipsOn) && <div className="live-warn">Live positions only: hidden while the map shows a past day. Press Today to see them.</div>}
       {tab === "live" && airOn && !pastDay && <div className="live-note">Planes: military-flagged aircraft that broadcast ADS-B. Many don't.</div>}
       {tab === "live" && shipsOn && !pastDay && (
         <div className="live-note">
@@ -300,7 +300,7 @@ export function TrackCard({ kind, item, fetchedAt, onClose, onPin }) {
         ["ICAO hex", item.id?.toUpperCase()],
       ]
     : [
-        ["Type", item.category ? item.category.toUpperCase() : "UNKNOWN"],
+        ["Type", item.category ? item.category[0].toUpperCase() + item.category.slice(1) : "Unknown"],
         ["Speed", fmt(item.speedKt, " kt")],
         ["Course", fmt(item.course, "°")],
         ["Destination", item.destination],
@@ -315,7 +315,7 @@ export function TrackCard({ kind, item, fetchedAt, onClose, onPin }) {
       onPointerDown={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
       <div className="tc-head">
         <div>
-          <div className="tc-kind">{isAir ? "MILITARY AIRCRAFT · ADS-B" : "VESSEL · AIS"}</div>
+          <div className="tc-kind">{isAir ? "Military aircraft · ADS-B" : "Vessel · AIS"}</div>
           <h3>{title}</h3>
         </div>
         <button type="button" aria-label="Close" onClick={onClose}>&times;</button>
@@ -327,10 +327,10 @@ export function TrackCard({ kind, item, fetchedAt, onClose, onPin }) {
       </dl>
       <div className="tc-foot">
         <span>{updated ? `Updated ${updated}` : ""}{isAir ? "" : " · self-reported by the ship"}</span>
-        <a href={link} target="_blank" rel="noreferrer">{isAir ? "OPEN TRACK →" : "MORE DETAILS →"}</a>
+        <a href={link} target="_blank" rel="noreferrer">{isAir ? "Open track →" : "More details →"}</a>
       </div>
       {onPin && (
-        <button type="button" className="tc-pin" onClick={onPin}>PIN TO MAP</button>
+        <button type="button" className="tc-pin" onClick={onPin}>Pin to map</button>
       )}
     </div>
   );

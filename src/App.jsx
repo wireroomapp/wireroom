@@ -98,10 +98,10 @@ const DEMO_NEWS = [
   { id:"demo-4", countryId:"il", sourceType:"official", source:"Government source", headline:"Official government reporting placeholder", summary:"This demonstrates how country activity will surface on the global map.", date:"Demo", url:"#", importance:3 },
 ];
 
-const TAG_LABELS = { official: "OFFICIAL", aircraft: "AIRCRAFT", vessel: "VESSEL", conflict: "CONFLICT DATA", advisory: "ADVISORY" };
+const TAG_LABELS = { official: "Official", aircraft: "Aircraft", vessel: "Vessel", conflict: "Conflict data", advisory: "Advisory" };
 function SourceTag({ type }) {
   const cls = type === "official" ? "official" : type === "aircraft" || type === "vessel" || type === "conflict" || type === "advisory" ? "track" : "independent";
-  return <span className={`tag ${cls}`}>{TAG_LABELS[type] || "NEWS"}</span>;
+  return <span className={`tag ${cls}`}>{TAG_LABELS[type] || "News"}</span>;
 }
 
 // "uk" -> "Ukrainian", using the browser's own list of language names.
@@ -128,11 +128,11 @@ function NewsCard({ item, onPin }) {
   return <article className={`card ${item.hiddenByAi ? "off-topic" : ""}`}>
     <div className="card-meta"><SourceTag type={item.sourceType}/><span>{item.source}</span><span>{item.date}</span>
       {item.countryLabel && <span className="card-gov">{item.countryLabel}</span>}
-      {item.hiddenByAi && <span className="card-offtopic">{String(item.hiddenByAi).startsWith("about ") ? `NOT ABOUT THIS COUNTRY (AI REVIEW): ${String(item.hiddenByAi).toUpperCase()}` : `OFF-TOPIC (AI REVIEW): ${String(item.hiddenByAi).toUpperCase()}`}</span>}</div>
+      {item.hiddenByAi && <span className="card-offtopic">{String(item.hiddenByAi).startsWith("about ") ? `Not about this country (AI review): ${String(item.hiddenByAi)}` : `OFF-TOPIC (AI REVIEW): ${String(item.hiddenByAi).toUpperCase()}`}</span>}</div>
     {tr && (
       <div className="tr-note">
-        <span>{english ? `MACHINE-TRANSLATED FROM ${languageName(tr.from).toUpperCase()}` : `ORIGINAL · ${languageName(tr.from).toUpperCase()}`}</span>
-        <button type="button" onClick={() => setShowOriginal(v => !v)}>{english ? "SHOW ORIGINAL" : "SHOW ENGLISH"}</button>
+        <span>{english ? `Machine-translated from ${languageName(tr.from)}` : `Original · ${languageName(tr.from)}`}</span>
+        <button type="button" onClick={() => setShowOriginal(v => !v)}>{english ? "Show original" : "Show English"}</button>
       </div>
     )}
     <h3 lang={english ? "en" : tr ? tr.from : undefined}>{english ? tr.headline : item.headline}</h3>
@@ -141,8 +141,8 @@ function NewsCard({ item, onPin }) {
       const body = english ? (tr.summary || "") : item.summary;
       return body && !sameText(head, body) ? <p lang={english ? "en" : tr ? tr.from : undefined}>{body}</p> : null;
     })()}
-    {item.url && item.url !== "#" && <a href={item.url} target="_blank" rel="noreferrer">READ ORIGINAL →</a>}
-  {onPin && <button type="button" onClick={() => onPin(item)} style={{ marginLeft: 12, background: "none", border: "1px solid #315e5b", color: "#4fa6a0", font: "10px monospace", padding: "4px 8px", cursor: "pointer" }}>PIN TO MAP</button>}
+    {item.url && item.url !== "#" && <a href={item.url} target="_blank" rel="noreferrer">Read original →</a>}
+  {onPin && <button type="button" onClick={() => onPin(item)} style={{ marginLeft: 12, background: "none", border: "1px solid var(--ok-line)", color: "var(--ok)", font: "12px var(--font)", padding: "4px 8px", cursor: "pointer" }}>Pin to map</button>}
   </article>;
 }
 
@@ -182,6 +182,20 @@ export default function WireRoomV2() {
   const [showWelcome, setShowWelcome] = useState(() => { try { return !localStorage.getItem("wireroom-welcomed-v2"); } catch { return true; } });
   const dismissWelcome = () => { try { localStorage.setItem("wireroom-welcomed-v2", "1"); } catch { /* private mode: just close */ } setShowWelcome(false); };
   const [annotationDraft, setAnnotationDraft] = useState(null);
+  // Light or dark look. index.html sets the starting value before the page paints.
+  const [theme, setTheme] = useState(() => (typeof document !== "undefined" && document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark"));
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    try { localStorage.setItem("wireroom-theme", theme); } catch { /* private mode: still switches, just not remembered */ }
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", theme === "light" ? "#ffffff" : "#0e1116");
+  }, [theme]);
+  // The drawing tools fold away behind one Draw button. Open on wide screens, folded on phones, then remembered.
+  const [toolsOpen, setToolsOpen] = useState(() => {
+    try { const v = localStorage.getItem("wireroom-tools-open"); if (v === "1" || v === "0") return v === "1"; } catch { /* ignore */ }
+    return typeof window === "undefined" || window.innerWidth > 800;
+  });
+  useEffect(() => { try { localStorage.setItem("wireroom-tools-open", toolsOpen ? "1" : "0"); } catch { /* ignore */ } }, [toolsOpen]);
   const [labelDialog, setLabelDialog] = useState(null); // in-page label box (replaces browser pop-ups)
   const drawingBlockedRef = useRef(false); // true while a pinch (2+ fingers) is in progress
   const [annotationColor, setAnnotationColor] = useState("#d7dde8");
@@ -438,7 +452,7 @@ export default function WireRoomV2() {
         document.body.appendChild(box); box.select(); copied = document.execCommand("copy"); box.remove();
       } catch { copied = false; }
     }
-    setLinkNote(copied ? "LINK COPIED" : "COPY THE ADDRESS BAR TO SHARE");
+    setLinkNote(copied ? "Link copied" : "Copy the address bar to share");
     setTimeout(() => setLinkNote(""), 2200);
   }
 
@@ -870,12 +884,12 @@ export default function WireRoomV2() {
   }
 
   const toolButtonStyle = active => ({
-    border: "1px solid rgba(255,255,255,.18)",
-    background: active ? "rgba(255,255,255,.16)" : "rgba(10,14,20,.78)",
-    color: "#fff",
-    padding: "6px 9px",
-    fontSize: "11px",
-    fontWeight: 700,
+    border: "1px solid " + (active ? "var(--accent)" : "var(--line-2)"),
+    background: active ? "var(--accent)" : "var(--surface)",
+    color: active ? "var(--on-accent)" : "var(--text)",
+    borderRadius: 8,
+    padding: "8px 12px",
+    font: "600 13px var(--font)",
     cursor: "pointer"
   });
 
@@ -886,15 +900,15 @@ export default function WireRoomV2() {
     {showWelcome && (
       <div className="welcome-back" onClick={dismissWelcome}>
         <div className="welcome-card" role="dialog" aria-label="Welcome to Wire Room" onClick={e => e.stopPropagation()}>
-          <div className="eyebrow">EARLY ACCESS</div>
-          <h2>WIRE <b>ROOM</b></h2>
+          <div className="eyebrow">Early access</div>
+          <h2>Wire <b>Room</b></h2>
           <p>What a government says, next to what independent outlets report, for each country, on one map.</p>
           <ul>
-            <li>Tap a country to open its brief. Switch <b>OFFICIAL</b>, <b>NEWS</b>, or <b>BOTH</b>.</li>
-            <li>Use the drawing tools to mark up the map, add notes, and pin reports to markers.</li>
+            <li>Tap a country to open its brief. Switch <b>Official</b>, <b>News</b>, or <b>Both</b>.</li>
+            <li>Tap <b>Draw</b> (top-left of the map) to mark up the map, add notes and pin reports to markers. Tap it again to fold the tools away.</li>
             <li>Some countries have no verified official source yet. The panel says so instead of guessing.</li>
-            <li>Tap <b>LIVE</b> (bottom-left of the map) to show military aircraft, and ships at key chokepoints and Indian Ocean ports.</li>
-            {ML && <li>Switch the map to <b>SATELLITE</b>, <b>RELIEF</b> or <b>NIGHT</b> (NASA imagery), spin it as a <b>GLOBE</b>, or raise mountains in <b>3D</b>.</li>}
+            <li>Tap <b>Live</b> (bottom-left of the map) to show military aircraft, and ships at key chokepoints and Indian Ocean ports.</li>
+            {ML && <li>Switch the map to <b>Satellite</b>, <b>Relief</b> or <b>Night</b> (NASA imagery), spin it as a <b>Globe</b>, or raise mountains in <b>3D</b>.</li>}
           </ul>
           <div className="welcome-note">
             <h3>About the live layers</h3>
@@ -908,8 +922,8 @@ export default function WireRoomV2() {
           </div>
           <p className="welcome-fine">Your maps are saved in this browser only. Clearing site data will erase them. This is an early version, so rough edges are expected and feedback is welcome.</p>
           <div className="welcome-actions">
-            <button className="welcome-go" onClick={dismissWelcome}>ENTER THE WIRE ROOM</button>
-            {FEEDBACK_URL && <a className="welcome-link" href={FEEDBACK_URL} target="_blank" rel="noreferrer">GIVE FEEDBACK</a>}
+            <button className="welcome-go" onClick={dismissWelcome}>Enter the Wire Room</button>
+            {FEEDBACK_URL && <a className="welcome-link" href={FEEDBACK_URL} target="_blank" rel="noreferrer">Give feedback</a>}
           </div>
         </div>
       </div>
@@ -917,20 +931,28 @@ export default function WireRoomV2() {
     {linkNote && <div className="link-toast" role="status">{linkNote}</div>}
     {showSources && <SourcesPanel apiBase={API_BASE} feedbackUrl={FEEDBACK_URL} onClose={() => setShowSources(false)} onOpenCountry={id => { const c = COUNTRIES.find(x => x.id === id); setShowSources(false); if (c) loadCountry(c); }} />}
     <header className="topbar">
-      <div className="brand">WIRE <b>ROOM</b></div>
-      <div className="subtitle">OFFICIAL STATEMENTS • INDEPENDENT NEWS</div>
+      <div className="brand">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="2" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg>
+        Wire Room
+      </div>
+      <div className="subtitle">Official statements and independent news, side by side</div>
       <div className="status">
-        <span className="status-tag">EARLY ACCESS</span>
-        <button className="hdr-btn" onClick={() => setShowSources(true)}>SOURCES</button>
-        <button className="hdr-btn" onClick={() => setShowWelcome(true)} aria-label="About Wire Room">?</button>
-        {FEEDBACK_URL && <a className="hdr-btn" href={FEEDBACK_URL} target="_blank" rel="noreferrer">FEEDBACK</a>}
+        <span className="status-tag">Early access</span>
+        <button className="hdr-btn" onClick={() => setShowSources(true)}>Sources</button>
+        <button className="hdr-btn hdr-icon" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label={theme === "light" ? "Switch to dark theme" : "Switch to light theme"} title={theme === "light" ? "Dark theme" : "Light theme"}>
+          {theme === "light"
+            ? <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
+            : <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="2" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2" stroke="currentColor" strokeWidth="2" /></svg>}
+        </button>
+        <button className="hdr-btn hdr-icon" onClick={() => setShowWelcome(true)} aria-label="About Wire Room">?</button>
+        {FEEDBACK_URL && <a className="hdr-btn hdr-primary" href={FEEDBACK_URL} target="_blank" rel="noreferrer">Feedback</a>}
       </div>
     </header>
 
            <div className="toolbar">
-      <input value={query} onChange={e=>setQuery(e.target.value)} placeholder="SEARCH COUNTRY"/>
-      <select value={region} onChange={e=>setRegion(e.target.value)}>{regions.map(r=><option key={r}>{r}</option>)}</select>
-      <div className="mode"><button className={mode==="official"?"active":""} onClick={()=>changeMode("official")}>OFFICIAL</button><button className={mode==="both"?"active":""} onClick={()=>changeMode("both")}>BOTH</button><button className={mode==="news"?"active":""} onClick={()=>changeMode("news")}>NEWS</button></div>
+      <input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search countries" aria-label="Search countries"/>
+      <select value={region} onChange={e=>setRegion(e.target.value)} aria-label="Region">{regions.map(r=><option key={r} value={r}>{r === "ALL" ? "All regions" : r}</option>)}</select>
+      <div className="mode" role="group" aria-label="What to show"><button className={mode==="official"?"active":""} aria-pressed={mode==="official"} onClick={()=>changeMode("official")}>Official</button><button className={mode==="both"?"active":""} aria-pressed={mode==="both"} onClick={()=>changeMode("both")}>Both</button><button className={mode==="news"?"active":""} aria-pressed={mode==="news"} onClick={()=>changeMode("news")}>News</button></div>
     </div>
 
 
@@ -967,6 +989,7 @@ export default function WireRoomV2() {
             onPinPlace={mlPinPlace}
             controlRef={mlRef}
             focus={mapFocus}
+            theme={theme}
           />
         ) : (
         <svg
@@ -1199,135 +1222,85 @@ export default function WireRoomV2() {
           </g>
         </svg>
         )}
-        <div
-          className="annotation-tools"
-          style={{
-            position: "absolute",
-            top: 10,
-            left: 10,
-            zIndex: 3,
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 5,
-            alignItems: "center"
-          }}
-        >
-          <span
-            style={{
-              fontSize: "10px",
-              fontWeight: 800,
-              letterSpacing: ".08em",
-              color: "#fff",
-              background: "rgba(10,14,20,.78)",
-              padding: "7px 8px"
-            }}
-          >
-            ANALYST CANVAS
-          </span>
-
-          {[
-            ["select", "SELECT"],
-            ["marker", "MARKER"],
-            ["line", "LINE"],
-            ["shape", "SHAPE"],
-            ["text", "NOTE"]
-          ].map(([tool, label]) => (
+        <div className={"annotation-tools" + (toolsOpen ? " open" : "")}>
+          <div className="tools-row">
             <button
-              key={tool}
+              type="button"
+              className={"tool-btn tool-toggle" + (toolsOpen ? " active" : "")}
+              aria-expanded={toolsOpen}
+              aria-controls="draw-tools"
+              title={toolsOpen ? "Hide the drawing tools" : "Draw and annotate on the map"}
               onClick={() => {
-                setAnnotationTool(tool);
-                if (tool !== "select") setPinning(null); // picking a drawing tool cancels a pending pin
-                setAnnotationDraft(null);
-                setSelectedAnnotationId(null);
+                if (toolsOpen) {
+                  // Folding the tools away also puts the map back to normal tapping.
+                  setAnnotationTool("select");
+                  setAnnotationDraft(null);
+                }
+                setToolsOpen(!toolsOpen);
               }}
-              style={toolButtonStyle(annotationTool === tool)}
             >
-              {label}
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16z" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
+              Draw
+              <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" className="tool-chev"><path d={toolsOpen ? "M15 6l-6 6 6 6" : "M9 6l6 6-6 6"} fill="none" stroke="currentColor" strokeWidth="2.5" /></svg>
             </button>
-          ))}
 
-          {(annotationTool === "marker" || (annotations.find(a => a.id === selectedAnnotationId) || {}).type === "marker") && (() => {
+            {toolsOpen && (
+              <div id="draw-tools" className="tool-group" role="group" aria-label="Drawing tools">
+                {[
+                  ["select", "Select"],
+                  ["marker", "Marker"],
+                  ["line", "Line"],
+                  ["shape", "Shape"],
+                  ["text", "Note"]
+                ].map(([tool, label]) => (
+                  <button
+                    key={tool}
+                    type="button"
+                    aria-pressed={annotationTool === tool}
+                    className={"tool-btn" + (annotationTool === tool ? " active" : "")}
+                    onClick={() => {
+                      setAnnotationTool(tool);
+                      if (tool !== "select") setPinning(null); // picking a drawing tool cancels a pending pin
+                      setAnnotationDraft(null);
+                      setSelectedAnnotationId(null);
+                    }}
+                  >
+                    {label}
+                  </button>
+                ))}
+                <span className="tool-sep" aria-hidden="true" />
+                <button type="button" className="tool-btn quiet" onClick={editSelectedAnnotation} disabled={!selectedAnnotationId}>Edit</button>
+                <button type="button" className="tool-btn quiet" onClick={deleteSelectedAnnotation} disabled={!selectedAnnotationId}>Delete</button>
+                <button type="button" className="tool-btn quiet" onClick={clearAnnotations}>Clear</button>
+                <button type="button" className="tool-btn quiet" onClick={exportMap} disabled={exportState === "busy"} title="Save this map view as an image">
+                  {exportState === "busy" ? "Exporting…" : exportState === "error" ? "Export failed" : "Export"}
+                </button>
+              </div>
+            )}
+          </div>
+
+          {toolsOpen && (annotationTool === "marker" || (annotations.find(a => a.id === selectedAnnotationId) || {}).type === "marker") && (() => {
             const sel = annotations.find(a => a.id === selectedAnnotationId);
             const active = sel && sel.type === "marker" && annotationTool === "select" ? (sel.color || "#d7dde8") : annotationColor;
             return (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                  background: "rgba(10,14,20,.78)",
-                  color: "#fff",
-                  border: "1px solid rgba(255,255,255,.18)",
-                  padding: "4px 7px",
-                  fontSize: "10px",
-                  fontWeight: 700
-                }}
-              >
-                COLOR
-                <div style={{ display: "flex", gap: 5, alignItems: "center", flexWrap: "wrap" }}>
-                  {MARKER_COLORS.map(color => (
-                    <button
-                      key={color}
-                      type="button"
-                      title={"Marker color " + color}
-                      aria-label={"Marker color " + color}
-                      onClick={() => applyMarkerColor(color)}
-                      style={{
-                        width: 22,
-                        height: 22,
-                        borderRadius: "50%",
-                        padding: 0,
-                        border: active === color ? "2px solid #fff" : "1px solid rgba(255,255,255,.35)",
-                        background: color,
-                        cursor: "pointer",
-                        boxShadow: active === color ? "0 0 0 1px rgba(0,0,0,.9)" : "none"
-                      }}
-                    />
-                  ))}
-                </div>
+              <div className="tool-colors" role="group" aria-label="Marker color">
+                <span>Color</span>
+                {MARKER_COLORS.map(color => (
+                  <button
+                    key={color}
+                    type="button"
+                    title={"Marker color " + color}
+                    aria-label={"Marker color " + color}
+                    aria-pressed={active === color}
+                    className={"swatch" + (active === color ? " on" : "")}
+                    onClick={() => applyMarkerColor(color)}
+                    style={{ background: color }}
+                  />
+                ))}
               </div>
             );
           })()}
 
-          <button
-            onClick={editSelectedAnnotation}
-            disabled={!selectedAnnotationId}
-            style={{
-              ...toolButtonStyle(false),
-              opacity: selectedAnnotationId ? 1 : .45,
-              cursor: selectedAnnotationId ? "pointer" : "default"
-            }}
-          >
-            EDIT
-          </button>
-
-          <button
-            onClick={deleteSelectedAnnotation}
-            disabled={!selectedAnnotationId}
-            style={{
-              ...toolButtonStyle(false),
-              opacity: selectedAnnotationId ? 1 : .45,
-              cursor: selectedAnnotationId ? "pointer" : "default"
-            }}
-          >
-            DELETE
-          </button>
-
-          <button
-            onClick={clearAnnotations}
-            style={toolButtonStyle(false)}
-          >
-            CLEAR
-          </button>
-
-          <button
-            onClick={exportMap}
-            disabled={exportState === "busy"}
-            title="Save this map view as an image"
-            style={{ ...toolButtonStyle(false), borderColor: "#c9974b", color: "#c9974b" }}
-          >
-            {exportState === "busy" ? "EXPORTING…" : exportState === "error" ? "EXPORT FAILED" : "EXPORT"}
-          </button>
           {/* The date bar: its own row under the drawing tools (desktop and phones). */}
           {ML && eventsOn && (
             <DayBar day={mapDay} past={Boolean(mapDay)} loading={incidentData.status === "loading"}
@@ -1349,10 +1322,10 @@ export default function WireRoomV2() {
               zIndex: 6,
               width: "min(340px, calc(100% - 24px))",
               boxSizing: "border-box",
-              background: "rgba(10,14,20,.96)",
-              border: "1px solid rgba(255,255,255,.28)",
+              background: "var(--overlay)",
+              border: "1px solid var(--line-2)",
               padding: 12,
-              color: "#fff",
+              color: "var(--text)",
               fontSize: 11,
               fontWeight: 700,
               display: "flex",
@@ -1361,10 +1334,10 @@ export default function WireRoomV2() {
             }}
           >
             <div>
-              {labelDialog.kind === "marker" ? "MARKER LABEL (OPTIONAL)"
-                : labelDialog.kind === "text" ? "NOTE TEXT"
-                : labelDialog.kind === "edit-text" ? "EDIT NOTE"
-                : "EDIT LABEL"}
+              {labelDialog.kind === "marker" ? "Marker label (optional)"
+                : labelDialog.kind === "text" ? "Note text"
+                : labelDialog.kind === "edit-text" ? "Edit note"
+                : "Edit label"}
             </div>
             <input
               ref={labelInputRef}
@@ -1379,13 +1352,13 @@ export default function WireRoomV2() {
                 if (e.key === "Enter") submitLabelDialog();
                 if (e.key === "Escape") setLabelDialog(null);
               }}
-              style={{ fontSize: 16, padding: "6px 8px", background: "#0c1724", color: "#fff", border: "1px solid rgba(255,255,255,.28)" }}
+              style={{ fontSize: 16, padding: "6px 8px", background: "var(--surface)", color: "var(--text)", border: "1px solid var(--line-2)" }}
             />
             <div style={{ display: "flex", gap: 6 }}>
               <button type="button" onClick={submitLabelDialog} style={toolButtonStyle(true)}>
-                {labelDialog.kind === "marker" ? "PLACE MARKER" : labelDialog.kind === "text" ? "ADD NOTE" : "SAVE"}
+                {labelDialog.kind === "marker" ? "Place marker" : labelDialog.kind === "text" ? "Add note" : "Save"}
               </button>
-              <button type="button" onClick={() => setLabelDialog(null)} style={toolButtonStyle(false)}>CANCEL</button>
+              <button type="button" onClick={() => setLabelDialog(null)} style={toolButtonStyle(false)}>Cancel</button>
             </div>
           </div>
         )}
@@ -1393,14 +1366,14 @@ export default function WireRoomV2() {
         {(() => {
           const sel = annotations.find(a => a.id === selectedAnnotationId);
           const showList = !pinning && annotationTool === "select" && sel && sel.type === "marker" && sel.pins && sel.pins.length > 0;
-          const box = { pointerEvents: "auto", background: "rgba(10,14,20,.96)", border: "1px solid rgba(255,255,255,.28)", padding: 10, color: "#fff", fontSize: 11, display: "flex", flexDirection: "column", gap: 6 };
+          const box = { pointerEvents: "auto", background: "var(--overlay)", border: "1px solid var(--line-2)", padding: 10, color: "var(--text)", fontSize: 11, display: "flex", flexDirection: "column", gap: 6 };
           return (
             <>
               {(pinning || showList) && <style>{"@media(max-width:800px){.panel,.panel.open{transform:translateX(100%) !important}}"}</style>}
               <div style={{ position: "absolute", left: "50%", bottom: 56, transform: "translateX(-50%)", zIndex: 6, width: "min(420px, calc(100% - 24px))", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 8, pointerEvents: "none" }}>
                 {storageWarn && (
-                  <div style={{ ...box, borderColor: "#ff4d4d", color: "#ffb3b3" }}>
-                    STORAGE PROBLEM. New annotations and pins are not being saved. Delete some markers or press CLEAR.
+                  <div style={{ ...box, borderColor: "#ff4d4d", color: "var(--danger)" }}>
+                    Storage problem: new annotations and pins are not being saved. Delete some markers or press Clear.
                   </div>
                 )}
                 {pinning && (
@@ -1412,29 +1385,29 @@ export default function WireRoomV2() {
                         <button type="button" onClick={() => {
                           const p = projection([pinning.lon, pinning.lat]);
                           if (p) placePinnedReport({ x: p[0], y: p[1] });
-                        }} style={toolButtonStyle(true)}>PIN AT ITS POSITION</button>
+                        }} style={toolButtonStyle(true)}>Pin at its position</button>
                       )}
-                      <button type="button" onClick={() => setPinning(null)} style={toolButtonStyle(false)}>CANCEL</button>
+                      <button type="button" onClick={() => setPinning(null)} style={toolButtonStyle(false)}>Cancel</button>
                     </div>
                   </div>
                 )}
                 {showList && (
                   <div onPointerDown={e => e.stopPropagation()} style={{ ...box, maxHeight: "38vh", overflowY: "auto" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontWeight: 800 }}>
-                      <span>PINNED REPORTS ({sel.pins.length})</span>
+                      <span>Pinned reports ({sel.pins.length})</span>
                       <button type="button" aria-label="Close" onClick={() => setSelectedAnnotationId(null)} style={toolButtonStyle(false)}>&times;</button>
                     </div>
                     {sel.pins.map(p => (
-                      <div key={p.id} style={{ borderTop: "1px solid rgba(255,255,255,.18)", paddingTop: 6, display: "flex", flexDirection: "column", gap: 4 }}>
-                        <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap", color: "#9ba8b8", fontSize: 10 }}>
+                      <div key={p.id} style={{ borderTop: "1px solid var(--line-2)", paddingTop: 6, display: "flex", flexDirection: "column", gap: 4 }}>
+                        <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap", color: "var(--text-2)", fontSize: 10 }}>
                           <SourceTag type={p.sourceType} /><span>{p.source}</span><span>{p.date}</span>
                         </div>
                         <div style={{ fontWeight: 700, fontSize: 12 }}>{(p.tr && p.tr.headline) || p.headline}</div>
-                        {p.tr && p.tr.headline && <div style={{ font: "9px monospace", color: "#718198" }}>MACHINE-TRANSLATED FROM {languageName(p.tr.from).toUpperCase()} · ORIGINAL: {p.headline}</div>}
-                        {((p.tr && p.tr.headline) ? p.tr.summary : p.summary) && <div style={{ color: "#9ba8b8", fontSize: 11, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical" }}>{(p.tr && p.tr.headline) ? p.tr.summary : p.summary}</div>}
+                        {p.tr && p.tr.headline && <div style={{ font: "11px var(--font)", color: "var(--muted)" }}>Machine-translated from {languageName(p.tr.from)} · original: {p.headline}</div>}
+                        {((p.tr && p.tr.headline) ? p.tr.summary : p.summary) && <div style={{ color: "var(--text-2)", fontSize: 11, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical" }}>{(p.tr && p.tr.headline) ? p.tr.summary : p.summary}</div>}
                         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                          {p.url && p.url !== "#" && <a href={p.url} target="_blank" rel="noreferrer" style={{ color: "#c9974b", fontSize: 10, textDecoration: "none" }}>OPEN ORIGINAL</a>}
-                          <button type="button" onClick={() => unpinReport(sel.id, p.id)} style={{ ...toolButtonStyle(false), fontSize: 10, padding: "3px 7px" }}>UNPIN</button>
+                          {p.url && p.url !== "#" && <a href={p.url} target="_blank" rel="noreferrer" style={{ color: "var(--accent)", fontSize: 10, textDecoration: "none" }}>Open original</a>}
+                          <button type="button" onClick={() => unpinReport(sel.id, p.id)} style={{ ...toolButtonStyle(false), fontSize: 10, padding: "3px 7px" }}>Unpin</button>
                         </div>
                       </div>
                     ))}
@@ -1477,14 +1450,14 @@ export default function WireRoomV2() {
             onPin={() => startPinReport(trackToReport(trackSel.kind, trackLive ? trackLive.item : trackSel.item, airFeed.fetchedAt))}
           />
         )}
-        <div className="map-note">SELECT A COUNTRY &bull; CLICK MARKER FOR SOURCES</div>
-        {view === "closed" && <button className="global-fab" onClick={() => loadGlobal()}>GLOBAL FEED</button>}      </section>
+        <div className="map-note">Tap a country to see its sources</div>
+        {view === "closed" && <button className="global-fab" onClick={() => loadGlobal()}>Global feed</button>}      </section>
 
       <aside className={`panel ${view !== "closed" ? "open" : ""}`}>
         <div className="panel-head">
           <div>
-            <div className="eyebrow">{view === "war" && warView ? `${(LEVEL_TEXT[(warViewDay || warView).level] || LEVEL_TEXT.war).label} BRIEF · MILITARY TRACKER` : "COUNTRY BRIEF"}</div>
-            <h1>{view === "war" && warView ? warView.name : selected?.name || "GLOBAL FEED"}</h1>
+            <div className="eyebrow">{view === "war" && warView ? `${(LEVEL_TEXT[(warViewDay || warView).level] || LEVEL_TEXT.war).label} brief · military tracker` : "Country brief"}</div>
+            <h1>{view === "war" && warView ? warView.name : selected?.name || "Global feed"}</h1>
             {view === "war" && warView && !warViewDay ? (
               <p className="source-status war">Not active as of {shownDay ? longDay(shownDay) : "today"}: no UCDP event in the 3 months before, and no strike reported that week.</p>
             ) : view === "war" && warView ? (() => {
@@ -1530,49 +1503,49 @@ export default function WireRoomV2() {
           )}
         </div>
         <div className="panel-mode">
-          <button className={mode==="official"?"active":""} onClick={()=>changeMode("official")}>OFFICIAL</button>
-          <button className={mode==="both"?"active":""} onClick={()=>changeMode("both")}>BOTH</button>
-          <button className={mode==="news"?"active":""} onClick={()=>changeMode("news")}>NEWS</button>
+          <button className={mode==="official"?"active":""} onClick={()=>changeMode("official")}>Official</button>
+          <button className={mode==="both"?"active":""} onClick={()=>changeMode("both")}>Both</button>
+          <button className={mode==="news"?"active":""} onClick={()=>changeMode("news")}>News</button>
         </div>
-        {loading && <div className="loading">CHECKING SOURCE FEEDS…</div>}
+        {loading && <div className="loading">Checking source feeds…</div>}
         {!loading && visibleFeed.length === 0 && (
           <div className="empty">
             {intelFiltersActive ? (
-              <>NO MATCHING REPORTS.<br/><small>Try a different keyword, source, or date range.</small></>
+              <>No matching reports.<br/><small>Try a different keyword, source, or date range.</small></>
             ) : mode === "official" && selected && officialVerifiedMap[selected.id] === false ? (
-              <>NO VERIFIED GOVERNMENT CHANNEL YET FOR THIS COUNTRY.<br/><small>We haven't found or confirmed a direct government channel for {selected.name} yet. That isn't the same as "nothing happening": the source itself is still unverified. Check the NEWS tab for independent coverage in the meantime.</small></>
+              <>No verified government channel yet for this country.<br/><small>We haven't found or confirmed a direct government channel for {selected.name} yet. That isn't the same as "nothing happening": the source itself is still unverified. Check the NEWS tab for independent coverage in the meantime.</small></>
             ) : mode === "official" && selected && (officialStatusMap[selected.id] || {}).status === "unavailable" ? (
-              <>OFFICIAL SOURCE TEMPORARILY UNAVAILABLE.<br/><small>We couldn't reach {selected.name}'s official source on the last check, so nothing new is shown. That doesn't mean nothing was said. Check the NEWS tab for independent coverage in the meantime.</small></>
+              <>Official source temporarily unavailable.<br/><small>We couldn't reach {selected.name}'s official source on the last check, so nothing new is shown. That doesn't mean nothing was said. Check the NEWS tab for independent coverage in the meantime.</small></>
             ) : mode === "official" && selected ? (
-              <>NO NEW OFFICIAL STATEMENTS RIGHT NOW.<br/><small>{selected.name}'s government channel is verified and connected. It just hasn't published anything new since the last check.</small></>
+              <>No new official statements right now.<br/><small>{selected.name}'s government channel is verified and connected. It just hasn't published anything new since the last check.</small></>
             ) : view === "war" ? (
-              <>NO RELATED REPORTS IN THE LAST 30 DAYS{mode !== "both" ? " IN THIS MODE" : ""}.<br/><small>Wire Room doesn't follow sources for every war yet. The casualty figures above still come from UCDP's researchers. {mode !== "both" ? "Try BOTH." : ""}</small></>
+              <>No related reports in the last 30 days{mode !== "both" ? " in this mode" : ""}.<br/><small>Wire Room doesn't follow sources for every war yet. The casualty figures above still come from UCDP's researchers. {mode !== "both" ? "Try BOTH." : ""}</small></>
             ) : (
-              <>NO STORIES IN THIS FILTER YET.<br/><small>Nothing has been collected for this view yet. Try another mode or country, or check back after the next hourly update.</small></>
+              <>No stories in this filter yet.<br/><small>Nothing has been collected for this view yet. Try another mode or country, or check back after the next hourly update.</small></>
             )}
           </div>
         )}
                 {(() => {
-          const fld = { minWidth: 0, background: "#0c1724", border: "1px solid #26384d", color: "#aeb8c6", padding: "7px 8px", font: "10px monospace", colorScheme: "dark" };
+          const fld = { minWidth: 0, background: "var(--surface)", border: "1px solid var(--line-2)", color: "var(--text-2)", padding: "7px 8px", font: "12px var(--font)", colorScheme: "dark" };
           return (
-            <div style={{ border: "1px solid #1d2d40", background: "#071019", padding: 10, marginBottom: 10 }}>
+            <div style={{ border: "1px solid var(--line)", background: "var(--bg)", padding: 10, marginBottom: 10 }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 8 }}>
-                <span style={{ font: "10px monospace", fontWeight: 700, color: "#aeb8c6", letterSpacing: ".05em" }}>INTEL FILTER</span>
+                <span style={{ font: "12px var(--font)", fontWeight: 700, color: "var(--text-2)", letterSpacing: 0 }}>Intel filter</span>
                 {intelFiltersActive && (
-                  <button type="button" onClick={() => { resetIntelFilters(); setPage(1); }} style={{ background: "none", border: "1px solid #26384d", color: "#718198", padding: "4px 7px", font: "9px monospace", cursor: "pointer" }}>CLEAR FILTER</button>
+                  <button type="button" onClick={() => { resetIntelFilters(); setPage(1); }} style={{ background: "none", border: "1px solid var(--line-2)", color: "var(--muted)", padding: "4px 7px", font: "11px var(--font)", cursor: "pointer" }}>Clear filter</button>
                 )}
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: 6 }}>
-                <input value={intelQuery} onChange={e => { setIntelQuery(e.target.value); setPage(1); }} placeholder="KEYWORD" aria-label="Search reports by keyword" style={fld} />
+                <input value={intelQuery} onChange={e => { setIntelQuery(e.target.value); setPage(1); }} placeholder="Keyword" aria-label="Search reports by keyword" style={fld} />
                 <select value={intelSource} onChange={e => { setIntelSource(e.target.value); setPage(1); }} aria-label="Filter reports by source" style={fld}>
-                  <option value="">ALL SOURCES</option>
+                  <option value="">All sources</option>
                   {sourceOptions.map(src => (<option key={src} value={src}>{src}</option>))}
                 </select>
                 <input type="date" value={intelFrom} onChange={e => { setIntelFrom(e.target.value); setPage(1); }} aria-label="Filter reports from date" title="From date" style={fld} />
                 <input type="date" value={intelTo} onChange={e => { setIntelTo(e.target.value); setPage(1); }} aria-label="Filter reports through date" title="To date" style={fld} />
               </div>
-              <div style={{ marginTop: 7, color: "#4e6076", font: "9px monospace" }}>
-                SEARCHES LOADED REPORTS ONLY{intelFiltersActive ? " - " + visibleFeed.length + " MATCHES" : ""}
+              <div style={{ marginTop: 7, color: "var(--muted)", font: "11px var(--font)" }}>
+                Searches loaded reports only{intelFiltersActive ? " · " + visibleFeed.length + " matches" : ""}
               </div>
             </div>
           );
@@ -1586,9 +1559,9 @@ export default function WireRoomV2() {
             {REVIEW_MODE && view !== "war" && offTopic.aiReview && (
               <span className="offtopic-note">
                 {showOffTopic
-                  ? `REVIEW LINK: SHOWING THE ${offTopic.hidden} NEWS REPORT${offTopic.hidden === 1 ? "" : "S"} THE AI REVIEW HIDES HERE (MARKED)`
-                  : `REVIEW LINK: THE AI REVIEW HIDES ${offTopic.hidden} NEWS REPORT${offTopic.hidden === 1 ? "" : "S"} HERE`}
-                <button type="button" onClick={toggleOffTopic}>{showOffTopic ? "HIDE" : "SHOW"}</button>
+                  ? `Review link: showing the ${offTopic.hidden} news report${offTopic.hidden === 1 ? "" : "s"} the AI review hides here (marked)`
+                  : `Review link: the AI review hides ${offTopic.hidden} news report${offTopic.hidden === 1 ? "" : "s"} here`}
+                <button type="button" onClick={toggleOffTopic}>{showOffTopic ? "Hide" : "Show"}</button>
               </span>
             )}
             <div className="pagination-buttons">
@@ -1623,16 +1596,97 @@ function geometryFromTopo(topology, geom) {
 }
 
 const CSS = `
-.status{display:flex;align-items:center;gap:10px}.status-tag{letter-spacing:.1em}.hdr-btn{background:none;border:1px solid #26384d;color:#aeb8c6;font:10px monospace;letter-spacing:.06em;padding:6px 10px;cursor:pointer;text-decoration:none;line-height:1}.hdr-btn:hover{border-color:#c9974b;color:#c9974b}
-.welcome-back{position:fixed;inset:0;z-index:100;background:rgba(4,9,15,.82);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}.welcome-card{background:#0c1724;border:1px solid #26384d;border-top:2px solid #c9974b;max-width:460px;width:100%;padding:22px;font-family:Arial,sans-serif}.welcome-card h2{margin:4px 0 10px;font-size:26px;letter-spacing:.12em}.welcome-card h2 b{color:#c9974b}.welcome-card p{margin:0 0 12px;color:#c4cbd6;font-size:14px;line-height:1.5}.welcome-card ul{margin:0 0 12px;padding-left:18px;color:#aeb8c6;font-size:13px;line-height:1.55}.welcome-card li{margin-bottom:6px}.welcome-card .welcome-fine{font:11px/1.5 monospace;color:#718198}.welcome-note{border-left:2px solid #26384d;padding:2px 0 2px 12px;margin:0 0 12px}.welcome-note h3{margin:0 0 5px;font:700 10px monospace;letter-spacing:.1em;color:#4fa6a0;text-transform:uppercase}.welcome-note p{font-size:13px;color:#aeb8c6;margin:0 0 10px}.welcome-note ul{margin:0;font-size:12.5px}.welcome-note li{margin-bottom:4px}.welcome-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}.welcome-go{background:#c9974b;color:#071019;border:0;font:700 12px monospace;letter-spacing:.08em;padding:11px 16px;cursor:pointer}.welcome-link{color:#c9974b;font:11px monospace;letter-spacing:.06em}
+.status{display:flex;align-items:center;gap:10px}.status-tag{letter-spacing:0}.hdr-btn{background:none;border:1px solid var(--line-2);color:var(--text-2);font:12px var(--font);letter-spacing:0;padding:6px 10px;cursor:pointer;text-decoration:none;line-height:1}.hdr-btn:hover{border-color:var(--accent);color:var(--accent)}
+.welcome-back{position:fixed;inset:0;z-index:100;background:var(--scrim);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}.welcome-card{background:var(--surface);border:1px solid var(--line-2);border-top:2px solid var(--accent);max-width:460px;width:100%;padding:22px;font-family:var(--font)}.welcome-card h2{margin:4px 0 10px;font-size:26px;letter-spacing:0}.welcome-card h2 b{color:var(--accent)}.welcome-card p{margin:0 0 12px;color:var(--text-2);font-size:14px;line-height:1.5}.welcome-card ul{margin:0 0 12px;padding-left:18px;color:var(--text-2);font-size:13px;line-height:1.55}.welcome-card li{margin-bottom:6px}.welcome-card .welcome-fine{font:13px/1.5 var(--font);color:var(--muted)}.welcome-note{border-left:2px solid var(--line-2);padding:2px 0 2px 12px;margin:0 0 12px}.welcome-note h3{margin:0 0 5px;font:700 12px var(--font);letter-spacing:0;color:var(--ok);text-transform:none}.welcome-note p{font-size:13px;color:var(--text-2);margin:0 0 10px}.welcome-note ul{margin:0;font-size:12.5px}.welcome-note li{margin-bottom:4px}.welcome-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}.welcome-go{background:var(--accent);color:var(--bg);border:0;font:700 14px var(--font);letter-spacing:0;padding:11px 16px;cursor:pointer}.welcome-link{color:var(--accent);font:13px var(--font);letter-spacing:0}
 @media(max-width:700px){.subtitle{display:none}.topbar{padding:0 14px}.status{margin-left:auto}.status-tag{display:none}}
-*{box-sizing:border-box} body{margin:0;background:#071019} .app{min-height:100vh;background:#071019;color:#e8e3d8;font-family:Arial,sans-serif}.topbar{height:64px;border-bottom:1px solid #1c2a3b;display:flex;align-items:center;padding:0 22px;gap:18px}.brand{font-weight:800;letter-spacing:.12em;font-size:21px}.brand b{color:#c9974b}.subtitle{font:11px monospace;color:#718198;letter-spacing:.08em}.status{margin-left:auto;font:10px monospace;color:#4fa6a0}.toolbar{height:54px;border-bottom:1px solid #162538;display:flex;align-items:center;gap:9px;padding:8px 18px}.toolbar input,.toolbar select,.mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace}.toolbar input{width:190px}.mode{margin-left:auto;display:flex}.mode button{cursor:pointer}.mode button.active{color:#c9974b;border-color:#c9974b}.layout{height:calc(100vh - 118px);display:flex}.map-wrap{position:relative;flex:1;min-width:0}.map{width:100%;height:100%;touch-action:none;cursor:grab}.map:active{cursor:grabbing}.ocean{fill:#0b1725;stroke:#21334a}.grid{fill:none;stroke:#142233;stroke-width:.5}.land{fill:#142230;stroke:#2a3c50;stroke-width:.65}.marker{cursor:pointer}.dot{fill:#c9974b}.dot.active{fill:#e8e3d8;stroke:#c9974b;stroke-width:2}.pulse{fill:none;stroke:#c9974b;stroke-width:1;opacity:.55;animation:pulse 2s infinite;pointer-events:none}.marker text{font:8px monospace;fill:#65758a;text-anchor:middle}.map-note{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:18px;font:10px monospace;color:#4e6076}.global-fab{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));right:18px;background:#0c1724;border:1px solid #c9974b;color:#c9974b;padding:8px 14px;font:10px monospace;letter-spacing:.06em;cursor:pointer;z-index:5}.panel{width:410px;background:#0c1724;border-left:1px solid #1c2a3b;padding:20px;overflow:auto;display:none;flex-direction:column}.panel.open{display:flex}.panel-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #1c2a3b;padding-bottom:14px;margin-bottom:14px}.panel-head h1{margin:2px 0 4px;font-size:28px}.panel-head p{margin:0;color:#718198;font:10px monospace;line-height:1.5}.panel-head button{height:30px;background:none;border:1px solid #26384d;color:#8795a7;cursor:pointer}.panel-actions{display:flex;gap:6px;align-items:flex-start;flex-shrink:0}.panel-head .link-btn{font:10px monospace;letter-spacing:.06em;padding:0 9px;min-width:44px}.panel-head .link-btn:hover{border-color:#c9974b;color:#e8e3d8}.link-toast{position:fixed;left:50%;top:76px;transform:translateX(-50%);z-index:120;background:#0c1724;border:1px solid #c9974b;color:#e8e3d8;font:10px monospace;letter-spacing:.08em;padding:8px 12px}.panel-mode{display:none}.panel-mode button{background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:8px 10px;font:11px monospace;cursor:pointer}.panel-mode button.active{color:#c9974b;border-color:#c9974b}.eyebrow{font:9px monospace;letter-spacing:.12em;color:#4fa6a0}.source-status{margin:6px 0 0;font:10px monospace;letter-spacing:.04em}.source-status.verified{color:#4fa6a0}.source-status.unverified{color:#c9974b}
-.source-status.war{color:#ff8a82}
-.card-gov{color:#c9974b;letter-spacing:.04em}
+*{box-sizing:border-box} body{margin:0;background:var(--bg)} .app{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--font)}.topbar{height:64px;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 22px;gap:18px}.brand{font-weight:800;letter-spacing:0;font-size:21px}.brand b{color:var(--accent)}.subtitle{font:13px var(--font);color:var(--muted);letter-spacing:0}.status{margin-left:auto;font:12px var(--font);color:var(--ok)}.toolbar{height:54px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:9px;padding:8px 18px}.toolbar input,.toolbar select,.mode button{background:var(--surface);border:1px solid var(--line-2);color:var(--text-2);padding:8px 10px;font:13px var(--font)}.toolbar input{width:190px}.mode{margin-left:auto;display:flex}.mode button{cursor:pointer}.mode button.active{color:var(--accent);border-color:var(--accent)}.layout{height:calc(100vh - 118px);display:flex}.map-wrap{position:relative;flex:1;min-width:0}.map{width:100%;height:100%;touch-action:none;cursor:grab}.map:active{cursor:grabbing}.ocean{fill:var(--bg);stroke:var(--line-2)}.grid{fill:none;stroke:var(--line);stroke-width:.5}.land{fill:#142230;stroke:var(--line-2);stroke-width:.65}.marker{cursor:pointer}.dot{fill:var(--accent)}.dot.active{fill:var(--text);stroke:var(--accent);stroke-width:2}.pulse{fill:none;stroke:var(--accent);stroke-width:1;opacity:.55;animation:pulse 2s infinite;pointer-events:none}.marker text{font:10px var(--font);fill:var(--muted);text-anchor:middle}.map-note{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:18px;font:12px var(--font);color:var(--muted)}.global-fab{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));right:18px;background:var(--surface);border:1px solid var(--accent);color:var(--accent);padding:8px 14px;font:12px var(--font);letter-spacing:0;cursor:pointer;z-index:5}.panel{width:410px;background:var(--surface);border-left:1px solid var(--line);padding:20px;overflow:auto;display:none;flex-direction:column}.panel.open{display:flex}.panel-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:14px}.panel-head h1{margin:2px 0 4px;font-size:28px}.panel-head p{margin:0;color:var(--muted);font:12px var(--font);line-height:1.5}.panel-head button{height:30px;background:none;border:1px solid var(--line-2);color:var(--muted);cursor:pointer}.panel-actions{display:flex;gap:6px;align-items:flex-start;flex-shrink:0}.panel-head .link-btn{font:12px var(--font);letter-spacing:0;padding:0 9px;min-width:44px}.panel-head .link-btn:hover{border-color:var(--accent);color:var(--text)}.link-toast{position:fixed;left:50%;top:76px;transform:translateX(-50%);z-index:120;background:var(--surface);border:1px solid var(--accent);color:var(--text);font:12px var(--font);letter-spacing:0;padding:8px 12px}.panel-mode{display:none}.panel-mode button{background:var(--surface);border:1px solid var(--line-2);color:var(--text-2);padding:8px 10px;font:13px var(--font);cursor:pointer}.panel-mode button.active{color:var(--accent);border-color:var(--accent)}.eyebrow{font:11px var(--font);letter-spacing:0;color:var(--ok)}.source-status{margin:6px 0 0;font:12px var(--font);letter-spacing:0}.source-status.verified{color:var(--ok)}.source-status.unverified{color:var(--accent)}
+.source-status.war{color:var(--danger)}
+.card-gov{color:var(--accent);letter-spacing:0}
 .card.off-topic{opacity:.62}
-.card-offtopic{color:#9b7bff;letter-spacing:.04em}
-.offtopic-note{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font:9px monospace;color:#9ba8b8;letter-spacing:.05em;margin-top:6px;flex-basis:100%}
-.offtopic-note button{background:none;border:1px solid #3d3566;color:#b7a4ff;font:9px monospace;padding:3px 7px;cursor:pointer;letter-spacing:.06em}.source-note{margin:3px 0 0;font:9px/1.4 monospace;color:#5d6d81}.loading,.empty{font:11px monospace;color:#718198;padding:24px 4px;line-height:1.7}.card{border:1px solid #1d2d40;background:#071019;padding:13px;margin-bottom:10px}.annotation-tools{max-width:calc(100% - 350px)}@media(max-width:800px){.annotation-tools{max-width:calc(100% - 20px)}}.card-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:#586b82;font:9px monospace;margin-bottom:8px}.tr-note{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:-2px 0 6px;font:9px monospace;letter-spacing:.06em;color:#4fa6a0}.tr-note button{background:none;border:1px solid #26384d;color:#8795a7;font:9px monospace;letter-spacing:.06em;padding:2px 6px;cursor:pointer}.tr-note button:hover{border-color:#c9974b;color:#e8e3d8}.tag{padding:2px 5px;border:1px solid}.tag.official{color:#4fa6a0;border-color:#315e5b}.tag.independent{color:#8a98aa;border-color:#3a4655}.tag.track{color:#7cc4ff;border-color:#2f4f6b}.card h3{font-size:14px;line-height:1.35;margin:0 0 7px}.card p{font-size:12px;line-height:1.5;color:#9ba8b8;margin:0 0 8px}.card a{font:10px monospace;color:#c9974b;text-decoration:none}.pagination{border:1px solid #1d2d40;background:#071019;padding:10px;margin-bottom:10px;font:9px monospace;color:#718198}.pagination-info{display:block;margin-bottom:8px}.pagination-buttons{display:flex;gap:6px}.pagination-buttons button{flex:1;background:#0c1724;border:1px solid #26384d;color:#aeb8c6;padding:7px 8px;font:9px monospace;cursor:pointer}.pagination-buttons button:hover:not(:disabled){color:#c9974b;border-color:#c9974b}.pagination-buttons button:disabled{opacity:.35;cursor:default}@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.2);opacity:0}}@media(max-width:800px){.layout{height:calc(100dvh - 118px);min-height:0;position:relative;overflow:hidden}.panel{display:flex;position:absolute;right:0;top:0;bottom:0;width:min(420px,100%);transform:translateX(100%);transition:transform .25s;z-index:4}.panel.open{transform:translateX(0)}.subtitle{display:none}.toolbar{height:auto;min-height:54px;overflow:hidden;flex-wrap:wrap;padding:8px 10px;gap:6px}.toolbar input{width:min(150px,calc(100vw - 20px))}.toolbar select{max-width:110px}.mode{margin-left:auto;flex-shrink:0}.mode button{padding:8px 7px}.toolbar .mode{display:none}.panel-mode{display:flex;gap:6px;margin:-4px 0 14px;padding-bottom:12px;border-bottom:1px solid #1c2a3b}.panel-mode button{flex:1;padding:8px 5px}.map-wrap{height:100%;min-height:0}.status{margin-left:auto;gap:6px}.status-tag{display:none}.hdr-btn{padding:6px 7px;letter-spacing:.03em}}
+.card-offtopic{color:#9b7bff;letter-spacing:0}
+.offtopic-note{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font:11px var(--font);color:var(--text-2);letter-spacing:0;margin-top:6px;flex-basis:100%}
+.offtopic-note button{background:none;border:1px solid #3d3566;color:#b7a4ff;font:11px var(--font);padding:3px 7px;cursor:pointer;letter-spacing:0}.source-note{margin:3px 0 0;font:11px/1.4 var(--font);color:var(--muted)}.loading,.empty{font:13px var(--font);color:var(--muted);padding:24px 4px;line-height:1.7}.card{border:1px solid var(--line);background:var(--bg);padding:13px;margin-bottom:10px}.annotation-tools{max-width:calc(100% - 350px)}@media(max-width:800px){.annotation-tools{max-width:calc(100% - 20px)}}.card-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:var(--muted);font:11px var(--font);margin-bottom:8px}.tr-note{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:-2px 0 6px;font:11px var(--font);letter-spacing:0;color:var(--ok)}.tr-note button{background:none;border:1px solid var(--line-2);color:var(--muted);font:11px var(--font);letter-spacing:0;padding:2px 6px;cursor:pointer}.tr-note button:hover{border-color:var(--accent);color:var(--text)}.tag{padding:2px 5px;border:1px solid}.tag.official{color:var(--ok);border-color:var(--ok-line)}.tag.independent{color:var(--muted);border-color:var(--line-2)}.tag.track{color:var(--accent);border-color:var(--line-2)}.card h3{font-size:14px;line-height:1.35;margin:0 0 7px}.card p{font-size:12px;line-height:1.5;color:var(--text-2);margin:0 0 8px}.card a{font:12px var(--font);color:var(--accent);text-decoration:none}.pagination{border:1px solid var(--line);background:var(--bg);padding:10px;margin-bottom:10px;font:11px var(--font);color:var(--muted)}.pagination-info{display:block;margin-bottom:8px}.pagination-buttons{display:flex;gap:6px}.pagination-buttons button{flex:1;background:var(--surface);border:1px solid var(--line-2);color:var(--text-2);padding:7px 8px;font:11px var(--font);cursor:pointer}.pagination-buttons button:hover:not(:disabled){color:var(--accent);border-color:var(--accent)}.pagination-buttons button:disabled{opacity:.35;cursor:default}@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.2);opacity:0}}@media(max-width:800px){.layout{height:calc(100dvh - 118px);min-height:0;position:relative;overflow:hidden}.panel{display:flex;position:absolute;right:0;top:0;bottom:0;width:min(420px,100%);transform:translateX(100%);transition:transform .25s;z-index:4}.panel.open{transform:translateX(0)}.subtitle{display:none}.toolbar{height:auto;min-height:54px;overflow:hidden;flex-wrap:wrap;padding:8px 10px;gap:6px}.toolbar input{width:min(150px,calc(100vw - 20px))}.toolbar select{max-width:110px}.mode{margin-left:auto;flex-shrink:0}.mode button{padding:8px 7px}.toolbar .mode{display:none}.panel-mode{display:flex;gap:6px;margin:-4px 0 14px;padding-bottom:12px;border-bottom:1px solid var(--line)}.panel-mode button{flex:1;padding:8px 5px}.map-wrap{height:100%;min-height:0}.status{margin-left:auto;gap:6px}.status-tag{display:none}.hdr-btn{padding:6px 7px;letter-spacing:0}}
+
+/* ---- Redesign (Nov 2026): quieter chrome, light and dark themes, sentence case ---- */
+.app{font-family:var(--font);background:var(--bg);color:var(--text)}
+.topbar{height:56px;background:var(--surface);border-bottom:1px solid var(--line);padding:0 20px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font:700 17px var(--font);letter-spacing:0;color:var(--text)}
+.subtitle{font:13px var(--font);color:var(--muted);letter-spacing:0}
+.status{margin-left:auto;display:flex;align-items:center;gap:8px;font:13px var(--font);color:var(--muted)}
+.status-tag{font:12px var(--font);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 9px}
+.hdr-btn{height:36px;padding:0 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text);font:500 14px var(--font);letter-spacing:0;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;text-decoration:none;line-height:1}
+.hdr-btn:hover{border-color:var(--line-2);color:var(--text);background:var(--surface-2)}
+.hdr-icon{width:36px;padding:0;font-weight:600}
+.hdr-primary,.hdr-primary:hover{background:var(--text);color:var(--bg);border-color:var(--text)}
+.toolbar{height:56px;background:var(--surface);border-bottom:1px solid var(--line);gap:10px;padding:10px 20px}
+.toolbar input,.toolbar select{height:36px;border-radius:8px;background:var(--surface-2);border:1px solid var(--line);color:var(--text);font:14px var(--font);padding:0 12px}
+.toolbar input{width:220px}.toolbar input::placeholder{color:var(--muted)}
+.mode{display:flex;gap:2px;padding:3px;background:var(--surface-2);border-radius:10px}
+.mode button,.toolbar .mode button{height:32px;padding:0 16px;border:0;border-radius:8px;background:transparent;color:var(--muted);font:500 14px var(--font);cursor:pointer}
+.mode button.active{background:var(--surface);color:var(--text);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.layout{height:calc(100vh - 112px)}
+.panel{background:var(--surface);border-left:1px solid var(--line)}
+.panel-head{border-bottom:1px solid var(--line)}
+.panel-head h1{font:700 24px var(--font);margin:2px 0 4px}
+.panel-head p{font:13px/1.45 var(--font);color:var(--muted)}
+.panel-head button{height:36px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);color:var(--text);font:500 13px var(--font)}
+.eyebrow{font:600 12px var(--font);color:var(--muted);letter-spacing:0}
+.source-status{font:13px var(--font)}
+.panel-mode{background:var(--surface-2);padding:3px;border-radius:10px;border-bottom:0}
+.panel-mode button{border:0;border-radius:8px;background:transparent;color:var(--muted);font:500 14px var(--font);height:34px}
+.panel-mode button.active{background:var(--surface);color:var(--text);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px}
+.card h3{font:600 15px/1.4 var(--font)}
+.card p{font:13px/1.5 var(--font);color:var(--text-2)}
+.card-meta{font:12px var(--font);color:var(--muted);font-variant-numeric:tabular-nums}
+.card a{font:500 13px var(--font);color:var(--accent)}
+.tag{border:0;border-radius:999px;padding:2px 8px;font:600 12px var(--font)}
+.tag.official{color:var(--accent);background:var(--accent-soft)}
+.tag.independent{color:var(--news);background:var(--news-soft)}
+.tag.track{color:var(--accent);background:var(--accent-soft)}
+.pagination{background:var(--surface);border:1px solid var(--line);border-radius:10px;font:12px var(--font)}
+.pagination-buttons button{border-radius:8px;background:var(--surface-2);border:1px solid var(--line);color:var(--text);font:500 13px var(--font);height:36px}
+.loading,.empty{font:13px/1.6 var(--font);color:var(--muted)}
+.global-fab{background:var(--surface);border:1px solid var(--line);color:var(--text);border-radius:10px;font:600 14px var(--font);padding:10px 16px;box-shadow:var(--shadow)}
+.map-note{font:12px var(--font);color:var(--muted)}
+.link-toast{background:var(--surface);border:1px solid var(--line);border-radius:10px;color:var(--text);font:500 13px var(--font);box-shadow:var(--shadow)}
+.welcome-back{background:var(--scrim)}
+.welcome-card{background:var(--surface);border:1px solid var(--line);border-top:1px solid var(--line);border-radius:14px;font-family:var(--font);color:var(--text);box-shadow:var(--shadow)}
+.welcome-card h2{font:700 24px var(--font);letter-spacing:0}.welcome-card h2 b{color:inherit}
+.welcome-card p{color:var(--text-2)}.welcome-card ul,.welcome-note p{color:var(--text-2)}
+.welcome-card .welcome-fine{font:12px/1.5 var(--font);color:var(--muted)}
+.welcome-note{border-left:2px solid var(--line)}.welcome-note h3{font:600 13px var(--font);color:var(--text);letter-spacing:0;text-transform:none}
+.welcome-go{background:var(--accent);color:var(--on-accent);border-radius:8px;font:600 14px var(--font);letter-spacing:0;padding:11px 18px}
+.welcome-link{color:var(--accent);font:500 14px var(--font)}
+.annotation-tools{position:absolute;top:12px;left:12px;z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.tools-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tool-btn{height:40px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);font:500 14px var(--font);display:inline-flex;align-items:center;gap:7px;cursor:pointer;box-shadow:var(--shadow)}
+.tool-btn:disabled{opacity:.45;cursor:default}
+.tool-toggle.active{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.tool-chev{opacity:.8}
+.tool-group{display:flex;flex-wrap:wrap;gap:2px;padding:3px;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
+.tool-group .tool-btn{height:36px;border:0;box-shadow:none;border-radius:8px;background:transparent}
+.tool-group .tool-btn.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.tool-group .tool-btn.quiet{color:var(--muted)}
+.tool-sep{width:1px;align-self:stretch;background:var(--line);margin:6px 4px}
+.tool-colors{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 10px;font:500 13px var(--font);color:var(--muted);box-shadow:var(--shadow)}
+.swatch{width:24px;height:24px;border-radius:50%;padding:0;border:1px solid var(--line-2);cursor:pointer}
+.swatch.on{outline:2px solid var(--text);outline-offset:2px}
+.app .live-box{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);font:12px var(--font);color:var(--muted);padding:10px 12px;gap:8px}
+.app .live-title,.app .live-sub{font-weight:600;color:var(--text);letter-spacing:0}
+.app .live-btn{border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--text);font:500 13px var(--font);padding:6px 11px}
+.app .live-btn.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.app .track-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);color:var(--text)}
+.app .day-bar{background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);font-family:var(--font)}
+.app .day-row button{border-radius:6px;color:var(--text);font:500 13px var(--font)}
+@media(max-width:800px){
+.toolbar select{max-width:none;width:auto}
+.topbar{padding:0 10px 0 14px;gap:8px}.status{gap:6px}.status-tag{display:none}
+.hdr-btn{height:40px;padding:0 10px}.hdr-icon{width:40px}
+.layout{height:calc(100dvh - 112px)}
+.toolbar{height:auto;min-height:56px;padding:8px 10px;gap:6px}
+.tool-group .tool-btn{height:40px}
+}
 `;
 
 

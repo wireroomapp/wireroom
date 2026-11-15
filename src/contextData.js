@@ -105,16 +105,16 @@ export const PRECISION_TEXT = {
   region: "region named in the report",
   country: "country only: the report names no city, so the marker sits mid-country",
 };
-export const KIND_LABEL = { terrorism: "TERRORISM", cyber: "CYBER", strike: "MILITARY STRIKE" };
+export const KIND_LABEL = { terrorism: "Terrorism", cyber: "Cyber", strike: "Military strike" };
 // UCDP's definitions, counted over the months Wire Room keeps (about a year).
 export const LEVEL_TEXT = {
-  war: { label: "WAR", note: "1,000+ battle deaths in the period (UCDP's definition of a war)" },
-  "armed conflict": { label: "ARMED CONFLICT", note: "25+ battle deaths in the period (UCDP's definition of an armed conflict)" },
-  "armed clashes": { label: "ARMED CLASHES", note: "fewer than 25 deaths in the period: below UCDP's armed-conflict line so far" },
+  war: { label: "War", note: "1,000+ battle deaths in the period (UCDP's definition of a war)" },
+  "armed conflict": { label: "Armed conflict", note: "25+ battle deaths in the period (UCDP's definition of an armed conflict)" },
+  "armed clashes": { label: "Armed clashes", note: "fewer than 25 deaths in the period: below UCDP's armed-conflict line so far" },
 };
 export const sidesText = (sides) => [sides.a.join(", "), sides.b.join(", ")].filter(Boolean).join(" vs ") || "—";
 export const isUnnamed = (s) => /^XXX\d/.test(String(s || ""));
-export const SUBTYPE_LABEL = { attack: "ATTACK REPORTED", threat: "THREAT REPORTED", warning: "WARNING" };
+export const SUBTYPE_LABEL = { attack: "Attack reported", threat: "Threat reported", warning: "Warning" };
 
 // One map marker per place and tracker: every terrorism (or cyber, or strike) event reported at
 // the same city, airport or region, or in the same country with no city named, shares a marker

@@ -16,11 +16,11 @@ export const SHIP_COLORS = {
 };
 
 export const SHIP_LEGEND = [
-  ["military", "MILITARY"],
-  ["tanker", "TANKER"],
-  ["cargo", "CARGO"],
-  ["passenger", "PASSENGER"],
-  ["other", "OTHER"],
+  ["military", "Military"],
+  ["tanker", "Tanker"],
+  ["cargo", "Cargo"],
+  ["passenger", "Passenger"],
+  ["other", "Other"],
 ];
 
 export function shipColor(category) {

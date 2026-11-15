@@ -14,10 +14,10 @@ export const DEM_CREDIT = 'Elevation: <a href="https://github.com/tilezen/joerd/
 
 // Base looks the user can pick. "imagery" = which NASA raster layer is shown under the map lines.
 export const BASES = [
-  { id: "map", label: "MAP", imagery: null },
-  { id: "satellite", label: "SATELLITE", imagery: "nasa-bluemarble" },
-  { id: "relief", label: "RELIEF", imagery: "nasa-relief" },
-  { id: "night", label: "NIGHT", imagery: "nasa-night" },
+  { id: "map", label: "Map", imagery: null },
+  { id: "satellite", label: "Satellite", imagery: "nasa-bluemarble" },
+  { id: "relief", label: "Relief", imagery: "nasa-relief" },
+  { id: "night", label: "Night", imagery: "nasa-night" },
 ];
 const IMAGERY_LAYERS = ["nasa-bluemarble", "nasa-relief", "nasa-night"];
 
@@ -121,7 +121,7 @@ export function buildStyle() {
       { id: "wr-zones-fill", type: "fill", source: "wr-zones", filter: ["==", ["get", "count"], 0], paint: { "fill-color": "#c9974b", "fill-opacity": 0.07 } },
       { id: "wr-zones-line", type: "line", source: "wr-zones", paint: { "line-color": ["case", ["==", ["get", "count"], 0], "#c9974b", "#5b7390"], "line-width": 1, "line-dasharray": [3, 2] } },
       // Areas with no ships are labeled a little earlier than the rest. At world view only the
-      // amber outline shows, so seven "NO FREE COVERAGE" labels don't crowd the globe.
+      // amber outline shows, so seven "No free coverage" labels don't crowd the globe.
       { id: "wr-zones-label-empty", type: "symbol", source: "wr-zone-labels", minzoom: 3, filter: ["==", ["get", "count"], 0],
         layout: { "text-field": ["get", "label"], "text-font": FONT, "text-size": 9.5, "text-anchor": "bottom-left", "text-offset": [0, -0.3], "text-letter-spacing": 0.06, "text-max-width": 40 },
         paint: { "text-color": "#c9974b", "text-halo-color": "#071019", "text-halo-width": 1.5 } },
@@ -177,9 +177,9 @@ export function buildStyle() {
       { id: "wr-selected", type: "circle", source: "wr-selected", paint: { "circle-radius": 13, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": "#ffffff", "circle-stroke-width": 1.8 } },
 
       // Country dots (open the country brief)
-      { id: "wr-country-halo", type: "circle", source: "wr-countries", filter: ["==", ["get", "has"], true], paint: { "circle-radius": 9, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": "#c9974b", "circle-stroke-width": 1, "circle-stroke-opacity": 0.5 } },
+      { id: "wr-country-halo", type: "circle", source: "wr-countries", filter: ["==", ["get", "has"], true], paint: { "circle-radius": 9, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": "#7eb2ff", "circle-stroke-width": 1, "circle-stroke-opacity": 0.5 } },
       { id: "wr-country-dot", type: "circle", source: "wr-countries",
-        paint: { "circle-radius": ["case", ["get", "active"], 6.5, ["get", "has"], 4.5, 3.5], "circle-color": ["case", ["get", "active"], "#e8e3d8", "#c9974b"], "circle-stroke-color": ["case", ["get", "active"], "#c9974b", "#071019"], "circle-stroke-width": ["case", ["get", "active"], 2, 1] } },
+        paint: { "circle-radius": ["case", ["get", "active"], 6.5, ["get", "has"], 4.5, 3.5], "circle-color": ["case", ["get", "active"], "#e8eaed", "#7eb2ff"], "circle-stroke-color": ["case", ["get", "active"], "#7eb2ff", "#071019"], "circle-stroke-width": ["case", ["get", "active"], 2, 1] } },
       { id: "wr-country-code", type: "symbol", source: "wr-countries",
         layout: { "text-field": ["get", "code"], "text-font": FONT_BOLD, "text-size": 9, "text-offset": [0, 1.25], "text-anchor": "top", "text-allow-overlap": true, "text-ignore-placement": true },
         paint: { "text-color": "#8a98aa", "text-halo-color": "#071019", "text-halo-width": 1.2 } },
@@ -217,13 +217,69 @@ export function buildStyle() {
 // colors; imagery looks hide the water fill so NASA's picture shows through.
 export const ANNOTATION_LAYERS = ["wr-ann-marker", "wr-ann-pin-badge", "wr-ann-marker-label", "wr-ann-text", "wr-ann-line", "wr-ann-line-label", "wr-ann-shape-line", "wr-ann-shape-fill", "wr-ann-shape-label"];
 
-export function applyBase(map, baseId) {
+export function applyBase(map, baseId, look = "dark") {
   const base = BASES.find((b) => b.id === baseId) || BASES[0];
   for (const id of IMAGERY_LAYERS) map.setLayoutProperty(id, "visibility", id === base.imagery ? "visible" : "none");
   map.setLayoutProperty("water", "visibility", base.imagery ? "none" : "visible");
-  map.setPaintProperty("background", "background-color", base.imagery ? "#071019" : "#142230");
+  map.setPaintProperty("background", "background-color", base.imagery ? "#071019" : look === "light" ? "#efece4" : "#142230");
   // NASA's relief image already has shading; the night image looks best without extra shadows.
   map.setLayoutProperty("hillshade", "visibility", base.id === "map" || base.id === "satellite" ? "visible" : "none");
+}
+
+// Light look for the plain MAP in the light theme. The style above is the dark look; the first
+// call saves those dark values so switching back restores them exactly. Imagery looks (satellite,
+// relief, night) are dark pictures, so they always keep the dark overlay colors.
+const GREY_MARKER = ["==", ["get", "color"], "#d7dde8"];
+const LIGHT_PAINT = {
+  water: { "fill-color": "#cddbe6" },
+  hillshade: { "hillshade-shadow-color": "#8a96a3", "hillshade-highlight-color": "#ffffff", "hillshade-accent-color": "#cfd5dc", "hillshade-exaggeration": 0.3 },
+  rivers: { "line-color": "#a9c2d6" },
+  "roads-major": { "line-color": "#d6cfbf" },
+  "roads-mid": { "line-color": "#e0dacd" },
+  "roads-minor": { "line-color": "#e8e3d9" },
+  "borders-states": { "line-color": "#b9bfc8" },
+  "borders-countries": { "line-color": "#8d97a5" },
+  "label-seas": { "text-color": "#5c7a95", "text-halo-color": "#cddbe6" },
+  "label-cities": { "text-color": "#3a414c", "text-halo-color": "#ffffff" },
+  "label-towns": { "text-color": "#5b6472", "text-halo-color": "#ffffff" },
+  "label-countries": { "text-color": "#6b7380", "text-halo-color": "#efece4" },
+  "wr-zones-label-empty": { "text-color": "#9a4a08", "text-halo-color": "#ffffff" },
+  "wr-zones-label": { "text-color": "#5b6472", "text-halo-color": "#ffffff" },
+  "wr-country-halo": { "circle-stroke-color": "#1f5fbf" },
+  "wr-country-dot": { "circle-color": ["case", ["get", "active"], "#1f5fbf", "#1f3a5f"], "circle-stroke-color": "#ffffff" },
+  "wr-country-code": { "text-color": "#3a414c", "text-halo-color": "#ffffff" },
+  "wr-wars": { "text-color": ["case", ["get", "sel"], "#14171c", "#b42318"], "text-halo-color": "#ffffff" },
+  "wr-selected": { "circle-stroke-color": "#14171c" },
+  "wr-ann-shape-fill": { "fill-color": "#14171c" },
+  "wr-ann-shape-line": { "line-color": ["case", ["get", "sel"], "#000000", "#3a414c"] },
+  "wr-ann-line": { "line-color": ["case", ["get", "sel"], "#000000", "#3a414c"] },
+  "wr-draft-fill": { "fill-color": "#14171c" },
+  "wr-draft-line": { "line-color": "#14171c" },
+  "wr-ann-marker": {
+    "circle-color": ["case", GREY_MARKER, "#3a414c", ["get", "color"]],
+    "circle-stroke-color": ["case", ["get", "sel"], "#14171c", ["case", GREY_MARKER, "#3a414c", ["get", "color"]]],
+  },
+  "wr-ann-marker-label": { "text-color": "#14171c", "text-halo-color": "#ffffff" },
+  "wr-ann-text": { "text-color": ["case", ["get", "sel"], "#1f5fbf", "#14171c"], "text-halo-color": "#ffffff" },
+  "wr-ann-line-label": { "text-color": "#14171c", "text-halo-color": "#ffffff" },
+  "wr-ann-shape-label": { "text-color": "#14171c", "text-halo-color": "#ffffff" },
+};
+const darkPaint = new WeakMap();
+export function applyLook(map, look) {
+  if (!darkPaint.has(map)) {
+    const saved = {};
+    for (const [layer, props] of Object.entries(LIGHT_PAINT)) {
+      if (!map.getLayer(layer)) continue;
+      saved[layer] = {};
+      for (const prop of Object.keys(props)) saved[layer][prop] = map.getPaintProperty(layer, prop);
+    }
+    darkPaint.set(map, saved);
+  }
+  const table = look === "light" ? LIGHT_PAINT : darkPaint.get(map);
+  for (const [layer, props] of Object.entries(table)) {
+    if (!map.getLayer(layer)) continue;
+    for (const [prop, value] of Object.entries(props)) map.setPaintProperty(layer, prop, value === undefined ? null : value);
+  }
 }
 
 // Small icons drawn in code (no image files to host). Drawn at 2x and shown at half size.
