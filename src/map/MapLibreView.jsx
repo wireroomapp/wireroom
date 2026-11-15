@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { groupByPlace } from "../contextData.js";
-import { buildStyle, applyBase, applyLook, makeIcons, ICON_IDS, SLOT_OFFSETS, BASES, ANNOTATION_LAYERS, NASA_CREDIT, DEM_CREDIT } from "./wireroomStyle.js";
+import { buildStyle, applyBase, applyLook, hideBaseCountryLabels, makeIcons, ICON_IDS, SLOT_OFFSETS, BASES, ANNOTATION_LAYERS, NASA_CREDIT, DEM_CREDIT } from "./wireroomStyle.js";
 import { WORLD_BBOX, trackId } from "../trackingGeo.js";
 
 // The full-scale map: MapLibre (free, open source) drawing OpenStreetMap data from
@@ -282,7 +282,8 @@ export default function MapLibreView({
   useEffect(() => {
     const src = ready && mapRef.current?.getSource("wr-countries");
     if (!src) return;
-    src.setData({ type: "FeatureCollection", features: countries.map((c) => point(c.lon, c.lat, { id: c.id, code: c.code, has: hasNews.has(c.id), active: c.id === selectedId })) });
+    src.setData({ type: "FeatureCollection", features: countries.map((c) => point(c.lon, c.lat, { id: c.id, code: c.code, name: c.name, has: hasNews.has(c.id), active: c.id === selectedId })) });
+    hideBaseCountryLabels(mapRef.current, countries.map((c) => c.id));
   }, [ready, countries, selectedId, hasNews]);
 
   // Planes and ships.

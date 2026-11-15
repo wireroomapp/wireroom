@@ -181,7 +181,9 @@ export function buildStyle() {
       { id: "wr-country-dot", type: "circle", source: "wr-countries",
         paint: { "circle-radius": ["case", ["get", "active"], 6.5, ["get", "has"], 4.5, 3.5], "circle-color": ["case", ["get", "active"], "#e8eaed", "#7eb2ff"], "circle-stroke-color": ["case", ["get", "active"], "#7eb2ff", "#071019"], "circle-stroke-width": ["case", ["get", "active"], 2, 1] } },
       { id: "wr-country-code", type: "symbol", source: "wr-countries",
-        layout: { "text-field": ["get", "code"], "text-font": FONT_BOLD, "text-size": 9, "text-offset": [0, 1.25], "text-anchor": "top", "text-allow-overlap": true, "text-ignore-placement": true },
+        // One title per country: the short code at world view, the full name once there's room.
+        // The base map's own name for these countries is hidden (see hideBaseCountryLabels).
+        layout: { "text-field": ["step", ["zoom"], ["get", "code"], 3.5, ["get", "name"]], "text-font": FONT_BOLD, "text-size": ["step", ["zoom"], 9, 3.5, 11], "text-max-width": 8, "text-offset": [0, 1.25], "text-anchor": "top", "text-allow-overlap": true, "text-ignore-placement": true },
         paint: { "text-color": "#8a98aa", "text-halo-color": "#071019", "text-halo-width": 1.2 } },
 
       // ---- The user's analysis (markers, lines, shapes, notes). Fixed size on screen at any zoom. ----
@@ -224,6 +226,14 @@ export function applyBase(map, baseId, look = "dark") {
   map.setPaintProperty("background", "background-color", base.imagery ? "#071019" : look === "light" ? "#efece4" : "#142230");
   // NASA's relief image already has shading; the night image looks best without extra shadows.
   map.setLayoutProperty("hillshade", "visibility", base.id === "map" || base.id === "satellite" ? "visible" : "none");
+}
+
+// The base map labels every country by name; Wire Room's dots label their own countries, so the
+// base map's label for those is hidden to avoid two titles on one country.
+export function hideBaseCountryLabels(map, ids) {
+  if (!map.getLayer("label-countries")) return;
+  const iso = ids.map((id) => String(id).toUpperCase());
+  map.setFilter("label-countries", ["all", ["==", ["get", "class"], "country"], ["!", ["in", ["get", "iso_a2"], ["literal", iso]]]]);
 }
 
 // Light look for the plain MAP in the light theme. The style above is the dark look; the first
