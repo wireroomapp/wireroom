@@ -29,12 +29,12 @@ function Sources({ item, max = 5 }) {
     <ul className="tc-src">
       {item.sources.slice(0, max).map((s) => (
         <li key={s.url || s.headline}>
-          <b className={s.sourceType === "official" ? "off" : ""}>{s.sourceType === "official" ? "OFFICIAL" : "NEWS"}</b>{s.source} · {dayLabel(s.publishedAt)}
-          {s.url && <a href={s.url} target="_blank" rel="noreferrer">READ →</a>}
-          {s.headline !== item.title && <div style={{ color: "#8795a7" }}>{s.headline}</div>}
+          <b className={s.sourceType === "official" ? "off" : ""}>{s.sourceType === "official" ? "Official" : "News"}</b>{s.source} · {dayLabel(s.publishedAt)}
+          {s.url && <a href={s.url} target="_blank" rel="noreferrer">Read →</a>}
+          {s.headline !== item.title && <div style={{ color: "var(--muted)" }}>{s.headline}</div>}
         </li>
       ))}
-      {item.sources.length > max && <li style={{ color: "#718198" }}>+{item.sources.length - max} more</li>}
+      {item.sources.length > max && <li style={{ color: "var(--muted)" }}>+{item.sources.length - max} more</li>}
     </ul>
   );
 }
@@ -50,10 +50,10 @@ export function PlaceCard({ group, onClose, onPin, warOf }) {
     <div className="track-card" role="dialog" aria-label={`${KIND_LABEL[group.kind]} reports at ${group.place}`} {...stop}>
       <Head onClose={onClose} title={where}
         icon={<Swatch kind={ICON_KIND[group.kind]} color={color} hollow={group.subtype !== "attack" && group.kind !== "strike"} size={12} />}
-        kindText={`${KIND_LABEL[group.kind]} · ${group.items.length} EVENTS REPORTED · LAST 7 DAYS`} />
-      {group.precision === "country" && <div className="tc-adv" style={{ color: "#8795a7" }}>{PRECISION_TEXT.country}.</div>}
+        kindText={`${KIND_LABEL[group.kind]} · ${group.items.length} events reported · last 7 days`} />
+      {group.precision === "country" && <div className="tc-adv" style={{ color: "var(--muted)" }}>{PRECISION_TEXT.country}.</div>}
       {adv && (
-        <div className="tc-adv">US travel advisory for {adv.name}: Level {adv.level} of 4, {adv.levelText}. <a href={adv.url} target="_blank" rel="noreferrer">READ →</a></div>
+        <div className="tc-adv">US travel advisory for {adv.name}: Level {adv.level} of 4, {adv.levelText}. <a href={adv.url} target="_blank" rel="noreferrer">Read →</a></div>
       )}
       <ol className="tc-events">
         {group.items.map((it) => {
@@ -67,7 +67,7 @@ export function PlaceCard({ group, onClose, onPin, warOf }) {
               <div className="ev-title">{it.title}</div>
               {it.kind !== "cyber" && <div className="ev-by">By: {byText(it)}{it.target ? ` · Target: ${it.target}` : ""}</div>}
               <Sources item={it} max={3} />
-              {onPin && <button type="button" className="tc-pin ev-pin" onClick={() => onPin(it)}>PIN TO MAP</button>}
+              {onPin && <button type="button" className="tc-pin ev-pin" onClick={() => onPin(it)}>Pin to map</button>}
             </li>
           );
         })}
@@ -101,13 +101,13 @@ export function IncidentCard({ item, onClose, onPin, war = null }) {
         {rows.map(([k, v]) => (<React.Fragment key={k}><dt>{k}</dt><dd>{v}</dd></React.Fragment>))}
       </dl>
       {item.advisory && (
-        <div className="tc-adv">US travel advisory for {item.advisory.name}: Level {item.advisory.level} of 4, {item.advisory.levelText}. <a href={item.advisory.url} target="_blank" rel="noreferrer">READ →</a></div>
+        <div className="tc-adv">US travel advisory for {item.advisory.name}: Level {item.advisory.level} of 4, {item.advisory.levelText}. <a href={item.advisory.url} target="_blank" rel="noreferrer">Read →</a></div>
       )}
       <Sources item={item} />
       <div className="tc-foot">
         <span>{checkedText(item)}{item.translatedFrom ? " (machine-translated)" : ""}. Reported, not verified by Wire Room.</span>
       </div>
-      {onPin && <button type="button" className="tc-pin" onClick={onPin}>PIN TO MAP</button>}
+      {onPin && <button type="button" className="tc-pin" onClick={onPin}>Pin to map</button>}
     </div>
   );
 }
@@ -127,14 +127,14 @@ export function WarCard({ war, onClose, onPin, intelOpen, onToggleIntel, reporte
   ];
   return (
     <div className="track-card" role="dialog" aria-label="War details" {...stop}>
-      <Head onClose={onClose} title={war.name} icon={<Swatch kind="war" color={TRACKER_COLORS.war} size={12} />} kindText={`${(LEVEL_TEXT[war.level] || LEVEL_TEXT.war).label} · UCDP VERIFIED EVENTS`} />
+      <Head onClose={onClose} title={war.name} icon={<Swatch kind="war" color={TRACKER_COLORS.war} size={12} />} kindText={`${(LEVEL_TEXT[war.level] || LEVEL_TEXT.war).label} · UCDP verified events`} />
       <div className="tc-big">{n(lm.best)} killed<small>{monthLabel(lm.month)} · best estimate{Math.min(lm.low, lm.best) !== Math.max(lm.high, lm.best) ? `, range ${n(Math.min(lm.low, lm.best))}–${n(Math.max(lm.high, lm.best))}` : ""}{!lm.best && war.latestEvent ? ` · last event ${dayLabel(war.latestEvent)}` : ""}</small></div>
       {lag !== null && lag > 0 ? (
-        <div className="tc-lag">UCDP DATA ENDS {dayLabel(ucdpThrough).toUpperCase()}: {lag} DAYS BEHIND {refDay === localDay() ? "TODAY" : "THIS DAY"}. Fighting since then shows only as strikes reported in the news (dashed lines).</div>
+        <div className="tc-lag">UCDP data ends {dayLabel(ucdpThrough)}: {lag} days behind {refDay === localDay() ? "today" : "this day"}. Fighting since then shows only as strikes reported in the news (dashed lines).</div>
       ) : (
         <div className="tc-lag ok">UCDP verified events, published 1–2 months after they happen.</div>
       )}
-      <div style={{ font: "9px monospace", color: "#718198", margin: "0 0 8px" }}>TOTALS COVER {(coverageLabel(war.coverage) || "THE LATEST 12 MONTHS").toUpperCase()} ONLY; EARLIER FIGHTING ISN'T INCLUDED.</div>
+      <div style={{ font: "11px var(--font)", color: "var(--muted)", margin: "0 0 8px" }}>Totals cover {coverageLabel(war.coverage) || "the latest 12 months"} only; earlier fighting isn't INCLUDED.</div>
       <dl>
         {rows.map(([k, v]) => (<React.Fragment key={k}><dt>{k}</dt><dd>{v}</dd></React.Fragment>))}
       </dl>
@@ -144,13 +144,13 @@ export function WarCard({ war, onClose, onPin, intelOpen, onToggleIntel, reporte
       </div>
       <div className="tc-foot">
         <span>Side names as UCDP codes them. Figures may be revised.</span>
-        <a href="https://ucdp.uu.se/downloads/" target="_blank" rel="noreferrer">UCDP DATA →</a>
+        <a href="https://ucdp.uu.se/downloads/" target="_blank" rel="noreferrer">UCDP data →</a>
       </div>
       <div className="tc-actions">
         <button type="button" className={`tc-intel ${intelOpen ? "on" : ""}`} aria-pressed={intelOpen} onClick={onToggleIntel}>
-          {intelOpen ? "CLOSE INTEL PANEL" : "OPEN INTEL PANEL"}{war.reportCount ? ` · ${war.reportCount}` : ""}
+          {intelOpen ? "Close intel panel" : "Open intel panel"}{war.reportCount ? ` · ${war.reportCount}` : ""}
         </button>
-        {onPin && <button type="button" className="tc-pin" onClick={onPin}>PIN TO MAP</button>}
+        {onPin && <button type="button" className="tc-pin" onClick={onPin}>Pin to map</button>}
       </div>
     </div>
   );
@@ -163,11 +163,11 @@ export function NodeCard({ node, war, onClose, onOpenWar }) {
   const headline = node.headline ? (node.headline.length >= 178 ? `${node.headline.replace(/\s+\S*$/, "")}…` : node.headline) : "";
   return (
     <div className="track-card" role="dialog" aria-label="Conflict event details" {...stop}>
-      <Head onClose={onClose} title={node.place || war.name} icon={<Swatch kind="war" color={TRACKER_COLORS.war} size={12} />} kindText="CONFLICT EVENT · UCDP VERIFIED DATASET" />
+      <Head onClose={onClose} title={node.place || war.name} icon={<Swatch kind="war" color={TRACKER_COLORS.war} size={12} />} kindText="Conflict event · UCDP verified dataset" />
       {headline ? (
         <>
-          <div style={{ font: "9px monospace", color: "#718198", letterSpacing: ".06em", margin: "0 0 3px" }}>WHAT HAPPENED (HEADLINE OF UCDP'S SOURCE)</div>
-          <div className="tc-quote" style={{ fontStyle: "normal", color: "#e8e3d8" }}>“{headline}”</div>
+          <div style={{ font: "11px var(--font)", color: "var(--muted)", letterSpacing: 0, margin: "0 0 3px" }}>What happened (headline of UCDP's source)</div>
+          <div className="tc-quote" style={{ fontStyle: "normal", color: "var(--text)" }}>“{headline}”</div>
         </>
       ) : <div className="tc-quote">UCDP didn't record a source headline for this event.</div>}
       <dl>
@@ -181,8 +181,8 @@ export function NodeCard({ node, war, onClose, onOpenWar }) {
         <span>Coded by UCDP researchers from news and NGO reports. Preliminary; may be revised. UCDP doesn't publish article links.</span>
       </div>
       <div className="tc-actions">
-        {search && <a className="tc-pin" style={{ textDecoration: "none", display: "inline-block" }} href={search} target="_blank" rel="noreferrer">SEARCH NEWS FOR THIS →</a>}
-        <button type="button" className="tc-intel" onClick={onOpenWar}>{war.name.toUpperCase()} →</button>
+        {search && <a className="tc-pin" style={{ textDecoration: "none", display: "inline-block" }} href={search} target="_blank" rel="noreferrer">Search news for this →</a>}
+        <button type="button" className="tc-intel" onClick={onOpenWar}>{war.name} →</button>
       </div>
     </div>
   );

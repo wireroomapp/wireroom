@@ -4,7 +4,19 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#071019" />
+    <meta name="theme-color" content="#0e1116" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <script>
+      // Pick the theme before the page paints: the saved choice, else the device setting.
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem("wireroom-theme"); } catch (e) {}
+        if (t !== "light" && t !== "dark") t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", t);
+      })();
+    </script>
     <title>Wire Room | Official statements and independent news, on a map</title>
     <meta name="description" content="Wire Room puts what governments say next to what independent outlets report, country by country, on an interactive world map. Draw, annotate, and pin reports." />
     <meta property="og:title" content="Wire Room" />

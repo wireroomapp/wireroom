@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { groupByPlace } from "../contextData.js";
-import { buildStyle, applyBase, makeIcons, ICON_IDS, SLOT_OFFSETS, BASES, ANNOTATION_LAYERS, NASA_CREDIT, DEM_CREDIT } from "./wireroomStyle.js";
+import { buildStyle, applyBase, applyLook, makeIcons, ICON_IDS, SLOT_OFFSETS, BASES, ANNOTATION_LAYERS, NASA_CREDIT, DEM_CREDIT } from "./wireroomStyle.js";
 import { WORLD_BBOX, trackId } from "../trackingGeo.js";
 
 // The full-scale map: MapLibre (free, open source) drawing OpenStreetMap data from
@@ -44,6 +44,7 @@ export default function MapLibreView({
   annotations, tool = "select", pinning = false,
   onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace, controlRef,
   focus = null, // { lon, lat, key }: fly here once (used when a shared link opens a country)
+  theme = "dark", // "light" gives the plain MAP a light atlas look
   // Trackers: reported incidents (strikes, terrorism, cyber) and wars (see TrackerCards.jsx)
   incidents = null, wars = null, selectedWar = null, selectedTrackerKey = null, onTrackerClick,
 }) {
@@ -51,6 +52,7 @@ export default function MapLibreView({
   const mapRef = useRef(null);
   const [ready, setReady] = useState(false);
   const [prefs, setPrefs] = useState(loadPrefs);
+  const [stylesOpen, setStylesOpen] = useState(false); // phones: the map-style buttons fold behind one button
   const lookup = useRef(new Map()); // track key -> full item, for taps
   const trkLookup = useRef(new Map()); // tracker feature key -> { kind, item, war }
   const terrainOn = useRef(false); // 3D terrain setting, readable from map event handlers
@@ -251,7 +253,9 @@ export default function MapLibreView({
   useEffect(() => {
     const map = mapRef.current;
     if (!ready || !map) return;
-    applyBase(map, prefs.base);
+    const look = theme === "light" && prefs.base === "map" ? "light" : "dark";
+    applyBase(map, prefs.base, look);
+    applyLook(map, look);
     map.setProjection({ type: prefs.globe ? "globe" : "mercator" });
     // Only the 3D button changes the tilt; switching looks or globe leaves the camera alone.
     const terrainChanged = prevTerrain.current !== prefs.terrain;
@@ -272,7 +276,7 @@ export default function MapLibreView({
       }
     }
     savePrefs(prefs);
-  }, [ready, prefs]);
+  }, [ready, prefs, theme]);
 
   // Country dots.
   useEffect(() => {
@@ -321,7 +325,7 @@ export default function MapLibreView({
       const dim = Boolean(selectedTrackerKey && selectedTrackerKey.startsWith("g:") && selectedTrackerKey !== key);
       return point(g.lon, g.lat, { key, icon: (ICON[g.kind] || ICON.strike)(g), slot: slot % SLOT_OFFSETS.length, rank: RANK[g.kind] || 0, dim, count: g.items.length });
     });
-    const MON = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const ws = (wars || []).map((w) => {
       const key = `w:${w.id}`;
       m.set(key, { kind: "war", item: w });
@@ -331,7 +335,7 @@ export default function MapLibreView({
       return point(w.lon, w.lat, {
         key, best: (w.deaths && w.deaths.best) || 0, level: w.level || "war", quiet: Boolean(w.quiet),
         sel: selectedWar ? selectedWar.id === w.id : false, dim: Boolean(selectedWar && selectedWar.id !== w.id),
-        label: `${w.name.toUpperCase()}\n${lm.best ? `${lm.best.toLocaleString()} KILLED IN ${mon} (UCDP)` : `LAST EVENT ${last}`}`,
+        label: `${w.name}\n${lm.best ? `${lm.best.toLocaleString()} killed in ${mon} (UCDP)` : `Last event ${last}`}`,
       });
     });
     const lines = [], nodes = [];
@@ -373,8 +377,8 @@ export default function MapLibreView({
         const s = Math.min(a, c), n = Math.max(a, c), w = Math.min(b, d), e = Math.max(b, d);
         const count = Number(z.count) || 0;
         polys.push({ type: "Feature", geometry: { type: "Polygon", coordinates: [[[w, s], [e, s], [e, n], [w, n], [w, s]]] }, properties: { count } });
-        const text = count === 0 ? (waiting ? "WAITING FOR DATA" : "NO FREE COVERAGE") : count.toLocaleString();
-        labels.push(point(w, n, { count, label: `${z.name.toUpperCase()} · ${text}` }));
+        const text = count === 0 ? (waiting ? "waiting for data" : "no free coverage") : count.toLocaleString();
+        labels.push(point(w, n, { count, label: `${z.name} · ${text}` }));
       }
     }
     map.getSource("wr-zones").setData({ type: "FeatureCollection", features: polys });
@@ -425,15 +429,19 @@ export default function MapLibreView({
     <div className="ml-wrap">
       <style>{ML_CSS}</style>
       <div ref={containerRef} className="ml-map" />
-      <div className="ml-controls" onPointerDown={(e) => e.stopPropagation()}>
+      <div className={"ml-controls" + (stylesOpen ? " open" : "")} onPointerDown={(e) => e.stopPropagation()}>
+        <button type="button" className="ml-styles-toggle" aria-expanded={stylesOpen} onClick={() => setStylesOpen(!stylesOpen)} title="Map style, globe and 3D terrain">
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
+          {(BASES.find((b) => b.id === prefs.base) || BASES[0]).label}
+        </button>
         <div className="ml-row">
           {BASES.map((b) => (
             <button key={b.id} type="button" className={prefs.base === b.id ? "on" : ""} aria-pressed={prefs.base === b.id} onClick={() => set({ base: b.id })}>{b.label}</button>
           ))}
         </div>
         <div className="ml-row">
-          <button type="button" className={prefs.globe ? "on" : ""} aria-pressed={prefs.globe} onClick={() => set({ globe: !prefs.globe })} title="Show the Earth as a globe">GLOBE</button>
-          <button type="button" className={prefs.terrain ? "on" : ""} aria-pressed={prefs.terrain} onClick={() => set({ terrain: !prefs.terrain })} title="Raise mountains in 3D. Zoom in to see them; tilt with right-drag or two fingers.">3D TERRAIN</button>
+          <button type="button" className={prefs.globe ? "on" : ""} aria-pressed={prefs.globe} onClick={() => set({ globe: !prefs.globe })} title="Show the Earth as a globe">Globe</button>
+          <button type="button" className={prefs.terrain ? "on" : ""} aria-pressed={prefs.terrain} onClick={() => set({ terrain: !prefs.terrain })} title="Raise mountains in 3D. Zoom in to see them; tilt with right-drag or two fingers.">3D terrain</button>
         </div>
       </div>
     </div>
@@ -442,17 +450,24 @@ export default function MapLibreView({
 
 const ML_CSS = `
 .ml-wrap{position:absolute;inset:0}
-.ml-map{position:absolute;inset:0;background:#071019}
+.ml-map{position:absolute;inset:0;background:var(--bg)}
 .ml-controls{position:absolute;top:10px;right:10px;z-index:3;display:flex;flex-direction:column;align-items:flex-end;gap:5px}
 .ml-row{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
-.ml-controls button{background:rgba(10,14,20,.86);border:1px solid #26384d;color:#aeb8c6;font:10px monospace;letter-spacing:.05em;padding:6px 8px;cursor:pointer}
-.ml-controls button.on{border-color:#c9974b;color:#e8e3d8}
+.ml-controls button{background:var(--overlay);border:1px solid var(--line-2);color:var(--text-2);font:12px var(--font);letter-spacing:0;padding:6px 8px;cursor:pointer}
+.ml-controls button.on{border-color:var(--accent);color:var(--text)}
+.ml-controls button{border-radius:8px;height:34px;font:500 13px var(--font);border-color:var(--line);color:var(--text);box-shadow:var(--shadow)}
+.ml-controls button.on{background:var(--accent-soft);color:var(--accent);border-color:var(--accent);font-weight:600}
+:root[data-theme="light"] .ml-wrap .maplibregl-ctrl-group button .maplibregl-ctrl-icon,:root[data-theme="light"] .ml-wrap .maplibregl-ctrl-attrib-button{filter:none}
 .ml-wrap .maplibregl-ctrl-bottom-right{bottom:calc(52px + env(safe-area-inset-bottom))}
-.ml-wrap .maplibregl-ctrl-group{background:#0c1724;border:1px solid #26384d}
-.ml-wrap .maplibregl-ctrl-group button+button{border-top:1px solid #26384d}
+.ml-wrap .maplibregl-ctrl-group{background:var(--surface);border:1px solid var(--line-2)}
+.ml-wrap .maplibregl-ctrl-group button+button{border-top:1px solid var(--line-2)}
 .ml-wrap .maplibregl-ctrl-group button .maplibregl-ctrl-icon{filter:invert(.8)}
-.ml-wrap .maplibregl-ctrl-attrib{background:rgba(10,14,20,.8);color:#718198;font:10px monospace}
-.ml-wrap .maplibregl-ctrl-attrib a{color:#8a98aa}
+.ml-wrap .maplibregl-ctrl-attrib{background:var(--overlay);color:var(--muted);font:12px var(--font)}
+.ml-wrap .maplibregl-ctrl-attrib a{color:var(--muted)}
 .ml-wrap .maplibregl-ctrl-attrib-button{filter:invert(.8)}
-@media(max-width:800px){.ml-controls{top:50%;transform:translateY(-60%);gap:4px}.ml-row{flex-direction:column;align-items:flex-end}.ml-controls button{padding:5px 6px;font-size:9px;min-width:66px;text-align:center}}
+.ml-controls .ml-styles-toggle{display:none}
+.ml-controls button{display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.ml-wrap .maplibregl-ctrl-attrib{font-size:11px;line-height:1.35}
+@media(max-width:800px){.ml-controls{top:12px;right:10px;transform:none;gap:6px}.ml-controls .ml-styles-toggle{display:inline-flex;height:40px;padding:0 12px}.ml-controls .ml-row{display:none;flex-direction:column;align-items:flex-end;gap:4px}.ml-controls.open .ml-row{display:flex}.ml-controls .ml-row button{height:36px;min-width:96px;font-size:13px}
+.ml-wrap .maplibregl-ctrl-attrib.maplibregl-compact{min-height:24px}}
 `;
