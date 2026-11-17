@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T07:02:14.321Z",
+  "generatedAt": "2026-11-17T08:18:18.445Z",
   "countries": {
     "us": {
       "official": [
@@ -9343,7 +9343,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-17T07:01:36.405Z",
+      "officialLastOkAt": "2026-11-17T08:13:34.197Z",
       "officialLastError": null
     },
     "ca": {
@@ -17704,7 +17704,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-17T07:01:38.601Z",
+      "officialLastOkAt": "2026-11-17T08:13:43.470Z",
       "officialLastError": null
     },
     "mx": {
@@ -39519,7 +39519,7 @@
       "officialVerified": true,
       "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-17T05:49:21.171Z",
-      "officialLastError": "https://news.google.com/rss/search?q=Presidente%20da%20Rep%C3%BAblica%20site%3Agov.br%2Fplanalto&hl=pt-BR&gl=BR&ceid=BR:pt-BR: Status code 429"
+      "officialLastError": "https://news.google.com/rss/search?q=Presidente%20da%20Rep%C3%BAblica%20site%3Agov.br%2Fplanalto&hl=pt-BR&gl=BR&ceid=BR:pt-BR: Status code 503"
     },
     "ar": {
       "official": [
@@ -44883,9 +44883,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-17T07:01:41.625Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=Comunicado%20Oficial%20N%C3%BAmero%20site%3Aargentina.gob.ar&hl=es-419&gl=AR&ceid=AR:es-419: This operation was aborted"
     },
     "gb": {
       "official": [
@@ -52940,7 +52940,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-17T07:01:42.727Z",
+      "officialLastOkAt": "2026-11-17T08:14:30.180Z",
       "officialLastError": null
     },
     "fr": {
@@ -61068,7 +61068,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-17T07:01:43.414Z",
+      "officialLastOkAt": "2026-11-17T08:14:38.273Z",
       "officialLastError": null
     },
     "de": {
@@ -68066,7 +68066,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-17T07:01:45.028Z",
+      "officialLastOkAt": "2026-11-17T08:14:46.674Z",
       "officialLastError": null
     },
     "it": {
@@ -76625,7 +76625,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-17T07:01:46.244Z",
+      "officialLastOkAt": "2026-11-17T08:14:55.273Z",
       "officialLastError": null
     },
     "es": {
@@ -85031,7 +85031,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-17T07:01:48.548Z",
+      "officialLastOkAt": "2026-11-17T08:15:03.964Z",
       "officialLastError": null
     },
     "pl": {
@@ -118682,9 +118682,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-17T07:01:52.356Z",
-      "officialLastError": "https://news.google.com/rss/search?q=site%3Amid.ru%20%22Foreign%20Minister%22&hl=en-US&gl=US&ceid=US:en: Status code 429"
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Akremlin.ru&hl=en-US&gl=US&ceid=US:en: This operation was aborted"
     },
     "tr": {
       "official": [],
@@ -134600,9 +134600,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-17T07:01:54.091Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Agov.il%2Fen%20%22Prime%20Minister%20Office%22&hl=en-US&gl=US&ceid=US:en: This operation was aborted"
     },
     "ir": {
       "official": [],
@@ -184556,7 +184556,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-17T07:01:59.355Z",
+      "officialLastOkAt": "2026-11-17T08:17:15.896Z",
       "officialLastError": null
     },
     "pk": {
@@ -191070,6 +191070,45 @@
     },
     "cn": {
       "official": [
+        {
+          "id": "cn-official-edfbab64163ed181",
+          "countryId": "cn",
+          "sourceType": "official",
+          "source": "State Council",
+          "headline": "President Xi Jinping Meets with Papua New Guinean Prime Minister James Marape",
+          "summary": "President Xi Jinping Meets with Papua New Guinean Prime Minister James Marape",
+          "date": "Nov 17, 2026 · 3:59 PM",
+          "publishedAt": "2026-11-17T15:59:00.000Z",
+          "dateOnly": false,
+          "url": "https://www.mfa.gov.cn/eng/xw/202611/t20261117_12061053.html",
+          "importance": 3
+        },
+        {
+          "id": "cn-official-71e491268b3004b7",
+          "countryId": "cn",
+          "sourceType": "official",
+          "source": "State Council",
+          "headline": "President Xi Jinping Meets with Canadian Prime Minister Mark Carney",
+          "summary": "President Xi Jinping Meets with Canadian Prime Minister Mark Carney",
+          "date": "Nov 17, 2026 · 3:45 PM",
+          "publishedAt": "2026-11-17T15:45:00.000Z",
+          "dateOnly": false,
+          "url": "https://www.mfa.gov.cn/eng/xw/202611/t20261117_12061035.html",
+          "importance": 3
+        },
+        {
+          "id": "cn-official-830c2b4f8b69a72c",
+          "countryId": "cn",
+          "sourceType": "official",
+          "source": "State Council",
+          "headline": "Xi Jinping Sends Congratulatory Messages to New Members of the Presidency of Bosnia and Herzegovina on Their Assumption of Office",
+          "summary": "Xi Jinping Sends Congratulatory Messages to New Members of the Presidency of Bosnia and Herzegovina on Their Assumption of Office",
+          "date": "Nov 17, 2026 · 11:03 AM",
+          "publishedAt": "2026-11-17T11:03:00.000Z",
+          "dateOnly": false,
+          "url": "https://www.mfa.gov.cn/eng/xw/202611/t20261117_12061027.html",
+          "importance": 3
+        },
         {
           "id": "cn-official-5f27f575827ec22a",
           "countryId": "cn",
@@ -199304,11 +199343,37 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-17T07:02:07.978Z",
+      "officialLastOkAt": "2026-11-17T08:17:36.423Z",
       "officialLastError": null
     },
     "jp": {
       "official": [
+        {
+          "id": "jp-official-de69ff5c7a0c7506",
+          "countryId": "jp",
+          "sourceType": "official",
+          "source": "Prime Minister's Office",
+          "headline": "The 13th Mekong-Japan Summit Meeting(Summary)",
+          "summary": "",
+          "date": "Nov 17, 2026 · 4:55 AM",
+          "publishedAt": "2026-11-17T04:55:00.000Z",
+          "dateOnly": false,
+          "url": "https://japan.kantei.go.jp/105/diplomatic/202611/1117mekong.html",
+          "importance": 3
+        },
+        {
+          "id": "jp-official-21291fb59e4f95f6",
+          "countryId": "jp",
+          "sourceType": "official",
+          "source": "Prime Minister's Office",
+          "headline": "ASEAN-related Summit Meetings (1)",
+          "summary": "",
+          "date": "Nov 16, 2026 · 11:00 AM",
+          "publishedAt": "2026-11-16T11:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://japan.kantei.go.jp/105/actions/202611/16asean.html",
+          "importance": 3
+        },
         {
           "id": "jp-official-1ba9c59c0f04178c",
           "countryId": "jp",
@@ -199353,7 +199418,7 @@
           "countryId": "jp",
           "sourceType": "official",
           "source": "Prime Minister's Office",
-          "headline": "Contributed Article \"Toward a Stronger and More Prosperous Indo-Pacific, Together\" by Prime Minister TAKAICHI Sanae to Philippine Daily Inquirer, Philippine Star, Manila Bulletin, Sin Chew Daily, and Nikkei Asia",
+          "headline": "Contributed Article \"Toward a Stronger and More Prosperous Indo-Pacific, Together\" by Prime Minister TAKAICHI Sanae to Philippine Daily Inquirer, Philippine Star, Manila Bulletin, Sin Chew Daily, Nikkei Asia and Asia News Network",
           "summary": "",
           "date": "Nov 15, 2026 · 10:00 PM",
           "publishedAt": "2026-11-15T22:00:00.000Z",
@@ -207299,7 +207364,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-17T07:02:09.765Z",
+      "officialLastOkAt": "2026-11-17T08:17:45.036Z",
       "officialLastError": null
     },
     "kr": {
@@ -215596,7 +215661,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-17T07:02:11.551Z",
+      "officialLastOkAt": "2026-11-17T08:17:54.479Z",
       "officialLastError": null
     },
     "tw": {
@@ -222600,7 +222665,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-17T07:02:12.736Z",
+      "officialLastOkAt": "2026-11-17T08:18:02.194Z",
       "officialLastError": null
     },
     "id": {
@@ -237207,7 +237272,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-17T07:02:14.321Z",
+      "officialLastOkAt": "2026-11-17T08:18:18.444Z",
       "officialLastError": null
     }
   }
