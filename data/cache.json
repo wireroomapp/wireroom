@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T03:47:27.812Z",
+  "generatedAt": "2026-11-18T04:35:50.729Z",
   "countries": {
     "us": {
       "official": [
@@ -9382,7 +9382,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-18T03:46:38.839Z",
+      "officialLastOkAt": "2026-11-18T04:30:42.364Z",
       "officialLastError": null
     },
     "ca": {
@@ -17769,7 +17769,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-18T03:46:40.667Z",
+      "officialLastOkAt": "2026-11-18T04:30:51.826Z",
       "officialLastError": null
     },
     "mx": {
@@ -30461,9 +30461,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-18T03:46:41.653Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=presidencia%20site%3Agob.mx&hl=es-MX&gl=MX&ceid=MX:es-MX: This operation was aborted"
     },
     "br": {
       "official": [
@@ -39909,9 +39909,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-18T03:46:42.665Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=Presidente%20da%20Rep%C3%BAblica%20site%3Agov.br%2Fplanalto&hl=pt-BR&gl=BR&ceid=BR:pt-BR: Status code 429"
     },
     "ar": {
       "official": [
@@ -45275,9 +45275,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-18T03:46:44.342Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=Comunicado%20Oficial%20N%C3%BAmero%20site%3Aargentina.gob.ar&hl=es-419&gl=AR&ceid=AR:es-419: This operation was aborted"
     },
     "gb": {
       "official": [
@@ -53332,7 +53332,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-18T03:46:47.234Z",
+      "officialLastOkAt": "2026-11-18T04:31:38.945Z",
       "officialLastError": null
     },
     "fr": {
@@ -61527,7 +61527,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-18T03:46:47.800Z",
+      "officialLastOkAt": "2026-11-18T04:31:47.022Z",
       "officialLastError": null
     },
     "de": {
@@ -68525,7 +68525,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-18T03:46:50.077Z",
+      "officialLastOkAt": "2026-11-18T04:31:55.350Z",
       "officialLastError": null
     },
     "it": {
@@ -77084,7 +77084,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-18T03:46:51.512Z",
+      "officialLastOkAt": "2026-11-18T04:32:03.971Z",
       "officialLastError": null
     },
     "es": {
@@ -85526,7 +85526,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-18T03:46:53.593Z",
+      "officialLastOkAt": "2026-11-18T04:32:12.670Z",
       "officialLastError": null
     },
     "pl": {
@@ -106274,9 +106274,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-18T03:46:57.035Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Apresident.gov.ua%20OR%20site%3Amfa.gov.ua%20OR%20site%3Amod.gov.ua&hl=uk&gl=UA&ceid=UA:uk: This operation was aborted"
     },
     "ru": {
       "official": [
@@ -119319,9 +119319,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-18T03:46:58.570Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Akremlin.ru&hl=en-US&gl=US&ceid=US:en: Status code 503"
     },
     "tr": {
       "official": [],
@@ -135276,9 +135276,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-18T03:47:00.984Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Agov.il%2Fen%20%22Prime%20Minister%20Office%22&hl=en-US&gl=US&ceid=US:en: Status code 503"
     },
     "ir": {
       "official": [],
@@ -185245,7 +185245,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-18T03:47:08.848Z",
+      "officialLastOkAt": "2026-11-18T04:34:41.198Z",
       "officialLastError": null
     },
     "pk": {
@@ -200110,7 +200110,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-18T03:47:19.377Z",
+      "officialLastOkAt": "2026-11-18T04:35:06.223Z",
       "officialLastError": null
     },
     "jp": {
@@ -208235,7 +208235,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-18T03:47:21.794Z",
+      "officialLastOkAt": "2026-11-18T04:35:15.523Z",
       "officialLastError": null
     },
     "kr": {
@@ -216622,7 +216622,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-18T03:47:23.653Z",
+      "officialLastOkAt": "2026-11-18T04:35:25.041Z",
       "officialLastError": null
     },
     "tw": {
@@ -223626,7 +223626,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-18T03:47:25.867Z",
+      "officialLastOkAt": "2026-11-18T04:35:34.412Z",
       "officialLastError": null
     },
     "id": {
@@ -238285,7 +238285,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-18T03:47:27.812Z",
+      "officialLastOkAt": "2026-11-18T04:35:50.728Z",
       "officialLastError": null
     }
   }
