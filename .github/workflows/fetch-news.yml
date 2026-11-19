@@ -74,6 +74,20 @@ jobs:
           SHIPS_COLLECT_SECONDS: "300"
         run: node scripts/collect-ships.mjs
 
+      # Supabase pauses free projects after a quiet week; one small read an hour keeps the
+      # Community database awake. Skipped until config/community.json has the project's address.
+      - name: Keep the community database awake
+        continue-on-error: true
+        timeout-minutes: 1
+        run: |
+          URL=$(node -p "require('./config/community.json').url || ''")
+          KEY=$(node -p "require('./config/community.json').publishableKey || ''")
+          if [ -n "$URL" ] && [ -n "$KEY" ]; then
+            curl -sS -m 20 -o /dev/null -w "Community database: HTTP %{http_code}\n" "$URL/rest/v1/posts?select=id&limit=1" -H "apikey: $KEY"
+          else
+            echo "Community database not set up yet."
+          fi
+
       - name: Commit and push cache if it changed
         run: |
           git config user.name "wire-room-bot"

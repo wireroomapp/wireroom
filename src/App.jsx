@@ -1,15 +1,19 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import * as d3 from "d3";
 import { useTrackingFeed } from "./useTracking.js";
 import { WORLD_BBOX, visibleBbox, projectItems, projectZones, hitTest, trackId, trackToReport } from "./trackingGeo.js";
 import { exportMapImage } from "./exportMap.js";
-import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrateLegacy, annotationsToGeoJSON } from "./annotationSpace.js";
+import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrateLegacy, annotationsToGeoJSON, unitToLonLat } from "./annotationSpace.js";
 import MapLibreView from "./map/MapLibreView.jsx";
 import { readViewFromUrl, viewToSearch } from "./urlState.js";
 import SourcesPanel from "./SourcesPanel.jsx";
 import { PlaceCard, WarCard, NodeCard } from "./TrackerCards.jsx";
 import { DayBar } from "./DayBar.jsx";
+import { communityConfigured } from "./community/api.js";
+import { copyForMe } from "./community/helpers.js";
+// The Community panel (users' posts, articles and maps) loads only when opened.
+const CommunityPanel = lazy(() => import("./community/CommunityPanel.jsx"));
 import { useTrackerData, localDay, dayEnd, longDay, daysBetween, incidentToReport, warToReport, worldwideGroups, TRACKER_CREDITS, LEVEL_TEXT, sidesText, monthLabel, coverageLabel, n as num } from "./contextData.js";
 
 // Which map to draw. "maplibre" = the full-scale map (OpenFreeMap + NASA + MapLibre, globe and terrain).
@@ -87,9 +91,10 @@ const REVIEW_MODE = (() => { try { return new URLSearchParams(window.location.se
 
 // What a shared link asks to open (?country=ua&mode=both, ?view=global, ?war=...). See urlState.js.
 const INITIAL_URL_VIEW = (() => {
-  try { return readViewFromUrl(window.location.search, COUNTRIES.map(c => c.id)); } catch { return { country: null, mode: null, global: false, war: null, day: null }; }
+  try { return readViewFromUrl(window.location.search, COUNTRIES.map(c => c.id)); } catch { return { country: null, mode: null, global: false, war: null, day: null, community: false, post: null }; }
 })();
 const INITIAL_COUNTRY = COUNTRIES.find(c => c.id === INITIAL_URL_VIEW.country) || null;
+const COMMUNITY_COUNTRIES = COUNTRIES.map(c => ({ id: c.id, name: c.name })).sort((a, b) => a.name.localeCompare(b.name));
 
 const DEMO_NEWS = [
   { id:"demo-1", countryId:"us", sourceType:"official", source:"White House", headline:"Latest presidential statements and announcements", summary:"Demo content for the V2 interface. The production backend will replace this with a verified official source result.", date:"Demo", url:"#", importance:3 },
@@ -148,11 +153,15 @@ function NewsCard({ item, onPin }) {
 
 export default function WireRoomV2() {
   const [selected, setSelected] = useState(INITIAL_COUNTRY);
-  const [view, setView] = useState(INITIAL_COUNTRY ? "country" : INITIAL_URL_VIEW.global ? "global" : "closed"); // "closed" | "country" | "global"
+  const [view, setView] = useState(INITIAL_COUNTRY ? "country" : INITIAL_URL_VIEW.global ? "global" : INITIAL_URL_VIEW.community && communityConfigured ? "community" : "closed"); // "closed" | "country" | "global" | "war" | "community"
   const [mode, setMode] = useState(INITIAL_URL_VIEW.mode || "official"); // official | news | both
   // A shared link to a country also flies the map there (new map only).
   const [mapFocus, setMapFocus] = useState(() => (INITIAL_COUNTRY ? { lon: INITIAL_COUNTRY.lon, lat: INITIAL_COUNTRY.lat, key: INITIAL_COUNTRY.id } : null));
   const [linkNote, setLinkNote] = useState("");
+  const [communityStart, setCommunityStart] = useState(INITIAL_URL_VIEW.post); // a ?post= link opens that post
+  const [communityPost, setCommunityPost] = useState(null); // the post open in the Community panel (for the address bar)
+  const [sharedMap, setSharedMap] = useState(null); // someone's map post, shown read-only on the map
+  const [panelPeek, setPanelPeek] = useState(false); // phones: panel slid away while looking at that map
   const [showSources, setShowSources] = useState(false);
   const [query, setQuery] = useState("");
   const [intelQuery, setIntelQuery] = useState("");
@@ -175,6 +184,10 @@ export default function WireRoomV2() {
   const [annotationTool, setAnnotationTool] = useState("select");
   // Saved in map units (see annotationSpace.js) so they stay put when the map resizes.
   const [annotations, setAnnotations] = useState(() => { try { return loadAnnotations(localStorage); } catch { return []; } });
+  // The Community panel reads my drawing when I post a map.
+  const annotationsRef = useRef(annotations);
+  useEffect(() => { annotationsRef.current = annotations; }, [annotations]);
+  const getDrawing = useCallback(() => annotationsRef.current, []);
   const [selectedAnnotationId, setSelectedAnnotationId] = useState(null);
   const [pinning, setPinning] = useState(null); // a report waiting to be pinned to a marker
   const pinTapRef = useRef(null);
@@ -258,7 +271,9 @@ export default function WireRoomV2() {
   const projection = useMemo(() => d3.geoNaturalEarth1().fitSize([dims.w,dims.h],{type:"Sphere"}),[dims]);
   const path = useMemo(() => d3.geoPath(projection),[projection]);
   // Annotations in screen pixels for drawing (stored in map units).
-  const viewAnnotations = useMemo(() => annotations.map(a => toPixel(a, projection)), [annotations, projection]);
+  // While someone's map post is open, the map shows theirs (read-only) instead of mine.
+  const shownAnnotations = sharedMap ? sharedMap.annotations : annotations;
+  const viewAnnotations = useMemo(() => shownAnnotations.map(a => toPixel(a, projection)), [shownAnnotations, projection]);
 
   // ---- Live layers: military aircraft + ships (off until the user turns them on) ----
   const [airOn, setAirOn] = useState(false);
@@ -307,7 +322,7 @@ export default function WireRoomV2() {
   const airProjected = useMemo(() => projectItems(airFeed.items, projection), [airFeed.items, projection]);
   const shipProjected = useMemo(() => projectItems(shipFeed.items, projection), [shipFeed.items, projection]);
   const hasNewsSet = useMemo(() => new Set(feed.map(n => n.countryId)), [feed]);
-  const annotationsGeo = useMemo(() => (ML ? annotationsToGeoJSON(annotations, selectedAnnotationId) : null), [annotations, selectedAnnotationId]);
+  const annotationsGeo = useMemo(() => (ML ? annotationsToGeoJSON(shownAnnotations, selectedAnnotationId) : null), [shownAnnotations, selectedAnnotationId]);
   const shipZones = useMemo(() => projectZones(shipFeed.meta?.zones, projection), [shipFeed.meta, projection]);
 
   useEffect(() => {
@@ -431,10 +446,11 @@ export default function WireRoomV2() {
   // Keep the address bar in step with what's open, so copying it shares this exact view.
   useEffect(() => {
     try {
-      const search = viewToSearch({ country: view === "country" && selected ? selected.id : null, global: view === "global", war: view === "war" && warView ? warView.id : null, day: shownDay, mode }, window.location.search);
+      const search = viewToSearch({ country: view === "country" && selected ? selected.id : null, global: view === "global", war: view === "war" && warView ? warView.id : null, day: shownDay, mode,
+        community: view === "community", post: view === "community" ? communityPost : null }, window.location.search);
       if (search !== window.location.search) window.history.replaceState(null, "", window.location.pathname + search + window.location.hash);
     } catch { /* very old browser: links just won't update */ }
-  }, [selected, view, mode, warView, shownDay]);
+  }, [selected, view, mode, warView, shownDay, communityPost]);
 
   // LINK button: phones get the share sheet, computers copy the link.
   async function shareView() {
@@ -485,6 +501,54 @@ export default function WireRoomV2() {
     setSelected(null);
     setView("closed");
     setWarView(null);
+    setPanelPeek(false);
+  }
+  function openCommunity() {
+    resetIntelFilters();
+    setSelected(null);
+    setWarView(null);
+    setCommunityStart(null);
+    setView("community");
+  }
+  // Someone's map post on the map, read-only, framed to fit; on phones the panel slides away.
+  function showSharedMap(post) {
+    if (!post || !Array.isArray(post.annotations)) return;
+    setSelectedAnnotationId(null);
+    setTrackSel(null);
+    setTrkSel(null);
+    setPinning(null);
+    setAnnotationTool("select");
+    setAnnotationDraft(null);
+    setToolsOpen(false);
+    setSharedMap({ id: post.id, title: post.title, username: post.username, annotations: post.annotations });
+    const pts = [];
+    for (const a of post.annotations) {
+      if (a.type === "line") pts.push(unitToLonLat(a.x1, a.y1), unitToLonLat(a.x2, a.y2));
+      else {
+        pts.push(unitToLonLat(a.x, a.y));
+        if (a.type === "shape") pts.push(unitToLonLat(a.x + a.width, a.y + a.height));
+      }
+    }
+    const ok = pts.filter(Boolean);
+    if (ok.length) {
+      const lons = ok.map(p => p[0]), lats = ok.map(p => p[1]);
+      const w = Math.min(...lons), e = Math.max(...lons), s = Math.min(...lats), n = Math.max(...lats);
+      setMapFocus({ key: `post-${post.id}-${Date.now()}`, lon: (w + e) / 2, lat: (s + n) / 2, bounds: [[w, s], [e, n]] });
+    }
+    if (window.matchMedia && window.matchMedia("(max-width: 800px)").matches) setPanelPeek(true);
+  }
+  function closeSharedMap() {
+    setSharedMap(null);
+    setSelectedAnnotationId(null);
+    setPanelPeek(false);
+  }
+  // Copy someone's map into my own drawing, to build on (a map I post from it credits theirs).
+  function copySharedMap(post) {
+    if (!post || !Array.isArray(post.annotations)) return;
+    setAnnotations(prev => [...prev, ...copyForMe(post.annotations, post.id)]);
+    setSharedMap(null);
+    setSelectedAnnotationId(null);
+    setPanelPeek(false);
   }
   // A war's intel panel: the latest related official statements (all governments Wire Room
   // follows) and outlet reports, collected hourly (scripts/collect-incidents.mjs).
@@ -791,6 +855,7 @@ export default function WireRoomV2() {
     else addAnnotation({ type: "shape", x: Math.min(p1.x, p2.x), y: Math.min(p1.y, p2.y), width: Math.abs(p2.x - p1.x), height: Math.abs(p2.y - p1.y), label: "" });
   }
   function mlAnnotationTap(id) {
+    if (sharedMap) { setSelectedAnnotationId(id); setTrackSel(null); return; } // someone's map: look, don't edit
     if (pinning) {
       const a = annotations.find(x => x.id === id);
       if (a && a.type === "marker") pinReportToMarker(id);
@@ -1234,6 +1299,7 @@ export default function WireRoomV2() {
               aria-controls="draw-tools"
               title={toolsOpen ? "Hide the drawing tools" : "Draw and annotate on the map"}
               onClick={() => {
+                if (sharedMap) closeSharedMap(); // drawing is on my own map
                 if (toolsOpen) {
                   // Folding the tools away also puts the map back to normal tapping.
                   setAnnotationTool("select");
@@ -1367,13 +1433,27 @@ export default function WireRoomV2() {
         )}
 
         {(() => {
-          const sel = annotations.find(a => a.id === selectedAnnotationId);
+          const sel = shownAnnotations.find(a => a.id === selectedAnnotationId);
           const showList = !pinning && annotationTool === "select" && sel && sel.type === "marker" && sel.pins && sel.pins.length > 0;
           const box = { pointerEvents: "auto", background: "var(--overlay)", border: "1px solid var(--line-2)", padding: 10, color: "var(--text)", fontSize: 11, display: "flex", flexDirection: "column", gap: 6 };
           return (
             <>
               {(pinning || showList) && <style>{"@media(max-width:800px){.panel,.panel.open{transform:translateX(100%) !important}}"}</style>}
               <div style={{ position: "absolute", left: "50%", bottom: 56, transform: "translateX(-50%)", zIndex: 6, width: "min(420px, calc(100% - 24px))", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 8, pointerEvents: "none" }}>
+                {sharedMap && (
+                  <div className="shared-banner" onPointerDown={e => e.stopPropagation()} style={{ ...box, background: "var(--surface)", boxShadow: "var(--shadow)" }} role="status">
+                    <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+                      <span className="tag analyst">Analyst</span>
+                      <span style={{ fontSize: 13 }}>@{sharedMap.username}'s map: <b>{sharedMap.title}</b></span>
+                    </div>
+                    <div style={{ color: "var(--muted)", fontSize: 12 }}>Viewing only. Tap a marker to see its pinned reports. Your own drawing is back when you close this.</div>
+                    <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                      <button type="button" onClick={() => copySharedMap(sharedMap)} style={toolButtonStyle(true)}>Copy to my map</button>
+                      {view === "community" && panelPeek && <button type="button" onClick={() => setPanelPeek(false)} style={toolButtonStyle(false)}>Back to post</button>}
+                      <button type="button" onClick={closeSharedMap} style={toolButtonStyle(false)}>Close</button>
+                    </div>
+                  </div>
+                )}
                 {storageWarn && (
                   <div style={{ ...box, borderColor: "#ff4d4d", color: "var(--danger)" }}>
                     Storage problem: new annotations and pins are not being saved. Delete some markers or press Clear.
@@ -1410,7 +1490,7 @@ export default function WireRoomV2() {
                         {((p.tr && p.tr.headline) ? p.tr.summary : p.summary) && <div style={{ color: "var(--text-2)", fontSize: 11, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical" }}>{(p.tr && p.tr.headline) ? p.tr.summary : p.summary}</div>}
                         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                           {p.url && p.url !== "#" && <a href={p.url} target="_blank" rel="noreferrer" style={{ color: "var(--accent)", fontSize: 10, textDecoration: "none" }}>Open original</a>}
-                          <button type="button" onClick={() => unpinReport(sel.id, p.id)} style={{ ...toolButtonStyle(false), fontSize: 10, padding: "3px 7px" }}>Unpin</button>
+                          {!sharedMap && <button type="button" onClick={() => unpinReport(sel.id, p.id)} style={{ ...toolButtonStyle(false), fontSize: 10, padding: "3px 7px" }}>Unpin</button>}
                         </div>
                       </div>
                     ))}
@@ -1460,9 +1540,21 @@ export default function WireRoomV2() {
           />
         )}
         <div className="map-note">Tap a country to see its sources</div>
-        {view === "closed" && <button className="global-fab" onClick={() => loadGlobal()}>Global feed</button>}      </section>
+        {view === "closed" && (
+          <div className="fab-row">
+            {communityConfigured && <button className="global-fab" onClick={openCommunity}>Community</button>}
+            <button className="global-fab" onClick={() => loadGlobal()}>Global feed</button>
+          </div>
+        )}
+      </section>
 
-      <aside className={`panel ${view !== "closed" ? "open" : ""}`}>
+      <aside className={`panel ${view !== "closed" ? "open" : ""}${panelPeek ? " peek" : ""}`}>
+        {view === "community" ? (
+          <Suspense fallback={<div className="loading">Loading…</div>}>
+            <CommunityPanel initialPostId={communityStart} onClose={closePanel} onPostChange={setCommunityPost} getDrawing={getDrawing}
+              onShowMap={showSharedMap} onCopyMap={copySharedMap} shownMapId={sharedMap ? sharedMap.id : null} countries={COMMUNITY_COUNTRIES} />
+          </Suspense>
+        ) : <>
         <div className="panel-head">
           <div>
             <div className="eyebrow">{view === "war" && warView ? `${(LEVEL_TEXT[(warViewDay || warView).level] || LEVEL_TEXT.war).label} brief · military tracker` : "Country brief"}</div>
@@ -1590,6 +1682,7 @@ export default function WireRoomV2() {
           </div>
         )}
         {pagedFeed.map(item=><NewsCard onPin={startPinReport} key={item.id} item={view === "war" && item.sourceType === "official" ? { ...item, countryLabel: `${(COUNTRY_BY_ID[item.countryId] || {}).name || ""} government`.trim() } : item}/>)}
+        </>}
       </aside>
     </main>
   </div>;
@@ -1657,6 +1750,10 @@ const CSS = `
 .pagination-buttons button{border-radius:8px;background:var(--surface-2);border:1px solid var(--line);color:var(--text);font:500 13px var(--font);height:36px}
 .loading,.empty{font:13px/1.6 var(--font);color:var(--muted)}
 .global-fab{background:var(--surface);border:1px solid var(--line);color:var(--text);border-radius:10px;font:600 14px var(--font);padding:10px 16px;box-shadow:var(--shadow)}
+.fab-row{position:absolute;right:18px;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:flex-end;z-index:5}
+.fab-row .global-fab{position:static}
+@media(max-width:800px){.fab-row{flex-direction:column}.panel.open.peek{transform:translateX(100%)}.layout:has(.panel.open:not(.peek)) .shared-banner{display:none !important}}
+.tag.analyst{color:var(--analyst);background:var(--analyst-soft)}
 .map-note{font:12px var(--font);color:var(--muted)}
 .link-toast{background:var(--surface);border:1px solid var(--line);border-radius:10px;color:var(--text);font:500 13px var(--font);box-shadow:var(--shadow)}
 .welcome-back{background:var(--scrim)}

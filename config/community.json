@@ -1,0 +1,5 @@
+{
+  "how": "Supabase project for the Community panel. Both values are public by design (Supabase calls this the publishable key): they ship in the website code. Never put the secret key or the database password here. Leave empty to hide the Community panel.",
+  "url": "",
+  "publishableKey": ""
+}

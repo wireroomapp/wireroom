@@ -43,7 +43,7 @@ export default function MapLibreView({
   // Analyst tools
   annotations, tool = "select", pinning = false,
   onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace, controlRef,
-  focus = null, // { lon, lat, key }: fly here once (used when a shared link opens a country)
+  focus = null, // { lon, lat, key, bounds? }: fly here once (a shared link's country; a posted map's area)
   theme = "dark", // "light" gives the plain MAP a light atlas look
   // Trackers: reported incidents (strikes, terrorism, cyber) and wars (see TrackerCards.jsx)
   incidents = null, wars = null, selectedWar = null, selectedTrackerKey = null, onTrackerClick,
@@ -74,7 +74,8 @@ export default function MapLibreView({
     const map = mapRef.current;
     if (!ready || !map || !focus || focusedKey.current === focus.key) return;
     focusedKey.current = focus.key;
-    map.flyTo({ center: [focus.lon, focus.lat], zoom: Math.max(map.getZoom(), 3.2), duration: 1600, essential: true });
+    if (focus.bounds) map.fitBounds(focus.bounds, { padding: 80, maxZoom: 6, duration: 1400, essential: true }); // a posted map, framed
+    else map.flyTo({ center: [focus.lon, focus.lat], zoom: Math.max(map.getZoom(), 3.2), duration: 1600, essential: true });
   }, [ready, focus]);
 
   // Create the map once.
