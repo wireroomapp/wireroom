@@ -10,7 +10,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { buildGeocoder, extractIncidents, warReports } from "../lib/incidents.mjs";
-import { AI_MODEL, AI_EFFORT, MAX_TRIES, reportKey, judgeReports, pruneVerdicts, hiddenReports, needsReview, isAnswer, readPanelRules, estimateCost } from "../lib/ai-check.mjs";
+import { AI_MODEL, AI_EFFORT, MAX_TRIES, WORLDWIDE_REVIEW, reportKey, judgeReports, pruneVerdicts, hiddenReports, needsReview, isAnswer, readPanelRules, estimateCost } from "../lib/ai-check.mjs";
 import { SHOW_DAYS, mergeArchive, snapshot } from "../lib/history.mjs";
 
 const ARCHIVE_FILE = "data/history/incidents.json";
@@ -54,7 +54,10 @@ try {
     // Newest first. A report the model gave no usable answer for is asked again in smaller
     // groups (5 at a time, then alone), so one awkward report can't keep taking others down with
     // it; after MAX_TRIES it is left to the keyword rules and never hidden.
-    const pending = all.filter((x) => needsReview(verdicts[x.key])).sort((a, b) => b.t - a.t);
+    // Reports from the worldwide cyber searches are asked again when the worldwide question changes.
+    const wwKeys = new Set((cache.worldwide?.independent || []).map(reportKey));
+    const reAsk = (key) => wwKeys.has(key) && isAnswer(verdicts[key]) && verdicts[key].ww !== WORLDWIDE_REVIEW;
+    const pending = all.filter((x) => needsReview(verdicts[x.key]) || reAsk(x.key)).sort((a, b) => b.t - a.t);
     const triesOf = (key) => (verdicts[key] && verdicts[key].pending ? verdicts[key].tries || 0 : 0);
     const rounds = [
       { label: "second try", batchSize: 5, max: 300, list: pending.filter((x) => triesOf(x.key) === 1) },
@@ -65,8 +68,11 @@ try {
     for (const r of rounds) {
       if (!r.list.length || sum.error) continue;
       const res = await judgeReports(r.list.map((x) => x.it), { apiKey, now, batchSize: r.batchSize, maxReports: r.max });
-      for (const [k, v] of res.verdicts) verdicts[k] = v;
-      for (const k of res.unanswered) verdicts[k] = { pending: true, tries: triesOf(k) + 1, at: now.toISOString() };
+      for (const [k, v] of res.verdicts) verdicts[k] = wwKeys.has(k) ? { ...v, ww: WORLDWIDE_REVIEW } : v;
+      for (const k of res.unanswered) {
+        if (reAsk(k)) { verdicts[k] = { ...verdicts[k], ww: WORLDWIDE_REVIEW }; continue; } // keep its earlier answer
+        verdicts[k] = { pending: true, tries: triesOf(k) + 1, at: now.toISOString() };
+      }
       const vs = [...res.verdicts.values()];
       sum.sent += res.verdicts.size + res.unanswered.length;
       sum.answered += res.verdicts.size;
