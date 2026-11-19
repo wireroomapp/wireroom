@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { classify, buildGeocoder, extractIncidents, buildWars, warReports, partiesFor } from "../lib/incidents.mjs";
 import { reportKey, parseVerdicts, requestBody, judgeReports, hiddenReports, pruneVerdicts, needsReview, isAnswer, panelKeeps, readPanelRules, MAX_TRIES, REVIEW_VERSION } from "../lib/ai-check.mjs";
-import { COUNTRY_INFO } from "../lib/feeds.mjs";
+import { COUNTRY_INFO, worldwideCyberQuery, WORLDWIDE_ID } from "../lib/feeds.mjs";
 
 const gaz = JSON.parse(readFileSync(new URL("../lib/gazetteer.json", import.meta.url), "utf8"));
 const geo = buildGeocoder(gaz);
@@ -190,6 +190,58 @@ test("strikes on two different cities are separate events, even 70 km apart", ()
   const zap2 = item("z2", "Three killed in Russian missile strike on Zaporizhzhia, governor says", "2026-11-09T10:00:00Z");
   const out = extractIncidents({ countries: { ua: { official: [], independent: [dnipro, zap1, zap2] } } }, geo, { now: NOW });
   assert.deepEqual(out.map((i) => `${i.place}:${i.sources.length}`).sort(), ["Dnipro:1", "Zaporizhzhia:2"]);
+});
+
+test("a cyberattack that hit many countries is listed as worldwide, not put on a country", () => {
+  // Nov 2026: a supply-chain attack through a website-testing platform hit 178 sites (Zoom, CNN,
+  // HSBC...). No country search caught it; the worldwide cyber searches do.
+  const ww = (id, headline, at) => item(id, headline, at, { countryId: WORLDWIDE_ID, source: "AP" });
+  const a = ww("w1", "Popular websites served malicious code targeting crypto, iPhones", "2026-11-09T08:00:00Z");
+  const b = ww("w2", "Cyberattack hits 178 organizations including Zoom, CNN and HSBC", "2026-11-09T12:00:00Z");
+  const local = ww("w3", "Hackers breach Japanese supercomputer, ministry says", "2026-11-09T09:00:00Z");
+  const opinion = ww("w4", "How to protect yourself from ransomware", "2026-11-09T10:00:00Z");
+  const cache = { countries: { us: { official: [], independent: [] } }, worldwide: { independent: [a, b, local, opinion] } };
+  const verdicts = new Map([
+    [reportKey(a), { event: true, kind: "cyber", subtype: "attack", scope: "worldwide", place: null, country: "United States", target: "website visitors" }],
+    [reportKey(b), { event: true, kind: "cyber", subtype: "attack", place: null, country: null, target: "178 organizations" }],
+    [reportKey(local), { event: true, kind: "cyber", subtype: "attack", place: null, country: "Japan", target: "supercomputer" }],
+    [reportKey(opinion), { event: false }],
+  ]);
+  const out = extractIncidents(cache, geo, { now: NOW, verdicts, keyOf: reportKey });
+  const world = out.filter((i) => i.precision === "worldwide");
+  // Both are worldwide (one by the AI's "scope", one because the worldwide search named no place).
+  // Their headlines share no words, so they stay two events, both under the Worldwide button.
+  assert.equal(world.length, 2);
+  assert.deepEqual([world[0].place, world[0].lat, world[0].lon, world[0].country], ["Worldwide", null, null, ""]);
+  // A follow-up with similar words joins the same event.
+  const c = ww("w5", "Popular websites served malicious code: what iPhone users should know", "2026-11-09T14:00:00Z");
+  cache.worldwide.independent.push(c);
+  verdicts.set(reportKey(c), { event: true, kind: "cyber", subtype: "attack", scope: "worldwide" });
+  const again = extractIncidents(cache, geo, { now: NOW, verdicts, keyOf: reportKey }).filter((i) => i.precision === "worldwide");
+  assert.equal(again.length, 2);
+  assert.equal(again.find((i) => i.sources.length === 2).sources.map((s) => s.url).sort().join(), [a.url, c.url].sort().join());
+  const jp = out.find((i) => i.title.includes("supercomputer"));
+  assert.deepEqual([jp.precision, jp.iso], ["country", "JP"], "an attack in one country still goes on that country");
+  assert.equal(out.length, 3, "not an event: not shown");
+  // Without the AI review, a worldwide search result with no place named is left out (not guessed).
+  assert.equal(extractIncidents(cache, geo, { now: NOW }).filter((i) => i.precision === "worldwide").length, 0);
+});
+
+test("the worldwide cyber search asks for cyber words, no country", () => {
+  const q = worldwideCyberQuery("apnews.com");
+  assert.match(q, /^site:apnews\.com \(/);
+  assert.match(q, /"malicious code"/);
+  assert.match(q, / OR hackers OR /);
+});
+
+test("the AI's worldwide answer is read; off-topic worldwide reports are hidden from the global feed", () => {
+  const [v] = parseVerdicts('[{"i":0,"keep":true,"topic":"cyber","countries":[],"event":true,"kind":"cyber","subtype":"attack","scope":"worldwide","place":null,"country":null}]', [{ headline: "x" }], new Date(NOW)).values();
+  assert.equal(v.scope, "worldwide");
+  const [w] = parseVerdicts('[{"i":0,"keep":true,"topic":"cyber","countries":["JP"],"event":true,"kind":"cyber","subtype":"attack","place":"Tokyo","country":"Japan"}]', [{ headline: "x" }], new Date(NOW)).values();
+  assert.ok(!("scope" in w));
+  const off = item("o1", "Best VPN deals this week", "2026-11-17T08:00:00Z", { countryId: WORLDWIDE_ID });
+  const hidden = hiddenReports({ countries: {}, worldwide: { independent: [off] } }, { [reportKey(off)]: { v: REVIEW_VERSION, keep: false, topic: "shopping", countries: [] } });
+  assert.equal(hidden.urls[off.url], "shopping");
 });
 
 test("reads the AI model's answers safely", () => {

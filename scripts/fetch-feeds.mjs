@@ -1,5 +1,5 @@
 ﻿import { writeFileSync, readFileSync, mkdirSync } from "fs";
-import { COUNTRY_INFO, fetchAllForCountry, hasVerifiedOfficialSource } from "../lib/feeds.mjs";
+import { COUNTRY_INFO, fetchAllForCountry, hasVerifiedOfficialSource, fetchWorldwideCyber } from "../lib/feeds.mjs";
 
 const CACHE_FILE = "data/cache.json";
 const MAX_HISTORY_PER_TYPE = 500;
@@ -102,9 +102,22 @@ async function main() {
     console.log(`::warning::Official source unavailable: ${unavailable.join(", ")}`);
   }
 
+  // Cyber stories that no single country's search catches (lib/feeds.mjs, fetchWorldwideCyber).
+  const previousWorldwide = previousCache.worldwide || { independent: [] };
+  let worldwide;
+  try {
+    const found = await fetchWorldwideCyber();
+    worldwide = { independent: mergeHistory(previousWorldwide.independent, found), fetchedAt: new Date().toISOString() };
+    console.log(`\nWorldwide cyber searches: new=${found.length} cached=${worldwide.independent.length}`);
+  } catch (err) {
+    worldwide = previousWorldwide;
+    console.log(`::warning::Worldwide cyber searches failed (${err.message}); keeping the previous ones.`);
+  }
+
   const cache = {
     generatedAt: new Date().toISOString(),
     countries,
+    worldwide,
   };
 
   mkdirSync("data", { recursive: true });

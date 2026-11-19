@@ -44,14 +44,14 @@ function Sources({ item, max = 5 }) {
 export function PlaceCard({ group, onClose, onPin, warOf }) {
   if (group.items.length === 1) return <IncidentCard item={group.items[0]} onClose={onClose} onPin={() => onPin(group.items[0])} war={warOf(group.items[0])} />;
   const color = group.kind === "strike" ? TRACKER_COLORS.strike : TRACKER_COLORS[group.kind];
-  const where = group.precision === "country" ? `${group.place} · no city named` : group.place;
+  const where = group.precision === "country" ? `${group.place} · no city named` : group.precision === "worldwide" ? "Worldwide · no single place" : group.place;
   const adv = group.items.find((x) => x.advisory)?.advisory;
   return (
     <div className="track-card" role="dialog" aria-label={`${KIND_LABEL[group.kind]} reports at ${group.place}`} {...stop}>
       <Head onClose={onClose} title={where}
         icon={<Swatch kind={ICON_KIND[group.kind]} color={color} hollow={group.subtype !== "attack" && group.kind !== "strike"} size={12} />}
         kindText={`${KIND_LABEL[group.kind]} · ${group.items.length} events reported · last 7 days`} />
-      {group.precision === "country" && <div className="tc-adv" style={{ color: "var(--muted)" }}>{PRECISION_TEXT.country}.</div>}
+      {(group.precision === "country" || group.precision === "worldwide") && <div className="tc-adv" style={{ color: "var(--muted)" }}>{PRECISION_TEXT[group.precision].replace(/^./, (c) => c.toUpperCase())}.</div>}
       {adv && (
         <div className="tc-adv">US travel advisory for {adv.name}: Level {adv.level} of 4, {adv.levelText}. <a href={adv.url} target="_blank" rel="noreferrer">Read →</a></div>
       )}

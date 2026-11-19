@@ -104,6 +104,7 @@ export const PRECISION_TEXT = {
   city: "city named in the report",
   region: "region named in the report",
   country: "country only: the report names no city, so the marker sits mid-country",
+  worldwide: "no single place: it hit many countries at once",
 };
 export const KIND_LABEL = { terrorism: "Terrorism", cyber: "Cyber", strike: "Military strike" };
 // UCDP's definitions, counted over the months Wire Room keeps (about a year).
@@ -137,6 +138,23 @@ export function groupByPlace(incidents) {
 }
 
 // Pin an incident or a war to a marker: the marker keeps its own copy, like any report.
+// Events with no single place (precision "worldwide", no lat/lon): listed in the Events panel
+// instead of on the map. Same shape as a map marker's group, so the same card opens.
+export function worldwideGroups(incidents) {
+  const groups = new Map();
+  for (const i of incidents || []) {
+    if (i.precision !== "worldwide") continue;
+    if (!groups.has(i.kind)) groups.set(i.kind, { key: `${i.kind}|worldwide`, kind: i.kind, place: "Worldwide", precision: "worldwide", iso: "", lon: null, lat: null, items: [] });
+    groups.get(i.kind).items.push(i);
+  }
+  return [...groups.values()].map((g) => {
+    g.items.sort((a, b) => String(b.lastReported).localeCompare(String(a.lastReported)));
+    g.subtype = g.items.some((x) => x.subtype === "attack") ? "attack" : g.items[0].subtype;
+    g.lastReported = g.items[0].lastReported;
+    return g;
+  });
+}
+
 export function incidentToReport(i) {
   const lead = i.sources[0] || {};
   return {
@@ -144,7 +162,7 @@ export function incidentToReport(i) {
     sourceType: lead.sourceType === "official" ? "official" : "independent",
     source: lead.source || "Report",
     headline: i.title,
-    summary: `${KIND_LABEL[i.kind]} · ${SUBTYPE_LABEL[i.subtype]} at ${i.place}${i.country && i.precision !== "country" ? `, ${i.country}` : ""} (${i.precision}).${i.by && i.by.length ? ` By (as reported): ${i.by.join(", ")}.` : ""} Reported by ${i.sourceCount} source${i.sourceCount === 1 ? "" : "s"}; not verified by Wire Room.`,
+    summary: `${KIND_LABEL[i.kind]} · ${SUBTYPE_LABEL[i.subtype]} ${i.precision === "worldwide" ? "in many countries (worldwide)" : `at ${i.place}${i.country && i.precision !== "country" ? `, ${i.country}` : ""} (${i.precision})`}.${i.by && i.by.length ? ` By (as reported): ${i.by.join(", ")}.` : ""} Reported by ${i.sourceCount} source${i.sourceCount === 1 ? "" : "s"}; not verified by Wire Room.`,
     date: dayLabel(i.lastReported),
     publishedAt: i.lastReported,
     url: lead.url || "",
