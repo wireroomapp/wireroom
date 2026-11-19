@@ -19,6 +19,7 @@ An interactive world map that shows what governments say next to what independen
 - **Cyber:** national cyber agencies (US CISA, UK NCSC, Japan JPCERT/CC) in those countries' official reports, plus worldwide cyber searches (Reuters, AP, BBC, The Record; no country required) for attacks that don't belong to one country. An attack that hit many countries at once (e.g. a hacked software supplier) has no map marker: it is listed under "Worldwide cyber" in the Events panel.
 - **Live layers:** military aircraft (ADS-B) and ships at 10 maritime chokepoints and 5 Indian Ocean ports (AIS, hourly snapshots), with coverage gaps labeled.
 - **Map:** flat or globe view, NASA imagery, 3D terrain.
+- **Community:** people sign in with Google and post short updates, articles and maps (their current drawing, pinned reports included as headline + link), comment, follow each other and report problems. Everything users post is labelled ANALYST, apart from OFFICIAL and NEWS. Another user's map opens read-only on the map, with "Copy to my map" to build on it (a map posted from a copy says what it's based on). Text only, no uploads. Moderators can hide posts and comments and suspend accounts; rules, terms and privacy are in the panel (`src/community/Rules.jsx`). Set up below.
 - **Shareable links:** the address bar follows what's open, e.g. [`?country=ua&mode=both`](https://wireroom.onrender.com/?country=ua&mode=both) or [`?view=global`](https://wireroom.onrender.com/?view=global). The `LINK` button in the panel copies it.
 
 ## How it works
@@ -73,6 +74,17 @@ npm run build
 | `VITE_MAP_ENGINE` | `maplibre` (default) or `d3` for the classic map |
 
 Backend: `PROXY_URL` (optional) routes official-source fetches through a proxy for sites that block datacenter IPs. `GITHUB_DISPATCH_TOKEN` (fine-grained token, this repo only, Actions: read and write) turns on the watchdog in `scheduler/watchdog.mjs`, which starts the data job whenever GitHub's schedule lets it run more than 70 minutes late; `/api/status` shows the data's age and the watchdog's state. `AISSTREAM_API_KEY` turns on the ships layer; other live-layer switches are in [`tracking/README.md`](tracking/README.md).
+
+## Community (Supabase)
+
+The Community panel stores accounts and posts in a free Supabase project. The website talks to it directly with the project's public (publishable) key; every rule about who may read or change what is in the database itself (`supabase/schema.sql`, row-level security), tested on Postgres in `tests/community-db.test.mjs` and on the real database by the **Community database** workflow.
+
+1. Create a Supabase project (free). Put its URL and **publishable** key (`sb_publishable_…`, public by design) in `config/community.json`. The Community button appears once both are set. Never commit the secret key or the database password.
+2. Add the repository secret `SUPABASE_DB_URL`: the **Session pooler** connection string from Supabase's Connect dialog, with the database password filled in. The **Community database** workflow then applies the schema and checks the rules whenever `supabase/` changes (or run it by hand).
+3. Google sign-in: a Google Cloud OAuth client (Web application) with redirect URI `https://<project>.supabase.co/auth/v1/callback`, pasted into Supabase → Authentication → Sign In / Providers → Google. Turn the Email provider off. In URL Configuration, set the Site URL to the site and add `https://<site>/**` as a redirect URL. Publish the Google app (Audience → Publish app).
+4. Moderators: run the workflow by hand with `make_admin` set to a username. Moderators see a Reports list in the panel and can hide or suspend.
+
+The hourly data job reads one row from the project to keep Supabase's free plan from pausing it. Local testing without a project: `npm run dev`, then open `/?fakeCommunity` (add `&fakeAdmin` to be a moderator).
 
 ## Known gaps
 

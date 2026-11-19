@@ -175,6 +175,12 @@ export default function SourcesPanel({ apiBase, feedbackUrl, onClose, onOpenCoun
           <li><b>Not tracked:</b> troop or drone movements in real time. No free source reports these reliably; Wire Room won't guess.</li>
         </ul>
 
+        <h3>Community posts</h3>
+        <ul>
+          <li>Posts, articles and maps in the Community panel are written by Wire Room users and labelled <b>Analyst</b>. They are their authors' analysis, not official statements or news reports, and Wire Room doesn't check them.</li>
+          <li>Anyone signed in can report a post; moderators can hide posts and suspend accounts that break the community rules.</li>
+        </ul>
+
         <h3>AI review of news reports</h3>
         <ul>
           <li>When it's on, a small AI model (Anthropic's Claude Haiku) reads each collected report once and judges whether it's useful for following government, politics, security, conflict, international affairs or the national economy.</li>

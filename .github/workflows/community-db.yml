@@ -1,0 +1,43 @@
+name: Community database
+
+# Sets up the community database on Supabase (supabase/schema.sql) and checks its rules on the
+# real database (scripts/community-db.mjs). Runs when the schema changes, or by hand
+# (Actions -> Community database -> Run workflow), optionally to make a username a moderator.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "supabase/**"
+      - "tests/community-rules.mjs"
+      - "scripts/community-db.mjs"
+      - ".github/workflows/community-db.yml"
+  workflow_dispatch:
+    inputs:
+      make_admin:
+        description: "Username to make a moderator (optional)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: community-db
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Apply schema and check the rules
+        run: node scripts/community-db.mjs
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          MAKE_ADMIN: ${{ github.event.inputs.make_admin }}

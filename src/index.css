@@ -31,6 +31,8 @@ html, body, #root {
   --overlay: rgba(22, 26, 33, 0.94);
   --scrim: rgba(6, 8, 12, 0.72);
   --shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  --analyst: #c9b0ff; /* users' own posts (Community panel), apart from official and news */
+  --analyst-soft: #2a2140;
   color-scheme: dark;
 }
 
@@ -58,6 +60,8 @@ html, body, #root {
   --scrim: rgba(20, 23, 28, 0.45);
   --shadow: 0 2px 10px rgba(20, 23, 28, 0.12);
   color-scheme: light;
+  --analyst: #6a3fc0;
+  --analyst-soft: #f1ebfd;
 }
 
 body {
