@@ -209,20 +209,22 @@ test("a cyberattack that hit many countries is listed as worldwide, not put on a
   ]);
   const out = extractIncidents(cache, geo, { now: NOW, verdicts, keyOf: reportKey });
   const world = out.filter((i) => i.precision === "worldwide");
-  // Both are worldwide (one by the AI's "scope", one because the worldwide search named no place).
-  // Their headlines share no words, so they stay two events, both under the Worldwide button.
-  assert.equal(world.length, 2);
+  // Only the AI's explicit "worldwide" answer makes an event worldwide. A report with no place and
+  // no country (b) is left off rather than guessed: "no place named" isn't "everywhere" (Nov 19: a
+  // local hospital breach and a hockey federation hack were wrongly listed as worldwide that way).
+  assert.equal(world.length, 1);
   assert.deepEqual([world[0].place, world[0].lat, world[0].lon, world[0].country], ["Worldwide", null, null, ""]);
+  assert.ok(!out.some((i) => i.title.includes("178 organizations")));
   // A follow-up with similar words joins the same event.
   const c = ww("w5", "Popular websites served malicious code: what iPhone users should know", "2026-11-09T14:00:00Z");
   cache.worldwide.independent.push(c);
   verdicts.set(reportKey(c), { event: true, kind: "cyber", subtype: "attack", scope: "worldwide" });
   const again = extractIncidents(cache, geo, { now: NOW, verdicts, keyOf: reportKey }).filter((i) => i.precision === "worldwide");
-  assert.equal(again.length, 2);
-  assert.equal(again.find((i) => i.sources.length === 2).sources.map((s) => s.url).sort().join(), [a.url, c.url].sort().join());
+  assert.equal(again.length, 1);
+  assert.deepEqual(again[0].sources.map((s) => s.url).sort(), [a.url, c.url].sort());
   const jp = out.find((i) => i.title.includes("supercomputer"));
   assert.deepEqual([jp.precision, jp.iso], ["country", "JP"], "an attack in one country still goes on that country");
-  assert.equal(out.length, 3, "not an event: not shown");
+  assert.equal(out.length, 2, "not an event: not shown");
   // Without the AI review, a worldwide search result with no place named is left out (not guessed).
   assert.equal(extractIncidents(cache, geo, { now: NOW }).filter((i) => i.precision === "worldwide").length, 0);
 });
