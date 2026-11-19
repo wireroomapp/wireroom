@@ -121,6 +121,8 @@ const LIVE_CSS = `
 .live-note{line-height:1.45}
 .live-warn{color:var(--accent);line-height:1.45}
 .live-legend{display:flex;flex-wrap:wrap;gap:3px 8px}
+.live-world{gap:6px}
+.live-world-note{color:var(--muted);font-size:11px;line-height:1.35;flex:1 1 140px}
 .ctx-short{display:none}
 @media(max-width:800px){.ctx-short{display:block}}
 .live-legend span{display:inline-flex;align-items:center;gap:3px}
@@ -275,6 +277,18 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
             {t.cyberOn && <span><Swatch kind="cyber" color={TRACKER_COLORS.cyber} hollow />Warning</span>}
           </div>
         </>
+      )}
+      {tab === "events" && (t.worldwide || []).length > 0 && (
+        <div className="live-row live-world">
+          {t.worldwide.map((g) => (
+            <button type="button" key={g.key} className={`live-btn ${t.worldwideOpen === g.key ? "on" : ""}`} onClick={() => t.onWorldwide(g)}
+              title="Attacks that hit many countries at once, so they have no single spot on the map">
+              <span className="sw"><Swatch kind={g.kind === "strike" ? "strike" : g.kind} color={TRACKER_COLORS[g.kind] || TRACKER_COLORS.strike} hollow={g.subtype !== "attack" && g.kind !== "strike"} /></span>
+              Worldwide {g.kind === "cyber" ? "cyber" : g.kind}<span className="n">{g.items.length}</span>
+            </button>
+          ))}
+          <span className="live-world-note">Hit many countries at once: no single spot on the map.</span>
+        </div>
       )}
       {problems.map((p) => <div key={p} className="live-warn">{p}</div>)}
       {credits.length > 0 && <div className="live-credit">{credits.join(" · ")}</div>}

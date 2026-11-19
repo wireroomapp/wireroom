@@ -1,5 +1,6 @@
 // Builds the tracker files from data Wire Room already has (see lib/incidents.mjs):
-//   data/incidents.json  reported terrorism, cyber and military incidents (last 7 days), active conflicts
+//   data/incidents.json  reported terrorism, cyber and military incidents (last 7 days), active conflicts;
+//                        a cyberattack with no single place has precision "worldwide" and no lat/lon
 //   data/war-intel.json  for each war, the latest related official statements and outlet reports
 //   data/ai-verdicts.json the optional AI review's saved answers (only when ANTHROPIC_API_KEY is set)
 //   data/hidden-reports.json off-topic NEWS reports the AI review hides from the panels (url -> topic)
@@ -38,7 +39,8 @@ try {
   const saved = readJson("data/ai-verdicts.json", { version: 1, verdicts: {} });
   const all = [];
   const seen = new Set();
-  for (const entry of Object.values(cache.countries || {})) for (const type of ["official", "independent"]) for (const it of entry[type] || []) {
+  const feeds = [...Object.values(cache.countries || {}), ...(cache.worldwide ? [cache.worldwide] : [])]; // + worldwide cyber searches
+  for (const entry of feeds) for (const type of ["official", "independent"]) for (const it of entry[type] || []) {
     const key = reportKey(it);
     if (seen.has(key)) continue;
     seen.add(key);
@@ -101,7 +103,7 @@ try {
   // Every incident in the news cache, folded into the archive; then the map as of now.
   const found = extractIncidents(cache, geo, { now, windowDays: SCAN_DAYS, verdicts: verdictMap, keyOf: reportKey });
   const cacheUrls = new Set();
-  for (const entry of Object.values(cache.countries || {})) for (const type of ["official", "independent"]) for (const it of entry[type] || []) if (it.url) cacheUrls.add(it.url);
+  for (const entry of feeds) for (const type of ["official", "independent"]) for (const it of entry[type] || []) if (it.url) cacheUrls.add(it.url);
   const prevArchive = readJson(ARCHIVE_FILE, { version: 1, incidents: [] });
   const archive = mergeArchive(prevArchive.incidents, found, cacheUrls, now);
   mkdirSync("data/history", { recursive: true });

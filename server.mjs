@@ -122,6 +122,11 @@ app.get("/api/global", (req, res) => {
     else if (mode === "news") items.push(...entry.independent);
     else items.push(...entry.official, ...entry.independent);
   }
+  // Cyber stories from the worldwide searches (no country), skipping ones a country feed also has.
+  if (mode !== "official" && cache.worldwide) {
+    const have = new Set(items.map((i) => i.url).filter(Boolean));
+    items.push(...(cache.worldwide.independent || []).filter((i) => !have.has(i.url)).map((i) => ({ ...i, countryLabel: "Worldwide" })));
+  }
   items = items.sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
   const reviewed = hideOffTopic(items, showHidden);
   const kept = reviewed.items.slice(0, 500);

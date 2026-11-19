@@ -10,7 +10,7 @@ import { readViewFromUrl, viewToSearch } from "./urlState.js";
 import SourcesPanel from "./SourcesPanel.jsx";
 import { PlaceCard, WarCard, NodeCard } from "./TrackerCards.jsx";
 import { DayBar } from "./DayBar.jsx";
-import { useTrackerData, localDay, dayEnd, longDay, daysBetween, incidentToReport, warToReport, TRACKER_CREDITS, LEVEL_TEXT, sidesText, monthLabel, coverageLabel, n as num } from "./contextData.js";
+import { useTrackerData, localDay, dayEnd, longDay, daysBetween, incidentToReport, warToReport, worldwideGroups, TRACKER_CREDITS, LEVEL_TEXT, sidesText, monthLabel, coverageLabel, n as num } from "./contextData.js";
 
 // Which map to draw. "maplibre" = the full-scale map (OpenFreeMap + NASA + MapLibre, globe and terrain).
 // "d3" = the classic flat map. Override in the address bar with ?engine=d3 or ?engine=maplibre.
@@ -1428,7 +1428,13 @@ export default function WireRoomV2() {
           onToggleShips={() => setShipsOn(v => !v)}
           air={airFeed}
           ships={shipFeed}
-          trackers={ML ? { militaryOn, terrorOn, cyberOn, onToggle: toggleTracker, data: incidentData } : null}
+          trackers={ML ? {
+            militaryOn, terrorOn, cyberOn, onToggle: toggleTracker, data: incidentData,
+            // Attacks with no single place (e.g. a hacked software supplier): a button, not a marker.
+            worldwide: worldwideGroups(shownIncidents),
+            worldwideOpen: trkShown && trkSelDay.kind === "place" && trkSelDay.item.precision === "worldwide" ? trkSelDay.item.key : null,
+            onWorldwide: (g) => { setSelectedAnnotationId(null); setTrackSel(null); setTrkSel(cur => (cur && cur.kind === "place" && cur.item.key === g.key ? null : { kind: "place", item: g, war: null })); },
+          } : null}
           pastDay={shownDay}
           initialTab={ML && (INITIAL_URL_VIEW.war || INITIAL_URL_VIEW.day) ? "events" : null}
         />
