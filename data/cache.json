@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T13:06:55.274Z",
+  "generatedAt": "2026-11-20T14:23:28.993Z",
   "countries": {
     "us": {
       "official": [
@@ -14,6 +14,19 @@
           "publishedAt": "2026-11-20T02:12:39.000Z",
           "dateOnly": false,
           "url": "https://www.whitehouse.gov/releases/2026/11/national-rural-health-day-president-trump-delivers-largest-rural-health-investment-in-history/",
+          "importance": 3
+        },
+        {
+          "id": "us-official-80f05e32dfa0fba4",
+          "countryId": "us",
+          "sourceType": "official",
+          "source": "White House",
+          "headline": "Presidential Message on National Rural Health Day",
+          "summary": "On National Rural Health Day, we honor the doctors, nurses, first responders, caregivers, and other healthcare professionals who serve millions of Americans in rural communities across our country. Their work is essen…",
+          "date": "Nov 19, 2026 · 10:00 PM",
+          "publishedAt": "2026-11-19T22:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://www.whitehouse.gov/briefings-statements/2026/11/presidential-message-on-national-rural-health-day/",
           "importance": 3
         },
         {
@@ -9447,7 +9460,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-20T13:06:12.563Z",
+      "officialLastOkAt": "2026-11-20T14:18:23.190Z",
       "officialLastError": null
     },
     "ca": {
@@ -17886,7 +17899,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-20T13:06:14.726Z",
+      "officialLastOkAt": "2026-11-20T14:18:32.402Z",
       "officialLastError": null
     },
     "mx": {
@@ -30913,9 +30926,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-20T13:06:15.674Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=presidencia%20site%3Agob.mx&hl=es-MX&gl=MX&ceid=MX:es-MX: Status code 503"
     },
     "br": {
       "official": [
@@ -40737,9 +40750,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-20T13:06:16.956Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=Presidente%20da%20Rep%C3%BAblica%20site%3Agov.br%2Fplanalto&hl=pt-BR&gl=BR&ceid=BR:pt-BR: Status code 503"
     },
     "ar": {
       "official": [
@@ -46129,9 +46142,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-20T13:06:17.758Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=Comunicado%20Oficial%20N%C3%BAmero%20site%3Aargentina.gob.ar&hl=es-419&gl=AR&ceid=AR:es-419: This operation was aborted"
     },
     "gb": {
       "official": [
@@ -54238,7 +54251,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-20T13:06:18.705Z",
+      "officialLastOkAt": "2026-11-20T14:19:25.573Z",
       "officialLastError": null
     },
     "fr": {
@@ -62433,7 +62446,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-20T13:06:19.434Z",
+      "officialLastOkAt": "2026-11-20T14:19:33.726Z",
       "officialLastError": null
     },
     "de": {
@@ -69462,7 +69475,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-20T13:06:20.815Z",
+      "officialLastOkAt": "2026-11-20T14:19:42.060Z",
       "officialLastError": null
     },
     "it": {
@@ -78227,7 +78240,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-20T13:06:22.197Z",
+      "officialLastOkAt": "2026-11-20T14:19:50.500Z",
       "officialLastError": null
     },
     "es": {
@@ -86854,7 +86867,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-20T13:06:24.371Z",
+      "officialLastOkAt": "2026-11-20T14:19:59.207Z",
       "officialLastError": null
     },
     "pl": {
@@ -86888,6 +86901,19 @@
           "publishedAt": "2026-11-19T12:00:00.000Z",
           "dateOnly": true,
           "url": "https://www.gov.pl/web/premier/sprawiedliwy-pokoj-dla-ukrainy-fundamentem-bezpieczenstwa-europy",
+          "importance": 3
+        },
+        {
+          "id": "pl-official-ba82976951a648d3",
+          "countryId": "pl",
+          "sourceType": "official",
+          "source": "Ministry of Foreign Affairs",
+          "headline": "Deputy Prime Minister Radosław Sikorski visits Budapest",
+          "summary": "Deputy Prime Minister Radosław Sikorski visits Budapest",
+          "date": "Nov 19, 2026",
+          "publishedAt": "2026-11-19T12:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://www.gov.pl/web/diplomacy/deputy-prime-minister-radoslaw-sikorski-visits-budapest",
           "importance": 3
         },
         {
@@ -87030,6 +87056,19 @@
           "publishedAt": "2026-11-17T12:00:00.000Z",
           "dateOnly": true,
           "url": "https://www.gov.pl/web/national-defence/talks-on-european-security-and-cooperation-with-the-us-in-brussels",
+          "importance": 3
+        },
+        {
+          "id": "pl-official-bcf90930f48fee7e",
+          "countryId": "pl",
+          "sourceType": "official",
+          "source": "Ministry of Foreign Affairs",
+          "headline": "Polish–Austrian talks on cooperation",
+          "summary": "Polish–Austrian talks on cooperation",
+          "date": "Nov 16, 2026",
+          "publishedAt": "2026-11-16T12:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://www.gov.pl/web/diplomacy/polishaustrian-talks-on-cooperation",
           "importance": 3
         },
         {
@@ -92215,7 +92254,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-20T13:06:26.717Z",
+      "officialLastOkAt": "2026-11-20T14:20:08.095Z",
       "officialLastError": null
     },
     "ua": {
@@ -107729,9 +107768,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-20T13:06:27.548Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Apresident.gov.ua%20OR%20site%3Amfa.gov.ua%20OR%20site%3Amod.gov.ua&hl=uk&gl=UA&ceid=UA:uk: Status code 503"
     },
     "ru": {
       "official": [
@@ -120774,9 +120813,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-20T13:06:29.000Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Akremlin.ru&hl=en-US&gl=US&ceid=US:en: Status code 503"
     },
     "tr": {
       "official": [],
@@ -136757,9 +136796,9 @@
         }
       ],
       "officialVerified": true,
-      "officialStatus": "ok",
+      "officialStatus": "unavailable",
       "officialLastOkAt": "2026-11-20T13:06:30.779Z",
-      "officialLastError": null
+      "officialLastError": "https://news.google.com/rss/search?q=site%3Agov.il%2Fen%20%22Prime%20Minister%20Office%22&hl=en-US&gl=US&ceid=US:en: Status code 503"
     },
     "ir": {
       "official": [],
@@ -186734,7 +186773,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-20T13:06:37.567Z",
+      "officialLastOkAt": "2026-11-20T14:22:14.508Z",
       "officialLastError": null
     },
     "pk": {
@@ -193248,6 +193287,45 @@
     },
     "cn": {
       "official": [
+        {
+          "id": "cn-official-7759a7676bb838ff",
+          "countryId": "cn",
+          "sourceType": "official",
+          "source": "State Council",
+          "headline": "President Xi Jinping Meets with Thai Prime Minister Anutin Charnvirakul",
+          "summary": "President Xi Jinping Meets with Thai Prime Minister Anutin Charnvirakul",
+          "date": "Nov 20, 2026 · 9:24 PM",
+          "publishedAt": "2026-11-20T21:24:00.000Z",
+          "dateOnly": false,
+          "url": "https://www.mfa.gov.cn/eng/xw/202611/t20261120_12064231.html",
+          "importance": 3
+        },
+        {
+          "id": "cn-official-463502be3b66d337",
+          "countryId": "cn",
+          "sourceType": "official",
+          "source": "State Council",
+          "headline": "President Xi Jinping Meets with Singaporean Prime Minister Lawrence Wong",
+          "summary": "President Xi Jinping Meets with Singaporean Prime Minister Lawrence Wong",
+          "date": "Nov 20, 2026 · 9:18 PM",
+          "publishedAt": "2026-11-20T21:18:00.000Z",
+          "dateOnly": false,
+          "url": "https://www.mfa.gov.cn/eng/xw/202611/t20261120_12064228.html",
+          "importance": 3
+        },
+        {
+          "id": "cn-official-44d1b9d4de754e63",
+          "countryId": "cn",
+          "sourceType": "official",
+          "source": "State Council",
+          "headline": "President Xi Jinping Meets with Malaysian Prime Minister Anwar Ibrahim",
+          "summary": "President Xi Jinping Meets with Malaysian Prime Minister Anwar Ibrahim",
+          "date": "Nov 20, 2026 · 9:07 PM",
+          "publishedAt": "2026-11-20T21:07:00.000Z",
+          "dateOnly": false,
+          "url": "https://www.mfa.gov.cn/eng/xw/202611/t20261120_12064214.html",
+          "importance": 3
+        },
         {
           "id": "cn-official-a922ba703e21f438",
           "countryId": "cn",
@@ -201846,7 +201924,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-20T13:06:45.230Z",
+      "officialLastOkAt": "2026-11-20T14:22:36.895Z",
       "officialLastError": null
     },
     "jp": {
@@ -210062,7 +210140,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-20T13:06:48.110Z",
+      "officialLastOkAt": "2026-11-20T14:22:45.809Z",
       "officialLastError": null
     },
     "kr": {
@@ -218629,7 +218707,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-20T13:06:51.632Z",
+      "officialLastOkAt": "2026-11-20T14:22:55.426Z",
       "officialLastError": null
     },
     "tw": {
@@ -225685,7 +225763,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-20T13:06:53.127Z",
+      "officialLastOkAt": "2026-11-20T14:23:04.669Z",
       "officialLastError": null
     },
     "id": {
@@ -240391,7 +240469,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-20T13:06:54.810Z",
+      "officialLastOkAt": "2026-11-20T14:23:20.990Z",
       "officialLastError": null
     }
   },
@@ -244818,6 +244896,6 @@
         "importance": 2
       }
     ],
-    "fetchedAt": "2026-11-20T13:06:55.273Z"
+    "fetchedAt": "2026-11-20T14:23:28.993Z"
   }
 }
