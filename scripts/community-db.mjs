@@ -4,14 +4,18 @@
 //      database, as four made-up users, inside a transaction that is rolled back: nothing stays.
 //   3. Optional: makes a username a moderator (workflow input "make_admin").
 // Needs the GitHub secret SUPABASE_DB_URL (the "Session pooler" connection string from
-// Supabase's Connect dialog). Without it, it says so and stops; nothing fails.
+// Supabase's Connect dialog). The password can be typed into it in place of [YOUR-PASSWORD], or
+// the string pasted as copied and the password put in a second secret, SUPABASE_DB_PASSWORD
+// (easier on a phone). Without SUPABASE_DB_URL, it says so and stops; nothing fails.
 // Prints counts only, never anyone's posts or account details.
 import { readFileSync } from "node:fs";
 import assert from "node:assert/strict";
 import pg from "pg";
 import { SECTIONS, USERS } from "../tests/community-rules.mjs";
 
-const url = String(process.env.SUPABASE_DB_URL || "").trim();
+const PLACEHOLDER = /\[YOUR-PASSWORD\]|%5BYOUR-PASSWORD%5D/i;
+const dbPassword = String(process.env.SUPABASE_DB_PASSWORD || "").trim();
+const url = String(process.env.SUPABASE_DB_URL || "").trim().replace(PLACEHOLDER, () => (dbPassword ? encodeURIComponent(dbPassword) : "[YOUR-PASSWORD]"));
 if (!url) {
   console.log("::notice::SUPABASE_DB_URL isn't set yet, so the community database wasn't set up. See the setup steps in README.md (Community).");
   process.exit(0);
@@ -21,7 +25,7 @@ try {
   const u = new URL(url);
   shape = `${u.protocol}//${u.username}:***@${u.hostname}:${u.port || 5432}${u.pathname}`;
   if (!/^postgres(ql)?:$/.test(u.protocol)) throw new Error("not a postgres:// address");
-  if (u.password === "[YOUR-PASSWORD]" || u.password === "%5BYOUR-PASSWORD%5D") throw new Error("the password placeholder wasn't replaced");
+  if (PLACEHOLDER.test(u.password)) throw new Error("it still says [YOUR-PASSWORD]: put the database password in its place, or add it as a second secret, SUPABASE_DB_PASSWORD");
 } catch (e) {
   console.log(`::error::SUPABASE_DB_URL doesn't look right (${e.message}). Copy the "Session pooler" string from Supabase's Connect dialog and put your database password in place of [YOUR-PASSWORD].`);
   process.exit(1);

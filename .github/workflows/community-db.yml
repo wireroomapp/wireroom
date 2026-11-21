@@ -40,4 +40,5 @@ jobs:
         run: node scripts/community-db.mjs
         env:
           SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }} # optional: the password, if the URL still says [YOUR-PASSWORD]
           MAKE_ADMIN: ${{ github.event.inputs.make_admin }}
