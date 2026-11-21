@@ -2,17 +2,20 @@
 // moderation. Every rule about who may read or change what lives in the database
 // (supabase/schema.sql); this file only asks. The Supabase code loads only when the Community
 // panel is used. Without a project set up (config/community.json, or VITE_SUPABASE_URL and
-// VITE_SUPABASE_PUBLISHABLE_KEY), the Community panel doesn't show at all.
+// VITE_SUPABASE_PUBLISHABLE_KEY), the Community panel doesn't show at all; with "enabled": false
+// it shows only on links with ?communityPreview (for testing before launch).
 import cfg from "../../config/community.json";
 import { friendlyError, sanitizeShared } from "./helpers.js";
 
 const URL_ = import.meta.env.VITE_SUPABASE_URL || cfg.url || "";
 const KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || cfg.publishableKey || "";
 
-const fakeWanted = () => {
-  try { return new URLSearchParams(window.location.search).has("fakeCommunity"); } catch { return false; }
+const ENABLED = cfg.enabled !== false || import.meta.env.VITE_COMMUNITY_ENABLED === "1";
+const hasParam = (name) => {
+  try { return new URLSearchParams(window.location.search).has(name); } catch { return false; }
 };
-export const communityConfigured = Boolean(URL_ && KEY) || Boolean(import.meta.env.DEV && fakeWanted());
+const fakeWanted = () => hasParam("fakeCommunity");
+export const communityConfigured = (Boolean(URL_ && KEY) && (ENABLED || hasParam("communityPreview"))) || Boolean(import.meta.env.DEV && fakeWanted());
 
 let apiPromise = null;
 export function loadCommunityApi() {

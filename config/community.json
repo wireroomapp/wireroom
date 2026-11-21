@@ -1,5 +1,6 @@
 {
-  "how": "Supabase project for the Community panel. Both values are public by design (Supabase calls this the publishable key): they ship in the website code. Never put the secret key or the database password here. Leave empty to hide the Community panel.",
-  "url": "",
-  "publishableKey": ""
+  "how": "Supabase project for the Community panel. url and publishableKey are public by design (Supabase calls it the publishable key): they ship in the website code. Never put the secret key or the database password here. enabled: false keeps the Community button hidden from visitors; open the site with ?communityPreview to try it anyway. Set enabled to true to launch.",
+  "url": "https://beaafqeisqrxqhiuelit.supabase.co",
+  "publishableKey": "sb_publishable_MQyfZ3wd_JTLK3PpyXyZrw_yZgwUrCP",
+  "enabled": false
 }
