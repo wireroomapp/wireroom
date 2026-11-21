@@ -31,6 +31,13 @@ try {
   process.exit(1);
 }
 console.log(`Connecting to ${shape}`);
+{ // Safe hints for a failed sign-in (never the password itself).
+  const raw = String(process.env.SUPABASE_DB_URL || "").trim();
+  const u = new URL(url);
+  const ref = (u.hostname.match(/^db\.([a-z0-9]+)\.supabase\.co$/) || [])[1];
+  console.log(`Sign-in check: user ${/^postgres\.[a-z0-9]+$/.test(u.username) ? "postgres.<project id> (right for the pooler)" : `"${u.username.replace(/[^a-z._]/g, "?")}"${u.hostname.includes("pooler") ? " (the pooler needs postgres.<project id>)" : ""}`}; ` +
+    `password ${PLACEHOLDER.test(raw) ? (dbPassword ? `from SUPABASE_DB_PASSWORD (${dbPassword.length} characters)` : "missing") : `typed into SUPABASE_DB_URL (${decodeURIComponent(u.password).length} characters; SUPABASE_DB_PASSWORD is ignored)`}${ref ? `; direct host for project ${ref}` : ""}.`);
+}
 
 // Supabase requires encryption; its certificate is signed by Supabase's own authority.
 const client = new pg.Client({ connectionString: url.replace(/[?&]sslmode=[^&]*/, ""), ssl: { rejectUnauthorized: false }, connectionTimeoutMillis: 20000 });
