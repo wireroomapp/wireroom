@@ -15,7 +15,9 @@ import { SECTIONS, USERS } from "../tests/community-rules.mjs";
 
 const PLACEHOLDER = /\[YOUR-PASSWORD\]|%5BYOUR-PASSWORD%5D/i;
 const dbPassword = String(process.env.SUPABASE_DB_PASSWORD || "").trim();
-const url = String(process.env.SUPABASE_DB_URL || "").trim().replace(PLACEHOLDER, () => (dbPassword ? encodeURIComponent(dbPassword) : "[YOUR-PASSWORD]"));
+// SUPABASE_DB_PASSWORD, when set, always wins (the address may hold an old password).
+let url = String(process.env.SUPABASE_DB_URL || "").trim().replace(PLACEHOLDER, () => (dbPassword ? encodeURIComponent(dbPassword) : "[YOUR-PASSWORD]"));
+if (dbPassword) { try { const u = new URL(url); u.password = encodeURIComponent(dbPassword); url = u.toString(); } catch { /* checked below */ } }
 if (!url) {
   console.log("::notice::SUPABASE_DB_URL isn't set yet, so the community database wasn't set up. See the setup steps in README.md (Community).");
   process.exit(0);
@@ -36,7 +38,7 @@ console.log(`Connecting to ${shape}`);
   const u = new URL(url);
   const ref = (u.hostname.match(/^db\.([a-z0-9]+)\.supabase\.co$/) || [])[1];
   console.log(`Sign-in check: user ${/^postgres\.[a-z0-9]+$/.test(u.username) ? "postgres.<project id> (right for the pooler)" : `"${u.username.replace(/[^a-z._]/g, "?")}"${u.hostname.includes("pooler") ? " (the pooler needs postgres.<project id>)" : ""}`}; ` +
-    `password ${PLACEHOLDER.test(raw) ? (dbPassword ? `from SUPABASE_DB_PASSWORD (${dbPassword.length} characters)` : "missing") : `typed into SUPABASE_DB_URL (${decodeURIComponent(u.password).length} characters; SUPABASE_DB_PASSWORD is ignored)`}${ref ? `; direct host for project ${ref}` : ""}.`);
+    `password ${dbPassword ? `from SUPABASE_DB_PASSWORD (${dbPassword.length} characters)` : PLACEHOLDER.test(raw) ? "missing" : `typed into SUPABASE_DB_URL (${decodeURIComponent(u.password).length} characters)`}${ref ? `; direct host for project ${ref}` : ""}.`);
 }
 
 // Supabase requires encryption; its certificate is signed by Supabase's own authority.
