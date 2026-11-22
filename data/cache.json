@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T00:16:06.261Z",
+  "generatedAt": "2026-11-22T00:25:31.109Z",
   "countries": {
     "us": {
       "official": [
@@ -9577,7 +9577,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:21.925Z",
+      "officialLastOkAt": "2026-11-22T00:24:49.652Z",
       "officialLastError": null
     },
     "ca": {
@@ -18055,7 +18055,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:24.096Z",
+      "officialLastOkAt": "2026-11-22T00:24:51.716Z",
       "officialLastError": null
     },
     "mx": {
@@ -25373,6 +25373,19 @@
       ],
       "independent": [
         {
+          "id": "mx-independent-c1c7eab109cdd55b",
+          "countryId": "mx",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Cartel leader captured in northern Mexico in a bloody firefight that left 11 dead - AP News",
+          "summary": "Cartel leader captured in northern Mexico in a bloody firefight that left 11 dead AP News",
+          "date": "Nov 22, 2026 · 12:12 AM",
+          "publishedAt": "2026-11-22T00:12:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOa2RiNXlYT1VFSmc3cEJmU0N4QW9Ydk9rX1RBZ3hvakVOYWtIa1ZDdGlhVm8wSUp5MUk2bWg0TFNyc2lvN3VXazhaamp3WTZBOVpqXzBPcnV5OVVGREVtU1FNVDBXb2d2ck5mVmhybmptaUtCMGRJNEt0UGhxU25fM0JWZE5NSUF2NmRxZVlZOGJSaUpncmt6dnFkNEpDdG9ZejlidXU5RnJUdm8?oc=5",
+          "importance": 2
+        },
+        {
           "id": "mx-independent-6b74be10da801852",
           "countryId": "mx",
           "sourceType": "independent",
@@ -25383,19 +25396,6 @@
           "publishedAt": "2026-11-21T21:58:48.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQa1lhc2ZRS3hPcnFWc3VBdDBIbElGZF9PSlZVSEV4NFNxSXZ1YlZWeWtYUVdrbjZXVXFJM3V6VkgzLTZGSWdWUFZiVGctOFRreU1lUWpWdXp5VmJxYTFBVU9wTk9YcTZNSmt6MDhsNnB6azlRSnVnaUdZNF83dl9Gay1OVm9qQ2NreElTT1EzVFF2STVySzRkQmt3M19lRjlzQjJvVWVQckYzR21YUVRyY1R0MGJNYzJwaVhR?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "mx-independent-c1c7eab109cdd55b",
-          "countryId": "mx",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Cartel leader captured in northern Mexico in a bloody firefight that left 11 dead - AP News",
-          "summary": "Cartel leader captured in northern Mexico in a bloody firefight that left 11 dead AP News",
-          "date": "Nov 21, 2026 · 9:50 PM",
-          "publishedAt": "2026-11-21T21:50:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOa2RiNXlYT1VFSmc3cEJmU0N4QW9Ydk9rX1RBZ3hvakVOYWtIa1ZDdGlhVm8wSUp5MUk2bWg0TFNyc2lvN3VXazhaamp3WTZBOVpqXzBPcnV5OVVGREVtU1FNVDBXb2d2ck5mVmhybmptaUtCMGRJNEt0UGhxU25fM0JWZE5NSUF2NmRxZVlZOGJSaUpncmt6dnFkNEpDdG9ZejlidXU5RnJUdm8?oc=5",
           "importance": 2
         },
         {
@@ -31199,7 +31199,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:25.356Z",
+      "officialLastOkAt": "2026-11-22T00:24:52.752Z",
       "officialLastError": null
     },
     "br": {
@@ -34047,8 +34047,8 @@
           "countryId": "br",
           "sourceType": "official",
           "source": "Presidência",
-          "headline": "2026 — Planalto - GOV.BR",
-          "summary": "2026 — Planalto GOV.BR",
+          "headline": "2026 — Planalto - www.gov.br",
+          "summary": "2026 — Planalto www.gov.br",
           "date": "Jan 1, 2026",
           "publishedAt": "2026-01-01T08:00:00.000Z",
           "dateOnly": true,
@@ -35425,8 +35425,8 @@
           "countryId": "br",
           "sourceType": "official",
           "source": "Presidência",
-          "headline": "Comunicados — Planalto - GOV.BR",
-          "summary": "Comunicados — Planalto GOV.BR",
+          "headline": "Comunicados — Planalto - www.gov.br",
+          "summary": "Comunicados — Planalto www.gov.br",
           "date": "May 15, 2023",
           "publishedAt": "2023-05-15T07:00:00.000Z",
           "dateOnly": true,
@@ -35607,8 +35607,8 @@
           "countryId": "br",
           "sourceType": "official",
           "source": "Presidência",
-          "headline": "Comissão de Ética Pública — Planalto - GOV.BR",
-          "summary": "Comissão de Ética Pública — Planalto GOV.BR",
+          "headline": "Comissão de Ética Pública — Planalto - www.gov.br",
+          "summary": "Comissão de Ética Pública — Planalto www.gov.br",
           "date": "Apr 28, 2021",
           "publishedAt": "2021-04-28T07:00:00.000Z",
           "dateOnly": true,
@@ -35698,8 +35698,8 @@
           "countryId": "br",
           "sourceType": "official",
           "source": "Presidência",
-          "headline": "Últimas — Planalto - GOV.BR",
-          "summary": "Últimas — Planalto GOV.BR",
+          "headline": "Últimas — Planalto - www.gov.br",
+          "summary": "Últimas — Planalto www.gov.br",
           "date": "Jul 31, 2019",
           "publishedAt": "2019-07-31T21:34:58.000Z",
           "dateOnly": true,
@@ -36190,14 +36190,27 @@
           "importance": 2
         },
         {
+          "id": "br-independent-6e4a27f3940fef59",
+          "countryId": "br",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Brazil - AP News",
+          "summary": "Brazil AP News",
+          "date": "Nov 12, 2026 · 10:42 AM",
+          "publishedAt": "2026-11-12T13:42:18.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE5oVDBocnJSWVppUl85SjM3Z2gzTEQ0Tk1IUFFhMDh0aEZhX3NsQzJSVE85NjFRR0xINVVyV1V5eklYMWM?oc=5",
+          "importance": 2
+        },
+        {
           "id": "br-independent-11a0af9aea371e1a",
           "countryId": "br",
           "sourceType": "independent",
           "source": "Folha de S.Paulo",
           "headline": "Number of Brazilian Municipalities Reporting Droughts, Flash Floods and Flooding Rises, Survey Shows - Folha de S.Paulo",
           "summary": "Number of Brazilian Municipalities Reporting Droughts, Flash Floods and Flooding Rises, Survey Shows Folha de S.Paulo",
-          "date": "Nov 12, 2026 · 12:37 PM",
-          "publishedAt": "2026-11-12T15:37:00.000Z",
+          "date": "Nov 12, 2026 · 5:00 AM",
+          "publishedAt": "2026-11-12T08:00:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxOZnpfbURJNUtLWHAwWElmWXIyWG1XQks1RkEtVDg3TDRVWGtLNktsbW9zRlhsTU1qeDhYbW5DNzU0QlVNWjdWN2tKaU5vZi1TRnF4X1dNUlp1N2ZYMEhZZjhKbEtPUkx4dm1BdG1nVkIzYjNBVFFkRzRILTVjNkc0MEdQRlVUYVRCQWFiQkNfbWFaQkh2dklmVG9mNks5UzR4MjR3MTdmTjc2YjZwYlN6ZnpuS3J1WDlTbHZVNFI2dWxwRGNycGtET3BBcmZKazRRLWJEXzZyUXpoVE5Oakl5dWFHS2MtWXR2a1FNWmFLV25IbHJLVFEtRkgyaUtKQmRvaWh1c3p5cw?oc=5",
           "importance": 2
@@ -36209,23 +36222,10 @@
           "source": "Folha de S.Paulo",
           "headline": "Covid Cases Rise in Brazil as More Transmissible XFG Variant Becomes Dominant - 12/11/2026 - Science and Health - Folha de S.Paulo",
           "summary": "Covid Cases Rise in Brazil as More Transmissible XFG Variant Becomes Dominant - 12/11/2026 - Science and Health Folha de S.Paulo",
-          "date": "Nov 12, 2026 · 12:24 PM",
-          "publishedAt": "2026-11-12T15:24:00.000Z",
+          "date": "Nov 12, 2026 · 5:00 AM",
+          "publishedAt": "2026-11-12T08:00:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNVjQxaktPdWFOd0NrMDFDREYtRDNqeGVtN3E4cENFS1dWS2wtN2Naczg4Y1hQSlNPc0NUWXQ2cGoxRTEzWWlnVDBxbFYtSk5tVFlBVUh6bDduVm1KejlZU09ZSWtTTFdyd3ozaHhyajZMbVBiTU01bmx0RnkzSE5fVXFlNG1ORzVfcXRKZElfNGVnazVOUHlyOVhJQ1JDMlNGSzc1cWFHX1p6YWZOMEN2NDY1SXJJT1dhbGkzbktSOVpJak5JLTJSMi1tSTZuUWdld19xQi1BekpfbXU2X3YzSnpld2pSSWN4cUJr?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "br-independent-6e4a27f3940fef59",
-          "countryId": "br",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Brazil - AP News",
-          "summary": "Brazil AP News",
-          "date": "Nov 12, 2026 · 10:42 AM",
-          "publishedAt": "2026-11-12T13:42:18.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE5oVDBocnJSWVppUl85SjM3Z2gzTEQ0Tk1IUFFhMDh0aEZhX3NsQzJSVE85NjFRR0xINVVyV1V5eklYMWM?oc=5",
           "importance": 2
         },
         {
@@ -41106,7 +41106,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:26.381Z",
+      "officialLastOkAt": "2026-11-22T00:24:53.630Z",
       "officialLastError": null
     },
     "ar": {
@@ -46550,7 +46550,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:27.490Z",
+      "officialLastOkAt": "2026-11-22T00:24:54.570Z",
       "officialLastError": null
     },
     "gb": {
@@ -54710,7 +54710,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:28.684Z",
+      "officialLastOkAt": "2026-11-22T00:24:56.112Z",
       "officialLastError": null
     },
     "fr": {
@@ -56524,6 +56524,19 @@
           "publishedAt": "2026-11-21T22:36:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNd3I5LTlDX3JXdExFQUk4NFcwR25VbGZnSm55eHJJSnJiLVJKZzZ3UVNobktHaHZiY2U1Y2tQWWpLOFZ1TDB3empPT2pqc2sxVGtBdEhBUUVjNm1zV2pKQlEtWUd5YTdKWWlXSkVDN1d2V3gzaEZUMkVTbXZkOV9SRzFQYjN6b0FYcmZjYVN3aWwtR1BC?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "fr-independent-34989503e97c374e",
+          "countryId": "fr",
+          "sourceType": "independent",
+          "source": "France 24",
+          "headline": "France to play South Africa in inaugural Nations Championship final - France 24",
+          "summary": "France to play South Africa in inaugural Nations Championship final France 24",
+          "date": "Nov 21, 2026 · 10:22 PM",
+          "publishedAt": "2026-11-21T22:22:16.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNUDZZM1NQeHhIU0JxUFd4RHBLMVIyNXRZMWJxYUpRYjQ2YmxQelV4cjhBX3dubG1MdW9sM1FhSXpxMHhONFdKMTVEaVdBRVVWSmRKSk01clA3SHpUQTI1cTZjMldadDFBcDJ5WG5FamdlN0NzT2VlaC04X203b0loT1djeWFyZV9nUjRndElpTjVFZ2p0MFlCdTJQMHlEZFdXX09YakZjOXBQdEpJY2RWRGVVZ1pFVWM?oc=5",
           "importance": 2
         },
         {
@@ -62986,24 +62999,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQTmIxUWx6OWRLOW55S1NEM2htMlNOZU11RUltdm5mUWVPM3VZVDNlSVJCTTItX0ZMTy1vSkpoYk5IclRzd1lfYjJ4NzRoUHotSC1TRHpCNTRvdVJ3SjJtUzdXZy1Bc1J4LVNBUEl3bWtXU1lJTkdJaUVvUHh4SlJMV3pPdWx0bGJsMTg2Ylk3MVhOV3VBZm5mMVhxZTg3RXFjU0JCaFJBcWR6SU5MSm5MTDJaSERJMUpZOHI3eGRtXzNtOXNTWW1XQVM1SUhLOG5FdmhOLTBOdC0wM1JoSlV3RzlwUGdidw?oc=5",
           "importance": 2
-        },
-        {
-          "id": "fr-independent-1b9b90b9cce78d44",
-          "countryId": "fr",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "French 10-year bond yields hit 5%, highest since 2002 - Reuters",
-          "summary": "French 10-year bond yields hit 5%, highest since 2002 Reuters",
-          "date": "Oct 21, 2026 · 9:44 AM",
-          "publishedAt": "2026-10-21T09:44:40.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOYXc5VF91b3J6TjJpdkR6VFR1SUtTX1VUY1ZTUFBTNXFIT3ZZQ3RBMTVPaDNjMVNZbzRqcGdqRjRXcFhEQjRZd0V6R2ZRZVJwOHdmeHl5LWhva0Y3c285ZUNuaG80bWxBNUMyczhxWWdPd0NZZlNUTVJmUEszM1dCMzU2dU43ZzJ0bHNMQVF5cjgzZWZMUWViWE5aeWc3NUYwSkE?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:29.338Z",
+      "officialLastOkAt": "2026-11-22T00:24:56.896Z",
       "officialLastError": null
     },
     "de": {
@@ -70050,7 +70050,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:30.915Z",
+      "officialLastOkAt": "2026-11-22T00:24:58.084Z",
       "officialLastError": null
     },
     "it": {
@@ -78864,7 +78864,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:31.987Z",
+      "officialLastOkAt": "2026-11-22T00:24:59.169Z",
       "officialLastError": null
     },
     "es": {
@@ -87491,7 +87491,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:33.764Z",
+      "officialLastOkAt": "2026-11-22T00:25:00.670Z",
       "officialLastError": null
     },
     "pl": {
@@ -92987,7 +92987,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:35.831Z",
+      "officialLastOkAt": "2026-11-22T00:25:02.937Z",
       "officialLastError": null
     },
     "ua": {
@@ -108502,7 +108502,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:36.660Z",
+      "officialLastOkAt": "2026-11-22T00:25:03.781Z",
       "officialLastError": null
     },
     "ru": {
@@ -121547,7 +121547,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:38.283Z",
+      "officialLastOkAt": "2026-11-22T00:25:05.230Z",
       "officialLastError": null
     },
     "tr": {
@@ -130341,8 +130341,8 @@
           "countryId": "il",
           "sourceType": "official",
           "source": "Prime Minister's Office",
-          "headline": "- GOV.IL",
-          "summary": "GOV.IL",
+          "headline": "Prime Minister’s Office Statement – 18 August 2026 Ministry of Foreign Affairs - GOV.IL",
+          "summary": "Prime Minister’s Office Statement – 18 August 2026 Ministry of Foreign Affairs GOV.IL",
           "date": "Aug 18, 2026 · 7:00 AM",
           "publishedAt": "2026-08-18T07:00:00.000Z",
           "dateOnly": false,
@@ -131181,6 +131181,19 @@
           "publishedAt": "2026-11-21T18:21:58.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPNER6Q2NPRk9TUmtuX1hhQ21MdEdsc05rT0FxZzE4RTczVDJqbjN1My04Zm4tUkd1aUJ4cDdXSTM3ZVl6UVg0S0hLTWs1d1pjLTRDcVgtM1dVeVNvWFZHd1g3NEZCdm5HMlR1U09Cd1JfWUg1cEQ0aUZSU19uSHowSWhEUERvNE5OM1NxTDR1T3VYV21rb25pX1NSOFdFcHlOd3VzYkpMT2VzMlYwRVVSMmFuc2J3SkZ5dUM3Z0M0YXEyZw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "il-independent-0d3030fba5d50531",
+          "countryId": "il",
+          "sourceType": "independent",
+          "source": "The Times of Israel",
+          "headline": "Bennett backs unity government under Eisenkot, says Netanyahu must not be next PM, rules out defection 'under any circumstances' - The Times of Israel",
+          "summary": "Bennett backs unity government under Eisenkot, says Netanyahu must not be next PM, rules out defection 'under any circumstances' The Times of Israel",
+          "date": "Nov 21, 2026 · 6:19 PM",
+          "publishedAt": "2026-11-21T18:19:35.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiigJBVV95cUxPYTZzc3pLc04waTB6RXQ0ZXdaTm1iaUFSWDQ2RV9fM0psR3VrN0VfUndrZml4QVdLcTZwdWxJMTJyRHhtcEtsbUJ0WFFzRlF6R1RXcE1QemJzVl9SYmRUeU9SOXVpdkhZVzZlZ1NyTUtDUFNlMTF4N2ZJbHFUVUJBSFJSNTBDZF9rUTZ0aWVpLXJjVzhnRXRaZE9oZENydUhseUx2ZkZlZVIyVVoySlItbHlXTmZDZ2tTXzliZE1fQkg2bHZ2b2VoTDJ6SGVXamt0X3VVZW1Oc3BSV3V3dF85Qnl5YzNzOEMyNVlBZXA3eWJxYzlRQmFMZ0RoMEt6V3dEUXZvVEZJNnJPQQ?oc=5",
           "importance": 2
         },
         {
@@ -137539,24 +137552,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNMUQzYkRmTTEzWWU1dlVORE05YVF4Yi1hcXJZSWRyQXZpVTA4MVIwakZ1OXJDUTJRY3NNV0dWRllGSl9JeXFlS3pHQkMzR1EwTG5hQWJ0eGo2Vk9XSGx0VVFuZ0EzWjFxV3E0V0V3V0pJWDVSLWRsYi1LelQzRjRhWUZiNVRpTDc0WDJaV1NTU19RSlE0VnN5SFVjTlRkcmEyMHBnLVowNDFzcWotX05neVY4VEZvLUpfbElTaGozOG5odmNjcFM2TWRvOHVoYV9yZV9MQ0IwaWJZY0hEQ2VCek90Z1VtZw?oc=5",
           "importance": 2
-        },
-        {
-          "id": "il-independent-ade8ff70a449ec26",
-          "countryId": "il",
-          "sourceType": "independent",
-          "source": "The Times of Israel",
-          "headline": "New York woman accused of antisemitic stabbings is indicted for federal hate crimes - The Times of Israel",
-          "summary": "New York woman accused of antisemitic stabbings is indicted for federal hate crimes The Times of Israel",
-          "date": "Nov 13, 2026 · 7:13 PM",
-          "publishedAt": "2026-11-13T19:13:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQS1huZWFubFV6MzZxTFJkZjdaZ05naGo4TGExWHpYNVdIMWpXOUh6eHkxUTA0bm5sYXVPa0tHb3ZtZEhHcXFtR2RibGQyRG9KWDQwajA0cmxrZmF4ME9uVVJ4RzBKNWo0TldnU0U4NkVqVWp6czdOeFVadVhxVlg5SmpiSTBMZVBIYWxSdkFGeUdRMDhodm1QUDlSLTFuaXZEX0Z6dW52djJTNU40V2dXaUxYWkXSAboBQVVfeXFMTmNmQnZIeGRtU2VVY0hQUmVMZEVTZE9aQThMWE5hTVBMZ08zZ3FSTGRSSFZIWWIySmxsR0lsX0F3dVZSX21pRnNQazI1d1FWQTh5aHB1NmdkVWd3ak1jME5KbjFvd19tN2hDV1AxdHlPOUk5aXhaVzQwdzNYUi1XUnRoQ0hSVDVVLVdCa2lPdjNTT05hTUxyNWg3dU1KQ1ZQdTNwcDRJaW5QZHROWU5ndFltOE5SMVo1M0pR?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:40.339Z",
+      "officialLastOkAt": "2026-11-22T00:25:07.241Z",
       "officialLastError": null
     },
     "ir": {
@@ -137586,6 +137586,19 @@
           "publishedAt": "2026-11-21T23:17:04.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiP0FVX3lxTFBPd3h6VGM0TDlnQTJRaHcwMHkxaG5HcFFUY08yOEpFQ3FjZHB3b3h1bGlwSnRkT3k5SXZORXhjYw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-90cf2d084a5f3dcd",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "At least 24 dead in Nigeria when boat capsizes while carrying people to a funeral - AP News",
+          "summary": "At least 24 dead in Nigeria when boat capsizes while carrying people to a funeral AP News",
+          "date": "Nov 21, 2026 · 10:52 PM",
+          "publishedAt": "2026-11-21T22:52:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQNkdWWmd1TGxndVdtTXRTSVZOekxZZDhzS0F4TlNTbFN4R085VlA2T2FER1UwdEE3ZlloaDRIREpFSXJuMnZHUGVnTjZxNVc5ZDRmcE1jSV9kM2p6WEF4cE5ocHktaURvOGhKZ012TUxPMS10ak1OUFAtQ1NFZmFMY293UktTR2Ri?oc=5",
           "importance": 2
         },
         {
@@ -137677,19 +137690,6 @@
           "publishedAt": "2026-11-21T21:00:04.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNWHFKUDdNZFRCLWtBLVdXaXJicmtVTFVoMFM2anB6VnA2dER4bHhWTVROaDdpWFhTeUpZYUJRWnZjYzc1b3g1WC1TcTJnZk5EdXpULTRwRFJRMGJRYmRKTzlzd1FiazJrSlNGRHNuUktRRjNaLTBTWlJScGhkeHJMTnYxdUdlcVRJOHZmWFdFeE1fUnlhMHB5MnM1SzcxaTdrWnRiT1BFbktpcmhSemw3anQ1R23SAboBQVVfeXFMT01MTmVjb1NOQWlBR3ZTRUhUU203dVZZSVljRnUwcGhWSUtiQkFOOFdsQjduS0tSVkN0VUtIVDc5NTJ4b21UbVVXWEp2SmdXTFZpbHB1X3FvM3ZHZ2piWURGTU45anA0M3VDOTJiaXh6ZTNZVFhlSlhlTjBoS0FFWjY0NDJ4V04zSUFwcVVORTJqQ083RjAtdmtCanZUMWQxNzgwak5NSWxwMWx5eVZGWHlWODhIM1R4Uzln?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-90cf2d084a5f3dcd",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "24 dead in Nigeria when boat capsizes while carrying people to a funeral - AP News",
-          "summary": "24 dead in Nigeria when boat capsizes while carrying people to a funeral AP News",
-          "date": "Nov 21, 2026 · 9:00 PM",
-          "publishedAt": "2026-11-21T21:00:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQNkdWWmd1TGxndVdtTXRTSVZOekxZZDhzS0F4TlNTbFN4R085VlA2T2FER1UwdEE3ZlloaDRIREpFSXJuMnZHUGVnTjZxNVc5ZDRmcE1jSV9kM2p6WEF4cE5ocHktaURvOGhKZ012TUxPMS10ak1OUFAtQ1NFZmFMY293UktTR2Ri?oc=5",
           "importance": 2
         },
         {
@@ -139058,6 +139058,19 @@
           "importance": 2
         },
         {
+          "id": "ir-independent-b27182e461beb16e",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "Oil gains on Iran war worries and short-covering ahead of Thanksgiving holiday - Reuters",
+          "summary": "Oil gains on Iran war worries and short-covering ahead of Thanksgiving holiday Reuters",
+          "date": "Nov 20, 2026 · 8:45 PM",
+          "publishedAt": "2026-11-20T20:45:32.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPb3pQREZDSHE2RmNHdDdGdExDUXhYeWljc2VualVoQ09oQV90WnFQQlZkYW1rWnl5ODJ6N2haaVBDVUY4VmFvRmtLSlZKbU5kR1lHNklrUUR3X3JGc181OHZCUHpXalZFUllBZXVEczJPUUdZZUt1MmpsTEN0MkJGSDNCVHhoa25pZFBSb1lldS1US0VJNVNBWWN1U2VwQmd0WmlQR1RKWmgyS2lyUDVfNHdWeWhzaFhmZ1E?oc=5",
+          "importance": 2
+        },
+        {
           "id": "ir-independent-c174fd96bc9ce803",
           "countryId": "ir",
           "sourceType": "independent",
@@ -140352,19 +140365,6 @@
           "publishedAt": "2026-11-20T02:17:48.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNWEMyTnBnb1k2elB1QVF4d05uRC1mZEsySEt3cDdvaVhaTnBoWHd4Y3ZDMEpILVBUQWFEcWtENjZvaDZmQ0lXdUZNN3pFaXZIVEtfdDdnZmMySjdpb0tZeDRJOUhIamtkVkViVmw0UFJYcGM1UkEydHh5akxqY2ZBa2U2LW9VX3dqalRyUDJjLXQ1XzlOd1JkWVl0ZzlGemZNdXdNcmlKRE1PX2k3Y0hnSVByUdIBuAFBVV95cUxNU3owOWlJXzgyM0E4bFQyVFlnbTRaaEVtRFNyNGdzc0I0c2Q1WExkTkdNYTVscEdoVVJIbEpJVXlMalo3ZVA5a0kyQlVmeXBSck5OQzBUelpHVm03VWhVX1RUdFIycGNrdEVrcUh4NzNvV25FX1FzUThTZEdkenBlVzVCVHBLZ2dMV2pJODlQWlVwN0FLS19XSmg2RGR3NTFrTC1BQ3BDWndGaTBEOGZaeVM2VTBTS3Bh?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-b27182e461beb16e",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "Oil gains on Iran war worries and short-covering ahead of Thanksgiving holiday - Reuters",
-          "summary": "Oil gains on Iran war worries and short-covering ahead of Thanksgiving holiday Reuters",
-          "date": "Nov 20, 2026 · 2:00 AM",
-          "publishedAt": "2026-11-20T02:00:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPb3pQREZDSHE2RmNHdDdGdExDUXhYeWljc2VualVoQ09oQV90WnFQQlZkYW1rWnl5ODJ6N2haaVBDVUY4VmFvRmtLSlZKbU5kR1lHNklrUUR3X3JGc181OHZCUHpXalZFUllBZXVEczJPUUdZZUt1MmpsTEN0MkJGSDNCVHhoa25pZFBSb1lldS1US0VJNVNBWWN1U2VwQmd0WmlQR1RKWmgyS2lyUDVfNHdWeWhzaFhmZ1E?oc=5",
           "importance": 2
         },
         {
@@ -160220,19 +160220,6 @@
           "importance": 2
         },
         {
-          "id": "eg-independent-9d4b17687e822e8c",
-          "countryId": "eg",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "Salah breaks Egypt scoring record as Tunisia lose to Libya - Reuters",
-          "summary": "Salah breaks Egypt scoring record as Tunisia lose to Libya Reuters",
-          "date": "Nov 13, 2026 · 11:25 PM",
-          "publishedAt": "2026-11-13T23:25:43.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOanZyTDZYZG9Jdm52WklYTk56TzdFUEg0QWxjZU5LSEVEMV9tTHk5cXhoanRQVHdsLTh4S0N5bUdMSFFKOUJUd2trdEFpMTd3LVBYU1BmZG1yQ1lOTEVfMWpwUXd1d3kyYnhkQnh5eFBFS2FNeUlJMDdtSV9zU3M3cmFfLXZYTUVPWS1oWHVkRkNMLTBvcGZpV3JBeDZFVnNzNjJ0aA?oc=5",
-          "importance": 2
-        },
-        {
           "id": "eg-independent-a622b2728e8c11c6",
           "countryId": "eg",
           "sourceType": "independent",
@@ -160542,6 +160529,19 @@
           "publishedAt": "2026-11-13T10:50:34.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOVXk4cWFDd2NIbFl4Umg4YzI2OWdfVWZqRklXWUQ5UnFUTHJaczFSS096MWpZT09UaDNlNzNFWUttR2JkdDB6Z2dadzJoN1Ztc3dnclVaek5ZWWNFb1pSWEZ3ZWR2SlJuNjB2SHR5SVRkRjZDN3lwNHR1d1VnbFA2Mi1Rang3RDVJdEVxQ0RUdDV4dVNGV2xPeG1zNDY?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "eg-independent-9d4b17687e822e8c",
+          "countryId": "eg",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "Salah breaks Egypt scoring record as Tunisia lose to Libya - Reuters",
+          "summary": "Salah breaks Egypt scoring record as Tunisia lose to Libya Reuters",
+          "date": "Nov 13, 2026 · 8:00 AM",
+          "publishedAt": "2026-11-13T08:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOanZyTDZYZG9Jdm52WklYTk56TzdFUEg0QWxjZU5LSEVEMV9tTHk5cXhoanRQVHdsLTh4S0N5bUdMSFFKOUJUd2trdEFpMTd3LVBYU1BmZG1yQ1lOTEVfMWpwUXd1d3kyYnhkQnh5eFBFS2FNeUlJMDdtSV9zU3M3cmFfLXZYTUVPWS1oWHVkRkNMLTBvcGZpV3JBeDZFVnNzNjJ0aA?oc=5",
           "importance": 2
         },
         {
@@ -168055,10 +168055,10 @@
           "countryId": "ng",
           "sourceType": "independent",
           "source": "AP",
-          "headline": "24 dead in Nigeria when boat capsizes while carrying people to a funeral - AP News",
-          "summary": "24 dead in Nigeria when boat capsizes while carrying people to a funeral AP News",
-          "date": "Nov 21, 2026 · 9:00 PM",
-          "publishedAt": "2026-11-21T21:00:00.000Z",
+          "headline": "At least 24 dead in Nigeria when boat capsizes while carrying people to a funeral - AP News",
+          "summary": "At least 24 dead in Nigeria when boat capsizes while carrying people to a funeral AP News",
+          "date": "Nov 21, 2026 · 10:52 PM",
+          "publishedAt": "2026-11-21T22:52:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQNkdWWmd1TGxndVdtTXRTSVZOekxZZDhzS0F4TlNTbFN4R085VlA2T2FER1UwdEE3ZlloaDRIREpFSXJuMnZHUGVnTjZxNVc5ZDRmcE1jSV9kM2p6WEF4cE5ocHktaURvOGhKZ012TUxPMS10ak1OUFAtQ1NFZmFMY293UktTR2Ri?oc=5",
           "importance": 2
@@ -168870,19 +168870,6 @@
           "importance": 2
         },
         {
-          "id": "ng-independent-2fa453bc1d9885e2",
-          "countryId": "ng",
-          "sourceType": "independent",
-          "source": "Channels TV",
-          "headline": "2027: Whoever Wins, Nigeria Loses, Atiku, Obi Handing Tinubu Advantage – Sule Lamido - Channels Television",
-          "summary": "2027: Whoever Wins, Nigeria Loses, Atiku, Obi Handing Tinubu Advantage – Sule Lamido Channels Television",
-          "date": "Nov 14, 2026 · 1:55 AM",
-          "publishedAt": "2026-11-14T01:55:43.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNLVdtWVU4NDNIaUVPZEE1X2l1WGRmUldxS0hYazB5cHg1WTFWZm9rWEhyaFlFUm9HU1RyRHlOX2pRZS15UkpsUjhQcXE3VWVYaDRYMUpnV3Q5ZzBLcXZWbGFVc2FCOC1xYTJrTGIxX2NGeElyZi1HdTNpX0dvMEVoeGFLcE85MlhDRVpXMkRzbGVQRGlRNUN5MHJYNzVBNGszZUo3bVZ1M3JXQmhENHZNUUZxU09qck1H?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ng-independent-a8aa48420586c732",
           "countryId": "ng",
           "sourceType": "independent",
@@ -168971,6 +168958,19 @@
           "publishedAt": "2026-11-13T09:34:54.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQNzU2RHljRkVvQi1oT1hoUEN5VFlmb05Zc0xhUDRnaTdFVXNaLUExa05aeW1LSTFKTk5KV1pmemF3WEdISEhDUUgtdFRmT09LUjNrVmNPMkFBTGk1SlY2TVBPNHpSdGhnZU14TFg2dFlPSmVGS0JmOUJSemtmakJkM2NRZWxMSkV0LS1VczN0SEdCWVZnWjlEZDBOVlRNYXAyZ2RtVXJlLXh2ZnVBMUo5bWFPLTl5M3VlbEM5MkRtdWFxckpHdC13?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ng-independent-2fa453bc1d9885e2",
+          "countryId": "ng",
+          "sourceType": "independent",
+          "source": "Channels TV",
+          "headline": "2027: Whoever Wins, Nigeria Loses, Atiku, Obi Handing Tinubu Advantage – Sule Lamido - Channels Television",
+          "summary": "2027: Whoever Wins, Nigeria Loses, Atiku, Obi Handing Tinubu Advantage – Sule Lamido Channels Television",
+          "date": "Nov 13, 2026 · 8:00 AM",
+          "publishedAt": "2026-11-13T08:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNLVdtWVU4NDNIaUVPZEE1X2l1WGRmUldxS0hYazB5cHg1WTFWZm9rWEhyaFlFUm9HU1RyRHlOX2pRZS15UkpsUjhQcXE3VWVYaDRYMUpnV3Q5ZzBLcXZWbGFVc2FCOC1xYTJrTGIxX2NGeElyZi1HdTNpX0dvMEVoeGFLcE85MlhDRVpXMkRzbGVQRGlRNUN5MHJYNzVBNGszZUo3bVZ1M3JXQmhENHZNUUZxU09qck1H?oc=5",
           "importance": 2
         },
         {
@@ -181061,6 +181061,19 @@
       ],
       "independent": [
         {
+          "id": "in-independent-5bd24cf25041a08a",
+          "countryId": "in",
+          "sourceType": "independent",
+          "source": "The Hindu",
+          "headline": "India, Bulgaria discuss bilateral ties, IMEC, Black Sea situation - The Hindu",
+          "summary": "India, Bulgaria discuss bilateral ties, IMEC, Black Sea situation The Hindu",
+          "date": "Nov 22, 2026 · 5:45 AM",
+          "publishedAt": "2026-11-22T00:15:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPZXBuN2JHbGJxMlN0R1l4NW9nVF9sLTNMNEw5VGc1M1R3MjFIWS1LX3NVdWtEOGs4aHA5SHdJWG53UndFU3d1RXJuZHEwRGZyMXhaMk8wbWZVY0tWOHJNS2JzSjBUZWdGcnBWM3Z5TVBEZUdMZUVNZ3Q5NG0tQUVRVlBrZ2VMeUpDQnhDZk9FS2NmXy0xcXBtNlJ5ODFzTEkzY3lQa2R3TmoxX1ZUU2NEVmxtbTlNam8zRWt6Z1Rn?oc=5",
+          "importance": 2
+        },
+        {
           "id": "in-independent-d2bce64c9893ff48",
           "countryId": "in",
           "sourceType": "independent",
@@ -187546,24 +187559,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNZXBlOHNxUS1nTl9ZZVFBYzFFSWpHYUxtdmZTbGFxLUEtdEgxUjJPVTd6VU5SLVgxYzZ2SkhHX2pXbG52SVRISm00bjktRVFmV20xaS1hWXZSVngxdFVVVHFLdDJCTWxWeV9YYlcwbUp5SmtOdmhuSTlRUlFETDNVSmNzVVV5ZWlvbjFlMjdLTjVhYUNvbzRXeDQ1Z2doSm1sRHhITjJvc2tSc1ZMLXB4dGR0VFhQUzJGZHJLaHZR0gHEAUFVX3lxTE15b0J1OEY1U1VMYXRIVGROR3FVZWpFQ2MzVE1TbV9tWFNBaTFPLW1ISDNRXzZmeV9jYnhwSTN0RGhSX09BbWlQTHJzV2kxMGpINHU2aUtvYWdwNnNHQUtBRmpnUjFjTWtmSkFCS1V6SlpuT2lyR1VGTEo0REdVYzFIX1FGSkM5Um5kUUk4V0pWeHRYYVdVTVRVTFFiS09ndHpXeGc3djliYXNwWFFvRFVZY0NsYjctMndDcGw2TTNadkRHN0o?oc=5",
           "importance": 2
-        },
-        {
-          "id": "in-independent-d58e0b301c6e6fc0",
-          "countryId": "in",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "Indian rupee breaks six-day winning streak on state banks' dollar bids - Reuters",
-          "summary": "Indian rupee breaks six-day winning streak on state banks' dollar bids Reuters",
-          "date": "Nov 9, 2026 · 8:42 AM",
-          "publishedAt": "2026-11-09T03:12:19.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQbmRYMGNidi13ZTlOWEpSRUR4cTdxV0ctVlowT2htXzZFMzJTUHhhSUdmcmtJczFKWFBkaWdrR1hCNUJpay1aNmVlRlNhUVZaWmpUc0pxU01ia0hUbWgwNnlaTEZmbkRNaE9GZUpoQjNpejA5ejA0akU0dWhQUmJQZG9wVFJLTF9kdE80NElJaFZZU2Y1UmhTdA?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:47.204Z",
+      "officialLastOkAt": "2026-11-22T00:25:12.194Z",
       "officialLastError": null
     },
     "pk": {
@@ -202727,7 +202727,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:56.646Z",
+      "officialLastOkAt": "2026-11-22T00:25:22.513Z",
       "officialLastError": null
     },
     "jp": {
@@ -204473,8 +204473,8 @@
           "source": "AP",
           "headline": "Japan - AP News",
           "summary": "Japan AP News",
-          "date": "Nov 21, 2026 · 7:49 AM",
-          "publishedAt": "2026-11-21T07:49:37.000Z",
+          "date": "Nov 21, 2026 · 3:20 AM",
+          "publishedAt": "2026-11-21T03:20:08.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE5hMWI2YTQzSno1c0NFckp0UkN2US1aY3U5QlJZSXJjMl9PNTdhdGNlMEpVVEduZk1oNTdpZENGeVB4dw?oc=5",
           "importance": 2
@@ -210943,7 +210943,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:15:59.143Z",
+      "officialLastOkAt": "2026-11-22T00:25:24.842Z",
       "officialLastError": null
     },
     "kr": {
@@ -219546,7 +219546,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:16:00.847Z",
+      "officialLastOkAt": "2026-11-22T00:25:26.629Z",
       "officialLastError": null
     },
     "tw": {
@@ -226602,7 +226602,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:16:02.420Z",
+      "officialLastOkAt": "2026-11-22T00:25:28.942Z",
       "officialLastError": null
     },
     "id": {
@@ -241321,7 +241321,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-22T00:16:05.618Z",
+      "officialLastOkAt": "2026-11-22T00:25:30.530Z",
       "officialLastError": null
     }
   },
@@ -242043,6 +242043,19 @@
         "importance": 2
       },
       {
+        "id": "ww-independent-d7de1fe56f4332f1",
+        "countryId": "ww",
+        "sourceType": "independent",
+        "source": "Reuters",
+        "headline": "Xi hails 'comprehensive turnaround' in China-Australia ties - Reuters",
+        "summary": "Xi hails 'comprehensive turnaround' in China-Australia ties Reuters",
+        "date": "Nov 20, 2026 · 8:33 PM",
+        "publishedAt": "2026-11-20T20:33:29.000Z",
+        "dateOnly": false,
+        "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNZHhaMkRlWERNdEhzanBwSHBJVVU4eUFLSUUzaXF6OFRnOTczX29tdnlhZEM0ZlhNZnBRTmpjcXVKQVZyOUxycnhVMmRwQzBUSlhwS1pDOG9KZ2V5dlhoaW40MWJUQ0RVTmNVY0xhWTd4Sm52QmhGSnp6M3NvSHBsU2RDbFV2WGV1dk9KTm1TYTdpZUcydUtNc3M3MzhVWFRJSHVQRA?oc=5",
+        "importance": 2
+      },
+      {
         "id": "ww-independent-4254dd1fc0ea5cfa",
         "countryId": "ww",
         "sourceType": "independent",
@@ -242417,19 +242430,6 @@
         "publishedAt": "2026-11-20T18:27:26.000Z",
         "dateOnly": false,
         "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNTmhITDNJWDN0aFIyMjg5dmx0bWFQS0RJcDZ4RDVUTEF4T3gzVUZ3VzZRVjRNMk1sdy0zaXdyWHBGdVBWQjI3V0FaRnhwbDJJQ2FqdjhIeFhMdEVDVWRadUs5M2tyM2RfTHNBVks3SVU0RkN2cXFwc2FPZWJfbHppVXhkVmZrbnVVOS14bVVaX1pRWG1yZEVvbm5GOVZDYWlQTEtvcmNyYUZWQQ?oc=5",
-        "importance": 2
-      },
-      {
-        "id": "ww-independent-e6703e8a4f84ca0b",
-        "countryId": "ww",
-        "sourceType": "independent",
-        "source": "Reuters",
-        "headline": "Trump ousts cyber director after tech outages spark criticism - Reuters",
-        "summary": "Trump ousts cyber director after tech outages spark criticism Reuters",
-        "date": "Nov 20, 2026 · 6:27 PM",
-        "publishedAt": "2026-11-20T18:27:01.000Z",
-        "dateOnly": false,
-        "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNTElpWEVLdXdjWl9QOVBPcjRMRWcyN2xMVzdqQ1hSZjJxZTJEUk9QWmtyNldWTHRyUmNBaWFtSUJ5TndzRG9vTHR1bGR5eEZXNkNDbnNNQlRKcW9PdnZPc2VZMVJhOGxablFJeUpLM2UtU1pfXzhUaWVhNi1qeXk0ejFVVDZ3VGp6b01UdmlrMEZicFlqcU9BY2lfN25rWWRMR2p4RkZYdXFkdnJWMVAtSWZkdW5PNHBfTkdxNFRwRQ?oc=5",
         "importance": 2
       },
       {
@@ -243902,19 +243902,6 @@
         "importance": 2
       },
       {
-        "id": "ww-independent-d7de1fe56f4332f1",
-        "countryId": "ww",
-        "sourceType": "independent",
-        "source": "Reuters",
-        "headline": "Xi hails 'comprehensive turnaround' in China-Australia ties - Reuters",
-        "summary": "Xi hails 'comprehensive turnaround' in China-Australia ties Reuters",
-        "date": "Nov 20, 2026 · 4:49 AM",
-        "publishedAt": "2026-11-20T04:49:00.000Z",
-        "dateOnly": false,
-        "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNZHhaMkRlWERNdEhzanBwSHBJVVU4eUFLSUUzaXF6OFRnOTczX29tdnlhZEM0ZlhNZnBRTmpjcXVKQVZyOUxycnhVMmRwQzBUSlhwS1pDOG9KZ2V5dlhoaW40MWJUQ0RVTmNVY0xhWTd4Sm52QmhGSnp6M3NvSHBsU2RDbFV2WGV1dk9KTm1TYTdpZUcydUtNc3M3MzhVWFRJSHVQRA?oc=5",
-        "importance": 2
-      },
-      {
         "id": "ww-independent-40908885a454871e",
         "countryId": "ww",
         "sourceType": "independent",
@@ -244562,6 +244549,19 @@
         "publishedAt": "2026-11-19T22:34:50.000Z",
         "dateOnly": false,
         "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQRmhOamVpZF9sMG9qSElyRS13Q2hIdXdncHVuRUIzUU1FYlM4eGNSR1NVcE9DdHVFNXRDT0ZSdTBXUUtSZGJUWGdoNnEwLXRqMmVRd251SWpHNVVsSWRFODZ3S3ZZQkVxM0dTaHNUaXA5M0FLVVYyaFNXa1l1a0Vkc2Rpc01EWWUxYi1kQmhwckhZOTBURFAxeQ?oc=5",
+        "importance": 2
+      },
+      {
+        "id": "ww-independent-e6703e8a4f84ca0b",
+        "countryId": "ww",
+        "sourceType": "independent",
+        "source": "Reuters",
+        "headline": "Trump ousts cyber director after tech outages spark criticism - Reuters",
+        "summary": "Trump ousts cyber director after tech outages spark criticism Reuters",
+        "date": "Nov 19, 2026 · 10:27 PM",
+        "publishedAt": "2026-11-19T22:27:00.000Z",
+        "dateOnly": false,
+        "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNTElpWEVLdXdjWl9QOVBPcjRMRWcyN2xMVzdqQ1hSZjJxZTJEUk9QWmtyNldWTHRyUmNBaWFtSUJ5TndzRG9vTHR1bGR5eEZXNkNDbnNNQlRKcW9PdnZPc2VZMVJhOGxablFJeUpLM2UtU1pfXzhUaWVhNi1qeXk0ejFVVDZ3VGp6b01UdmlrMEZicFlqcU9BY2lfN25rWWRMR2p4RkZYdXFkdnJWMVAtSWZkdW5PNHBfTkdxNFRwRQ?oc=5",
         "importance": 2
       },
       {
@@ -247828,6 +247828,6 @@
         "importance": 2
       }
     ],
-    "fetchedAt": "2026-11-22T00:16:06.261Z"
+    "fetchedAt": "2026-11-22T00:25:31.109Z"
   }
 }
