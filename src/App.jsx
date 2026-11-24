@@ -201,8 +201,8 @@ export default function WireRoomV2() {
   const [pinning, setPinning] = useState(null); // a report waiting to be pinned to a marker
   const pinTapRef = useRef(null);
   const [storageWarn, setStorageWarn] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(() => { try { return !localStorage.getItem("wireroom-welcomed-v2"); } catch { return true; } });
-  const dismissWelcome = () => { try { localStorage.setItem("wireroom-welcomed-v2", "1"); } catch { /* private mode: just close */ } setShowWelcome(false); };
+  const [showWelcome, setShowWelcome] = useState(() => { try { return !localStorage.getItem("wireroom-welcomed-v3"); } catch { return true; } });
+  const dismissWelcome = () => { try { localStorage.setItem("wireroom-welcomed-v3", "1"); } catch { /* private mode: just close */ } setShowWelcome(false); };
   const [annotationDraft, setAnnotationDraft] = useState(null);
   // Light or dark look. index.html sets the starting value before the page paints.
   const [theme, setTheme] = useState(() => (typeof document !== "undefined" && document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark"));
@@ -994,20 +994,33 @@ export default function WireRoomV2() {
             <li>Tap a country to open its brief. Switch <b>Official</b>, <b>News</b>, or <b>Both</b>.</li>
             <li>Tap <b>Draw</b> (top-left of the map) to mark up the map, add notes and pin reports to markers. Tap it again to fold the tools away.</li>
             <li>Some countries have no verified official source yet. The panel says so instead of guessing.</li>
-            <li>Tap <b>Live</b> (bottom-left of the map) to show military aircraft, and ships at key chokepoints and Indian Ocean ports.</li>
+            <li>The <b>Trackers</b> box (bottom-left) has <b>Live</b> (military aircraft, ships at key chokepoints) and <b>Events</b> (military strikes and wars, terrorism, cyberattacks). Use the date bar to see the map on any past day. Tap ▾ to tuck the box away.</li>
+            <li>Tap <b>Feeds</b> (bottom-right) for the <b>Global feed</b>, <b>Community</b> and <b>Messages</b>.</li>
             {ML && <li>Switch the map to <b>Satellite</b>, <b>Relief</b> or <b>Night</b> (NASA imagery), spin it as a <b>Globe</b>, or raise mountains in <b>3D</b>.</li>}
           </ul>
           <div className="welcome-note">
+            <h3>New: Community</h3>
+            <ul>
+              <li>Sign in with Google to post updates, articles and <b>your maps</b>. Others can show your map on theirs, copy it to build on, and comment.</li>
+              <li>Reply to a post with your own map: tick <b>Attach my map</b> under the comment box.</li>
+              <li>Follow analysts, and send <b>direct messages</b> (text or a map). Block or report anyone, anytime.</li>
+              <li>Everything users post is labelled <b>Analyst</b>: their analysis, not verified by Wire Room. Reading needs no account.</li>
+            </ul>
+            <h3>Also new</h3>
+            <ul>
+              <li>Worldwide cyberattacks that hit many countries at once now show under <b>Worldwide cyber</b> in Events.</li>
+              <li>An AI review hides off-topic news (sports, celebrity) from country feeds. Official statements are never hidden.</li>
+            </ul>
             <h3>About the live layers</h3>
             <p>Aircraft and ship positions come from free, volunteer-run networks, so coverage has gaps, and ship positions are periodic snapshots, not live. Many military aircraft don't broadcast their position, and some chokepoints, including the Strait of Hormuz, show no ships yet. The map labels these gaps instead of hiding them.</p>
             <h3>What funding will add</h3>
             <ul>
               <li>Satellite ship tracking and licensed flight data for worldwide coverage</li>
               <li>Verified official sources for every country (20 of 29 today)</li>
-              <li>Saved maps you can share, and analysts you can follow</li>
+              <li>Notifications, and maps you can edit together in real time</li>
             </ul>
           </div>
-          <p className="welcome-fine">Your maps are saved in this browser only. Clearing site data will erase them. This is an early version, so rough edges are expected and feedback is welcome.</p>
+          <p className="welcome-fine">Your drawing is saved in this browser; post it to Community to keep it with your account. This is an early version, so rough edges are expected and feedback is welcome.</p>
           <div className="welcome-actions">
             <button className="welcome-go" onClick={dismissWelcome}>Enter the Wire Room</button>
             {FEEDBACK_URL && <a className="welcome-link" href={FEEDBACK_URL} target="_blank" rel="noreferrer">Give feedback</a>}
