@@ -1813,6 +1813,8 @@ const CSS = `
 .map-note{font:12px var(--font);color:var(--muted)}
 .link-toast{background:var(--surface);border:1px solid var(--line);border-radius:10px;color:var(--text);font:500 13px var(--font);box-shadow:var(--shadow)}
 .welcome-back{background:var(--scrim)}
+.welcome-back{align-items:flex-start}
+.welcome-card{margin:auto 0}
 .welcome-card{background:var(--surface);border:1px solid var(--line);border-top:1px solid var(--line);border-radius:14px;font-family:var(--font);color:var(--text);box-shadow:var(--shadow)}
 .welcome-card h2{font:700 24px var(--font);letter-spacing:0}.welcome-card h2 b{color:inherit}
 .welcome-card p{color:var(--text-2)}.welcome-card ul,.welcome-note p{color:var(--text-2)}
