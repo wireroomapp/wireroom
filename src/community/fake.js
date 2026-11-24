@@ -2,7 +2,7 @@
 // open the dev site with ?fakeCommunity (add &fakeAdmin to be a moderator). Never part of the
 // production build. Its rules only roughly mirror supabase/schema.sql; the real rules are tested
 // in tests/community-db.test.mjs.
-import { sanitizeShared } from "./helpers.js";
+import { groupConversations, sanitizeShared } from "./helpers.js";
 import { PAGE } from "./api.js";
 
 export function makeFakeApi() {
@@ -27,6 +27,8 @@ export function makeFakeApi() {
   const follows = [];
   const comments = [{ id: "c-1", post_id: "p-1", author_id: "u-bob", body: "The line from Crimea looks right, matches the governor's statement.", hidden: false, created_at: iso(40) }];
   const reports = [];
+  const messages = [{ id: "m-1", sender_id: "u-alice", recipient_id: "u-you", body: "Hi! Saw you're tracking the Gulf too. Want to compare maps?", annotations: null, read_at: null, hidden: false, created_at: iso(30) }];
+  const blocks = [];
   let user = null;
   const listeners = new Set();
   const emit = () => listeners.forEach((cb) => cb(user));
@@ -83,8 +85,32 @@ export function makeFakeApi() {
     },
     async updatePost(pid, f) { await wait(); need(); const p = posts.find((x) => x.id === pid && x.author_id === user.id); if (p) Object.assign(p, f, { edited_at: new Date().toISOString() }); },
     async deletePost(pid) { await wait(); need(); const k = posts.findIndex((x) => x.id === pid && x.author_id === user.id); if (k >= 0) posts.splice(k, 1); },
-    async comments(pid) { await wait(); return comments.filter((c) => c.post_id === pid && (!c.hidden || admin || c.author_id === user?.id)).map((c) => ({ ...c, username: author(c.author_id).username, display_name: author(c.author_id).display_name })); },
-    async addComment(pid, body) { await wait(); need(); comments.push({ id: id("c"), post_id: pid, author_id: user.id, body, hidden: false, created_at: new Date().toISOString() }); },
+    async comments(pid) { await wait(); return comments.filter((c) => c.post_id === pid && (!c.hidden || admin || c.author_id === user?.id)).map((c) => ({ ...c, annotations: c.annotations ? sanitizeShared(c.annotations) : null, username: author(c.author_id).username, display_name: author(c.author_id).display_name })); },
+    async addComment(pid, body, annotations = null) { await wait(); need(); comments.push({ id: id("c"), post_id: pid, author_id: user.id, body, annotations, hidden: false, created_at: new Date().toISOString() }); },
+    async conversations() {
+      await wait();
+      if (!user) return [];
+      const rows = messages.filter((m) => (m.sender_id === user.id || (m.recipient_id === user.id && !m.hidden))).sort((a, b) => b.created_at.localeCompare(a.created_at))
+        .map((m) => ({ ...m, sender: author(m.sender_id), recipient: author(m.recipient_id) }));
+      return groupConversations(rows, user.id);
+    },
+    async thread(oid) {
+      await wait();
+      if (!user) return [];
+      return messages.filter((m) => (m.sender_id === user.id && m.recipient_id === oid) || (m.sender_id === oid && m.recipient_id === user.id && !m.hidden))
+        .sort((a, b) => a.created_at.localeCompare(b.created_at)).map((m) => ({ ...m, mine: m.sender_id === user.id }));
+    },
+    async sendMessage(oid, body, annotations = null) {
+      await wait(); need();
+      if (blocks.some((b) => (b.blocker_id === user.id && b.blocked_id === oid) || (b.blocker_id === oid && b.blocked_id === user.id))) throw new Error("Not sent: one of you has blocked the other, or one account is suspended.");
+      messages.push({ id: id("m"), sender_id: user.id, recipient_id: oid, body, annotations, read_at: null, hidden: false, created_at: new Date().toISOString() });
+    },
+    async markRead(oid) { messages.forEach((m) => { if (m.recipient_id === user?.id && m.sender_id === oid && !m.read_at) m.read_at = new Date().toISOString(); }); },
+    async unsend(mid) { const k = messages.findIndex((m) => m.id === mid && m.sender_id === user?.id); if (k >= 0) messages.splice(k, 1); },
+    async unreadCount() { return user ? messages.filter((m) => m.recipient_id === user.id && !m.read_at && !m.hidden).length : 0; },
+    async myBlocks() { return blocks.filter((b) => b.blocker_id === user?.id).map((b) => b.blocked_id); },
+    async block(bid) { await wait(); need(); blocks.push({ blocker_id: user.id, blocked_id: bid }); },
+    async unblock(bid) { await wait(); const k = blocks.findIndex((b) => b.blocker_id === user?.id && b.blocked_id === bid); if (k >= 0) blocks.splice(k, 1); },
     async deleteComment(cid) { await wait(); const k = comments.findIndex((c) => c.id === cid); if (k >= 0) comments.splice(k, 1); },
     async follow(fid) { await wait(); need(); follows.push({ follower_id: user.id, followee_id: fid }); },
     async unfollow(fid) { await wait(); const k = follows.findIndex((f) => f.follower_id === user?.id && f.followee_id === fid); if (k >= 0) follows.splice(k, 1); },
@@ -92,7 +118,7 @@ export function makeFakeApi() {
     async moderate(type, tid, hide) {
       await wait();
       if (!admin) throw new Error("Only moderators can do that.");
-      const list = type === "post" ? posts : type === "comment" ? comments : users;
+      const list = type === "post" ? posts : type === "comment" ? comments : type === "message" ? messages : users;
       const t = list.find((x) => x.id === tid);
       if (t) t.hidden = hide;
       reports.forEach((r) => { if (r.target_id === tid) r.resolved = true; });

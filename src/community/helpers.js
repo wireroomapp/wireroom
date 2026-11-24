@@ -3,7 +3,7 @@
 // Tested in tests/community.test.mjs.
 
 // Same limits as the database (supabase/schema.sql).
-export const LIMITS = { post: 1000, title: 120, article: 20000, caption: 2000, comment: 1000, bio: 280, displayName: 40, countries: 5, mapItems: 500, mapBytes: 300000 };
+export const LIMITS = { message: 2000, post: 1000, title: 120, article: 20000, caption: 2000, comment: 1000, bio: 280, displayName: 40, countries: 5, mapItems: 500, mapBytes: 300000 };
 export const KINDS = [
   { id: "post", label: "Post", hint: "A short update or thought" },
   { id: "article", label: "Article", hint: "A longer piece with a title" },
@@ -122,6 +122,20 @@ export function postRow({ kind, title, body, annotations, countries }) {
     if (from) row.copied_from = from;
   }
   return row;
+}
+
+// Messages (newest first) -> one conversation per other person: the latest message and how many
+// of theirs I haven't read.
+export function groupConversations(rows, myId) {
+  const byOther = new Map();
+  for (const m of rows || []) {
+    const mine = m.sender_id === myId;
+    const otherId = mine ? m.recipient_id : m.sender_id;
+    const other = (mine ? m.recipient : m.sender) || {};
+    if (!byOther.has(otherId)) byOther.set(otherId, { other: { id: otherId, username: other.username || "", display_name: other.display_name || "" }, last: m, unread: 0 });
+    if (!mine && !m.read_at) byOther.get(otherId).unread++;
+  }
+  return [...byOther.values()].sort((a, b) => String(b.last.created_at).localeCompare(String(a.last.created_at)));
 }
 
 // Text with web addresses made into links (rendered by the panel as plain text + <a>, never HTML).

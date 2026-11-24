@@ -1,4 +1,5 @@
--- Wire Room community: accounts, posts (text posts, articles, maps), comments, follows, reports.
+-- Wire Room community: accounts, posts (text posts, articles, maps), comments (which can carry a
+-- map), follows, direct messages, blocks, reports.
 --
 -- Applied by .github/workflows/community-db.yml (scripts/community-db.mjs) whenever this file
 -- changes, inside one transaction, so a mistake leaves nothing half-done. Safe to run again: it
@@ -9,6 +10,8 @@
 --   - anyone can read posts, comments, profiles and follows that aren't hidden
 --   - you can only create, change or delete your own profile, posts, follows and comments
 --   - a post's author can also delete comments on it
+--   - direct messages: only the sender and the recipient can read them (moderators only see a
+--     message someone reported to them); a block stops new messages both ways
 --   - reports can be sent but only admins can read them (in the app, or the dashboard)
 --   - "hidden" (moderation) can only be set by an admin, through moderate()
 --   - text only: no image or file uploads (nothing to scan for illegal images)
@@ -63,6 +66,13 @@ create table if not exists public.comments (
   created_at timestamptz not null default now()
 );
 create index if not exists comments_by_post on public.comments (post_id, created_at);
+-- A comment can carry a map (a reply drawn on the post's map): text, a map, or both.
+alter table public.comments add column if not exists annotations jsonb;
+alter table public.comments drop constraint if exists comments_body_check;
+alter table public.comments drop constraint if exists comment_shape;
+alter table public.comments add constraint comment_shape check (
+  char_length(body) <= 1000 and (char_length(btrim(body)) >= 1 or annotations is not null)
+  and (annotations is null or (case when jsonb_typeof(annotations) = 'array' then jsonb_array_length(annotations) between 1 and 500 and octet_length(annotations::text) <= 300000 else false end)));
 
 create table if not exists public.follows (
   follower_id uuid not null default auth.uid() references public.profiles(id) on delete cascade,
@@ -83,6 +93,35 @@ create table if not exists public.reports (
   created_at timestamptz not null default now()
 );
 create index if not exists reports_open on public.reports (created_at desc) where not resolved;
+alter table public.reports drop constraint if exists reports_target_type_check;
+alter table public.reports add constraint reports_target_type_check check (target_type in ('post', 'comment', 'profile', 'message'));
+
+-- Blocks: whoever I block can't message me, and I can't message them.
+create table if not exists public.blocks (
+  blocker_id uuid not null default auth.uid() references public.profiles(id) on delete cascade,
+  blocked_id uuid not null references public.profiles(id) on delete cascade,
+  created_at timestamptz not null default now(),
+  primary key (blocker_id, blocked_id),
+  check (blocker_id <> blocked_id)
+);
+
+-- Direct messages between two accounts: text, a map, or both.
+create table if not exists public.messages (
+  id uuid primary key default gen_random_uuid(),
+  sender_id uuid not null default auth.uid(),
+  recipient_id uuid not null,
+  body text not null default '',
+  annotations jsonb,
+  hidden boolean not null default false, -- set by a moderator after a report
+  read_at timestamptz,
+  created_at timestamptz not null default now(),
+  constraint messages_sender_fk foreign key (sender_id) references public.profiles(id) on delete cascade,
+  constraint messages_recipient_fk foreign key (recipient_id) references public.profiles(id) on delete cascade,
+  constraint message_shape check (sender_id <> recipient_id and char_length(body) <= 2000
+    and (char_length(btrim(body)) >= 1 or annotations is not null) and (annotations is null or (case when jsonb_typeof(annotations) = 'array' then jsonb_array_length(annotations) between 1 and 500 and octet_length(annotations::text) <= 300000 else false end)))
+);
+create index if not exists messages_to on public.messages (recipient_id, created_at desc);
+create index if not exists messages_from on public.messages (sender_id, created_at desc);
 
 -- Moderators. Added by the workflow (input "make_admin") or in the dashboard; never from the website.
 create table if not exists private.admins (
@@ -92,19 +131,25 @@ create table if not exists private.admins (
 
 -- ---------- Who may write which columns ----------
 -- (Supabase lets the public roles write every column by default; narrow that.)
-revoke insert, update, delete on public.profiles, public.posts, public.comments, public.follows, public.reports from anon, authenticated;
+revoke insert, update, delete on public.profiles, public.posts, public.comments, public.follows, public.reports, public.blocks, public.messages from anon, authenticated;
+revoke select on public.blocks, public.messages from anon;
 revoke select on public.reports from anon, authenticated;
 grant insert (id, username, display_name, bio) on public.profiles to authenticated;
 grant update (display_name, bio) on public.profiles to authenticated;
 grant insert (kind, title, body, annotations, countries, copied_from) on public.posts to authenticated;
 grant update (title, body, annotations, countries) on public.posts to authenticated;
 grant delete on public.posts to authenticated;
-grant insert (post_id, body) on public.comments to authenticated;
+grant insert (post_id, body, annotations) on public.comments to authenticated;
 grant delete on public.comments to authenticated;
 grant insert (followee_id) on public.follows to authenticated;
 grant delete on public.follows to authenticated;
 grant insert (target_type, target_id, reason) on public.reports to authenticated;
 grant select on public.profiles, public.posts, public.comments, public.follows to anon, authenticated;
+grant select, delete on public.blocks to authenticated;
+grant insert (blocked_id) on public.blocks to authenticated;
+grant select, delete on public.messages to authenticated;
+grant insert (recipient_id, body, annotations) on public.messages to authenticated;
+grant update (read_at) on public.messages to authenticated;
 
 -- ---------- Helpers ----------
 create or replace function public.am_admin() returns boolean
@@ -116,6 +161,12 @@ $$;
 create or replace function public.in_good_standing() returns boolean
 language sql stable security definer set search_path = public as $$
   select exists (select 1 from public.profiles where id = auth.uid() and not hidden);
+$$;
+
+-- Has either of two accounts blocked the other? (Each person can only see their own blocks.)
+create or replace function public.blocked_between(a uuid, b uuid) returns boolean
+language sql stable security definer set search_path = public as $$
+  select exists (select 1 from public.blocks where (blocker_id = a and blocked_id = b) or (blocker_id = b and blocked_id = a));
 $$;
 
 -- Can this post be seen and answered? (not hidden, author not hidden)
@@ -135,6 +186,7 @@ begin
   if p_type = 'post' then update public.posts set hidden = p_hide where id = p_id;
   elsif p_type = 'comment' then update public.comments set hidden = p_hide where id = p_id;
   elsif p_type = 'profile' then update public.profiles set hidden = p_hide where id = p_id;
+  elsif p_type = 'message' then update public.messages set hidden = p_hide where id = p_id;
   else raise exception 'Unknown type %', p_type;
   end if;
   update public.reports set resolved = true where target_type = p_type and target_id = p_id and not resolved;
@@ -150,9 +202,9 @@ begin
   if not public.am_admin() then raise exception 'Only moderators can do that.' using errcode = '42501'; end if;
   return query
   select r.id, r.target_type, r.target_id, r.reason, r.created_at, rp.username,
-    coalesce(tp.username, cp.username, pp.username),
-    left(coalesce(nullif(t.title, ''), t.body, c.body, pp.display_name || ' ' || pp.bio, ''), 300),
-    coalesce(t.hidden, c.hidden, pp.hidden, false),
+    coalesce(tp.username, cp.username, mp.username, pp.username),
+    left(coalesce(nullif(t.title, ''), t.body, nullif(c.body, ''), nullif(m.body, ''), case when c.id is not null or m.id is not null then '(a map)' end, pp.display_name || ' ' || pp.bio, ''), 300),
+    coalesce(t.hidden, c.hidden, m.hidden, pp.hidden, false),
     coalesce(t.id, c.post_id)
   from public.reports r
   left join public.profiles rp on rp.id = r.reporter_id
@@ -161,6 +213,8 @@ begin
   left join public.comments c on r.target_type = 'comment' and c.id = r.target_id
   left join public.profiles cp on cp.id = c.author_id
   left join public.profiles pp on r.target_type = 'profile' and pp.id = r.target_id
+  left join public.messages m on r.target_type = 'message' and m.id = r.target_id
+  left join public.profiles mp on mp.id = m.sender_id
   where not r.resolved
   order by r.created_at desc
   limit 200;
@@ -173,7 +227,7 @@ begin
   update public.reports set resolved = true where id = p_id;
 end; $$;
 
--- Delete my account and everything I posted (posts, comments, follows). Reports I sent stay, unnamed.
+-- Delete my account and everything I posted (posts, comments, follows, messages, blocks). Reports I sent stay, unnamed.
 create or replace function public.delete_my_account() returns void
 language sql security definer set search_path = public, auth as $$
   delete from auth.users where id = auth.uid();
@@ -216,14 +270,21 @@ drop trigger if exists comments_rate_day on public.comments;
 create trigger comments_rate_day before insert on public.comments for each row execute function public.rate_limit('author_id', '200', '1 day');
 drop trigger if exists follows_rate on public.follows;
 create trigger follows_rate before insert on public.follows for each row execute function public.rate_limit('follower_id', '200', '1 day');
+drop trigger if exists messages_rate_short on public.messages;
+create trigger messages_rate_short before insert on public.messages for each row execute function public.rate_limit('sender_id', '30', '10 minutes');
+drop trigger if exists messages_rate_day on public.messages;
+create trigger messages_rate_day before insert on public.messages for each row execute function public.rate_limit('sender_id', '500', '1 day');
+drop trigger if exists blocks_rate on public.blocks;
+create trigger blocks_rate before insert on public.blocks for each row execute function public.rate_limit('blocker_id', '100', '1 day');
 drop trigger if exists reports_rate on public.reports;
 create trigger reports_rate before insert on public.reports for each row execute function public.rate_limit('reporter_id', '20', '1 day');
 
 -- (Supabase lets everyone run new functions by default; take that back, then allow what's needed.)
-revoke all on function public.am_admin(), public.in_good_standing(), public.post_is_open(uuid), public.moderate(text, uuid, boolean),
+revoke all on function public.am_admin(), public.in_good_standing(), public.blocked_between(uuid, uuid), public.post_is_open(uuid), public.moderate(text, uuid, boolean),
   public.open_reports(), public.dismiss_report(bigint), public.delete_my_account(), public.mark_edited(), public.rate_limit()
   from public, anon, authenticated;
 grant execute on function public.am_admin(), public.in_good_standing(), public.post_is_open(uuid) to anon, authenticated;
+grant execute on function public.blocked_between(uuid, uuid) to authenticated;
 grant execute on function public.moderate(text, uuid, boolean), public.open_reports(), public.dismiss_report(bigint), public.delete_my_account() to authenticated;
 
 -- ---------- Row-level security ----------
@@ -232,6 +293,8 @@ alter table public.posts enable row level security;
 alter table public.comments enable row level security;
 alter table public.follows enable row level security;
 alter table public.reports enable row level security;
+alter table public.blocks enable row level security;
+alter table public.messages enable row level security;
 
 drop policy if exists profiles_read on public.profiles;
 create policy profiles_read on public.profiles for select using (not hidden or id = (select auth.uid()) or (select public.am_admin()));
@@ -279,4 +342,32 @@ drop policy if exists follows_delete on public.follows;
 create policy follows_delete on public.follows for delete to authenticated using (follower_id = (select auth.uid()));
 
 drop policy if exists reports_create on public.reports;
-create policy reports_create on public.reports for insert to authenticated with check (reporter_id = (select auth.uid()));
+create policy reports_create on public.reports for insert to authenticated with check (
+  reporter_id = (select auth.uid())
+  -- a message can only be reported by the person who received it
+  and (target_type <> 'message' or exists (select 1 from public.messages m where m.id = target_id and m.recipient_id = (select auth.uid())))
+);
+
+drop policy if exists blocks_read on public.blocks;
+create policy blocks_read on public.blocks for select to authenticated using (blocker_id = (select auth.uid()));
+drop policy if exists blocks_create on public.blocks;
+create policy blocks_create on public.blocks for insert to authenticated with check (blocker_id = (select auth.uid()));
+drop policy if exists blocks_delete on public.blocks;
+create policy blocks_delete on public.blocks for delete to authenticated using (blocker_id = (select auth.uid()));
+
+-- Only the two people in a conversation see a message (moderators too only once it's reported,
+-- through open_reports). A hidden message disappears for the recipient.
+drop policy if exists messages_read on public.messages;
+create policy messages_read on public.messages for select to authenticated using (
+  sender_id = (select auth.uid()) or (recipient_id = (select auth.uid()) and not hidden)
+);
+drop policy if exists messages_send on public.messages;
+create policy messages_send on public.messages for insert to authenticated with check (
+  sender_id = (select auth.uid()) and (select public.in_good_standing())
+  and not public.blocked_between((select auth.uid()), recipient_id)
+  and exists (select 1 from public.profiles p where p.id = recipient_id and not p.hidden)
+);
+drop policy if exists messages_mark_read on public.messages;
+create policy messages_mark_read on public.messages for update to authenticated using (recipient_id = (select auth.uid())) with check (recipient_id = (select auth.uid()));
+drop policy if exists messages_unsend on public.messages;
+create policy messages_unsend on public.messages for delete to authenticated using (sender_id = (select auth.uid()));

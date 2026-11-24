@@ -142,6 +142,59 @@ export const SECTIONS = [
     await fails(as(D, "insert into follows (followee_id) values ($1)", [A]), /row-level security/);
   }],
 
+  ["comments can carry a map (a reply drawn on the post's map)", async ({ as, fails, s }) => {
+    const [c] = await as(B, "insert into comments (post_id, body, annotations) values ($1, '', $2::jsonb) returning id", [s.map.id, drawing]);
+    assert.ok(c.id, "a map with no text is fine");
+    await as(B, "insert into comments (post_id, body, annotations) values ($1, 'Added the ferry route', $2::jsonb)", [s.map.id, drawing]);
+    await fails(as(B, "insert into comments (post_id, body) values ($1, '')", [s.map.id]), /check/, "needs text or a map");
+    await fails(as(B, "insert into comments (post_id, body, annotations) values ($1, 'x', '{}'::jsonb)", [s.map.id]), /check/);
+    await fails(as(B, "insert into comments (post_id, body, annotations) values ($1, 'x', '[]'::jsonb)", [s.map.id]), /check/);
+    const rows = await as(null, "select annotations from comments where id = $1", [c.id]);
+    assert.equal(rows[0].annotations.length, 1, "anyone can see the map");
+  }],
+  ["messages: only sender and recipient read them; blocks stop them both ways", async ({ as, fails, s }) => {
+    const [m] = await as(A, "insert into messages (recipient_id, body) values ($1, 'Saw your map, want to compare notes?') returning id", [B]);
+    await as(A, "insert into messages (recipient_id, body, annotations) values ($1, '', $2::jsonb)", [B, drawing]);
+    s.message = m;
+    assert.equal((await as(B, "select id from messages where recipient_id = $1", [B])).length, 2, "the recipient reads them");
+    assert.equal((await as(A, "select id from messages where id = $1", [m.id])).length, 1, "the sender reads them");
+    assert.equal((await as(C, "select id from messages where id = $1", [m.id])).length, 0, "nobody else does");
+    await fails(as(null, "select id from messages"), /permission denied/);
+    await fails(as(A, "insert into messages (sender_id, recipient_id, body) values ($1, $2, 'spoof')", [C, B]), /permission denied/);
+    await fails(as(A, "insert into messages (recipient_id, body) values ($1, 'me')", [A]), /check/);
+    await fails(as(A, "insert into messages (recipient_id, body) values ($1, '  ')", [B]), /check/);
+    await fails(as(A, "update messages set body = 'edited' where id = $1", [m.id]), /permission denied/);
+    await as(A, "update messages set read_at = now() where id = $1", [m.id]);
+    assert.equal((await as(B, "select read_at from messages where id = $1", [m.id]))[0].read_at, null, "only the recipient marks it read");
+    await as(B, "update messages set read_at = now() where id = $1", [m.id]);
+    assert.ok((await as(B, "select read_at from messages where id = $1", [m.id]))[0].read_at);
+    // B blocks A: A can't message B, and B can't message A either, until B unblocks.
+    await as(B, "insert into blocks (blocked_id) values ($1)", [A]);
+    assert.equal((await as(A, "select * from blocks")).length, 0, "you can't see who blocked you");
+    await fails(as(A, "insert into messages (recipient_id, body) values ($1, 'hello?')", [B]), /row-level security/);
+    await fails(as(B, "insert into messages (recipient_id, body) values ($1, 'hi')", [A]), /row-level security/);
+    await fails(as(A, "insert into blocks (blocker_id, blocked_id) values ($1, $2)", [B, C]), /permission denied/);
+    await as(B, "delete from blocks where blocked_id = $1", [A]);
+    await as(A, "insert into messages (recipient_id, body) values ($1, 'ok now?')", [B]);
+    // A suspended account can't message; nobody can message a suspended account.
+    await fails(as(D, "insert into messages (recipient_id, body) values ($1, 'spam')", [B]), /row-level security/);
+    await fails(as(B, "insert into messages (recipient_id, body) values ($1, 'hi')", [D]), /row-level security/);
+    // Unsend: the sender can delete; the recipient can't delete the sender's message.
+    const [u] = await as(B, "insert into messages (recipient_id, body) values ($1, 'oops') returning id", [C]);
+    await as(C, "delete from messages where id = $1", [u.id]);
+    assert.equal((await as(B, "select id from messages where id = $1", [u.id])).length, 1);
+    await as(B, "delete from messages where id = $1", [u.id]);
+    assert.equal((await as(B, "select id from messages where id = $1", [u.id])).length, 0);
+  }],
+  ["reported messages: only the recipient can report; moderators then see and can hide it", async ({ as, fails, s }) => {
+    await fails(as(C, "insert into reports (target_type, target_id, reason) values ('message', $1, 'spam')", [s.message.id]), /row-level security/, "an outsider can't");
+    await fails(as(A, "insert into reports (target_type, target_id, reason) values ('message', $1, 'spam')", [s.message.id]), /row-level security/, "nor the sender");
+    await as(B, "insert into reports (target_type, target_id, reason) values ('message', $1, 'Harassment')", [s.message.id]);
+    const [r] = (await as(A, "select * from open_reports()")).filter((x) => x.target_id === s.message.id);
+    assert.deepEqual([r.target_type, r.target_author, r.target_text], ["message", "alice", "Saw your map, want to compare notes?"]);
+    await as(A, "select moderate('message', $1, true)", [s.message.id]);
+    assert.equal((await as(B, "select id from messages where id = $1", [s.message.id])).length, 0, "hidden from the recipient");
+  }],
   ["rate limit: 10 posts an hour", async ({ as, fails, post, s }) => {
     for (let k = 0; k < 10; k++) await post(C, "post", { body: `update ${k}` });
     await fails(post(C, "post", { body: "one more" }), /Too many/);

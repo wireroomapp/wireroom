@@ -5,7 +5,7 @@
 // VITE_SUPABASE_PUBLISHABLE_KEY), the Community panel doesn't show at all; with "enabled": false
 // it shows only on links with ?communityPreview (for testing before launch).
 import cfg from "../../config/community.json";
-import { friendlyError, sanitizeShared } from "./helpers.js";
+import { friendlyError, groupConversations, sanitizeShared } from "./helpers.js";
 
 const URL_ = import.meta.env.VITE_SUPABASE_URL || cfg.url || "";
 const KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || cfg.publishableKey || "";
@@ -129,11 +129,12 @@ function makeApi(sb) {
     async deletePost(id) { await run(sb.from("posts").delete().eq("id", id)); },
 
     async comments(postId) {
-      const rows = await run(sb.from("comments").select("id, post_id, author_id, body, hidden, created_at, author:profiles(username, display_name)")
+      const rows = await run(sb.from("comments").select("id, post_id, author_id, body, annotations, hidden, created_at, author:profiles(username, display_name)")
         .eq("post_id", postId).order("created_at", { ascending: true }).limit(500));
-      return rows.map((c) => ({ ...c, username: c.author ? c.author.username : "", display_name: c.author ? c.author.display_name : "" }));
+      return rows.map((c) => ({ ...c, annotations: c.annotations ? sanitizeShared(c.annotations) : null, username: c.author ? c.author.username : "", display_name: c.author ? c.author.display_name : "" }));
     },
-    async addComment(postId, body) { await run(sb.from("comments").insert({ post_id: postId, body })); },
+    // annotations: a map attached to the comment (cleanForPublish'd), or null
+    async addComment(postId, body, annotations = null) { await run(sb.from("comments").insert({ post_id: postId, body, ...(annotations ? { annotations } : {}) })); },
     async deleteComment(id) { await run(sb.from("comments").delete().eq("id", id)); },
 
     async follow(id) { await run(sb.from("follows").insert({ followee_id: id })); },
@@ -145,6 +146,49 @@ function makeApi(sb) {
     async moderate(type, id, hide) { await run(sb.rpc("moderate", { p_type: type, p_id: id, p_hide: hide })); },
     async openReports() { return (await run(sb.rpc("open_reports"))) || []; },
     async dismissReport(id) { await run(sb.rpc("dismiss_report", { p_id: id })); },
+    // Direct messages. Only the two people in a conversation can read it (database rules).
+    async conversations() {
+      const u = await me();
+      if (!u) return [];
+      const rows = await run(sb.from("messages")
+        .select("id, sender_id, recipient_id, body, read_at, created_at, sender:profiles!messages_sender_fk(username, display_name), recipient:profiles!messages_recipient_fk(username, display_name)")
+        .or(`sender_id.eq.${u.id},recipient_id.eq.${u.id}`).order("created_at", { ascending: false }).limit(300));
+      return groupConversations(rows, u.id);
+    },
+    async thread(otherId) {
+      const u = await me();
+      if (!u) return [];
+      const rows = await run(sb.from("messages").select("id, sender_id, recipient_id, body, annotations, read_at, created_at")
+        .or(`and(sender_id.eq.${u.id},recipient_id.eq.${otherId}),and(sender_id.eq.${otherId},recipient_id.eq.${u.id})`)
+        .order("created_at", { ascending: false }).limit(200));
+      return rows.reverse().map((m) => ({ ...m, mine: m.sender_id === u.id, annotations: m.annotations ? sanitizeShared(m.annotations) : null }));
+    },
+    async sendMessage(otherId, body, annotations = null) {
+      try {
+        await run(sb.from("messages").insert({ recipient_id: otherId, body, ...(annotations ? { annotations } : {}) }));
+      } catch (e) {
+        if (/row-level security/i.test((e.cause && e.cause.message) || "")) throw new Error("Not sent: one of you has blocked the other, or one account is suspended.", { cause: e });
+        throw e;
+      }
+    },
+    async markRead(otherId) {
+      const u = await me();
+      if (u) await run(sb.from("messages").update({ read_at: new Date().toISOString() }).eq("recipient_id", u.id).eq("sender_id", otherId).is("read_at", null));
+    },
+    async unsend(id) { await run(sb.from("messages").delete().eq("id", id)); },
+    async unreadCount() {
+      const u = await me();
+      if (!u) return 0;
+      const { count, error } = await sb.from("messages").select("id", { count: "exact", head: true }).eq("recipient_id", u.id).is("read_at", null);
+      if (error) throw new Error(friendlyError(error));
+      return count || 0;
+    },
+    async myBlocks() { return (await run(sb.from("blocks").select("blocked_id"))).map((r) => r.blocked_id); },
+    async block(id) { await run(sb.from("blocks").insert({ blocked_id: id })); },
+    async unblock(id) {
+      const u = await me();
+      if (u) await run(sb.from("blocks").delete().eq("blocker_id", u.id).eq("blocked_id", id));
+    },
     async deleteAccount() { await run(sb.rpc("delete_my_account")); await sb.auth.signOut(); },
   };
 }

@@ -94,6 +94,8 @@ const INITIAL_URL_VIEW = (() => {
   try { return readViewFromUrl(window.location.search, COUNTRIES.map(c => c.id)); } catch { return { country: null, mode: null, global: false, war: null, day: null, community: false, post: null }; }
 })();
 const INITIAL_COUNTRY = COUNTRIES.find(c => c.id === INITIAL_URL_VIEW.country) || null;
+// Signed in to Community before? Then load it at start, so the Messages badge shows straight away.
+const HAS_COMMUNITY_SESSION = (() => { try { return Object.keys(localStorage).some(k => /^sb-.+-auth-token$/.test(k)); } catch { return false; } })();
 const COMMUNITY_COUNTRIES = COUNTRIES.map(c => ({ id: c.id, name: c.name })).sort((a, b) => a.name.localeCompare(b.name));
 
 const DEMO_NEWS = [
@@ -159,6 +161,13 @@ export default function WireRoomV2() {
   const [mapFocus, setMapFocus] = useState(() => (INITIAL_COUNTRY ? { lon: INITIAL_COUNTRY.lon, lat: INITIAL_COUNTRY.lat, key: INITIAL_COUNTRY.id } : null));
   const [linkNote, setLinkNote] = useState("");
   const [communityStart, setCommunityStart] = useState(INITIAL_URL_VIEW.post); // a ?post= link opens that post
+  // The Feeds panel: Global feed, Community and Messages tabs. It can be tucked away (the Feeds
+  // button brings it back as it was). Community stays loaded once opened, so it keeps its place.
+  const [communitySection, setCommunitySection] = useState("community"); // "community" | "messages"
+  const [communityMounted, setCommunityMounted] = useState(communityConfigured && (INITIAL_URL_VIEW.community || HAS_COMMUNITY_SESSION));
+  const [panelCollapsed, setPanelCollapsed] = useState(false);
+  const [lastFeed, setLastFeed] = useState("global"); // which tab the Feeds button reopens
+  const [unread, setUnread] = useState(0); // unread direct messages
   const [communityPost, setCommunityPost] = useState(null); // the post open in the Community panel (for the address bar)
   const [sharedMap, setSharedMap] = useState(null); // someone's map post, shown read-only on the map
   const [panelPeek, setPanelPeek] = useState(false); // phones: panel slid away while looking at that map
@@ -478,6 +487,8 @@ export default function WireRoomV2() {
     setSelected(null);
     setView("global");
     setWarView(null);
+    setPanelCollapsed(false);
+    setLastFeed("global");
     const show = typeof showHiddenOverride === "boolean" ? showHiddenOverride : showOffTopic;
     fetch(`${API_BASE}/api/global?mode=both${show ? "&showHidden=1" : ""}`)
       .then(r => r.ok ? r.json() : null)
@@ -502,13 +513,23 @@ export default function WireRoomV2() {
     setView("closed");
     setWarView(null);
     setPanelPeek(false);
+    setPanelCollapsed(false);
   }
-  function openCommunity() {
+  function openCommunity(section = "community") {
     resetIntelFilters();
     setSelected(null);
     setWarView(null);
-    setCommunityStart(null);
+    if (!communityMounted) setCommunityStart(null);
+    setCommunityMounted(true);
+    setCommunitySection(section);
+    setLastFeed(section);
+    setPanelCollapsed(false);
     setView("community");
+  }
+  function openFeeds() {
+    if (panelCollapsed && (view === "global" || view === "community")) setPanelCollapsed(false);
+    else if (lastFeed === "global" || !communityConfigured) loadGlobal();
+    else openCommunity(lastFeed);
   }
   // Someone's map post on the map, read-only, framed to fit; on phones the panel slides away.
   function showSharedMap(post) {
@@ -520,7 +541,7 @@ export default function WireRoomV2() {
     setAnnotationTool("select");
     setAnnotationDraft(null);
     setToolsOpen(false);
-    setSharedMap({ id: post.id, title: post.title, username: post.username, annotations: post.annotations });
+    setSharedMap({ id: post.id, title: post.title, username: post.username, annotations: post.annotations, creditId: post.creditId });
     const pts = [];
     for (const a of post.annotations) {
       if (a.type === "line") pts.push(unitToLonLat(a.x1, a.y1), unitToLonLat(a.x2, a.y2));
@@ -545,7 +566,8 @@ export default function WireRoomV2() {
   // Copy someone's map into my own drawing, to build on (a map I post from it credits theirs).
   function copySharedMap(post) {
     if (!post || !Array.isArray(post.annotations)) return;
-    setAnnotations(prev => [...prev, ...copyForMe(post.annotations, post.id)]);
+    // A map post is credited when a copy of it is posted; maps from comments and messages aren't.
+    setAnnotations(prev => [...prev, ...copyForMe(post.annotations, post.creditId !== undefined ? post.creditId : post.id)]);
     setSharedMap(null);
     setSelectedAnnotationId(null);
     setPanelPeek(false);
@@ -1444,7 +1466,7 @@ export default function WireRoomV2() {
                   <div className="shared-banner" onPointerDown={e => e.stopPropagation()} style={{ ...box, background: "var(--surface)", boxShadow: "var(--shadow)" }} role="status">
                     <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
                       <span className="tag analyst">Analyst</span>
-                      <span style={{ fontSize: 13 }}>@{sharedMap.username}'s map: <b>{sharedMap.title}</b></span>
+                      <span style={{ fontSize: 13 }}>{sharedMap.username === "you" ? "Your map" : `@${sharedMap.username}'s map`}: <b>{sharedMap.title}</b></span>
                     </div>
                     <div style={{ color: "var(--muted)", fontSize: 12 }}>Viewing only. Tap a marker to see its pinned reports. Your own drawing is back when you close this.</div>
                     <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
@@ -1540,21 +1562,34 @@ export default function WireRoomV2() {
           />
         )}
         <div className="map-note">Tap a country to see its sources</div>
-        {view === "closed" && (
+        {(view === "closed" || (panelCollapsed && (view === "global" || view === "community"))) && (
           <div className="fab-row">
-            {communityConfigured && <button className="global-fab" onClick={openCommunity}>Community</button>}
-            <button className="global-fab" onClick={() => loadGlobal()}>Global feed</button>
+            <button className="global-fab" onClick={openFeeds}>{communityConfigured ? "Feeds" : "Global feed"}{unread > 0 && <span className="fab-badge" aria-label={`${unread} unread messages`}>{unread}</span>}</button>
           </div>
         )}
       </section>
 
-      <aside className={`panel ${view !== "closed" ? "open" : ""}${panelPeek ? " peek" : ""}`}>
-        {view === "community" ? (
-          <Suspense fallback={<div className="loading">Loading…</div>}>
-            <CommunityPanel initialPostId={communityStart} onClose={closePanel} onPostChange={setCommunityPost} getDrawing={getDrawing}
-              onShowMap={showSharedMap} onCopyMap={copySharedMap} shownMapId={sharedMap ? sharedMap.id : null} countries={COMMUNITY_COUNTRIES} />
-          </Suspense>
-        ) : <>
+      <aside className={`panel ${view !== "closed" ? "open" : ""}${panelPeek ? " peek" : ""}${panelCollapsed && (view === "global" || view === "community") ? " collapsed" : ""}`}>
+        {communityConfigured && (view === "global" || view === "community") && (
+          <div className="feed-tabs" role="tablist" aria-label="Feeds">
+            <button type="button" role="tab" aria-selected={view === "global"} className={view === "global" ? "on" : ""} onClick={() => loadGlobal()}>Global feed</button>
+            <button type="button" role="tab" aria-selected={view === "community" && communitySection === "community"} className={view === "community" && communitySection === "community" ? "on" : ""} onClick={() => openCommunity("community")}>Community</button>
+            <button type="button" role="tab" aria-selected={view === "community" && communitySection === "messages"} className={view === "community" && communitySection === "messages" ? "on" : ""} onClick={() => openCommunity("messages")}>
+              Messages{unread > 0 && <span className="fab-badge">{unread}</span>}
+            </button>
+            <button type="button" className="feed-hide" onClick={() => setPanelCollapsed(true)} aria-label="Hide the feeds panel" title="Hide (the Feeds button brings it back)">⟩</button>
+          </div>
+        )}
+        {communityMounted && (
+          <div className="cm-host" hidden={view !== "community"}>
+            <Suspense fallback={<div className="loading">Loading…</div>}>
+              <CommunityPanel initialPostId={communityStart} section={communitySection} onSection={(s) => { setCommunitySection(s); setLastFeed(s); }} onUnread={setUnread}
+                onClose={closePanel} onPostChange={setCommunityPost} getDrawing={getDrawing}
+                onShowMap={showSharedMap} onCopyMap={copySharedMap} shownMapId={sharedMap ? sharedMap.id : null} countries={COMMUNITY_COUNTRIES} />
+            </Suspense>
+          </div>
+        )}
+        {view !== "community" && <>
         <div className="panel-head">
           <div>
             <div className="eyebrow">{view === "war" && warView ? `${(LEVEL_TEXT[(warViewDay || warView).level] || LEVEL_TEXT.war).label} brief · military tracker` : "Country brief"}</div>
@@ -1751,7 +1786,15 @@ const CSS = `
 .loading,.empty{font:13px/1.6 var(--font);color:var(--muted)}
 .global-fab{background:var(--surface);border:1px solid var(--line);color:var(--text);border-radius:10px;font:600 14px var(--font);padding:10px 16px;box-shadow:var(--shadow)}
 .fab-row{position:absolute;right:18px;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:flex-end;z-index:5}
-.fab-row .global-fab{position:static}
+.fab-row .global-fab{position:static;display:inline-flex;align-items:center}
+.fab-badge{background:var(--accent);color:var(--bg);border-radius:999px;font:700 11px var(--font);padding:1px 7px;margin-left:6px}
+.panel.collapsed{display:none !important}
+.cm-host{display:flex;flex-direction:column;min-height:0}
+.cm-host[hidden]{display:none}
+.feed-tabs{display:flex;gap:2px;align-items:center;margin:-6px 0 14px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.feed-tabs button{background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);font:600 13px var(--font);padding:6px 8px;cursor:pointer;display:inline-flex;align-items:center}
+.feed-tabs button.on{color:var(--text);border-bottom-color:var(--accent)}
+.feed-tabs .feed-hide{margin-left:auto;font-size:17px;padding:4px 8px}
 @media(max-width:800px){.fab-row{flex-direction:column}.panel.open.peek{transform:translateX(100%)}.layout:has(.panel.open:not(.peek)) .shared-banner{display:none !important}}
 .tag.analyst{color:var(--analyst);background:var(--analyst-soft)}
 .map-note{font:12px var(--font);color:var(--muted)}

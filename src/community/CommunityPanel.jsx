@@ -5,6 +5,31 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { loadCommunityApi, PAGE } from "./api.js";
 import { KINDS, LIMITS, describeDrawing, friendlyError, linkParts, postProblem, postRow, timeAgo, validUsername, cleanForPublish } from "./helpers.js";
+
+// "Attach my map" for comments and messages: my current drawing, as it is now.
+function MapAttach({ getDrawing, on, setOn }) {
+  const drawing = cleanForPublish(getDrawing());
+  if (!drawing.length) return <div className="cm-fine">To reply with a map, draw on the map first (Draw button), then come back.</div>;
+  return (
+    <label className="cm-check">
+      <input type="checkbox" checked={on} onChange={(e) => setOn(e.target.checked)} />
+      <span>Attach my map ({describeDrawing(drawing)})</span>
+    </label>
+  );
+}
+
+// A map someone attached to a comment or message.
+function AttachedMap({ annotations, onShow, onCopy, showing }) {
+  return (
+    <div className="cm-mapbox small">
+      <div><b>Map:</b> {describeDrawing(annotations)}.</div>
+      <div className="cm-actions">
+        <button type="button" className={`cm-btn small ${showing ? "on" : ""}`} onClick={onShow}>{showing ? "Showing on the map" : "Show on the map"}</button>
+        <button type="button" className="cm-btn small" onClick={onCopy}>Copy to my map</button>
+      </div>
+    </div>
+  );
+}
 import { RulesText } from "./Rules.jsx";
 
 const KIND_LABEL = { post: "Post", article: "Article", map: "Map" };
@@ -177,19 +202,23 @@ function Composer({ api, editing, getDrawing, countries, onDone, onCancel, onRul
   );
 }
 
-function Comments({ api, post, me, admin, signedIn, onAuthor, onNeedAccount, onReport, notify }) {
+function Comments({ api, post, me, admin, signedIn, onAuthor, onNeedAccount, onReport, notify, getDrawing, onShowMap, onCopyMap, shownMapId }) {
   const [list, setList] = useState(null);
   const [text, setText] = useState("");
+  const [withMap, setWithMap] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const load = useCallback(() => api.comments(post.id).then(setList, (e) => setError(e.message)), [api, post.id]);
   useEffect(() => { load(); }, [load]);
   const send = async () => {
-    if (!text.trim()) return;
+    const map = withMap ? cleanForPublish(getDrawing()) : null;
+    if (!text.trim() && !(map && map.length)) return;
     setBusy(true); setError("");
-    try { await api.addComment(post.id, text.trim()); setText(""); await load(); } catch (e) { setError(e.message); }
+    try { await api.addComment(post.id, text.trim(), map && map.length ? map : null); setText(""); setWithMap(false); await load(); } catch (e) { setError(e.message); }
     setBusy(false);
   };
+  // A comment's map, shown like a map post (copies of it aren't credited: only posts can be).
+  const asShared = (c) => ({ id: `comment-${c.id}`, title: `reply on “${post.title || "a post"}”`, username: c.username, annotations: c.annotations, creditId: null });
   const remove = async (c) => {
     if (!window.confirm("Delete this comment?")) return;
     try { await api.deleteComment(c.id); await load(); } catch (e) { notify(e.message); }
@@ -209,7 +238,10 @@ function Comments({ api, post, me, admin, signedIn, onAuthor, onNeedAccount, onR
             <span>· {timeAgo(c.created_at)}</span>
             {c.hidden && <span className="cm-hidden-tag">Hidden</span>}
           </div>
-          <div className="cm-comment-body"><Linked text={c.body} /></div>
+          {c.body && <div className="cm-comment-body"><Linked text={c.body} /></div>}
+          {c.annotations && c.annotations.length > 0 && (
+            <AttachedMap annotations={c.annotations} showing={shownMapId === `comment-${c.id}`} onShow={() => onShowMap(asShared(c))} onCopy={() => onCopyMap(asShared(c))} />
+          )}
           <div className="cm-row-actions">
             {me && (c.author_id === me.id || post.author_id === me.id) && <button type="button" className="cm-link" onClick={() => remove(c)}>Delete</button>}
             {me && c.author_id !== me.id && <button type="button" className="cm-link" onClick={() => onReport("comment", c.id)}>Report</button>}
@@ -221,7 +253,8 @@ function Comments({ api, post, me, admin, signedIn, onAuthor, onNeedAccount, onR
       {me ? (
         <div className="cm-field">
           <textarea value={text} rows={3} maxLength={LIMITS.comment} onChange={(e) => setText(e.target.value)} placeholder="Add a comment" aria-label="Add a comment" />
-          <div className="cm-actions"><button type="button" className="cm-btn primary" disabled={busy || !text.trim()} onClick={send}>{busy ? "Sending…" : "Comment"}</button></div>
+          <MapAttach getDrawing={getDrawing} on={withMap} setOn={setWithMap} />
+          <div className="cm-actions"><button type="button" className="cm-btn primary" disabled={busy || (!text.trim() && !withMap)} onClick={send}>{busy ? "Sending…" : "Comment"}</button></div>
         </div>
       ) : (
         <button type="button" className="cm-btn" onClick={onNeedAccount}>{signedIn ? "Pick a username to comment" : "Sign in to comment"}</button>
@@ -230,7 +263,7 @@ function Comments({ api, post, me, admin, signedIn, onAuthor, onNeedAccount, onR
   );
 }
 
-function PostView({ api, id, me, admin, signedIn, names, onOpen, onAuthor, onEdit, onDeleted, onShowMap, onCopyMap, shownMapId, onNeedAccount, onReport, notify }) {
+function PostView({ api, id, me, admin, signedIn, names, onOpen, onAuthor, onEdit, onDeleted, onShowMap, onCopyMap, shownMapId, onNeedAccount, onReport, notify, getDrawing }) {
   const [state, setState] = useState({ id: null, post: null, error: "" });
   const [tick, setTick] = useState(0);
   useEffect(() => {
@@ -285,12 +318,13 @@ function PostView({ api, id, me, admin, signedIn, names, onOpen, onAuthor, onEdi
         {me && !mine && <button type="button" className="cm-link" onClick={() => onReport("post", p.id)}>Report</button>}
         {admin && <button type="button" className="cm-link" onClick={hide}>{p.hidden ? "Unhide (moderator)" : "Hide (moderator)"}</button>}
       </div>
-      <Comments api={api} post={p} me={me} admin={admin} signedIn={signedIn} onAuthor={onAuthor} onNeedAccount={onNeedAccount} onReport={onReport} notify={notify} />
+      <Comments api={api} post={p} me={me} admin={admin} signedIn={signedIn} onAuthor={onAuthor} onNeedAccount={onNeedAccount} onReport={onReport} notify={notify}
+        getDrawing={getDrawing} onShowMap={onShowMap} onCopyMap={onCopyMap} shownMapId={shownMapId} />
     </div>
   );
 }
 
-function ProfileView({ api, username, me, admin, names, onOpen, onAuthor, onShowMap, shownMapId, onEditProfile, onNeedAccount, onReport, notify }) {
+function ProfileView({ api, username, me, admin, names, onOpen, onAuthor, onShowMap, shownMapId, onEditProfile, onNeedAccount, onReport, notify, onMessage }) {
   const [state, setState] = useState({ username: null, profile: null });
   const [tick, setTick] = useState(0);
   useEffect(() => {
@@ -320,6 +354,7 @@ function ProfileView({ api, username, me, admin, names, onOpen, onAuthor, onShow
       <div className="cm-actions">
         {mine ? <button type="button" className="cm-btn" onClick={onEditProfile}>Edit profile</button>
           : <button type="button" className={`cm-btn ${p.isFollowing ? "" : "primary"}`} onClick={follow}>{p.isFollowing ? "Following ✓" : "Follow"}</button>}
+        {!mine && !p.hidden && <button type="button" className="cm-btn" onClick={() => (me ? onMessage(p) : onNeedAccount())}>Message</button>}
         {me && !mine && <button type="button" className="cm-btn" onClick={() => onReport("profile", p.id)}>Report</button>}
         {admin && !mine && <button type="button" className="cm-btn" onClick={suspend}>{p.hidden ? "Restore" : "Suspend"}</button>}
       </div>
@@ -463,14 +498,122 @@ function ReportForm({ api, target, onDone, onCancel }) {
   );
 }
 
+function Inbox({ api, onOpen, refreshKey }) {
+  const [list, setList] = useState(null);
+  const [error, setError] = useState("");
+  useEffect(() => {
+    let alive = true;
+    const load = () => api.conversations().then((r) => { if (alive) { setList(r); setError(""); } }, (e) => { if (alive) setError(e.message); });
+    load();
+    const t = setInterval(load, 30000);
+    return () => { alive = false; clearInterval(t); };
+  }, [api, refreshKey]);
+  if (error && !list) return <div className="cm-error">{error}</div>;
+  if (!list) return <div className="loading">Loading messages…</div>;
+  if (!list.length) return <div className="empty">No messages yet. Open someone's profile (tap their name on a post) and tap Message.</div>;
+  return (
+    <div className="cm-inbox">
+      {list.map((c) => (
+        <button type="button" key={c.other.id} className={`cm-convo ${c.unread ? "unread" : ""}`} onClick={() => onOpen(c.other)}>
+          <span className="cm-convo-top"><b>{c.other.display_name || c.other.username}</b> <span>@{c.other.username}</span><span className="cm-convo-time">{timeAgo(c.last.created_at)}</span></span>
+          <span className="cm-convo-last">{c.last.sender_id === c.other.id ? "" : "You: "}{c.last.body || "Sent a map"}</span>
+          {c.unread > 0 && <span className="cm-unread" aria-label={`${c.unread} unread`}>{c.unread}</span>}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function Thread({ api, other, onAuthor, onReport, notify, getDrawing, onShowMap, onCopyMap, shownMapId, onRead }) {
+  const [list, setList] = useState(null);
+  const [blocked, setBlocked] = useState(false);
+  const [text, setText] = useState("");
+  const [withMap, setWithMap] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const [tick, setTick] = useState(0);
+  const endRef = useRef(null);
+  const count = list ? list.length : 0;
+  useEffect(() => {
+    let alive = true;
+    const load = () => api.thread(other.id).then((r) => {
+      if (!alive) return;
+      setList(r);
+      if (r.some((m) => !m.mine && !m.read_at)) api.markRead(other.id).then(onRead, () => {});
+    }, (e) => { if (alive) setError(e.message); });
+    load();
+    api.myBlocks().then((ids) => { if (alive) setBlocked(ids.includes(other.id)); }, () => {});
+    const t = setInterval(() => { if (!document.hidden) load(); }, 8000); // new messages show within seconds while open
+    return () => { alive = false; clearInterval(t); };
+  }, [api, other.id, tick, onRead]);
+  useEffect(() => { if (endRef.current) endRef.current.scrollIntoView({ block: "nearest" }); }, [count]);
+  const send = async () => {
+    const map = withMap ? cleanForPublish(getDrawing()) : null;
+    if (!text.trim() && !(map && map.length)) return;
+    setBusy(true); setError("");
+    try { await api.sendMessage(other.id, text.trim(), map && map.length ? map : null); setText(""); setWithMap(false); setTick((t) => t + 1); } catch (e) { setError(e.message); }
+    setBusy(false);
+  };
+  const toggleBlock = async () => {
+    if (!blocked && !window.confirm(`Block @${other.username}? Neither of you will be able to message the other. They aren't told.`)) return;
+    try { await (blocked ? api.unblock(other.id) : api.block(other.id)); setBlocked(!blocked); notify(blocked ? "Unblocked." : `Blocked @${other.username}.`); } catch (e) { notify(e.message); }
+  };
+  const unsend = async (m) => {
+    if (!window.confirm("Unsend this message? It's removed for both of you.")) return;
+    try { await api.unsend(m.id); setTick((t) => t + 1); } catch (e) { notify(e.message); }
+  };
+  const asShared = (m) => ({ id: `message-${m.id}`, title: m.mine ? "a map you sent" : "a map they sent you", username: m.mine ? "you" : other.username, annotations: m.annotations, creditId: null });
+  return (
+    <div className="cm-thread">
+      <div className="cm-thread-head">
+        <Who name={other.display_name} username={other.username} onOpen={onAuthor} />
+        <button type="button" className="cm-link" onClick={toggleBlock}>{blocked ? "Unblock" : "Block"}</button>
+      </div>
+      <p className="cm-fine">Private between you two. Don't share personal details like your address or phone number. Report anything abusive.</p>
+      {!list && !error && <div className="loading">Loading…</div>}
+      <div className="cm-msgs">
+        {list && list.map((m) => (
+          <div key={m.id} className={`cm-msg ${m.mine ? "mine" : ""}`}>
+            {m.body && <div className="cm-msg-body"><Linked text={m.body} /></div>}
+            {m.annotations && m.annotations.length > 0 && (
+              <AttachedMap annotations={m.annotations} showing={shownMapId === `message-${m.id}`} onShow={() => onShowMap(asShared(m))} onCopy={() => onCopyMap(asShared(m))} />
+            )}
+            <div className="cm-msg-meta">
+              {timeAgo(m.created_at)}{m.mine && m.read_at ? " · Seen" : ""}
+              {m.mine ? <button type="button" className="cm-link" onClick={() => unsend(m)}>Unsend</button>
+                : <button type="button" className="cm-link" onClick={() => onReport("message", m.id)}>Report</button>}
+            </div>
+          </div>
+        ))}
+        <div ref={endRef} />
+      </div>
+      {error && <div className="cm-error">{error}</div>}
+      {blocked ? <div className="cm-fine">You blocked @{other.username}. Unblock to send messages.</div> : (
+        <div className="cm-field">
+          <textarea value={text} rows={2} maxLength={LIMITS.message} onChange={(e) => setText(e.target.value)} placeholder={`Message @${other.username}`} aria-label="Write a message" />
+          <MapAttach getDrawing={getDrawing} on={withMap} setOn={setWithMap} />
+          <div className="cm-actions"><button type="button" className="cm-btn primary" disabled={busy || (!text.trim() && !withMap)} onClick={send}>{busy ? "Sending…" : "Send"}</button></div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // Screens: feed | post | profile | compose | setup | edit-profile | report | reports | rules
-export default function CommunityPanel({ initialPostId = null, onClose, onPostChange, getDrawing, onShowMap, onCopyMap, shownMapId, countries }) {
+// Messages section: inbox | thread (and profile, report from there)
+export default function CommunityPanel({ initialPostId = null, section = "community", onSection, onUnread, onClose, onPostChange, getDrawing, onShowMap, onCopyMap, shownMapId, countries }) {
   const [api, setApi] = useState(null);
   const [apiError, setApiError] = useState("");
   const [user, setUser] = useState(undefined); // undefined = still checking
   const [me, setMe] = useState(undefined); // my profile; null = signed in without one yet
   const [admin, setAdmin] = useState(false);
-  const [stack, setStack] = useState(() => [initialPostId ? { name: "post", id: initialPostId } : { name: "feed" }]);
+  // Each section remembers where you were: the posts feed, and Messages.
+  const [stacks, setStacks] = useState(() => ({ community: [initialPostId ? { name: "post", id: initialPostId } : { name: "feed" }], messages: [{ name: "inbox" }] }));
+  const sec = section === "messages" ? "messages" : "community";
+  const stack = stacks[sec];
+  const root = sec === "messages" ? { name: "inbox" } : { name: "feed" };
+  const setStack = (fn) => setStacks((all) => ({ ...all, [sec]: typeof fn === "function" ? fn(all[sec]) : fn }));
+  const [inboxKey, setInboxKey] = useState(0);
   const [tab, setTab] = useState("latest");
   const [country, setCountry] = useState("");
   const [feedKey, setFeedKey] = useState(0);
@@ -524,22 +667,40 @@ export default function CommunityPanel({ initialPostId = null, onClose, onPostCh
       if (!alive) return;
       setMe(p);
       setAdmin(Boolean(a));
-      if (user && !p) setStack((s) => (s[s.length - 1].name === "setup" || s[s.length - 1].name === "rules" ? s : [...s, { name: "setup" }]));
+      if (user && !p) setStacks((all) => { const s = all.community; return s[s.length - 1].name === "setup" || s[s.length - 1].name === "rules" ? all : { ...all, community: [...s, { name: "setup" }] }; });
     }, (e) => { if (alive) { setMe(null); notify(e.message); } });
     return () => { alive = false; };
   }, [api, user, notify]);
 
+  // Unread messages, for the badge on the Messages tab.
+  const refreshUnread = useCallback(() => {
+    if (api && me && onUnread) api.unreadCount().then(onUnread, () => {});
+  }, [api, me, onUnread]);
+  useEffect(() => {
+    if (!api || !me || !onUnread) return undefined;
+    let alive = true;
+    const tick = () => api.unreadCount().then((n) => { if (alive) onUnread(n); }, () => {});
+    tick();
+    const t = setInterval(tick, 45000);
+    return () => { alive = false; clearInterval(t); };
+  }, [api, me, onUnread]);
+
   // Let the app know which post is open (for the ?post= link).
-  const openPostId = screen.name === "post" ? screen.id : null;
+  const openPostId = sec === "community" && screen.name === "post" ? screen.id : null;
   useEffect(() => { if (onPostChange) onPostChange(openPostId); }, [openPostId, onPostChange]);
 
   const go = (s) => setStack((st) => [...st, s]);
-  const back = () => setStack((st) => (st.length > 1 ? st.slice(0, -1) : [{ name: "feed" }]));
-  const home = () => { setStack([{ name: "feed" }]); setFeedKey((k) => k + 1); };
+  const back = () => setStack((st) => (st.length > 1 ? st.slice(0, -1) : [root]));
+  const home = () => { setStack([root]); setFeedKey((k) => k + 1); setInboxKey((k) => k + 1); };
+  // Message someone: switch to Messages with their conversation open.
+  const openThread = (other) => {
+    setStacks((all) => ({ ...all, messages: [{ name: "inbox" }, { name: "thread", other: { id: other.id, username: other.username, display_name: other.display_name || "" } }] }));
+    if (onSection) onSection("messages");
+  };
   const openPost = (id) => go({ name: "post", id });
   const openAuthor = (username) => go({ name: "profile", username });
   const signIn = async () => { try { await api.signIn(); } catch (e) { notify(e.message); } };
-  const signOut = async () => { await api.signOut(); setMe(null); setAdmin(false); home(); };
+  const signOut = async () => { await api.signOut(); setMe(null); setAdmin(false); if (onUnread) onUnread(0); setStacks({ community: [{ name: "feed" }], messages: [{ name: "inbox" }] }); };
   const needAccount = () => { if (!user) signIn(); else go({ name: "setup" }); };
   const report = (type, id) => { if (!me) needAccount(); else go({ name: "report", target: { type, id } }); };
   const showMap = async (postOrId) => {
@@ -551,7 +712,7 @@ export default function CommunityPanel({ initialPostId = null, onClose, onPostCh
   const copyMap = (p) => { onCopyMap(p); notify("Added to your map. Tap Draw to edit it; post it as a Map to share your version."); };
   const reloadMe = async () => { setMe(await api.myProfile()); };
 
-  const common = { api, me, admin, names, onOpen: openPost, onAuthor: openAuthor, onShowMap: showMap, shownMapId, notify };
+  const common = { api, me, admin, names, onOpen: openPost, onAuthor: openAuthor, onShowMap: showMap, shownMapId, notify, getDrawing };
 
   let content;
   if (apiError) content = <div className="cm-error">{apiError}</div>;
@@ -567,7 +728,14 @@ export default function CommunityPanel({ initialPostId = null, onClose, onPostCh
     content = <PostView key={screen.id} {...common} id={screen.id} signedIn={Boolean(user)} onCopyMap={copyMap} onNeedAccount={needAccount} onReport={report}
       onEdit={(p) => go({ name: "compose", editing: p })} onDeleted={() => { notify("Deleted."); home(); }} />;
   } else if (screen.name === "profile") {
-    content = <ProfileView key={screen.username} {...common} username={screen.username} onNeedAccount={needAccount} onReport={report} onEditProfile={() => go({ name: "edit-profile" })} />;
+    content = <ProfileView key={screen.username} {...common} username={screen.username} onNeedAccount={needAccount} onReport={report} onEditProfile={() => go({ name: "edit-profile" })} onMessage={openThread} />;
+  } else if (screen.name === "thread") {
+    content = me ? <Thread key={screen.other.id} api={api} other={screen.other} onAuthor={openAuthor} onReport={report} notify={notify} getDrawing={getDrawing}
+      onShowMap={onShowMap} onCopyMap={copyMap} shownMapId={shownMapId} onRead={refreshUnread} /> : <div className="empty">Sign in to see your messages.</div>;
+  } else if (sec === "messages") {
+    content = !user ? <div className="empty">Sign in with Google to send and receive messages.</div>
+      : !me ? <div className="empty">Pick a username first (Community tab), then you can message people.</div>
+      : <Inbox api={api} refreshKey={inboxKey} onOpen={(other) => go({ name: "thread", other })} />;
   } else if (screen.name === "edit-profile" && me) {
     content = <EditProfile api={api} me={me} onSignOut={signOut} onDone={async () => { await reloadMe(); notify("Saved."); back(); }} onDeleted={() => { setMe(null); setUser(null); notify("Your account was deleted."); home(); }} />;
   } else if (screen.name === "report") {
@@ -602,15 +770,16 @@ export default function CommunityPanel({ initialPostId = null, onClose, onPostCh
       <style>{CM_CSS}</style>
       <div className="panel-head">
         <div>
-          <div className="eyebrow">Community</div>
-          <h1>{screen.name === "feed" ? "Analyst posts" : <button type="button" className="cm-back" onClick={back}>← Back</button>}</h1>
+          <div className="eyebrow">{sec === "messages" ? "Messages" : "Community"}</div>
+          <h1>{screen.name === root.name ? (sec === "messages" ? "Direct messages" : "Analyst posts") : <button type="button" className="cm-back" onClick={back}>← Back</button>}</h1>
           {screen.name === "feed" && <p>Posts, articles and maps by Wire Room users. Their analysis, not verified by Wire Room.</p>}
+          {screen.name === "inbox" && <p>Private conversations. Send text or your map.</p>}
         </div>
         <div className="panel-actions">
           <button type="button" onClick={onClose} aria-label="Close panel">×</button>
         </div>
       </div>
-      {api && user !== undefined && (
+      {api && user !== undefined && (sec === "community" || !user) && (
         <div className="cm-account">
           {!user && <><button type="button" className="cm-btn primary" onClick={signIn}>Sign in with Google</button><span className="cm-fine">to post, comment and follow. Reading is open to all.</span></>}
           {user && me && (
@@ -693,11 +862,28 @@ button.cm-chip{cursor:pointer}
 .cm-counter{align-self:flex-end;font:11px var(--font);color:var(--muted)}
 .cm-counter.warn{color:var(--danger)}
 .cm-check{display:flex;gap:8px;align-items:flex-start;font:13px/1.45 var(--font);color:var(--text-2);margin:4px 0}
-.cm-check input{margin-top:3px}
+.cm-check input{margin-top:3px;width:auto;flex:none}
 .cm-handle{font:13px var(--font);color:var(--muted);margin:-4px 0 8px}
 .cm-bio{font:14px/1.5 var(--font);color:var(--text-2);margin:0 0 8px;white-space:pre-wrap}
 .cm-stats{font:13px var(--font);color:var(--muted);margin:0 0 10px}
 .cm-stats b{color:var(--text)}
+.cm-mapbox.small{padding:8px 10px;margin:6px 0;gap:6px;font-size:12px}
+.cm-inbox{display:flex;flex-direction:column;gap:6px}
+.cm-convo{position:relative;display:flex;flex-direction:column;gap:3px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;color:var(--text);font:13px var(--font)}
+.cm-convo:hover{border-color:var(--line-2)}
+.cm-convo.unread{border-color:var(--accent)}
+.cm-convo-top span{color:var(--muted)}
+.cm-convo-time{float:right;font-size:12px}
+.cm-convo-last{color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:28px}
+.cm-unread{position:absolute;right:10px;bottom:9px;background:var(--accent);color:var(--bg);border-radius:999px;font:700 11px var(--font);padding:1px 7px}
+.cm-thread-head{display:flex;justify-content:space-between;align-items:center}
+.cm-msgs{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.cm-msg{max-width:85%;align-self:flex-start;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:8px 10px}
+.cm-msg.mine{align-self:flex-end;background:var(--accent-soft);border-color:transparent}
+.cm-msg-body{font:14px/1.45 var(--font);color:var(--text);white-space:pre-wrap;overflow-wrap:anywhere}
+.cm-msg-body a{color:var(--accent)}
+.cm-msg-meta{display:flex;gap:10px;align-items:center;font:11px var(--font);color:var(--muted);margin-top:4px}
+.cm-msg-meta .cm-link{font-size:11px}
 .cm-rules h2{font:700 18px var(--font);margin:0 0 6px}
 .cm-rules h3{font:600 14px var(--font);margin:16px 0 6px}
 .cm-rules p,.cm-rules li{font:13px/1.55 var(--font);color:var(--text-2)}

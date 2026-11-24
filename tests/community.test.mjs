@@ -69,3 +69,15 @@ test("describes a drawing and explains errors in plain words", () => {
   assert.match(friendlyError({ message: "new row violates row-level security policy" }), /isn't allowed/);
   assert.match(friendlyError(new TypeError("Failed to fetch")), /Couldn't reach/);
 });
+
+test("messages group into one conversation per person, with unread counts", async () => {
+  const { groupConversations } = await import("../src/community/helpers.js");
+  const me = "u-me";
+  const rows = [ // newest first, as the server returns them
+    { id: "3", sender_id: "u-a", recipient_id: me, body: "and another", read_at: null, created_at: "2026-11-24T10:03:00Z", sender: { username: "alice" } },
+    { id: "2", sender_id: me, recipient_id: "u-b", body: "hi bob", read_at: null, created_at: "2026-11-24T10:02:00Z", recipient: { username: "bob" } },
+    { id: "1", sender_id: "u-a", recipient_id: me, body: "hello", read_at: null, created_at: "2026-11-24T10:01:00Z", sender: { username: "alice" } },
+  ];
+  const out = groupConversations(rows, me);
+  assert.deepEqual(out.map((c) => [c.other.username, c.last.id, c.unread]), [["alice", "3", 2], ["bob", "2", 0]], "my own unread messages to bob don't count");
+});

@@ -159,6 +159,12 @@ const LIVE_CSS = `
 .track-card .tc-legend span{display:inline-flex;align-items:center;gap:5px}
 .live-btn .sw{display:inline-flex}
 .live-box.past{border-color:var(--accent)}
+.live-collapse{position:absolute;top:5px;right:5px;background:none;border:0;color:var(--muted);font:14px var(--font);padding:2px 6px;cursor:pointer}
+.live-tabs{padding-right:22px}
+.live-collapse:hover,.live-expand:hover{color:var(--text)}
+.live-mini{padding:0}
+.live-expand{background:none;border:0;color:var(--text);font:600 12px var(--font);padding:8px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.live-expand .n{color:var(--accent);font-weight:700}
 .live-tabs{display:flex;align-items:center;gap:4px;margin-bottom:6px;border-bottom:1px solid var(--line);padding-bottom:5px;flex-wrap:wrap}
 .live-tab{background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);font:700 12px var(--font);letter-spacing:0;padding:3px 6px 4px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
 .live-tab.on{color:var(--ok);border-bottom-color:var(--ok)}
@@ -194,6 +200,9 @@ function saveTab(v) { try { localStorage.setItem(TAB_KEY, v); } catch { /* priva
 export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, air, ships, trackers = null, initialTab = null, pastDay = null }) {
   const t = trackers;
   const [tabState, setTab] = useState(() => initialTab || (readTab() === "events" ? "events" : "live"));
+  // The trackers box can be tucked into a small button (remembered on this device).
+  const [collapsed, setCollapsed] = useState(() => { try { return localStorage.getItem("wireroom-trackers-collapsed") === "1"; } catch { return false; } });
+  const collapse = (v) => { setCollapsed(v); try { localStorage.setItem("wireroom-trackers-collapsed", v ? "1" : "0"); } catch { /* not remembered */ } };
   const tab = t ? tabState : "live";
   const pick = (v) => { setTab(v); saveTab(v); };
   const liveOn = (airOn ? 1 : 0) + (shipsOn ? 1 : 0);
@@ -210,6 +219,16 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
       <span className="sw">{icon}</span>{label}{on && count !== "" && <span className="n">{count}</span>}
     </button>
   );
+  if (collapsed) {
+    return (
+      <div className="live-box live-mini" onPointerDown={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
+        <style>{LIVE_CSS}</style>
+        <button type="button" className="live-expand" onClick={() => collapse(false)} aria-label="Show trackers">
+          Trackers{liveOn + eventsOn > 0 && <span className="n">{liveOn + eventsOn} on</span>} <span aria-hidden="true">▴</span>
+        </button>
+      </div>
+    );
+  }
   return (
     <div className={`live-box ${pastDay ? "past" : ""}`} onPointerDown={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
       <style>{LIVE_CSS}</style>
@@ -222,6 +241,7 @@ export function LiveLayerControls({ airOn, onToggleAir, shipsOn, onToggleShips, 
             Events{eventsOn > 0 && <span className="n">{eventsOn} on</span>}
           </button>
           <span className="live-sub">{tab === "live" ? "Positions of planes and ships" : "Wars, attacks and hacks, from reports"}</span>
+          <button type="button" className="live-collapse" onClick={() => collapse(true)} aria-label="Hide trackers" title="Hide (tap Trackers to bring it back)">▾</button>
         </div>
       ) : null}
       <div className="live-row">
