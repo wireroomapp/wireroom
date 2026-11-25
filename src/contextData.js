@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 // lib/history.mjs for past days). Loaded when a tracker is first turned on; today's map is
 // refreshed every 30 minutes, past days are kept once loaded.
 
-export const TRACKER_COLORS = { war: "#ff4d4d", strike: "#ff8a3d", terrorism: "#f5c242", cyber: "#ff5fd2" };
+export const TRACKER_COLORS = { war: "#ff4d4d", strike: "#ff6b5e", terrorism: "#f5c542", cyber: "#ff5fb4" };
 export const TRACKER_CREDITS = {
   military: "Wars: UCDP Candidate Events Dataset, Uppsala University (CC BY 4.0)",
   reports: "Incident markers: placed from collected reports (not verified by Wire Room)",

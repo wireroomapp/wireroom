@@ -94,19 +94,15 @@ export function Swatch({ kind, color, hollow = false, size = 11 }) {
       {kind === "air" && <path d="M0,-4.5L3.2,3.5L0,1.5L-3.2,3.5Z" fill={color} />}
       {kind === "ship" && <path d="M0,-3.6L3.6,0L0,3.6L-3.6,0Z" fill={color} />}
       {kind === "war" && (<>
-        <circle r="2.9" fill="none" stroke={color} strokeWidth="1.3" />
-        <path d="M0,-4.8V-3.2M0,3.2V4.8M-4.8,0H-3.2M3.2,0H4.8" stroke={color} strokeWidth="1.2" />
-        <circle r="1" fill={color} />
+        <circle r="3.4" fill="none" stroke={color} strokeWidth="1.3" />
+        <circle r="1.6" fill={color} />
       </>)}
-      {kind === "strike" && <path d="M0,-4.6L1.2,-1.6L4.4,-1.6L1.9,0.5L2.8,3.8L0,1.9L-2.8,3.8L-1.9,0.5L-4.4,-1.6L-1.2,-1.6Z" fill={color} />}
-      {kind === "terrorism" && (<>
-        <path d="M0,-4.3L4.6,3.8L-4.6,3.8Z" fill={fill} stroke={color} strokeWidth={hollow ? 1.1 : 0} strokeLinejoin="round" />
-        <path d="M0,-1.4V1.3M0,2.3V2.9" stroke={hollow ? color : "#071019"} strokeWidth="1.1" />
+      {kind === "strike" && (<>
+        <circle r="2.6" fill="none" stroke={color} strokeWidth="1.1" />
+        <path d="M0,-4.6V-1.4M0,1.4V4.6M-4.6,0H-1.4M1.4,0H4.6" stroke={color} strokeWidth="1.1" strokeLinecap="round" />
       </>)}
-      {kind === "cyber" && (<>
-        <path d={HEX} fill={fill} stroke={color} strokeWidth={hollow ? 1.1 : 0} />
-        <path d="M0.6,-2.6L-1.4,0.4H0.4L-0.6,2.6L1.5,-0.5H-0.3Z" fill={hollow ? color : "#071019"} />
-      </>)}
+      {kind === "terrorism" && <path d="M0,-4.3L4.6,3.8L-4.6,3.8Z" fill={fill} stroke={color} strokeWidth={hollow ? 1.1 : 0} strokeLinejoin="round" />}
+      {kind === "cyber" && <path d={HEX} fill={fill} stroke={color} strokeWidth={hollow ? 1.1 : 0} />}
     </svg>
   );
 }
