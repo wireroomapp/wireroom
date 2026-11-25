@@ -43,7 +43,7 @@ export const SLOT_OFFSETS = [[0, 0], [15, -13], [-15, -13], [15, 13], [-15, 13],
 const SLOT_EXPR = ["match", ["get", "slot"], ...SLOT_OFFSETS.slice(1).flatMap((o, i) => [i + 1, ["literal", o]]), ["literal", [0, 0]]];
 // The count badge sits at the icon's top-right corner (text offsets are in ems at size 10).
 const BADGE_EXPR = ["match", ["get", "slot"], ...SLOT_OFFSETS.flatMap((o, i) => [i, ["literal", [(o[0] + 9) / 10, (o[1] - 9) / 10]]]), ["literal", [0.9, -0.9]]];
-const WAR_RED = "#ff4d4d", STRIKE_ORANGE = "#ff8a3d";
+const WAR_RED = "#ff4d4d", STRIKE_RED = "#ff6b5e", TERROR_YELLOW = "#f5c542", CYBER_PINK = "#ff5fb4";
 const LEVEL_SIZE = ["match", ["get", "level"], "war", 1, "armed conflict", 0.78, 0.6];
 
 export function buildStyle() {
@@ -139,7 +139,7 @@ export function buildStyle() {
       { id: "wr-web-line", type: "line", source: "wr-web", filter: ["==", ["get", "kind"], "ucdp"], layout: { "line-cap": "round" },
         paint: { "line-color": WAR_RED, "line-width": ["interpolate", ["linear"], ["zoom"], 2, 0.8, 7, 1.6], "line-opacity": 0.55 } },
       { id: "wr-web-line-rep", type: "line", source: "wr-web", filter: ["==", ["get", "kind"], "report"],
-        paint: { "line-color": STRIKE_ORANGE, "line-width": ["interpolate", ["linear"], ["zoom"], 2, 1, 7, 1.8], "line-opacity": 0.85, "line-dasharray": [2, 1.5] } },
+        paint: { "line-color": STRIKE_RED, "line-width": ["interpolate", ["linear"], ["zoom"], 2, 1, 7, 1.8], "line-opacity": 0.85, "line-dasharray": [2, 1.5] } },
       { id: "wr-web-node", type: "circle", source: "wr-web-nodes", layout: { "circle-sort-key": ["get", "best"] },
         paint: {
           "circle-radius": ["min", 11, ["+", 3, ["*", 0.55, ["sqrt", ["get", "best"]]]]],
@@ -304,7 +304,6 @@ function draw(size, fn) {
 const DARK = "#071019";
 const poly = (c, pts) => { c.beginPath(); pts.forEach(([x, y], i) => (i ? c.lineTo(x, y) : c.moveTo(x, y))); c.closePath(); };
 const hexPts = (r) => Array.from({ length: 6 }, (_, i) => { const a = (i * Math.PI) / 3 - Math.PI / 2; return [r * Math.cos(a), r * Math.sin(a)]; }); // point at the top
-const bolt = [[2.2, -8], [-4.5, 1.5], [0.2, 1.5], [-2.2, 8], [4.5, -1.5], [-0.2, -1.5]];
 
 export function makeIcons() {
   const plane = draw(32, (c) => {
@@ -316,44 +315,39 @@ export function makeIcons() {
     poly(c, [[0, -8], [8, 0], [0, 8], [-8, 0]]);
     c.fillStyle = "#ffffff"; c.fill();
   });
-  // War: a red target with crosshair ticks.
+  // Flat icons with a thin dark edge (Nov 2026 restyle). Solid = attack reported, outlined = threat or warning.
+  // War (UCDP conflict): a bullseye. Sized by level on the map and labeled with its name.
   const war = draw(52, (c) => {
-    const ring = (color, w) => {
-      c.strokeStyle = color; c.lineWidth = w;
-      c.beginPath(); c.arc(0, 0, 14, 0, Math.PI * 2); c.stroke();
+    c.fillStyle = "rgba(255,77,77,.18)"; c.beginPath(); c.arc(0, 0, 22, 0, Math.PI * 2); c.fill();
+    c.strokeStyle = DARK; c.lineWidth = 7; c.beginPath(); c.arc(0, 0, 13, 0, Math.PI * 2); c.stroke();
+    c.strokeStyle = WAR_RED; c.lineWidth = 3.5; c.beginPath(); c.arc(0, 0, 13, 0, Math.PI * 2); c.stroke();
+    c.fillStyle = WAR_RED; c.strokeStyle = DARK; c.lineWidth = 2; c.beginPath(); c.arc(0, 0, 6, 0, Math.PI * 2); c.fill(); c.stroke();
+  });
+  // Strike reported in the news: a crosshair with a soft red glow, open in the middle.
+  const strike = draw(40, (c) => {
+    c.fillStyle = "rgba(255,107,94,.2)"; c.beginPath(); c.arc(0, 0, 16, 0, Math.PI * 2); c.fill();
+    const mark = (color, w) => {
+      c.strokeStyle = color; c.lineWidth = w; c.lineCap = "round";
+      c.beginPath(); c.arc(0, 0, 9, 0, Math.PI * 2); c.stroke();
       c.beginPath();
-      for (const [x1, y1, x2, y2] of [[0, -14, 0, -23], [0, 14, 0, 23], [-14, 0, -23, 0], [14, 0, 23, 0]]) { c.moveTo(x1, y1); c.lineTo(x2, y2); }
+      for (const [x1, y1, x2, y2] of [[0, -15, 0, -5], [0, 5, 0, 15], [-15, 0, -5, 0], [5, 0, 15, 0]]) { c.moveTo(x1, y1); c.lineTo(x2, y2); }
       c.stroke();
     };
-    c.fillStyle = "rgba(7,16,25,.7)"; c.beginPath(); c.arc(0, 0, 14, 0, Math.PI * 2); c.fill();
-    ring(DARK, 8); ring(WAR_RED, 4);
-    c.fillStyle = WAR_RED; c.strokeStyle = DARK; c.lineWidth = 2; c.beginPath(); c.arc(0, 0, 5, 0, Math.PI * 2); c.fill(); c.stroke();
+    mark(DARK, 6); mark(STRIKE_RED, 3);
   });
-  // Reported strike: an orange burst.
-  const strike = draw(34, (c) => {
-    const pts = [];
-    for (let i = 0; i < 16; i++) { const r = i % 2 ? 6.5 : 14.5, a = (i * Math.PI) / 8 - Math.PI / 2; pts.push([r * Math.cos(a), r * Math.sin(a)]); }
-    poly(c, pts);
-    c.fillStyle = STRIKE_ORANGE; c.strokeStyle = DARK; c.lineWidth = 2.5; c.lineJoin = "round"; c.fill(); c.stroke();
-  });
-  // Terrorism: warning triangle, solid for an attack, outlined for a threat.
-  const triangle = (solid) => draw(38, (c) => {
-    const pts = [[0, -15], [16, 13], [-16, 13]];
+  // Terrorism: a warning triangle.
+  const triangle = (solid) => draw(34, (c) => {
+    const pts = [[0, -12], [12.5, 10], [-12.5, 10]];
     c.lineJoin = "round";
-    poly(c, pts); c.strokeStyle = DARK; c.lineWidth = solid ? 4 : 7; c.stroke();
-    poly(c, pts);
-    if (solid) { c.fillStyle = "#f5c242"; c.fill(); } else { c.fillStyle = "rgba(7,16,25,.85)"; c.fill(); c.strokeStyle = "#f5c242"; c.lineWidth = 3.2; c.stroke(); }
-    c.fillStyle = solid ? DARK : "#f5c242";
-    c.fillRect(-2, -6, 4, 10); c.beginPath(); c.arc(0, 8.2, 2.3, 0, Math.PI * 2); c.fill();
+    if (solid) { poly(c, pts); c.fillStyle = TERROR_YELLOW; c.fill(); c.strokeStyle = DARK; c.lineWidth = 2.2; c.stroke(); }
+    else { poly(c, pts); c.strokeStyle = DARK; c.lineWidth = 6.5; c.stroke(); poly(c, pts); c.fillStyle = "rgba(7,16,25,.85)"; c.fill(); c.strokeStyle = TERROR_YELLOW; c.lineWidth = 3; c.stroke(); }
   });
-  // Cyber: hexagon with a bolt, solid for an attack, outlined for a warning.
-  const hexagon = (solid) => draw(36, (c) => {
-    const pts = hexPts(14);
+  // Cyber: a hexagon.
+  const hexagon = (solid) => draw(32, (c) => {
+    const pts = hexPts(11.5);
     c.lineJoin = "round";
-    poly(c, pts); c.strokeStyle = DARK; c.lineWidth = solid ? 4 : 7; c.stroke();
-    poly(c, pts);
-    if (solid) { c.fillStyle = "#ff5fd2"; c.fill(); } else { c.fillStyle = "rgba(7,16,25,.85)"; c.fill(); c.strokeStyle = "#ff5fd2"; c.lineWidth = 3.2; c.stroke(); }
-    poly(c, bolt); c.fillStyle = solid ? DARK : "#ff5fd2"; c.fill();
+    if (solid) { poly(c, pts); c.fillStyle = CYBER_PINK; c.fill(); c.strokeStyle = DARK; c.lineWidth = 2.2; c.stroke(); }
+    else { poly(c, pts); c.strokeStyle = DARK; c.lineWidth = 6.5; c.stroke(); poly(c, pts); c.fillStyle = "rgba(7,16,25,.85)"; c.fill(); c.strokeStyle = CYBER_PINK; c.lineWidth = 3; c.stroke(); }
   });
   return {
     plane, ship, war, strike,
