@@ -1,8 +1,21 @@
 {
-  "generatedAt": "2026-11-25T23:00:52.313Z",
+  "generatedAt": "2026-11-26T00:12:54.158Z",
   "countries": {
     "us": {
       "official": [
+        {
+          "id": "us-official-8c4e3d2be01900a3",
+          "countryId": "us",
+          "sourceType": "official",
+          "source": "White House",
+          "headline": "Trump Administration Leads Whole-of-Government Effort to Safely Neutralize Obama-Era Explosives Threat in Iowa",
+          "summary": "Under President Donald J. Trump’s leadership, the U.S. Army this morning safely destroyed nearly five tons of degraded explosives at the Iowa Army Ammunition Plant. All initial indications show the controlled detonati…",
+          "date": "Nov 25, 2026 · 11:10 PM",
+          "publishedAt": "2026-11-25T23:10:56.000Z",
+          "dateOnly": false,
+          "url": "https://www.whitehouse.gov/releases/2026/11/trump-administrations-whole-of-government-effort-safely-neutralizes-obama-era-explosives-threat-in-iowa/",
+          "importance": 3
+        },
         {
           "id": "us-official-c45b0c1acf74fa6f",
           "countryId": "us",
@@ -9720,11 +9733,24 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:06.206Z",
+      "officialLastOkAt": "2026-11-26T00:12:04.242Z",
       "officialLastError": null
     },
     "ca": {
       "official": [
+        {
+          "id": "ca-official-b3c5704d279aabda",
+          "countryId": "ca",
+          "sourceType": "official",
+          "source": "Prime Minister's Office",
+          "headline": "Thursday, November 26, 2026",
+          "summary": "Note: All times local Regina, Saskatchewan 3:00 p.m. The Prime Minister will meet with the Premier of Saskatchewan, Scott Moe. Note for media: Pooled photo opportunity at the beginning of the meeting Whitehorse, Yukon…",
+          "date": "Nov 25, 2026 · 10:55 PM",
+          "publishedAt": "2026-11-25T22:55:51.000Z",
+          "dateOnly": false,
+          "url": "https://www.pm.gc.ca/en/news/media-advisories/2026/11/25/thursday-november-26-2026",
+          "importance": 3
+        },
         {
           "id": "ca-official-16f53f27a9e729e0",
           "countryId": "ca",
@@ -11756,6 +11782,19 @@
           "importance": 2
         },
         {
+          "id": "ca-independent-49d71f3a5b29fbbb",
+          "countryId": "ca",
+          "sourceType": "independent",
+          "source": "CBC",
+          "headline": "Toronto man gets life in prison, no chance of parole for 17 years in shooting death of YMCA instructor - CBC",
+          "summary": "Toronto man gets life in prison, no chance of parole for 17 years in shooting death of YMCA instructor CBC",
+          "date": "Nov 25, 2026 · 10:18 PM",
+          "publishedAt": "2026-11-25T22:18:24.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNRFBRTi1YT2ZQdHpZQVdXMUdUaVFPVGZ2SEppNnlIQ3FieXVWbE96c2dfajNxbGdYMkxJSHRxWUdEQmVCYjR5Nnh4eWJPSmZJM0RQenpmcnl2c2oyY2poXzhiVEprODU1VFpBN2pSRGtJNE1ENTJYbzdxRzdYdElSWnZFZ3JGeWNweTR0VDlxMVlQYXliVzZSVjRBSlhHTkFFRWZLcURveFFLemNmZklOQVdXbFg?oc=5",
+          "importance": 2
+        },
+        {
           "id": "ca-independent-cf30ab08cc031a6e",
           "countryId": "ca",
           "sourceType": "independent",
@@ -11925,32 +11964,6 @@
           "importance": 2
         },
         {
-          "id": "ca-independent-49d71f3a5b29fbbb",
-          "countryId": "ca",
-          "sourceType": "independent",
-          "source": "CBC",
-          "headline": "Toronto man gets life in prison, no chance of parole for 17 years in shooting death of YMCA instructor - CBC",
-          "summary": "Toronto man gets life in prison, no chance of parole for 17 years in shooting death of YMCA instructor CBC",
-          "date": "Nov 25, 2026 · 6:17 PM",
-          "publishedAt": "2026-11-25T18:17:21.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNRFBRTi1YT2ZQdHpZQVdXMUdUaVFPVGZ2SEppNnlIQ3FieXVWbE96c2dfajNxbGdYMkxJSHRxWUdEQmVCYjR5Nnh4eWJPSmZJM0RQenpmcnl2c2oyY2poXzhiVEprODU1VFpBN2pSRGtJNE1ENTJYbzdxRzdYdElSWnZFZ3JGeWNweTR0VDlxMVlQYXliVzZSVjRBSlhHTkFFRWZLcURveFFLemNmZklOQVdXbFg?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ca-independent-f7dd94009470b724",
-          "countryId": "ca",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Pentagon criticism of Canada’s military hasn’t come up in Trump talks, Carney says - AP News",
-          "summary": "Pentagon criticism of Canada’s military hasn’t come up in Trump talks, Carney says AP News",
-          "date": "Nov 25, 2026 · 5:44 PM",
-          "publishedAt": "2026-11-25T17:44:01.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOOUIwYllkTWJwYUhGWnVzQkhlU1ZPT00tYXFOcmRVbHM1N2hGbFl2NkJWWWg2VWRTMmdOa0ZoUVNCTHZaQ1hmUFc0Qlk2ck90RkQ1YWdZbUNrbTlxMDE1SWhFY3JxSUN4OVFGdjNGSDBiajVNakhaVkxwaUdKWnhKRkFKSElVNDJpQzhpdVJJY25qcUMwRGdjaFlISEY?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ca-independent-9bf7dfe9a1c8696d",
           "countryId": "ca",
           "sourceType": "independent",
@@ -11961,6 +11974,19 @@
           "publishedAt": "2026-11-25T17:38:12.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPTDBfVno4Nm1kZW13V1lLZHZVdUI1Y1huZHpPNWVTS0JTbmJCNkswVVFwSGdYNnBxeDRiV3VudzlpOTJ4WEtTLXpYUGs4bXU0LW9lUkhyRFV0NXJPVlNKN1J4N0wxV255Uy14cjJzb3liNm1yazhyRWJpaXdaWGQya0t0eUlVaE8tWW9oQ3BuMXoyaEVuN1A2T0FB?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ca-independent-f7dd94009470b724",
+          "countryId": "ca",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Pentagon criticism of Canada’s military hasn’t come up in Trump talks, Carney says - AP News",
+          "summary": "Pentagon criticism of Canada’s military hasn’t come up in Trump talks, Carney says AP News",
+          "date": "Nov 25, 2026 · 5:16 PM",
+          "publishedAt": "2026-11-25T17:16:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOOUIwYllkTWJwYUhGWnVzQkhlU1ZPT00tYXFOcmRVbHM1N2hGbFl2NkJWWWg2VWRTMmdOa0ZoUVNCTHZaQ1hmUFc0Qlk2ck90RkQ1YWdZbUNrbTlxMDE1SWhFY3JxSUN4OVFGdjNGSDBiajVNakhaVkxwaUdKWnhKRkFKSElVNDJpQzhpdVJJY25qcUMwRGdjaFlISEY?oc=5",
           "importance": 2
         },
         {
@@ -18245,7 +18271,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:08.119Z",
+      "officialLastOkAt": "2026-11-26T00:12:06.151Z",
       "officialLastError": null
     },
     "mx": {
@@ -18642,6 +18668,24 @@
           }
         },
         {
+          "id": "mx-official-4c0d24e8d1105eab",
+          "countryId": "mx",
+          "sourceType": "official",
+          "source": "Presidencia",
+          "headline": "Ha sido una gira muy exitosa; marca una nueva era en la relación con China: presidenta concluye visita en el marco de la APEC 2026 - Gob MX",
+          "summary": "Ha sido una gira muy exitosa; marca una nueva era en la relación con China: presidenta concluye visita en el marco de la APEC 2026 Gob MX",
+          "date": "Nov 19, 2026 · 4:25 PM",
+          "publishedAt": "2026-11-19T16:25:50.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQOVpjVDR3MlJxM2NOMnZpeG42Q053LTRCa0F0dU1CaWdSOXpBNk02VmszRWltSmRIV3M4S01NVFNFd1lWLV9rZlBWMGxlTUg1bXl0TC1fX3lQTUJYV0JpV1MyQ0VrUkY0REJiMXAyck1haEdQdE0wdHByYjlJZlB4R3g3Skk3bTBPX0djakdCVGVfTnRVRm85WmVwU2w0OXh1OExEUlE1aUFobFJzR0dYOXJMZUJ0TmU4Yy14VmV6VlYwQ0RWRHdBQmJ1MGhFT0ktZnphbXV4UlhPaDRLZXpuUS0zTnAxUGZPbDJEWFZUUUlZcUp0OVQyYlFn?oc=5",
+          "importance": 3,
+          "tr": {
+            "from": "es",
+            "headline": "\"It has been a very successful tour; it marks a new era in our relationship with China\": President Concludes Visit as Part of APEC 2026 - Gob MX",
+            "summary": "It has been a very successful tour; it marks a new era in relations with China: President concludes visit as part of APEC 2026 Gob MX"
+          }
+        },
+        {
           "id": "mx-official-de59460fd380ee3c",
           "countryId": "mx",
           "sourceType": "official",
@@ -18760,24 +18804,6 @@
             "from": "es",
             "headline": "4,550 km of rural roads will be built during the President's six-year term; 32,556 million pesos will be invested, and progress stands at 30% - Gob MX",
             "summary": "4,550 km of rural roads will be built during the President’s six-year term; 32,556 million pesos will be invested, and progress stands at 30%—Gob MX"
-          }
-        },
-        {
-          "id": "mx-official-4c0d24e8d1105eab",
-          "countryId": "mx",
-          "sourceType": "official",
-          "source": "Presidencia",
-          "headline": "Ha sido una gira muy exitosa; marca una nueva era en la relación con China: presidenta concluye visita en el marco de la APEC 2026 - Gob MX",
-          "summary": "Ha sido una gira muy exitosa; marca una nueva era en la relación con China: presidenta concluye visita en el marco de la APEC 2026 Gob MX",
-          "date": "Nov 19, 2026 · 6:32 AM",
-          "publishedAt": "2026-11-19T06:32:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQOVpjVDR3MlJxM2NOMnZpeG42Q053LTRCa0F0dU1CaWdSOXpBNk02VmszRWltSmRIV3M4S01NVFNFd1lWLV9rZlBWMGxlTUg1bXl0TC1fX3lQTUJYV0JpV1MyQ0VrUkY0REJiMXAyck1haEdQdE0wdHByYjlJZlB4R3g3Skk3bTBPX0djakdCVGVfTnRVRm85WmVwU2w0OXh1OExEUlE1aUFobFJzR0dYOXJMZUJ0TmU4Yy14VmV6VlYwQ0RWRHdBQmJ1MGhFT0ktZnphbXV4UlhPaDRLZXpuUS0zTnAxUGZPbDJEWFZUUUlZcUp0OVQyYlFn?oc=5",
-          "importance": 3,
-          "tr": {
-            "from": "es",
-            "headline": "\"It has been a very successful tour; it marks a new era in our relationship with China\": President Concludes Visit as Part of APEC 2026 - Gob MX",
-            "summary": "It has been a very successful tour; it marks a new era in relations with China: President concludes visit as part of APEC 2026 Gob MX"
           }
         },
         {
@@ -25064,8 +25090,8 @@
           "source": "Presidencia",
           "headline": "Plan México avanza: Se anuncia inversión de 4 mil 800 mdd de CloudHQ para la construcción de 6 Centros de Datos en Querétaro - Gob MX",
           "summary": "Plan México avanza: Se anuncia inversión de 4 mil 800 mdd de CloudHQ para la construcción de 6 Centros de Datos en Querétaro Gob MX",
-          "date": "Sep 25, 2025 · 7:58 PM",
-          "publishedAt": "2025-09-25T19:58:20.000Z",
+          "date": "Sep 25, 2025 · 7:00 AM",
+          "publishedAt": "2025-09-25T07:00:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxOMnhyRWY2cnFBWk5XSjdnTUpaNGNvSE4zZUM4YlFOUnQ0M2dNd0hYa3hfUnVlVUVlMUJtQ1pyRUt1ckZVbXdIQl84RFBjdnV6M09hRDVOaXktQXpEXzVob3VHMlR3eFVPbHRhSDVNSWo3S0JEeHUyenAxWTNnVGtaMzhtMzBEXzZvZnR3WVNNc0tiQWJsY21XMVlTWFlxY2c4Z1ljR0t3S2JrVjJCbDlqNmtSNnNxazk0dm0zUzdBZnk1YUpZVVRwbjExS01hY3U3TXpQdW5EN2wyTlJHUnYzak5lc0tQdVFKSTRvTG5vYzk2Nk0?oc=5",
           "importance": 3
@@ -31731,7 +31757,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:09.360Z",
+      "officialLastOkAt": "2026-11-26T00:12:07.369Z",
       "officialLastError": null
     },
     "br": {
@@ -33692,6 +33718,19 @@
           "publishedAt": "2026-08-05T07:00:00.000Z",
           "dateOnly": true,
           "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPNTNQV3FPRmZuZU1fV0RESEpRYk5lOUIwMEpDSG5QSFd1R0lpaG9tZ1VwZFJfdEdWV09WWlo2c1hZVHZCeEpMYzhUYm9ZSkwzSHRCUl95SGV3VS1ySmNYSkRNeU5vbmRDU095dEx5c2JyMUFnTmxGNnFmTzBMRjhLOU0tZExpTGFhWUVFbWxvY2VJcVk3OUJqVW9Dd2xJblRiYlNONW82WGYxRXVvLU5ORmx6SlFzbWxDWjFQZWVWc2llenVRN1lGQTBPR1Nod05ZVHh1aA?oc=5",
+          "importance": 3
+        },
+        {
+          "id": "br-official-b8cb47bf7bd59147",
+          "countryId": "br",
+          "sourceType": "official",
+          "source": "Presidência",
+          "headline": "Setor automotivo é tema entre governo federal e ANFAVEA — Planalto - www.gov.br",
+          "summary": "Setor automotivo é tema entre governo federal e ANFAVEA — Planalto www.gov.br",
+          "date": "Aug 5, 2026",
+          "publishedAt": "2026-08-05T07:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQeFFqdzVIOWFyWEZkblhEd2NFT2hHTTllcEpZbDkzSGtZcVJWd0drZktWYTFzVGp3cDZYdUFNN0Q3ZWdPamdWdzFaWk95b3JLNk9ZTi1wMEh1M1VRZHlWOHJ4QUJsZ05iWE1ocVZCOHltLUZNVEZJNjJweW5oa2xZT2RSLUhhSGg0cXUzMVBHUXRBN2Rpa3BadkszRzVVZElOVW1uMHhlRkswQWhUM1F0YTByb1RaaWM1a2tYNmhIZWdYU3V3Y0hBT0tFT1BON2owcUlXUkJMMkwyQQ?oc=5",
           "importance": 3
         },
         {
@@ -35840,6 +35879,19 @@
           "importance": 3
         },
         {
+          "id": "br-official-f057be7975edcf18",
+          "countryId": "br",
+          "sourceType": "official",
+          "source": "Presidência",
+          "headline": "Notas à Imprensa — Planalto - www.gov.br",
+          "summary": "Notas à Imprensa — Planalto www.gov.br",
+          "date": "Jul 14, 2024",
+          "publishedAt": "2024-07-14T07:00:00.000Z",
+          "dateOnly": true,
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQbHVMbkNONTJhOXJuY2NINnBCZjFzN0Y1OUtOdnZoUUhzYUxYeGVGOFhQLW9GUjZfdll2U0YyZ0VWcTRKaHhEaUNSYUtDRzdqWWF4ak5tbFZPd21oZ2hsUEoyeEpwRW1HNDhoUDFGQ25hMFV2U0xxZVEtM2pmZ2pYVGxRajdUWVdTbFkzOGhIcw?oc=5",
+          "importance": 3
+        },
+        {
           "id": "br-official-bf1921bee1454d7c",
           "countryId": "br",
           "sourceType": "official",
@@ -36390,13 +36442,18 @@
           "countryId": "br",
           "sourceType": "official",
           "source": "Presidência",
-          "headline": "Agenda de Presidente da República para 24/11/2026 — Planalto - GOV.BR",
-          "summary": "Agenda de Presidente da República para 24/11/2026 — Planalto GOV.BR",
-          "date": "Nov 24, 2026",
+          "headline": "Agenda de Presidente da República para 25/11/2026 — Planalto - Governo Federal",
+          "summary": "Agenda de Presidente da República para 25/11/2026 — Planalto Governo Federal",
+          "date": "Nov 25, 2026",
           "publishedAt": "2023-01-05T14:58:31.000Z",
           "dateOnly": true,
           "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNc0FhUkZmVm1aQlI4STEtc1J0Z3VMTjg5TzBEcFdjUjNhcnZNMER5NzIyYk91cUh1N2lWbEJoT2IzdjdiN1hDREVCX1E4eUllYVdBbTVpNFg0SmI1T0dGN0pETnUxT2ZGNTlKdms3bVp2eTlEMmhKTEpMWk5SalFuY09pTkVLc0J0OHJnb240ZkE5S3ZhN1RhNFdab1B2bmxLcWZ4bm5vSGhubWIyb25mWWxENHk4LXZpUXdjXzJlUHJpN3BuV1E?oc=5",
-          "importance": 3
+          "importance": 3,
+          "tr": {
+            "from": "pt",
+            "headline": "Schedule of the President of the Republic for November 25, 2026 — Planalto - Federal Government",
+            "summary": "Schedule of the President of the Republic for November 25, 2026 — Planalto, Federal Government"
+          }
         },
         {
           "id": "br-official-797aa9f3d11d0a19",
@@ -42045,7 +42102,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:10.345Z",
+      "officialLastOkAt": "2026-11-26T00:12:08.360Z",
       "officialLastError": null
     },
     "ar": {
@@ -47671,7 +47728,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:11.208Z",
+      "officialLastOkAt": "2026-11-26T00:12:09.544Z",
       "officialLastError": null
     },
     "gb": {
@@ -49433,6 +49490,19 @@
           "importance": 2
         },
         {
+          "id": "gb-independent-14aa65f2ae93a2d6",
+          "countryId": "gb",
+          "sourceType": "independent",
+          "source": "Financial Times",
+          "headline": "British household energy bills to soar 26% from January - Financial Times",
+          "summary": "British household energy bills to soar 26% from January Financial Times",
+          "date": "Nov 25, 2026 · 8:51 AM",
+          "publishedAt": "2026-11-25T08:51:47.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNamxuTERESnp4SVhnbUlPejBFMTBFUm5tcC1oME1Pd2JYckIwQ2Z2aEtkNk1lM0tFVUpWYVdub3d0YkV0NEFtRUh4c1ZaZndjd0FqQ0NwRGUycWxOTnlhREpJRTM2Ymp0Mnh2bFRZTmJWSk1uVmNWSWJEdEhPUWludjhoX3A?oc=5",
+          "importance": 2
+        },
+        {
           "id": "gb-independent-af39264c4cf86e5f",
           "countryId": "gb",
           "sourceType": "independent",
@@ -49443,19 +49513,6 @@
           "publishedAt": "2026-11-25T08:00:02.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE45UEt6ZnlnT3lJaUNFSE9peENHd241VmIyanpGUGtOOHZtdEV5SVlINnQ1dXpHX2hlSFFGRGFsdXpIOWxxVzdhcnF4bC1uZHBiTXl5U0pkT3hYVnF4dDFfRFRGVmk5TkctRW50WGVRaS0?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "gb-independent-14aa65f2ae93a2d6",
-          "countryId": "gb",
-          "sourceType": "independent",
-          "source": "Financial Times",
-          "headline": "British household energy bills to soar 26% from January - Financial Times",
-          "summary": "British household energy bills to soar 26% from January Financial Times",
-          "date": "Nov 25, 2026 · 7:13 AM",
-          "publishedAt": "2026-11-25T07:13:39.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNamxuTERESnp4SVhnbUlPejBFMTBFUm5tcC1oME1Pd2JYckIwQ2Z2aEtkNk1lM0tFVUpWYVdub3d0YkV0NEFtRUh4c1ZaZndjd0FqQ0NwRGUycWxOTnlhREpJRTM2Ymp0Mnh2bFRZTmJWSk1uVmNWSWJEdEhPUWludjhoX3A?oc=5",
           "importance": 2
         },
         {
@@ -49498,29 +49555,29 @@
           "importance": 2
         },
         {
-          "id": "gb-independent-bef9540e6a3a4db7",
-          "countryId": "gb",
-          "sourceType": "independent",
-          "source": "Financial Times",
-          "headline": "London hedge fund Qube squares up to US rivals in expansion drive - Financial Times",
-          "summary": "London hedge fund Qube squares up to US rivals in expansion drive Financial Times",
-          "date": "Nov 25, 2026 · 5:02 AM",
-          "publishedAt": "2026-11-25T05:02:44.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQOVZFaFdwRUNuQ25zMzJVNHhRaWRDSVJ6WVVfXzRoaldyZTRyczJsc2NWdWRQNjlMRUNYWnIwVF9pWHluTjdkcndaVG9UQmRlaFdkQ1BUeE5XTFFGVl9VNm41MVhoenhXeDdEOW9wOXg0NmVCcnFRMzlwOGs2ODhwUWlOckc?oc=5",
-          "importance": 2
-        },
-        {
           "id": "gb-independent-ba2bdecf563a5e7f",
           "countryId": "gb",
           "sourceType": "independent",
           "source": "Financial Times",
           "headline": "British drone developers hampered by outdated laws, industry warns - Financial Times",
           "summary": "British drone developers hampered by outdated laws, industry warns Financial Times",
-          "date": "Nov 25, 2026 · 5:00 AM",
-          "publishedAt": "2026-11-25T05:00:32.000Z",
+          "date": "Nov 25, 2026 · 5:14 AM",
+          "publishedAt": "2026-11-25T05:14:15.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPVFVpS2JZdzFQNlNrVlFwSXl4TlFGeGl1TzV3ZDh3VTF6RV9FSkpHaS0zck04SGthZXU1Mm14RmZqYV9wN21hZ2RRbHZMZlZuX3FBX3V0eWk2bFBWdEo2Ul80d04xXzIwbXNKM2JYSk1wWXJiVk90WllfaVFzdE41MUhEcnA?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "gb-independent-bef9540e6a3a4db7",
+          "countryId": "gb",
+          "sourceType": "independent",
+          "source": "Financial Times",
+          "headline": "London hedge fund Qube squares up to US rivals in expansion drive - Financial Times",
+          "summary": "London hedge fund Qube squares up to US rivals in expansion drive Financial Times",
+          "date": "Nov 25, 2026 · 5:00 AM",
+          "publishedAt": "2026-11-25T05:00:22.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQOVZFaFdwRUNuQ25zMzJVNHhRaWRDSVJ6WVVfXzRoaldyZTRyczJsc2NWdWRQNjlMRUNYWnIwVF9pWHluTjdkcndaVG9UQmRlaFdkQ1BUeE5XTFFGVl9VNm41MVhoenhXeDdEOW9wOXg0NmVCcnFRMzlwOGs2ODhwUWlOckc?oc=5",
           "importance": 2
         },
         {
@@ -55883,7 +55940,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:12.522Z",
+      "officialLastOkAt": "2026-11-26T00:12:12.652Z",
       "officialLastError": null
     },
     "fr": {
@@ -57687,6 +57744,32 @@
       ],
       "independent": [
         {
+          "id": "fr-independent-a544ea9c94028e80",
+          "countryId": "fr",
+          "sourceType": "independent",
+          "source": "France 24",
+          "headline": "Duran Duran guitarist Andy Taylor dies aged 65 - France 24",
+          "summary": "Duran Duran guitarist Andy Taylor dies aged 65 France 24",
+          "date": "Nov 25, 2026 · 11:37 PM",
+          "publishedAt": "2026-11-25T23:37:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQclN1LU10TVNwaFNaMklXWTU3bFJoU1NvamQtdnRPTWxIXzFaY0J3NG9yUjFwR3NMZW9vRXBfWGx2SDJLekE4WmNHVXBaTjlib0FJWFhEM1FQU2hzMFdNWkJ3ZjBLNDRNTmlOOHBhaFd4MnhjZjJybDFPc3BPUWtnRDNTRV9CbVNzcWVPQllqR3JPdW9Pc1E?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "fr-independent-911834a9e6bdd7b9",
+          "countryId": "fr",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Andy Taylor, guitarist of new wave icons Duran Duran, dies at 65 - AP News",
+          "summary": "Andy Taylor, guitarist of new wave icons Duran Duran, dies at 65 AP News",
+          "date": "Nov 25, 2026 · 11:12 PM",
+          "publishedAt": "2026-11-25T23:12:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNN2V2OUxYWk12T2E3d0g5SFVQNDA2LW9qdkNtZDZJdmVtelh4amRUNEtNYXNfN1hraG9KcnhnSFlpbmZ5TXlpSkVrVVgxa3lMaUpydlRyeHVGREN5aGpUN1BDUEJpYnE1dC1lTGh3OHR1UWkzZVJpMkdPaEkzd1padXdRYnNrQXBJYnlaVEc1bVVVUQ?oc=5",
+          "importance": 2
+        },
+        {
           "id": "fr-independent-8c98ac5048d76a68",
           "countryId": "fr",
           "sourceType": "independent",
@@ -57697,19 +57780,6 @@
           "publishedAt": "2026-11-25T22:06:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPcWJ0MDE3ZEJzV2tVdThRbXdzcGxXN0phLUpNTHAyVWlEQV9JNzVUWlpsRXp6ZHFTNnY1dnpKMHJjNExkUnZxTlRXdzZNTUFOeXhkUTk5XzF0ZW55b1lZcnhJYTkyYUt5N1lvdm5TZ3QyZDh5UkNsVmtHMmhuNm5xcGc3VmVUcV9fellldEtWcTdaYWJpRUlBcm5R?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "fr-independent-911834a9e6bdd7b9",
-          "countryId": "fr",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Andy Taylor, guitarist of new wave icons Duran Duran, dies at 65 - AP News",
-          "summary": "Andy Taylor, guitarist of new wave icons Duran Duran, dies at 65 AP News",
-          "date": "Nov 25, 2026 · 9:55 PM",
-          "publishedAt": "2026-11-25T21:55:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNN2V2OUxYWk12T2E3d0g5SFVQNDA2LW9qdkNtZDZJdmVtelh4amRUNEtNYXNfN1hraG9KcnhnSFlpbmZ5TXlpSkVrVVgxa3lMaUpydlRyeHVGREN5aGpUN1BDUEJpYnE1dC1lTGh3OHR1UWkzZVJpMkdPaEkzd1padXdRYnNrQXBJYnlaVEc1bVVVUQ?oc=5",
           "importance": 2
         },
         {
@@ -58100,6 +58170,19 @@
           "publishedAt": "2026-11-23T08:19:05.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPblQyZXdTcDdXejZ6aDR0Tm9KT3Y4ODIxR2RlR21CVmlzblNGWlpTbTNtYkpXTFoxRXhBMTB2djJkRWYtakVmRUJHdkVPbWxac3RsN01FZF9pai1hNmR1Nl9RWEJ2UjBBNkg0SF94a2xhTEhyQzR5VkVoWDFuVUE1eU1rT1hKWkMwUWJEWm96OGZSdDNRc3NDTWwzcXdxLWhBd3o0cXdBeWlkc2NVRnZVUg?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "fr-independent-69c5985c131b5179",
+          "countryId": "fr",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "France's EDF nears investment decision on new nuclear reactors, say sources - Reuters",
+          "summary": "France's EDF nears investment decision on new nuclear reactors, say sources Reuters",
+          "date": "Nov 23, 2026 · 8:00 AM",
+          "publishedAt": "2026-11-23T08:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQV1ZvQWhEWTNGNENvLVNNLVk0R3VCc2NkRmFzby1mS0ZuSlpocVFKMl9tLTRjcGVDVm9DcmgyUm5sT042dGpKMU9zRGNyRm1BemVQTzI5OC1lS0RzRkIyY0oyOHQ0UUhwMUNlSGlpWE5RWmdyNGZ6YTdwdWJRREQxQUlmU0FhNFpoam4ydTFwVWJzaVNYZmNnYkFGbWtodDUyNDlWQS0xZG5TYUllNWZTbzNFNm9SRXVkbWRBUTlyOA?oc=5",
           "importance": 2
         },
         {
@@ -58649,19 +58732,6 @@
           "importance": 2
         },
         {
-          "id": "fr-independent-69c5985c131b5179",
-          "countryId": "fr",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "France's EDF nears investment decision on new nuclear reactors, say sources - Reuters",
-          "summary": "France's EDF nears investment decision on new nuclear reactors, say sources Reuters",
-          "date": "Nov 20, 2026 · 12:01 PM",
-          "publishedAt": "2026-11-20T12:01:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQV1ZvQWhEWTNGNENvLVNNLVk0R3VCc2NkRmFzby1mS0ZuSlpocVFKMl9tLTRjcGVDVm9DcmgyUm5sT042dGpKMU9zRGNyRm1BemVQTzI5OC1lS0RzRkIyY0oyOHQ0UUhwMUNlSGlpWE5RWmdyNGZ6YTdwdWJRREQxQUlmU0FhNFpoam4ydTFwVWJzaVNYZmNnYkFGbWtodDUyNDlWQS0xZG5TYUllNWZTbzNFNm9SRXVkbWRBUTlyOA?oc=5",
-          "importance": 2
-        },
-        {
           "id": "fr-independent-fbee4e9dd8b7bea6",
           "countryId": "fr",
           "sourceType": "independent",
@@ -59169,19 +59239,6 @@
           "importance": 2
         },
         {
-          "id": "fr-independent-1077ec48745912df",
-          "countryId": "fr",
-          "sourceType": "independent",
-          "source": "Le Monde",
-          "headline": "French MP's campaign against forever chemicals wins Earthshot Prize - Le Monde.fr",
-          "summary": "French MP's campaign against forever chemicals wins Earthshot Prize Le Monde.fr",
-          "date": "Nov 17, 2026 · 7:49 PM",
-          "publishedAt": "2026-11-17T19:49:09.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPVzVhc0NqY1drUjRJVDVLQlI3bTVxeTJCVV9GZ256bUhsdGtvM3RTekxpX2RJbnlUcHJhYWRJR1FSSFpWR3FKT2JWTE0xdjBDNDh6TDJXSjFKOEtKNGRPekVFU3RrcUxobDJ6MjhWNmR2bWdUbkVmeWVQUGE0VlV1bjlxcWRZQkFBWGpENi1LNmpHYW9HQmlPY1NWR05xU19ueWJpczNFdlMtWnVRLU1obEJxd1FEUzhOZmFOa2dQNHpCRTBaR0p1amhITXdQSTRDQ1dvd1hEYjI?oc=5",
-          "importance": 2
-        },
-        {
           "id": "fr-independent-29d07d6baa492b14",
           "countryId": "fr",
           "sourceType": "independent",
@@ -59309,6 +59366,19 @@
           "publishedAt": "2026-11-17T08:05:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOTmtvQ3JUM1M5UjhSRGpfc2luWlBNVHhrZk5aS1NNeTdoSEE1cU1FTnFXQkFtMUNZV3JJbjBWMzU3WTJ5TXJQb2t6RklIZlNjam1SUHJlM2gzcUYzbW5xUjJuVXhMSTJ3VUhtU3pzMmEtYzZ0Ynl0cGRIbV9hRWtFdUVaOFI0aENJSUw2c3I0UnE?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "fr-independent-1077ec48745912df",
+          "countryId": "fr",
+          "sourceType": "independent",
+          "source": "Le Monde",
+          "headline": "French MP's campaign against forever chemicals wins Earthshot Prize - Le Monde.fr",
+          "summary": "French MP's campaign against forever chemicals wins Earthshot Prize Le Monde.fr",
+          "date": "Nov 17, 2026 · 8:00 AM",
+          "publishedAt": "2026-11-17T08:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPVzVhc0NqY1drUjRJVDVLQlI3bTVxeTJCVV9GZ256bUhsdGtvM3RTekxpX2RJbnlUcHJhYWRJR1FSSFpWR3FKT2JWTE0xdjBDNDh6TDJXSjFKOEtKNGRPekVFU3RrcUxobDJ6MjhWNmR2bWdUbkVmeWVQUGE0VlV1bjlxcWRZQkFBWGpENi1LNmpHYW9HQmlPY1NWR05xU19ueWJpczNFdlMtWnVRLU1obEJxd1FEUzhOZmFOa2dQNHpCRTBaR0p1amhITXdQSTRDQ1dvd1hEYjI?oc=5",
           "importance": 2
         },
         {
@@ -64172,24 +64242,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxPelRLS2hUZ09YdzdkS2gxSTlJVDYyM1dPejJIalg2V21wVHRXcC1lcU43N3BFUS03TDVKMkx5ZVhSWHQxeTZQLXpVeWRlM1l0TEx3SnNEaFpDV2llQjlYd3NRaWwzakR3MUdhNzRSeFVpMnJrOUJLQTNIQW90LTQ5WGVsMUtwTjk1eDdadEVDc2RxdGc2RVBhY1c2VENGWWh2QVlpTEUtSnM0RlFLckdyZzhiMU1pUVdXaTRsZ0wyNXJ2NDMyZ0ZBdGppcE5mSWZTU0lTOUk5amZzYTJVZng3V3k1V29rcllkbDlaVllVdGdGZw?oc=5",
           "importance": 2
-        },
-        {
-          "id": "fr-independent-30ed9f30f1c63af7",
-          "countryId": "fr",
-          "sourceType": "independent",
-          "source": "France 24",
-          "headline": "France to deploy 70,000 police officers as students call for fresh protests Saturday - France 24",
-          "summary": "France to deploy 70,000 police officers as students call for fresh protests Saturday France 24",
-          "date": "Oct 23, 2026 · 8:34 AM",
-          "publishedAt": "2026-10-23T08:34:52.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQT1RCZE5xWWFXcmJOOEtUODZaOGRBZ1JhOGU3d1loNjRIcHotdzRGSFk4cUJtaXd1RGZqc2h5S2F2UzVFSVhBeWpYa0hHakx5YUJFUkNpVGpkN25DRkJFQ3JZT2dFNWFaSHdWdkk3bFdBQ3hSY3BWaFczRENyYWx1VnVKU3BCZUNFemxja0p4ZndjbjhySENROFFrZHpZZVFJNEhCS2RJaGRaZXJncEQ0d2tFRnVaVTZU?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:13.624Z",
+      "officialLastOkAt": "2026-11-26T00:12:14.732Z",
       "officialLastError": null
     },
     "de": {
@@ -64747,16 +64804,16 @@
       ],
       "independent": [
         {
-          "id": "de-independent-d9df547e6c8afba1",
+          "id": "de-independent-9020e7d3d108e4a6",
           "countryId": "de",
           "sourceType": "independent",
           "source": "Deutsche Welle",
-          "headline": "German auto workers on the back foot as the industry struggles with high costs and mounting competition - DW.com",
-          "summary": "German auto workers on the back foot as the industry struggles with high costs and mounting competition DW.com",
-          "date": "Nov 25, 2026 · 7:30 PM",
-          "publishedAt": "2026-11-25T19:30:00.000Z",
+          "headline": "Domestic violence in Germany is at an all-time high - DW.com",
+          "summary": "Domestic violence in Germany is at an all-time high DW.com",
+          "date": "Nov 25, 2026 · 4:06 PM",
+          "publishedAt": "2026-11-25T16:06:51.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOcm83R3ZNWmctZ0hkaGQwdi1MRmRucjhmeWlxNHhCTVpBRkF1UUxrQ2d1ZUw1aEJIV2dZOExKVnAyQlpQWDBuQTVVRmJXRG1hWG9jX0lNcGdtTWRkN0RyR3NUUlBCb3p6Tm5ndEVmd0NLNE9fTVBJVG5zWWNsc3BRNG84SjBoWE9NbmV6ZERySEt4N2NUVlHSAZYBQVVfeXFMUFBkT09UMDNMb3VyTlVzYlZCc1U3RS1leFd6ck5kaHp5ZkFoaWd0SU9zQjk0VXg5dzNHOGg5UDUzc3h0LWxOQlFlNjQwZUVvUmhGNlFudFFZcnBwZWk1ajY0UjlkTkVhQzFrSkNnc0tsODdfRWpzMlNWc3l1dDBRc0YzMGlxajBHOG8xckRJSDBzNW9HS01B?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOSGhtWDJoZE9YdnZOVGF3UW9FUVZSV3BJcDdrNkdidXg0bXBkWnNCel9vR19JdnRDdEVkaVNBeWRwTUZSZlRmN1B1WjVzMWs1S3YxUnRTWnU4ZnEtLVdtd3JmZ1FwS2tiQkwwZGxoWFZJUTBaQlJTTGozbDNtdGxqNDFldHFBWlNacEHSAYoBQVVfeXFMT241ZW1hNGF1TDNqT2MwZ3VULTY2a2dBSElVdDQ1MWZDUWZvQVhQOFNHWl83TmcxbWJGYVUtaDNlbFNCWkVfNFFTSG9kcE9kend6dXUyZS1WOC0zaU5NMFJ2c3BpR3ZpcUhNSmRfVGFqTGQ2TUMweUFNU0trT0ltNTRldDhYRkJaVHpR?oc=5",
           "importance": 2
         },
         {
@@ -64786,16 +64843,16 @@
           "importance": 2
         },
         {
-          "id": "de-independent-9020e7d3d108e4a6",
+          "id": "de-independent-d9df547e6c8afba1",
           "countryId": "de",
           "sourceType": "independent",
           "source": "Deutsche Welle",
-          "headline": "Domestic violence in Germany is at an all-time high - DW.com",
-          "summary": "Domestic violence in Germany is at an all-time high DW.com",
-          "date": "Nov 25, 2026 · 7:58 AM",
-          "publishedAt": "2026-11-25T07:58:56.000Z",
+          "headline": "German auto workers on the back foot as the industry struggles with high costs and mounting competition - DW.com",
+          "summary": "German auto workers on the back foot as the industry struggles with high costs and mounting competition DW.com",
+          "date": "Nov 25, 2026 · 9:23 AM",
+          "publishedAt": "2026-11-25T09:23:42.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOSGhtWDJoZE9YdnZOVGF3UW9FUVZSV3BJcDdrNkdidXg0bXBkWnNCel9vR19JdnRDdEVkaVNBeWRwTUZSZlRmN1B1WjVzMWs1S3YxUnRTWnU4ZnEtLVdtd3JmZ1FwS2tiQkwwZGxoWFZJUTBaQlJTTGozbDNtdGxqNDFldHFBWlNacEHSAYoBQVVfeXFMT241ZW1hNGF1TDNqT2MwZ3VULTY2a2dBSElVdDQ1MWZDUWZvQVhQOFNHWl83TmcxbWJGYVUtaDNlbFNCWkVfNFFTSG9kcE9kend6dXUyZS1WOC0zaU5NMFJ2c3BpR3ZpcUhNSmRfVGFqTGQ2TUMweUFNU0trT0ltNTRldDhYRkJaVHpR?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOcm83R3ZNWmctZ0hkaGQwdi1MRmRucjhmeWlxNHhCTVpBRkF1UUxrQ2d1ZUw1aEJIV2dZOExKVnAyQlpQWDBuQTVVRmJXRG1hWG9jX0lNcGdtTWRkN0RyR3NUUlBCb3p6Tm5ndEVmd0NLNE9fTVBJVG5zWWNsc3BRNG84SjBoWE9NbmV6ZERySEt4N2NUVlHSAZYBQVVfeXFMUFBkT09UMDNMb3VyTlVzYlZCc1U3RS1leFd6ck5kaHp5ZkFoaWd0SU9zQjk0VXg5dzNHOGg5UDUzc3h0LWxOQlFlNjQwZUVvUmhGNlFudFFZcnBwZWk1ajY0UjlkTkVhQzFrSkNnc0tsODdfRWpzMlNWc3l1dDBRc0YzMGlxajBHOG8xckRJSDBzNW9HS01B?oc=5",
           "importance": 2
         },
         {
@@ -65050,8 +65107,8 @@
           "countryId": "de",
           "sourceType": "independent",
           "source": "Deutsche Welle",
-          "headline": "Schools across Germany receive bomb threats by email in similar pattern seen in other European countries - DW.com",
-          "summary": "Schools across Germany receive bomb threats by email in similar pattern seen in other European countries DW.com",
+          "headline": "Schools across Germany receive bomb threats by email in similar pattern seen in other European countries - Deutsche Welle",
+          "summary": "Schools across Germany receive bomb threats by email in similar pattern seen in other European countries Deutsche Welle",
           "date": "Nov 23, 2026 · 2:25 PM",
           "publishedAt": "2026-11-23T14:25:48.000Z",
           "dateOnly": false,
@@ -71249,7 +71306,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:15.417Z",
+      "officialLastOkAt": "2026-11-26T00:12:17.456Z",
       "officialLastError": null
     },
     "it": {
@@ -80179,7 +80236,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:17.604Z",
+      "officialLastOkAt": "2026-11-26T00:12:19.309Z",
       "officialLastError": null
     },
     "es": {
@@ -88896,7 +88953,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:19.143Z",
+      "officialLastOkAt": "2026-11-26T00:12:20.739Z",
       "officialLastError": null
     },
     "pl": {
@@ -94664,7 +94721,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:21.533Z",
+      "officialLastOkAt": "2026-11-26T00:12:23.365Z",
       "officialLastError": null
     },
     "ua": {
@@ -94872,8 +94929,8 @@
           "countryId": "ua",
           "sourceType": "official",
           "source": "Office of the President",
-          "headline": "Рамштайн» дав додаткові пакети, серед них більш ніж 700 мільйонів доларів на програму PURL - Офіційне інтернет-представництво Президента України",
-          "summary": "Рамштайн» дав додаткові пакети, серед них більш ніж 700 мільйонів доларів на програму PURL Офіційне інтернет-представництво Президента України",
+          "headline": "«Рамштайн» дав додаткові пакети, серед них більш ніж 700 мільйонів доларів на програму PURL – звернення Президента - Офіційне інтернет-представництво Президента України",
+          "summary": "«Рамштайн» дав додаткові пакети, серед них більш ніж 700 мільйонів доларів на програму PURL – звернення Президента Офіційне інтернет-представництво Президента України",
           "date": "Nov 25, 2026 · 5:46 PM",
           "publishedAt": "2026-11-25T17:46:00.000Z",
           "dateOnly": false,
@@ -94881,8 +94938,8 @@
           "importance": 3,
           "tr": {
             "from": "uk",
-            "headline": "\"Ramstein\" provided additional funding, including more than $700 million for the PURL program - Official Website of the President of Ukraine",
-            "summary": "\"Ramstein\" provided additional funding, including more than $700 million for the PURL program. Official Website of the President of Ukraine"
+            "headline": "\"Ramstein\" provided additional funding, including more than $700 million for the PURL program – Statement by the President - Official Website of the President of Ukraine",
+            "summary": "\"Ramstein\" provided additional funding, including more than $700 million for the PURL program – Statement by the President | Official Website of the President of Ukraine"
           }
         },
         {
@@ -96186,8 +96243,8 @@
           "countryId": "ua",
           "sourceType": "official",
           "source": "Office of the President",
-          "headline": "УКАЗ ПРЕЗИДЕНТА УКРАЇНИ №1134/2026 — Офіційне інтернет-представництво Президента України - Офіційне інтернет-представництво Президента України",
-          "summary": "УКАЗ ПРЕЗИДЕНТА УКРАЇНИ №1134/2026 — Офіційне інтернет-представництво Президента України Офіційне інтернет-представництво Президента України",
+          "headline": "УКАЗ ПРЕЗИДЕНТА УКРАЇНИ №1134/2026 - Офіційне інтернет-представництво Президента України",
+          "summary": "УКАЗ ПРЕЗИДЕНТА УКРАЇНИ №1134/2026 Офіційне інтернет-представництво Президента України",
           "date": "Nov 23, 2026 · 7:08 PM",
           "publishedAt": "2026-11-23T19:08:20.000Z",
           "dateOnly": false,
@@ -96195,8 +96252,8 @@
           "importance": 3,
           "tr": {
             "from": "uk",
-            "headline": "DECREE OF THE PRESIDENT OF UKRAINE No. 1134/2026 — Official Website of the President of Ukraine - Official Website of the President of Ukraine",
-            "summary": "DECREE OF THE PRESIDENT OF UKRAINE No. 1134/2026 — Official Website of the President of Ukraine Official Website of the President of Ukraine"
+            "headline": "DECREE OF THE PRESIDENT OF UKRAINE No. 1134/2026 - Official Website of the President of Ukraine",
+            "summary": "DECREE OF THE PRESIDENT OF UKRAINE No. 1134/2026 Official Website of the President of Ukraine"
           }
         },
         {
@@ -96276,8 +96333,8 @@
           "countryId": "ua",
           "sourceType": "official",
           "source": "Office of the President",
-          "headline": "УКАЗ ПРЕЗИДЕНТА УКРАЇНИ №1131/2026 — Офіційне інтернет-представництво Президента України - Офіційне інтернет-представництво Президента України",
-          "summary": "УКАЗ ПРЕЗИДЕНТА УКРАЇНИ №1131/2026 — Офіційне інтернет-представництво Президента України Офіційне інтернет-представництво Президента України",
+          "headline": "УКАЗ ПРЕЗИДЕНТА УКРАЇНИ №1131/2026 - Офіційне інтернет-представництво Президента України",
+          "summary": "УКАЗ ПРЕЗИДЕНТА УКРАЇНИ №1131/2026 Офіційне інтернет-представництво Президента України",
           "date": "Nov 23, 2026 · 6:29 PM",
           "publishedAt": "2026-11-23T18:29:21.000Z",
           "dateOnly": false,
@@ -96285,8 +96342,8 @@
           "importance": 3,
           "tr": {
             "from": "uk",
-            "headline": "DECREE OF THE PRESIDENT OF UKRAINE No. 1131/2026 — Official Website of the President of Ukraine - Official Website of the President of Ukraine",
-            "summary": "DECREE OF THE PRESIDENT OF UKRAINE No. 1131/2026 — Official Website of the President of Ukraine Official Website of the President of Ukraine"
+            "headline": "DECREE OF THE PRESIDENT OF UKRAINE No. 1131/2026 - Official Website of the President of Ukraine",
+            "summary": "DECREE OF THE PRESIDENT OF UKRAINE No. 1131/2026 Official Website of the President of Ukraine"
           }
         },
         {
@@ -98058,8 +98115,8 @@
           "countryId": "ua",
           "sourceType": "official",
           "source": "Office of the President",
-          "headline": "Про присвоєння почесного звання Героя України (посмертно) старшому солдату Збройних Сил України Михайлику Віктору Петровичу Електронні петиції — Офіційне інтернет-представництво Президента України - Офіційне інтернет-представництво Президента України",
-          "summary": "Про присвоєння почесного звання Героя України (посмертно) старшому солдату Збройних Сил України Михайлику Віктору Петровичу Електронні петиції — Офіційне інтернет-представництво Президента України Офіційне інтернет-пр…",
+          "headline": "Про присвоєння почесного звання Героя України (посмертно) старшому солдату Збройних Сил України Михайлику Віктору Петровичу Електронні петиції - Офіційне інтернет-представництво Президента України",
+          "summary": "Про присвоєння почесного звання Героя України (посмертно) старшому солдату Збройних Сил України Михайлику Віктору Петровичу Електронні петиції Офіційне інтернет-представництво Президента України",
           "date": "Nov 19, 2026 · 1:41 PM",
           "publishedAt": "2026-11-19T13:41:01.000Z",
           "dateOnly": false,
@@ -98067,8 +98124,8 @@
           "importance": 3,
           "tr": {
             "from": "uk",
-            "headline": "On Awarding the Honorary Title of Hero of Ukraine (posthumously) to Senior Soldier of the Armed Forces of Ukraine Viktor Petrovych Mykhailyk | Electronic Petitions — Official Website of the President of Ukraine - Official Website of the President of Ukraine",
-            "summary": "On conferring the honorary title of Hero of Ukraine (posthumously) on Senior Soldier of the Armed Forces of Ukraine Viktor Petrovych Mykhailyk. Electronic Petitions — Official Website of the President of Ukraine. Official Website…"
+            "headline": "On conferring the honorary title of Hero of Ukraine (posthumously) on Senior Soldier of the Armed Forces of Ukraine Viktor Petrovich Mykhailyk | Electronic Petitions - Official Website of the President of Ukraine",
+            "summary": "On Awarding the Honorary Title of Hero of Ukraine (posthumously) to Senior Private Viktor Petrovich Mykhailyk of the Armed Forces of Ukraine | Electronic Petitions | Official Website of the President of Ukraine"
           }
         },
         {
@@ -103671,6 +103728,19 @@
         }
       ],
       "independent": [
+        {
+          "id": "ua-independent-a9ff38e369391807",
+          "countryId": "ua",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "Russian forces hit Kyiv with ballistic missiles, mayor says - Reuters",
+          "summary": "Russian forces hit Kyiv with ballistic missiles, mayor says Reuters",
+          "date": "Nov 25, 2026 · 10:07 PM",
+          "publishedAt": "2026-11-25T22:07:09.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOOUhrdXc0NFhybXpCcmF1VjM2RlFseVBqOW0xdXJBQlZWT0w5TmZRTjFTbEpjWTVlZHBmMHZMQ0tVcm5OMnk5RjhKWklxQlFfY1hDQTB4dmZNQWwwd2tLb0xLNGRNbUpNXzNCZGw0Sm1fNlhkSEUzNUZvQ2hkVHNOMGhOOFJlSnZJcXQ4UldFb01FY2J2YmpLUW1NTi1rWnRBb3c?oc=5",
+          "importance": 2
+        },
         {
           "id": "ua-independent-bfd981d3de764a41",
           "countryId": "ua",
@@ -110162,24 +110232,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOYU5takp3TVNYY2RfSUlHLThUWUxCMzRRRGgtT3FiOHJlMHNDblpDSXVxT19KcHMzWXRlR2NsaDllV1pCem5iVjJkVi0yZFNCRHR4SmtQQW12a05EUXBLejV0ZmphejZzQkZXM2pVcURrX1dSdkdGT2RiaEp5Q2xpUkhOMUw3cFBtZHVOLVktcFI4MllnczhOUXJuS1VZNzcwZGFkSm44R0ZLOWV1WWJCX1k0N0VTRktSOFNWQy1KS2I2dFVUd0E?oc=5",
           "importance": 2
-        },
-        {
-          "id": "ua-independent-2936af63e8a21793",
-          "countryId": "ua",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "Russia steps up attacks on Ukraine's digital infrastructure, Kyiv says - Reuters",
-          "summary": "Russia steps up attacks on Ukraine's digital infrastructure, Kyiv says Reuters",
-          "date": "Oct 23, 2026 · 2:23 PM",
-          "publishedAt": "2026-10-23T14:23:45.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNc3J2MDc3anpSU2p0VjB3VkZ4YXlUTWxzYmpUVlU1NHRvQ25PU0JpS0YtQnBVWXhVUjJRZWRlaDRoQ3hTLVgxdk9CYnZyRzd1ODZyT1FrM0Z5dXdBWlE5RTdadVVxd0JqeDRfNVNhZHI1M2UwNEFlRmdPWlVOaGpHeWNGa3paRXdQZ3lwTkR5ZjhVOTBhREJKa0dVWG00OUgtZmFrOVlweUFPb1JDeG9Ub2dzeWgwUmdDQmpIUHZYNUlfRm5JM19j?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:22.562Z",
+      "officialLastOkAt": "2026-11-26T00:12:24.480Z",
       "officialLastError": null
     },
     "ru": {
@@ -111112,19 +111169,6 @@
           "importance": 3
         },
         {
-          "id": "ru-official-4f7107349af6a378",
-          "countryId": "ru",
-          "sourceType": "official",
-          "source": "Kremlin",
-          "headline": "On November 18–19, Vladimir Putin will travel to China on a working visit and will attend the 33rd APEC Summit in Shenzhen - Президент России",
-          "summary": "On November 18–19, Vladimir Putin will travel to China on a working visit and will attend the 33rd APEC Summit in Shenzhen Президент России",
-          "date": "Nov 16, 2026 · 3:47 PM",
-          "publishedAt": "2026-11-16T15:47:47.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1IU3JFY0MwTEVWdHQ0NGtlV09XdVh6clRabHVGZHNyblU1QmtjSGJ5LWZCTVJxb3FhejJwTXN0QXg0NmxvWjU5SHFUWDVKNUozWEpfQUUxcWZRVWt1?oc=5",
-          "importance": 3
-        },
-        {
           "id": "ru-official-75093d8900ecb9b2",
           "countryId": "ru",
           "sourceType": "official",
@@ -111239,6 +111283,19 @@
           "publishedAt": "2026-11-16T09:52:12.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9KektjLUlPMGhyM2FFN0ExXzVHN0hwTnhPV2VmaTV6Zmc4UTVUTEFLcXQ1MldTOVJYbnVXc0w4V3ptQ3ZDR2tsUEZBTVcwUjRfSGJ3UHJrR2g4RzZB?oc=5",
+          "importance": 3
+        },
+        {
+          "id": "ru-official-4f7107349af6a378",
+          "countryId": "ru",
+          "sourceType": "official",
+          "source": "Kremlin",
+          "headline": "On November 18–19, Vladimir Putin will travel to China on a working visit and will attend the 33rd APEC Summit in Shenzhen - Президент России",
+          "summary": "On November 18–19, Vladimir Putin will travel to China on a working visit and will attend the 33rd APEC Summit in Shenzhen Президент России",
+          "date": "Nov 16, 2026 · 8:00 AM",
+          "publishedAt": "2026-11-16T08:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1IU3JFY0MwTEVWdHQ0NGtlV09XdVh6clRabHVGZHNyblU1QmtjSGJ5LWZCTVJxb3FhejJwTXN0QXg0NmxvWjU5SHFUWDVKNUozWEpfQUUxcWZRVWt1?oc=5",
           "importance": 3
         },
         {
@@ -116721,6 +116778,19 @@
         }
       ],
       "independent": [
+        {
+          "id": "ru-independent-a9ff38e369391807",
+          "countryId": "ru",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "Russian forces hit Kyiv with ballistic missiles, mayor says - Reuters",
+          "summary": "Russian forces hit Kyiv with ballistic missiles, mayor says Reuters",
+          "date": "Nov 25, 2026 · 10:07 PM",
+          "publishedAt": "2026-11-25T22:07:09.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOOUhrdXc0NFhybXpCcmF1VjM2RlFseVBqOW0xdXJBQlZWT0w5TmZRTjFTbEpjWTVlZHBmMHZMQ0tVcm5OMnk5RjhKWklxQlFfY1hDQTB4dmZNQWwwd2tLb0xLNGRNbUpNXzNCZGw0Sm1fNlhkSEUzNUZvQ2hkVHNOMGhOOFJlSnZJcXQ4UldFb01FY2J2YmpLUW1NTi1rWnRBb3c?oc=5",
+          "importance": 2
+        },
         {
           "id": "ru-independent-dfdd93c9ae0a9039",
           "countryId": "ru",
@@ -123207,24 +123277,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPVGhCNTc0bjdqTkxuZDdtOFpCZVd1TEdDQnpURXNYeGY1ZG9saHUyZGFBbTMzWF8zbzBmOHQyeERTMTlWaUo1eUVXdjAyUENTaEkwbGNsb2xteDdxWXFybS1GcjlKWWl4VU4xUGdVdk9wSE1PM3NSTktvYWRINUpESnp4bDJqMkhzR21ySDZKWVVBbzJ5NHpDeDJFNFh5MDdGcEpWbEkzU2dFWFZBVWhxR0pR?oc=5",
           "importance": 2
-        },
-        {
-          "id": "ru-independent-d0b5b650f57a9a55",
-          "countryId": "ru",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "Evan Gershkovich on prison, Russia and liberty - Reuters",
-          "summary": "Evan Gershkovich on prison, Russia and liberty Reuters",
-          "date": "Nov 7, 2026 · 11:00 AM",
-          "publishedAt": "2026-11-07T11:00:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQZF9OSkRoSDgtRGJ2TzRBRHRfUXNycUpjRmdpbXJkcC1FWmFDOFdBWW5fQ1YzYktMSlc5dURJdkxZeUZ4LWNOU1Z5SGR3eHlXVU04WTAwWGczNC1XeHQ4QTN4UEdSQWpFQ2dsTXJnMWd2a2NTUExUdlItRzNEazFxZmlSNElwQkhkZUxqUV9aWUFUMl80clBlZGZsNFNDTnV5TlE?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:24.426Z",
+      "officialLastOkAt": "2026-11-26T00:12:26.219Z",
       "officialLastError": null
     },
     "tr": {
@@ -132835,6 +132892,19 @@
       ],
       "independent": [
         {
+          "id": "il-independent-f7d2d2cda9cbe024",
+          "countryId": "il",
+          "sourceType": "independent",
+          "source": "The Times of Israel",
+          "headline": "Eisenkot bloc said to fight over ministries as PM frets ‘only a miracle’ will save him - The Times of Israel",
+          "summary": "Eisenkot bloc said to fight over ministries as PM frets ‘only a miracle’ will save him The Times of Israel",
+          "date": "Nov 25, 2026 · 10:19 PM",
+          "publishedAt": "2026-11-25T22:19:51.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZzdSUFpBdEFib1dGcUd3bkdDbzMwUFVqVm1mc05Ddy1WdHd1eUQweVJQdVljUzVzZkZpaFREeUJULW5aZ0RGem9mNnhTT1dLSER5ZXdLbk9GaU5UaU9IVlpqd21NNndGSGtCeWo4SVZpOW9oaGVGZlA3Y2tGVnZLM2J3d1dCZF9KNlpoU3FiZnFUTEw0aEVVR2s5YlJwQy1TRlZYVFpQX2ZOeERIUTdnVk1hTHJrZ9IBuwFBVV95cUxPYUdaOW5LLVM1RmI0UG1ydy1pWHZ1UUZ6RGhBeVRJU25mQUdYNldGWlluV09pMFUyUmRmLXlwQ01rTTlOdHAwaDdjekxudlBvLTdpNHB5UjIyVDNINmdkQUM1Sl82M1NaSGNTVW1GMXFfT1ZQaWlNdk5IYkh2U0NBODA2Y1hCdnE2bjluX1QyRjlMYWlCbXBKalMyU0FyZHFkeEJ0ZEE2azRMSGF5WVJnNkNEQVJZZEplNE0w?oc=5",
+          "importance": 2
+        },
+        {
           "id": "il-independent-0f1e2a2d2e6d86d3",
           "countryId": "il",
           "sourceType": "independent",
@@ -132854,8 +132924,8 @@
           "source": "The Times of Israel",
           "headline": "Report: Netanyahu indicated to Kushner he is willing to move forward on Gaza plan - The Times of Israel",
           "summary": "Report: Netanyahu indicated to Kushner he is willing to move forward on Gaza plan The Times of Israel",
-          "date": "Nov 25, 2026 · 6:59 PM",
-          "publishedAt": "2026-11-25T18:59:01.000Z",
+          "date": "Nov 25, 2026 · 7:00 PM",
+          "publishedAt": "2026-11-25T19:00:48.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOdmxaN21IbHlScU5hQzZjMjRNV3hDWTU5RTRPdC15czJxeXBUYXdVa0MzcUdONEx3RHhDUmxuc0tsUDhfZm5EdTAxS21KZ0tqWlMxYm96Z2h1WXNXOXptVmlSXzBraHRoc3RwTHpTSTl0S1Z4dFFta0tpS1BJWWNqdlV4UjFsTk1QYlhKQndKVUg0b2xsai1VOGUyUXJKbmNKek53aVlIUWdRQWZLcFVGNWdBVEE4NWxNTUVQYmt2RWh3RXlH?oc=5",
           "importance": 2
@@ -132887,14 +132957,53 @@
           "importance": 2
         },
         {
+          "id": "il-independent-1e0ea136ef65d343",
+          "countryId": "il",
+          "sourceType": "independent",
+          "source": "The Times of Israel",
+          "headline": "First all-Jewish pair wins US’s ‘Dancing with the Stars’ - The Times of Israel",
+          "summary": "First all-Jewish pair wins US’s ‘Dancing with the Stars’ The Times of Israel",
+          "date": "Nov 25, 2026 · 6:44 PM",
+          "publishedAt": "2026-11-25T18:44:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNcTQxaGlka3JTSWh0YlRhNlJ1ZV8zanZEOWtYNzF1WnVWMC1aZnNJVWhsTWtiNUt6aGcwdXUtT0F3eFVsTVM0V2dKWUZTSnNiVm9BM2E3RFhEZGFVbHRxTVgycGtMSFdGRlJ3ZDg4TVg2SW15N1hoNFU5X29Tdm1JOWhRblFWTmRW0gGOAUFVX3lxTFB2MmNTTDhrZnB4cVlNOHZ2MUFlZW9Dc2t3NHlSQ3MyNWFyWjRWaGlRTkRMcHB0ZzZRT2lFcng0dnpGZnhVRjZsWTRvbjNaMktfRUtPS2dmN1NTTjFoejdNVF85SWh1TmJKRnFBSTFveGR4d0VrTVQtMHFHb0FpWkI0STFMMXhxNGNHRDZyQmc?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "il-independent-555c03dfdc8e94e1",
+          "countryId": "il",
+          "sourceType": "independent",
+          "source": "The Times of Israel",
+          "headline": "Josh Shapiro, set to run in 2028, slams ‘failed’ Netanyahu, says Biden didn’t check Israel enough - The Times of Israel",
+          "summary": "Josh Shapiro, set to run in 2028, slams ‘failed’ Netanyahu, says Biden didn’t check Israel enough The Times of Israel",
+          "date": "Nov 25, 2026 · 6:44 PM",
+          "publishedAt": "2026-11-25T18:44:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQaFYtR2ZXbDB6VGRoem4wc0VhbC1Cb1BGaGY0LXBGT3p4TGx2RU14TmlnN012YzJteDRsdE9FQ0cydndoTWtsLTVlZ1dVYjNzYkpkWFRsLThrazVzd2FtczJSY01SR0Y4Vi03N015ZnFMbFNiVk9oNnp2bjB6SGxUVm5LYTFMZE0yZ1hmakJSREZtU2J0b21ic3JheFJxemQ1T082VE1tX2trMGpTdFBjcEY2VUd2djNTTF9KVFZua9IBxAFBVV95cUxQM3lkOGppbEtoam9Ccnd0UmUtbkM2NXZKdExzRzgyN3F1QTdZTEJqa081QWU1X3BVbXFrVVN1M1VFRVNjc0JLSFplU05Pb3lTWGY1Tmdoa3N0T01OS1VWUm10LVdCTERVY2liaFdyZDJuZHB3VWIyN1FHRXU3ZGEyd0UwWmRzU2ptNHpuN0hwRy1Ia1lTcl81TjdZZDVxNk5mVjJNQXpDdkFyNFlrbnFyX1lxNURzLXBxRnZTZU5wRFVQVWxx?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "il-independent-d2a3900467dacf17",
+          "countryId": "il",
+          "sourceType": "independent",
+          "source": "The Times of Israel",
+          "headline": "Zamir tells Gaza border mayors IDF won't compromise on their security, after plans to cut back on superfluous reservists - The Times of Israel",
+          "summary": "Zamir tells Gaza border mayors IDF won't compromise on their security, after plans to cut back on superfluous reservists The Times of Israel",
+          "date": "Nov 25, 2026 · 6:15 PM",
+          "publishedAt": "2026-11-25T18:15:47.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxOTXh0cDBnbEl5RkZUZ1UzX3RPcnAtdy1ncjJITU5MVHFYV0J2ZnNMMXJkUGswd3o1bkZaMGh3blRoUFl6c0haWThIdHpvWTZjVl9lX3hheUN0a1hNa0ZVS3FPSUNPUFV0YzNFeEhPNG44QVRuZ3FCQ3J2ZkliRDBqNkdxNkNwZVVSSzI2b184T0dCRTYzOHhNeDJ6T3FvVks0LWlsckJPbVg3WlFHNXFNMko2ZEUwQ3lkTmI2RUNxM2ZObDN6cHJIbXhRajZtSmxmV3ZmZFZ6VzFJZmFMb2hXR1pkWkxKeHBtdWpWNVI2bEVuMzB3alZF?oc=5",
+          "importance": 2
+        },
+        {
           "id": "il-independent-e5b1de8d407ae8a7",
           "countryId": "il",
           "sourceType": "independent",
           "source": "The Times of Israel",
           "headline": "Eisenkot said to promise Liberman’s party the justice and defense portfolios - The Times of Israel",
           "summary": "Eisenkot said to promise Liberman’s party the justice and defense portfolios The Times of Israel",
-          "date": "Nov 25, 2026 · 6:15 PM",
-          "publishedAt": "2026-11-25T18:15:47.000Z",
+          "date": "Nov 25, 2026 · 6:12 PM",
+          "publishedAt": "2026-11-25T18:12:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOMFg0SHhuSXotajBFcHRqRklnQ2R1NlVYcUk3ajZjV1dROUVfeUhyX0xFT3NjSU16Z0JqNFJaaHFyWktiTzNBbE8tY3Z6UmJ1dFZGM3N2QTBlSXBaMUFQSTZHaVZVV21KckVZM2QtaHVFMWNMMEZlMTU2NWZ6NVZzWXpxakE5TnJrTGRuZXdYV3RZUWQxNjJ6c01FMFVGZ01ETHZ3NkJ0NnhYNzFfTVBtbC1jZ2FkRGZELU1IX2Z3?oc=5",
           "importance": 2
@@ -133125,8 +133234,8 @@
           "countryId": "il",
           "sourceType": "independent",
           "source": "Haaretz",
-          "headline": "Leader of Israel's Largest Arab Party Yousef Jabareen Makes His Case for Jewish-Arab Partnership - Haaretz",
-          "summary": "Leader of Israel's Largest Arab Party Yousef Jabareen Makes His Case for Jewish-Arab Partnership Haaretz",
+          "headline": "Leader of Israel's largest Arab party makes his case for Jewish-Arab partnership - Haaretz",
+          "summary": "Leader of Israel's largest Arab party makes his case for Jewish-Arab partnership Haaretz",
           "date": "Nov 25, 2026 · 12:18 PM",
           "publishedAt": "2026-11-25T12:18:00.000Z",
           "dateOnly": false,
@@ -139281,68 +139390,94 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOTFFZaV9BUlBTeUJSeHQ1ZWNLVzN2TFVsTF9yWGFWTWNfdmVGb2w1bTBFSEdnT3l1bmE1SXFpSTNDbWlVQy1rLUlVOW9lM0pCeGJQeENOWjdVWnBtTl80ME9KMWxDRmpXcURzY3lvdnVqX2x0MEVnZ0lSdTJDV01YNjYyNU1CRGloajBnaXJxdVdfdHB5UU1XTWVZU0VZOVY1VVRrVVV3ekRPUdIBrwFBVV95cUxOTkNMMEFDNTdSU3VJOVpGWDFBcTdMM1FEOEpfdXo2TlFSNUdZXzlMVWduakJOTER6WTNJUmVQU0hGaGtBck5OeXlQVzlmaFpFSFhaWEhMTURuVUppbjNQazItejVVUGFOR3BSZUp1NnNNU1puTFFFa0U4NVowa0FzTnZMaW5hWEg2MHNWblRyWXlGaUNHbkdQZDZwTlpFOXc1OWpEdVBPMWFiaThGSm9R?oc=5",
           "importance": 2
-        },
-        {
-          "id": "il-independent-6458ea8b19b9b0b5",
-          "countryId": "il",
-          "sourceType": "independent",
-          "source": "Haaretz",
-          "headline": "Israeli firms struggle to secure foreign financing as U.K. expands sanctions - Haaretz",
-          "summary": "Israeli firms struggle to secure foreign financing as U.K. expands sanctions Haaretz",
-          "date": "Nov 18, 2026 · 7:25 AM",
-          "publishedAt": "2026-11-18T07:25:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMirAJBVV95cUxOWFAwd0JlZ1FVT0Z1Y1NXcnR1bC1acWE1OVo0Nm5RNHY5dDg4bkRkcWZxbHpkOGRHLUV0NlZzWmJlUW44bHJzX2M2eHZHYkVSMG5VcjFnS2JkSlFuaDQ3Z3NSSENBSkxpcXZqdmcwTFZETkMxUUFRd0NEZzVpX2VJT0w5Wjl4dngtWVg2VjVGVGo1UGtJVnRjY01kam0wUzBKLTNic0ZoSUNEa3pkeFBaUFpvRW1RaGNmbDBWRGFZTUlXQ2YzekR6X1MyZHJKMnF0SDZuZWNPbTBaZ0NmMHgyZDRkVkU0TXJqenVkaERQQ3BVSjBlS290Z2tVclZMc1p4TFptTGhJTFZXZ24yd3h0QTJ6RE1kaHRXU2hrWG5FNmNfbm9ZakJuN0VxN2c?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "il-independent-314e901a40af1c21",
-          "countryId": "il",
-          "sourceType": "independent",
-          "source": "The Times of Israel",
-          "headline": "Australia declares sanctions over settlement expansion, violence against Palestinians - The Times of Israel",
-          "summary": "Australia declares sanctions over settlement expansion, violence against Palestinians The Times of Israel",
-          "date": "Nov 18, 2026 · 6:38 AM",
-          "publishedAt": "2026-11-18T06:38:03.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxONkhVVmRIQk9DY19HZk5Cbmc5cHVqZEw2UXNVNU5LcnV6VnpJb2ZPZzFWNmNQUXkyZzRsdndPeldNcVhRdlcwaVNaVmtqblI1cElGdk1kTUNoTEt6RkV2SFhXX0RTYjZNNkVBMVlObW1qOUxZWWNtb2hFMzhOQUN6N1ZRbUlrVEZpVzc3X3VOUk8zTFF3YnpaeVJsZ1pJRnNkajlUa2R0bldjOVJ6ZnF5dzA3dm1hUdIBuwFBVV95cUxPOXBqRXBVaHVQa1VMWDlaWkgtOWdSTWdHVkFmcDNEdUxPNUdGZllldXFIbnFOYkl2TzdqOW1kSndoX0RDRWh0dmI1UDlHQjJwcHYteTNnTWxuVXNtMEU3d00zcGVhTE16RW00WFFNeDk2Uzloa2pRUWZUNXhnX1N6N3RERWNNOUk4aUR4bkJYV0hHYldhOTBHMGxzM2VfeC1mci1UZkFyaWdkaTJESHREOXp2anhKSklYTUxz?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "il-independent-a21116cfaf1effd3",
-          "countryId": "il",
-          "sourceType": "independent",
-          "source": "The Times of Israel",
-          "headline": "Italian gelato champ shrugs off anti-Israel backlash fears as chain expands in Israel - The Times of Israel",
-          "summary": "Italian gelato champ shrugs off anti-Israel backlash fears as chain expands in Israel The Times of Israel",
-          "date": "Nov 18, 2026 · 5:03 AM",
-          "publishedAt": "2026-11-18T05:03:02.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPdXBPMnRWa2V4NnVzUTh6Sk1qXzRiM3V1a0o4Q3A0SkFfVlhMMDk2SFFfZlYwODgxSWd4Znd2NlYzeHZ2YkQ5UDNWYm90N2ZXSjhKQ0JrZmZaS1ZyY29kcTNpMnRhc3piVE1zM3NLVlZVRWY1cDNGTnd1UGhPQ3BtenRjaXJzcTllM185SklybXhwQ1Ezc25NWGw4emV1Y1pKRm9Kbm92ZDI2Z1ZMNHljWVZ5amloR2fSAbwBQVVfeXFMUDBwNzQ4bXFrUnBmUFdNY0xTVnFGZWxxWG4weUgzNkJkTEtBTS01WXFBTjh4Q0ZrdnB2cktmaURKVUt6VjQtbHR4eW9WRkFwcDI5SE5KdWRBOVVwMXFHVk1DNk5nY3c3TERPQjZzMG5pMFlyODVaUEdLblJuSlYtQkxBSFlWall3LUg4aUpKVUljZ1UwNzBva1pQR3FBRWFXVklsbGZjTVp1ZWZUNXFXZU1SX240Z29qTS1Ma2Q?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "il-independent-2dcfdca68fc24d74",
-          "countryId": "il",
-          "sourceType": "independent",
-          "source": "The Times of Israel",
-          "headline": "Australia unveils new sanctions against Israeli activists and entities over 'illegal settlement expansion' - The Times of Israel",
-          "summary": "Australia unveils new sanctions against Israeli activists and entities over 'illegal settlement expansion' The Times of Israel",
-          "date": "Nov 18, 2026 · 5:03 AM",
-          "publishedAt": "2026-11-18T05:03:02.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOcU84WnZ3QUpTQVpMZllqOXJsdkZGb3dCOEJLV3l3ZkwyODFNTzBpZGpzVmlYSmN3MDVla0p5RnNzaDFwejlvdmh2cEtYSXNiWEtIUnZVazl0ajFXTEJWbTZiRnM5c19zcUh6cThtZGV2MHI5OVVJSXpRbzhsTHFkUE53a0tOalU2blhvUGNhMnRlZjhYMnlOWmwtWDBIbjNmX2UxMHExeGJacEl0S2NiSWplZE80b0UyWUFPT21IQUZSNzZBS0IzbHJ2Wll0YnJqb0tNMndiclhSRWpIdHhWalJDa1Y?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:26.639Z",
+      "officialLastOkAt": "2026-11-26T00:12:28.801Z",
       "officialLastError": null
     },
     "ir": {
       "official": [],
       "independent": [
+        {
+          "id": "ir-independent-7b1f86075eafccf7",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Plane crash off the coast of Mississippi kills extended family of 6 on fishing trip - AP News",
+          "summary": "Plane crash off the coast of Mississippi kills extended family of 6 on fishing trip AP News",
+          "date": "Nov 25, 2026 · 11:44 PM",
+          "publishedAt": "2026-11-25T23:44:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOeEh3VHJBUW9yQzVjTncwWGNBRkN2U0wtbkJxWHpkU2JXSmE2Ukc2Q25aUXZ3ZVVsN2lPd1JUTnE4ZUNxTDNIMXEwRXJZV01ZVGVwaERxdXdjMTZjWGQxaVpXSTBIWEtoTDNhZXdBcW5ESVdvUGhiLVpXYUFUMHRJQkVWZmNDM29CUS04cUx3?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-e0d32876989c587c",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "Al Jazeera",
+          "headline": "Breaking News, World News and Video from Al Jazeera - Al Jazeera",
+          "summary": "Breaking News, World News and Video from Al Jazeera Al Jazeera",
+          "date": "Nov 25, 2026 · 11:24 PM",
+          "publishedAt": "2026-11-25T23:24:16.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiP0FVX3lxTFBPd3h6VGM0TDlnQTJRaHcwMHkxaG5HcFFUY08yOEpFQ3FjZHB3b3h1bGlwSnRkT3k5SXZORXhjYw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-0893739a94139117",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Fuel tanker crash ignites a massive fire on a highway surrounding Cairo, killing at least 31 people - AP News",
+          "summary": "Fuel tanker crash ignites a massive fire on a highway surrounding Cairo, killing at least 31 people AP News",
+          "date": "Nov 25, 2026 · 11:14 PM",
+          "publishedAt": "2026-11-25T23:14:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNaEhpcnZZbkFLdDdZb1VrR2laRkJMMUxDYi1FZHZPOUo0LVpBdl9wUUlXMG1Ealh0eHJOU0o3Q0JSOFU4LXVlcWgyUDd6bDVLa2ZNWGY2aWVId0pnYlNNaHkzSkw2YzdEN3dMN0hGUzNZRktJekRLQWZIbmk5d2lrTElCeXZSV1IxUi0yamFWZzJsUQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-002ba8bec24b2a04",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Major League Baseball sues players' union ahead of lockout, trying to block possible antitrust suit - AP News",
+          "summary": "Major League Baseball sues players' union ahead of lockout, trying to block possible antitrust suit AP News",
+          "date": "Nov 25, 2026 · 11:14 PM",
+          "publishedAt": "2026-11-25T23:14:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9JV0N2c2xoRkFDZ1BfMjZIbElEMEJVX0xIQnVZQ0NzS2hldUNoc09zMUpIOGV6Y3FqMjcxMF9sekotb3djMWZoZDlwTl96akdZT3pCaFM2MHM4VldqdXhHNU1ITzI1OW1ISVFLZG52QTVnQ2tGUjd6THhnYw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-911834a9e6bdd7b9",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Andy Taylor, guitarist of new wave icons Duran Duran, dies at 65 - AP News",
+          "summary": "Andy Taylor, guitarist of new wave icons Duran Duran, dies at 65 AP News",
+          "date": "Nov 25, 2026 · 11:12 PM",
+          "publishedAt": "2026-11-25T23:12:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNN2V2OUxYWk12T2E3d0g5SFVQNDA2LW9qdkNtZDZJdmVtelh4amRUNEtNYXNfN1hraG9KcnhnSFlpbmZ5TXlpSkVrVVgxa3lMaUpydlRyeHVGREN5aGpUN1BDUEJpYnE1dC1lTGh3OHR1UWkzZVJpMkdPaEkzd1padXdRYnNrQXBJYnlaVEc1bVVVUQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-02bbd8675e0291c7",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "US travelers facing long airport lines, bad weather in the run up to Thanksgiving - AP News",
+          "summary": "US travelers facing long airport lines, bad weather in the run up to Thanksgiving AP News",
+          "date": "Nov 25, 2026 · 11:12 PM",
+          "publishedAt": "2026-11-25T23:12:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQQkk2WEd6VjhQeXF0eGZsQnFSUmNlbnBXQmlicUdtaWJKdWJ0Tm5TNXJmRll2LUdSMmNaekFCenlKb3hnX1Jod0t0TDRONWlueUdrYWRfZ1ZpTkp0WGhXbEEyZ1diSm1PTWluWVNPQUlPWWFFSnFZWTlQdl9BZXl5TGRMdHloN2tLZTJUcG93el9Ya0IzV00tT1JrZVVnUQ?oc=5",
+          "importance": 2
+        },
         {
           "id": "ir-independent-2f09f77481181fd8",
           "countryId": "ir",
@@ -139350,8 +139485,8 @@
           "source": "AP",
           "headline": "Macy’s Thanksgiving Day Parade postponed to Saturday due to expected bad weather - AP News",
           "summary": "Macy’s Thanksgiving Day Parade postponed to Saturday due to expected bad weather AP News",
-          "date": "Nov 25, 2026 · 10:26 PM",
-          "publishedAt": "2026-11-25T22:26:00.000Z",
+          "date": "Nov 25, 2026 · 11:08 PM",
+          "publishedAt": "2026-11-25T23:08:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQR0xRS3NTalh5TmtXemJCMTB1Y1ZJWXEwQ0JnNU5WOEc0clZQdkJseU90dllkcl9tcllmeGR2TFRXQ1lZc1ZYTEVNTzNJNGx5Mi0tRTVOVXlFUldFSGVtcUhyVEczNkVnbTQ4RGRRWnVJUENZYjUyRVI5ZEh3alRTWG01cE1fX3dORVd3RWlsbTdlVU9xaEdIa0hDdnRCbnp2NjFMSjBR?oc=5",
           "importance": 2
@@ -139361,12 +139496,38 @@
           "countryId": "ir",
           "sourceType": "independent",
           "source": "AP",
-          "headline": "Wall street recovers most early losses as pullback in AI stocks eases - AP News",
-          "summary": "Wall street recovers most early losses as pullback in AI stocks eases AP News",
-          "date": "Nov 25, 2026 · 10:10 PM",
-          "publishedAt": "2026-11-25T22:10:00.000Z",
+          "headline": "Wall Street recovers most early losses as pullback in AI stocks eases - AP News",
+          "summary": "Wall Street recovers most early losses as pullback in AI stocks eases AP News",
+          "date": "Nov 25, 2026 · 11:05 PM",
+          "publishedAt": "2026-11-25T23:05:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQdVFZQmxpUGVXLUtXYzR6ZzYzX0Njd0I2bzBVbkJMb2JhcDJkRHJnVGV5eC1Ma0o2djdvZUhROXVpYjRzbTVQUGliYlRINU1kdnJVOXpRd21KdlJYcFQySlR5aWRCc0ZLMjZESjdYOWlrZEpiR0owcTRILVhqNVZZeGtweUNoM21XQndPZEl4Ym1OeTQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-da984778b8bf2d2f",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "Steelers cut QB Aaron Rodgers after benching, accusations against head coach Mike McCarthy - AP News",
+          "summary": "Steelers cut QB Aaron Rodgers after benching, accusations against head coach Mike McCarthy AP News",
+          "date": "Nov 25, 2026 · 10:58 PM",
+          "publishedAt": "2026-11-25T22:58:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPN1laVWIyOEZSb29hcHFwTm1MS3M1SmdoYnNwQkoybjJjQkNPWVQ2YldyN1Rjai1GYzR5VXo5a1FxeTdicUhNb1RiREpIU0tKSk91T3ZjaWNzUW5Va09qNmFfV2RlaTlNMlZxWlY4Mm93S2hmU3lPZDBsQUZWZEo5b3RjN0NSM2ttR0lFTkcwVVpZUmZ6bEtuNW01X3NEb1Foa2xsc0VLY3h4Y1E?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-ee92c9809792f1db",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "A postponed Macy’s Thanksgiving Day Parade to celebrate a milestone with Blue Hippo and Bluey - AP News",
+          "summary": "A postponed Macy’s Thanksgiving Day Parade to celebrate a milestone with Blue Hippo and Bluey AP News",
+          "date": "Nov 25, 2026 · 10:57 PM",
+          "publishedAt": "2026-11-25T22:57:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxORm14bFpCNEQ3SVZfb1VRZEpuWGw3dXpPVjZYRS1zTFJvU2Q2cEZBMGVJNGNOZjVQMGtPTzJWeXo0WldmV0xzN0hjV2djWlRYMThidUZleHVNVTYxcFdBLW94UllVbG9jd0xQMTlyQ3FOdkNIQnpoODhsZmlsUFVEVXUwYzE4MFVaRDl0MGx4NWxLVTNMeXAtd0ZR?oc=5",
           "importance": 2
         },
         {
@@ -139383,16 +139544,16 @@
           "importance": 2
         },
         {
-          "id": "ir-independent-911834a9e6bdd7b9",
+          "id": "ir-independent-0f6e37f0135c05dc",
           "countryId": "ir",
           "sourceType": "independent",
           "source": "AP",
-          "headline": "Andy Taylor, guitarist of new wave icons Duran Duran, dies at 65 - AP News",
-          "summary": "Andy Taylor, guitarist of new wave icons Duran Duran, dies at 65 AP News",
-          "date": "Nov 25, 2026 · 9:55 PM",
-          "publishedAt": "2026-11-25T21:55:00.000Z",
+          "headline": "$6M Boys’ School verdict sparks call for more juvenile justice reforms - AP News",
+          "summary": "$6M Boys’ School verdict sparks call for more juvenile justice reforms AP News",
+          "date": "Nov 25, 2026 · 9:45 PM",
+          "publishedAt": "2026-11-25T21:45:00.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNN2V2OUxYWk12T2E3d0g5SFVQNDA2LW9qdkNtZDZJdmVtelh4amRUNEtNYXNfN1hraG9KcnhnSFlpbmZ5TXlpSkVrVVgxa3lMaUpydlRyeHVGREN5aGpUN1BDUEJpYnE1dC1lTGh3OHR1UWkzZVJpMkdPaEkzd1padXdRYnNrQXBJYnlaVEc1bVVVUQ?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQVHdwT0gtUGUyNW0zUGJhc2J1Z2R1WVFzZ0ZjVzA5Tkw2c3Nld3lYVUNYcVBHMnAxNDZBTzlCdmVLc0dEYjdub2FCVV91c0JCVGNGajRRdWpRd0dsd2VORlpuUUJ5QnNGV3hoVDRnMGw0ZzgzTDJlRHB1MTlLQkU1UlE3WThQeVdhdjJjU2pNN0xtWUlhTk9rMlRGQQ?oc=5",
           "importance": 2
         },
         {
@@ -139422,16 +139583,29 @@
           "importance": 2
         },
         {
-          "id": "ir-independent-02bbd8675e0291c7",
+          "id": "ir-independent-05fe276b9aabaaaa",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "Al Jazeera",
+          "headline": "At least 30 killed in Egypt vehicle fire, health ministry says - Al Jazeera",
+          "summary": "At least 30 killed in Egypt vehicle fire, health ministry says Al Jazeera",
+          "date": "Nov 25, 2026 · 9:09 PM",
+          "publishedAt": "2026-11-25T21:09:29.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQTlU0RXBRWWJMUXd0Z01rcmhMeTI0V1hJLVdXUUY3eEhwb2w2R0pza2RxSnZyd044elUxX3UyemhQTG5wN1VadlphRjE2SGJvMmlRQ0N0TGRScDlwYUVWejFyX0FDMWpQZGJkZWZTSmxia2tTUkZQSFZ1XzBzNVU1ZVB5cFBGblBxWGtfb2ZXZGxTNGRzWlNBdkJaTm9tdWVlQTJfNnJB0gGrAUFVX3lxTFBxMmtCU1JWQ2xhSXBTMEczWEc0MGpvSExWY2xIcEl4VFZCOGdNRWg0ZFJxSzZZek52aV9pdUVFcFdUSEh1YmlVSmRQUU53RzE1dVhkZzc4RWZxSzEtNUZZbUNvbkFJU1hRdDljX21MY0xIZ2NmbGRKZXc3NkFkRTVhdTJZdExmYVJObVNNWk1Hd2EtdHJSb0lCRmplNC1XcXVfd3pnVS03MHkxaw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-299badd2207a85a7",
           "countryId": "ir",
           "sourceType": "independent",
           "source": "AP",
-          "headline": "US travelers facing long airport lines, bad weather in the run up to Thanksgiving - AP News",
-          "summary": "US travelers facing long airport lines, bad weather in the run up to Thanksgiving AP News",
-          "date": "Nov 25, 2026 · 9:15 PM",
-          "publishedAt": "2026-11-25T21:15:00.000Z",
+          "headline": "2 baby meerkats make their debut at Peruvian zoo, spotlighting conservation - AP News",
+          "summary": "2 baby meerkats make their debut at Peruvian zoo, spotlighting conservation AP News",
+          "date": "Nov 25, 2026 · 9:00 PM",
+          "publishedAt": "2026-11-25T21:00:00.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQQkk2WEd6VjhQeXF0eGZsQnFSUmNlbnBXQmlicUdtaWJKdWJ0Tm5TNXJmRll2LUdSMmNaekFCenlKb3hnX1Jod0t0TDRONWlueUdrYWRfZ1ZpTkp0WGhXbEEyZ1diSm1PTWluWVNPQUlPWWFFSnFZWTlQdl9BZXl5TGRMdHloN2tLZTJUcG93el9Ya0IzV00tT1JrZVVnUQ?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNampONlhhaElXUjNVTTNBR0VHQklmOWVmN2VqQWRUaElzNDJvdEVQZEFZTkZycDJVNWo4UGpVMjVqQUZtZUgzUWwtc1lGTTFwWFlOYlFBWk5WWGltTndBTnhWb1RtNlBHRUI0Q2Z1QjFfYkFoaERPQXNoUXZSTVJ5OW1YeThvOUQzanVoOUxxNzVjeDlxYXZ5ZkI0bw?oc=5",
           "importance": 2
         },
         {
@@ -139484,32 +139658,6 @@
           "publishedAt": "2026-11-25T20:40:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxONEtNTlFzQUotcXU1N1VCaXBGY0pYWnlqLWVfQ0F3WVl4YkdGMXBIZzdOczlFaFNnUUdZclhRVVlxNE5yVjhzektQSDh0YmRtaGVGQWk3UmNMbUljUjNmZ3NDMTh2dUhlNDdKMzBydnRGZ09EelN2anNjNTcyWkN5OTZkR25TUllOWjZ5SVhoVDJwZ245Q01lSVozd2dfdjRoRFhYTXo3LWtaaTgwanR2eURrMnY2ZEt5?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-e0d32876989c587c",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "Al Jazeera",
-          "headline": "Breaking News, World News and Video from Al Jazeera - Al Jazeera",
-          "summary": "Breaking News, World News and Video from Al Jazeera Al Jazeera",
-          "date": "Nov 25, 2026 · 8:22 PM",
-          "publishedAt": "2026-11-25T20:22:45.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiP0FVX3lxTFBPd3h6VGM0TDlnQTJRaHcwMHkxaG5HcFFUY08yOEpFQ3FjZHB3b3h1bGlwSnRkT3k5SXZORXhjYw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-0893739a94139117",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Fuel tanker crash ignites a massive fire on a highway surrounding Cairo, killing at least 30 people - AP News",
-          "summary": "Fuel tanker crash ignites a massive fire on a highway surrounding Cairo, killing at least 30 people AP News",
-          "date": "Nov 25, 2026 · 8:22 PM",
-          "publishedAt": "2026-11-25T20:22:04.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNaEhpcnZZbkFLdDdZb1VrR2laRkJMMUxDYi1FZHZPOUo0LVpBdl9wUUlXMG1Ealh0eHJOU0o3Q0JSOFU4LXVlcWgyUDd6bDVLa2ZNWGY2aWVId0pnYlNNaHkzSkw2YzdEN3dMN0hGUzNZRktJekRLQWZIbmk5d2lrTElCeXZSV1IxUi0yamFWZzJsUQ?oc=5",
           "importance": 2
         },
         {
@@ -139604,19 +139752,6 @@
           "importance": 2
         },
         {
-          "id": "ir-independent-05fe276b9aabaaaa",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "Al Jazeera",
-          "headline": "At least 30 killed in Egypt vehicle fire, health ministry says - Al Jazeera",
-          "summary": "At least 30 killed in Egypt vehicle fire, health ministry says Al Jazeera",
-          "date": "Nov 25, 2026 · 6:56 PM",
-          "publishedAt": "2026-11-25T18:56:15.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQTlU0RXBRWWJMUXd0Z01rcmhMeTI0V1hJLVdXUUY3eEhwb2w2R0pza2RxSnZyd044elUxX3UyemhQTG5wN1VadlphRjE2SGJvMmlRQ0N0TGRScDlwYUVWejFyX0FDMWpQZGJkZWZTSmxia2tTUkZQSFZ1XzBzNVU1ZVB5cFBGblBxWGtfb2ZXZGxTNGRzWlNBdkJaTm9tdWVlQTJfNnJB0gGrAUFVX3lxTFBxMmtCU1JWQ2xhSXBTMEczWEc0MGpvSExWY2xIcEl4VFZCOGdNRWg0ZFJxSzZZek52aV9pdUVFcFdUSEh1YmlVSmRQUU53RzE1dVhkZzc4RWZxSzEtNUZZbUNvbkFJU1hRdDljX21MY0xIZ2NmbGRKZXc3NkFkRTVhdTJZdExmYVJObVNNWk1Hd2EtdHJSb0lCRmplNC1XcXVfd3pnVS03MHkxaw?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ir-independent-817f4ed808d90bd3",
           "countryId": "ir",
           "sourceType": "independent",
@@ -139669,19 +139804,6 @@
           "importance": 2
         },
         {
-          "id": "ir-independent-7b1f86075eafccf7",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Plane crash off the coast of Mississippi kills extended family of 6 on fishing trip - AP News",
-          "summary": "Plane crash off the coast of Mississippi kills extended family of 6 on fishing trip AP News",
-          "date": "Nov 25, 2026 · 6:42 PM",
-          "publishedAt": "2026-11-25T18:42:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOeEh3VHJBUW9yQzVjTncwWGNBRkN2U0wtbkJxWHpkU2JXSmE2Ukc2Q25aUXZ3ZVVsN2lPd1JUTnE4ZUNxTDNIMXEwRXJZV01ZVGVwaERxdXdjMTZjWGQxaVpXSTBIWEtoTDNhZXdBcW5ESVdvUGhiLVpXYUFUMHRJQkVWZmNDM29CUS04cUx3?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ir-independent-df367359340d2be5",
           "countryId": "ir",
           "sourceType": "independent",
@@ -139695,19 +139817,6 @@
           "importance": 2
         },
         {
-          "id": "ir-independent-da984778b8bf2d2f",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Steelers cut QB Aaron Rodgers after benching, accusations against head coach Mike McCarthy - AP News",
-          "summary": "Steelers cut QB Aaron Rodgers after benching, accusations against head coach Mike McCarthy AP News",
-          "date": "Nov 25, 2026 · 5:58 PM",
-          "publishedAt": "2026-11-25T17:58:18.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPN1laVWIyOEZSb29hcHFwTm1MS3M1SmdoYnNwQkoybjJjQkNPWVQ2YldyN1Rjai1GYzR5VXo5a1FxeTdicUhNb1RiREpIU0tKSk91T3ZjaWNzUW5Va09qNmFfV2RlaTlNMlZxWlY4Mm93S2hmU3lPZDBsQUZWZEo5b3RjN0NSM2ttR0lFTkcwVVpZUmZ6bEtuNW01X3NEb1Foa2xsc0VLY3h4Y1E?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ir-independent-6d321d7d6a1b2ce0",
           "countryId": "ir",
           "sourceType": "independent",
@@ -139718,19 +139827,6 @@
           "publishedAt": "2026-11-25T17:57:13.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQUnVnMHBzamlwcjFjc2dIdkh4VUdzQVdVWlhfeC10eGxXT0NUTGx1Z09EQ1J0MHFCYlJ0T3RaNnkyU1ZUT09taXBXWmdWd1MxWnNqczBOSWdnRXI5V09OTE1WVzc4NVJqUlBPRlp0bmxqSTBJS3JPUVZMbVY0RHBZOHpUNndhWGdGMmV3VjZ3RDJYQmJfenFpdkFfMA?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-002ba8bec24b2a04",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Major League Baseball sues players’ union, asking court to declare lockout is legal - AP News",
-          "summary": "Major League Baseball sues players’ union, asking court to declare lockout is legal AP News",
-          "date": "Nov 25, 2026 · 5:53 PM",
-          "publishedAt": "2026-11-25T17:53:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9JV0N2c2xoRkFDZ1BfMjZIbElEMEJVX0xIQnVZQ0NzS2hldUNoc09zMUpIOGV6Y3FqMjcxMF9sekotb3djMWZoZDlwTl96akdZT3pCaFM2MHM4VldqdXhHNU1ITzI1OW1ISVFLZG52QTVnQ2tGUjd6THhnYw?oc=5",
           "importance": 2
         },
         {
@@ -139822,19 +139918,6 @@
           "publishedAt": "2026-11-25T16:34:53.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNNXk4cTJiN1hVeGlydEtUN2JpRTVCMF9CRFVBUkh3cUs2c0NJRHNnendsV1ZjWkxicDhPZUhESnlTNy1paWtzQlNHaHlSMkpLTVRvYXVGdFVDVEFGeVFGN2tQWElwRDZwREoyaXU2QUtNSm5oaGsyZ2VoSVNtT2c0aVlhbXlabU02Mm1menJtMGpNQXdzal9lM2dYeUtxZ0xFZ3lnc0FoODhBaklCa0M3eTQzbFF4dXVyNmc?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-ee92c9809792f1db",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Macy’s Thanksgiving Day Parade to celebrate a milestone with Blue Hippo, Bluey and Megan Moroney - AP News",
-          "summary": "Macy’s Thanksgiving Day Parade to celebrate a milestone with Blue Hippo, Bluey and Megan Moroney AP News",
-          "date": "Nov 25, 2026 · 3:56 PM",
-          "publishedAt": "2026-11-25T15:56:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxORm14bFpCNEQ3SVZfb1VRZEpuWGw3dXpPVjZYRS1zTFJvU2Q2cEZBMGVJNGNOZjVQMGtPTzJWeXo0WldmV0xzN0hjV2djWlRYMThidUZleHVNVTYxcFdBLW94UllVbG9jd0xQMTlyQ3FOdkNIQnpoODhsZmlsUFVEVXUwYzE4MFVaRDl0MGx4NWxLVTNMeXAtd0ZR?oc=5",
           "importance": 2
         },
         {
@@ -141278,6 +141361,19 @@
           "publishedAt": "2026-11-24T21:32:51.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxObWthWEU2V2VxbjBhWTVtNE5wdC1LWFBYM24tVF92ekgyb25wMDRablR5eUJCQXFNUFVXU2NMYnkwWUlkWmpmNnhNaUhXZGdOSjUxeVItUzdING0xbDZZRENTTmFHdzJyWXZHM0NCbl91QU1DR3ZpMlpWNGYyVmVVV3dXM2RJSWMxUk1qckdVR18tSjJfbml3enVHUFpZcDBEaG5lSVlDQQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ir-independent-d77b2b2eac0a4422",
+          "countryId": "ir",
+          "sourceType": "independent",
+          "source": "BBC",
+          "headline": "Iran - BBC",
+          "summary": "Iran BBC",
+          "date": "Nov 24, 2026 · 9:28 PM",
+          "publishedAt": "2026-11-24T21:28:33.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBOaTdZSHBUOWN2a2QwMUlfcG02SUJJYU9vRXo1bjRDZDNYTzUwNG9xektZallVYklUOURXVzFfNzFENXNjY2dTekV1V1d0b3htd3BCMHBSMA?oc=5",
           "importance": 2
         },
         {
@@ -142903,19 +142999,6 @@
           "publishedAt": "2026-11-24T01:50:09.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNdkxXYjZDcEV1OENMUFpwT2VQdFhnLXk0WlI5eEk3U3BuU0FjU2IzLVhOMHF3VjN4Rll3TlBMaEw2STl4OF94TFU4R1hZSEpiejBVaDJhRktPakRucm9CZEZ6ZHhJRVhuTmU5TVpSYW80MUtSRFlSczlacV9PM2dqWDliSHRWWTJNVkFoVkhzS0zSAZYBQVVfeXFMTUFuX0ZxSkliTGxLNm4zV3BWTFk2M0QyaTc0elRtOFhzdm5FVTlBeTNIQlh2TUU2UW1sOG5MNDhrQnp3UllfaUFSa0xSUk1SQmRmUEFHNUI2ajVEQWFXR2tidW41ZlJkNGtMb0FZcy10dFpOUEFrUzV6TGQyN19DQzc4YVpZYlpkSE05d3N4UzZmN0c5NTNR?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-d77b2b2eac0a4422",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "BBC",
-          "headline": "Iran - BBC",
-          "summary": "Iran BBC",
-          "date": "Nov 24, 2026 · 1:46 AM",
-          "publishedAt": "2026-11-24T01:46:40.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBOaTdZSHBUOWN2a2QwMUlfcG02SUJJYU9vRXo1bjRDZDNYTzUwNG9xektZallVYklUOURXVzFfNzFENXNjY2dTekV1V1d0b3htd3BCMHBSMA?oc=5",
           "importance": 2
         },
         {
@@ -145816,32 +145899,6 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOLUxmel9XQzE5eEpFbjd1OVY5cC13TDRMdnljT01DMzlyU3hCTnRYYVVVVlNxT2x4YXhwT3Vkbl9HY0RyeWZOVUdxelNzOWF2MVp5U3JCVS11OXNWSlhQc1BMOWJJdkVULVhUNTlkVENfTWF3WlpRZEhpX3N6Nlc4YVp4TkRLS2gtS2lET0h3bHc1OUpfSHdr?oc=5",
           "importance": 2
-        },
-        {
-          "id": "ir-independent-8cbb1901966403c4",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "Al Jazeera",
-          "headline": "Why Somalia’s president turned against his former ally, the UAE - Al Jazeera",
-          "summary": "Why Somalia’s president turned against his former ally, the UAE Al Jazeera",
-          "date": "Nov 22, 2026 · 3:32 PM",
-          "publishedAt": "2026-11-22T15:32:42.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPWkhBSVN4a3R3Y01DNnpYUTYxNW5iUmNrZlNMdk9oWm1pVEQxNzlpUkt0TXB2RVFrbkYwUi1VekZOM2RrRDJhTUhfR2d4ZXViREFYcEl4dXcwSmpqZWw1Q3lDUEN1NkJ5UThIVkh1b09jZDUzZXNpTVd5bmh1SVFiVXppeVRTWjMxcUMySGh4RTkxVGYtblhWV0hVelFSUkx2Qm01RFR30gGrAUFVX3lxTE5ucE1RdjFfVWd4c0pZRS1SZUtCdzdlVjRCMGZPRXp3bXplSlUtZ09JQkg2UlhLcF84VDVHNVZYMzVCV0o4ZDBoWXRHZlo1MkFPRnFkTFFsek5kb3FybjVyV1pkdWp5eVhPWW9EcUYzUnNZR1o2SFRGTW9WWnd3Tk1mcTFwVEU1Z21HNTYta2taS19iZTNNeDRKSmxKY0xQRDlFUnYyWEJiWU9HMA?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ir-independent-6f15d719484e7063",
-          "countryId": "ir",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "Bryce Underwood lifts Michigan to an 18-16 win over No. 4 UCLA in 3 overtimes - AP News",
-          "summary": "Bryce Underwood lifts Michigan to an 18-16 win over No. 4 UCLA in 3 overtimes AP News",
-          "date": "Nov 22, 2026 · 3:31 PM",
-          "publishedAt": "2026-11-22T15:31:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPd21xcHpoRDBpZ0ZEa2xGRHJXNGRJVnotWWlzTkplaE1HeTc5UFJJcEhFNFNqeDBXWDhDNGZiS1BlYVZZV0hzcnc2dnhCZ3E1TmNFSkFiYV9ITHF2OEN4UGJPRDJuRjZkT1hLNU56QnlhdEx6dnBWTmRzNFNvZTJFd3FKZGxKQQ?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": false,
@@ -146054,8 +146111,8 @@
           "source": "Arab News",
           "headline": "Saudi Arabia approves SR1.39tn budget for 2027 as growth set to rebound - Arab News",
           "summary": "Saudi Arabia approves SR1.39tn budget for 2027 as growth set to rebound Arab News",
-          "date": "Nov 24, 2026 · 1:55 PM",
-          "publishedAt": "2026-11-24T13:55:30.000Z",
+          "date": "Nov 24, 2026 · 1:54 PM",
+          "publishedAt": "2026-11-24T13:54:24.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQR2VoQ0c0Vi1PdmpnNXQ5TDE5VnNlaHBSeUxvNHFVbnJIY2dEUmFEY2o5a3p1bURSd1JzOXFkQ2ctSG84Yk9DclBNdmp4NTZZMHFkbm5KSG96dmJTM0dMYkpLbHhtaDhzLWxYOEVnc2ZONkZNV2FYTFNPRlZTNHRkSWo3R2hQY2VzS2hVTVM3WkNTMV9OZGUwcTNMTlhIaU44dEg5QmFDcVB6c1Z0NGVqXw?oc=5",
           "importance": 2
@@ -152401,6 +152458,19 @@
           "importance": 2
         },
         {
+          "id": "ae-independent-4c050509988383cd",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "OPEC blames EU for COP31 collapse - Reuters",
+          "summary": "OPEC blames EU for COP31 collapse Reuters",
+          "date": "Nov 25, 2026 · 7:22 PM",
+          "publishedAt": "2026-11-25T19:22:01.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNblVnV0tQbjBnOTRFVnp6bWFwUjBRQ2hXcHg4QmhVRHBUUXdjNXk3UVY3aGJza0RxMEw1Qnprc2VGNE9rbFhLWHJRcFFOZ0RIbkRpeHB3bmtsNTVIbk9aOXFza2JiaTJTdVI4bzFQd0lrTlBHb0p0TWkzSjZoS2FsMlFFOUgycUd3bWl6aQ?oc=5",
+          "importance": 2
+        },
+        {
           "id": "ae-independent-7beb0427e58a9eba",
           "countryId": "ae",
           "sourceType": "independent",
@@ -152486,7 +152556,7 @@
           "headline": "Khaleej Times - Dubai News, UAE News, Gulf, News, Latest news, Arab news, Gulf News, Dubai Labour News - Khaleej Times",
           "summary": "Khaleej Times - Dubai News, UAE News, Gulf, News, Latest news, Arab news, Gulf News, Dubai Labour News Khaleej Times",
           "date": "Nov 25, 2026 · 5:09 PM",
-          "publishedAt": "2026-11-25T17:09:48.000Z",
+          "publishedAt": "2026-11-25T17:09:51.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE5fYk8tWjBWRG9iZzVYQWtsRTQxaXpwVDY4OHVmV3ZDd055V2ptWVQzcURXVlN0WGFyUE4xdlFBYWxBcTQ?oc=5",
           "importance": 2
@@ -152567,6 +152637,19 @@
           "publishedAt": "2026-11-25T15:03:19.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxObFZTM3duSDN4VVFaSGxpYzRSZTlobUtOS1FrVmY1UVNhLUcwakk2dHpicXhaTlJfSUc4OXFjVU1Qc3g4RUhtalJTckhGSHhiR3YxLXBQZEJHYkZ6dWtoalA3Q1VHVEVZMVBKMnQ3WW9lQmN0OW9Td2s4eXRBNW9pQk9Tdk9MWlU4Z05vd2I4RU5VQlRESXZWVVFn?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ae-independent-c1b7c95ca1902c52",
+          "countryId": "ae",
+          "sourceType": "independent",
+          "source": "The National",
+          "headline": "Louvre Abu Dhabi exhibition reveals human effort behind saving cultural heritage - The National",
+          "summary": "Louvre Abu Dhabi exhibition reveals human effort behind saving cultural heritage The National",
+          "date": "Nov 25, 2026 · 2:53 PM",
+          "publishedAt": "2026-11-25T14:53:18.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOLXVDSGxRUTVGVm1xS0E3Q3FaSnEwTnllcU1hWTc1VEdleGUyNTdha05GMk51VlFBb1pDZUpmbVJRRkNOWW1HNXNKbHdyUG8zaDRYNEJXNURVRmFYZjBhb0FPRWNnYUc0UHVfNERjR3B4bGV6STJhLVVNZ2VLdkg2TnhZY0VkM2xhU0hpUDJ5MGRrOVYwZGxuV01xRGpqSVpGclRZUzEzLXVkcVAzUTRydHp5WTVabUxXV05sQ1l2UTVIcEFnX3QxWWNYYXhNSXkwdk5B?oc=5",
           "importance": 2
         },
         {
@@ -153113,19 +153196,6 @@
           "publishedAt": "2026-11-25T04:03:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNb3dqNWJYNnNfb1lMYk5wQlh2RHBxUmtHSlpjVUpFdHdWV3duU2lHSmVmZG9Ra2gyNDdqd2Y4ZXhYZFkycjBvejhZSUlialRCLXhrSUdqZ1VwV1JEaW5la2phUGZhUzFEYWpUbmxNVzJWVFBxMVZuekpZVVFFVS16WVdsQ3dHY2NWaHR6WWtVOVNiRlZwcjB1azlyTzZXV1Nfa0ZGSGJXc1Qtb052TDFtSkNHcnFkZms4d2VJaWlIQlItSklBcXQyYXZGalphajA?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "ae-independent-c1b7c95ca1902c52",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "The National",
-          "headline": "Louvre Abu Dhabi exhibition reveals human effort behind saving cultural heritage - The National",
-          "summary": "Louvre Abu Dhabi exhibition reveals human effort behind saving cultural heritage The National",
-          "date": "Nov 25, 2026 · 3:18 AM",
-          "publishedAt": "2026-11-25T03:18:26.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOLXVDSGxRUTVGVm1xS0E3Q3FaSnEwTnllcU1hWTc1VEdleGUyNTdha05GMk51VlFBb1pDZUpmbVJRRkNOWW1HNXNKbHdyUG8zaDRYNEJXNURVRmFYZjBhb0FPRWNnYUc0UHVfNERjR3B4bGV6STJhLVVNZ2VLdkg2TnhZY0VkM2xhU0hpUDJ5MGRrOVYwZGxuV01xRGpqSVpGclRZUzEzLXVkcVAzUTRydHp5WTVabUxXV05sQ1l2UTVIcEFnX3QxWWNYYXhNSXkwdk5B?oc=5",
           "importance": 2
         },
         {
@@ -158847,19 +158917,6 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOZkRQYlM1RGhXQTR0YUtzSGl4cXA1M3JVR0thaFl6STgzejFlMTh6d3VCZ1JpY0ZBSU5RUnc2QTFUbUdZdjE2eWZiQjF2R2Z4OS1PbU9TejFST25ZSEVwZTZ1VGRjU2FpV0JndHo3NmItM0cwWlNMUkZoZEpMNlBOT1FWUVFuaDRvazEwMms5R2lZZXJCLXdGQlFvak1Qbk5OTEgxMmsyT1JmcUVsVTZydTVZdUgwVzBhUTUyV3J6cjlkbDjSAcsBQVVfeXFMTWI4VnhybDIwd1A4eXZoZ3VVOTlKOEVfR0hYVUwyOEtqeTZmcFlkTGdISk1OT28xaWpRSXdIcHVzYndsMXFLckRMMnhwVlNkdDNWbFI2R0kwUmRYMlRRVGpNdVRJNkI1a3Fwc2dNX3dNZHlJTldYcC0wMWY2QmZzZlhEM3R4cUlBWWw1QjMtSDZnNVJMWkNubTRSMnAwZGtVZ3YwaUhMY0ViNk1xbVRsNGNoRkVJMGZrM0w0WXhrWnF3bU5idTFoTlFvVzA?oc=5",
           "importance": 2
-        },
-        {
-          "id": "ae-independent-a194193381d79876",
-          "countryId": "ae",
-          "sourceType": "independent",
-          "source": "The National",
-          "headline": "True romance: my first two hours with GTA 6 - The National",
-          "summary": "True romance: my first two hours with GTA 6 The National",
-          "date": "Nov 19, 2026 · 12:01 PM",
-          "publishedAt": "2026-11-19T12:01:22.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPNGtDVnhzRHdodjBMc1FWaUliU2Y3ajlEbWpIRE1zM0c2V2hqNGlqQ1B2V2VSTG95OTB5QzNJQk1XWU02N0FFa2lNWVhtZXc5QkVsQWpYYnYwSG9LWjJ1QW1ZYTVmbjVJTXB3TnlKa2JveFJYVDVfc1g0SUtxN2hPdm5GR0hDWEdkQ0t4V0pYWTBoNjdBNkpnTnFNT1c5N0ZM?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": false,
@@ -159011,6 +159068,19 @@
           "publishedAt": "2026-11-25T18:01:40.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOc1lCX0t2VXYwWE1fSGUyUFJSN2RqZGhONzFpdG16bEt3Y2xmcFlsNVJpLXVmYmJ3QTQxbGhJRjQ4YnpaNkIwLXZrN1EtaExVWnJoZ1lad3doVkM2MVA2MkFQaFdKRTdqNGxTLS11SFd3MTFHTWZhREVFbFd3LXRmd2EzQUVFZlZXUWp3X0NVOU00RUNmbXlFaWd3T2lfX2xLLV9Bd0ZYNVlFbHhxOGVHaGMwcEE3a2o1V1Y0ZlYxT2pqUGJQbE03OWxENEo?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "eg-independent-560d7d57dc370c5e",
+          "countryId": "eg",
+          "sourceType": "independent",
+          "source": "Ahram Online",
+          "headline": "Egypt, Eritrea discuss bilateral ties and Horn of Africa developments - Foreign Affairs - Egypt - Ahram Online",
+          "summary": "Egypt, Eritrea discuss bilateral ties and Horn of Africa developments - Foreign Affairs - Egypt Ahram Online",
+          "date": "Nov 25, 2026 · 6:01 PM",
+          "publishedAt": "2026-11-25T18:01:40.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxONF82VS05SWs4QkxyYVBvb2tUVXIyOFRIalQ2LWVzeU52cElmRWl2SlBOYTlhVVdoTUlqdW5idlM0Tm40STBUZUpaS2FNZFVKR0UwTG5tTnpELTNoLWdWUXd0MkxiREFUWGxHQ1dtVmNlWmF5TkQ5ajBCODVwU0p3UzhOZVFlNks0Tk0tZ2FYOUhXMDNLUmxDb2YtSTVUN0ZxRk4zcERkdUJpU2MyN1d3Y3pB?oc=5",
           "importance": 2
         },
         {
@@ -159310,6 +159380,19 @@
           "publishedAt": "2026-11-25T11:18:21.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQSF9QOExTaEtsdGZNeFB5NGd2Vjc3ZF9jY0RGZWFvZkdVYlJlS2FrUklFdUNCTnlNbGNEZTc3TVhTUlBNa3pBYkJ0MjFsRWNxTkkyR05ycmg0cWZ5V1BncXdHQ2RjRWxudHltVktXcVQ0QXBBSXFTLUU3WnJ4OWhtOVRKZEZrWFdmV0RwNEpPbXFmQUxkSTQ4X3F5U2YzR1Z1cE9jam9LNEJhdmExVks5ay1YUE52LXFMZVBjOQ?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "eg-independent-258230f011a35cbd",
+          "countryId": "eg",
+          "sourceType": "independent",
+          "source": "Ahram Online",
+          "headline": "Egypt’s National Council for Human Rights calls for measurable targets in next human rights strategy - Politics - Egypt - Ahram Online",
+          "summary": "Egypt’s National Council for Human Rights calls for measurable targets in next human rights strategy - Politics - Egypt Ahram Online",
+          "date": "Nov 25, 2026 · 11:16 AM",
+          "publishedAt": "2026-11-25T11:16:54.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBtTWx5SENkTXdiQkE1NmpsbFVqYS1saGFENE9LMl9acUh2RVdxVzBHUkc0bzIwendQTlBGczlZbVU3Zks4V1N0SGtQYnlVQUNadXhxQS1heVg?oc=5",
           "importance": 2
         },
         {
@@ -165342,32 +165425,6 @@
           "publishedAt": "2026-11-11T08:59:46.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNVzV3c243eXJtdHJCRTUwMEJfMzh5TG1sRklZcmVHZjk3dGZnWVAyUEY5RmJtZlNHWkdPZllCbXdGV1NCQmVob0RGa1J2OXZ0Slltb3cxQktfeEprazBsc1hhc3B6QlNiYlN4bHN0TnhneVZIUEtqbURRZzFSNHRXSGZQN1g1Qk03NVJJS3F5MzVQcGlPY0VaZlNhdzI0NVJMbTZ1Wm9SMHJrWVdiT2VyYk5n?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "eg-independent-edac892721e2e38c",
-          "countryId": "eg",
-          "sourceType": "independent",
-          "source": "Ahram Online",
-          "headline": "Chilly nights, misty mornings: Cairo warms up towards the weekend - Society - Egypt - Ahram Online",
-          "summary": "Chilly nights, misty mornings: Cairo warms up towards the weekend - Society - Egypt Ahram Online",
-          "date": "Nov 11, 2026 · 8:02 AM",
-          "publishedAt": "2026-11-11T08:02:33.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPNm9ad29TU3p4c3hrbFRIaFpzRU0tTEtfNUVEMGpmVzJYWm5odlRJRm94U3MzZjcxejc5M3BzVlVvN0NfUjNtRzl5VG9GQVg4RVc0NFBJejJ4Q2hyMU1WVnVIR3ZVN1NKNmcxX2JIa0NESTdtbVpMdzc1bTJMVUJNNGtjLVFzODlYTmhGT0lmLUpnb1EwUG9hbWJadWFWNFR6bEE4dHZsWURTeFRpdVQ3T3Bn?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "eg-independent-921ec5abe5a761bf",
-          "countryId": "eg",
-          "sourceType": "independent",
-          "source": "Ahram Online",
-          "headline": "Chilly nights, misty mornings: Cairo warms up towards the weekend - Society - Egypt - Ahram Online",
-          "summary": "Chilly nights, misty mornings: Cairo warms up towards the weekend - Society - Egypt Ahram Online",
-          "date": "Nov 11, 2026 · 8:02 AM",
-          "publishedAt": "2026-11-11T08:02:33.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1XNkJHSmdfVjBKaER4TlpKTFM0UVFNdlpFUmxsNUg5aEJQYnM5QktFdVVfSW5tMmxadmVXRHNIMHdPYXVIVzFOMmVyRHZKYk0wYlRYWjc5U18?oc=5",
           "importance": 2
         }
       ],
@@ -172370,19 +172427,6 @@
           "importance": 2
         },
         {
-          "id": "ng-independent-81bf699fc734209f",
-          "countryId": "ng",
-          "sourceType": "independent",
-          "source": "Channels TV",
-          "headline": "Tinubu Returns To Abuja After Umrah In Saudi Arabia - Channels Television",
-          "summary": "Tinubu Returns To Abuja After Umrah In Saudi Arabia Channels Television",
-          "date": "Nov 5, 2026 · 10:08 AM",
-          "publishedAt": "2026-11-05T10:08:39.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPMERfdVpwcFNKU1p2MEZYTWxoOHhISnd2TFJSenlmX3JFV2RIdTBGSkJkY0YtOG5PejVnWENmQ3Y0Rk82UzE3V05qbDZUUVd3RzhjV3EzWUVjdnVPWjlLR1VDam5RenJPRDlwd3BzSmJUWVlieXozbHkybk5PeHNhejZpMlgwV0FmaDVtM3ExSzFLTjV6?oc=5",
-          "importance": 2
-        },
-        {
           "id": "ng-independent-51cbf817dcbce392",
           "countryId": "ng",
           "sourceType": "independent",
@@ -172627,6 +172671,19 @@
           "publishedAt": "2026-11-04T08:07:35.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOTGc4UGdLVlRubE00SGkyVklsZkh2TWRfcks5bkNYSGIzVXl4aUp2Y1Q4QlkweHpoYzlKNFNXYUg0M3lTU3NqampkeUpPN0NlYlhjaktGT1RWZG9wMWpLODFUY2pyVW4zN1dVeHhuMEQ4OUZ1UXlaS3lzZW9YUFU2bDZUU00yVFFsalAyYkZnbkM1MDh0YzBYVHJLTHZGdExUeTJBWVV0M0ozNGJCcUV3Y3pUM1VYdW4zN2pWQkNXVWZ5TVJjb1lMeUxKRjdOdw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "ng-independent-81bf699fc734209f",
+          "countryId": "ng",
+          "sourceType": "independent",
+          "source": "Channels TV",
+          "headline": "Tinubu Returns To Abuja After Umrah In Saudi Arabia - Channels Television",
+          "summary": "Tinubu Returns To Abuja After Umrah In Saudi Arabia Channels Television",
+          "date": "Nov 4, 2026 · 8:00 AM",
+          "publishedAt": "2026-11-04T08:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPMERfdVpwcFNKU1p2MEZYTWxoOHhISnd2TFJSenlmX3JFV2RIdTBGSkJkY0YtOG5PejVnWENmQ3Y0Rk82UzE3V05qbDZUUVd3RzhjV3EzWUVjdnVPWjlLR1VDam5RenJPRDlwd3BzSmJUWVlieXozbHkybk5PeHNhejZpMlgwV0FmaDVtM3ExSzFLTjV6?oc=5",
           "importance": 2
         },
         {
@@ -182858,6 +182915,19 @@
       ],
       "independent": [
         {
+          "id": "in-independent-0acc4ce1b4859147",
+          "countryId": "in",
+          "sourceType": "independent",
+          "source": "The Indian Express",
+          "headline": "India Pavilion wins at Venice Biennale 2026 - The Indian Express",
+          "summary": "India Pavilion wins at Venice Biennale 2026 The Indian Express",
+          "date": "Nov 26, 2026 · 4:45 AM",
+          "publishedAt": "2026-11-25T23:15:39.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPcnFjNjY4dHEtcm1UR2ZsckZjdDYwLWlqRjZ2LUpWemxUd3VsNTF4Y2tEMF9OSFQ4VzdzVHdUUlJQWFNGRmNJblhkT3I0QURFc0lYX0lTX0hHSjZHeElEM1FSWEMyR3N2N2lPV0RGRG1hSm5BMTFpR0F5aXNDdTVwS0Z3dDZLNTNSZ2lYNWNoXzlFd2lSUTR1N3Rwck1FT1FmVWJKZDY0ZzFFeFlVTzIyRXR3c9IBugFBVV95cUxPYnB1ajhwd1ZoQ2tyU24yUzhrVnBaYkFSckZxSXgzMzdnWGZzbFl0QjhjTnVCdHk0bDB2YjNnOFZTTGVRb2ZzUXdxU1R2T05JM2d3bnNaTXVNZDg1Tzl6MVF1T3c5NzRfQlY5VE4wVFM4RVktVjRYY1VqOFc5RGZJUmRTeGZYbE1idnkzMHU3bGdMMUhaX2JRLUdoRGlyRVpjd0UwREVPcE5XMFdVWkpoYXR3SFNLU1k5ckE?oc=5",
+          "importance": 2
+        },
+        {
           "id": "in-independent-d2bce64c9893ff48",
           "countryId": "in",
           "sourceType": "independent",
@@ -189343,29 +189413,29 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOSU04UVNKMWt4WUROOU9VYWliWkZ6NXNOTUUwX282NFI0R1pYWEpXOTFjdzZZLXNhZDJNNU5hUzE2Q2hxTkJFVEViT1BLSG9vdlk0MzIzWU13dnpDdzZuLVRrNkZxTWVtWnV6NHhYSFlKSkJmcm53bFA4eGVwN0xKYzB5TWh0NVJqb2wwY3RqZFhJNGI1ejNrVk9QMVBsYXpwVFVHOWxRUk1uZEtrREhNQlU5c1VkRFk4Si1mZtIBwwFBVV95cUxQM01Pa2I4VWhrQXdYb2g5cUt3dTE0ZFRfTFJhOGFvWDAyZVZqYmYyV1RJQkYyV2trSDVGMTc3eDdNbGJnSS1RMlZQWU5hRGZiVXlfLWt3X2dTdnJ3Tlk3eDlqTFdWR251LVhGSncxcThCSS1IMGJUZGFnOHlZUGdkVXVMR0hIU0FkVXNqemE4bW00dDNFeWo4TGZJcXBxUlI1SnFFeUNvaGxaVWlMUmJGV0lZZDlKMFJXZzhjOTd2OUt1STg?oc=5",
           "importance": 2
-        },
-        {
-          "id": "in-independent-eb6aed53d20f90d5",
-          "countryId": "in",
-          "sourceType": "independent",
-          "source": "The Indian Express",
-          "headline": "Who is Aarti Shah, the Indian-origin executive on Nvidia’s board amid Jensen Huang’s exit? - The Indian Express",
-          "summary": "Who is Aarti Shah, the Indian-origin executive on Nvidia’s board amid Jensen Huang’s exit? The Indian Express",
-          "date": "Nov 13, 2026 · 1:17 PM",
-          "publishedAt": "2026-11-13T07:47:34.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPb0VHclZFR3d1eXZZSzJscV9wWUVHMlg0NkZ5Y2lmTl96MFlDOWQ1LU5tNHRKOElkU3VqZnMyYkplbjZyNHkyV2RDcmRQRTJGQWlUS1hSc3NJTEJ3YV9iNWxDSHVucDZySGgzWU8xX2FCTE9PZFVaVk44a2t6cXY1VnFEdS1kMWtzVDFXZHRBVWFUZTdLZW1GbjVPTms5bDA4UjRxZzIyUEVKQVNnUXFZejFMNmVGYktVRnNYUjYxd3ZPQVhqMFB6SHFEaGVTWXN5Ry1jdFpZc0TSAd8BQVVfeXFMT3dYZzIwRkV3bkhwNFdaSk5sZEZnZkkxWV9vUDBTVE51dWtLUlloWk9OSzJmZElWZzVPWllEb3YzWUUxUWhERDY1VGJmaHBfa2ZRSUxJWVNUbUVVZkw3ZjJQSFl4OUQwcU1mOHZmNnJRcDdVbHVUbjFBMGdtUWk0T2tWeXZjTnBZYWtXdUp6UmhmaE01UV9nTWcxejdnU0xhejJ0WVB2cW00ZHRURVMtcWdibTVueVo0U1VBQUU4X1g1b1V0REZ5ZkxtVjJSMnE0ZFVGRlZSMk83Smpfc0h0VQ?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:33.868Z",
+      "officialLastOkAt": "2026-11-26T00:12:36.063Z",
       "officialLastError": null
     },
     "pk": {
       "official": [],
       "independent": [
+        {
+          "id": "pk-independent-0eb25dcd544745c9",
+          "countryId": "pk",
+          "sourceType": "independent",
+          "source": "Reuters",
+          "headline": "Pakistan's PIA to shift UK flights to own fleet after Norse Atlantic suspension - Reuters",
+          "summary": "Pakistan's PIA to shift UK flights to own fleet after Norse Atlantic suspension Reuters",
+          "date": "Nov 25, 2026 · 7:32 PM",
+          "publishedAt": "2026-11-25T19:32:39.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOTkFGakJWZVBjNkpWNGJSajBSZFVudDhWdVhpYU4xWjROeWRjZ05JMHpDa0oxekJDeUUxQTVIVHc3cUZYQktSbmV1bVFZT2VsR0tJVW1NWk9maVVmU0RrY1J0U050cU14S2s5MEZLS28xM3lIVDEzcThxbmlGWXBvOGxaZkNEbEZJdGN5aFRxSndmU0RhSGVyN0tsaS1SWkl1WFJ2ajZZcWJnMEJSS2NZd3A0QUp4MFdPRk1jWlg2SWdhaEFqdlpLZlRTT1JLcVla?oc=5",
+          "importance": 2
+        },
         {
           "id": "pk-independent-b3261bf13bf8c0c9",
           "countryId": "pk",
@@ -195857,19 +195927,6 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPYkdtMDk2MVpqQ0lFME5XaXdTSEctX2RTdDBfd3dFWEpCUzlQbmNtTW11RXhWR1l3T1pudzJxUzlQX3ltX293THFrMGhDN1k3dzhma1ZnX3dnd3NaZjJ3Z2lMcmMySzY1dy1nVXQ3STJkaGdlOXhhNGpoT0pYa0ZzYXFaejhVWWxkSWlrSkJSQkpLUzBPTHg5UDBGUFM3TXl4Zlp4SWV4OHdTdWNQMWhfRFdKUEF1VzJyc1BhbVFpMXFGbTVrTTVyZ1NEa3dOd08w?oc=5",
           "importance": 2
-        },
-        {
-          "id": "pk-independent-f66a9bb7bfb60a86",
-          "countryId": "pk",
-          "sourceType": "independent",
-          "source": "Dawn",
-          "headline": "FO reiterates Pakistan's 'firm and unshakeable' commitment to Saudi Arabia's security after Riyadh attack - Dawn",
-          "summary": "FO reiterates Pakistan's 'firm and unshakeable' commitment to Saudi Arabia's security after Riyadh attack Dawn",
-          "date": "Oct 11, 2026 · 4:13 AM",
-          "publishedAt": "2026-10-11T04:13:34.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTFBtU0diTTE2XzZ5cGgteXEtMEpNWkUtQllXdFJxRmVEakVMV2VNVXpjWWJXejhhMm03UjRKMW5fY3NNOGY3NEZjdw?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": false,
@@ -198326,6 +198383,19 @@
           "importance": 2
         },
         {
+          "id": "cn-independent-7b51badac06b1808",
+          "countryId": "cn",
+          "sourceType": "independent",
+          "source": "South China Morning Post",
+          "headline": "US finds no evidence China told Alice Huang to spy on Nvidia CEO, report says - South China Morning Post",
+          "summary": "US finds no evidence China told Alice Huang to spy on Nvidia CEO, report says South China Morning Post",
+          "date": "Nov 25, 2026 · 6:23 PM",
+          "publishedAt": "2026-11-25T18:23:37.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOemxPaTYzV3h2MDhwNktqeE9Bd25vd2NvN0cyS3ctdnVWN2I4Mm0zei1aX2h4RFR3YWI3N2dHX1VTWmRUdVJBM1NvWllac1ctTTZCQWl2bHFhWEF3akVzZGxrdGV3MGJkQXVmYkE2UzAtN013bmFoUjk4c1ktbVRkcmhERTNwb2JxVVN2ekNmQ3FzLXZtUjExM0JPSkoyc2xEX1BhbHdDWVlUYWhKVTZvZ3N1WWpnZEwxY3pJQnlSc1dHTUY0M096aE9rVjNZUUthYVkxbWZLb2NfT0ZpY1cwQdIB4AFBVV95cUxOU1c0TXA3WmJ0T180cVVlSURHYTVIcWM3cXlwcU9nOFRGdGRMVmt5ZGpZSFhRSVY1bi1vdWZ4Sm5ocnRiaUhXNUxSX2o0OUd1LXREdjRiY2hvU2J6OXY3LVVSUER0TUdoMDNDeEdWbFZyZHBBQnFwLVFkU3RoWTRBMnF3ZnUxVGxJV05GeWZ5YmJ6eHdnbk5UQ0J0VkVjcTlmelpXMENRY3ZuejhhckhOMzZhWkktamZoTGRwVWl2b19oZEo2MVFtUDh4ajJJSWRJLUtGZ1FCR19rLUVVOHh1VQ?oc=5",
+          "importance": 2
+        },
+        {
           "id": "cn-independent-f792efd1cd75ca79",
           "countryId": "cn",
           "sourceType": "independent",
@@ -198729,19 +198799,6 @@
           "importance": 2
         },
         {
-          "id": "cn-independent-7474334e00abc04d",
-          "countryId": "cn",
-          "sourceType": "independent",
-          "source": "AP",
-          "headline": "China investigates Politburo member and Shanghai party chief Chen Jining - AP News",
-          "summary": "China investigates Politburo member and Shanghai party chief Chen Jining AP News",
-          "date": "Nov 24, 2026 · 10:00 PM",
-          "publishedAt": "2026-11-24T22:00:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNMG44bXNIbVRoRkdsc1FsaEg0ajBQekRydkVTeDZTbWN0TnBCSWZ1MFQxTzMxc2p0VWFTQzBQRWhHdUVrQUItOC1FNGlVQlZkeVRQWjFRRTZUTkFUeHIyWkRIOXIzbktKZk5HdGxNWGFTSldPN1p3QUtFSEM2dUJHYmRXN0g4UVAzSW9rTkZGOTd3cmZJYU1VdEJJNFE?oc=5",
-          "importance": 2
-        },
-        {
           "id": "cn-independent-39b94f94240f1312",
           "countryId": "cn",
           "sourceType": "independent",
@@ -198817,6 +198874,19 @@
           "publishedAt": "2026-11-24T14:56:18.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOWENXdFJEUVN5WUF1ODgwSWdpRUZiSWk0UVFoX3QzbVF4N19LRDJmaUdpTm1ZVlU2Rmx2Zm5hX1RleFg2aDRjWlN6QTBCM1JNc0VOZ2FRbEFvVUYyNF96REhoU0RsUTVyVkYzUXVfdmFHaTQxMnk2WVZQWU1XR25NaGV0TERXS2RtVmR6bVBCZ1loZHRzZzlQajlZdjkySHhpdDJV?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "cn-independent-7474334e00abc04d",
+          "countryId": "cn",
+          "sourceType": "independent",
+          "source": "AP",
+          "headline": "China investigates Politburo member and Shanghai party chief Chen Jining - AP News",
+          "summary": "China investigates Politburo member and Shanghai party chief Chen Jining AP News",
+          "date": "Nov 24, 2026 · 2:04 PM",
+          "publishedAt": "2026-11-24T14:04:08.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNMG44bXNIbVRoRkdsc1FsaEg0ajBQekRydkVTeDZTbWN0TnBCSWZ1MFQxTzMxc2p0VWFTQzBQRWhHdUVrQUItOC1FNGlVQlZkeVRQWjFRRTZUTkFUeHIyWkRIOXIzbktKZk5HdGxNWGFTSldPN1p3QUtFSEM2dUJHYmRXN0g4UVAzSW9rTkZGOTd3cmZJYU1VdEJJNFE?oc=5",
           "importance": 2
         },
         {
@@ -204772,24 +204842,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOUXFZb3BiQnVoUlE0aWNCTmFkT0tHU1dBUEpoUHJDWFQ2bHNicF83YXA5SnpPODJTM2w0X3BPZ3hYZUZOQUg5ZEUyVjYyalBCWExpU3hfV01tX1J2RDViRUF3MklUNERaeWRrMk9DU212OFJXQjNhT0R3WkFuOGx3NEdGeVhLOWo5a096cFYtSGx2Z1RsVzNMeHh0SmdaMmMxbjVudXRzaEw4OVZWb1RPTFQzMmd2bjh0YlBBRU5qcnl3aTVsUGfSAcYBQVVfeXFMTi0xMHpISjVRT296RjB4OEJScDM1WEE2V3I2NHMtQWROMHlGZUJzenAta19rMy1feDZIX1l4Yy1JdTRhcWt3V0Y5d2Z0RWpveWNocFNIQTd6QnFhaWQxa3J0R1NTZDdLamJCZVFjRnRrbUJjZFE3ZlBxTnNoZGlEcjNyMUgwT1hwWTlhaEtyTklnajF1ajQwWl80SlZRMnVHd2xzSWdxX1pSYUY3ZmEycmF0dnZLcHBUeGNKM25xQUxBOXJhd3NB?oc=5",
           "importance": 2
-        },
-        {
-          "id": "cn-independent-569e598e0a909df8",
-          "countryId": "cn",
-          "sourceType": "independent",
-          "source": "South China Morning Post",
-          "headline": "In China’s fierce race for success, mental health struggles are starting earlier - South China Morning Post",
-          "summary": "In China’s fierce race for success, mental health struggles are starting earlier South China Morning Post",
-          "date": "Nov 7, 2026 · 10:00 PM",
-          "publishedAt": "2026-11-07T22:00:12.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOMThaa0xfNDlDVVE1ZG9QelMzWmJieFhZbXhaSGYxQXdkbnl0ZE1ubWtfWXZmSjVYT011Q1dpVXdSMEkwUUJWZFpBdE5IS1RUV0hoZm9ETHJySk9xYlNwUDQ2anBJVmRVMF9nNU1XVFk1LThXX0t0S2RXVkFzS2xCYjg4NDJCYmxoSTA5UlgtTDRqYVoySVVTdTA0U2lfa0ZyVW9IS21nVmRjTVI2WmcwdFI2RWo3QXRmcDBfeDVJRWRrVjNLOVpV0gHHAUFVX3lxTFBNY2VZYUZYMThSdksyZk1lYzg0dDY0d3JaT3hhaC13Z1I4anRsNVpiVkxIU3J1Q0RDQ2xya2twMUI3X1o3ZjJJYmRtV2RyVXFhdTZkVGg5aTZsQ1ZTUklqY2lNMHg4ZGFFNlFrQXRRdmh0UWRSNUhrekJ3Q0ZuNmQxM2FqcWNnR1RheTFaVmdVQi1sNlk2MTdZblpzWUxHamRqcHFWWlFoSVFwVkx4aS1LcmFFWFZUVW9ESGk2SUpZeXowUnlLUTQ?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:41.877Z",
+      "officialLastOkAt": "2026-11-26T00:12:44.368Z",
       "officialLastError": null
     },
     "jp": {
@@ -206568,16 +206625,16 @@
           "importance": 2
         },
         {
-          "id": "jp-independent-75bcdbef26d5c765",
+          "id": "jp-independent-c866982bad60b8c8",
           "countryId": "jp",
           "sourceType": "independent",
-          "source": "NHK",
-          "headline": "Japan to draft 2nd supplementary budget for urgent needs - NHKニュース",
-          "summary": "Japan to draft 2nd supplementary budget for urgent needs NHKニュース",
-          "date": "Nov 25, 2026 · 12:02 PM",
-          "publishedAt": "2026-11-25T12:02:58.000Z",
+          "source": "The Japan Times",
+          "headline": "Japan mulls new Japanese-language test for foreign workers - The Japan Times",
+          "summary": "Japan mulls new Japanese-language test for foreign workers The Japan Times",
+          "date": "Nov 25, 2026 · 12:06 PM",
+          "publishedAt": "2026-11-25T12:06:00.000Z",
           "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE02OUtDNjBXbVJETHJUaVNLU3RjMldJQ1VHMW5ORjF6LS10Sm8tRWdMZXBVTDlWRGJoNlY1U0VPa0k5cjZKU3RpaVZYUTVnZ2VZcGNIVjhORXJURlo3UzJaQUhITQ?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQcjRjUW5ONmFwQmZTREc3c1hYYVpWaFRzSlB1M21DSU5ocktraTFLWFlvcHlZUTdzMXlvYzV5eUZKY0pTZ0dtOS1TNmF6SEVuOUU4dXpFV1ZrYTFFRVAyaGhVaTdlWkpobHhKV3BUdm1nSjJadmRfMk4yVGhYYXdpYTFBSUZxVlprdGNRai1R?oc=5",
           "importance": 2
         },
         {
@@ -206620,19 +206677,6 @@
           "importance": 2
         },
         {
-          "id": "jp-independent-0e37253da5bec778",
-          "countryId": "jp",
-          "sourceType": "independent",
-          "source": "NHK",
-          "headline": "Big builders in Japan turning to AI robots | NHK WORLD-JAPAN News - NHKニュース",
-          "summary": "Big builders in Japan turning to AI robots | NHK WORLD-JAPAN News NHKニュース",
-          "date": "Nov 25, 2026 · 6:21 AM",
-          "publishedAt": "2026-11-25T06:21:10.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1EWGZ3YWNLV3ZsQlk4bVpiQzBlQkc4VTl4ZDVjeU1MdkhVQnR5RWpreFNZLVZPdEJ2RkxGR0xmSV9wYU5iM1JWRUZJWmZCV1dTVkxOTS1hMUxIT2RNUmViVzk2dw?oc=5",
-          "importance": 2
-        },
-        {
           "id": "jp-independent-e42aa12e218e5e80",
           "countryId": "jp",
           "sourceType": "independent",
@@ -206659,6 +206703,19 @@
           "importance": 2
         },
         {
+          "id": "jp-independent-75bcdbef26d5c765",
+          "countryId": "jp",
+          "sourceType": "independent",
+          "source": "NHK",
+          "headline": "Japan to draft 2nd supplementary budget for urgent needs - NHKニュース",
+          "summary": "Japan to draft 2nd supplementary budget for urgent needs NHKニュース",
+          "date": "Nov 25, 2026 · 1:03 AM",
+          "publishedAt": "2026-11-25T01:03:58.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE02OUtDNjBXbVJETHJUaVNLU3RjMldJQ1VHMW5ORjF6LS10Sm8tRWdMZXBVTDlWRGJoNlY1U0VPa0k5cjZKU3RpaVZYUTVnZ2VZcGNIVjhORXJURlo3UzJaQUhITQ?oc=5",
+          "importance": 2
+        },
+        {
           "id": "jp-independent-b9c1cacfe6b19148",
           "countryId": "jp",
           "sourceType": "independent",
@@ -206669,6 +206726,19 @@
           "publishedAt": "2026-11-25T00:25:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNdkxtVFU0MnowNnVkS0VyRkZWT2hVZ3hsVFkxNjc3dTZCbjJGT0V0Z2Z4Q2l5MXZQTE5YdXBRYzY1Smx3YUZEQVpRRm44a09PRV9tX2N0YjZIdl9vdzNxblhPSHRCd3lndVNWYmhmM3BJZjRxU3hNMlhrSUlxOWw5V2NOanhNcENOOXZTOWRiYVRLMXFUSkgxM3h3QVQyV1U?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "jp-independent-0e37253da5bec778",
+          "countryId": "jp",
+          "sourceType": "independent",
+          "source": "NHK",
+          "headline": "Big builders in Japan turning to AI robots | NHK WORLD-JAPAN News - NHKニュース",
+          "summary": "Big builders in Japan turning to AI robots | NHK WORLD-JAPAN News NHKニュース",
+          "date": "Nov 24, 2026 · 10:21 PM",
+          "publishedAt": "2026-11-24T22:21:10.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1EWGZ3YWNLV3ZsQlk4bVpiQzBlQkc4VTl4ZDVjeU1MdkhVQnR5RWpreFNZLVZPdEJ2RkxGR0xmSV9wYU5iM1JWRUZJWmZCV1dTVkxOTS1hMUxIT2RNUmViVzk2dw?oc=5",
           "importance": 2
         },
         {
@@ -206828,6 +206898,19 @@
           "importance": 2
         },
         {
+          "id": "jp-independent-7d21e69ac5330e7f",
+          "countryId": "jp",
+          "sourceType": "independent",
+          "source": "NHK",
+          "headline": "Japan education minister intends to stay | NHK WORLD-JAPAN News - NHKニュース",
+          "summary": "Japan education minister intends to stay | NHK WORLD-JAPAN News NHKニュース",
+          "date": "Nov 24, 2026 · 6:49 AM",
+          "publishedAt": "2026-11-24T06:49:54.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBMQUNRZWxKM0dxTVg4QzFUZEdIUEZ4NXRtYldrLUJyaHhOU01scHRHRnJ1UUJWWFNhSkNPNjdYMzB3RlJnZ1Z3OE9FWEhkdU1FUE1OYWh1NWlxc1BlZDQyR3dxTQ?oc=5",
+          "importance": 2
+        },
+        {
           "id": "jp-independent-3c09b70ae8ee1a7c",
           "countryId": "jp",
           "sourceType": "independent",
@@ -206968,19 +207051,6 @@
           "publishedAt": "2026-11-23T16:15:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE04YWV4YV9qZUk4cVRJUWkwc0lSNFFvUmJuVUYwbEVPazFRSjEwYm9maUpsVW5uZUhlaVFqVWEyaDJVMUdiYVkzZ1lKYmRqTU1OTG9fZUZLSXVoSEtnd1pNVm5EZw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "jp-independent-7d21e69ac5330e7f",
-          "countryId": "jp",
-          "sourceType": "independent",
-          "source": "NHK",
-          "headline": "Japan education minister intends to stay | NHK WORLD-JAPAN News - NHKニュース",
-          "summary": "Japan education minister intends to stay | NHK WORLD-JAPAN News NHKニュース",
-          "date": "Nov 23, 2026 · 2:23 PM",
-          "publishedAt": "2026-11-23T14:23:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBMQUNRZWxKM0dxTVg4QzFUZEdIUEZ4NXRtYldrLUJyaHhOU01scHRHRnJ1UUJWWFNhSkNPNjdYMzB3RlJnZ1Z3OE9FWEhkdU1FUE1OYWh1NWlxc1BlZDQyR3dxTQ?oc=5",
           "importance": 2
         },
         {
@@ -207471,8 +207541,8 @@
           "source": "AP",
           "headline": "France’s Diallo and Japan’s Tashima challenging Infantino in FIFA president election - AP News",
           "summary": "France’s Diallo and Japan’s Tashima challenging Infantino in FIFA president election AP News",
-          "date": "Nov 19, 2026 · 7:21 PM",
-          "publishedAt": "2026-11-19T19:21:00.000Z",
+          "date": "Nov 19, 2026 · 7:57 PM",
+          "publishedAt": "2026-11-19T19:57:13.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNV0JNYTJhdElycVdZeUtCejcteGRSYTFGRU5nMXZUUnpjd0pKVi1CVHk0MkhNZEFSY2l4ODlLSzFqVzBWYTRNS2U5YUJzS3I0WkNmZHV2OTFZOEpsMU1LLUVKRkQ4UXVzSWlYVnU5dnBVS1Y5aXhlRjZHelQwNWdEQUlZYWN3NWNqR05LSWZmT1FoU25nTHhSRkZNdXVpcHd0WDU5OGhpRXBaWTNU?oc=5",
           "importance": 2
@@ -213040,24 +213110,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNckNtZXlxMXk5RnVGYkFxUnpmbDg5cUR4V3gzd1ZpQS02djBDWVZxWGtFZldWXzM0a1V2VWQxMUNadmhkbU5vNjlrT2g3UVl5VEVtcmtJLTY4VDVZNEwtNmFNbjVYZ0pIRE5fenlfZURDQlVQTXJsenJpQ0FlNTRXZ0dWMTdBNlQ1aHJ6cWlpckdHRUd5dEpiTjZ1cHY1LTQ?oc=5",
           "importance": 2
-        },
-        {
-          "id": "jp-independent-81d5b562e3687d7b",
-          "countryId": "jp",
-          "sourceType": "independent",
-          "source": "The Japan Times",
-          "headline": "Japan considering paper-digital hybrid textbooks as standard - The Japan Times",
-          "summary": "Japan considering paper-digital hybrid textbooks as standard The Japan Times",
-          "date": "Oct 20, 2026 · 2:27 AM",
-          "publishedAt": "2026-10-20T02:27:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOUzdqTXhxdHctb0FvWG9sRDVRM0swMEROX0xmV21YWXdRWFZPdUttR3BYdUpjZVpJLWsxNVZIR1BqYk43bld2MURqdVoxdE5rRXloTXJTc19yQnowb2p4a1FGRXBQam95ZWhBTmwydko1MUZ1dzZKR1I4QlJNLVdKUFBCZXhtZWp3SGotUWxPS2FRZw?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:44.319Z",
+      "officialLastOkAt": "2026-11-26T00:12:46.231Z",
       "officialLastError": null
     },
     "kr": {
@@ -215302,6 +215359,45 @@
       ],
       "independent": [
         {
+          "id": "kr-independent-f1b262c262c2a95d",
+          "countryId": "kr",
+          "sourceType": "independent",
+          "source": "Yonhap",
+          "headline": "Korea National Sport University's chief gives interview - Yonhap News Agency",
+          "summary": "Korea National Sport University's chief gives interview Yonhap News Agency",
+          "date": "Nov 25, 2026 · 11:50 PM",
+          "publishedAt": "2026-11-25T23:50:58.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBPdEJLcXR4eUZxUVhmdjN4SE0tamRoR0pkOXBybEYyaDNsczlqaS1BV1RxN1ZoU2U1Yl9vZXhyeUgxdkVndE5vZ1hRb19QNnR1LTMyR0M5WHBSc21pTFpnMXpyZHZQT1ZweFBPeDZiWURzaXBWbjhR?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "kr-independent-32ee5bccc221e82a",
+          "countryId": "kr",
+          "sourceType": "independent",
+          "source": "Yonhap",
+          "headline": "N. Korea holds conference of party cell leaders - Yonhap News Agency",
+          "summary": "N. Korea holds conference of party cell leaders Yonhap News Agency",
+          "date": "Nov 25, 2026 · 11:03 PM",
+          "publishedAt": "2026-11-25T23:03:58.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBBQ3gtR0NKYkQzV2xkVGs2bkxTcXBzZHJQMW00dUhWSUZjNFF5Z1Vuc3JyMWtQOHRyRUh4bFJTdUlHU2V5blJTMExLZ180aE1oWWUxbklqTno2c05tblotVzc4cWxGWTZOdVRyZG80T2g?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "kr-independent-149ac778113e3d7a",
+          "countryId": "kr",
+          "sourceType": "independent",
+          "source": "Yonhap",
+          "headline": "N. Korea holds conference of party cell leaders - Yonhap News Agency",
+          "summary": "N. Korea holds conference of party cell leaders Yonhap News Agency",
+          "date": "Nov 25, 2026 · 11:02 PM",
+          "publishedAt": "2026-11-25T23:02:55.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5mM1lTOWV1MjNzaTFCZVJfWW9vakJiNXM5S1hKeW5ld0l6c3dtWDg4V3Bmd3JlV3dDRXJPeERVMXg0TkVDSHpvOHBHS0ZOOVVoZm5EX0ZXRmZNSUJ5aEVUSUdwcE9mS2Q1dHdrTlp6eWU?oc=5",
+          "importance": 2
+        },
+        {
           "id": "kr-independent-4260f7a4fb5629f1",
           "countryId": "kr",
           "sourceType": "independent",
@@ -215364,6 +215460,19 @@
           "publishedAt": "2026-11-25T08:21:20.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5XdDFfd0J3d19WSkRhZ05INHF6d3BJcTlqTk5mLXZ5WGQ1VUF1YlNQaTJGNWFFMERZTmdZQmMybTJjMkFONXBsS1BqSHNJSUgzRWY0aTJxTDJVdHRqTkc0OGhXSGZvcjFYTFRRaXF0LUU2b2tVRUZF?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "kr-independent-c5621bdd6616b7a0",
+          "countryId": "kr",
+          "sourceType": "independent",
+          "source": "Yonhap",
+          "headline": "S. Korea-Oman talks - Yonhap News Agency",
+          "summary": "S. Korea-Oman talks Yonhap News Agency",
+          "date": "Nov 25, 2026 · 8:21 AM",
+          "publishedAt": "2026-11-25T08:21:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5Ob25zcVRQWVNxMVdCUHpQZ1JKRGFRWFhJcEhBMW5pZmc3cDN6VlFDSndkN0o0T0tOWm1ESlFzYTg3ZUNHNXFnVzRwODk5RnJaeHFqcXpKMGZBZw?oc=5",
           "importance": 2
         },
         {
@@ -215458,6 +215567,45 @@
           "importance": 2
         },
         {
+          "id": "kr-independent-67d7449adc089f5a",
+          "countryId": "kr",
+          "sourceType": "independent",
+          "source": "Yonhap",
+          "headline": "Korea Fintech Week - Yonhap News Agency",
+          "summary": "Korea Fintech Week Yonhap News Agency",
+          "date": "Nov 25, 2026 · 5:42 AM",
+          "publishedAt": "2026-11-25T05:42:55.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE56OU5oMzZKd0VIQUJGeldPVkhrNTE5RzFNVXhqbUtsMElIakNqMEJHOFhtdWt6TU9CaW44MzFQNmRGZV9yV2xzRWFRZlRmaVVoVHBIU2JWWnVFZw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "kr-independent-9b1ea83033411ff3",
+          "countryId": "kr",
+          "sourceType": "independent",
+          "source": "Yonhap",
+          "headline": "Korea Fintech Week - Yonhap News Agency",
+          "summary": "Korea Fintech Week Yonhap News Agency",
+          "date": "Nov 25, 2026 · 5:42 AM",
+          "publishedAt": "2026-11-25T05:42:45.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE8yR1huREY0cENvVWdVR0VfMEtBckUzYzdSVVJNVDlYR0FQZ3d4bDh3WHVtMVF0Qi1CNUk2Uy1ibTF4UndIcFVCNV95NWZQZFEzaWkxbjgyNXNYdw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "kr-independent-7e5f3b8e262e834a",
+          "countryId": "kr",
+          "sourceType": "independent",
+          "source": "Yonhap",
+          "headline": "Korea Fintech Week - Yonhap News Agency",
+          "summary": "Korea Fintech Week Yonhap News Agency",
+          "date": "Nov 25, 2026 · 5:42 AM",
+          "publishedAt": "2026-11-25T05:42:35.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0wc0N6aGJBc2NSOU0tNFBSSGxPUW5ETDBrdGd1NUdKWWRFbFQta0FVSmdLVnVnVFU2cWROeGJhV2RfYXIzS1QySUI1bzdzbm12NXZWc3B5QUg1UQ?oc=5",
+          "importance": 2
+        },
+        {
           "id": "kr-independent-60eda0b0fbe5fb1e",
           "countryId": "kr",
           "sourceType": "independent",
@@ -215494,6 +215642,19 @@
           "publishedAt": "2026-11-25T05:31:36.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBLRXQzMkJHQXJCaVQzTlBkU0FJdGVsZ3YyS19oWW14YWxHNUJtQVoxTFZ4YUd6WVVLeXkyRWowX282bGpmZDhRcHJXTWpNNTFGYXpwNmlRcw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "kr-independent-95c2b7e5703e1a47",
+          "countryId": "kr",
+          "sourceType": "independent",
+          "source": "Yonhap",
+          "headline": "Births in S. Korea jump 12.2 pct in September - Yonhap News Agency",
+          "summary": "Births in S. Korea jump 12.2 pct in September Yonhap News Agency",
+          "date": "Nov 25, 2026 · 5:19 AM",
+          "publishedAt": "2026-11-25T05:19:21.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9ZZm9yUlJuTlVpak8xem90WGRyVVNoSk5zVHpOSE1mYWhLOHNqSDZiQ3Q0SkpWYzNUMHNHNUtYS0tQdG1ZTmdnQ2hCZU5keklpaC1QZXNPZnQxUQ?oc=5",
           "importance": 2
         },
         {
@@ -215614,6 +215775,19 @@
           "importance": 2
         },
         {
+          "id": "kr-independent-71abdf122cf78e0d",
+          "countryId": "kr",
+          "sourceType": "independent",
+          "source": "Yonhap",
+          "headline": "The Korea Interbank Offered Rates (KORIBOR) - Yonhap News Agency",
+          "summary": "The Korea Interbank Offered Rates (KORIBOR) Yonhap News Agency",
+          "date": "Nov 25, 2026 · 2:07 AM",
+          "publishedAt": "2026-11-25T02:07:27.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFA4M3UwRzAyWjl4aTRpNG1XYzM3b3VuZ0FLSGxVMHdVaDBOc1hYQWUzT2dubUFDWHJYQ3RycndlNmRIbGtOZGUxZ0k0NnJ1UWVEZFB0d3NBYVFFUQ?oc=5",
+          "importance": 2
+        },
+        {
           "id": "kr-independent-00ec4a67998e99e3",
           "countryId": "kr",
           "sourceType": "independent",
@@ -215663,6 +215837,19 @@
           "publishedAt": "2026-11-25T00:24:06.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9Na09fQWtpRUo5VVpLMHdFYmhQQ0VGRkVKM1JpdnpQUDNFNTVBSTJpQnd0QTAtazdMU3FiMFl1bXZJUGNPM0xtNTZqdWJuQl9SWi1mRDFjaw?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "kr-independent-1b664a4e98889295",
+          "countryId": "kr",
+          "sourceType": "independent",
+          "source": "Yonhap",
+          "headline": "Seoul shares open sharply lower - Yonhap News Agency",
+          "summary": "Seoul shares open sharply lower Yonhap News Agency",
+          "date": "Nov 25, 2026 · 12:20 AM",
+          "publishedAt": "2026-11-25T00:20:24.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBjX1ZaYVVvLUNKXzlRZEFPSDBUMXF0MDQzblpOWkIzZ1VMYWltUUdkS1lBVkhkalF1eVJCbHdMbXFYTjlTSUZOVkRkSDg1eDhHWGd6MjM2cWFYZw?oc=5",
           "importance": 2
         },
         {
@@ -221670,141 +221857,11 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE03bU8xRUdEdnVGZ2lzVW1zSzJ1NUxYWl9aUjVpZTdmRnFTbjBTaE9OVGh1alYzUENrN092Y3lRX2k2ZVBrQlRrQ1pVZlc5TFhKanpyTjBONTJMUQ?oc=5",
           "importance": 2
-        },
-        {
-          "id": "kr-independent-690243709dbe0975",
-          "countryId": "kr",
-          "sourceType": "independent",
-          "source": "Yonhap",
-          "headline": "N. Korea's Kim inspects east coast naval base under construction, urges timely completion - Yonhap News Agency",
-          "summary": "N. Korea's Kim inspects east coast naval base under construction, urges timely completion Yonhap News Agency",
-          "date": "Nov 11, 2026 · 11:59 PM",
-          "publishedAt": "2026-11-11T23:59:48.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBvN0pfYjdsUV9nTXl5dVc4SXhhY0hjZTJJSEVSNGZKOGlWSDZNNkNJTkUyZ1E4Y0VSUjh2dE1PeXlMU0tNb0lwUnI5MzNraktpejhPRFg2LWRPUQ?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "kr-independent-75b53a756d2acd3e",
-          "countryId": "kr",
-          "sourceType": "independent",
-          "source": "Reuters",
-          "headline": "North Korea's Kim inspects construction of key naval base, KCNA says - Reuters",
-          "summary": "North Korea's Kim inspects construction of key naval base, KCNA says Reuters",
-          "date": "Nov 11, 2026 · 10:18 PM",
-          "publishedAt": "2026-11-11T22:18:00.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOZDNKZUVkc3hWOFZhTW9ZV0hWT3VQSFNmNWRVTlhGcV9DZTdxRWRpRmV1VV9KVlo3VUlDMEVFYXVsbG93WGhtYXlxUE9kNjlqdkVZRDJyNGRLUm5BTnVxbHBTRm5mRkpZdXJKR05DTVBXSDVweGFwTDNwYkJOYzRVNlozU3ZMUk1hQkExNGFXOWFfd3ZaMEl2cC1BaXZMQ3FkNzdTZDBMWVlnZ3czVXA0T2V4eXBCZnpsWXc?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "kr-independent-a941ec9e1981fc62",
-          "countryId": "kr",
-          "sourceType": "independent",
-          "source": "Yonhap",
-          "headline": "(EDITORIAL from Korea Herald on Nov. 12) - Yonhap News Agency",
-          "summary": "(EDITORIAL from Korea Herald on Nov. 12) Yonhap News Agency",
-          "date": "Nov 11, 2026 · 9:58 PM",
-          "publishedAt": "2026-11-11T21:58:55.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0wUnBleGx3aG0xUHFGVnBqZmVNejJfQWdlcmhVQW1qT3VJUVNDZHpOZmpJNFdKRktLZTNvdmNGZFVYdER4bWdHSXNnM0E4MS1sdWN3ZnJzYmNudw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "kr-independent-840819290baab9d1",
-          "countryId": "kr",
-          "sourceType": "independent",
-          "source": "Yonhap",
-          "headline": "S. Korean envoy reaffirms Seoul's conditional approach to proposed Alaska LNG project - Yonhap News Agency",
-          "summary": "S. Korean envoy reaffirms Seoul's conditional approach to proposed Alaska LNG project Yonhap News Agency",
-          "date": "Nov 11, 2026 · 5:44 PM",
-          "publishedAt": "2026-11-11T17:44:45.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBwQXRLTk9HX0FXNUNyeDBPclBJM1BGbF9zSG5xRk9KSW1rYklzek9mWENDSzI3eHZsRzB0R1BJdkUxVmRQdm9jVHdhTlhXUlBQWEVOTDFyY3VJZw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "kr-independent-18602317cecc71b8",
-          "countryId": "kr",
-          "sourceType": "independent",
-          "source": "The Korea Herald",
-          "headline": "Korea to allow limited carry-in of prescribed weight-loss drugs from overseas - The Korea Herald",
-          "summary": "Korea to allow limited carry-in of prescribed weight-loss drugs from overseas The Korea Herald",
-          "date": "Nov 11, 2026 · 11:47 AM",
-          "publishedAt": "2026-11-11T11:47:40.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1kY2ZCVktsOTFUUDg5VE8wSFViV2hFUGdRM1lyX0pXSDEwLUZ2SzhZUTliYWU5cXJOTVJ4VXljS0dXSDJXLTdrWjh6RzhvMmZReVljM29UVQ?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "kr-independent-e8e7fd475ea5b9f9",
-          "countryId": "kr",
-          "sourceType": "independent",
-          "source": "The Korea Herald",
-          "headline": "Jisoo, NCT, Babymonster among Korean acts for Coachella 2027 - The Korea Herald",
-          "summary": "Jisoo, NCT, Babymonster among Korean acts for Coachella 2027 The Korea Herald",
-          "date": "Nov 11, 2026 · 11:18 AM",
-          "publishedAt": "2026-11-11T11:18:05.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBJVnMwZ29ZZjcyNHVDUVFXY1Rqdmt6TEh1T3RHc2hWNUFZbVI3Sm04SU9pTzFoWVVTMGt5UVJxdThTb280UWlPSk1UakZjQjhHaGJVMnB6QQ?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "kr-independent-3aedeeccfbf752e8",
-          "countryId": "kr",
-          "sourceType": "independent",
-          "source": "Yonhap",
-          "headline": "Seoul shares rise - Yonhap News Agency",
-          "summary": "Seoul shares rise Yonhap News Agency",
-          "date": "Nov 11, 2026 · 8:17 AM",
-          "publishedAt": "2026-11-11T08:17:08.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5kdGxuX2VybkItdGFVVEZ6UldwZi10NDRqM3hQdE5OSGhMTFpuUlRkSjYwZmJsVTdyWjZCSWg0RjJ2ajFneUVOY0hKWFk2bUFubVFQTUtMTWVKdw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "kr-independent-949744810d575bc0",
-          "countryId": "kr",
-          "sourceType": "independent",
-          "source": "Yonhap",
-          "headline": "(2nd LD) Seoul shares rise for 2nd day on tech rally amid rate hike woes - Yonhap News Agency",
-          "summary": "(2nd LD) Seoul shares rise for 2nd day on tech rally amid rate hike woes Yonhap News Agency",
-          "date": "Nov 11, 2026 · 7:32 AM",
-          "publishedAt": "2026-11-11T07:32:48.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9INU52QUtNZEgyVXdobzkycEVkdFhfZnN3blhRODNRSFgtQ3hlUmZycGt2eXZlUzdXM2k5cHFxYTcxN252T1cwdmlkZFNtYnRPTVdhaWRkYXVNZw?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "kr-independent-17823dba28ab9b10",
-          "countryId": "kr",
-          "sourceType": "independent",
-          "source": "Yonhap",
-          "headline": "(LEAD) Seoul shares rise for 2nd day on tech rally amid rate hike woes - Yonhap News Agency",
-          "summary": "(LEAD) Seoul shares rise for 2nd day on tech rally amid rate hike woes Yonhap News Agency",
-          "date": "Nov 11, 2026 · 7:06 AM",
-          "publishedAt": "2026-11-11T07:06:27.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE41amVjcXJvZllTNGxXajNXZkZwbVBtRDlDeWNrQ3JOVE8yUmtNUGlqUS1RRGpkVFkwU2JrMXR0d2JIclFlRWJSQ1hWQ3J3bTV3el9aam9zZjNiQQ?oc=5",
-          "importance": 2
-        },
-        {
-          "id": "kr-independent-ff5bcdc4081643af",
-          "countryId": "kr",
-          "sourceType": "independent",
-          "source": "The Korea Herald",
-          "headline": "S. Korea, Indonesia discuss diversifying defense industry cooperation - The Korea Herald",
-          "summary": "S. Korea, Indonesia discuss diversifying defense industry cooperation The Korea Herald",
-          "date": "Nov 11, 2026 · 7:05 AM",
-          "publishedAt": "2026-11-11T07:05:16.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBVSmtrNkR3djBFWkdYaUtidHZPX09HSl8zMVk2NE4xTFlFSXZaQW5rMDVmQzk0aTd4ZGtSU2hCVFc5d3lzMkN1YllvZ01LRl8yS016VWdOMA?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:46.266Z",
+      "officialLastOkAt": "2026-11-26T00:12:48.333Z",
       "officialLastError": null
     },
     "tw": {
@@ -228878,7 +228935,7 @@
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:49.073Z",
+      "officialLastOkAt": "2026-11-26T00:12:50.704Z",
       "officialLastError": null
     },
     "id": {
@@ -231274,6 +231331,19 @@
           "publishedAt": "2026-11-12T08:00:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNaE80VHB2dlMwYkZpM2p1UUdyV0toU0V6TDdvS044OWRteHdVSWltUzJtLUZtd3oyUlpFZHZpd0gzUDdqOWMzTHZQMjM2VDYyR0Y0YkFaSm15dnFHRHM0b3o5ZDU1ME9OcVZ4aGNqWGVSZ1hLdHBIajVMMENZSGEwZVFDeWlwVUFEUGJqQ0s0QlUzVnZPNHpNcWllT1ZveXZZNlE?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "id-independent-3eaa81f73e9420af",
+          "countryId": "id",
+          "sourceType": "independent",
+          "source": "Tempo",
+          "headline": "MSCI Dumps 8 Indonesian Stocks in November Review, Here's the List - Tempo.co English",
+          "summary": "MSCI Dumps 8 Indonesian Stocks in November Review, Here's the List Tempo.co English",
+          "date": "Nov 12, 2026 · 8:00 AM",
+          "publishedAt": "2026-11-12T08:00:00.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNVnJ1aVI4QTlrWXVOMXZWeG5ORXphQzFlVGpSSnZFb1I4TTU5MjhSSTJRMDdvWmRWNlplWjl5N1hRT0tJdDBseTF6Vzc3Z2dDVGFiQlBfajBKdWNhS3ViN2dHdEpveTR5MlJzUEtHZ2JNbV9UanlwcUl4T1J5T2VKd0k5VVJWYmNiQ3ZFOE1rUEkwZlluby1NMGhmeVQzUQ?oc=5",
           "importance": 2
         },
         {
@@ -235370,19 +235440,6 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPa3N4MzdBTVdpMDFseFJpb0RxOGJOWi1HZC1HVHZ3TjFNZzFWYUdRUmpZZE01cWJlSlU3UnNENUxkV0hheHZHeEt3T09qLU1PSUpvc09SMlZDMFBFUnk1MjJzV1l2MmZydWNuOFhkX0RHYXFxOEE4cllReGhCZVNJbHBfYWFCSUd5ZExfMFFfM3FURGxsemJmVHNB?oc=5",
           "importance": 2
-        },
-        {
-          "id": "id-independent-3cb9089e06984639",
-          "countryId": "id",
-          "sourceType": "independent",
-          "source": "Tempo",
-          "headline": "Why Minister Pigai Claims Indonesia Has 'Democratic Surplus' - Tempo.co English",
-          "summary": "Why Minister Pigai Claims Indonesia Has 'Democratic Surplus' Tempo.co English",
-          "date": "Oct 22, 2026 · 10:10 AM",
-          "publishedAt": "2026-10-22T10:10:05.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNdHNfVnl6QjA2cWhKcEZSUXpwRG5VMkVHM2tNdGdUc0NNV28tZllkOGhtdWM0SGp4cHJHUkwwNEhITWt6MmxzSHljcFRTNkFZTEVkWWlqemE5TWs3WDJsaVJIbTBmWG5TcTRlV2VBQ3Q4TWpMYktIdVZSMnYweG8yd3p4YlFCczJXMGZXN3FTMVBqbEctRkE?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": false,
@@ -237267,6 +237324,19 @@
       ],
       "independent": [
         {
+          "id": "au-independent-358ad771d92f109b",
+          "countryId": "au",
+          "sourceType": "independent",
+          "source": "ABC News Australia",
+          "headline": "Canberra youths to face charges after aggravated robbery - ABC News & Headlines – Australian Broadcasting Corporation",
+          "summary": "Canberra youths to face charges after aggravated robbery ABC News & Headlines – Australian Broadcasting Corporation",
+          "date": "Nov 25, 2026 · 11:04 PM",
+          "publishedAt": "2026-11-25T23:04:09.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNb0RRamhNQmVUT09NdU5NbU16UUFlc0tuMlRRczEtZVBOczYzbGxiSEc1UnBMYWxDMUdmUWxXMXhKRmJJVjAtMUtTMTRRa09UajlqOFU0eVR5TWQ0MllJWU92RVh0aWhEanU1d1BMUDh2Yld1UUNGSThFYldmYjdoNi1TTUlvaU5oOXhNeEFnaUZHaEliUl9DUlN3a2NQQzdRcGR1VFlWdlNfcEVLQnc?oc=5",
+          "importance": 2
+        },
+        {
           "id": "au-independent-d1b1940d55acfe59",
           "countryId": "au",
           "sourceType": "independent",
@@ -237397,19 +237467,6 @@
           "importance": 2
         },
         {
-          "id": "au-independent-bb5dcca1bcf522e6",
-          "countryId": "au",
-          "sourceType": "independent",
-          "source": "ABC News Australia",
-          "headline": "Australia makes new deal in Pacific after revelations over China treaty - ABC News & Headlines – Australian Broadcasting Corporation",
-          "summary": "Australia makes new deal in Pacific after revelations over China treaty ABC News & Headlines – Australian Broadcasting Corporation",
-          "date": "Nov 25, 2026 · 3:57 AM",
-          "publishedAt": "2026-11-25T03:57:56.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQVm5nV2JBSlhXVTlhQjktUWFoZjY3YWlUOHZHRkM4dnVablJZYV9iQWZ1V3RDVlZoNkNFcEduVVpuc0F3LXJpQURIRHNhQ1NGeUFMb2lid3BxX3pza29nZlRNc3hPd0pGbWZ1UVVtQzFYblg1LTdlZlJwaXF0dWRYcU8zSjJRSjQ1bEZCRGlGRHZRSUdZN2E1NFVtUHZWZVF4aUpaSWJwLWtJZ2s?oc=5",
-          "importance": 2
-        },
-        {
           "id": "au-independent-6db25ebfec0127e3",
           "countryId": "au",
           "sourceType": "independent",
@@ -237433,6 +237490,19 @@
           "publishedAt": "2026-11-25T01:28:00.000Z",
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOb192cElUMkkwdmMzTDZpeTJZZTBITVUzZXhLZ19IcWR5Q2poQnpmcjYyQ1J4dGhSMndWbU0yOTVYMG1VX0hBOER0RzJOU3hyNm1STHVsWjNRUGh2Mm9NM3B0WG9jbzdWc3VvdGlZNmdDUXZ6OWxoaE43SmJSVGFrdWFkSUtQMkZwS3VtbjR6UlhteHEwNWZNMnRUV0x4aVpxWUx2TV8yM1h6NXhPSkhLQg?oc=5",
+          "importance": 2
+        },
+        {
+          "id": "au-independent-bb5dcca1bcf522e6",
+          "countryId": "au",
+          "sourceType": "independent",
+          "source": "ABC News Australia",
+          "headline": "Australia makes new deal in Pacific after revelations over China treaty - ABC News & Headlines – Australian Broadcasting Corporation",
+          "summary": "Australia makes new deal in Pacific after revelations over China treaty ABC News & Headlines – Australian Broadcasting Corporation",
+          "date": "Nov 25, 2026 · 1:22 AM",
+          "publishedAt": "2026-11-25T01:22:26.000Z",
+          "dateOnly": false,
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQVm5nV2JBSlhXVTlhQjktUWFoZjY3YWlUOHZHRkM4dnVablJZYV9iQWZ1V3RDVlZoNkNFcEduVVpuc0F3LXJpQURIRHNhQ1NGeUFMb2lid3BxX3pza29nZlRNc3hPd0pGbWZ1UVVtQzFYblg1LTdlZlJwaXF0dWRYcU8zSjJRSjQ1bEZCRGlGRHZRSUdZN2E1NFVtUHZWZVF4aUpaSWJwLWtJZ2s?oc=5",
           "importance": 2
         },
         {
@@ -243762,29 +243832,55 @@
           "dateOnly": false,
           "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQS1AycWNuaXk4eGhMenlaZmJhYjJWWXJiTXFtSmZ2NHdjaXZvLUEwRmJLbWlTejVUSVRlaTRjTC1wVTFia0c3d1ZQOFJ5amR0WGsxTVA3T2ZhU1g1ZjNxVWhjUkswNHZ2d2ZiS3EyRUQ5LWNBV05lN1RoSkJUZjJYazlUU29MaTlTT1NMQmkzZy1HR1k?oc=5",
           "importance": 2
-        },
-        {
-          "id": "au-independent-5ed7a1dbfde430f0",
-          "countryId": "au",
-          "sourceType": "independent",
-          "source": "The Sydney Morning Herald",
-          "headline": "Topic | Australian Macadamias - SMH.com.au",
-          "summary": "Topic | Australian Macadamias SMH.com.au",
-          "date": "Nov 2, 2026 · 10:41 PM",
-          "publishedAt": "2026-11-02T22:41:45.000Z",
-          "dateOnly": false,
-          "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1yLWhuOGtCT2psRGhRZEN5Ml9nVHdselVGWUdrc2ctS3VnSm1hT2E1WjVhcV9qSkxyNURlOUsxakYtaFFsRkp4cGpTcTRpbWJUQTdnRDBCeFdST1d3OU9VS2p1ckxlQQ?oc=5",
-          "importance": 2
         }
       ],
       "officialVerified": true,
       "officialStatus": "ok",
-      "officialLastOkAt": "2026-11-25T23:00:51.875Z",
+      "officialLastOkAt": "2026-11-26T00:12:53.710Z",
       "officialLastError": null
     }
   },
   "worldwide": {
     "independent": [
+      {
+        "id": "ww-independent-43635583ee144558",
+        "countryId": "ww",
+        "sourceType": "independent",
+        "source": "Reuters",
+        "headline": "S&P warns Nvidia's board may be compromised, puts chipmaker's rating on downgrade watch - Reuters",
+        "summary": "S&P warns Nvidia's board may be compromised, puts chipmaker's rating on downgrade watch Reuters",
+        "date": "Nov 25, 2026 · 10:44 PM",
+        "publishedAt": "2026-11-25T22:44:42.000Z",
+        "dateOnly": false,
+        "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNb1ZBby1iVDJnTmJwX3hDYWJpU2lxTUdLTHdlWHFqRHJUcmtTOWFuQkFRTlUyZTJBcGdNMWR3N3d1YlJIV05kWk1mU21JSDZmSVpZR1BlanpqRzFXSkg3NkxkeElWcHM0Q2Y4eFJKb3Fha29XakxYNFJ4cXExZHo4MFVDOHdDbENrQWs0d0lqQ3Z5cEVDRVBQR1hNNWZxSmhiUll4NFg1amZlU01oWm9fN2hkUFBBNkdKT21v?oc=5",
+        "importance": 2
+      },
+      {
+        "id": "ww-independent-995f948e5f07e137",
+        "countryId": "ww",
+        "sourceType": "independent",
+        "source": "AP",
+        "headline": "Italy - AP News",
+        "summary": "Italy AP News",
+        "date": "Nov 25, 2026 · 10:36 PM",
+        "publishedAt": "2026-11-25T22:36:44.000Z",
+        "dateOnly": false,
+        "url": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE5Td1hZN3hJaDVpNzlzZWo5M29pUmZ0T0hSazlGbS1rOVhHeVhhTjhsOGdVd1ZZRG03Y3cya3NWb1VIUQ?oc=5",
+        "importance": 2
+      },
+      {
+        "id": "ww-independent-1cea4a479975b805",
+        "countryId": "ww",
+        "sourceType": "independent",
+        "source": "BBC",
+        "headline": "North Korea expels Swiss diplomat in sanctions row - BBC",
+        "summary": "North Korea expels Swiss diplomat in sanctions row BBC",
+        "date": "Nov 25, 2026 · 9:51 PM",
+        "publishedAt": "2026-11-25T21:51:17.000Z",
+        "dateOnly": false,
+        "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1kUGpCM0pWeVZ0dDBWSWIzNURSaC1BVXBPTzRJRTZ4TTB3RGotNENFUER2YVhqWTJ0NlVGU0hGTFZYRkVUazlqMUZMMHFrcEowV3hyaTItbGlYbjA?oc=5",
+        "importance": 2
+      },
       {
         "id": "ww-independent-c0122aa67ab47856",
         "countryId": "ww",
@@ -243874,19 +243970,6 @@
         "publishedAt": "2026-11-25T19:39:17.000Z",
         "dateOnly": false,
         "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE81M0F0SHRCYnRnbmttbF94a2Zval9Qd0xqeWxhNGlJWjJiNTl6R0hBTWxfOUV3bXM4SWNUOTlzUUZnVW9fMTdPMWxBZEVESWxZRlg0X1h3ZWFndw?oc=5",
-        "importance": 2
-      },
-      {
-        "id": "ww-independent-1cea4a479975b805",
-        "countryId": "ww",
-        "sourceType": "independent",
-        "source": "BBC",
-        "headline": "North Korea expels Swiss diplomat in sanctions row - BBC",
-        "summary": "North Korea expels Swiss diplomat in sanctions row BBC",
-        "date": "Nov 25, 2026 · 7:19 PM",
-        "publishedAt": "2026-11-25T19:19:06.000Z",
-        "dateOnly": false,
-        "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1kUGpCM0pWeVZ0dDBWSWIzNURSaC1BVXBPTzRJRTZ4TTB3RGotNENFUER2YVhqWTJ0NlVGU0hGTFZYRkVUazlqMUZMMHFrcEowV3hyaTItbGlYbjA?oc=5",
         "importance": 2
       },
       {
@@ -244111,6 +244194,19 @@
         "importance": 2
       },
       {
+        "id": "ww-independent-beab44e47c571db5",
+        "countryId": "ww",
+        "sourceType": "independent",
+        "source": "BBC",
+        "headline": "Air travel - BBC",
+        "summary": "Air travel BBC",
+        "date": "Nov 25, 2026 · 10:58 AM",
+        "publishedAt": "2026-11-25T10:58:53.000Z",
+        "dateOnly": false,
+        "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBhU0FuVWU4empUUktYUzdvQ3VnTjFmTTN4WmhpTW8yWjZPT25rQm93REJ3MVE1QmJRUmowaWxPb3VnLXNnYkExRUNNNHlPRnJydGU1V0hqUQ?oc=5",
+        "importance": 2
+      },
+      {
         "id": "ww-independent-c8279737e453557e",
         "countryId": "ww",
         "sourceType": "independent",
@@ -244137,16 +244233,29 @@
         "importance": 2
       },
       {
-        "id": "ww-independent-781a72b5ddb1e7b5",
+        "id": "ww-independent-a3ed420921fa2403",
         "countryId": "ww",
         "sourceType": "independent",
-        "source": "AP",
-        "headline": "Tech outages are piling up, and AI is raising the stakes. Could this be the new normal? - AP News",
-        "summary": "Tech outages are piling up, and AI is raising the stakes. Could this be the new normal? AP News",
-        "date": "Nov 25, 2026 · 7:59 AM",
-        "publishedAt": "2026-11-25T07:59:59.000Z",
+        "source": "BBC",
+        "headline": "Cyber-crime - BBC",
+        "summary": "Cyber-crime BBC",
+        "date": "Nov 25, 2026 · 7:56 AM",
+        "publishedAt": "2026-11-25T07:56:04.000Z",
         "dateOnly": false,
-        "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNRzA5RWNfellCVEVsUGMyVm1kc255MGVnZHNDcEVIcmdUX29IbEFPakdnYUUxTFFvZGFORUwwRU5pWlpsV1RXbVN6anRoOEZSdHYtS3VFdXlZczYtS3gwNU9UcXViNlFhWHdnR1N0NEZFVFhseEpKWTlYOGhPOUgxbENJYVhWSlhBVXF1aGNVR3BLckU?oc=5",
+        "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFB6U1l0bVAwTV9VN05zekVtQnQ0b0hjaHVReUJ4ckZTVjdQbUxiekR2Z3E2TlVUby1IYjlET0MyN3ZhQTdweksxV2xVYVNfZGtyREU1YXl1RQ?oc=5",
+        "importance": 2
+      },
+      {
+        "id": "ww-independent-88b0a30de409a369",
+        "countryId": "ww",
+        "sourceType": "independent",
+        "source": "Reuters",
+        "headline": "CD Projekt RED sees no material fourth-quarter hit from GTA VI - Reuters",
+        "summary": "CD Projekt RED sees no material fourth-quarter hit from GTA VI Reuters",
+        "date": "Nov 25, 2026 · 7:43 AM",
+        "publishedAt": "2026-11-25T07:43:00.000Z",
+        "dateOnly": false,
+        "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNRUp0Si1pZjRaMXJucFpFeWQ3OURDd3lEcWhxcWo1NnJuNnZzTy1zU2NBMk5jLTJ4RVh6dHhEWDNpZlJfSDBMTC1aT29yRjh4VW15bDF0Zi1yS1MwRUJWNUJXb1N4YTRyUllpeDBaUzRPRjNwTEFuT0hOYkxfMGFNNlJVTHo1TkgwdWdLZS1XZFZKTnU4ZDNKeUg0ZEU4cWxRMjFveGNLbw?oc=5",
         "importance": 2
       },
       {
@@ -244186,19 +244295,6 @@
         "publishedAt": "2026-11-25T07:14:00.000Z",
         "dateOnly": false,
         "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNOGI2RTlyaGxFazYyTHNnZXpVZkhKYk1BZTdfUWRmOEJFbGp1UUFSV253a2xZZW9WMW5oaGpScjdaMUNyeFJWQXVYdXJDZXNTak9EbFdDdTFaSFZpQVNwZFJ5dk9mVTZNQ25HMXZfSjIzc09mZUdEMUVIbFkwdnIzQTBMS0F6VmNKc0g0RTlhdHh4b1dUaEdLd1VZOExSVE91blRqWFlKTWNGZDN0aG1V?oc=5",
-        "importance": 2
-      },
-      {
-        "id": "ww-independent-b0582acc7b7c33bb",
-        "countryId": "ww",
-        "sourceType": "independent",
-        "source": "BBC",
-        "headline": "Cyber-security - BBC",
-        "summary": "Cyber-security BBC",
-        "date": "Nov 25, 2026 · 6:51 AM",
-        "publishedAt": "2026-11-25T06:51:30.000Z",
-        "dateOnly": false,
-        "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5IWS1aTGoyQUtBeVhocm00OUx6dmpPVmtBdnZtSVhUS3BMZUZCNmE0eTN5eV82dWtLb3JDWWthb2gxZmRoRW5BcFY2M2RhOXYxWWRlajg5VQ?oc=5",
         "importance": 2
       },
       {
@@ -244475,19 +244571,6 @@
         "importance": 2
       },
       {
-        "id": "ww-independent-a3ed420921fa2403",
-        "countryId": "ww",
-        "sourceType": "independent",
-        "source": "BBC",
-        "headline": "Cyber-crime - BBC",
-        "summary": "Cyber-crime BBC",
-        "date": "Nov 24, 2026 · 8:28 PM",
-        "publishedAt": "2026-11-24T20:28:19.000Z",
-        "dateOnly": false,
-        "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFB6U1l0bVAwTV9VN05zekVtQnQ0b0hjaHVReUJ4ckZTVjdQbUxiekR2Z3E2TlVUby1IYjlET0MyN3ZhQTdweksxV2xVYVNfZGtyREU1YXl1RQ?oc=5",
-        "importance": 2
-      },
-      {
         "id": "ww-independent-85ffdb27d43f9dbd",
         "countryId": "ww",
         "sourceType": "independent",
@@ -244761,19 +244844,6 @@
         "importance": 2
       },
       {
-        "id": "ww-independent-beab44e47c571db5",
-        "countryId": "ww",
-        "sourceType": "independent",
-        "source": "BBC",
-        "headline": "Air travel - BBC",
-        "summary": "Air travel BBC",
-        "date": "Nov 24, 2026 · 1:51 PM",
-        "publishedAt": "2026-11-24T13:51:11.000Z",
-        "dateOnly": false,
-        "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBhU0FuVWU4empUUktYUzdvQ3VnTjFmTTN4WmhpTW8yWjZPT25rQm93REJ3MVE1QmJRUmowaWxPb3VnLXNnYkExRUNNNHlPRnJydGU1V0hqUQ?oc=5",
-        "importance": 2
-      },
-      {
         "id": "ww-independent-23036550f648dbf3",
         "countryId": "ww",
         "sourceType": "independent",
@@ -244995,6 +245065,32 @@
         "importance": 2
       },
       {
+        "id": "ww-independent-b0582acc7b7c33bb",
+        "countryId": "ww",
+        "sourceType": "independent",
+        "source": "BBC",
+        "headline": "Cyber-security - BBC",
+        "summary": "Cyber-security BBC",
+        "date": "Nov 23, 2026 · 11:56 PM",
+        "publishedAt": "2026-11-23T23:56:07.000Z",
+        "dateOnly": false,
+        "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5IWS1aTGoyQUtBeVhocm00OUx6dmpPVmtBdnZtSVhUS3BMZUZCNmE0eTN5eV82dWtLb3JDWWthb2gxZmRoRW5BcFY2M2RhOXYxWWRlajg5VQ?oc=5",
+        "importance": 2
+      },
+      {
+        "id": "ww-independent-c6dc9f6f8925ee11",
+        "countryId": "ww",
+        "sourceType": "independent",
+        "source": "BBC",
+        "headline": "Cyber-attacks - BBC",
+        "summary": "Cyber-attacks BBC",
+        "date": "Nov 23, 2026 · 11:54 PM",
+        "publishedAt": "2026-11-23T23:54:11.000Z",
+        "dateOnly": false,
+        "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFAzWTF4UEpEdFBDa3VBRFhZTHoxc0hQUS1oWXBoWnBldFFLZm82b1Z0X0lBekJIYVdqbUtiU2FKV25vM0NvQy1mcmpRYUstclkwSGdoREJKNA?oc=5",
+        "importance": 2
+      },
+      {
         "id": "ww-independent-4106394f2017292e",
         "countryId": "ww",
         "sourceType": "independent",
@@ -245005,19 +245101,6 @@
         "publishedAt": "2026-11-23T23:36:00.000Z",
         "dateOnly": false,
         "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNbUdPNnFZNXVRRHJqeGNYX0ptRk1oUW85OHlueHM2aW5teGxVWmViTWdKOGVTTVBYdWNVTjA3M2d4NUFfQ1Fac2g2ZzVZZ0hMdnZ6V1RQdFRmdWNfZlFzNnRYNmR0YWsxUjFIaTNYR2c5V3RQUHdVVUx4X1loaHF6dEcyNF9fQQ?oc=5",
-        "importance": 2
-      },
-      {
-        "id": "ww-independent-c6dc9f6f8925ee11",
-        "countryId": "ww",
-        "sourceType": "independent",
-        "source": "BBC",
-        "headline": "Cyber-attacks - BBC",
-        "summary": "Cyber-attacks BBC",
-        "date": "Nov 23, 2026 · 10:54 PM",
-        "publishedAt": "2026-11-23T22:54:52.000Z",
-        "dateOnly": false,
-        "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFAzWTF4UEpEdFBDa3VBRFhZTHoxc0hQUS1oWXBoWnBldFFLZm82b1Z0X0lBekJIYVdqbUtiU2FKV25vM0NvQy1mcmpRYUstclkwSGdoREJKNA?oc=5",
         "importance": 2
       },
       {
@@ -246357,6 +246440,19 @@
         "publishedAt": "2026-11-22T02:37:56.000Z",
         "dateOnly": false,
         "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOTzltZHhpNzJyRTg4dE5kYUJSOUJ4azFWY2txckEtQUlGQVVfTEtIUUpWN3dHZWlocXlZWGFidVRIMjN3ZDM4d2xQWVZ0UFAxRm81TGFfbFNZRzMxTXJOemdzOHRNeWJOLXhEWF83a3N0a1hiR0FjbUE1eGZVX002eVpMNHJyX2JoVXp5bFdjcDJBYkhOWFE4a1AzN0hSRE1wTDFmNGxvaFR6TkR6bkd4a3FSSUU1anZp?oc=5",
+        "importance": 2
+      },
+      {
+        "id": "ww-independent-781a72b5ddb1e7b5",
+        "countryId": "ww",
+        "sourceType": "independent",
+        "source": "AP",
+        "headline": "Tech outages are piling up, and AI is raising the stakes. Could this be the new normal? - AP News",
+        "summary": "Tech outages are piling up, and AI is raising the stakes. Could this be the new normal? AP News",
+        "date": "Nov 22, 2026 · 2:32 AM",
+        "publishedAt": "2026-11-22T02:32:41.000Z",
+        "dateOnly": false,
+        "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNRzA5RWNfellCVEVsUGMyVm1kc255MGVnZHNDcEVIcmdUX29IbEFPakdnYUUxTFFvZGFORUwwRU5pWlpsV1RXbVN6anRoOEZSdHYtS3VFdXlZczYtS3gwNU9UcXViNlFhWHdnR1N0NEZFVFhseEpKWTlYOGhPOUgxbENJYVhWSlhBVXF1aGNVR3BLckU?oc=5",
         "importance": 2
       },
       {
@@ -250245,47 +250341,8 @@
         "dateOnly": false,
         "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPbDVJVUxnTV8wWW53ZDBmMC1GX3V1Z2k1N24zdTk0bkdYR2lBYTB2c3J4QVkzUFRiTHJSTkoycmM0ZG5jSWxnSkxVOWJNZzFFX3kydHoyWU9oSURMel9Yck5VMlk3TTVaNkhBX09wU1B1TzVuYlhnYnZhMmhnMEpIMmZLeXVXT09IWEs5cXJLOWtNcklfZkU1NU85WE1NSEE1ZUhzRDBKY2dzaW5pWnQzdTJra3UybUdXVWpDeWRYYw?oc=5",
         "importance": 2
-      },
-      {
-        "id": "ww-independent-f5cc3f7e636c3adb",
-        "countryId": "ww",
-        "sourceType": "independent",
-        "source": "Reuters",
-        "headline": "California AG subpoenas Nvidia over concerns about former CEO, China ties - Reuters",
-        "summary": "California AG subpoenas Nvidia over concerns about former CEO, China ties Reuters",
-        "date": "Nov 19, 2026 · 11:31 PM",
-        "publishedAt": "2026-11-19T23:31:26.000Z",
-        "dateOnly": false,
-        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNY2NBVmplUHV4MUZrbVByaDVvby13dXpkX3RuaGVwd1RDMzAxdGtGSDQ3aFhjNjc3VHNxWnlYNHBrcWhRa0xiemxLOE8wTnZFVE9YZ3B4NVFjZ3d5QmJTaWtqc3JTVWdRX0IyT3VlU3BOaEFlMm5fS1lqczg1RmxyMUk4c0JfTEtUSlV4bDh0Z1BVQ0NySHZ3UHRINXZBdUM5NDhOX3Y0bUdsZXRuODdDZDJsMWNHUjY3STVCRA?oc=5",
-        "importance": 2
-      },
-      {
-        "id": "ww-independent-75dd6f660206e5ca",
-        "countryId": "ww",
-        "sourceType": "independent",
-        "source": "Reuters",
-        "headline": "COMMENTARY: Xi faced Trump with weak economic hand - Reuters",
-        "summary": "COMMENTARY: Xi faced Trump with weak economic hand Reuters",
-        "date": "Nov 19, 2026 · 11:30 PM",
-        "publishedAt": "2026-11-19T23:30:45.000Z",
-        "dateOnly": false,
-        "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQeGtFWXlFUGpLMEp5SmZZZHgzbkRfSDJJY3g0YlJLeTJGRDVkWi1rQXBpUTJzMGp3WkJXMzZQVElGSWNFZHIxUTI4UXZLdGJjQWN4YVZhZ3BzTjZGWksyaUZFcTVpZjdoV2FvOVc3OTR1U3JOb24zOElNdC1kU3BHUnhITlg3SkFnMWpWQ2VKSE52M2ExWHJnQ01WS0RiSTJZT2c0QmoySjhfSkJFVTh4cnAxTEdVSmc?oc=5",
-        "importance": 2
-      },
-      {
-        "id": "ww-independent-5319023bf557bbf9",
-        "countryId": "ww",
-        "sourceType": "independent",
-        "source": "AP",
-        "headline": "Thomas Markle, Meghan's father, is competent to face child sex abuse images case, expert says - AP News",
-        "summary": "Thomas Markle, Meghan's father, is competent to face child sex abuse images case, expert says AP News",
-        "date": "Nov 19, 2026 · 11:29 PM",
-        "publishedAt": "2026-11-19T23:29:00.000Z",
-        "dateOnly": false,
-        "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOVlZOam9mNDQ3bF9PTUdjclZQU1RaeEVPVXFVUjZHS0RrRlEtN0NWX0FZMW1ZbW16aThraElZUENGamVlbHJrQ2I4eVFhVE1ZMzdOMjVPSXpWclp5TlZmcEM4TWlHRlpvS2ZERmY4RWdCVTdxT01fNjhuYVZoLXNrQVBpZ2JaVllhLTFuOTZUajFyZw?oc=5",
-        "importance": 2
       }
     ],
-    "fetchedAt": "2026-11-25T23:00:52.313Z"
+    "fetchedAt": "2026-11-26T00:12:54.158Z"
   }
 }
