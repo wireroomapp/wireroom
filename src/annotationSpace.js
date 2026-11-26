@@ -144,6 +144,12 @@ export function annotationLonLats(a) {
   return pts.filter(Boolean);
 }
 
+// "1 source", "3 sources" (shown on zones that have sources pinned to them).
+export const sourcesText = (n) => `${n} source${n === 1 ? "" : "s"}`;
+const pinCount = (a) => (Array.isArray(a.pins) ? a.pins.length : 0);
+// A small numbered badge for a line, shape or note with sources (markers have their own).
+const pinBadge = (a, at, slot) => ({ type: "Feature", geometry: { type: "Point", coordinates: at }, properties: { id: a.id, kind: "pins", pins: pinCount(a), slot } });
+
 // The middle of an area's corners (where its name goes).
 function middle(points) {
   const n = points.length;
@@ -162,7 +168,8 @@ export function annotationsToGeoJSON(list, selectedId) {
       const color = a.color || DEFAULT_COLOR;
       features.push({ type: "Feature", geometry: { type: "Polygon", coordinates: [circleRing(c[0], c[1], a.radiusKm)] }, properties: { id: a.id, kind: "area", color, sel } });
       // Name and radius sit just above the ring's top edge, clear of whatever is at its center.
-      const radius = `${formatDistance(a.radiusKm, a.unit)} radius`;
+      const n = pinCount(a);
+      const radius = `${formatDistance(a.radiusKm, a.unit)} radius${n ? ` · ${sourcesText(n)}` : ""}`;
       const top = [c[0], Math.min(85, c[1] + Math.min(a.radiusKm, MAX_RADIUS_KM) / KM_PER_DEG)];
       features.push({ type: "Feature", geometry: { type: "Point", coordinates: top }, properties: { id: a.id, kind: "area-label", label: a.label ? `${a.label}\n${radius}` : radius, anchor: "bottom", color, sel } });
       continue;
@@ -172,7 +179,9 @@ export function annotationsToGeoJSON(list, selectedId) {
       if (pts.length < 3 || pts.some((p) => !p)) continue;
       const color = a.color || DEFAULT_COLOR;
       features.push({ type: "Feature", geometry: { type: "Polygon", coordinates: [[...pts, pts[0]]] }, properties: { id: a.id, kind: "area", color, sel } });
-      if (a.label) features.push({ type: "Feature", geometry: { type: "Point", coordinates: middle(pts) }, properties: { id: a.id, kind: "area-label", label: a.label, anchor: "center", color, sel } });
+      const n = pinCount(a);
+      const text = [a.label, n ? sourcesText(n) : ""].filter(Boolean).join("\n");
+      if (text) features.push({ type: "Feature", geometry: { type: "Point", coordinates: middle(pts) }, properties: { id: a.id, kind: "area-label", label: text, anchor: "center", color, sel } });
       continue;
     }
     if (a.type === "marker" || a.type === "text") {
@@ -180,15 +189,18 @@ export function annotationsToGeoJSON(list, selectedId) {
       if (!ll) continue;
       features.push({ type: "Feature", geometry: { type: "Point", coordinates: ll },
         properties: { id: a.id, kind: a.type, label: (a.type === "text" ? a.text : a.label) || "", color: a.color || "#d7dde8", pins: (a.pins || []).length, sel } });
+      if (a.type === "text" && pinCount(a)) features.push(pinBadge(a, ll, "left"));
     } else if (a.type === "line") {
       const p1 = unitToLonLat(a.x1, a.y1), p2 = unitToLonLat(a.x2, a.y2);
       if (!p1 || !p2) continue;
       features.push({ type: "Feature", geometry: { type: "LineString", coordinates: [p1, p2] }, properties: { id: a.id, kind: "line", label: a.label || "", sel } });
+      if (pinCount(a)) features.push(pinBadge(a, [(p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2], "below"));
     } else if (a.type === "shape") {
       const nw = unitToLonLat(a.x, a.y), se = unitToLonLat(a.x + a.width, a.y + a.height);
       if (!nw || !se) continue;
       const [w, n] = nw, [e, s] = se;
       features.push({ type: "Feature", geometry: { type: "Polygon", coordinates: [[[w, n], [e, n], [e, s], [w, s], [w, n]]] }, properties: { id: a.id, kind: "shape", label: a.label || "", sel, lx: w, ly: n } });
+      if (pinCount(a)) features.push(pinBadge(a, [w, n], "corner"));
     }
   }
   return { type: "FeatureCollection", features };

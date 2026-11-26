@@ -46,6 +46,9 @@ const BADGE_EXPR = ["match", ["get", "slot"], ...SLOT_OFFSETS.flatMap((o, i) => 
 const WAR_RED = "#ff4d4d", STRIKE_RED = "#ff6b5e", TERROR_YELLOW = "#f5c542", CYBER_PINK = "#ff5fb4";
 const LEVEL_SIZE = ["match", ["get", "level"], "war", 1, "armed conflict", 0.78, 0.6];
 
+// Where a line's, shape's or note's source-count badge sits, in screen pixels from its anchor.
+const PIN_SLOTS = [["below", [0, 14]], ["corner", [10, 10]], ["left", [-12, 0]]];
+
 export function buildStyle() {
   return {
     version: 8,
@@ -221,6 +224,15 @@ export function buildStyle() {
       { id: "wr-ann-shape-label", type: "symbol", source: "wr-ann", filter: ["all", ["==", ["get", "kind"], "shape"], ["!=", ["get", "label"], ""]],
         layout: { "text-field": ["get", "label"], "text-font": FONT_BOLD, "text-size": 12, "text-allow-overlap": true, "text-ignore-placement": true },
         paint: { "text-color": "#ffffff", "text-halo-color": "#000000", "text-halo-width": 2 } },
+      // Sources pinned to a line (badge just below its middle), a shape (its top-left corner) or a
+      // note (left of it). One layer per position: a fixed screen offset can't vary per feature.
+      ...PIN_SLOTS.flatMap(([slot, offset]) => [
+        { id: `wr-ann-pins-badge-${slot}`, type: "circle", source: "wr-ann", filter: ["all", ["==", ["get", "kind"], "pins"], ["==", ["get", "slot"], slot]],
+          paint: { "circle-radius": 7.5, "circle-color": "#c9974b", "circle-stroke-color": "#000000", "circle-stroke-width": 1.5, "circle-translate": offset } },
+        { id: `wr-ann-pins-count-${slot}`, type: "symbol", source: "wr-ann", filter: ["all", ["==", ["get", "kind"], "pins"], ["==", ["get", "slot"], slot]],
+          layout: { "text-field": ["to-string", ["get", "pins"]], "text-font": FONT_BOLD, "text-size": 10, "text-allow-overlap": true, "text-ignore-placement": true },
+          paint: { "text-color": "#000000", "text-translate": offset } },
+      ]),
       // A circle's name and radius above its top edge; an area's name in its middle.
       { id: "wr-ann-area-label", type: "symbol", source: "wr-ann", filter: ["==", ["get", "kind"], "area-label"],
         layout: { "text-field": ["get", "label"], "text-font": FONT_BOLD, "text-size": 12.5, "text-anchor": ["match", ["get", "anchor"], "bottom", "bottom", "center"], "text-offset": ["match", ["get", "anchor"], "bottom", ["literal", [0, -0.35]], ["literal", [0, 0]]], "text-max-width": 22, "text-allow-overlap": true, "text-ignore-placement": true },
@@ -233,7 +245,7 @@ export function buildStyle() {
 // colors; imagery looks hide the water fill so NASA's picture shows through.
 // Tapping these selects the annotation. A circle's or area's inside isn't listed: a big zone
 // would otherwise swallow taps on the country dots and trackers inside it (tap its edge or name).
-export const ANNOTATION_LAYERS = ["wr-ann-marker", "wr-ann-pin-badge", "wr-ann-marker-label", "wr-ann-text", "wr-ann-line", "wr-ann-line-label", "wr-ann-shape-line", "wr-ann-shape-fill", "wr-ann-shape-label", "wr-ann-area-line", "wr-ann-area-label"];
+export const ANNOTATION_LAYERS = ["wr-ann-marker", "wr-ann-pin-badge", "wr-ann-marker-label", "wr-ann-text", "wr-ann-line", "wr-ann-line-label", "wr-ann-shape-line", "wr-ann-shape-fill", "wr-ann-shape-label", "wr-ann-area-line", "wr-ann-area-label", ...PIN_SLOTS.map(([slot]) => `wr-ann-pins-badge-${slot}`)];
 
 export function applyBase(map, baseId, look = "dark") {
   const base = BASES.find((b) => b.id === baseId) || BASES[0];

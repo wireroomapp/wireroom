@@ -60,11 +60,38 @@ function cleanOne(a) {
     const c = color(a.color);
     if (c) out.color = c;
   }
-  if (a.type === "marker") {
-    const pins = (Array.isArray(a.pins) ? a.pins : []).map(cleanPin).filter(Boolean).slice(0, 50);
-    if (pins.length) out.pins = pins;
-  }
+  // Any annotation can carry its sources (a marker, a line, a fallout zone...).
+  const pins = (Array.isArray(a.pins) ? a.pins : []).map(cleanPin).filter(Boolean).slice(0, 50);
+  if (pins.length) out.pins = pins;
   return out;
+}
+
+// A source added by pasting its link (for articles that aren't in Wire Room's feeds):
+// the headline, outlet and date the analyst typed, and the link. No summary, as with feed pins.
+// Returns { pin } or { error } in plain words.
+export function makeLinkPin({ url, headline, source, date, official } = {}, now = new Date()) {
+  const link = String(url || "").trim();
+  let host;
+  try {
+    const u = new URL(link);
+    if (!/^https?:$/.test(u.protocol)) throw new Error("not http");
+    host = u.hostname.replace(/^www\./, "");
+  } catch {
+    return { error: "Paste the full link, starting with https://" };
+  }
+  const h = String(headline || "").trim();
+  if (!h) return { error: "Add the headline (or a short title) so readers know what it says." };
+  return {
+    pin: {
+      id: `link:${link}`.slice(0, 120),
+      headline: h.slice(0, 300),
+      url: link.slice(0, 2000),
+      source: (String(source || "").trim() || host).slice(0, 80),
+      sourceType: official ? "official" : "independent",
+      date: String(date || "").trim().slice(0, 40),
+      pinnedAt: now.toISOString(),
+    },
+  };
 }
 
 // My drawing -> what is stored when I post it.
@@ -94,7 +121,7 @@ export function describeDrawing(annotations) {
   const list = Array.isArray(annotations) ? annotations : [];
   const n = (t) => list.filter((a) => a && a.type === t).length;
   const pins = list.reduce((s, a) => s + ((a && a.pins && a.pins.length) || 0), 0);
-  const parts = [[n("marker"), "marker"], [n("line"), "line"], [n("shape"), "shape"], [n("circle"), "circle"], [n("polygon"), "area"], [n("text"), "note"], [pins, "pinned report"]]
+  const parts = [[n("marker"), "marker"], [n("line"), "line"], [n("shape"), "shape"], [n("circle"), "circle"], [n("polygon"), "area"], [n("text"), "note"], [pins, "source"]]
     .filter(([k]) => k > 0).map(([k, w]) => `${k} ${w}${k === 1 ? "" : "s"}`);
   return parts.length ? parts.join(", ") : "nothing drawn yet";
 }

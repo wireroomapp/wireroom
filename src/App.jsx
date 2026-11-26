@@ -4,14 +4,14 @@ import * as d3 from "d3";
 import { useTrackingFeed } from "./useTracking.js";
 import { WORLD_BBOX, visibleBbox, projectItems, projectZones, hitTest, trackId, trackToReport } from "./trackingGeo.js";
 import { exportMapImage } from "./exportMap.js";
-import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrateLegacy, annotationsToGeoJSON, annotationLonLats, distanceKm, kmFrom, kmTo, roundDistance, formatDistance, circleRing, MAX_RADIUS_KM, KM_PER_DEG } from "./annotationSpace.js";
+import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrateLegacy, annotationsToGeoJSON, annotationLonLats, distanceKm, kmFrom, kmTo, roundDistance, formatDistance, circleRing, MAX_RADIUS_KM, KM_PER_DEG, sourcesText } from "./annotationSpace.js";
 import MapLibreView from "./map/MapLibreView.jsx";
 import { readViewFromUrl, viewToSearch } from "./urlState.js";
 import SourcesPanel from "./SourcesPanel.jsx";
 import { PlaceCard, WarCard, NodeCard } from "./TrackerCards.jsx";
 import { DayBar } from "./DayBar.jsx";
 import { communityConfigured } from "./community/api.js";
-import { copyForMe } from "./community/helpers.js";
+import { copyForMe, makeLinkPin } from "./community/helpers.js";
 // The Community panel (users' posts, articles and maps) loads only when opened.
 const CommunityPanel = lazy(() => import("./community/CommunityPanel.jsx"));
 import { useTrackerData, localDay, dayEnd, longDay, daysBetween, incidentToReport, warToReport, worldwideGroups, TRACKER_CREDITS, LEVEL_TEXT, sidesText, monthLabel, coverageLabel, n as num } from "./contextData.js";
@@ -707,7 +707,7 @@ export default function WireRoomV2() {
     const report = pinning;
     if (!report) return;
     setAnnotations(prev => prev.map(a => {
-      if (a.id !== markerId || a.type !== "marker") return a;
+      if (a.id !== markerId) return a; // any annotation can hold sources
       const pins = a.pins || [];
       if (pins.some(p => p.id === report.id)) return a;
       return { ...a, pins: [...pins, { ...report, pinnedAt: new Date().toISOString() }] };
@@ -728,6 +728,19 @@ export default function WireRoomV2() {
       pins: [{ ...report, pinnedAt: new Date().toISOString() }]
     });
     setPinning(null);
+  }
+
+  // A source added by its link (an article that isn't in Wire Room's feeds).
+  const [sourceForm, setSourceForm] = useState(null); // { url, headline, source, date, official, error }
+  function addLinkSource(annotationId) {
+    const { pin, error } = makeLinkPin(sourceForm || {});
+    if (error) { setSourceForm(f => (f ? { ...f, error } : f)); return; }
+    setAnnotations(prev => prev.map(a => {
+      if (a.id !== annotationId) return a;
+      const pins = a.pins || [];
+      return pins.some(p => p.id === pin.id) ? a : { ...a, pins: [...pins, pin] };
+    }));
+    setSourceForm(null);
   }
 
   function unpinReport(markerId, pinId) {
@@ -939,8 +952,7 @@ export default function WireRoomV2() {
   function mlAnnotationTap(id) {
     if (sharedMap) { setSelectedAnnotationId(id); setTrackSel(null); return; } // someone's map: look, don't edit
     if (pinning) {
-      const a = annotations.find(x => x.id === id);
-      if (a && a.type === "marker") pinReportToMarker(id);
+      if (annotations.some(x => x.id === id)) pinReportToMarker(id);
       return;
     }
     if (annotationTool === "select") { setSelectedAnnotationId(id); setTrackSel(null); }
@@ -1017,7 +1029,7 @@ export default function WireRoomV2() {
   function deleteSelectedAnnotation() {
     const doomed = annotations.find(a => a.id === selectedAnnotationId);
     if (doomed && doomed.pins && doomed.pins.length > 0 &&
-        !window.confirm("This marker has " + doomed.pins.length + " pinned report(s). Delete the marker and its pins?")) return;
+        !window.confirm("This has " + sourcesText(doomed.pins.length) + " pinned to it. Delete it and its sources?")) return;
     if (!selectedAnnotationId) return;
 
     setAnnotations(prev =>
@@ -1028,7 +1040,7 @@ export default function WireRoomV2() {
 
   function clearAnnotations() {
     const pinnedTotal = annotations.reduce((n, a) => n + ((a.pins && a.pins.length) || 0), 0);
-    if (pinnedTotal > 0 && !window.confirm("CLEAR removes every annotation, including " + pinnedTotal + " pinned report(s). Continue?")) return;
+    if (pinnedTotal > 0 && !window.confirm("CLEAR removes every annotation, including " + sourcesText(pinnedTotal) + " pinned to them. Continue?")) return;
     if (!annotations.length) return;
 
     if (window.confirm("Clear all map annotations?")) {
@@ -1272,6 +1284,7 @@ export default function WireRoomV2() {
                     onPointerDown={e => e.stopPropagation()}
                     onClick={e => {
                       e.stopPropagation();
+                      if (pinning) { pinReportToMarker(a.id); return; }
                       if (annotationTool === "select") {
                         setSelectedAnnotationId(a.id);
                       }
@@ -1310,6 +1323,7 @@ export default function WireRoomV2() {
                     onPointerDown={e => e.stopPropagation()}
                     onClick={e => {
                       e.stopPropagation();
+                      if (pinning) { pinReportToMarker(a.id); return; }
                       if (annotationTool === "select") {
                         setSelectedAnnotationId(a.id);
                       }
@@ -1342,7 +1356,7 @@ export default function WireRoomV2() {
 
               if (a.type === "circle" || a.type === "polygon") {
                 const color = a.color || "#d7dde8";
-                let d, labelAt = null, labelText = a.label || "";
+                let d, labelAt = null, labelText;
                 if (a.type === "circle") {
                   const c = projection.invert([a.x, a.y]);
                   if (!c || !(a.radiusKm > 0)) return null;
@@ -1351,11 +1365,13 @@ export default function WireRoomV2() {
                   labelAt = top ? [top[0], top[1] - 6] : null;
                   const radius = `${formatDistance(a.radiusKm, a.unit)} radius`;
                   labelText = a.label ? `${a.label} · ${radius}` : radius;
+                  if (a.pins && a.pins.length) labelText += ` · ${sourcesText(a.pins.length)}`;
                 } else {
                   const pts = a.points || [];
                   if (pts.length < 3) return null;
                   d = "M" + pts.map(p => `${p.x},${p.y}`).join("L") + "Z";
-                  if (a.label) labelAt = [pts.reduce((t, p) => t + p.x, 0) / pts.length, pts.reduce((t, p) => t + p.y, 0) / pts.length];
+                  labelText = [a.label, a.pins && a.pins.length ? sourcesText(a.pins.length) : ""].filter(Boolean).join(" · ");
+                  if (labelText) labelAt = [pts.reduce((t, p) => t + p.x, 0) / pts.length, pts.reduce((t, p) => t + p.y, 0) / pts.length];
                 }
                 // Only the edge and the name take taps (with Select): a big zone mustn't block
                 // tapping the countries inside it, or drawing on top of it.
@@ -1366,6 +1382,7 @@ export default function WireRoomV2() {
                     onPointerDown={e => e.stopPropagation()}
                     onClick={e => {
                       e.stopPropagation();
+                      if (pinning) { pinReportToMarker(a.id); return; }
                       setSelectedAnnotationId(a.id);
                     }}
                   >
@@ -1403,6 +1420,7 @@ export default function WireRoomV2() {
                     onPointerDown={e => e.stopPropagation()}
                     onClick={e => {
                       e.stopPropagation();
+                      if (pinning) { pinReportToMarker(a.id); return; }
                       if (annotationTool === "select") {
                         setSelectedAnnotationId(a.id);
                       }
@@ -1551,10 +1569,11 @@ export default function WireRoomV2() {
 
           {toolsOpen && annotationTool === "polygon" && (
             <div className="tool-colors tool-hint" role="group" aria-label="Area">
-              <span>{polyDraft.length === 0 ? "Tap the map to place corners." : polyDraft.length < 3 ? `${polyDraft.length} corner${polyDraft.length === 1 ? "" : "s"}: add at least 3.` : `${polyDraft.length} corners. Tap the first corner or Finish.`}</span>
-              <button type="button" className="unit-btn" onClick={() => setPolyDraft(prev => prev.slice(0, -1))} disabled={!polyDraft.length}>Undo</button>
+              {/* Buttons first, so they don't shift as the message below changes length. */}
               <button type="button" className="unit-btn on" onClick={finishPolygon} disabled={polyDraft.length < 3}>Finish</button>
+              <button type="button" className="unit-btn" onClick={() => setPolyDraft(prev => prev.slice(0, -1))} disabled={!polyDraft.length}>Undo</button>
               <button type="button" className="unit-btn" onClick={() => setPolyDraft([])} disabled={!polyDraft.length}>Cancel</button>
+              <span>{polyDraft.length === 0 ? "Tap the map to place corners." : polyDraft.length < 3 ? `${polyDraft.length} corner${polyDraft.length === 1 ? "" : "s"}: add at least 3.` : `${polyDraft.length} corners. Tap the first corner or Finish.`}</span>
             </div>
           )}
 
@@ -1685,7 +1704,10 @@ export default function WireRoomV2() {
 
         {(() => {
           const sel = shownAnnotations.find(a => a.id === selectedAnnotationId);
-          const showList = !pinning && annotationTool === "select" && sel && sel.type === "marker" && sel.pins && sel.pins.length > 0;
+          const selPins = (sel && sel.pins) || [];
+          // Sources box: on my own map for anything selected (so sources can be added); on
+          // someone else's map only when there are sources to read.
+          const showList = !pinning && annotationTool === "select" && sel && (selPins.length > 0 || !sharedMap);
           const box = { pointerEvents: "auto", background: "var(--overlay)", border: "1px solid var(--line-2)", padding: 10, color: "var(--text)", fontSize: 11, display: "flex", flexDirection: "column", gap: 6 };
           return (
             <>
@@ -1697,7 +1719,7 @@ export default function WireRoomV2() {
                       <span className="tag analyst">Analyst</span>
                       <span style={{ fontSize: 13 }}>{sharedMap.username === "you" ? "Your map" : `@${sharedMap.username}'s map`}: <b>{sharedMap.title}</b></span>
                     </div>
-                    <div style={{ color: "var(--muted)", fontSize: 12 }}>Viewing only. Tap a marker to see its pinned reports. Your own drawing is back when you close this.</div>
+                    <div style={{ color: "var(--muted)", fontSize: 12 }}>Viewing only. Tap a marker, line or zone to see its sources. Your own drawing is back when you close this.</div>
                     <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                       <button type="button" onClick={() => copySharedMap(sharedMap)} style={toolButtonStyle(true)}>Copy to my map</button>
                       {view === "community" && panelPeek && <button type="button" onClick={() => setPanelPeek(false)} style={toolButtonStyle(false)}>Back to post</button>}
@@ -1713,7 +1735,7 @@ export default function WireRoomV2() {
                 {pinning && (
                   <div onPointerDown={e => e.stopPropagation()} style={box}>
                     <div style={{ fontWeight: 800 }}>PINNING: {pinning.headline.length > 90 ? pinning.headline.slice(0, 87) + "..." : pinning.headline}</div>
-                    <div>Tap a marker to pin it, or tap the map to add a new marker{Number.isFinite(pinning.lat) ? ", or drop a marker where it is now" : ""}.</div>
+                    <div>Tap a marker, line, circle or area (its edge or name) to pin it there, or tap the map to add a new marker{Number.isFinite(pinning.lat) ? ", or drop a marker where it is now" : ""}.</div>
                     <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                       {Number.isFinite(pinning.lat) && Number.isFinite(pinning.lon) && (
                         <button type="button" onClick={() => {
@@ -1726,12 +1748,13 @@ export default function WireRoomV2() {
                   </div>
                 )}
                 {showList && (
-                  <div onPointerDown={e => e.stopPropagation()} style={{ ...box, maxHeight: "38vh", overflowY: "auto" }}>
+                  <div onPointerDown={e => e.stopPropagation()} style={{ ...box, maxHeight: "42vh", overflowY: "auto" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontWeight: 800 }}>
-                      <span>Pinned reports ({sel.pins.length})</span>
-                      <button type="button" aria-label="Close" onClick={() => setSelectedAnnotationId(null)} style={toolButtonStyle(false)}>&times;</button>
+                      <span>Sources ({selPins.length}){sel.label ? ` · ${sel.label.length > 40 ? sel.label.slice(0, 38) + "…" : sel.label}` : ""}</span>
+                      <button type="button" aria-label="Close" onClick={() => { setSelectedAnnotationId(null); setSourceForm(null); }} style={toolButtonStyle(false)}>&times;</button>
                     </div>
-                    {sel.pins.map(p => (
+                    {selPins.length === 0 && <div style={{ color: "var(--muted)", fontWeight: 500 }}>No sources yet. Pin a report from a feed (Pin to map, then tap this), or add a link.</div>}
+                    {selPins.map(p => (
                       <div key={p.id} style={{ borderTop: "1px solid var(--line-2)", paddingTop: 6, display: "flex", flexDirection: "column", gap: 4 }}>
                         <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap", color: "var(--text-2)", fontSize: 10 }}>
                           <SourceTag type={p.sourceType} /><span>{p.source}</span><span>{p.date}</span>
@@ -1745,6 +1768,40 @@ export default function WireRoomV2() {
                         </div>
                       </div>
                     ))}
+                    {!sharedMap && !(sourceForm && sourceForm.forId === sel.id) && (
+                      <button type="button" onClick={() => setSourceForm({ forId: sel.id, url: "", headline: "", source: "", date: "", official: false })} style={{ ...toolButtonStyle(false), alignSelf: "flex-start" }}>+ Add a source link</button>
+                    )}
+                    {!sharedMap && sourceForm && sourceForm.forId === sel.id && (
+                      <form
+                        noValidate
+                        onSubmit={e => { e.preventDefault(); addLinkSource(sel.id); }}
+                        style={{ borderTop: "1px solid var(--line-2)", paddingTop: 8, display: "flex", flexDirection: "column", gap: 6, fontWeight: 600 }}
+                      >
+                        {[["url", "Link", "https://…", "url"], ["headline", "Headline", "What the article is called", "text"], ["source", "Outlet (optional)", "e.g. Reuters", "text"], ["date", "Date (optional)", "e.g. Nov 25, 2026", "text"]].map(([k, label, ph, type]) => (
+                          <label key={k} style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                            <span>{label}</span>
+                            <input
+                              type={type}
+                              value={sourceForm[k]}
+                              placeholder={ph}
+                              maxLength={k === "url" ? 2000 : k === "headline" ? 300 : 80}
+                              autoFocus={k === "url"}
+                              onChange={e => setSourceForm(f => (f ? { ...f, [k]: e.target.value, error: null } : f))}
+                              style={{ fontSize: 14, padding: "5px 7px", background: "var(--surface)", color: "var(--text)", border: "1px solid var(--line-2)" }}
+                            />
+                          </label>
+                        ))}
+                        <label style={{ display: "flex", gap: 6, alignItems: "center", fontWeight: 500 }}>
+                          <input type="checkbox" checked={sourceForm.official} onChange={e => setSourceForm(f => (f ? { ...f, official: e.target.checked } : f))} />
+                          An official government statement
+                        </label>
+                        {sourceForm.error && <div role="alert" style={{ color: "#ff8a80" }}>{sourceForm.error}</div>}
+                        <div style={{ display: "flex", gap: 6 }}>
+                          <button type="submit" style={toolButtonStyle(true)}>Add source</button>
+                          <button type="button" onClick={() => setSourceForm(null)} style={toolButtonStyle(false)}>Cancel</button>
+                        </div>
+                      </form>
+                    )}
                   </div>
                 )}
               </div>
