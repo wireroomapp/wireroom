@@ -61,6 +61,29 @@ test("links in text become links; nothing else is treated as markup", () => {
   assert.deepEqual(linkParts(""), []);
 });
 
+test("posted circles keep a sane radius and unit; areas need at least 3 corners", () => {
+  const out = cleanForPublish([
+    { id: "c1", type: "circle", x: 0.1, y: -0.7, radiusKm: 32.18688, unit: "mi", label: "Shelter zone", color: "#ff4d4d" },
+    { type: "circle", x: 0.1, y: -0.7, radiusKm: 0 },
+    { type: "circle", x: 0.1, y: -0.7, radiusKm: 50000 },
+    { type: "circle", x: 0.1, y: -0.7, radiusKm: "10" },
+    { type: "circle", x: 0.1, y: -0.7, radiusKm: 5, unit: "furlongs", color: "url(x)" },
+    { id: "p1", type: "polygon", points: [{ x: 0, y: 0 }, { x: 0.1, y: 0 }, { x: 0, y: 0.1 }], label: "Zone", color: "#ffd166", pins: [{ headline: "h" }] },
+    { type: "polygon", points: [{ x: 0, y: 0 }, { x: 0.1, y: 0 }] },
+    { type: "polygon", points: [{ x: 0, y: 0 }, { x: "a", y: 0 }, { x: 0, y: 0.1 }] },
+    { type: "polygon", points: "not a list" },
+  ]);
+  assert.deepEqual(out.map((a) => a.type), ["circle", "circle", "polygon"], "broken circles and areas are dropped");
+  assert.deepEqual(out[0], { id: "c1", type: "circle", x: 0.1, y: -0.7, radiusKm: 32.18688, unit: "mi", label: "Shelter zone", color: "#ff4d4d" });
+  assert.equal(out[1].unit, "mi", "unknown units fall back to miles");
+  assert.equal(out[1].color, undefined, "only #hex colors");
+  assert.equal(out[2].points.length, 3);
+  assert.ok(!("pins" in out[2]), "only markers carry pinned reports");
+  const many = cleanForPublish([{ type: "polygon", points: Array.from({ length: 500 }, (_, i) => ({ x: i / 1000, y: 0 })) }]);
+  assert.equal(many[0].points.length, 200, "an area keeps at most 200 corners");
+  assert.equal(describeDrawing(out), "2 circles, 1 area");
+});
+
 test("describes a drawing and explains errors in plain words", () => {
   assert.equal(describeDrawing([marker, { type: "line" }, { type: "text" }]), "1 marker, 1 line, 1 note, 1 pinned report");
   assert.equal(describeDrawing([]), "nothing drawn yet");

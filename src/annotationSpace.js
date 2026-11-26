@@ -1,6 +1,6 @@
-import { geoNaturalEarth1 } from "d3";
+import { geoNaturalEarth1, geoCircle, geoDistance } from "d3";
 
-// Where analyst annotations (markers, lines, shapes, notes) are stored.
+// Where analyst annotations (markers, lines, shapes, circles, areas, notes) are stored.
 //
 // The map redraws itself to fit its box: opening the side panel narrows the map, which
 // changes the projection's scale and offset. Annotations used to be saved in screen pixels,
@@ -15,7 +15,10 @@ function convert(a, fx, fy, fl) {
   const out = { ...a };
   if (a.type === "line") {
     out.x1 = fx(a.x1); out.y1 = fy(a.y1); out.x2 = fx(a.x2); out.y2 = fy(a.y2);
+  } else if (a.type === "polygon") {
+    out.points = (Array.isArray(a.points) ? a.points : []).map((p) => ({ x: fx(p.x), y: fy(p.y) }));
   } else if (Number.isFinite(a.x) && Number.isFinite(a.y)) {
+    // A circle's center moves like a marker; its radius is a real distance (km), not a size on screen.
     out.x = fx(a.x); out.y = fy(a.y);
     if (a.type === "shape") { out.width = fl(a.width); out.height = fl(a.height); }
   }
@@ -83,12 +86,95 @@ export function lonLatToUnit(lon, lat) {
   return p && Number.isFinite(p[0]) ? { x: p[0], y: p[1] } : null;
 }
 
+// ---- Real distances, for circles (a blast radius, a shelter zone, a missile's range) ----
+export const EARTH_KM = 6371.0088; // mean Earth radius
+export const KM_PER_MI = 1.609344;
+export const KM_PER_DEG = (EARTH_KM * Math.PI) / 180; // km along one degree of a great circle
+export const MAX_RADIUS_KM = 20000; // half way round the world
+export const DEFAULT_COLOR = "#d7dde8";
+
+// Great-circle distance between two [lon, lat] points, in km.
+export function distanceKm(a, b) {
+  return geoDistance(a, b) * EARTH_KM;
+}
+
+export const kmFrom = (value, unit) => (unit === "km" ? value : value * KM_PER_MI);
+export const kmTo = (km, unit) => (unit === "km" ? km : km / KM_PER_MI);
+
+// 20 -> "20", 3.25 -> "3.3", 1234 -> "1,234" (one decimal under 10, whole numbers above).
+export function roundDistance(v) {
+  if (!Number.isFinite(v)) return 0;
+  return v < 10 ? Math.round(v * 10) / 10 : Math.round(v);
+}
+export function formatDistance(km, unit = "mi") {
+  const u = unit === "km" ? "km" : "mi";
+  return `${roundDistance(kmTo(km, u)).toLocaleString("en-US")} ${u}`;
+}
+
+// The outline of a circle on the Earth's surface: every point is radiusKm from the center,
+// so it stays a true distance ring on any projection (it looks oval far from the equator,
+// as it should on a flat map). Longitudes are unwrapped so a ring across the date line
+// doesn't streak across the whole map.
+export function circleRing(lon, lat, radiusKm, steps = 96) {
+  const deg = Math.min(radiusKm, MAX_RADIUS_KM) / KM_PER_DEG;
+  const ring = geoCircle().center([lon, lat]).radius(deg).precision(360 / steps)().coordinates[0];
+  let prev = lon;
+  return ring.map(([x, y]) => {
+    let ux = x;
+    while (ux - prev > 180) ux -= 360;
+    while (prev - ux > 180) ux += 360;
+    prev = ux;
+    return [ux, y];
+  });
+}
+
+// Every [lon, lat] an annotation reaches (to frame someone's map so all of it shows).
+export function annotationLonLats(a) {
+  if (!a || a.legacy) return [];
+  let pts;
+  if (a.type === "line") pts = [unitToLonLat(a.x1, a.y1), unitToLonLat(a.x2, a.y2)];
+  else if (a.type === "polygon") pts = (a.points || []).map((p) => unitToLonLat(p.x, p.y));
+  else if (a.type === "circle") {
+    const c = unitToLonLat(a.x, a.y);
+    pts = c && a.radiusKm > 0 ? circleRing(c[0], c[1], a.radiusKm, 16) : [c];
+  } else {
+    pts = [unitToLonLat(a.x, a.y)];
+    if (a.type === "shape") pts.push(unitToLonLat(a.x + a.width, a.y + a.height));
+  }
+  return pts.filter(Boolean);
+}
+
+// The middle of an area's corners (where its name goes).
+function middle(points) {
+  const n = points.length;
+  return [points.reduce((s, p) => s + p[0], 0) / n, points.reduce((s, p) => s + p[1], 0) / n];
+}
+
 // Annotations (stored in map units) as GeoJSON features for MapLibre.
 export function annotationsToGeoJSON(list, selectedId) {
   const features = [];
   for (const a of list) {
     if (a.legacy) continue; // still in old pixel form; converted shortly after load
     const sel = a.id === selectedId;
+    if (a.type === "circle") {
+      const c = unitToLonLat(a.x, a.y);
+      if (!c || !(a.radiusKm > 0)) continue;
+      const color = a.color || DEFAULT_COLOR;
+      features.push({ type: "Feature", geometry: { type: "Polygon", coordinates: [circleRing(c[0], c[1], a.radiusKm)] }, properties: { id: a.id, kind: "area", color, sel } });
+      // Name and radius sit just above the ring's top edge, clear of whatever is at its center.
+      const radius = `${formatDistance(a.radiusKm, a.unit)} radius`;
+      const top = [c[0], Math.min(85, c[1] + Math.min(a.radiusKm, MAX_RADIUS_KM) / KM_PER_DEG)];
+      features.push({ type: "Feature", geometry: { type: "Point", coordinates: top }, properties: { id: a.id, kind: "area-label", label: a.label ? `${a.label}\n${radius}` : radius, anchor: "bottom", color, sel } });
+      continue;
+    }
+    if (a.type === "polygon") {
+      const pts = (a.points || []).map((p) => unitToLonLat(p.x, p.y));
+      if (pts.length < 3 || pts.some((p) => !p)) continue;
+      const color = a.color || DEFAULT_COLOR;
+      features.push({ type: "Feature", geometry: { type: "Polygon", coordinates: [[...pts, pts[0]]] }, properties: { id: a.id, kind: "area", color, sel } });
+      if (a.label) features.push({ type: "Feature", geometry: { type: "Point", coordinates: middle(pts) }, properties: { id: a.id, kind: "area-label", label: a.label, anchor: "center", color, sel } });
+      continue;
+    }
     if (a.type === "marker" || a.type === "text") {
       const ll = unitToLonLat(a.x, a.y);
       if (!ll) continue;
