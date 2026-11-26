@@ -82,8 +82,8 @@ export function buildStyle() {
       "wr-ships": { type: "geojson", data: EMPTY },
       "wr-planes": { type: "geojson", data: EMPTY },
       "wr-selected": { type: "geojson", data: EMPTY },
-      "wr-ann": { type: "geojson", data: EMPTY }, // the user's markers, lines, shapes, notes
-      "wr-draft": { type: "geojson", data: EMPTY }, // the line/shape being drawn right now
+      "wr-ann": { type: "geojson", data: EMPTY }, // the user's markers, lines, shapes, circles, areas, notes
+      "wr-draft": { type: "geojson", data: EMPTY }, // the line/shape/circle/area being drawn right now
     },
     layers: [
       // Land is the background; water is drawn on top of it.
@@ -186,12 +186,22 @@ export function buildStyle() {
         layout: { "text-field": ["step", ["zoom"], ["get", "code"], 3.5, ["get", "name"]], "text-font": FONT_BOLD, "text-size": ["step", ["zoom"], 9, 3.5, 11], "text-max-width": 8, "text-offset": [0, 1.25], "text-anchor": "top", "text-allow-overlap": true, "text-ignore-placement": true },
         paint: { "text-color": "#8a98aa", "text-halo-color": "#071019", "text-halo-width": 1.2 } },
 
-      // ---- The user's analysis (markers, lines, shapes, notes). Fixed size on screen at any zoom. ----
+      // ---- The user's analysis (markers, lines, shapes, circles, areas, notes). ----
+      // Circles and freeform areas: a tinted zone in the color the analyst picked (e.g. red for a blast radius).
+      { id: "wr-ann-area-fill", type: "fill", source: "wr-ann", filter: ["==", ["get", "kind"], "area"], paint: { "fill-color": ["get", "color"], "fill-opacity": ["case", ["get", "sel"], 0.2, 0.12] } },
+      { id: "wr-ann-area-line", type: "line", source: "wr-ann", filter: ["==", ["get", "kind"], "area"], layout: { "line-join": "round" }, paint: { "line-color": ["case", ["get", "sel"], "#ffffff", ["get", "color"]], "line-width": ["case", ["get", "sel"], 3, 2] } },
       { id: "wr-ann-shape-fill", type: "fill", source: "wr-ann", filter: ["==", ["get", "kind"], "shape"], paint: { "fill-color": "#ffffff", "fill-opacity": 0.05 } },
       { id: "wr-ann-shape-line", type: "line", source: "wr-ann", filter: ["==", ["get", "kind"], "shape"], paint: { "line-color": ["case", ["get", "sel"], "#ffffff", "#d7dde8"], "line-width": ["case", ["get", "sel"], 3, 2] } },
       { id: "wr-ann-line", type: "line", source: "wr-ann", filter: ["==", ["get", "kind"], "line"], layout: { "line-cap": "round" }, paint: { "line-color": ["case", ["get", "sel"], "#ffffff", "#d7dde8"], "line-width": ["case", ["get", "sel"], 4, 2.5] } },
       { id: "wr-draft-fill", type: "fill", source: "wr-draft", filter: ["==", ["geometry-type"], "Polygon"], paint: { "fill-color": "#ffffff", "fill-opacity": 0.04 } },
-      { id: "wr-draft-line", type: "line", source: "wr-draft", paint: { "line-color": "#ffffff", "line-width": 2, "line-dasharray": [3, 2] } },
+      { id: "wr-draft-line", type: "line", source: "wr-draft", filter: ["!=", ["geometry-type"], "Point"], paint: { "line-color": "#ffffff", "line-width": 2, "line-dasharray": [3, 2] } },
+      // Corners of an area being drawn (the first one is bigger: tap it to close the area).
+      { id: "wr-draft-vertex", type: "circle", source: "wr-draft", filter: ["all", ["==", ["geometry-type"], "Point"], ["!", ["has", "text"]]],
+        paint: { "circle-radius": ["case", ["get", "first"], 6, 4], "circle-color": "#ffffff", "circle-opacity": ["case", ["get", "first"], 0.35, 0.9], "circle-stroke-color": "#000000", "circle-stroke-width": 1.5 } },
+      // Live readout while drawing (a circle's radius as it grows).
+      { id: "wr-draft-label", type: "symbol", source: "wr-draft", filter: ["has", "text"],
+        layout: { "text-field": ["get", "text"], "text-font": FONT_BOLD, "text-size": 13, "text-anchor": "bottom", "text-offset": [0, -0.6], "text-allow-overlap": true, "text-ignore-placement": true },
+        paint: { "text-color": "#ffffff", "text-halo-color": "#000000", "text-halo-width": 2 } },
       { id: "wr-ann-marker", type: "circle", source: "wr-ann", filter: ["==", ["get", "kind"], "marker"],
         paint: { "circle-radius": ["case", ["get", "sel"], 7.5, 6], "circle-color": ["get", "color"], "circle-opacity": 0.3, "circle-stroke-color": ["case", ["get", "sel"], "#ffffff", ["get", "color"]], "circle-stroke-width": ["case", ["get", "sel"], 3, 2] } },
       { id: "wr-ann-pin-badge", type: "circle", source: "wr-ann", filter: ["all", ["==", ["get", "kind"], "marker"], [">", ["get", "pins"], 0]],
@@ -211,13 +221,19 @@ export function buildStyle() {
       { id: "wr-ann-shape-label", type: "symbol", source: "wr-ann", filter: ["all", ["==", ["get", "kind"], "shape"], ["!=", ["get", "label"], ""]],
         layout: { "text-field": ["get", "label"], "text-font": FONT_BOLD, "text-size": 12, "text-allow-overlap": true, "text-ignore-placement": true },
         paint: { "text-color": "#ffffff", "text-halo-color": "#000000", "text-halo-width": 2 } },
+      // A circle's name and radius above its top edge; an area's name in its middle.
+      { id: "wr-ann-area-label", type: "symbol", source: "wr-ann", filter: ["==", ["get", "kind"], "area-label"],
+        layout: { "text-field": ["get", "label"], "text-font": FONT_BOLD, "text-size": 12.5, "text-anchor": ["match", ["get", "anchor"], "bottom", "bottom", "center"], "text-offset": ["match", ["get", "anchor"], "bottom", ["literal", [0, -0.35]], ["literal", [0, 0]]], "text-max-width": 22, "text-allow-overlap": true, "text-ignore-placement": true },
+        paint: { "text-color": ["case", ["get", "sel"], "#ffe9b8", "#ffffff"], "text-halo-color": "#000000", "text-halo-width": 2 } },
     ],
   };
 }
 
 // Show the chosen base look by flipping visibility. The plain MAP keeps the dark land/water
 // colors; imagery looks hide the water fill so NASA's picture shows through.
-export const ANNOTATION_LAYERS = ["wr-ann-marker", "wr-ann-pin-badge", "wr-ann-marker-label", "wr-ann-text", "wr-ann-line", "wr-ann-line-label", "wr-ann-shape-line", "wr-ann-shape-fill", "wr-ann-shape-label"];
+// Tapping these selects the annotation. A circle's or area's inside isn't listed: a big zone
+// would otherwise swallow taps on the country dots and trackers inside it (tap its edge or name).
+export const ANNOTATION_LAYERS = ["wr-ann-marker", "wr-ann-pin-badge", "wr-ann-marker-label", "wr-ann-text", "wr-ann-line", "wr-ann-line-label", "wr-ann-shape-line", "wr-ann-shape-fill", "wr-ann-shape-label", "wr-ann-area-line", "wr-ann-area-label"];
 
 export function applyBase(map, baseId, look = "dark") {
   const base = BASES.find((b) => b.id === baseId) || BASES[0];
@@ -273,6 +289,11 @@ const LIGHT_PAINT = {
   "wr-ann-text": { "text-color": ["case", ["get", "sel"], "#1f5fbf", "#14171c"], "text-halo-color": "#ffffff" },
   "wr-ann-line-label": { "text-color": "#14171c", "text-halo-color": "#ffffff" },
   "wr-ann-shape-label": { "text-color": "#14171c", "text-halo-color": "#ffffff" },
+  "wr-ann-area-fill": { "fill-color": ["case", GREY_MARKER, "#3a414c", ["get", "color"]] },
+  "wr-ann-area-line": { "line-color": ["case", ["get", "sel"], "#000000", ["case", GREY_MARKER, "#3a414c", ["get", "color"]]] },
+  "wr-ann-area-label": { "text-color": ["case", ["get", "sel"], "#1f5fbf", "#14171c"], "text-halo-color": "#ffffff" },
+  "wr-draft-vertex": { "circle-color": "#14171c", "circle-stroke-color": "#ffffff" },
+  "wr-draft-label": { "text-color": "#14171c", "text-halo-color": "#ffffff" },
 };
 const darkPaint = new WeakMap();
 export function applyLook(map, look) {

@@ -4,7 +4,7 @@ import * as d3 from "d3";
 import { useTrackingFeed } from "./useTracking.js";
 import { WORLD_BBOX, visibleBbox, projectItems, projectZones, hitTest, trackId, trackToReport } from "./trackingGeo.js";
 import { exportMapImage } from "./exportMap.js";
-import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrateLegacy, annotationsToGeoJSON, unitToLonLat } from "./annotationSpace.js";
+import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrateLegacy, annotationsToGeoJSON, annotationLonLats, distanceKm, kmFrom, kmTo, roundDistance, formatDistance, circleRing, MAX_RADIUS_KM, KM_PER_DEG } from "./annotationSpace.js";
 import MapLibreView from "./map/MapLibreView.jsx";
 import { readViewFromUrl, viewToSearch } from "./urlState.js";
 import SourcesPanel from "./SourcesPanel.jsx";
@@ -222,6 +222,13 @@ export default function WireRoomV2() {
   const drawingBlockedRef = useRef(false); // true while a pinch (2+ fingers) is in progress
   const [annotationColor, setAnnotationColor] = useState("#d7dde8");
   const MARKER_COLORS = ["#d7dde8", "#ff4d4d", "#ff9f43", "#ffd166", "#4cd964", "#35c7b0", "#4da3ff", "#9b7bff", "#ff6fb5"];
+  // Annotations that take a color (the color row shows for these).
+  const COLORED = new Set(["marker", "circle", "polygon"]);
+  // Corners of an area (Area tool) placed so far, as [lon, lat]. It becomes an annotation on Finish.
+  const [polyDraft, setPolyDraft] = useState([]);
+  // Miles or kilometres for circles (remembered).
+  const [distanceUnit, setDistanceUnit] = useState(() => { try { return localStorage.getItem("wireroom-distance-unit") === "km" ? "km" : "mi"; } catch { return "mi"; } });
+  useEffect(() => { try { localStorage.setItem("wireroom-distance-unit", distanceUnit); } catch { /* ignore */ } }, [distanceUnit]);
   const annotationHydratedRef = useRef(false);
 
   useEffect(() => {
@@ -540,17 +547,10 @@ export default function WireRoomV2() {
     setPinning(null);
     setAnnotationTool("select");
     setAnnotationDraft(null);
+    setPolyDraft([]);
     setToolsOpen(false);
     setSharedMap({ id: post.id, title: post.title, username: post.username, annotations: post.annotations, creditId: post.creditId });
-    const pts = [];
-    for (const a of post.annotations) {
-      if (a.type === "line") pts.push(unitToLonLat(a.x1, a.y1), unitToLonLat(a.x2, a.y2));
-      else {
-        pts.push(unitToLonLat(a.x, a.y));
-        if (a.type === "shape") pts.push(unitToLonLat(a.x + a.width, a.y + a.height));
-      }
-    }
-    const ok = pts.filter(Boolean);
+    const ok = post.annotations.flatMap(annotationLonLats);
     if (ok.length) {
       const lons = ok.map(p => p[0]), lats = ok.map(p => p[1]);
       const w = Math.min(...lons), e = Math.max(...lons), s = Math.min(...lats), n = Math.max(...lats);
@@ -638,12 +638,55 @@ export default function WireRoomV2() {
     const next = { id, ...toUnit(annotation, projection) };
     setAnnotations(prev => [...prev, next]);
     setSelectedAnnotationId(id);
+    return id;
   }
+
+  // ---- Circles: a center and a real distance (blast radius, shelter zone, missile range) ----
+  // The radius is rounded to what the readout showed (e.g. 20 mi), then the box opens to name
+  // it or type an exact radius.
+  function addCircle(centerLL, km) {
+    const c = llToPx(centerLL);
+    if (!c || !(km > 0)) return;
+    const shown = Math.max(0.1, roundDistance(kmTo(Math.min(km, MAX_RADIUS_KM), distanceUnit)));
+    const id = addAnnotation({ type: "circle", x: c.x, y: c.y, radiusKm: kmFrom(shown, distanceUnit), unit: distanceUnit, label: "", color: annotationColor });
+    openLabelDialog({ kind: "edit-circle", id, value: "", radius: String(shown), unit: distanceUnit });
+  }
+
+  // ---- Areas: tap corners, then Finish (or tap the first corner) ----
+  const MAX_AREA_CORNERS = 200;
+  function addPolyCorner(ll) {
+    setPolyDraft(prev => (prev.length >= MAX_AREA_CORNERS ? prev : [...prev, ll]));
+  }
+  function finishPolygon() {
+    if (polyDraft.length < 3) return;
+    const points = polyDraft.map(llToPx);
+    setPolyDraft([]);
+    if (points.some(p => !p)) return;
+    const id = addAnnotation({ type: "polygon", points, label: "", color: annotationColor });
+    openLabelDialog({ kind: "edit-label", id, value: "", title: "Name this area (optional)" });
+  }
+  // Keyboard, while drawing an area: Enter finishes, Backspace removes the last corner, Esc cancels.
+  const areaKeysRef = useRef(null);
+  useEffect(() => { areaKeysRef.current = { finishPolygon, active: annotationTool === "polygon" && !labelDialog }; });
+  useEffect(() => {
+    function onKey(e) {
+      const k = areaKeysRef.current;
+      if (!k || !k.active) return;
+      const t = e.target;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      if (e.key === "Enter") { e.preventDefault(); k.finishPolygon(); }
+      else if (e.key === "Backspace") { e.preventDefault(); setPolyDraft(prev => prev.slice(0, -1)); }
+      else if (e.key === "Escape") setPolyDraft([]);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   function startPinReport(item) {
     setSelectedAnnotationId(null);
     setAnnotationTool("select");
     setAnnotationDraft(null);
+    setPolyDraft([]);
     setLabelDialog(null);
     setPinning({
       id: item.id,
@@ -794,6 +837,21 @@ export default function WireRoomV2() {
       openLabelDialog({ kind: "text", value: "", point: { x: start.x, y: start.y } });
     }
 
+    if (tool === "circle" && Math.hypot(end.x - start.x, end.y - start.y) > 8) {
+      const a = projection.invert([start.x, start.y]), b = projection.invert([end.x, end.y]);
+      if (a && b) addCircle(a, distanceKm(a, b));
+    }
+
+    if (tool === "polygon") {
+      // A tap near the first corner closes the area; any other tap adds a corner.
+      const first = polyDraft.length >= 3 ? projection(polyDraft[0]) : null;
+      if (first && Math.hypot(first[0] - start.x, first[1] - start.y) <= 12 / transform.k) finishPolygon();
+      else {
+        const ll = projection.invert([start.x, start.y]);
+        if (ll) addPolyCorner(ll);
+      }
+    }
+
     setAnnotationDraft(null);
   }
 
@@ -866,6 +924,7 @@ export default function WireRoomV2() {
   const mlRef = useRef(null);
   const llToPx = ll => { const p = projection(ll); return p && Number.isFinite(p[0]) ? { x: p[0], y: p[1] } : null; };
   function mlDrawPoint(tool, ll) {
+    if (tool === "polygon") { addPolyCorner(ll); return; }
     const point = llToPx(ll);
     if (!point) return;
     openLabelDialog(tool === "marker" ? { kind: "marker", value: "", point, color: annotationColor } : { kind: "text", value: "", point });
@@ -873,7 +932,8 @@ export default function WireRoomV2() {
   function mlDrawDrag(tool, a, b) {
     const p1 = llToPx(a), p2 = llToPx(b);
     if (!p1 || !p2) return;
-    if (tool === "line") addAnnotation({ type: "line", x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, label: "" });
+    if (tool === "circle") addCircle(a, distanceKm(a, b));
+    else if (tool === "line") addAnnotation({ type: "line", x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, label: "" });
     else addAnnotation({ type: "shape", x: Math.min(p1.x, p2.x), y: Math.min(p1.y, p2.y), width: Math.abs(p2.x - p1.x), height: Math.abs(p2.y - p1.y), label: "" });
   }
   function mlAnnotationTap(id) {
@@ -916,6 +976,12 @@ export default function WireRoomV2() {
       return;
     }
 
+    if (current.type === "circle") {
+      const unit = current.unit === "km" ? "km" : "mi";
+      openLabelDialog({ kind: "edit-circle", id: current.id, value: current.label || "", radius: String(roundDistance(kmTo(current.radiusKm, unit))), unit });
+      return;
+    }
+
     openLabelDialog({ kind: "edit-label", id: current.id, value: current.label || "" });
   }
 
@@ -934,6 +1000,15 @@ export default function WireRoomV2() {
       setAnnotations(prev => prev.map(a => a.id === d.id ? { ...a, text: value } : a));
     } else if (d.kind === "edit-label") {
       setAnnotations(prev => prev.map(a => a.id === d.id ? { ...a, label: value } : a));
+    } else if (d.kind === "edit-circle") {
+      const r = Number(String(d.radius || "").replace(",", "."));
+      const km = kmFrom(r, d.unit);
+      if (!(r > 0) || km > MAX_RADIUS_KM) {
+        setLabelDialog(prev => prev ? { ...prev, error: `Radius must be more than 0 and at most ${roundDistance(kmTo(MAX_RADIUS_KM, d.unit)).toLocaleString("en-US")} ${d.unit}.` } : prev);
+        return;
+      }
+      setAnnotations(prev => prev.map(a => a.id === d.id ? { ...a, label: value, radiusKm: km, unit: d.unit } : a));
+      setDistanceUnit(d.unit);
     }
 
     setLabelDialog(null);
@@ -964,9 +1039,13 @@ export default function WireRoomV2() {
 
   function applyMarkerColor(color) {
     setAnnotationColor(color);
-    if (annotationTool !== "select" || !selectedAnnotationId) return;
+    if (!selectedAnnotationId) return;
+    // Recolor the selected one (with Select), or the circle/area just drawn with that tool.
+    // (With the Marker tool a color is for the next marker, as before.)
+    const sel = annotations.find(a => a.id === selectedAnnotationId);
+    if (!sel || !(annotationTool === "select" || (sel.type === annotationTool && annotationTool !== "marker"))) return;
     setAnnotations(prev => prev.map(a =>
-      a.id === selectedAnnotationId && a.type === "marker" ? { ...a, color } : a
+      a.id === selectedAnnotationId && COLORED.has(a.type) ? { ...a, color } : a
     ));
   }
 
@@ -1008,6 +1087,7 @@ export default function WireRoomV2() {
             </ul>
             <h3>Also new</h3>
             <ul>
+              <li>Draw <b>circles</b> with an exact radius in miles or km (a blast radius, a shelter zone, a missile's range) and freeform <b>areas</b> (tap the corners), in any color.</li>
               <li>Worldwide cyberattacks that hit many countries at once now show under <b>Worldwide cyber</b> in Events.</li>
               <li>An AI review hides off-topic news (sports, celebrity) from country feeds. Official statements are never hidden.</li>
             </ul>
@@ -1089,6 +1169,9 @@ export default function WireRoomV2() {
             onAnnotationTap={mlAnnotationTap}
             onDrawPoint={mlDrawPoint}
             onDrawDrag={mlDrawDrag}
+            polyDraft={polyDraft}
+            onPolyFinish={finishPolygon}
+            distanceUnit={distanceUnit}
             onPinPlace={mlPinPlace}
             controlRef={mlRef}
             focus={mapFocus}
@@ -1257,6 +1340,53 @@ export default function WireRoomV2() {
                 );
               }
 
+              if (a.type === "circle" || a.type === "polygon") {
+                const color = a.color || "#d7dde8";
+                let d, labelAt = null, labelText = a.label || "";
+                if (a.type === "circle") {
+                  const c = projection.invert([a.x, a.y]);
+                  if (!c || !(a.radiusKm > 0)) return null;
+                  d = path({ type: "Polygon", coordinates: [circleRing(c[0], c[1], a.radiusKm)] });
+                  const top = projection([c[0], Math.min(85, c[1] + Math.min(a.radiusKm, MAX_RADIUS_KM) / KM_PER_DEG)]);
+                  labelAt = top ? [top[0], top[1] - 6] : null;
+                  const radius = `${formatDistance(a.radiusKm, a.unit)} radius`;
+                  labelText = a.label ? `${a.label} · ${radius}` : radius;
+                } else {
+                  const pts = a.points || [];
+                  if (pts.length < 3) return null;
+                  d = "M" + pts.map(p => `${p.x},${p.y}`).join("L") + "Z";
+                  if (a.label) labelAt = [pts.reduce((t, p) => t + p.x, 0) / pts.length, pts.reduce((t, p) => t + p.y, 0) / pts.length];
+                }
+                // Only the edge and the name take taps (with Select): a big zone mustn't block
+                // tapping the countries inside it, or drawing on top of it.
+                return (
+                  <g
+                    key={a.id}
+                    style={{ pointerEvents: annotationTool === "select" ? "auto" : "none" }}
+                    onPointerDown={e => e.stopPropagation()}
+                    onClick={e => {
+                      e.stopPropagation();
+                      setSelectedAnnotationId(a.id);
+                    }}
+                  >
+                    <path d={d || ""} pointerEvents="visibleStroke" fill={color} fillOpacity={isSelected ? 0.2 : 0.12} stroke={isSelected ? "#ffffff" : color} strokeWidth={isSelected ? 3 : 2} strokeLinejoin="round" />
+                    {labelAt && labelText && (
+                      <text
+                        x={labelAt[0]}
+                        y={labelAt[1]}
+                        fill="#fff"
+                        fontSize="12"
+                        fontWeight="700"
+                        textAnchor="middle"
+                        paintOrder="stroke"
+                        stroke="#000"
+                        strokeWidth="3"
+                      >{labelText}</text>
+                    )}
+                  </g>
+                );
+              }
+
               if (a.type === "text") {
                 return (
                   <text
@@ -1311,6 +1441,28 @@ export default function WireRoomV2() {
               />
             )}
 
+            {annotationDraft && annotationDraft.tool === "circle" && (() => {
+              const { start, end } = annotationDraft;
+              const a = projection.invert([start.x, start.y]), b = projection.invert([end.x, end.y]);
+              return (
+                <g pointerEvents="none">
+                  <circle cx={start.x} cy={start.y} r={Math.hypot(end.x - start.x, end.y - start.y)} fill="rgba(255,255,255,.04)" stroke="#ffffff" strokeWidth="2" strokeDasharray="6 5" />
+                  <line x1={start.x} y1={start.y} x2={end.x} y2={end.y} stroke="#ffffff" strokeWidth="1.5" strokeDasharray="4 4" />
+                  {a && b && <text x={end.x} y={end.y - 8} fill="#fff" fontSize="13" fontWeight="700" textAnchor="middle" paintOrder="stroke" stroke="#000" strokeWidth="3">{formatDistance(distanceKm(a, b), distanceUnit)}</text>}
+                </g>
+              );
+            })()}
+
+            {annotationTool === "polygon" && polyDraft.length > 0 && (() => {
+              const pts = polyDraft.map(ll => projection(ll)).filter(Boolean);
+              return (
+                <g pointerEvents="none">
+                  {pts.length > 1 && <path d={"M" + pts.map(p => p.join(",")).join("L") + (pts.length >= 3 ? "Z" : "")} fill={pts.length >= 3 ? "rgba(255,255,255,.04)" : "none"} stroke="#ffffff" strokeWidth="2" strokeDasharray="6 5" />}
+                  {pts.map((p, i) => <circle key={i} cx={p[0]} cy={p[1]} r={i === 0 ? 6 : 4} fill={i === 0 ? "rgba(255,255,255,.35)" : "#ffffff"} stroke="#000" strokeWidth="1.5" />)}
+                </g>
+              );
+            })()}
+
             {annotationDraft && annotationDraft.tool === "marker" && (
               <circle
                 cx={annotationDraft.start.x}
@@ -1339,6 +1491,7 @@ export default function WireRoomV2() {
                   // Folding the tools away also puts the map back to normal tapping.
                   setAnnotationTool("select");
                   setAnnotationDraft(null);
+                  setPolyDraft([]);
                 }
                 setToolsOpen(!toolsOpen);
               }}
@@ -1355,6 +1508,8 @@ export default function WireRoomV2() {
                   ["marker", "Marker"],
                   ["line", "Line"],
                   ["shape", "Shape"],
+                  ["circle", "Circle"],
+                  ["polygon", "Area"],
                   ["text", "Note"]
                 ].map(([tool, label]) => (
                   <button
@@ -1362,10 +1517,12 @@ export default function WireRoomV2() {
                     type="button"
                     aria-pressed={annotationTool === tool}
                     className={"tool-btn" + (annotationTool === tool ? " active" : "")}
+                    title={tool === "circle" ? "Drag from a center outward to draw a radius (miles or km)" : tool === "polygon" ? "Tap corners to outline an area" : undefined}
                     onClick={() => {
                       setAnnotationTool(tool);
                       if (tool !== "select") setPinning(null); // picking a drawing tool cancels a pending pin
                       setAnnotationDraft(null);
+                      setPolyDraft([]);
                       setSelectedAnnotationId(null);
                     }}
                   >
@@ -1383,18 +1540,39 @@ export default function WireRoomV2() {
             )}
           </div>
 
-          {toolsOpen && (annotationTool === "marker" || (annotations.find(a => a.id === selectedAnnotationId) || {}).type === "marker") && (() => {
+          {toolsOpen && annotationTool === "circle" && (
+            <div className="tool-colors tool-hint" role="group" aria-label="Circle">
+              <span>Drag from the center outward. Radius in</span>
+              {["mi", "km"].map(u => (
+                <button key={u} type="button" className={"unit-btn" + (distanceUnit === u ? " on" : "")} aria-pressed={distanceUnit === u} onClick={() => setDistanceUnit(u)}>{u === "mi" ? "miles" : "km"}</button>
+              ))}
+            </div>
+          )}
+
+          {toolsOpen && annotationTool === "polygon" && (
+            <div className="tool-colors tool-hint" role="group" aria-label="Area">
+              <span>{polyDraft.length === 0 ? "Tap the map to place corners." : polyDraft.length < 3 ? `${polyDraft.length} corner${polyDraft.length === 1 ? "" : "s"}: add at least 3.` : `${polyDraft.length} corners. Tap the first corner or Finish.`}</span>
+              <button type="button" className="unit-btn" onClick={() => setPolyDraft(prev => prev.slice(0, -1))} disabled={!polyDraft.length}>Undo</button>
+              <button type="button" className="unit-btn on" onClick={finishPolygon} disabled={polyDraft.length < 3}>Finish</button>
+              <button type="button" className="unit-btn" onClick={() => setPolyDraft([])} disabled={!polyDraft.length}>Cancel</button>
+            </div>
+          )}
+
+          {toolsOpen && (COLORED.has(annotationTool) || COLORED.has((annotations.find(a => a.id === selectedAnnotationId) || {}).type)) && (() => {
             const sel = annotations.find(a => a.id === selectedAnnotationId);
-            const active = sel && sel.type === "marker" && annotationTool === "select" ? (sel.color || "#d7dde8") : annotationColor;
+            const own = sel && COLORED.has(sel.type) && (annotationTool === "select" || (sel.type === annotationTool && annotationTool !== "marker"));
+            const active = own ? (sel.color || "#d7dde8") : annotationColor;
+            const what = own ? sel.type : annotationTool;
+            const noun = what === "circle" ? "Circle" : what === "polygon" ? "Area" : "Marker";
             return (
-              <div className="tool-colors" role="group" aria-label="Marker color">
+              <div className="tool-colors" role="group" aria-label={noun + " color"}>
                 <span>Color</span>
                 {MARKER_COLORS.map(color => (
                   <button
                     key={color}
                     type="button"
-                    title={"Marker color " + color}
-                    aria-label={"Marker color " + color}
+                    title={noun + " color " + color}
+                    aria-label={noun + " color " + color}
                     aria-pressed={active === color}
                     className={"swatch" + (active === color ? " on" : "")}
                     onClick={() => applyMarkerColor(color)}
@@ -1438,9 +1616,11 @@ export default function WireRoomV2() {
             }}
           >
             <div>
-              {labelDialog.kind === "marker" ? "Marker label (optional)"
+              {labelDialog.title ? labelDialog.title
+                : labelDialog.kind === "marker" ? "Marker label (optional)"
                 : labelDialog.kind === "text" ? "Note text"
                 : labelDialog.kind === "edit-text" ? "Edit note"
+                : labelDialog.kind === "edit-circle" ? "Circle: name (optional) and radius"
                 : "Edit label"}
             </div>
             <input
@@ -1452,12 +1632,48 @@ export default function WireRoomV2() {
               maxLength={140}
               value={labelDialog.value}
               onChange={e => setLabelDialog(prev => prev ? { ...prev, value: e.target.value } : prev)}
+              placeholder={labelDialog.kind === "edit-circle" ? "e.g. Shelter-in-place zone" : undefined}
               onKeyDown={e => {
                 if (e.key === "Enter") submitLabelDialog();
                 if (e.key === "Escape") setLabelDialog(null);
               }}
               style={{ fontSize: 16, padding: "6px 8px", background: "var(--surface)", color: "var(--text)", border: "1px solid var(--line-2)" }}
             />
+            {labelDialog.kind === "edit-circle" && (
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <label htmlFor="circle-radius">Radius</label>
+                <input
+                  id="circle-radius"
+                  type="number"
+                  inputMode="decimal"
+                  min="0"
+                  step="any"
+                  value={labelDialog.radius}
+                  onChange={e => setLabelDialog(prev => prev ? { ...prev, radius: e.target.value, error: null } : prev)}
+                  onKeyDown={e => {
+                    if (e.key === "Enter") submitLabelDialog();
+                    if (e.key === "Escape") setLabelDialog(null);
+                  }}
+                  style={{ fontSize: 16, padding: "6px 8px", width: 110, background: "var(--surface)", color: "var(--text)", border: "1px solid var(--line-2)" }}
+                />
+                {["mi", "km"].map(u => (
+                  <button
+                    key={u}
+                    type="button"
+                    className={"unit-btn" + (labelDialog.unit === u ? " on" : "")}
+                    aria-pressed={labelDialog.unit === u}
+                    onClick={() => setLabelDialog(prev => {
+                      if (!prev || prev.unit === u) return prev;
+                      // Switching units keeps the same circle: 20 mi becomes 32.2 km.
+                      const r = Number(String(prev.radius || "").replace(",", "."));
+                      const radius = r > 0 ? String(roundDistance(kmTo(kmFrom(r, prev.unit), u))) : prev.radius;
+                      return { ...prev, unit: u, radius, error: null };
+                    })}
+                  >{u === "mi" ? "miles" : "km"}</button>
+                ))}
+              </div>
+            )}
+            {labelDialog.error && <div role="alert" style={{ color: "#ff8a80", fontWeight: 600 }}>{labelDialog.error}</div>}
             <div style={{ display: "flex", gap: 6 }}>
               <button type="button" onClick={submitLabelDialog} style={toolButtonStyle(true)}>
                 {labelDialog.kind === "marker" ? "Place marker" : labelDialog.kind === "text" ? "Add note" : "Save"}
@@ -1836,6 +2052,10 @@ const CSS = `
 .tool-colors{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 10px;font:500 13px var(--font);color:var(--muted);box-shadow:var(--shadow)}
 .swatch{width:24px;height:24px;border-radius:50%;padding:0;border:1px solid var(--line-2);cursor:pointer}
 .swatch.on{outline:2px solid var(--text);outline-offset:2px}
+.unit-btn{height:28px;padding:0 10px;border:1px solid var(--line-2);border-radius:999px;background:var(--surface);color:var(--text);font:500 13px var(--font);cursor:pointer}
+.unit-btn.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.unit-btn:disabled{opacity:.45;cursor:default}
+.tool-hint{max-width:min(560px,calc(100vw - 24px))}
 .app .live-box{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);font:12px var(--font);color:var(--muted);padding:10px 12px;gap:8px}
 .app .live-title,.app .live-sub{font-weight:600;color:var(--text);letter-spacing:0}
 .app .live-btn{border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--text);font:500 13px var(--font);padding:6px 11px}

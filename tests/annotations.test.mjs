@@ -62,3 +62,79 @@ test("map units <-> longitude/latitude round trip (shared by both maps)", async 
   assert.equal(gj.features[0].properties.pins, 2);
   assert.equal(gj.features[0].properties.sel, true);
 });
+
+// ---- Circles (a true-distance radius) and freeform areas ----
+test("an area keeps every corner on its spot when the map is resized", () => {
+  const a = fit(1200, 700), b = fit(700, 500);
+  const corners = [[-91.25, 40.81], [-91.6, 40.2], [-92.05, 40.57]];
+  const stored = toUnit({ type: "polygon", points: corners.map((ll) => { const [x, y] = a(ll); return { x, y }; }), label: "Fallout" }, a);
+  const shown = toPixel(stored, b);
+  corners.forEach((ll, i) => { const [x, y] = b(ll); near(shown.points[i].x, x); near(shown.points[i].y, y); });
+  assert.equal(shown.label, "Fallout");
+});
+
+test("a circle's center moves with the map; its radius is a distance, not a size on screen", () => {
+  const a = fit(1200, 700), b = fit(600, 400);
+  const [x, y] = a([-91.255, 40.81]);
+  const stored = toUnit({ type: "circle", x, y, radiusKm: 32.19, unit: "mi" }, a);
+  assert.equal(stored.radiusKm, 32.19);
+  const shown = toPixel(stored, b);
+  const [ex, ey] = b([-91.255, 40.81]);
+  near(shown.x, ex); near(shown.y, ey);
+  assert.equal(shown.radiusKm, 32.19);
+});
+
+test("every point of a drawn circle is the radius away from its center", async () => {
+  const { circleRing, distanceKm } = await import("../src/annotationSpace.js");
+  for (const [lon, lat, km] of [[-91.255, 40.81, 32.19], [56.3, 26.5, 500], [0, 70, 1000], [179.5, -16, 300]]) {
+    const ring = circleRing(lon, lat, km);
+    assert.ok(ring.length > 60, "smooth enough");
+    for (const p of ring) assert.ok(Math.abs(distanceKm([lon, lat], p) - km) < km * 0.001 + 0.01, `${p} is ${distanceKm([lon, lat], p)} km, not ${km}`);
+    // Across the date line the ring stays in one piece (no jump of ~360 degrees between points).
+    for (let i = 1; i < ring.length; i++) assert.ok(Math.abs(ring[i][0] - ring[i - 1][0]) < 90);
+  }
+});
+
+test("miles and km, and the radius readout", async () => {
+  const { kmFrom, kmTo, formatDistance, roundDistance } = await import("../src/annotationSpace.js");
+  assert.ok(Math.abs(kmFrom(20, "mi") - 32.18688) < 1e-9);
+  assert.equal(kmFrom(20, "km"), 20);
+  assert.ok(Math.abs(kmTo(kmFrom(20, "mi"), "mi") - 20) < 1e-9);
+  assert.equal(formatDistance(kmFrom(20, "mi"), "mi"), "20 mi");
+  assert.equal(formatDistance(kmFrom(20, "mi"), "km"), "32 km");
+  assert.equal(formatDistance(5.25, "km"), "5.3 km");
+  assert.equal(formatDistance(2000, "km"), "2,000 km");
+  assert.equal(roundDistance(9.96), 10);
+});
+
+test("circles and areas become map shapes with their names and colors", async () => {
+  const { annotationsToGeoJSON, lonLatToUnit, kmFrom } = await import("../src/annotationSpace.js");
+  const c = lonLatToUnit(-91.255, 40.81);
+  const corners = [[-91.25, 40.81], [-91.6, 40.2], [-92.05, 40.57]].map(([lon, lat]) => lonLatToUnit(lon, lat));
+  const gj = annotationsToGeoJSON([
+    { id: "c", type: "circle", x: c.x, y: c.y, radiusKm: kmFrom(20, "mi"), unit: "mi", label: "Shelter in place", color: "#ff4d4d" },
+    { id: "p", type: "polygon", points: corners, label: "Fallout zone", color: "#ffd166" },
+    { id: "bad", type: "polygon", points: corners.slice(0, 2) }, // 2 corners: not an area
+    { id: "zero", type: "circle", x: c.x, y: c.y, radiusKm: 0 },
+  ], "c");
+  const byKind = (id, kind) => gj.features.find((f) => f.properties.id === id && f.properties.kind === kind);
+  const ring = byKind("c", "area");
+  assert.equal(ring.geometry.type, "Polygon");
+  assert.equal(ring.properties.color, "#ff4d4d");
+  assert.equal(ring.properties.sel, true);
+  assert.equal(byKind("c", "area-label").properties.label, "Shelter in place\n20 mi radius");
+  assert.ok(byKind("c", "area-label").geometry.coordinates[1] > 40.81, "the name sits above the ring, not on its center");
+  const area = byKind("p", "area");
+  assert.equal(area.geometry.coordinates[0].length, 4, "closed ring");
+  assert.equal(byKind("p", "area-label").properties.label, "Fallout zone");
+  assert.ok(!gj.features.some((f) => f.properties.id === "bad" || f.properties.id === "zero"));
+});
+
+test("a posted map is framed to show all of a circle, not just its center", async () => {
+  const { annotationLonLats, lonLatToUnit } = await import("../src/annotationSpace.js");
+  const c = lonLatToUnit(10, 50);
+  const pts = annotationLonLats({ type: "circle", x: c.x, y: c.y, radiusKm: 111.2 });
+  const lats = pts.map((p) => p[1]);
+  assert.ok(Math.max(...lats) > 50.9 && Math.min(...lats) < 49.1, "reaches about one degree north and south");
+  assert.equal(annotationLonLats({ type: "polygon", points: [c, c, c] }).length, 3);
+});

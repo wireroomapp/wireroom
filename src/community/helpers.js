@@ -10,7 +10,9 @@ export const KINDS = [
   { id: "map", label: "Map", hint: "Your current map, with a title and caption" },
 ];
 
-const TYPES = new Set(["marker", "text", "line", "shape"]);
+const TYPES = new Set(["marker", "text", "line", "shape", "circle", "polygon"]);
+const MAX_RADIUS_KM = 20000; // same cap as the map (annotationSpace.js)
+const MAX_AREA_POINTS = 200;
 const num = (v) => (Number.isFinite(v) ? Math.round(v * 1e6) / 1e6 : undefined);
 const str = (v, n) => (typeof v === "string" ? v.slice(0, n) : "");
 const httpUrl = (u) => (typeof u === "string" && /^https?:\/\//i.test(u) ? u.slice(0, 2000) : "");
@@ -38,16 +40,27 @@ function cleanOne(a) {
   const out = { id: str(String(a.id ?? ""), 80) || undefined, type: a.type };
   if (a.type === "line") {
     for (const k of ["x1", "y1", "x2", "y2"]) { out[k] = num(a[k]); if (out[k] === undefined) return null; }
+  } else if (a.type === "polygon") {
+    if (!Array.isArray(a.points)) return null;
+    out.points = a.points.slice(0, MAX_AREA_POINTS).map((p) => ({ x: num(p && p.x), y: num(p && p.y) }));
+    if (out.points.length < 3 || out.points.some((p) => p.x === undefined || p.y === undefined)) return null;
   } else {
     out.x = num(a.x); out.y = num(a.y);
     if (out.x === undefined || out.y === undefined) return null;
     if (a.type === "shape") { out.width = num(a.width); out.height = num(a.height); if (out.width === undefined || out.height === undefined) return null; }
+    if (a.type === "circle") {
+      out.radiusKm = num(a.radiusKm);
+      if (out.radiusKm === undefined || out.radiusKm <= 0 || out.radiusKm > MAX_RADIUS_KM) return null;
+      out.unit = a.unit === "km" ? "km" : "mi";
+    }
   }
   if (a.type === "text") out.text = str(a.text, 500);
   else out.label = str(a.label, 120);
-  if (a.type === "marker") {
+  if (a.type === "marker" || a.type === "circle" || a.type === "polygon") {
     const c = color(a.color);
     if (c) out.color = c;
+  }
+  if (a.type === "marker") {
     const pins = (Array.isArray(a.pins) ? a.pins : []).map(cleanPin).filter(Boolean).slice(0, 50);
     if (pins.length) out.pins = pins;
   }
@@ -81,7 +94,7 @@ export function describeDrawing(annotations) {
   const list = Array.isArray(annotations) ? annotations : [];
   const n = (t) => list.filter((a) => a && a.type === t).length;
   const pins = list.reduce((s, a) => s + ((a && a.pins && a.pins.length) || 0), 0);
-  const parts = [[n("marker"), "marker"], [n("line"), "line"], [n("shape"), "shape"], [n("text"), "note"], [pins, "pinned report"]]
+  const parts = [[n("marker"), "marker"], [n("line"), "line"], [n("shape"), "shape"], [n("circle"), "circle"], [n("polygon"), "area"], [n("text"), "note"], [pins, "pinned report"]]
     .filter(([k]) => k > 0).map(([k, w]) => `${k} ${w}${k === 1 ? "" : "s"}`);
   return parts.length ? parts.join(", ") : "nothing drawn yet";
 }
@@ -107,7 +120,7 @@ export function postProblem({ kind, title, body, annotations, countries }) {
   }
   if (b.length > LIMITS.caption) return `Captions are up to ${LIMITS.caption.toLocaleString()} characters.`;
   const drawing = cleanForPublish(annotations);
-  if (!drawing.length) return "Your map is empty. Close this, tap Draw on the map, add markers, lines, notes or pinned reports, then come back.";
+  if (!drawing.length) return "Your map is empty. Close this, tap Draw on the map, add markers, lines, circles, areas, notes or pinned reports, then come back.";
   if ((Array.isArray(annotations) ? annotations.length : 0) > LIMITS.mapItems) return `Maps can have up to ${LIMITS.mapItems} items.`;
   if (JSON.stringify(drawing).length > LIMITS.mapBytes) return "This map is too big to post. Remove some markers or pinned reports.";
   return null;

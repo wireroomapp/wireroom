@@ -4,6 +4,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { groupByPlace } from "../contextData.js";
 import { buildStyle, applyBase, applyLook, hideBaseCountryLabels, makeIcons, ICON_IDS, SLOT_OFFSETS, BASES, ANNOTATION_LAYERS, NASA_CREDIT, DEM_CREDIT } from "./wireroomStyle.js";
 import { WORLD_BBOX, trackId } from "../trackingGeo.js";
+import { circleRing, distanceKm, formatDistance } from "../annotationSpace.js";
 
 // The full-scale map: MapLibre (free, open source) drawing OpenStreetMap data from
 // OpenFreeMap, NASA imagery, and free elevation data. Flat or globe, optional 3D terrain.
@@ -36,6 +37,17 @@ function viewBbox(map) {
 
 const point = (lon, lat, properties) => ({ type: "Feature", geometry: { type: "Point", coordinates: [lon, lat] }, properties });
 
+// An area being drawn: its outline so far (closed once it has 3 corners), and its corners.
+// `cursor` (optional) is where the pointer is, for a rubber band to the next corner.
+function polyDraftFeatures(corners, cursor = null) {
+  const pts = cursor ? [...corners, cursor] : corners;
+  const out = [];
+  if (pts.length >= 3) out.push({ type: "Feature", geometry: { type: "Polygon", coordinates: [[...pts, pts[0]]] }, properties: {} });
+  else if (pts.length === 2) out.push({ type: "Feature", geometry: { type: "LineString", coordinates: pts }, properties: {} });
+  corners.forEach((c, i) => out.push(point(c[0], c[1], { first: i === 0 })));
+  return out;
+}
+
 export default function MapLibreView({
   countries, selectedId, hasNews, onCountryClick,
   aircraft, ships, zones, shipsStatus, airOn, shipsOn,
@@ -43,6 +55,9 @@ export default function MapLibreView({
   // Analyst tools
   annotations, tool = "select", pinning = false,
   onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace, controlRef,
+  polyDraft = null, // corners of an area being drawn, [[lon, lat], ...]
+  onPolyFinish, // tap on the first corner closes the area
+  distanceUnit = "mi", // "mi" | "km": how a circle's radius reads while drawing
   focus = null, // { lon, lat, key, bounds? }: fly here once (a shared link's country; a posted map's area)
   theme = "dark", // "light" gives the plain MAP a light atlas look
   // Trackers: reported incidents (strikes, terrorism, cyber) and wars (see TrackerCards.jsx)
@@ -59,12 +74,12 @@ export default function MapLibreView({
   const userPitched = useRef(false); // did the person tilt the map by hand? then leave the angle alone
   const prevTerrain = useRef(null);
   const prefsRef = useRef(prefs);
-  const draft = useRef(null); // line/shape being drawn: { start: [lon,lat], startPt, last }
+  const draft = useRef(null); // line/shape/circle being drawn: { start: [lon,lat], startPt, last }
   const suppressClickUntil = useRef(0);
   // Latest callbacks for the map's event handlers (which are set up once).
   const cb = useRef({});
   useLayoutEffect(() => {
-    cb.current = { onCountryClick, onTrackClick, onEmptyClick, onViewChange, countries, tool, pinning, onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace, onTrackerClick };
+    cb.current = { onCountryClick, onTrackClick, onEmptyClick, onViewChange, countries, tool, pinning, onAnnotationTap, onDrawPoint, onDrawDrag, onPinPlace, onTrackerClick, polyDraft, onPolyFinish, distanceUnit };
     prefsRef.current = prefs;
   });
 
@@ -150,7 +165,17 @@ export default function MapLibreView({
       const ll = [e.lngLat.lng, e.lngLat.lat];
       // Drawing tools: a tap places a marker or a note.
       if (k.tool === "marker" || k.tool === "text") { k.onDrawPoint?.(k.tool, ll); return; }
-      if (k.tool !== "select") return; // line/shape are drawn by dragging
+      // Area tool: each tap adds a corner; tapping the first corner again closes the area.
+      if (k.tool === "polygon") {
+        const pts = k.polyDraft || [];
+        if (pts.length >= 3) {
+          const first = map.project(pts[0]);
+          if (Math.hypot(first.x - e.point.x, first.y - e.point.y) <= 12) { k.onPolyFinish?.(); return; }
+        }
+        k.onDrawPoint?.("polygon", ll);
+        return;
+      }
+      if (k.tool !== "select") return; // line/shape/circle are drawn by dragging
       const ann = hitAnnotation(e.point);
       // Pinning a report/ship/plane: tap a marker to pin to it, or tap the map for a new marker.
       if (k.pinning) {
@@ -192,14 +217,23 @@ export default function MapLibreView({
       k.onEmptyClick?.();
     });
 
-    // Drawing lines and shapes by dragging (mouse or one finger). Two fingers still zoom.
+    // Drawing lines, shapes and circles by dragging (mouse or one finger). Two fingers still zoom.
     const draftShape = (a, b, tool) => {
       if (tool === "line") return { type: "Feature", geometry: { type: "LineString", coordinates: [a, b] }, properties: {} };
+      if (tool === "circle") {
+        // Drag from the center outward; the radius reads out at the edge as it grows.
+        const km = distanceKm(a, b);
+        return [
+          { type: "Feature", geometry: { type: "Polygon", coordinates: [circleRing(a[0], a[1], km)] }, properties: {} },
+          { type: "Feature", geometry: { type: "LineString", coordinates: [a, b] }, properties: {} },
+          point(b[0], b[1], { text: formatDistance(km, cb.current.distanceUnit) }),
+        ];
+      }
       const [w, e] = [Math.min(a[0], b[0]), Math.max(a[0], b[0])], [s2, n] = [Math.min(a[1], b[1]), Math.max(a[1], b[1])];
       return { type: "Feature", geometry: { type: "Polygon", coordinates: [[[w, n], [e, n], [e, s2], [w, s2], [w, n]]] }, properties: {} };
     };
-    const setDraft = (f) => map.getSource("wr-draft")?.setData({ type: "FeatureCollection", features: f ? [f] : [] });
-    const dragTool = () => cb.current.tool === "line" || cb.current.tool === "shape";
+    const setDraft = (f) => map.getSource("wr-draft")?.setData({ type: "FeatureCollection", features: !f ? [] : Array.isArray(f) ? f : [f] });
+    const dragTool = () => cb.current.tool === "line" || cb.current.tool === "shape" || cb.current.tool === "circle";
     const startDraw = (e) => {
       if (!dragTool()) return;
       const touches = e.originalEvent && e.originalEvent.touches;
@@ -224,7 +258,7 @@ export default function MapLibreView({
       setDraft(null);
       const dx = Math.abs(d.lastPt.x - d.startPt.x), dy = Math.abs(d.lastPt.y - d.startPt.y);
       const tool = cb.current.tool;
-      const bigEnough = tool === "line" ? Math.hypot(dx, dy) > 8 : dx > 8 && dy > 8;
+      const bigEnough = tool === "line" || tool === "circle" ? Math.hypot(dx, dy) > 8 : dx > 8 && dy > 8;
       if (bigEnough) {
         suppressClickUntil.current = Date.now() + 400;
         cb.current.onDrawDrag?.(tool, d.start, d.last);
@@ -237,6 +271,12 @@ export default function MapLibreView({
     map.on("mouseup", endDraw);
     map.on("touchend", endDraw);
     map.on("touchcancel", () => { draft.current = null; setDraft(null); });
+    // Area tool: show the corners so far, plus a rubber band to the pointer.
+    map.on("mousemove", (e) => {
+      const k = cb.current;
+      if (k.tool !== "polygon" || !k.polyDraft || !k.polyDraft.length) return;
+      setDraft(polyDraftFeatures(k.polyDraft, [e.lngLat.lng, e.lngLat.lat]));
+    });
 
     const hoverLayers = ["wr-country-dot", "wr-country-code", "wr-ships", "wr-planes", "wr-incidents", "wr-wars", "wr-web-node", ...ANNOTATION_LAYERS];
     map.on("mousemove", (e) => {
@@ -393,13 +433,22 @@ export default function MapLibreView({
     if (src && annotations) src.setData(annotations);
   }, [ready, annotations]);
 
-  // Line/shape tools: one finger or mouse drag draws instead of moving the map.
+  // Line/shape/circle tools: one finger or mouse drag draws instead of moving the map.
+  // The area tool keeps dragging for panning, and turns off double-tap zoom (quick taps add corners).
   useEffect(() => {
     const map = mapRef.current;
     if (!ready || !map) return;
-    if (tool === "line" || tool === "shape") map.dragPan.disable(); else map.dragPan.enable();
+    if (tool === "line" || tool === "shape" || tool === "circle") map.dragPan.disable(); else map.dragPan.enable();
+    if (tool === "polygon") map.doubleClickZoom.disable(); else map.doubleClickZoom.enable();
     if (tool === "select") map.getCanvas().style.cursor = "";
   }, [ready, tool]);
+
+  // The area being drawn (corners placed so far).
+  useEffect(() => {
+    const src = ready && mapRef.current?.getSource("wr-draft");
+    if (!src || draft.current) return; // a drag in progress owns the draft layer
+    src.setData({ type: "FeatureCollection", features: tool === "polygon" && polyDraft && polyDraft.length ? polyDraftFeatures(polyDraft) : [] });
+  }, [ready, tool, polyDraft]);
 
   // What EXPORT needs from this map: the drawn image and the credits for what's on it.
   useEffect(() => {
