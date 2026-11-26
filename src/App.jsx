@@ -4,7 +4,7 @@ import * as d3 from "d3";
 import { useTrackingFeed } from "./useTracking.js";
 import { WORLD_BBOX, visibleBbox, projectItems, projectZones, hitTest, trackId, trackToReport } from "./trackingGeo.js";
 import { exportMapImage } from "./exportMap.js";
-import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrateLegacy, annotationsToGeoJSON, annotationLonLats, distanceKm, kmFrom, kmTo, roundDistance, formatDistance, circleRing, MAX_RADIUS_KM, KM_PER_DEG, sourcesText } from "./annotationSpace.js";
+import { STORAGE_KEY as ANNOTATION_KEY, toUnit, toPixel, loadAnnotations, migrateLegacy, annotationsToGeoJSON, annotationLonLats, distanceKm, kmFrom, kmTo, roundDistance, formatDistance, circleRing, MAX_RADIUS_KM, KM_PER_DEG, sourcesText, takesSources } from "./annotationSpace.js";
 import MapLibreView from "./map/MapLibreView.jsx";
 import { readViewFromUrl, viewToSearch } from "./urlState.js";
 import SourcesPanel from "./SourcesPanel.jsx";
@@ -707,7 +707,7 @@ export default function WireRoomV2() {
     const report = pinning;
     if (!report) return;
     setAnnotations(prev => prev.map(a => {
-      if (a.id !== markerId) return a; // any annotation can hold sources
+      if (a.id !== markerId || !takesSources(a)) return a; // markers and notes hold sources
       const pins = a.pins || [];
       if (pins.some(p => p.id === report.id)) return a;
       return { ...a, pins: [...pins, { ...report, pinnedAt: new Date().toISOString() }] };
@@ -952,7 +952,7 @@ export default function WireRoomV2() {
   function mlAnnotationTap(id) {
     if (sharedMap) { setSelectedAnnotationId(id); setTrackSel(null); return; } // someone's map: look, don't edit
     if (pinning) {
-      if (annotations.some(x => x.id === id)) pinReportToMarker(id);
+      if (takesSources(annotations.find(x => x.id === id))) pinReportToMarker(id);
       return;
     }
     if (annotationTool === "select") { setSelectedAnnotationId(id); setTrackSel(null); }
@@ -1284,7 +1284,6 @@ export default function WireRoomV2() {
                     onPointerDown={e => e.stopPropagation()}
                     onClick={e => {
                       e.stopPropagation();
-                      if (pinning) { pinReportToMarker(a.id); return; }
                       if (annotationTool === "select") {
                         setSelectedAnnotationId(a.id);
                       }
@@ -1323,7 +1322,6 @@ export default function WireRoomV2() {
                     onPointerDown={e => e.stopPropagation()}
                     onClick={e => {
                       e.stopPropagation();
-                      if (pinning) { pinReportToMarker(a.id); return; }
                       if (annotationTool === "select") {
                         setSelectedAnnotationId(a.id);
                       }
@@ -1365,12 +1363,11 @@ export default function WireRoomV2() {
                   labelAt = top ? [top[0], top[1] - 6] : null;
                   const radius = `${formatDistance(a.radiusKm, a.unit)} radius`;
                   labelText = a.label ? `${a.label} · ${radius}` : radius;
-                  if (a.pins && a.pins.length) labelText += ` · ${sourcesText(a.pins.length)}`;
                 } else {
                   const pts = a.points || [];
                   if (pts.length < 3) return null;
                   d = "M" + pts.map(p => `${p.x},${p.y}`).join("L") + "Z";
-                  labelText = [a.label, a.pins && a.pins.length ? sourcesText(a.pins.length) : ""].filter(Boolean).join(" · ");
+                  labelText = a.label || "";
                   if (labelText) labelAt = [pts.reduce((t, p) => t + p.x, 0) / pts.length, pts.reduce((t, p) => t + p.y, 0) / pts.length];
                 }
                 // Only the edge and the name take taps (with Select): a big zone mustn't block
@@ -1382,7 +1379,6 @@ export default function WireRoomV2() {
                     onPointerDown={e => e.stopPropagation()}
                     onClick={e => {
                       e.stopPropagation();
-                      if (pinning) { pinReportToMarker(a.id); return; }
                       setSelectedAnnotationId(a.id);
                     }}
                   >
@@ -1705,9 +1701,9 @@ export default function WireRoomV2() {
         {(() => {
           const sel = shownAnnotations.find(a => a.id === selectedAnnotationId);
           const selPins = (sel && sel.pins) || [];
-          // Sources box: on my own map for anything selected (so sources can be added); on
-          // someone else's map only when there are sources to read.
-          const showList = !pinning && annotationTool === "select" && sel && (selPins.length > 0 || !sharedMap);
+          // Sources box: on my own map for a selected marker or note (so sources can be added);
+          // on someone else's map only when there are sources to read.
+          const showList = !pinning && annotationTool === "select" && sel && (selPins.length > 0 || (!sharedMap && takesSources(sel)));
           const box = { pointerEvents: "auto", background: "var(--overlay)", border: "1px solid var(--line-2)", padding: 10, color: "var(--text)", fontSize: 11, display: "flex", flexDirection: "column", gap: 6 };
           return (
             <>
@@ -1719,7 +1715,7 @@ export default function WireRoomV2() {
                       <span className="tag analyst">Analyst</span>
                       <span style={{ fontSize: 13 }}>{sharedMap.username === "you" ? "Your map" : `@${sharedMap.username}'s map`}: <b>{sharedMap.title}</b></span>
                     </div>
-                    <div style={{ color: "var(--muted)", fontSize: 12 }}>Viewing only. Tap a marker, line or zone to see its sources. Your own drawing is back when you close this.</div>
+                    <div style={{ color: "var(--muted)", fontSize: 12 }}>Viewing only. Tap a marker or note to see its sources. Your own drawing is back when you close this.</div>
                     <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                       <button type="button" onClick={() => copySharedMap(sharedMap)} style={toolButtonStyle(true)}>Copy to my map</button>
                       {view === "community" && panelPeek && <button type="button" onClick={() => setPanelPeek(false)} style={toolButtonStyle(false)}>Back to post</button>}
@@ -1735,7 +1731,7 @@ export default function WireRoomV2() {
                 {pinning && (
                   <div onPointerDown={e => e.stopPropagation()} style={box}>
                     <div style={{ fontWeight: 800 }}>PINNING: {pinning.headline.length > 90 ? pinning.headline.slice(0, 87) + "..." : pinning.headline}</div>
-                    <div>Tap a marker, line, circle or area (its edge or name) to pin it there, or tap the map to add a new marker{Number.isFinite(pinning.lat) ? ", or drop a marker where it is now" : ""}.</div>
+                    <div>Tap a marker or note to pin it there, or tap the map to add a new marker{Number.isFinite(pinning.lat) ? ", or drop a marker where it is now" : ""}.</div>
                     <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                       {Number.isFinite(pinning.lat) && Number.isFinite(pinning.lon) && (
                         <button type="button" onClick={() => {
@@ -1753,7 +1749,7 @@ export default function WireRoomV2() {
                       <span>Sources ({selPins.length}){sel.label ? ` · ${sel.label.length > 40 ? sel.label.slice(0, 38) + "…" : sel.label}` : ""}</span>
                       <button type="button" aria-label="Close" onClick={() => { setSelectedAnnotationId(null); setSourceForm(null); }} style={toolButtonStyle(false)}>&times;</button>
                     </div>
-                    {selPins.length === 0 && <div style={{ color: "var(--muted)", fontWeight: 500 }}>No sources yet. Pin a report from a feed (Pin to map, then tap this), or add a link.</div>}
+                    {selPins.length === 0 && <div style={{ color: "var(--muted)", fontWeight: 500 }}>No sources yet. Pin a report from a feed (Pin to map, then tap this {sel.type === "text" ? "note" : "marker"}), or paste a link.</div>}
                     {selPins.map(p => (
                       <div key={p.id} style={{ borderTop: "1px solid var(--line-2)", paddingTop: 6, display: "flex", flexDirection: "column", gap: 4 }}>
                         <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap", color: "var(--text-2)", fontSize: 10 }}>

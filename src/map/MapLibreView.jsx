@@ -177,10 +177,9 @@ export default function MapLibreView({
       }
       if (k.tool !== "select") return; // line/shape/circle are drawn by dragging
       const ann = hitAnnotation(e.point);
-      // Pinning a report/ship/plane: tap any annotation (marker, line, circle, area...) to pin
-      // it there, or tap the map for a new marker.
+      // Pinning a report/ship/plane: tap a marker or note to pin it there, or tap the map for a new marker.
       if (k.pinning) {
-        if (ann) k.onAnnotationTap?.(ann.id);
+        if (ann && (ann.kind === "marker" || ann.kind === "text" || ann.kind === "pins")) k.onAnnotationTap?.(ann.id);
         else k.onPinPlace?.(ll);
         return;
       }

@@ -60,9 +60,11 @@ function cleanOne(a) {
     const c = color(a.color);
     if (c) out.color = c;
   }
-  // Any annotation can carry its sources (a marker, a line, a fallout zone...).
-  const pins = (Array.isArray(a.pins) ? a.pins : []).map(cleanPin).filter(Boolean).slice(0, 50);
-  if (pins.length) out.pins = pins;
+  // Markers and notes carry their sources.
+  if (a.type === "marker" || a.type === "text") {
+    const pins = (Array.isArray(a.pins) ? a.pins : []).map(cleanPin).filter(Boolean).slice(0, 50);
+    if (pins.length) out.pins = pins;
+  }
   return out;
 }
 

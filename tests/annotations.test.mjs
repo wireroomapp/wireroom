@@ -139,7 +139,7 @@ test("a posted map is framed to show all of a circle, not just its center", asyn
   assert.equal(annotationLonLats({ type: "polygon", points: [c, c, c] }).length, 3);
 });
 
-test("zones, lines, shapes and notes show how many sources are pinned to them", async () => {
+test("a note with sources gets a numbered badge; zones and lines don't carry sources", async () => {
   const { annotationsToGeoJSON, lonLatToUnit, kmFrom } = await import("../src/annotationSpace.js");
   const c = lonLatToUnit(-91.255, 40.81), d = lonLatToUnit(-92.47, 39.74), e = lonLatToUnit(-91.6, 40.2);
   const pins = [{ id: "a", headline: "A" }, { id: "b", headline: "B" }];
@@ -147,12 +147,13 @@ test("zones, lines, shapes and notes show how many sources are pinned to them", 
     { id: "c", type: "circle", x: c.x, y: c.y, radiusKm: kmFrom(20, "mi"), unit: "mi", label: "Shelter in place", pins },
     { id: "p", type: "polygon", points: [c, d, e], pins: [pins[0]] },
     { id: "l", type: "line", x1: c.x, y1: c.y, x2: d.x, y2: d.y, label: "Wind", pins },
-    { id: "n", type: "text", x: c.x, y: c.y, text: "Note" },
+    { id: "n", type: "text", x: c.x, y: c.y, text: "Note", pins },
+    { id: "m", type: "text", x: c.x, y: c.y, text: "Plain note" },
   ], null);
   const get = (id, kind) => gj.features.find((f) => f.properties.id === id && f.properties.kind === kind);
-  assert.equal(get("c", "area-label").properties.label, "Shelter in place\n20 mi radius · 2 sources");
-  assert.equal(get("p", "area-label").properties.label, "1 source", "an unnamed area still says it has sources");
-  assert.equal(get("l", "pins").properties.pins, 2);
-  assert.equal(get("l", "pins").properties.slot, "below");
-  assert.equal(get("n", "pins"), undefined, "no badge without sources");
+  assert.equal(get("c", "area-label").properties.label, "Shelter in place\n20 mi radius");
+  assert.equal(get("p", "area-label"), undefined, "an unnamed area has no label");
+  assert.equal(get("l", "pins"), undefined);
+  assert.equal(get("n", "pins").properties.pins, 2);
+  assert.equal(get("m", "pins"), undefined, "no badge without sources");
 });

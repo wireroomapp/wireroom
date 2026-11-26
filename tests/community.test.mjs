@@ -78,10 +78,10 @@ test("posted circles keep a sane radius and unit; areas need at least 3 corners"
   assert.equal(out[1].unit, "mi", "unknown units fall back to miles");
   assert.equal(out[1].color, undefined, "only #hex colors");
   assert.equal(out[2].points.length, 3);
-  assert.equal(out[2].pins[0].headline, "h", "areas carry their sources too");
+  assert.ok(!("pins" in out[2]), "only markers and notes carry sources");
   const many = cleanForPublish([{ type: "polygon", points: Array.from({ length: 500 }, (_, i) => ({ x: i / 1000, y: 0 })) }]);
   assert.equal(many[0].points.length, 200, "an area keeps at most 200 corners");
-  assert.equal(describeDrawing(out), "2 circles, 1 area, 1 source");
+  assert.equal(describeDrawing(out), "2 circles, 1 area");
 });
 
 test("describes a drawing and explains errors in plain words", () => {
@@ -114,8 +114,12 @@ test("a source added by its link: checked, cleaned, and published like a feed pi
   const { pin } = makeLinkPin({ url: " https://www.abc17news.com/weather/maps ", headline: "New Army maps detail potential lead dust paths", date: "Nov 24, 2026" }, now);
   assert.deepEqual(pin, { id: "link:https://www.abc17news.com/weather/maps", headline: "New Army maps detail potential lead dust paths", url: "https://www.abc17news.com/weather/maps", source: "abc17news.com", sourceType: "independent", date: "Nov 24, 2026", pinnedAt: "2026-11-26T18:00:00.000Z" });
   assert.equal(makeLinkPin({ url: "https://www.whitehouse.gov/x", headline: "Statement", source: "White House", official: true }).pin.sourceType, "official");
-  // Any annotation keeps its sources when posted (headline, outlet, link, date; never a summary).
-  const [line] = cleanForPublish([{ type: "line", x1: 0, y1: 0, x2: 1, y2: 1, label: "Route", pins: [{ ...pin, summary: "An outlet's paragraph" }] }]);
-  assert.equal(line.pins[0].url, "https://www.abc17news.com/weather/maps");
-  assert.ok(!("summary" in line.pins[0]) && !("pinnedAt" in line.pins[0]));
+  // A note keeps its sources when posted, like a marker (headline, outlet, link, date; never a summary).
+  const [note, line] = cleanForPublish([
+    { type: "text", x: 0, y: 0, text: "Fallout zone: Army forecast", pins: [{ ...pin, summary: "An outlet's paragraph" }] },
+    { type: "line", x1: 0, y1: 0, x2: 1, y2: 1, label: "Route", pins: [pin] },
+  ]);
+  assert.equal(note.pins[0].url, "https://www.abc17news.com/weather/maps");
+  assert.ok(!("summary" in note.pins[0]) && !("pinnedAt" in note.pins[0]));
+  assert.ok(!("pins" in line), "lines don't carry sources");
 });
