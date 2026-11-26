@@ -2,7 +2,7 @@
 // limits, credit for copied maps, links in text.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { cleanForPublish, copyForMe, copiedFrom, postProblem, postRow, linkParts, describeDrawing, friendlyError, LIMITS } from "../src/community/helpers.js";
+import { cleanForPublish, copyForMe, copiedFrom, postProblem, postRow, linkParts, describeDrawing, friendlyError, makeLinkPin, LIMITS } from "../src/community/helpers.js";
 
 const marker = { id: "m1", type: "marker", x: 0.46, y: -0.79, label: "Port", color: "#ff5c5c",
   pins: [{ id: "r1", headline: "Drone strike near port", summary: "The outlet's own paragraph.", url: "https://example.com/a", source: "AP", sourceType: "independent", date: "Nov 18", lat: 44.6, lon: 33.5, pinnedAt: "2026-11-18T10:00:00Z" }] };
@@ -78,14 +78,14 @@ test("posted circles keep a sane radius and unit; areas need at least 3 corners"
   assert.equal(out[1].unit, "mi", "unknown units fall back to miles");
   assert.equal(out[1].color, undefined, "only #hex colors");
   assert.equal(out[2].points.length, 3);
-  assert.ok(!("pins" in out[2]), "only markers carry pinned reports");
+  assert.ok(!("pins" in out[2]), "only markers and notes carry sources");
   const many = cleanForPublish([{ type: "polygon", points: Array.from({ length: 500 }, (_, i) => ({ x: i / 1000, y: 0 })) }]);
   assert.equal(many[0].points.length, 200, "an area keeps at most 200 corners");
   assert.equal(describeDrawing(out), "2 circles, 1 area");
 });
 
 test("describes a drawing and explains errors in plain words", () => {
-  assert.equal(describeDrawing([marker, { type: "line" }, { type: "text" }]), "1 marker, 1 line, 1 note, 1 pinned report");
+  assert.equal(describeDrawing([marker, { type: "line" }, { type: "text" }]), "1 marker, 1 line, 1 note, 1 source");
   assert.equal(describeDrawing([]), "nothing drawn yet");
   assert.match(friendlyError({ message: 'duplicate key value violates unique constraint "profiles_username_key"' }), /taken/);
   assert.match(friendlyError({ message: "Too many in a short time. Please try again later." }), /wait/);
@@ -103,4 +103,23 @@ test("messages group into one conversation per person, with unread counts", asyn
   ];
   const out = groupConversations(rows, me);
   assert.deepEqual(out.map((c) => [c.other.username, c.last.id, c.unread]), [["alice", "3", 2], ["bob", "2", 0]], "my own unread messages to bob don't count");
+});
+
+test("a source added by its link: checked, cleaned, and published like a feed pin", () => {
+  const now = new Date("2026-11-26T18:00:00Z");
+  assert.match(makeLinkPin({ url: "", headline: "x" }).error, /link/);
+  assert.match(makeLinkPin({ url: "javascript:alert(1)", headline: "x" }).error, /link/);
+  assert.match(makeLinkPin({ url: "ftp://example.com/a", headline: "x" }).error, /link/);
+  assert.match(makeLinkPin({ url: "https://example.com/a", headline: "  " }).error, /headline/);
+  const { pin } = makeLinkPin({ url: " https://www.abc17news.com/weather/maps ", headline: "New Army maps detail potential lead dust paths", date: "Nov 24, 2026" }, now);
+  assert.deepEqual(pin, { id: "link:https://www.abc17news.com/weather/maps", headline: "New Army maps detail potential lead dust paths", url: "https://www.abc17news.com/weather/maps", source: "abc17news.com", sourceType: "independent", date: "Nov 24, 2026", pinnedAt: "2026-11-26T18:00:00.000Z" });
+  assert.equal(makeLinkPin({ url: "https://www.whitehouse.gov/x", headline: "Statement", source: "White House", official: true }).pin.sourceType, "official");
+  // A note keeps its sources when posted, like a marker (headline, outlet, link, date; never a summary).
+  const [note, line] = cleanForPublish([
+    { type: "text", x: 0, y: 0, text: "Fallout zone: Army forecast", pins: [{ ...pin, summary: "An outlet's paragraph" }] },
+    { type: "line", x1: 0, y1: 0, x2: 1, y2: 1, label: "Route", pins: [pin] },
+  ]);
+  assert.equal(note.pins[0].url, "https://www.abc17news.com/weather/maps");
+  assert.ok(!("summary" in note.pins[0]) && !("pinnedAt" in note.pins[0]));
+  assert.ok(!("pins" in line), "lines don't carry sources");
 });

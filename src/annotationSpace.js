@@ -144,6 +144,12 @@ export function annotationLonLats(a) {
   return pts.filter(Boolean);
 }
 
+// "1 source", "3 sources".
+export const sourcesText = (n) => `${n} source${n === 1 ? "" : "s"}`;
+// Markers and notes carry sources (pinned reports or pasted links).
+export const takesSources = (a) => Boolean(a) && (a.type === "marker" || a.type === "text");
+const pinCount = (a) => (Array.isArray(a.pins) ? a.pins.length : 0);
+
 // The middle of an area's corners (where its name goes).
 function middle(points) {
   const n = points.length;
@@ -180,6 +186,8 @@ export function annotationsToGeoJSON(list, selectedId) {
       if (!ll) continue;
       features.push({ type: "Feature", geometry: { type: "Point", coordinates: ll },
         properties: { id: a.id, kind: a.type, label: (a.type === "text" ? a.text : a.label) || "", color: a.color || "#d7dde8", pins: (a.pins || []).length, sel } });
+      // A note with sources gets a numbered badge just left of its text (markers have their own).
+      if (a.type === "text" && pinCount(a)) features.push({ type: "Feature", geometry: { type: "Point", coordinates: ll }, properties: { id: a.id, kind: "pins", pins: pinCount(a) } });
     } else if (a.type === "line") {
       const p1 = unitToLonLat(a.x1, a.y1), p2 = unitToLonLat(a.x2, a.y2);
       if (!p1 || !p2) continue;

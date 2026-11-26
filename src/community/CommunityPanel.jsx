@@ -188,7 +188,7 @@ function Composer({ api, editing, getDrawing, countries, onDone, onCancel, onRul
         <div className="cm-mapbox">
           {editing && <label className="cm-check"><input type="checkbox" checked={replaceMap} onChange={(e) => setReplaceMap(e.target.checked)} /> Replace this map with my current drawing</label>}
           <div><b>{editing && !replaceMap ? "Map in this post:" : "Your map:"}</b> {describeDrawing(cleanForPublish(drawing))}.</div>
-          <div className="cm-fine">Posted as it is now. Pinned reports keep their headline, outlet and link, not the summary.</div>
+          <div className="cm-fine">Posted as it is now. Sources keep their headline, outlet and link, not the summary.</div>
         </div>
       )}
       <CountryPicker value={tags} onChange={setTags} countries={countries} />

@@ -221,6 +221,12 @@ export function buildStyle() {
       { id: "wr-ann-shape-label", type: "symbol", source: "wr-ann", filter: ["all", ["==", ["get", "kind"], "shape"], ["!=", ["get", "label"], ""]],
         layout: { "text-field": ["get", "label"], "text-font": FONT_BOLD, "text-size": 12, "text-allow-overlap": true, "text-ignore-placement": true },
         paint: { "text-color": "#ffffff", "text-halo-color": "#000000", "text-halo-width": 2 } },
+      // A note's sources: a numbered badge just left of its text.
+      { id: "wr-ann-pins-badge", type: "circle", source: "wr-ann", filter: ["==", ["get", "kind"], "pins"],
+        paint: { "circle-radius": 7.5, "circle-color": "#c9974b", "circle-stroke-color": "#000000", "circle-stroke-width": 1.5, "circle-translate": [-12, 0] } },
+      { id: "wr-ann-pins-count", type: "symbol", source: "wr-ann", filter: ["==", ["get", "kind"], "pins"],
+        layout: { "text-field": ["to-string", ["get", "pins"]], "text-font": FONT_BOLD, "text-size": 10, "text-allow-overlap": true, "text-ignore-placement": true },
+        paint: { "text-color": "#000000", "text-translate": [-12, 0] } },
       // A circle's name and radius above its top edge; an area's name in its middle.
       { id: "wr-ann-area-label", type: "symbol", source: "wr-ann", filter: ["==", ["get", "kind"], "area-label"],
         layout: { "text-field": ["get", "label"], "text-font": FONT_BOLD, "text-size": 12.5, "text-anchor": ["match", ["get", "anchor"], "bottom", "bottom", "center"], "text-offset": ["match", ["get", "anchor"], "bottom", ["literal", [0, -0.35]], ["literal", [0, 0]]], "text-max-width": 22, "text-allow-overlap": true, "text-ignore-placement": true },
@@ -233,7 +239,7 @@ export function buildStyle() {
 // colors; imagery looks hide the water fill so NASA's picture shows through.
 // Tapping these selects the annotation. A circle's or area's inside isn't listed: a big zone
 // would otherwise swallow taps on the country dots and trackers inside it (tap its edge or name).
-export const ANNOTATION_LAYERS = ["wr-ann-marker", "wr-ann-pin-badge", "wr-ann-marker-label", "wr-ann-text", "wr-ann-line", "wr-ann-line-label", "wr-ann-shape-line", "wr-ann-shape-fill", "wr-ann-shape-label", "wr-ann-area-line", "wr-ann-area-label"];
+export const ANNOTATION_LAYERS = ["wr-ann-marker", "wr-ann-pin-badge", "wr-ann-marker-label", "wr-ann-text", "wr-ann-line", "wr-ann-line-label", "wr-ann-shape-line", "wr-ann-shape-fill", "wr-ann-shape-label", "wr-ann-area-line", "wr-ann-area-label", "wr-ann-pins-badge"];
 
 export function applyBase(map, baseId, look = "dark") {
   const base = BASES.find((b) => b.id === baseId) || BASES[0];
