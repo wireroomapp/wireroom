@@ -145,6 +145,9 @@ const LIVE_CSS = `
 .track-card .tc-lag{font:11px/1.45 var(--font);color:var(--danger);border:1px solid var(--danger-line);background:var(--danger-bg);padding:4px 6px;margin:0 0 6px;letter-spacing:0}
 .track-card .tc-lag.ok{color:var(--muted);border-color:var(--line);background:none}
 .track-card .tc-big small{display:block;font:12px var(--font);color:var(--text-2);margin-top:2px}
+.track-card .tc-related{border-top:1px solid var(--line);padding-top:8px;margin:0 0 8px}
+.track-card .tc-related-head{font:600 12px var(--font);color:var(--text);margin-bottom:2px}
+.track-card .tc-related-note{font:11px/1.4 var(--font);color:var(--muted);margin-bottom:6px}
 .track-card .tc-src{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-direction:column;gap:5px}
 .track-card .tc-src li{font:11px/1.4 var(--font);color:var(--text-2);border-left:2px solid var(--line-2);padding-left:7px}
 .track-card .tc-src li b{font:11px var(--font);letter-spacing:0;color:var(--muted);margin-right:5px}
