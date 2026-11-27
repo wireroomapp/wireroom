@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 // lib/history.mjs for past days). Loaded when a tracker is first turned on; today's map is
 // refreshed every 30 minutes, past days are kept once loaded.
 
+// Wire Room country ids and names, for matching events to the countries whose feeds Wire Room follows.
+export const WR_COUNTRIES = {"us": "United States", "ca": "Canada", "mx": "Mexico", "br": "Brazil", "ar": "Argentina", "gb": "United Kingdom", "fr": "France", "de": "Germany", "it": "Italy", "es": "Spain", "pl": "Poland", "ua": "Ukraine", "ru": "Russia", "tr": "T\u00fcrkiye", "il": "Israel", "ir": "Iran", "sa": "Saudi Arabia", "ae": "United Arab Emirates", "eg": "Egypt", "za": "South Africa", "ng": "Nigeria", "in": "India", "pk": "Pakistan", "cn": "China", "jp": "Japan", "kr": "South Korea", "tw": "Taiwan", "id": "Indonesia", "au": "Australia"};
 export const TRACKER_COLORS = { war: "#ff4d4d", strike: "#ff6b5e", terrorism: "#f5c542", cyber: "#ff5fb4" };
 export const TRACKER_CREDITS = {
   military: "Wars: UCDP Candidate Events Dataset, Uppsala University (CC BY 4.0)",
@@ -170,9 +172,17 @@ export function incidentToReport(i) {
     lon: i.lon,
   };
 }
+const newsSearch = (q) => (q ? `https://www.google.com/search?tbm=nws&q=${encodeURIComponent(q)}` : "");
 export function nodeSearchUrl(node) {
-  const q = String(node.headline || "").split(/\s+/).slice(0, 14).join(" ");
-  return q ? `https://www.google.com/search?tbm=nws&q=${encodeURIComponent(q)}` : "";
+  // UCDP's "headline" is sometimes just the date; then search the place and the date instead.
+  const h = String(node.headline || "").trim();
+  if (h && !/^\d{1,2} \w+ \d{4}$/.test(h)) return newsSearch(h.split(/\s+/).slice(0, 14).join(" "));
+  const place = String(node.place || "").split(",").slice(0, 2).join(" ").trim();
+  const when = node.date ? new Date(`${node.date}T12:00:00Z`).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }) : "";
+  return place ? newsSearch(`${place} ${when}`.trim()) : "";
+}
+export function incidentSearchUrl(item) {
+  return newsSearch(String(item.title || "").split(/\s+/).slice(0, 14).join(" "));
 }
 export function warToReport(w) {
   const lm = w.latestMonth || {};

@@ -8,6 +8,7 @@ import { createWatchdog } from "./scheduler/watchdog.mjs";
 import { snapshot } from "./lib/history.mjs";
 import { warReports } from "./lib/incidents.mjs";
 import { panelKeeps, readPanelRules } from "./lib/ai-check.mjs";
+import { relatedReports } from "./lib/related.mjs";
 
 /*
   WIRE ROOM / WORLD WIRE — backend (cache-serving version)
@@ -226,6 +227,24 @@ app.get("/api/war-intel", (req, res) => {
   if (!items) return res.status(404).json({ status: "not-found", error: "No such war" });
   res.set("Cache-Control", "public, max-age=900");
   res.json({ status: "ok", generatedAt: data.generatedAt, id, items });
+});
+
+// Related coverage for one event card: matching official statements and outlet reports from
+// the countries' feeds around the event's dates (lib/related.mjs).
+app.get("/api/related", (req, res) => {
+  const list = (v) => String(v || "").split(",").map((x) => x.trim()).filter(Boolean).slice(0, 6);
+  const countries = list(req.query.c).map((x) => x.toLowerCase()).filter((x) => /^[a-z]{2}$/.test(x));
+  const from = String(req.query.from || ""), to = String(req.query.to || from);
+  if (!countries.length || !Number.isFinite(Date.parse(from))) return res.status(400).json({ status: "bad-request", error: "Need c and from" });
+  const out = relatedReports(loadCache(), {
+    countries, from, to,
+    text: String(req.query.q || "").slice(0, 300),
+    place: String(req.query.place || "").slice(0, 120),
+    skipWords: list(req.query.skip),
+    pad: Math.min(5, Math.max(1, Number(req.query.pad) || 2)),
+  });
+  res.set("Cache-Control", "public, max-age=900");
+  res.json({ status: "ok", ...out });
 });
 
 // Where every country's reports come from (the SOURCES page).
